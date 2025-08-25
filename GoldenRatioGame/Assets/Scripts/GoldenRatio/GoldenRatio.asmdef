@@ -1,0 +1,16 @@
+{
+    "name": "GoldenRatio",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3626ecde29ce49d4c88e80cbd9ce6a67"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
