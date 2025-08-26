@@ -1,10 +1,10 @@
-﻿namespace IMBase
+﻿namespace GRP.Base
 {
     public interface IFactory<out T>
     {
         T Create();
     }
-
+    
     public interface IFactory<out T, in TParam1>
     {
         T Create(TParam1 param1);

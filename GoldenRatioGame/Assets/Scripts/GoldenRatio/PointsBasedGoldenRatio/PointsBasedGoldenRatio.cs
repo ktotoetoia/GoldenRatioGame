@@ -7,7 +7,7 @@ namespace GRP.GoldenRatio
 {
     public class PointsBasedGoldenRatio : IGoldenRatio
     {
-        private List<Vector2> _points;
+        private readonly List<Vector2> _points;
         public IReadOnlyList<Vector2> Points => _points;
         
         public PointsBasedGoldenRatio(float arcStep, float maxS, float rotationDegrees = 0f)
@@ -26,7 +26,7 @@ namespace GRP.GoldenRatio
 
             for (float s = 0; s < maxS; s += arcStep)
             {
-                float theta = (1f / b) * Mathf.Log((b * s) / (a * Mathf.Sqrt(1 + b * b)) + 1f);
+                float theta = 1f / b * Mathf.Log((b * s) / (a * Mathf.Sqrt(1 + b * b)) + 1f);
                 float r = a * Mathf.Exp(b * theta);
                 float x = r * Mathf.Cos(theta);
                 float y = r * Mathf.Sin(theta);

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using IMBase;
+using GRP.Base;
 using UnityEngine;
 
 namespace GRP.GoldenRatio
