@@ -1,5 +1,5 @@
 ﻿using IM.StateMachines;
-using TD.Movement;
+using IM.Movement;
 using UnityEngine;
 
 namespace Tests

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TD.Movement
+namespace IM.Movement
 {
     public interface ISpeed
     {

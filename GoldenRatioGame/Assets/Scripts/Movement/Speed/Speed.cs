@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace TD.Movement
+namespace IM.Movement
 {
     [Serializable]
     public class Speed : ISpeed

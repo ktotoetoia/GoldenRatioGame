@@ -2,7 +2,7 @@
 using IM.StateMachines;
 using UnityEngine;
 
-namespace TD.Movement
+namespace IM.Movement
 {
     public class MovementState : State
     {

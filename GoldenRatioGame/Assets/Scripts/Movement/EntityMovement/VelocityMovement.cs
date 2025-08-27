@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using IM.Economy;
+using UnityEngine;
 
-namespace TD.Movement
+namespace IM.Movement
 {
     [RequireComponent(typeof(IVelocityModifier))]
     public class VelocityMovement : MonoBehaviour, IVectorMovement

@@ -1,5 +1,4 @@
-﻿using System;
-using GRP.GoldenRatio;
+﻿using IM.GoldenRatio;
 using UnityEngine;
 
 namespace Tests

@@ -1,4 +1,4 @@
-﻿namespace TD.Movement
+﻿namespace IM.Movement
 {
     public class MultiplyingSpeedModifier : ISpeedModifier
     {

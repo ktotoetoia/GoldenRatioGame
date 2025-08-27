@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TD.Movement
+namespace IM.Movement
 {
     public struct VelocityInfo
     {
