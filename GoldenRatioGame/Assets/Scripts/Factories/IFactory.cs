@@ -1,4 +1,4 @@
-﻿namespace GRP.Base
+﻿namespace IM.Base
 {
     public interface IFactory<out T>
     {

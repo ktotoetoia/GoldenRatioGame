@@ -1,4 +1,4 @@
-﻿namespace GRP.GoldenRatio
+﻿namespace IM.GoldenRatio
 {
     public static class Fibonacci
     {

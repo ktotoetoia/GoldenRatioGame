@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using GRP.Base;
+using IM.Base;
 using UnityEngine;
 
-namespace GRP.GoldenRatio
+namespace IM.GoldenRatio
 {
     public class GoldenRatioFactory : IFactory<RegionBasedGoldenRatio>, IFactory<RegionBasedGoldenRatio,int,int>
     {

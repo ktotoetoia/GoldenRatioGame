@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GRP.GoldenRatio
+namespace IM.GoldenRatio
 {
     public readonly struct RatioRegion
     {
