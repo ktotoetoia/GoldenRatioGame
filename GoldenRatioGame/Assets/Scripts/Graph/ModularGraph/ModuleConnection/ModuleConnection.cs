@@ -14,6 +14,11 @@ namespace IM.Graphs
         {
             Input = from;
             Output = to;
+
+            if (from.Direction != PortDirection.Output || to.Direction != PortDirection.Input)
+            {
+                throw new ArgumentException("from port must be output and to port must be input");
+            }
         }
 
         public void Connect()
