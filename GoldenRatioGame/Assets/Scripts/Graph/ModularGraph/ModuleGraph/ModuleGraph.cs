@@ -49,6 +49,8 @@ namespace IM.Graphs
             
             if (!_modules.Contains(from.Module) || !_modules.Contains(to.Module))
                 throw new ArgumentException("modules must be add before connecting");
+            if (from.Direction != PortDirection.Output || to.Direction != PortDirection.Input)
+                throw new ArgumentException("from port must be output and to port must be input");
             
             ModuleConnection connection =  new ModuleConnection(from, to);
             
@@ -65,7 +67,6 @@ namespace IM.Graphs
         {
             if (connection is not ModuleConnection moduleConnector || !_connections.Contains(moduleConnector))
                 throw new ArgumentException("Graph does not contain this connector");
-            
             
             if (connection.Input.CanDisconnect() && connection.Output.CanDisconnect())
             {

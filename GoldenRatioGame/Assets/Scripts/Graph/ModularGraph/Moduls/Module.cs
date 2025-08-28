@@ -6,12 +6,12 @@ namespace IM.Graphs
 {
     public class Module : IModule
     {
-        private List<IModulePort> _ports = new();
+        protected List<IModulePort> _ports = new();
         
         public IEnumerable<IModulePort> Ports => _ports;
         public IEnumerable<IEdge> Edges => _ports.Select(x => x.Connection);
 
-        public void AddPort(IModulePort port)
+        public virtual void AddPort(IModulePort port)
         {
             if (_ports.Contains(port))
             {
