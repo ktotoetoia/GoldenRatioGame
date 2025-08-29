@@ -2,7 +2,6 @@
 {
     public enum PortDirection
     {
-        None,
         Input,
         Output
     }

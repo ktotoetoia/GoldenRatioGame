@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a35f7a4d577d947b3e34679742fa71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputPorts: 1
+  _inputPorts: 2
   _outputPorts: 2
   _initialBounds:
     m_Center: {x: 0, y: 0, z: 0}
