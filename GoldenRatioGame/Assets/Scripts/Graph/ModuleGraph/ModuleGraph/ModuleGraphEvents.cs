@@ -45,9 +45,9 @@ namespace IM.Graphs
             OnModuleRemoved?.Invoke(module);
         }
 
-        public IModuleConnection Connect(IModulePort from, IModulePort to)
+        public IModuleConnection Connect(IModulePort output, IModulePort input)
         {
-            IModuleConnection connection = _graph.Connect(from, to);
+            IModuleConnection connection = _graph.Connect(output, input);
             
             OnConnected?.Invoke(connection);
 

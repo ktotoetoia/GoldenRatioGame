@@ -14,19 +14,22 @@ namespace IM.Graphs
         {
             Input = from;
             Output = to;
+        }
 
-            if (from.Direction != PortDirection.Output || to.Direction != PortDirection.Input)
-            {
-                throw new ArgumentException("from port must be output and to port must be input");
-            }
+        public bool CanConnect()
+        {
+            return Output.CanConnect(this) && Input.CanConnect(this);
+        }
+
+        public bool CanDisconnect()
+        {
+            return Output.CanDisconnect() && Input.CanDisconnect();
         }
 
         public void Connect()
         {
             if (Input == null || Output == null)
-            {
                 throw new InvalidOperationException("Module connector was disconnected and cannot be reused");
-            }
         
             Input.Connect(this);
             Output.Connect(this);
@@ -35,14 +38,10 @@ namespace IM.Graphs
         public void Disconnect()
         {
             if (Input == null || Output == null)
-            {
                 return;
-            }
 
             if (Input.Connection != this || Output.Connection != this)
-            {
                 throw new InvalidOperationException("Module connector was changed before disconnecting");
-            }
             
             Input.Disconnect();
             Output.Disconnect();
