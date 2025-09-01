@@ -1,4 +1,5 @@
-﻿using IM.Economy;
+﻿using System;
+using IM.Economy;
 
 namespace IM.Health
 {
@@ -19,17 +20,55 @@ namespace IM.Health
             _health = health;
         }
         
-        public float PreviewDamage(float damage)
+        public DamageResult PreviewDamage(float damage)
         {
-            float before = _health.Value;
-            float after = _health.Clamp(before - damage);
+            if (damage < 0)
+                throw new ArgumentException("Damage cannot be negative. use Preview Healing instead");
             
-            return before - after; 
+            float before = _health.Value;
+            float unclampedAfter = before - damage;
+            float after = _health.Clamp(unclampedAfter);
+
+            return new DamageResult(before, after,damage,0);
         }
 
-        public void ApplyDamage(float damage)
+        public DamageResult ApplyDamage(float damage)
         {
+            if (damage < 0)
+                throw new ArgumentException("Damage cannot be negative. use Apply Healing instead");
+            
+            DamageResult result = PreviewDamage(damage);
+            
             _health.Value -= damage;
+            
+            return result;
+        }
+
+        public HealingResult PreviewHealing(float healing)
+        {
+            if (healing < 0)
+                throw new ArgumentException("Healing cannot be negative. use PreviewDamage instead.");
+
+            float before = _health.Value;
+            float unclampedAfter = before + healing;
+            float after = _health.Clamp(unclampedAfter);
+
+            float applied = after - before;
+            float mitigated = healing - applied;
+
+            return new HealingResult(before, after, healing, mitigated);
+        }
+
+        public HealingResult ApplyHealing(float healing)
+        {
+            if (healing < 0)
+                throw new ArgumentException("Healing cannot be negative. use ApplyDamage instead.");
+
+            HealingResult result = PreviewHealing(healing);
+
+            _health.Value = _health.Clamp(_health.Value + healing);
+
+            return result;
         }
     }
 }
