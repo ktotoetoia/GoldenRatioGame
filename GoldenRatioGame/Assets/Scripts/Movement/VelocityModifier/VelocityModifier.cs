@@ -1,5 +1,4 @@
-﻿using IM.Storages;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace IM.Movement
 {

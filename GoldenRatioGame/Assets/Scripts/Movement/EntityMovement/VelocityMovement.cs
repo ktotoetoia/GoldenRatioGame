@@ -1,5 +1,4 @@
-﻿using IM.Economy;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace IM.Movement
 {
