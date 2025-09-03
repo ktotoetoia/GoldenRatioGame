@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 using IM.Graphs;
 using IM.SelectionSystem;
@@ -22,9 +21,6 @@ namespace IM.ModuleEditor
         {
             _graphEvents = new ModuleGraphEvents(new ModuleGraph());
             _selector = new GraphSelection(_graphEvents);
-
-            if (TryGetComponent(out ModuleGraphGizmos gizmos))
-                gizmos.ModuleGraph = _graphEvents;
         }
 
         private void Update()

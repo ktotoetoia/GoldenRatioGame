@@ -1,5 +1,6 @@
 ﻿using System;
 using IM.Economy;
+using UnityEngine;
 
 namespace IM.Health
 {
@@ -20,53 +21,46 @@ namespace IM.Health
             _health = health;
         }
         
-        public DamageResult PreviewDamage(float damage)
+        public HealthChangeResult PreviewDamage(float damage)
         {
             if (damage < 0)
                 throw new ArgumentException("Damage cannot be negative. use Preview Healing instead");
-            
-            float before = _health.Value;
-            float unclampedAfter = before - damage;
-            float after = _health.Clamp(unclampedAfter);
 
-            return new DamageResult(before, after,damage,0);
+            float applied = _health.Value < damage ? _health.Value : damage;
+            
+            return new HealthChangeResult(damage, damage,applied);
         }
 
-        public DamageResult ApplyDamage(float damage)
+        public HealthChangeResult TakeDamage(float damage)
         {
             if (damage < 0)
                 throw new ArgumentException("Damage cannot be negative. use Apply Healing instead");
             
-            DamageResult result = PreviewDamage(damage);
+            HealthChangeResult result = PreviewDamage(damage);
             
-            _health.Value -= damage;
+            _health.Value -= result.Applied;
             
             return result;
         }
 
-        public HealingResult PreviewHealing(float healing)
+        public HealthChangeResult PreviewHealing(float healing)
         {
             if (healing < 0)
                 throw new ArgumentException("Healing cannot be negative. use PreviewDamage instead.");
-
-            float before = _health.Value;
-            float unclampedAfter = before + healing;
-            float after = _health.Clamp(unclampedAfter);
-
-            float applied = after - before;
-            float mitigated = healing - applied;
-
-            return new HealingResult(before, after, healing, mitigated);
+            
+            float applied = _health.MaxValue < _health.Value + healing ? _health.MaxValue - _health.Value: healing;
+            
+            return new HealthChangeResult(healing, healing, applied);
         }
 
-        public HealingResult ApplyHealing(float healing)
+        public HealthChangeResult RestoreHealth(float healing)
         {
             if (healing < 0)
                 throw new ArgumentException("Healing cannot be negative. use ApplyDamage instead.");
 
-            HealingResult result = PreviewHealing(healing);
+            HealthChangeResult result = PreviewHealing(healing);
 
-            _health.Value = _health.Clamp(_health.Value + healing);
+            _health.Value += result.Applied;
 
             return result;
         }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace IM.Economy
+﻿namespace IM.Economy
 {
     public interface ICappedValueReadOnly<out T>
     {

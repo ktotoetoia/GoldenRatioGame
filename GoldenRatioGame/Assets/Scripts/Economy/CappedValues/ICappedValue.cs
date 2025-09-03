@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace IM.Economy
+﻿namespace IM.Economy
 {
     public interface ICappedValue<T> : ICappedValueReadOnly<T>
     {
