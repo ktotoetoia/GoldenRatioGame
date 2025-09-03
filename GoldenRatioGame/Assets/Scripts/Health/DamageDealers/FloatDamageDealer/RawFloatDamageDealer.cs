@@ -9,14 +9,14 @@
             Damage = damage;   
         }
         
-        public DamageResult PreviewDamage(IDamageable target)
+        public HealthChangeResult PreviewDamage(IDamageable target)
         {
             return target.PreviewDamage(Damage);
         }
 
-        public DamageResult DealDamage(IDamageable target)
+        public HealthChangeResult DealDamage(IDamageable target)
         {
-            return target.ApplyDamage(Damage);
+            return target.TakeDamage(Damage);
         }
     }
 }
