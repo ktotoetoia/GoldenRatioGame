@@ -15,7 +15,7 @@ namespace IM.Modules
         {
             _entity = GetComponent<IEntity>();
             _graph = new ModuleGraph();
-            _graph.AddModule(new HealthChangingModule(_maxHealth,_maxHealth));
+            _graph.AddModule(new HealthModifyingModule(_maxHealth,_maxHealth));
             
             UpdateBuild();
         }
@@ -24,7 +24,7 @@ namespace IM.Modules
         {
             if (Input.GetKeyDown(KeyCode.O))
             {
-                _graph.AddModule(new HealthChangingModule(_maxHealth,_maxHealth));
+                _graph.AddModule(new HealthModifyingModule(_maxHealth,_maxHealth));
                 UpdateBuild();
             }
         }
