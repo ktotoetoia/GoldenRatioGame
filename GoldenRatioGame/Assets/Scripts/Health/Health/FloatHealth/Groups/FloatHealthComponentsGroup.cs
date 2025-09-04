@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using IM.Economy;
-using UnityEngine;
 
 namespace IM.Health
 {
-    public class FloatHealthComposition : IFloatHealthComposition
+    public class FloatHealthComponentsGroup : IFloatHealthComponentsGroup
     {
         private readonly List<IFloatHealth> _healthComponents = new();
 
-        public IReadOnlyList<IFloatHealth> HealthComponents => _healthComponents;
+        public IReadOnlyList<IFloatHealth> Components => _healthComponents;
         public ICappedValueReadOnly<float> Health => GetCurrentHealth();
         
         public void AddHealth(IFloatHealth healthComponent)
         {
+            if (_healthComponents.Contains(healthComponent))
+                throw new Exception("Health component already exists");
+            
             _healthComponents.Add(healthComponent);
         }
 
@@ -47,11 +49,11 @@ namespace IM.Health
         {
             HealthChangeResult result = new HealthChangeResult(value, value, 0);
 
-            foreach (IFloatHealth healthComponent in _healthComponents)
+            foreach (var healthComponent in _healthComponents)
             {
-                if(result.Overflow < 0)
+                if (result.Overflow < 0)
                     break;
-                
+
                 HealthChangeResult r = apply(healthComponent, result.Overflow);
 
                 result = new HealthChangeResult(

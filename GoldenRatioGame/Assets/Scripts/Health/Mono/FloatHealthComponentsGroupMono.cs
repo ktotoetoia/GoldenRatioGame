@@ -4,13 +4,12 @@ using UnityEngine;
 
 namespace IM.Health
 {
-    public class FloatHealthCompositionMono : MonoBehaviour, IFloatHealthComposition
+    public class FloatHealthComponentsGroupMono : MonoBehaviour, IFloatHealthComponentsGroup
     {
-        private readonly IFloatHealthComposition _floatHealth= new FloatHealthComposition();
+        private readonly IFloatHealthComponentsGroup _floatHealth= new FloatHealthComponentsGroup();
 
         public ICappedValueReadOnly<float> Health => _floatHealth.Health;
-
-        public IReadOnlyList<IFloatHealth> HealthComponents => _floatHealth.HealthComponents;
+        public IReadOnlyList<IFloatHealth> Components => _floatHealth.Components;
 
         public HealthChangeResult PreviewDamage(float incomingDamage)
         {

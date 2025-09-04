@@ -2,9 +2,9 @@
 
 namespace IM.Health
 {
-    public class FloatHealthCompositionDebug : MonoBehaviour
+    public class FloatHealthComponentsDebug : MonoBehaviour
     {
-        private IFloatHealthComposition _health;
+        private IFloatHealthComponentsGroup _health;
 
         private void OnDrawGizmos()
         {
@@ -25,12 +25,12 @@ namespace IM.Health
             Vector3 filledPos = pos - new Vector3((size.x - filledSize.x) / 2f, 0f, 0f);
             Gizmos.DrawCube(filledPos, filledSize);
 
-            if (_health.HealthComponents != null && _health.HealthComponents.Count > 1)
+            if (_health.Components != null && _health.Components.Count > 1)
             {
                 float totalMax = health.MaxValue;
                 float accumulated = 0f;
 
-                foreach (var comp in _health.HealthComponents)
+                foreach (var comp in _health.Components)
                 {
                     accumulated += comp.Health.MaxValue;
 
