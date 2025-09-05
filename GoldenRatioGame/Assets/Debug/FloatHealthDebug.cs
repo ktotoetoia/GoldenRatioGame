@@ -4,16 +4,17 @@ namespace IM.Health
 {
     public class FloatHealthDebug : MonoBehaviour
     {
+        [SerializeField] private GameObject _target;
         private IFloatHealth _health;
         
         private void OnDrawGizmos()
         {
-            if (_health == null && !TryGetComponent(out _health))
+            if (_target == null || _health == null && !_target.TryGetComponent(out _health))
                 return;
 
             float ratio = Mathf.InverseLerp(_health.Health.MinValue, _health.Health.MaxValue, _health.Health.Value);
             
-            Vector3 pos = transform.position + Vector3.up * 1.5f;
+            Vector3 pos = _target.transform.position + Vector3.up * 1.5f;
             Vector3 size = new Vector3(2f, 0.2f, 0f);
 
             Gizmos.color = Color.gray;

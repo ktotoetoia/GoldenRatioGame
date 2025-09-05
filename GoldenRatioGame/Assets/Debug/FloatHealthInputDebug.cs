@@ -5,6 +5,7 @@ namespace IM.Health
 {
     public class FloatHealthInputDebug : MonoBehaviour
     {
+        [SerializeField] private GameObject _target;
         [SerializeField] private float _value;
         private IFloatHealth _health;
         private HealthChangeResult _healthChangeResult;
@@ -12,7 +13,7 @@ namespace IM.Health
 
         private void Awake()
         {
-            _health = GetComponent<IFloatHealth>();
+            _target?.TryGetComponent(out _health);
         }
 
         private void Update()
@@ -30,7 +31,7 @@ namespace IM.Health
 
         private void OnDrawGizmos()
         {
-            Vector3 pos = transform.position + Vector3.up * 3f;
+            Vector3 pos = _target.transform.position + Vector3.up * 3.5f;
 
             string text =
                 $"PreMitigation: {_healthChangeResult.PreMitigation}\n" +

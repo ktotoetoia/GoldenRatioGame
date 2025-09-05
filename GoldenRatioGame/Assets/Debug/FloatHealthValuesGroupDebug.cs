@@ -4,17 +4,18 @@ namespace IM.Health
 {
     public class FloatHealthValuesGroupDebug : MonoBehaviour
     {
-        private IFloatHealthValueGroup _health;
+        [SerializeField] private GameObject _target;
+        private IFloatHealthValuesGroup _health;
 
         private void OnDrawGizmos()
         {
-            if (_health == null && !TryGetComponent(out _health))
+            if (_target == null || _health == null && !_target.TryGetComponent(out _health))
                 return;
 
             var health = _health.Health;
             float ratio = Mathf.InverseLerp(health.MinValue, health.MaxValue, health.Value);
 
-            Vector3 pos = transform.position + Vector3.up * 2.0f;
+            Vector3 pos = _target.transform.position + Vector3.up * 2.0f;
             Vector3 size = new Vector3(2f, 0.2f, 0f);
 
             Gizmos.color = Color.gray;
@@ -25,12 +26,12 @@ namespace IM.Health
             Vector3 filledPos = pos - new Vector3((size.x - filledSize.x) / 2f, 0f, 0f);
             Gizmos.DrawCube(filledPos, filledSize);
             
-            if (_health.HealthBars != null && _health.HealthBars.Count > 1)
+            if (_health.Values != null && _health.Values.Count > 1)
             {
                 float totalMax = health.MaxValue;
                 float accumulated = 0f;
 
-                foreach (var comp in _health.HealthBars)
+                foreach (var comp in _health.Values)
                 {
                     accumulated += comp.MaxValue;
 
