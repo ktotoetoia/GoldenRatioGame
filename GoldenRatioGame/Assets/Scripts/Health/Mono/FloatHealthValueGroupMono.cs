@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace IM.Health
 {
-    public class FloatHealthValueGroupMono : MonoBehaviour, IFloatHealthValueGroup
+    public class FloatHealthValueGroupMono : MonoBehaviour, IFloatHealthValuesGroup
     {
-        private readonly IFloatHealthValueGroup _floatHealthValueGroupImplementation = new FloatHealthValueGroup();
+        private readonly IFloatHealthValuesGroup _floatHealthValueGroupImplementation = new FloatHealthValuesGroup();
 
         public ICappedValueReadOnly<float> Health => _floatHealthValueGroupImplementation.Health;
-        public IReadOnlyList<ICappedValueReadOnly<float>> HealthBars => _floatHealthValueGroupImplementation.HealthBars;
+        public IReadOnlyList<ICappedValueReadOnly<float>> Values => _floatHealthValueGroupImplementation.Values;
         
         public HealthChangeResult PreviewDamage(float incomingDamage)
         {

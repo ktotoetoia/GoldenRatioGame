@@ -21,7 +21,7 @@ namespace IM.Modules
         
         public void AddToBuild(IEntity entity)
         {
-            if (!entity.GameObject.TryGetComponent(out IFloatHealthValueGroup component))
+            if (!entity.GameObject.TryGetComponent(out IFloatHealthValuesGroup component))
             {
                 Debug.LogWarning("Entity does not contain required component");
              
@@ -33,7 +33,7 @@ namespace IM.Modules
 
         public void RemoveFromBuild(IEntity entity)
         {            
-            if (entity.GameObject.TryGetComponent(out IFloatHealthValueGroup component) && component.HealthBars.Contains(_health))
+            if (entity.GameObject.TryGetComponent(out IFloatHealthValuesGroup component) && component.Values.Contains(_health))
             {
                 component.RemoveHealth(_health);
             }

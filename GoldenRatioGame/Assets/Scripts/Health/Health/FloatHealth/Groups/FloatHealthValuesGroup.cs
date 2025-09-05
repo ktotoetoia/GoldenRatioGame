@@ -4,11 +4,11 @@ using IM.Economy;
 
 namespace IM.Health
 {
-    public class FloatHealthValueGroup : IFloatHealthValueGroup
+    public class FloatHealthValuesGroup : IFloatHealthValuesGroup
     {
         private readonly List<ICappedValue<float>> _healthValues = new();
 
-        public IReadOnlyList<ICappedValueReadOnly<float>> HealthBars => _healthValues;
+        public IReadOnlyList<ICappedValueReadOnly<float>> Values => _healthValues;
         public ICappedValueReadOnly<float> Health => GetCurrentHealth();
 
         public void AddHealth(ICappedValue<float> healthBar)

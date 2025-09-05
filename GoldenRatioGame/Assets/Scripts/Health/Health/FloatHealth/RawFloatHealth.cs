@@ -1,6 +1,5 @@
 ﻿using System;
 using IM.Economy;
-using UnityEngine;
 
 namespace IM.Health
 {
@@ -10,8 +9,8 @@ namespace IM.Health
         
         public ICappedValueReadOnly<float> Health => _health;
         
-        public RawFloatHealth(float minHealth, float maxHealth, float currentHealth) 
-            : this(new CappedValue<float>(minHealth, maxHealth, currentHealth))
+        public RawFloatHealth(float maxHealth, float currentHealth) 
+            : this(new CappedValue<float>(0, maxHealth, currentHealth))
         {
             
         }
@@ -63,6 +62,14 @@ namespace IM.Health
             _health.Value += result.Applied;
 
             return result;
+        }
+
+        public void SetMaxValue(float maxValue)
+        {
+            if (maxValue <= _health.MinValue)
+                throw new ArgumentException("max value must be higher than the min value");
+
+            _health.MaxValue = maxValue;
         }
     }
 }
