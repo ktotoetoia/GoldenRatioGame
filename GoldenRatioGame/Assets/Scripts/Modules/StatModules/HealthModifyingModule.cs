@@ -30,7 +30,7 @@ namespace IM.Modules
 
             component.AddHealth(_health);
         }
-
+        
         public void RemoveFromBuild(IEntity entity)
         {            
             if (entity.GameObject.TryGetComponent(out IFloatHealthValuesGroup component) && component.Values.Contains(_health))
