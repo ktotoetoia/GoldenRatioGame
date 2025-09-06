@@ -29,7 +29,6 @@ namespace IM.Movement
 
                 return;
             }
-
             if (velocityInfo.Action == VelocityAction.Override)
             {
                 _velocity = velocityInfo;
