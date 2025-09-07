@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using IM.Entities;
 using IM.Graphs;
 using UnityEngine;
@@ -7,7 +7,9 @@ namespace IM.Modules
 {
     public class ModuleEntity : MonoBehaviour, IModuleEntity
     {
+        [SerializeField] private float _maxHealth;
         private ModuleGraphEvents _graph;
+        private List<IGraphReader> _graphReaders;
         
         public GameObject GameObject => gameObject;
         public IModuleGraph Graph => _graph;
@@ -15,28 +17,19 @@ namespace IM.Modules
         private void Awake()
         {
             _graph = new ModuleGraphEvents();
-            _graph.OnGraphChanged += UpdateBuild;
-        }
+            _graph.OnGraphChanged +=() => _graphReaders.ForEach(x => x.OnGraphStructureChanged());
         
-        private void UpdateBuild()
-        {
-            RemoveAllFromBuild();
-            AddAllToBuild();
+            _graphReaders = new List<IGraphReader>(0)
+            {
+                new EntityModuleGraphReader(_graph,this),
+            };
         }
 
-        private void AddAllToBuild()
+        private void Update()
         {
-            foreach (IGameModule module in Graph.Modules.OfType<IGameModule>())
+            if (Input.GetKeyDown(KeyCode.O))
             {
-                module.AddToBuild(this);
-            }
-        }
-
-        private void RemoveAllFromBuild()
-        {
-            foreach (IGameModule module in Graph.Modules.OfType<IGameModule>())
-            {
-                module.RemoveFromBuild(this);
+                _graph.AddModule(new HealthModifyingModule(_maxHealth,_maxHealth));
             }
         }
     }

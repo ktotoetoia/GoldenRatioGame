@@ -2,7 +2,7 @@
 
 namespace IM.Modules
 {
-    public interface IGameModule
+    public interface IEntityModule
     {
         void AddToBuild(IEntity entity);
         void RemoveFromBuild(IEntity entity);

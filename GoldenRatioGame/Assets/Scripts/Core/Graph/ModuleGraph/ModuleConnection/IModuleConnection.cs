@@ -4,5 +4,7 @@
     {
         IModulePort Input { get; }
         IModulePort Output { get; }
+        void Connect();
+        void Disconnect();
     }
 }

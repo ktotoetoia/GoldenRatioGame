@@ -6,7 +6,7 @@ namespace IM.Graphs
 {
     public class ModuleGraph : IModuleGraph
     {
-        private readonly List<ModuleConnection> _connections = new();
+        private readonly List<IModuleConnection> _connections = new();
         private readonly List<IModule> _modules = new();
         
         public IEnumerable<IModule> Modules => _modules;
@@ -31,7 +31,6 @@ namespace IM.Graphs
             module.Ports
                 .Select(p => p.Connection)
                 .Where(c => c != null)
-                .OfType<ModuleConnection>()
                 .ToList()
                 .ForEach(Disconnect);
         }
@@ -41,9 +40,6 @@ namespace IM.Graphs
             CheckPorts(output,input);
             
             ModuleConnection connection =  new ModuleConnection(output, input);
-
-            if (!connection.CanConnect())
-                throw new InvalidOperationException("Ports refused the connection.");
 
             connection.Connect();
             _connections.Add(connection);
@@ -55,13 +51,9 @@ namespace IM.Graphs
         {
             if(connection == null) throw new ArgumentNullException(nameof(connection));
             if (!Contains(connection)) throw new ArgumentException("Graph does not contain this connector");
-
-            if (connection is not ModuleConnection moduleConnection || moduleConnection.CanDisconnect())
-                throw new InvalidOperationException("Cannot disconnect module connection.");
             
-            
-            moduleConnection.Disconnect();
-            _connections.Remove(moduleConnection);
+            connection.Disconnect();
+            _connections.Remove(connection);
         }
 
         public bool Contains(IModule module)
@@ -71,7 +63,7 @@ namespace IM.Graphs
 
         public bool Contains(IModuleConnection connection)
         {
-            return connection is ModuleConnection moduleConnection && _connections.Contains(moduleConnection);
+            return _connections.Contains(connection);
         }
 
         public void Clear()

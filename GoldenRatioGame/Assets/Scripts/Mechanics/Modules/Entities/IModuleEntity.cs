@@ -1,6 +1,8 @@
-﻿using IM.Graphs;
+﻿using System;
+using IM.Entities;
+using IM.Graphs;
 
-namespace IM.Entities
+namespace IM.Modules
 {
     public interface IModuleEntity : IEntity
     {

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public sealed class HealthModifyingModule : Module, IGameModule
+    public sealed class HealthModifyingModule : Module, IEntityModule
     {
         private readonly CappedValue<float> _health;
         
@@ -23,8 +23,8 @@ namespace IM.Modules
         {
             if (!entity.GameObject.TryGetComponent(out IFloatHealthValuesGroup component))
             {
-                Debug.LogWarning("Entity does not contain required component");
-             
+                Debug.LogWarning("Entity does not contain IFloatHealthValuesGroup component");
+                
                 return;
             }
 

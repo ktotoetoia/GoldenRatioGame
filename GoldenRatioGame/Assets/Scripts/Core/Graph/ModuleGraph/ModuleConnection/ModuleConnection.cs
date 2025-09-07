@@ -16,16 +16,6 @@ namespace IM.Graphs
             Output = to;
         }
 
-        public bool CanConnect()
-        {
-            return Output.CanConnect(this) && Input.CanConnect(this);
-        }
-
-        public bool CanDisconnect()
-        {
-            return Output.CanDisconnect() && Input.CanDisconnect();
-        }
-
         public void Connect()
         {
             if (Input == null || Output == null)
