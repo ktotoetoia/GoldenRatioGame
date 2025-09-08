@@ -1,11 +1,9 @@
-﻿using System;
-using IM.Entities;
-using IM.Graphs;
+﻿using IM.Entities;
 
 namespace IM.Modules
 {
     public interface IModuleEntity : IEntity
     {
-        IModuleGraph Graph { get; }
+        ICoreModuleGraph Graph { get; }
     }
 }

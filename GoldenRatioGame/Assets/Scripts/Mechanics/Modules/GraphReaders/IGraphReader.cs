@@ -4,7 +4,7 @@ namespace IM.Modules
 {
     public interface IGraphReader
     {
-        IModuleGraph Graph { get; }
+        ICoreModuleGraph Graph { get; }
 
         void OnGraphStructureChanged();
     }

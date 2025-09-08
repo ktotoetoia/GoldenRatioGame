@@ -20,8 +20,8 @@ namespace IM.Modules
         
         public CoreModuleGraph(IModule coreModule, IModuleGraph moduleGraph)
         {
-            CoreModule = coreModule;
             _moduleGraph = moduleGraph;
+            SetCoreModule(coreModule);
         }
         
         public void AddModule(IModule module)
@@ -46,14 +46,18 @@ namespace IM.Modules
 
         public void SetCoreModule(IModule module)
         {
-            RemoveModule(CoreModule);
+            if(CoreModule != null)
+            {
+                RemoveModule(CoreModule);
+            }
+
             CoreModule = module;
             AddModule(module);
         }
 
-        public IModuleGraph GetCoreSubgraph()
+        public IGraphReadOnly GetCoreSubgraph()
         {
-            throw new NotImplementedException();
+            return new BreadthFirstTraversal().GetSubGraph(CoreModule, x => true);
         }
     }
 }

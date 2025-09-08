@@ -7,6 +7,6 @@ namespace IM.Modules
         IModule CoreModule { get; }
         
         void SetCoreModule(IModule module);
-        IModuleGraph GetCoreSubgraph();
+        IGraphReadOnly GetCoreSubgraph();
     }
 }

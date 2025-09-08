@@ -8,7 +8,7 @@ namespace IM.Graphs
         protected List<IModulePort> _ports = new();
         
         public IEnumerable<IModulePort> Ports => _ports;
-        public IEnumerable<IEdge> Edges => _ports.Select(x => x.Connection);
+        public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection);
 
         public virtual void AddPort(IModulePort port)
         {

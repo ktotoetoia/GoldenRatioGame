@@ -2,17 +2,16 @@
 using System.Linq;
 using IM.Entities;
 using IM.Graphs;
-using UnityEngine;
 
 namespace IM.Modules
 {
     public class EntityModuleGraphReader : IGraphReader
     {
         private readonly List<IEntityModule> _modules = new();
-        public IModuleGraph Graph { get; }
+        public ICoreModuleGraph Graph { get; }
         public IEntity Entity { get; }
 
-        public EntityModuleGraphReader(IModuleGraph graph, IEntity entity)
+        public EntityModuleGraphReader(ICoreModuleGraph graph, IEntity entity)
         {
             Graph = graph;
             Entity = entity;

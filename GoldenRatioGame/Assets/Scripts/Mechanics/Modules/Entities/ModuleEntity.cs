@@ -8,29 +8,31 @@ namespace IM.Modules
     public class ModuleEntity : MonoBehaviour, IModuleEntity
     {
         [SerializeField] private float _maxHealth;
-        private ModuleGraphEvents _graph;
+        private CoreModuleGraph _graph;
         private List<IGraphReader> _graphReaders;
         
         public GameObject GameObject => gameObject;
-        public IModuleGraph Graph => _graph;
+        public ICoreModuleGraph Graph => _graph;
 
         private void Awake()
         {
-            _graph = new ModuleGraphEvents();
-            _graph.OnGraphChanged +=() => _graphReaders.ForEach(x => x.OnGraphStructureChanged());
+            ModuleGraphEvents graphEvents = new ModuleGraphEvents(new SafeModuleGraph());
+            
+            _graph = new CoreModuleGraph(new HealthModifyingModule(_maxHealth,_maxHealth),graphEvents);
+
+            graphEvents.OnGraphChanged +=UpdateGraphReaders;
         
             _graphReaders = new List<IGraphReader>(0)
             {
                 new EntityModuleGraphReader(_graph,this),
             };
+
+            UpdateGraphReaders();
         }
 
-        private void Update()
+        private void UpdateGraphReaders()
         {
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                _graph.AddModule(new HealthModifyingModule(_maxHealth,_maxHealth));
-            }
+            _graphReaders.ForEach(x => x.OnGraphStructureChanged());
         }
     }
 }
