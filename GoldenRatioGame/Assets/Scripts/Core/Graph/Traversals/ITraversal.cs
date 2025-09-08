@@ -1,7 +1,10 @@
-﻿namespace IM.Graphs
+﻿using System;
+using System.Collections.Generic;
+
+namespace IM.Graphs
 {
     public interface ITraversal
     {
-        IGraph GetSubGraph(INode node);
+        IGraphReadOnly GetSubGraph(INode node, Func<IReadOnlyList<INode>, bool> canPathTo);
     }
-}
+} 
