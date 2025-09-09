@@ -1,4 +1,5 @@
-﻿using IM.Graphs;
+﻿using System.Linq;
+using IM.Graphs;
 using IM.Modules;
 using UnityEngine;
 
@@ -26,7 +27,7 @@ namespace IM.ModuleEditor
         {
             if(ModuleGraph == null) return;
 
-            foreach (IModule module in ModuleGraph.Nodes)
+            foreach (IModule module in ModuleGraph.Nodes.OfType<IModule>())
             {
                 Gizmos.color = Color.white;
 
@@ -56,7 +57,7 @@ namespace IM.ModuleEditor
                 }
             }
             
-            foreach (IModuleConnection connection in ModuleGraph.Edges)
+            foreach (IModuleConnection connection in ModuleGraph.Edges.OfType<IModuleConnection>())
             {
                 Gizmos.color = Color.green;
                 DrawConnection(connection);
