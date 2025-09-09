@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using IM.Entities;
+using System.Linq;
 using IM.Graphs;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ namespace IM.Modules
     {
         [SerializeField] private float _maxHealth;
         private CoreModuleGraph _graph;
-        private List<IGraphReader> _graphReaders;
+        private List<IGraphObserver> _graphReaders;
         
         public GameObject GameObject => gameObject;
         public ICoreModuleGraph Graph => _graph;
@@ -22,12 +22,27 @@ namespace IM.Modules
 
             graphEvents.OnGraphChanged +=UpdateGraphReaders;
         
-            _graphReaders = new List<IGraphReader>(0)
+            _graphReaders = new List<IGraphObserver>(0)
             {
-                new EntityModuleGraphReader(_graph,this),
+                new HealthModulesGraphObserver(_graph,this),
             };
 
             UpdateGraphReaders();
+        }
+
+        private void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                IModule module = new HealthModifyingModule(_maxHealth, _maxHealth);
+                _graph.AddModule(module);
+                _graph.Connect(module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input), _graph.CoreModule.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Output));
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                _graph.RemoveModule(_graph.Modules.FirstOrDefault(x => x != _graph.CoreModule));
+            }
         }
 
         private void UpdateGraphReaders()

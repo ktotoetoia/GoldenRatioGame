@@ -1,13 +1,9 @@
-﻿using System.Linq;
-using IM.Economy;
-using IM.Entities;
+﻿using IM.Economy;
 using IM.Graphs;
-using IM.Health;
-using UnityEngine;
 
 namespace IM.Modules
 {
-    public sealed class HealthModifyingModule : Module, IEntityModule
+    public sealed class HealthModifyingModule : Module, IHealthModule
     {
         private readonly CappedValue<float> _health;
         
@@ -17,26 +13,21 @@ namespace IM.Modules
 
             AddPort(new ModulePort(this,PortDirection.Input));
             AddPort(new ModulePort(this,PortDirection.Output));
+            AddPort(new ModulePort(this,PortDirection.Input));
+            AddPort(new ModulePort(this,PortDirection.Output));
+            AddPort(new ModulePort(this,PortDirection.Input));
+            AddPort(new ModulePort(this,PortDirection.Output));
+            AddPort(new ModulePort(this,PortDirection.Input));
+            AddPort(new ModulePort(this,PortDirection.Output));
+            AddPort(new ModulePort(this,PortDirection.Input));
+            AddPort(new ModulePort(this,PortDirection.Output));
+            AddPort(new ModulePort(this,PortDirection.Input));
+            AddPort(new ModulePort(this,PortDirection.Output));
         }
-        
-        public void AddToBuild(IEntity entity)
-        {
-            if (!entity.GameObject.TryGetComponent(out IFloatHealthValuesGroup component))
-            {
-                Debug.LogWarning("Entity does not contain IFloatHealthValuesGroup component");
-                
-                return;
-            }
 
-            component.AddHealth(_health);
-        }
-        
-        public void RemoveFromBuild(IEntity entity)
-        {            
-            if (entity.GameObject.TryGetComponent(out IFloatHealthValuesGroup component) && component.Values.Contains(_health))
-            {
-                component.RemoveHealth(_health);
-            }
+        public ICappedValue<float> GetHealth()
+        {
+            return _health;
         }
     }
 }

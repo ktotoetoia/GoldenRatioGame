@@ -2,7 +2,7 @@
 
 namespace IM.Modules
 {
-    public interface IGraphReader
+    public interface IGraphObserver
     {
         ICoreModuleGraph Graph { get; }
 

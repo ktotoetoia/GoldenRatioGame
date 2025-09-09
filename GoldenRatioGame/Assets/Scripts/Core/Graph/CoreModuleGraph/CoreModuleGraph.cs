@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using IM.Graphs;
 
-namespace IM.Modules
+namespace IM.Graphs
 {
     public class CoreModuleGraph : ICoreModuleGraph
     {
@@ -31,6 +30,9 @@ namespace IM.Modules
 
         public void RemoveModule(IModule module)
         {
+            if (module == CoreModule)
+                throw new Exception("cannot remove CoreModule");
+            
             _moduleGraph.RemoveModule(module);
         }
 
