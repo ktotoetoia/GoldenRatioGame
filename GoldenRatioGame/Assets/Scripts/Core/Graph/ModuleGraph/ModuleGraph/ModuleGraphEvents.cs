@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace IM.Graphs
 {
-    public class ModuleGraphEvents : IModuleGraph
+    public class ModuleGraphEvents : IModuleGraph, IModuleGraphEvents
     {
-        private readonly IModuleGraph _graph;
+        protected readonly IModuleGraph _graph;
         
         public IReadOnlyList<INode> Nodes => _graph.Nodes;
         public IReadOnlyList<IEdge> Edges => _graph.Edges;
@@ -16,7 +16,7 @@ namespace IM.Graphs
         public event Action<IModule> OnModuleRemoved;
         public event Action<IModuleConnection> OnConnected;
         public event Action<IModuleConnection> OnDisconnected;
-        public event Action OnGraphChanged;
+        public event Action OnGraphChange;
         
         public ModuleGraphEvents() : this(new ModuleGraph())
         {
@@ -27,10 +27,10 @@ namespace IM.Graphs
         {
             _graph = graph;
             
-            OnModuleAdded += x => OnGraphChanged?.Invoke();
-            OnModuleRemoved += x => OnGraphChanged?.Invoke();
-            OnConnected += x => OnGraphChanged?.Invoke();
-            OnDisconnected += x => OnGraphChanged?.Invoke();
+            OnModuleAdded += x => OnGraphChanged();
+            OnModuleRemoved += x => OnGraphChanged();
+            OnConnected += x => OnGraphChanged();
+            OnDisconnected += x => OnGraphChanged();
         }
 
         public void AddModule(IModule module)
@@ -58,6 +58,11 @@ namespace IM.Graphs
         {
             _graph.Disconnect(connection);
             OnDisconnected?.Invoke(connection);
+        }
+
+        protected void OnGraphChanged()
+        {
+            OnGraphChange?.Invoke();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace IM.Modules
     public class ModuleEntity : MonoBehaviour, IModuleEntity
     {
         [SerializeField] private float _maxHealth;
-        private CoreModuleGraph _graph;
+        private CoreModuleGraphEvents _graph;
         private List<IGraphObserver> _graphReaders;
         
         public GameObject GameObject => gameObject;
@@ -16,15 +16,13 @@ namespace IM.Modules
 
         private void Awake()
         {
-            ModuleGraphEvents graphEvents = new ModuleGraphEvents(new SafeModuleGraph());
+            _graph = new CoreModuleGraphEvents(new HealthModifyingModule(_maxHealth,_maxHealth));
             
-            _graph = new CoreModuleGraph(new HealthModifyingModule(_maxHealth,_maxHealth),graphEvents);
-
-            graphEvents.OnGraphChanged +=UpdateGraphReaders;
+            _graph.OnGraphChange +=UpdateGraphReaders;
         
             _graphReaders = new List<IGraphObserver>(0)
             {
-                new HealthModulesGraphObserver(_graph,this),
+                new HealthModulesGraphObserver(Graph,this),
             };
 
             UpdateGraphReaders();
@@ -35,13 +33,13 @@ namespace IM.Modules
             if (Input.GetMouseButtonDown(0))
             {
                 IModule module = new HealthModifyingModule(_maxHealth, _maxHealth);
-                _graph.AddModule(module);
-                _graph.Connect(module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input), _graph.CoreModule.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Output));
+                Graph.AddModule(module);
+                Graph.Connect(module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input), Graph.CoreModule.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Output));
             }
 
             if (Input.GetMouseButtonDown(1))
             {
-                _graph.RemoveModule(_graph.Modules.FirstOrDefault(x => x != _graph.CoreModule));
+                Graph.RemoveModule(Graph.Modules.FirstOrDefault(x => x != Graph.CoreModule));
             }
         }
 
