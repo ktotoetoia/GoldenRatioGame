@@ -1,4 +1,6 @@
-﻿namespace IM.Graphs
+﻿using System;
+
+namespace IM.Graphs
 {
     public class ModulePort : IModulePort
     {
@@ -12,20 +14,16 @@
             Module = module;
             Direction = direction;
         }
-
-        public virtual bool CanConnect(IModuleConnection connection) => !IsConnected;
-
+        
         public virtual void Connect(IModuleConnection connection)
         {
-            if (CanConnect(connection))
+            if (!IsConnected)
                 Connection = connection;
         }
 
-        public virtual bool CanDisconnect() => IsConnected;
-
         public virtual void Disconnect()
         {
-            if (CanDisconnect())
+            if (IsConnected)
                 Connection = null;
         }
     }
