@@ -9,23 +9,19 @@ namespace IM.Modules
     {
         [SerializeField] private float _maxHealth;
         private CoreModuleGraphEvents _graph;
-        private List<IGraphObserver> _graphReaders;
+        private List<IModulesObserver> _graphReaders;
         
         public GameObject GameObject => gameObject;
         public ICoreModuleGraph Graph => _graph;
 
         private void Awake()
         {
-            _graph = new CoreModuleGraphEvents(new HealthModifyingModule(_maxHealth,_maxHealth));
-            
-            _graph.OnGraphChange +=UpdateGraphReaders;
-        
-            _graphReaders = new List<IGraphObserver>(0)
-            {
-                new HealthModulesGraphObserver(Graph,this),
-            };
+            HumanoidCoreModule coreModule = new HumanoidCoreModule(this, _maxHealth, _maxHealth);
+            _graph = new CoreModuleGraphEvents(coreModule);
 
-            UpdateGraphReaders();
+            _graph.OnGraphChange += coreModule.OnStructureUpdated;
+            
+            coreModule.OnStructureUpdated();
         }
 
         private void Update()
@@ -41,11 +37,6 @@ namespace IM.Modules
             {
                 Graph.RemoveModule(Graph.Modules.FirstOrDefault(x => x != Graph.CoreModule));
             }
-        }
-
-        private void UpdateGraphReaders()
-        {
-            _graphReaders.ForEach(x => x.OnGraphStructureChanged());
         }
     }
 }
