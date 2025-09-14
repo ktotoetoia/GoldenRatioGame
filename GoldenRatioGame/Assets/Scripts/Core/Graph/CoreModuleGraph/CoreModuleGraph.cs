@@ -5,11 +5,12 @@ namespace IM.Graphs
 {
     public class CoreModuleGraph : ICoreModuleGraph
     {
+        private readonly BreadthFirstTraversal _breadthFirstTraversal = new();
         private readonly IModuleGraph _moduleGraph;
         public IReadOnlyList<INode> Nodes => _moduleGraph.Nodes;
         public IReadOnlyList<IEdge> Edges => _moduleGraph.Edges;
-        public IEnumerable<IModuleConnection> Connections => _moduleGraph.Connections;
-        public IEnumerable<IModule> Modules => _moduleGraph.Modules;
+        public IReadOnlyList<IModuleConnection> Connections => _moduleGraph.Connections;
+        public IReadOnlyList<IModule> Modules => _moduleGraph.Modules;
         public IModule CoreModule { get; private set; }
 
         public CoreModuleGraph(IModule coreModule) :this(coreModule,new SafeModuleGraph())
@@ -59,7 +60,7 @@ namespace IM.Graphs
 
         public IGraphReadOnly GetCoreSubgraph()
         {
-            return new BreadthFirstTraversal().GetSubGraph(CoreModule, x => true);
+            return _breadthFirstTraversal.GetSubGraph(CoreModule, x => true);
         }
     }
 }

@@ -10,8 +10,8 @@ namespace IM.Graphs
         
         public IReadOnlyList<INode> Nodes => _inner.Nodes;
         public IReadOnlyList<IEdge> Edges => _inner.Edges;
-        public IEnumerable<IModuleConnection> Connections => _inner.Connections;
-        public IEnumerable<IModule> Modules => _inner.Modules;
+        public IReadOnlyList<IModuleConnection> Connections => _inner.Connections;
+        public IReadOnlyList<IModule> Modules => _inner.Modules;
         public bool LogWarningsOnNullExceptions { get; set; } = true;
         public bool LogWarningInnerExceptions { get; set; } = true;
 

@@ -9,8 +9,8 @@ namespace IM.Graphs
         
         public IReadOnlyList<INode> Nodes => _graph.Nodes;
         public IReadOnlyList<IEdge> Edges => _graph.Edges;
-        public IEnumerable<IModule> Modules => _graph.Modules;
-        public IEnumerable<IModuleConnection> Connections => _graph.Connections;
+        public IReadOnlyList<IModule> Modules => _graph.Modules;
+        public IReadOnlyList<IModuleConnection> Connections => _graph.Connections;
         
         public event Action<IModule> OnModuleAdded;
         public event Action<IModule> OnModuleRemoved;
