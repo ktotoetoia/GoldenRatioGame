@@ -40,5 +40,10 @@ namespace IM.Health
         {
             _floatHealthValueGroupImplementation.RemoveHealth(healthBar);
         }
+
+        public bool Contains(ICappedValueReadOnly<float> healthBar)
+        {
+            return _floatHealthValueGroupImplementation.Contains(healthBar);
+        }
     }
 }

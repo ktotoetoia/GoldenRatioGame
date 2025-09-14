@@ -9,5 +9,6 @@ namespace IM.Health
         
         void AddHealth(ICappedValue<float> healthBar);
         void RemoveHealth(ICappedValue<float> healthBar);
+        bool Contains(ICappedValueReadOnly<float> healthBar);
     }
 }
