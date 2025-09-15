@@ -1,18 +1,16 @@
-﻿using IM.Entities;
+﻿using IM.Economy;
 using IM.Graphs;
 
 namespace IM.Modules
 {
-    public sealed class HealthModifierModule : Module, IEntityHolder
+    public sealed class HealthModifierModule : Module, IHealthModule
     {
-        private readonly HealthHolder _healthHolder;
-        
-        public IEntity Entity {get => _healthHolder.Entity; set => _healthHolder.Entity = value; }
+        public ICappedValue<float> Health { get; }
         
         public HealthModifierModule(float maxHealth, float currentHealth)
         {
-            _healthHolder = new HealthHolder(maxHealth,currentHealth);
-
+            Health = new CappedValue<float>(0,maxHealth, currentHealth);
+            
             AddPort(new ModulePort(this,PortDirection.Input));
             AddPort(new ModulePort(this,PortDirection.Output));
             AddPort(new ModulePort(this,PortDirection.Input));

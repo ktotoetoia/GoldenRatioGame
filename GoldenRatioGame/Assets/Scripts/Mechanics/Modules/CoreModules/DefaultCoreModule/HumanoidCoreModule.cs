@@ -1,26 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using IM.Economy;
-using IM.Entities;
+﻿using IM.Economy;
 using IM.Graphs;
-using UnityEngine;
 
 namespace IM.Modules
 {
-    public sealed class HumanoidCoreModule : Module, IEntityHolder
+    public sealed class HumanoidCoreModule : Module, IHealthModule
     {
-        private readonly HealthHolder _healthHolder;
-
-        public IEntity Entity
-        {
-            get => _healthHolder.Entity; 
-            set
-            {
-                Debug.Log(value);
-                _healthHolder.Entity = value;
-            }
-        }
+        public ICappedValue<float> Health { get; }
         
         public IModulePort HeadPort { get; }
         public IModulePort LeftArmPort { get; }
@@ -30,7 +15,7 @@ namespace IM.Modules
         
         public HumanoidCoreModule(float maxHealth, float currentHealth)
         {
-            _healthHolder = new HealthHolder(maxHealth,currentHealth);
+            Health = new CappedValue<float>(0,maxHealth, currentHealth);
 
             AddPort(HeadPort = new ModulePort(this,PortDirection.Output));
             AddPort(LeftArmPort = new ModulePort(this,PortDirection.Output));

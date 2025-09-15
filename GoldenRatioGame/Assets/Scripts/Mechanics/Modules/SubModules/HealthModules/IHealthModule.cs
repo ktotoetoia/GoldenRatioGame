@@ -4,6 +4,6 @@ namespace IM.Modules
 {
     public interface IHealthModule
     {
-        ICappedValue<float> GetHealth();
+        ICappedValue<float> Health { get; }
     }
 }
