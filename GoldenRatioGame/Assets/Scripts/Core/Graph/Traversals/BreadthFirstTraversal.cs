@@ -6,6 +6,11 @@ namespace IM.Graphs
 {
     public class BreadthFirstTraversal : ITraversal
     {
+        public IGraphReadOnly GetSubGraph(INode start)
+        {
+            return GetSubGraph(start, x => true);
+        }
+        
         public IGraphReadOnly GetSubGraph(INode start, Func<IReadOnlyList<INode>, bool> canPathTo)
         {
             HashSet<INode> newNodes = new HashSet<INode>();
@@ -46,6 +51,11 @@ namespace IM.Graphs
             }
 
             return new GraphReadOnly(newNodes.ToList(), newEdges.ToList());
+        }
+
+        public bool HasPathTo(INode from, INode to)
+        {
+            return GetSubGraph(from).Nodes.Contains(to);
         }
     }
 } 

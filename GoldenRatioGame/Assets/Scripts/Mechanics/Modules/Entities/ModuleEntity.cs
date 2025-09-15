@@ -8,35 +8,55 @@ namespace IM.Modules
     public class ModuleEntity : MonoBehaviour, IModuleEntity
     {
         [SerializeField] private float _maxHealth;
+        private readonly List<IModule> _modulesUsed = new();
         private CoreModuleGraphEvents _graph;
-        private List<IModulesObserver> _graphReaders;
         
         public GameObject GameObject => gameObject;
         public ICoreModuleGraph Graph => _graph;
-
+        
         private void Awake()
         {
-            HumanoidCoreModule coreModule = new HumanoidCoreModule(this, _maxHealth, _maxHealth);
+            HumanoidCoreModule coreModule = new HumanoidCoreModule(_maxHealth, _maxHealth);
             _graph = new CoreModuleGraphEvents(coreModule);
 
-            _graph.OnGraphChange += coreModule.OnStructureUpdated;
-            
-            coreModule.OnStructureUpdated();
+            coreModule.Entity = this;
+
+            _graph.OnGraphChange += U;
+            _graph.SetCoreModule(coreModule);
+            U();
         }
 
-        private void Update()
+        private void U()
         {
-            if (Input.GetMouseButtonDown(0))
+            List<IModule> newModules = Graph
+                .GetCoreSubgraph()
+                .Nodes
+                .OfType<IModule>()
+                .ToList();
+            
+            HashSet<IModule> oldSet = new HashSet<IModule>(_modulesUsed);
+            
+            foreach (IModule added in newModules)
             {
-                IModule module = new HealthModifyingModule(_maxHealth, _maxHealth);
-                Graph.AddModule(module);
-                Graph.Connect(module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input), Graph.CoreModule.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Output));
+                if (oldSet.Remove(added)) 
+                    continue;
+
+                if (added is IEntityHolder h)
+                {
+                    h.Entity = this;
+                }
             }
 
-            if (Input.GetMouseButtonDown(1))
+            foreach (IModule removed in oldSet)
             {
-                Graph.RemoveModule(Graph.Modules.FirstOrDefault(x => x != Graph.CoreModule));
+                if (removed is IEntityHolder h)
+                {
+                    h.Entity = null;
+                }
             }
+
+            _modulesUsed.Clear();
+            _modulesUsed.AddRange(newModules);
         }
     }
 }
