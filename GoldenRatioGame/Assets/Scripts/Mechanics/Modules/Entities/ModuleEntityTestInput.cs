@@ -1,0 +1,32 @@
+﻿using System.Linq;
+using IM.Graphs;
+using UnityEngine;
+
+namespace IM.Modules
+{
+    public class ModuleEntityTestInput : MonoBehaviour
+    {
+        [SerializeField] private float _maxHealth;
+        private IModuleEntity _moduleEntity;
+        
+        private void Awake()
+        {
+            _moduleEntity = GetComponent<IModuleEntity>();
+        }
+
+        private void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                IModule module = new HealthModifierModule(_maxHealth, _maxHealth);
+                _moduleEntity.Graph.AddModule(module);
+                _moduleEntity.Graph.Connect(module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input), _moduleEntity.Graph.CoreModule.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Output));
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                _moduleEntity.Graph.RemoveModule(_moduleEntity.Graph.Modules.FirstOrDefault(x => x != _moduleEntity.Graph.CoreModule));
+            }
+        }
+    }
+}

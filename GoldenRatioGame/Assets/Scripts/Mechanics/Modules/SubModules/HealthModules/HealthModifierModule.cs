@@ -1,15 +1,17 @@
-﻿using IM.Economy;
+﻿using IM.Entities;
 using IM.Graphs;
 
 namespace IM.Modules
 {
-    public sealed class HealthModifyingModule : Module, IHealthModule
+    public sealed class HealthModifierModule : Module, IEntityHolder
     {
-        private readonly CappedValue<float> _health;
+        private readonly HealthHolder _healthHolder;
         
-        public HealthModifyingModule(float maxHealth, float currentHealth)
+        public IEntity Entity {get => _healthHolder.Entity; set => _healthHolder.Entity = value; }
+        
+        public HealthModifierModule(float maxHealth, float currentHealth)
         {
-            _health = new CappedValue<float>(0,maxHealth,currentHealth);
+            _healthHolder = new HealthHolder(maxHealth,currentHealth);
 
             AddPort(new ModulePort(this,PortDirection.Input));
             AddPort(new ModulePort(this,PortDirection.Output));
@@ -23,11 +25,6 @@ namespace IM.Modules
             AddPort(new ModulePort(this,PortDirection.Output));
             AddPort(new ModulePort(this,PortDirection.Input));
             AddPort(new ModulePort(this,PortDirection.Output));
-        }
-
-        public ICappedValue<float> GetHealth()
-        {
-            return _health;
         }
     }
 }
