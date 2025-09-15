@@ -51,7 +51,7 @@ namespace IM.Graphs
         {
             if(CoreModule != null)
             {
-                RemoveModule(CoreModule);
+                _moduleGraph.RemoveModule(module);
             }
 
             CoreModule = module;
@@ -60,7 +60,7 @@ namespace IM.Graphs
 
         public IGraphReadOnly GetCoreSubgraph()
         {
-            return _breadthFirstTraversal.GetSubGraph(CoreModule, x => true);
+            return _breadthFirstTraversal.GetSubGraph(CoreModule);
         }
     }
 }
