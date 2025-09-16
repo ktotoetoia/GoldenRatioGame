@@ -1,4 +1,4 @@
-﻿namespace IM.Economy
+﻿namespace IM.Values
 {
     public static class NumerableResourceExtensions
     {

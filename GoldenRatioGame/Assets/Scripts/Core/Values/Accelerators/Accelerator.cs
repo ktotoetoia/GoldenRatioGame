@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace IM.Economy
+namespace IM.Values
 {
     public class Accelerator : IAccelerator
     {

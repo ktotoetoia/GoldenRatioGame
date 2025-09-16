@@ -1,4 +1,4 @@
-﻿namespace IM.Economy
+﻿namespace IM.Values
 {
     public interface INumerableResource<out TResource> : ICappedValue<int> 
     {

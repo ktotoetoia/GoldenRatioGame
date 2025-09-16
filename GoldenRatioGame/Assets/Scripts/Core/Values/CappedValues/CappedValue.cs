@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IM.Economy
+namespace IM.Values
 {
     public class CappedValue<T> : ICappedValue<T> where T : struct, IComparable<T>
     {
