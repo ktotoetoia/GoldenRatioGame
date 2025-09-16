@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using IM.Economy;
+using IM.Values;
 
 namespace IM.Health
 {

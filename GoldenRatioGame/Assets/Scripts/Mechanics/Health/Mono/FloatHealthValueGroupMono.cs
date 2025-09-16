@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using IM.Economy;
+using IM.Values;
 using UnityEngine;
 
 namespace IM.Health

@@ -1,10 +1,10 @@
 ﻿using System;
-using IM.Economy;
+using IM.Values;
 using UnityEngine;
 
 namespace IM.Abilities
 {
-    public class BlinkForwardAbility : IAbility
+    public class BlinkForwardAbility : IActiveAbility
     {
         private readonly ICooldown _cooldown;
         public Func<Vector2> GetDirection { get; }

@@ -1,4 +1,4 @@
-﻿using IM.Economy;
+﻿using IM.Values;
 
 namespace IM.Health
 {

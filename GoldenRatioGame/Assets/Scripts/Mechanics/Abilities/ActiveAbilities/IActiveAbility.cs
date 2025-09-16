@@ -1,8 +1,8 @@
-using IM.Economy;
+using IM.Values;
 
 namespace IM.Abilities
 {
-    public interface IAbility
+    public interface IActiveAbility
     {
         ICooldownReadOnly Cooldown { get; }
         

@@ -10,7 +10,7 @@ namespace IM.Modules
         [SerializeField] private float _maxHealth;
         [SerializeField] private float _distance;
         private IModuleEntity _moduleEntity;
-        private IAbility _ability;
+        private IActiveAbility _ability;
         
         private void Awake()
         {
