@@ -1,12 +1,7 @@
-using IM.Values;
-
 namespace IM.Abilities
 {
-    public interface IActiveAbility
+    public interface IActiveAbility : IAbility
     {
-        ICooldownReadOnly Cooldown { get; }
-        
         bool TryUse();
-        bool CanUse();
     }
 }
