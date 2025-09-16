@@ -12,7 +12,7 @@ namespace IM.ModuleEditor
 
         private ISelection<object> _current = new Selection<object>();
 
-        public GraphSelection(IModuleGraph graph)
+        public GraphSelection(IModuleGraphReadOnly graph)
         {
             SelectionProvider = new ModuleGraphSelectionProvider(graph);
         }

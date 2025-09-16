@@ -7,9 +7,9 @@ namespace IM.ModuleEditor
 {
     public class ModuleGraphSelectionProvider : ISelectionProvider
     {
-        private readonly IModuleGraph _graph;
+        private readonly IModuleGraphReadOnly _graph;
 
-        public ModuleGraphSelectionProvider(IModuleGraph graph)
+        public ModuleGraphSelectionProvider(IModuleGraphReadOnly graph)
         {
             _graph = graph;
         }

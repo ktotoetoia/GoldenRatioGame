@@ -6,7 +6,7 @@ namespace IM.Abilities
 {
     public class BlinkForwardAbility : IAbility
     {
-        private ICooldown _cooldown;
+        private readonly ICooldown _cooldown;
         public Func<Vector2> GetDirection { get; }
         public Func<Transform> GetTarget { get;  }
         public ICooldownReadOnly Cooldown => _cooldown;

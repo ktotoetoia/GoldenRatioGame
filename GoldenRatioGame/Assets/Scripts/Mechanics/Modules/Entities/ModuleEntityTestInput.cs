@@ -44,7 +44,7 @@ namespace IM.Modules
 
         private Vector2 GetDirection()
         {
-            return ((Vector2)(Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position)).normalized;
+            return ((Vector2)(Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position)).normalized * _distance;
         }
     }
 }

@@ -1,33 +1,18 @@
 ﻿using System.Linq;
 using IM.Graphs;
-using IM.Modules;
 using UnityEngine;
 
 namespace IM.ModuleEditor
 {
     public class ModuleGraphGizmos : MonoBehaviour
     {
-        private IModuleEntity _mEntity;
-        public IGraphReadOnly ModuleGraph { get; set; }
-
-        private void Awake()
-        {
-            _mEntity = GetComponent<IModuleEntity>();
-        }
-
-        private void Update()
-        {
-            if(_mEntity != null)
-            {
-                ModuleGraph = _mEntity.Graph.GetCoreSubgraph();
-            }
-        }
+        public IGraphReadOnly Graph { get; set; }
 
         private void OnDrawGizmos()
         {
-            if(ModuleGraph == null) return;
+            if(Graph == null) return;
 
-            foreach (IModule module in ModuleGraph.Nodes.OfType<IModule>())
+            foreach (IModule module in Graph.Nodes.OfType<IModule>())
             {
                 Gizmos.color = Color.white;
 
@@ -57,7 +42,7 @@ namespace IM.ModuleEditor
                 }
             }
             
-            foreach (IModuleConnection connection in ModuleGraph.Edges.OfType<IModuleConnection>())
+            foreach (IModuleConnection connection in Graph.Edges.OfType<IModuleConnection>())
             {
                 Gizmos.color = Color.green;
                 DrawConnection(connection);
