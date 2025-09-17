@@ -5,6 +5,5 @@ namespace IM.Abilities
     public interface IAbilitiesPool
     {
         IEnumerable<IAbility> Abilities { get; }
-        IEnumerable<IActiveAbility> ActiveAbilities { get; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace IM.Abilities
 {
-    public interface IAbility
+    public interface IAbilityReadOnly
     {
         ICooldownReadOnly Cooldown { get; }
         bool IsBeingUsed { get; }

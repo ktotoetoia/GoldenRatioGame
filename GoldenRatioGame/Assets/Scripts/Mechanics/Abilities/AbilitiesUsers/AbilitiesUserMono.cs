@@ -14,11 +14,11 @@ namespace IM.Abilities
 
         private void Update()
         {
-            foreach (IActiveAbility ability in _pool.ActiveAbilities)
+            foreach (IAbility ability in _pool.Abilities)
             {
-                if (ability is IPreferredKeyboardBinding preferred && Input.GetKeyDown(preferred.Key) && ability.TryUse() )
+                if (ability is IPreferredKeyboardBinding preferred && Input.GetKeyDown(preferred.Key))
                 {
-                    
+                    ability.TryUse();
                 }
             }
         }
