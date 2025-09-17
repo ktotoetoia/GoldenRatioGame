@@ -611,7 +611,6 @@ GameObject:
   - component: {fileID: 1908329188}
   - component: {fileID: 1908329179}
   - component: {fileID: 1908329190}
-  - component: {fileID: 1908329191}
   - component: {fileID: 1908329189}
   m_Layer: 0
   m_Name: Player
@@ -828,23 +827,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _distance: 3
---- !u!114 &1908329191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908329172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bf9291c4a624fedb8f5f1af3f05c963, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _projectilePrefab: {fileID: 1434278888192613618, guid: eba33f8b0ce19fd4e80f7d5736b07c7b, type: 3}
-  _projectileCooldown: 1
-  _projectileSpeed: 5
-  _blinkDistance: 3
-  _blinkCooldown: 1
 --- !u!114 &1908329192
 MonoBehaviour:
   m_ObjectHideFlags: 0

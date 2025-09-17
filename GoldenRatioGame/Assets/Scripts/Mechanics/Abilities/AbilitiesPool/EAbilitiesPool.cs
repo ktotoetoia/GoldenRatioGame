@@ -12,19 +12,19 @@ namespace IM.Abilities
         [SerializeField] private float _projectileSpeed;
         [SerializeField] private float _blinkDistance;
         [SerializeField] private float _blinkCooldown;
-        private readonly List<IAbility> _activeAbilities = new();
-        public IEnumerable<IAbility> Abilities => _activeAbilities;
+        private readonly List<IAbility> _abilities = new();
+        public IEnumerable<IAbility> Abilities => _abilities;
 
         private void Awake()
         {
-            _activeAbilities.Add(new BlinkForwardAbility(GetDirection,GetComponent<Rigidbody2D>(),_blinkCooldown));
-            _activeAbilities.Add(new SendProjectileByVelocityAbility(GetDirection,transform, _projectilePrefab,_projectileCooldown));
+            _abilities.Add(new BlinkForwardAbility(GetDirection,GetComponent<Rigidbody2D>(),_blinkCooldown));
+            _abilities.Add(new SendProjectileByVelocityAbility(GetDirection,transform, _projectilePrefab,_projectileCooldown));
         }
 
         private void Update()
         {
-            (_activeAbilities.FirstOrDefault(x => x is BlinkForwardAbility) as BlinkForwardAbility).Range = _blinkDistance;
-            (_activeAbilities.FirstOrDefault(x => x is SendProjectileByVelocityAbility) as SendProjectileByVelocityAbility).Speed = _projectileSpeed;
+            (_abilities.FirstOrDefault(x => x is BlinkForwardAbility) as BlinkForwardAbility).Range = _blinkDistance;
+            (_abilities.FirstOrDefault(x => x is SendProjectileByVelocityAbility) as SendProjectileByVelocityAbility).Speed = _projectileSpeed;
             
         }
 

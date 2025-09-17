@@ -15,7 +15,7 @@ namespace IM.Modules
         public ICoreModuleGraph Graph
         {
             get => _graph;
-            set
+            private set
             {
                 _graph = value;
                 OnGraphChange();

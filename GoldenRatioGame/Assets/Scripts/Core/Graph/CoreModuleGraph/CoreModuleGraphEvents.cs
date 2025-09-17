@@ -17,7 +17,6 @@ namespace IM.Graphs
         public CoreModuleGraphEvents(ICoreModuleGraph coreModuleGraph) : base(coreModuleGraph)
         {
             _coreModuleGraph = coreModuleGraph;
-            OnCoreModuleSet += x => OnGraphChanged();
         }
 
         public IGraphReadOnly GetCoreSubgraph()
@@ -30,6 +29,7 @@ namespace IM.Graphs
             _coreModuleGraph.SetCoreModule(module);
 
             OnCoreModuleSet?.Invoke(module);
+            OnGraphChanged();
         }
     }
 }

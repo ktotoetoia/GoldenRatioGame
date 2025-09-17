@@ -4,7 +4,7 @@ namespace IM.Modules
 {
     public interface IGraphObserver
     {
-        ICoreModuleGraph Graph { get; set; }
+        ICoreModuleGraph Graph { get; }
         void OnGraphChange();
     }
 }

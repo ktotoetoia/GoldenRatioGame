@@ -18,22 +18,17 @@ namespace IM.Modules
 
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetKeyDown(KeyCode.O))
             {
                 IModule module = new HealthModifierModule(_maxHealth, _maxHealth);
                 _moduleEntity.Graph.AddModule(module);
                 _moduleEntity.Graph.Connect(module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input), _moduleEntity.Graph.CoreModule.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Output));
             }
 
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetKeyDown(KeyCode.P))
             {
                 _moduleEntity.Graph.RemoveModule(_moduleEntity.Graph.Modules.FirstOrDefault(x => x != _moduleEntity.Graph.CoreModule));
             }
-        }
-
-        private Vector2 GetDirection()
-        {
-            return ((Vector2)(Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position)).normalized * _distance;
         }
     }
 }

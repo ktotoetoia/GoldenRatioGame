@@ -26,23 +26,20 @@ namespace IM.Graphs
         public ModuleGraphEvents(IModuleGraph graph)
         {
             _graph = graph;
-            
-            OnModuleAdded += x => OnGraphChanged();
-            OnModuleRemoved += x => OnGraphChanged();
-            OnConnected += x => OnGraphChanged();
-            OnDisconnected += x => OnGraphChanged();
         }
 
         public void AddModule(IModule module)
         {
             _graph.AddModule(module);
             OnModuleAdded?.Invoke(module);
+            OnGraphChanged();
         }
 
         public void RemoveModule(IModule module)
         {
             _graph.RemoveModule(module);
             OnModuleRemoved?.Invoke(module);
+            OnGraphChanged();
         }
 
         public IModuleConnection Connect(IModulePort output, IModulePort input)
@@ -50,6 +47,7 @@ namespace IM.Graphs
             IModuleConnection connection = _graph.Connect(output, input);
             
             OnConnected?.Invoke(connection);
+            OnGraphChanged();
 
             return connection;
         }
@@ -58,6 +56,7 @@ namespace IM.Graphs
         {
             _graph.Disconnect(connection);
             OnDisconnected?.Invoke(connection);
+            OnGraphChanged();
         }
 
         protected void OnGraphChanged()

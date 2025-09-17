@@ -1,20 +1,21 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace IM.Abilities
 {
     public class AbilitiesUserMono : MonoBehaviour
     {
-        private IAbilitiesPool _pool;
+        public IAbilitiesPool Pool { get; set; }
 
         private void Awake()
         {
-            _pool = GetComponent<IAbilitiesPool>();
+            Pool = GetComponent<IAbilitiesPool>();
         }
 
         private void Update()
         {
-            foreach (IAbility ability in _pool.Abilities)
+            if(Pool == null) return;
+            
+            foreach (IAbility ability in Pool.Abilities)
             {
                 if (ability is IPreferredKeyboardBinding preferred && Input.GetKeyDown(preferred.Key))
                 {
