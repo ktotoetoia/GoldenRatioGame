@@ -27,9 +27,8 @@ namespace IM.Graphs
         public void SetCoreModule(IModule module)
         {
             _coreModuleGraph.SetCoreModule(module);
-
             OnCoreModuleSet?.Invoke(module);
-            OnGraphChanged();
+            CallOnModuleAdded(module);
         }
     }
 }

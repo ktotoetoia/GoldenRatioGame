@@ -1,10 +1,8 @@
 ﻿namespace IM.Graphs
 {
-    public interface ICoreModuleGraph : IModuleGraph
+    public interface ICoreModuleGraph :ICoreModuleGraphReadOnly, IModuleGraph
     {
-        IModule CoreModule { get; }
         
         void SetCoreModule(IModule module);
-        IGraphReadOnly GetCoreSubgraph();
     }
 }

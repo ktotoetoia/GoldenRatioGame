@@ -8,6 +8,6 @@ namespace IM.Graphs
         public event Action<IModule> OnModuleRemoved;
         public event Action<IModuleConnection> OnConnected;
         public event Action<IModuleConnection> OnDisconnected;
-        public event Action OnGraphChange;
+        public event Action OnGraphChanged;
     }
 }

@@ -5,7 +5,7 @@ namespace IM.Graphs
 {
     public class ModuleGraphEvents : IModuleGraph, IModuleGraphEvents
     {
-        protected readonly IModuleGraph _graph;
+        private readonly IModuleGraph _graph;
         
         public IReadOnlyList<INode> Nodes => _graph.Nodes;
         public IReadOnlyList<IEdge> Edges => _graph.Edges;
@@ -16,7 +16,7 @@ namespace IM.Graphs
         public event Action<IModule> OnModuleRemoved;
         public event Action<IModuleConnection> OnConnected;
         public event Action<IModuleConnection> OnDisconnected;
-        public event Action OnGraphChange;
+        public event Action OnGraphChanged;
         
         public ModuleGraphEvents() : this(new ModuleGraph())
         {
@@ -31,23 +31,20 @@ namespace IM.Graphs
         public void AddModule(IModule module)
         {
             _graph.AddModule(module);
-            OnModuleAdded?.Invoke(module);
-            OnGraphChanged();
+            CallOnModuleAdded(module);
         }
 
         public void RemoveModule(IModule module)
         {
             _graph.RemoveModule(module);
-            OnModuleRemoved?.Invoke(module);
-            OnGraphChanged();
+            CallOnModuleRemoved(module);
         }
 
         public IModuleConnection Connect(IModulePort output, IModulePort input)
         {
             IModuleConnection connection = _graph.Connect(output, input);
             
-            OnConnected?.Invoke(connection);
-            OnGraphChanged();
+            CallOnConnected(connection);
 
             return connection;
         }
@@ -55,13 +52,36 @@ namespace IM.Graphs
         public void Disconnect(IModuleConnection connection)
         {
             _graph.Disconnect(connection);
-            OnDisconnected?.Invoke(connection);
-            OnGraphChanged();
+            CallOnDisconnected(connection);
         }
 
-        protected void OnGraphChanged()
+        protected void CallOnGraphChanged()
         {
-            OnGraphChange?.Invoke();
+            OnGraphChanged?.Invoke();
+        }
+
+        protected void CallOnModuleAdded(IModule module)
+        {
+            OnModuleAdded?.Invoke(module);
+            CallOnGraphChanged();
+        }
+
+        protected void CallOnModuleRemoved(IModule module)
+        {
+            OnModuleRemoved?.Invoke(module);
+            CallOnGraphChanged();
+        }
+
+        protected void CallOnConnected(IModuleConnection connection)
+        {
+            OnConnected?.Invoke(connection);
+            CallOnGraphChanged();
+        }
+
+        protected void CallOnDisconnected(IModuleConnection connection)
+        {
+            OnDisconnected?.Invoke(connection);
+            CallOnGraphChanged();
         }
     }
 }
