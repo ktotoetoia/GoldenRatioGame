@@ -6,30 +6,29 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class AbilitiesObserver : IGraphObserver,IAbilitiesPool
+    public class AbilitiesObserver : IModuleObserver,IAbilitiesPool
     {
         private readonly List<IAbility> _abilities = new();
-        public ICoreModuleGraph Graph { get; private set; }
         public IEnumerable<IAbility> Abilities => _abilities;
 
-        public AbilitiesObserver(ICoreModuleGraph graph)
+        public void Add(IModule module)
         {
-            Graph = graph;
-        }
-        
-        public void OnGraphChange()
-        {
-            IGraphReadOnly coreSubgraph = Graph.GetCoreSubgraph();
-
-            foreach (IAbility ability in coreSubgraph.Nodes.OfType<IAbility>())
+            if (module is not IAbility ability || _abilities.Contains(ability))
             {
-                _abilities.Add(ability);
+                return;
             }
+            
+            _abilities.Add(ability);
         }
 
-        private Vector2 GetDirection()
+        public void Remove(IModule module)
         {
-            return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (module is not IAbility ability || !_abilities.Contains(ability))
+            {
+                return;
+            }
+            
+            _abilities.Remove(ability);
         }
     }
 }

@@ -1,62 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using IM.Entities;
 using IM.Graphs;
 using IM.Health;
 
 namespace IM.Modules
 {
-    public class HealthModulesObserver : IGraphObserver
+    public class HealthModulesObserver : IModuleObserver
     {
         private readonly List<IHealthModule> _modulesUsed = new();
         private readonly IFloatHealthValuesGroup _floatHealthValuesGroup;
-        private ICoreModuleGraph _graph;
-        
-        public ICoreModuleGraph Graph
+
+        public HealthModulesObserver(IFloatHealthValuesGroup floatHealthValuesGroup)
         {
-            get => _graph;
-            private set
-            {
-                _graph = value;
-                OnGraphChange();
-            }
+            _floatHealthValuesGroup = floatHealthValuesGroup;
         }
         
-        public HealthModulesObserver(IModuleEntity entity)
+        public void Add(IModule module)
         {
-            if (!entity.GameObject.TryGetComponent(out _floatHealthValuesGroup))
+            if (module is not IHealthModule healthModule)
             {
-                throw new Exception();
+                return;
             }
             
-            Graph = entity.Graph;
+            _floatHealthValuesGroup.AddHealth(healthModule.Health);
+            _modulesUsed.Add(healthModule);
         }
 
-        public void OnGraphChange()
+        public void Remove(IModule module)
         {
-            List<IHealthModule> newModules =_graph
-                .GetCoreSubgraph()
-                .Nodes
-                .OfType<IHealthModule>()
-                .ToList();
-            
-            HashSet<IHealthModule> oldSet = new HashSet<IHealthModule>(_modulesUsed);
-            
-            foreach (IHealthModule added in newModules)
+            if (module is not IHealthModule healthModule || !_modulesUsed.Contains(healthModule))
             {
-                if (oldSet.Remove(added)) 
-                    continue;
-                    
-                _floatHealthValuesGroup.AddHealth(added.Health);
+                return;
             }
-
-            foreach (IHealthModule removed in oldSet)
-            {
-                _floatHealthValuesGroup.RemoveHealth(removed.Health);
-            }
-
-            _modulesUsed.Clear();
-            _modulesUsed.AddRange(newModules);
+            
+            _floatHealthValuesGroup.RemoveHealth(healthModule.Health);
+            _modulesUsed.Remove(healthModule);
         }
     }
 }

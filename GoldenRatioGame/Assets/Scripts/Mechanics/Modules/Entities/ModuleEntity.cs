@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using IM.Abilities;
 using IM.Graphs;
+using IM.Health;
 using UnityEngine;
 
 namespace IM.Modules
@@ -8,7 +9,7 @@ namespace IM.Modules
     public class ModuleEntity : MonoBehaviour, IModuleEntity
     {
         [SerializeField] private float _maxHealth;
-        private List<IGraphObserver>  _graphObservers = new();
+        private List<IModuleObserver>  _moduleObservers = new();
         private CoreModuleGraphEvents _graph;
         private AbilitiesObserver _abilitiesObserver;
         
@@ -20,22 +21,32 @@ namespace IM.Modules
         {
             HumanoidCoreModule coreModule = new HumanoidCoreModule(_maxHealth, _maxHealth);
             _graph = new CoreModuleGraphEvents(coreModule);
-            _abilitiesObserver = new AbilitiesObserver(_graph);
+            _abilitiesObserver = new AbilitiesObserver();
             
-            _graphObservers = new List<IGraphObserver>()
+            _moduleObservers = new List<IModuleObserver>()
             {
-                new HealthModulesObserver(this),
+                new HealthModulesObserver(GetComponent<IFloatHealthValuesGroup>()),
                 _abilitiesObserver,
             };
 
-            _graph.OnGraphChange += UpdateObservers;
+            _graph.OnModuleAdded += x =>
+            {
+                foreach (IModuleObserver moduleObserver in _moduleObservers)
+                {
+                    moduleObserver.Add(x);
+                }
+            };
+
+            _graph.OnModuleRemoved += x =>
+            {
+                foreach (IModuleObserver moduleObserver in _moduleObservers)
+                {
+                    moduleObserver.Remove(x);
+                }
+            };
+            
             _graph.SetCoreModule(coreModule);
             GetComponent<AbilitiesUserMono>().Pool = AbilitiesPool;
-        }
-
-        private void UpdateObservers()
-        {
-            _graphObservers.ForEach(x => x.OnGraphChange());
         }
     }
 }
