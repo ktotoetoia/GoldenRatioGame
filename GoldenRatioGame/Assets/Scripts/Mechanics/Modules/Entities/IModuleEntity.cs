@@ -6,7 +6,7 @@ namespace IM.Modules
 {
     public interface IModuleEntity : IEntity
     {
-        ICoreModuleGraph Graph { get; }
+        IGameModuleGraph Graph { get; }
         IAbilitiesPool AbilitiesPool { get; }
     }
 }

@@ -42,14 +42,14 @@ namespace IM.ModuleEditor
                 }
             }
             
-            foreach (IModuleConnection connection in Graph.Edges.OfType<IModuleConnection>())
+            foreach (IConnection connection in Graph.Edges.OfType<IConnection>())
             {
                 Gizmos.color = Color.green;
                 DrawConnection(connection);
             }
         }
 
-        private void DrawConnection(IModuleConnection connection)
+        private void DrawConnection(IConnection connection)
         {
             if (connection.Input is IHavePosition input && connection.Output is IHavePosition output)
             {
