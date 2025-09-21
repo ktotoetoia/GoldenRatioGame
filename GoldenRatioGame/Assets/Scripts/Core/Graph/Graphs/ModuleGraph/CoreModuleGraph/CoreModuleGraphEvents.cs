@@ -19,11 +19,6 @@ namespace IM.Graphs
             _coreModuleGraph = coreModuleGraph;
         }
 
-        public IGraphReadOnly GetCoreSubgraph()
-        {
-            return _coreModuleGraph.GetCoreSubgraph();
-        }
-
         public void SetCoreModule(IModule module)
         {
             _coreModuleGraph.SetCoreModule(module);

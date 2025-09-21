@@ -9,7 +9,7 @@ namespace IM.Graphs
         private readonly IModuleGraph _moduleGraph;
         public IReadOnlyList<INode> Nodes => _moduleGraph.Nodes;
         public IReadOnlyList<IEdge> Edges => _moduleGraph.Edges;
-        public IReadOnlyList<IModuleConnection> Connections => _moduleGraph.Connections;
+        public IReadOnlyList<IConnection> Connections => _moduleGraph.Connections;
         public IReadOnlyList<IModule> Modules => _moduleGraph.Modules;
         public IModule CoreModule { get; private set; }
 
@@ -24,25 +24,25 @@ namespace IM.Graphs
             SetCoreModule(coreModule);
         }
         
-        public void AddModule(IModule module)
+        public bool AddModule(IModule module)
         {
-            _moduleGraph.AddModule(module);
+            return _moduleGraph.AddModule(module);
         }
 
-        public void RemoveModule(IModule module)
+        public bool RemoveModule(IModule module)
         {
             if (module == CoreModule)
                 throw new Exception("cannot remove CoreModule");
             
-            _moduleGraph.RemoveModule(module);
+            return _moduleGraph.RemoveModule(module);
         }
 
-        public IModuleConnection Connect(IModulePort output, IModulePort input)
+        public IConnection Connect(IModulePort output, IModulePort input)
         {
             return _moduleGraph.Connect(output, input);
         }
 
-        public void Disconnect(IModuleConnection connection)
+        public void Disconnect(IConnection connection)
         {
             _moduleGraph.Disconnect(connection);
         }
@@ -56,11 +56,6 @@ namespace IM.Graphs
 
             CoreModule = module;
             AddModule(module);
-        }
-
-        public IGraphReadOnly GetCoreSubgraph()
-        {
-            return _breadthFirstTraversal.GetSubGraph(CoreModule);
         }
     }
 }

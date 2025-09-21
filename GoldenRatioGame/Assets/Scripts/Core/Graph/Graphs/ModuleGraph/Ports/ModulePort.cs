@@ -3,7 +3,7 @@
     public class ModulePort : IModulePort
     {
         public IModule Module { get; }
-        public IModuleConnection Connection { get; private set; }
+        public IConnection Connection { get; private set; }
         public bool IsConnected => Connection != null;
         public PortDirection Direction { get; }
 
@@ -13,7 +13,7 @@
             Direction = direction;
         }
         
-        public virtual void Connect(IModuleConnection connection)
+        public virtual void Connect(IConnection connection)
         {
             if (!IsConnected)
                 Connection = connection;

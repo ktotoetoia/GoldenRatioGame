@@ -6,40 +6,47 @@ namespace IM.Graphs
 {
     public class ModuleGraph : IModuleGraph
     {
-        private readonly List<IModuleConnection> _connections = new();
+        private readonly List<IConnection> _connections = new();
         private readonly List<IModule> _modules = new();
         
         public IReadOnlyList<IModule> Modules => _modules;
-        public IReadOnlyList<IModuleConnection> Connections => _connections;
+        public IReadOnlyList<IConnection> Connections => _connections;
 
         public IReadOnlyList<INode> Nodes => _modules;
         public IReadOnlyList<IEdge> Edges => _connections;
         
-        public void AddModule(IModule module)
+        public bool AddModule(IModule module)
         {
             if (Contains(module))
-                throw new ArgumentException($"Graph already contains this module: {module}");
+            {
+                return false;
+            }
             
             _modules.Add(module);
+            return true;
         }
 
-        public void RemoveModule(IModule module)
+        public bool RemoveModule(IModule module)
         {
             if (!_modules.Remove(module))
-                throw new InvalidOperationException("Module not in graph.");
-
+            {
+                return false;
+            }
+            
             module.Ports
                 .Select(p => p.Connection)
                 .Where(c => c != null)
                 .ToList()
                 .ForEach(Disconnect);
+            
+            return true;
         }
         
-        public IModuleConnection Connect(IModulePort output, IModulePort input)
+        public IConnection Connect(IModulePort output, IModulePort input)
         {
             CheckPorts(output,input);
             
-            ModuleConnection connection =  new ModuleConnection(output, input);
+            Connection connection =  new Connection(output, input);
 
             connection.Connect();
             _connections.Add(connection);
@@ -47,7 +54,7 @@ namespace IM.Graphs
             return connection;
         }
 
-        public void Disconnect(IModuleConnection connection)
+        public void Disconnect(IConnection connection)
         {
             if(connection == null) throw new ArgumentNullException(nameof(connection));
             if (!Contains(connection)) throw new ArgumentException("Graph does not contain this connector");
@@ -61,7 +68,7 @@ namespace IM.Graphs
             return _modules.Contains(module);
         }
 
-        public bool Contains(IModuleConnection connection)
+        public bool Contains(IConnection connection)
         {
             return _connections.Contains(connection);
         }

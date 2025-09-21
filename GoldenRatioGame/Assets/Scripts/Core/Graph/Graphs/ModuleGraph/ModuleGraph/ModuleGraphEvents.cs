@@ -10,12 +10,12 @@ namespace IM.Graphs
         public IReadOnlyList<INode> Nodes => _graph.Nodes;
         public IReadOnlyList<IEdge> Edges => _graph.Edges;
         public IReadOnlyList<IModule> Modules => _graph.Modules;
-        public IReadOnlyList<IModuleConnection> Connections => _graph.Connections;
+        public IReadOnlyList<IConnection> Connections => _graph.Connections;
         
         public event Action<IModule> OnModuleAdded;
         public event Action<IModule> OnModuleRemoved;
-        public event Action<IModuleConnection> OnConnected;
-        public event Action<IModuleConnection> OnDisconnected;
+        public event Action<IConnection> OnConnected;
+        public event Action<IConnection> OnDisconnected;
         public event Action OnGraphChanged;
         
         public ModuleGraphEvents() : this(new ModuleGraph())
@@ -28,28 +28,40 @@ namespace IM.Graphs
             _graph = graph;
         }
 
-        public void AddModule(IModule module)
+        public bool AddModule(IModule module)
         {
-            _graph.AddModule(module);
-            CallOnModuleAdded(module);
+            if (_graph.AddModule(module))
+            {
+                CallOnModuleAdded(module);
+
+                return true;
+            }
+
+            return false;
         }
 
-        public void RemoveModule(IModule module)
+        public bool RemoveModule(IModule module)
         {
-            _graph.RemoveModule(module);
-            CallOnModuleRemoved(module);
+            if (_graph.RemoveModule(module))
+            {
+                CallOnModuleRemoved(module);
+
+                return true;
+            }
+            
+            return false;
         }
 
-        public IModuleConnection Connect(IModulePort output, IModulePort input)
+        public IConnection Connect(IModulePort output, IModulePort input)
         {
-            IModuleConnection connection = _graph.Connect(output, input);
+            IConnection connection = _graph.Connect(output, input);
             
             CallOnConnected(connection);
 
             return connection;
         }
 
-        public void Disconnect(IModuleConnection connection)
+        public void Disconnect(IConnection connection)
         {
             _graph.Disconnect(connection);
             CallOnDisconnected(connection);
@@ -72,13 +84,13 @@ namespace IM.Graphs
             CallOnGraphChanged();
         }
 
-        protected void CallOnConnected(IModuleConnection connection)
+        protected void CallOnConnected(IConnection connection)
         {
             OnConnected?.Invoke(connection);
             CallOnGraphChanged();
         }
 
-        protected void CallOnDisconnected(IModuleConnection connection)
+        protected void CallOnDisconnected(IConnection connection)
         {
             OnDisconnected?.Invoke(connection);
             CallOnGraphChanged();

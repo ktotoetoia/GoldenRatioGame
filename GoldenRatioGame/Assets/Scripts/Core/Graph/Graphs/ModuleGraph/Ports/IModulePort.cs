@@ -3,11 +3,11 @@
     public interface IModulePort
     {
         IModule Module { get; }
-        IModuleConnection Connection { get; }
+        IConnection Connection { get; }
         PortDirection Direction { get; }
         bool IsConnected { get; }
     
-        void Connect(IModuleConnection connection);
+        void Connect(IConnection connection);
         void Disconnect();
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace IM.Graphs
 {
-    public interface IModuleConnection : IEdge
+    public interface IConnection : IEdge
     {
         IModulePort Input { get; }
         IModulePort Output { get; }
