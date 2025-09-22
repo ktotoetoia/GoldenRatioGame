@@ -17,11 +17,11 @@ namespace IM.Modules
         {
             Health = new CappedValue<float>(0,maxHealth, currentHealth);
 
-            AddPort(HeadPort = new ModulePort(this,PortDirection.Output));
-            AddPort(LeftArmPort = new ModulePort(this,PortDirection.Output));
-            AddPort(RightArmPort = new ModulePort(this,PortDirection.Output));
-            AddPort(LeftLegPort = new ModulePort(this,PortDirection.Output));
-            AddPort(RightLegPort = new ModulePort(this,PortDirection.Output));
+            AddPort(HeadPort = new LimitPort(this,PortDirection.Output));
+            AddPort(LeftArmPort = new LimitPort(this,PortDirection.Output));
+            AddPort(RightArmPort = new LimitPort(this,PortDirection.Output));
+            AddPort(LeftLegPort = new LimitPort(this,PortDirection.Output));
+            AddPort(RightLegPort = new LimitPort(this,PortDirection.Output));
         }
     }
 }

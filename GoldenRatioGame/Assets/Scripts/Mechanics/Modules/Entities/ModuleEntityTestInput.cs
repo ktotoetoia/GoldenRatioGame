@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using IM.Abilities;
 using IM.Graphs;
 using UnityEngine;
 
@@ -21,13 +20,15 @@ namespace IM.Modules
             if (Input.GetKeyDown(KeyCode.O))
             {
                 IModule module = new HealthModifierModule(_maxHealth, _maxHealth);
-                _moduleEntity.Graph.AddModule(module);
-                _moduleEntity.Graph.Connect(module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input), _moduleEntity.Graph.CoreModule.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Output));
+
+                _moduleEntity.Graph.AddAndConnect(module,
+                    module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input), 
+                    _moduleEntity.Graph.CoreModule.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Output));
             }
 
             if (Input.GetKeyDown(KeyCode.P))
             {
-                _moduleEntity.Graph.RemoveModule(_moduleEntity.Graph.Modules.FirstOrDefault(x => x != _moduleEntity.Graph.CoreModule));
+                _moduleEntity.Graph.RemoveModule(_moduleEntity.Graph.Modules.LastOrDefault(x => x != _moduleEntity.Graph.CoreModule));
             }
         }
     }
