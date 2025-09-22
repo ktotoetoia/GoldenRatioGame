@@ -2,6 +2,7 @@
 
 namespace IM.Graphs
 {
+    //todo :: remove ModuleGraphEvents inheritance
     public class CoreModuleGraphEvents : ModuleGraphEvents, ICoreModuleGraph, ICoreModuleGraphEvents
     {
         private readonly ICoreModuleGraph _coreModuleGraph;

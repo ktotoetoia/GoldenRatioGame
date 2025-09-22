@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace IM.Graphs
+﻿namespace IM.Graphs
 {
     public class Edge : IEdge
     {

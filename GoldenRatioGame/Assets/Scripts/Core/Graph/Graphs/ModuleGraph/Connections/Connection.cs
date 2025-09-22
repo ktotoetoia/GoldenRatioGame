@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace IM.Graphs
+﻿namespace IM.Graphs
 {
     public class Connection : IConnection
     {
@@ -14,30 +12,6 @@ namespace IM.Graphs
         {
             Input = from;
             Output = to;
-        }
-
-        public void Connect()
-        {
-            if (Input == null || Output == null)
-                throw new InvalidOperationException("Module connector was disconnected and cannot be reused");
-        
-            Input.Connect(this);
-            Output.Connect(this);
-        }
-
-        public void Disconnect()
-        {
-            if (Input == null || Output == null)
-                return;
-
-            if (Input.Connection != this || Output.Connection != this)
-                throw new InvalidOperationException("Module connector was changed before disconnecting");
-            
-            Input.Disconnect();
-            Output.Disconnect();
-            
-            Input = null;
-            Output = null;
         }
     }
 }

@@ -48,7 +48,9 @@ namespace IM.Graphs
             
             Connection connection =  new Connection(output, input);
 
-            connection.Connect();
+            input.Connect(connection);
+            output.Connect(connection);
+
             _connections.Add(connection);
 
             return connection;
@@ -58,8 +60,9 @@ namespace IM.Graphs
         {
             if(connection == null) throw new ArgumentNullException(nameof(connection));
             if (!Contains(connection)) throw new ArgumentException("Graph does not contain this connector");
+            connection.Input.Disconnect();
+            connection.Output.Disconnect();
             
-            connection.Disconnect();
             _connections.Remove(connection);
         }
 
