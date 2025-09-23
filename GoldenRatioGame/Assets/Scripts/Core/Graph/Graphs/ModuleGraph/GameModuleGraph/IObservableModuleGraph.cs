@@ -2,7 +2,7 @@
 
 namespace IM.Graphs
 {
-    public interface IGameModuleGraph: ICoreModuleGraph
+    public interface IObservableModuleGraph: ICoreModuleGraph
     {
         public IReadOnlyCollection<IModuleObserver> Observers { get; }
         public void AddObserver(IModuleObserver observer);

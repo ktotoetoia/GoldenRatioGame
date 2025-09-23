@@ -12,17 +12,6 @@ namespace IM.Modules
             Health = new CappedValue<float>(0,maxHealth, currentHealth);
             
             AddPort(new LimitPort(this,PortDirection.Input));
-            AddPort(new LimitPort(this,PortDirection.Output));
-            AddPort(new LimitPort(this,PortDirection.Input));
-            AddPort(new LimitPort(this,PortDirection.Output));
-            AddPort(new LimitPort(this,PortDirection.Input));
-            AddPort(new LimitPort(this,PortDirection.Output));
-            AddPort(new LimitPort(this,PortDirection.Input));
-            AddPort(new LimitPort(this,PortDirection.Output));
-            AddPort(new LimitPort(this,PortDirection.Input));
-            AddPort(new LimitPort(this,PortDirection.Output));
-            AddPort(new LimitPort(this,PortDirection.Input));
-            AddPort(new LimitPort(this,PortDirection.Output));
         }
     }
 }

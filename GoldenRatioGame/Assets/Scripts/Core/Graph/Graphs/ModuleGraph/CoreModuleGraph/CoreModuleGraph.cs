@@ -5,7 +5,6 @@ namespace IM.Graphs
 {
     public class CoreModuleGraph : ICoreModuleGraph
     {
-        private readonly BreadthFirstTraversal _breadthFirstTraversal = new();
         private readonly IModuleGraph _moduleGraph;
         public IReadOnlyList<INode> Nodes => _moduleGraph.Nodes;
         public IReadOnlyList<IEdge> Edges => _moduleGraph.Edges;

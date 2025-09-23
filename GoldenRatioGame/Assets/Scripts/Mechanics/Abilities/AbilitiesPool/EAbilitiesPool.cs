@@ -17,7 +17,7 @@ namespace IM.Abilities
         private void Awake()
         {
             _abilities.Add(new BlinkForwardAbility(GetDirection,GetComponent<Rigidbody2D>(),_blinkCooldown));
-            _abilities.Add(new SendProjectileByVelocityAbility(GetDirection,transform, _projectilePrefab,_projectileCooldown));
+            _abilities.Add(new SendProjectileByVelocityAbility(GetDirection,new ProjectileFactory(_projectilePrefab,transform),_projectileCooldown));
         }
 
         private void Update()

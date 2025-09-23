@@ -10,7 +10,7 @@ namespace IM.Abilities
         private readonly Func<Vector2> _getLookDirection;
         
         public bool IsBeingUsed => false;
-        public bool CanUse =>!Cooldown.IsOnCooldown && Rigidbody != null;
+        public bool CanUse =>!Cooldown.IsOnCooldown && Rigidbody is not null;
         public ICooldownReadOnly Cooldown => _cooldown;
         public float Range { get; set; } = 2f;
         public KeyCode Key { get; set; } = KeyCode.E;

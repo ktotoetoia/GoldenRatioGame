@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace IM.Graphs
 {
-    public class ModuleGraphEvents : IModuleGraph, IModuleGraphEvents
+    public sealed class ModuleGraphEvents : IModuleGraph, IModuleGraphEvents
     {
         private readonly IModuleGraph _graph;
         
@@ -32,7 +32,8 @@ namespace IM.Graphs
         {
             if (_graph.AddModule(module))
             {
-                CallOnModuleAdded(module);
+                OnModuleAdded?.Invoke(module);
+                OnGraphChanged?.Invoke();
 
                 return true;
             }
@@ -44,7 +45,8 @@ namespace IM.Graphs
         {
             if (_graph.RemoveModule(module))
             {
-                CallOnModuleRemoved(module);
+                OnModuleRemoved?.Invoke(module);
+                OnGraphChanged?.Invoke();
 
                 return true;
             }
@@ -56,7 +58,8 @@ namespace IM.Graphs
         {
             IConnection connection = _graph.Connect(output, input);
             
-            CallOnConnected(connection);
+            OnConnected?.Invoke(connection);
+            OnGraphChanged?.Invoke();
 
             return connection;
         }
@@ -64,36 +67,8 @@ namespace IM.Graphs
         public void Disconnect(IConnection connection)
         {
             _graph.Disconnect(connection);
-            CallOnDisconnected(connection);
-        }
-
-        protected void CallOnGraphChanged()
-        {
-            OnGraphChanged?.Invoke();
-        }
-
-        protected void CallOnModuleAdded(IModule module)
-        {
-            OnModuleAdded?.Invoke(module);
-            CallOnGraphChanged();
-        }
-
-        protected void CallOnModuleRemoved(IModule module)
-        {
-            OnModuleRemoved?.Invoke(module);
-            CallOnGraphChanged();
-        }
-
-        protected void CallOnConnected(IConnection connection)
-        {
-            OnConnected?.Invoke(connection);
-            CallOnGraphChanged();
-        }
-
-        protected void CallOnDisconnected(IConnection connection)
-        {
             OnDisconnected?.Invoke(connection);
-            CallOnGraphChanged();
+            OnGraphChanged?.Invoke();
         }
     }
 }

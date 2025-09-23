@@ -1,49 +1,44 @@
 ﻿using System;
+using IM.Base;
 using IM.Values;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace IM.Abilities
 {
     public class SendProjectileByVelocityAbility : IAbility, IPreferredKeyboardBinding
     {
+        private readonly IFactory<GameObject> _projectileFactory;
         private readonly ICooldown _cooldown;
         private readonly Func<Vector2> _getDirection;
-        private readonly GameObject _prefab;
         
         public bool IsBeingUsed => false;
-        public bool CanUse=>!Cooldown.IsOnCooldown && User;
+        public bool CanUse=>!Cooldown.IsOnCooldown;
         public ICooldownReadOnly Cooldown => _cooldown;
         public KeyCode Key { get; set; } = KeyCode.Q;
-        public Transform User { get; set; }
         public float Speed { get; set; } = 5f;
         
-        public SendProjectileByVelocityAbility(Func<Vector2> getDirection,Transform user, GameObject prefab, float cooldown) : this(getDirection, user, prefab, new FloatCooldown(cooldown))
+        public SendProjectileByVelocityAbility(Func<Vector2> getDirection,IFactory<GameObject> projectileFactory, float cooldown) : this(getDirection, projectileFactory, new FloatCooldown(cooldown))
         {
             
         }
         
-        public SendProjectileByVelocityAbility(Func<Vector2>getDirection,Transform user, GameObject prefab, ICooldown cooldown)
+        public SendProjectileByVelocityAbility(Func<Vector2>getDirection,IFactory<GameObject> projectileFactory, ICooldown cooldown)
         {
             _getDirection = getDirection;
+            _projectileFactory = projectileFactory;
             _cooldown = cooldown;
-            _prefab = prefab;
-            User = user;
         }
         
         public bool TryUse()
         {
-            if (CanUse && _cooldown.TryReset())
-            {
-                GameObject projectile = Object.Instantiate(_prefab);
+            if (!CanUse || !_cooldown.TryReset()) return false;
+            
+            GameObject projectile = _projectileFactory.Create();
+            
+            projectile.GetComponent<Rigidbody2D>().linearVelocity = (_getDirection() - (Vector2)projectile.transform.position).normalized * Speed;
                 
-                projectile.GetComponent<Rigidbody2D>().linearVelocity = (_getDirection() - (Vector2)User.position).normalized * Speed;
-                projectile.transform.position = User.position;
-                
-                return true;
-            }
+            return true;
 
-            return false;
         }
     }
 }
