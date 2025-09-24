@@ -16,6 +16,11 @@ namespace IM.Modules
         
         public void Add(IModule module)
         {
+            if (module is IComponentModule gameModule && gameModule.TryGetComponent(out IHealthModule g))
+            {
+                
+            }
+            
             if (module is not IHealthModule healthModule)
             {
                 return;

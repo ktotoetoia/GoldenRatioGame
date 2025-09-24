@@ -18,7 +18,6 @@ namespace IM.Modules
         private void Awake()
         {
             HumanoidCoreModule coreModule = new HumanoidCoreModule(_maxHealth, _maxHealth);
-            
             _graph = new ObservableModuleGraph(coreModule);
             
             _abilitiesObserver = new AbilitiesObserver();
