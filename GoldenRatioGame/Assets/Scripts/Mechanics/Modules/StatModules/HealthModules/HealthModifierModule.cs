@@ -3,7 +3,7 @@ using IM.Graphs;
 
 namespace IM.Modules
 {
-    public sealed class HealthModifierModule : Module, IHealthModule
+    public sealed class HealthModifierModule : Module, IHealthModule, IComponentModule
     {
         public ICappedValue<float> Health { get; }
         
@@ -12,6 +12,16 @@ namespace IM.Modules
             Health = new CappedValue<float>(0,maxHealth, currentHealth);
             
             AddPort(new LimitPort(this,PortDirection.Input));
+        }
+
+        public T GetComponent<T>()
+        {
+            if(this is T t)
+            {
+                return t;
+            }
+
+            return default;
         }
     }
 }

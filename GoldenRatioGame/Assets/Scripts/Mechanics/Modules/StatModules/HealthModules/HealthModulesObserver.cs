@@ -16,23 +16,18 @@ namespace IM.Modules
         
         public void Add(IModule module)
         {
-            if (module is IComponentModule gameModule && gameModule.TryGetComponent(out IHealthModule g))
-            {
-                
-            }
-            
-            if (module is not IHealthModule healthModule)
+            if (module is not IComponentModule gameModule || !gameModule.TryGetComponent(out IHealthModule healthModule))
             {
                 return;
             }
-            
+
             _floatHealthValuesGroup.AddHealth(healthModule.Health);
             _modulesUsed.Add(healthModule);
         }
 
         public void Remove(IModule module)
         {
-            if (module is not IHealthModule healthModule || !_modulesUsed.Contains(healthModule))
+            if (module is not IComponentModule gameModule || !gameModule.TryGetComponent(out IHealthModule healthModule) || !_modulesUsed.Contains(healthModule))
             {
                 return;
             }
