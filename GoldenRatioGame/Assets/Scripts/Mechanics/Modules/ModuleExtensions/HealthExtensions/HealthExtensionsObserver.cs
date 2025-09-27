@@ -16,7 +16,7 @@ namespace IM.Modules
         
         public void Add(IModule module)
         {
-            if (!TryGetHealthModule(module, out IHealthExtension healthModule))
+            if (!TryGetHealthModule(module, out IHealthExtension healthModule) || _modulesUsed.Contains(healthModule))
             {
                 return;
             }

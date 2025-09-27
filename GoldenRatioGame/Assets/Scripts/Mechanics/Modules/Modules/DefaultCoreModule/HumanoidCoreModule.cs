@@ -5,7 +5,7 @@ using IM.Graphs;
 
 namespace IM.Modules
 {
-    public sealed class HumanoidCoreExtension : Module, IExtensibleModule
+    public sealed class HumanoidCoreModule : Module, IExtensibleModule
     {
         public IModulePort HeadPort { get; }
         public IModulePort LeftArmPort { get; }
@@ -15,12 +15,12 @@ namespace IM.Modules
 
         public IReadOnlyList<IModuleExtension> Extensions { get; }
         
-        public HumanoidCoreExtension(float maxHealth, float currentHealth) : this(new CappedValue<float>(0,maxHealth,currentHealth))
+        public HumanoidCoreModule(float maxHealth, float currentHealth) : this(new CappedValue<float>(0,maxHealth,currentHealth))
         {
             
         }
 
-        public HumanoidCoreExtension(ICappedValue<float> health)
+        public HumanoidCoreModule(ICappedValue<float> health)
         {
             Extensions = new List<IModuleExtension> { new HealthExtension(health) };
             
