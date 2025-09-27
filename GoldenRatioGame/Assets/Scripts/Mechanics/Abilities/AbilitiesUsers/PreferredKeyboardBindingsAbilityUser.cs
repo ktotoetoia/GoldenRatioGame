@@ -2,19 +2,17 @@
 
 namespace IM.Abilities
 {
-    public class AbilitiesUserMono : MonoBehaviour
+    public class PreferredKeyboardBindingsAbilityUser
     {
-        public IAbilitiesPool Pool { get; set; }
-
-        private void Awake()
+        public IAbilityPool Pool { get; set; }
+        
+        public PreferredKeyboardBindingsAbilityUser(IAbilityPool pool)
         {
-            Pool = GetComponent<IAbilitiesPool>();
+            Pool = pool;
         }
 
-        private void Update()
+        public void Update()
         {
-            if(Pool == null) return;
-            
             foreach (IAbility ability in Pool.Abilities)
             {
                 if (ability is IPreferredKeyboardBinding preferred && Input.GetKeyDown(preferred.Key))

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace IM.Abilities
 {
-    public class EAbilitiesPool : MonoBehaviour, IAbilitiesPool
+    public class EAbilityPool : MonoBehaviour, IAbilityPool
     {
         [SerializeField] private GameObject _projectilePrefab;
         [SerializeField] private float _projectileCooldown;

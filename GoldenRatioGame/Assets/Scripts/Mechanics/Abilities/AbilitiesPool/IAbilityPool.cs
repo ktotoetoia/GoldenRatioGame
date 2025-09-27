@@ -2,7 +2,7 @@
 
 namespace IM.Abilities
 {
-    public interface IAbilitiesPool
+    public interface IAbilityPool
     {
         IEnumerable<IAbility> Abilities { get; }
     }
