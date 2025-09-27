@@ -1,22 +1,25 @@
 ﻿using System.Linq;
+using IM.Abilities;
 using IM.Graphs;
 using UnityEngine;
 
 namespace IM.Modules
 {
+    [DefaultExecutionOrder(10000)]
     public class ModuleEntityTestInput : MonoBehaviour
     {
+        [SerializeField] private ModuleEntity _moduleEntity;
         [SerializeField] private GameObject _healthModulePrefab;
-        [SerializeField] private float _distance;
-        private IModuleEntity _moduleEntity;
+        private PreferredKeyboardBindingsAbilityUser _abilityUser;
         
         private void Awake()
         {
-            _moduleEntity = GetComponent<IModuleEntity>();
+            _abilityUser = new PreferredKeyboardBindingsAbilityUser(_moduleEntity.AbilityPool);
         }
 
         private void Update()
         {
+            _abilityUser.Update();
             if (Input.GetKeyDown(KeyCode.O))
             {
                 IModule module = Instantiate(_healthModulePrefab).GetComponent<IModule>();
@@ -24,6 +27,16 @@ namespace IM.Modules
                 _moduleEntity.Graph.AddAndConnect(module,
                     module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input), 
                     _moduleEntity.Graph.CoreModule.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Output));
+            }
+
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                IModule module = new BlinkAbilityModule();
+
+                _moduleEntity.Graph.AddAndConnect(module,
+                    module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input),
+                    _moduleEntity.Graph.CoreModule.Ports.FirstOrDefault(x =>
+                        !x.IsConnected && x.Direction == PortDirection.Output));
             }
 
             if (Input.GetKeyDown(KeyCode.P))

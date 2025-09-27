@@ -10,22 +10,21 @@ namespace IM.Modules
     {
         [SerializeField] private CappedValue<float> _floatHealth;
         private ObservableModuleGraph _graph;
-        private AbilitiesObserver _abilitiesObserver;
 
         public GameObject GameObject => gameObject;
         public IObservableModuleGraph Graph => _graph;
-        public IAbilitiesPool AbilitiesPool => _abilitiesObserver;
+        public IAbilityPool AbilityPool { get; private set; }
         
         private void Awake()
         {
-            HumanoidCoreExtension coreExtension = new HumanoidCoreExtension(_floatHealth);
-            _graph = new ObservableModuleGraph(coreExtension);
+            HumanoidCoreModule coreModule = new HumanoidCoreModule(_floatHealth);
+            _graph = new ObservableModuleGraph(coreModule);
+            AbilityPool = new AbilityPool();
             
-            _abilitiesObserver = new AbilitiesObserver();
+            _graph.AddObserver(new LookPositionProviderInjector());
+            _graph.AddObserver(new EntityInjector(this));
             _graph.AddObserver(new HealthExtensionsObserver(GetComponent<IFloatHealthValuesGroup>()));
-            _graph.AddObserver(_abilitiesObserver);
-            
-            GetComponent<AbilitiesUserMono>().Pool = AbilitiesPool;
+            _graph.AddObserver(new AbilityExtensionsObserver(AbilityPool as AbilityPool));
         }
     }
 }
