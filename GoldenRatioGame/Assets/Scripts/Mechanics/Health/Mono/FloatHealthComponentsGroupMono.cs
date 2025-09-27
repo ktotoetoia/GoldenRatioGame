@@ -40,5 +40,10 @@ namespace IM.Health
         {
             _floatHealth.RemoveHealth(healthComponent);
         }
+
+        public bool Contains(IFloatHealth healthComponent)
+        {
+            return _floatHealth.Contains(healthComponent);
+        }
     }
 }

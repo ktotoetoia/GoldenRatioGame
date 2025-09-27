@@ -24,22 +24,11 @@ namespace IM.Health
             _healthComponents.Remove(healthComponent);
         }
 
-        private ICappedValueReadOnly<float> GetCurrentHealth()
+        public bool Contains(IFloatHealth healthComponent)
         {
-            float totalMax = 0f;
-            float totalCurrent = 0f;
-
-            foreach (IFloatHealth component in _healthComponents)
-            {
-                totalMax += component.Health.MaxValue;
-                float currentAboveMin = component.Health.Value - component.Health.MinValue;
-                if (currentAboveMin > 0)
-                    totalCurrent += currentAboveMin;
-            }
-
-            return new CappedValueReadOnly<float>(totalCurrent, 0, totalMax);
+            return _healthComponents.Contains(healthComponent);
         }
-        
+
         public HealthChangeResult TakeDamage(float damage) => ProcessHealthChange(damage,(x,y) => x.TakeDamage(y));
         public HealthChangeResult PreviewDamage(float damage) => ProcessHealthChange(damage,(x,y) => x.PreviewDamage(y));
         public HealthChangeResult RestoreHealth(float healing) =>ProcessHealthChange(healing,(x,y) => x.RestoreHealth(y));
@@ -63,6 +52,22 @@ namespace IM.Health
             }
 
             return result;
+        }
+
+        private ICappedValueReadOnly<float> GetCurrentHealth()
+        {
+            float totalMax = 0f;
+            float totalCurrent = 0f;
+
+            foreach (IFloatHealth component in _healthComponents)
+            {
+                totalMax += component.Health.MaxValue;
+                float currentAboveMin = component.Health.Value - component.Health.MinValue;
+                if (currentAboveMin > 0)
+                    totalCurrent += currentAboveMin;
+            }
+
+            return new CappedValueReadOnly<float>(totalCurrent, 0, totalMax);
         }
     }
 }

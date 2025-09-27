@@ -2,7 +2,7 @@
 
 namespace IM.Modules
 {
-    public interface IHealthModule
+    public interface IHealthExtension : IModuleExtension
     {
         ICappedValue<float> Health { get; }
     }

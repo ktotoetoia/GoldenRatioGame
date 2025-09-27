@@ -1,13 +1,13 @@
 ﻿namespace IM.Modules
 {
-    public static class ComponentModuleExtensions
+    public static class ExtensibleModuleExtensions
     {
-        public static bool TryGetComponent<T>(this IComponentModule module, out T component)
+        public static bool TryGetExtension<T>(this IExtensibleModule module, out T component)
         {
             if (module == null)
                 throw new System.ArgumentException(nameof(module));
 
-            component = module.GetComponent<T>();
+            component = module.GetExtension<T>();
             return component != null;
         }
     }

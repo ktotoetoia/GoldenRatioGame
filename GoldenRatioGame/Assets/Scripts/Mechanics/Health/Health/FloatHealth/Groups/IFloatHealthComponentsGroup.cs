@@ -8,5 +8,6 @@ namespace IM.Health
         
         void AddHealth(IFloatHealth healthComponent);
         void RemoveHealth(IFloatHealth healthComponent);
+        bool Contains(IFloatHealth healthComponent);
     }
 }

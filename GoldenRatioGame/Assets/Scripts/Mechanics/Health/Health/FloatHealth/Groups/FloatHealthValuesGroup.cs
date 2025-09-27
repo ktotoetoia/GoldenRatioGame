@@ -23,6 +23,24 @@ namespace IM.Health
         public HealthChangeResult PreviewHealing(float healing) => 
             ProcessHealthChange(healing, PreviewHealingInternal);
 
+        public void AddHealth(ICappedValue<float> healthBar)
+        {
+            if (_healthValues.Contains(healthBar))
+                throw new Exception("Health bar already exists");
+
+            _healthValues.Add(healthBar);
+        }
+
+        public void RemoveHealth(ICappedValue<float> healthBar)
+        {
+            _healthValues.Remove(healthBar);
+        }
+
+        public bool Contains(ICappedValueReadOnly<float> healthBar)
+        {
+            return healthBar is ICappedValue<float> health && _healthValues.Contains(health);
+        }
+
         private HealthChangeResult ProcessHealthChange(
             float value,
             Func<ICappedValue<float>, float, float> apply)
@@ -43,24 +61,6 @@ namespace IM.Health
             }
 
             return new HealthChangeResult(value, value, applied);
-        }
-
-        public void AddHealth(ICappedValue<float> healthBar)
-        {
-            if (_healthValues.Contains(healthBar))
-                throw new Exception("Health bar already exists");
-
-            _healthValues.Add(healthBar);
-        }
-
-        public void RemoveHealth(ICappedValue<float> healthBar)
-        {
-            _healthValues.Remove(healthBar);
-        }
-
-        public bool Contains(ICappedValueReadOnly<float> healthBar)
-        {
-            return healthBar is ICappedValue<float> health && _healthValues.Contains(health);
         }
         
         private float PreviewDamageInternal(ICappedValue<float> health, float amount)

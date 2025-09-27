@@ -1,12 +1,14 @@
 ﻿using System;
+using UnityEngine;
 
 namespace IM.Values
 {
+    [Serializable]
     public class CappedValue<T> : ICappedValue<T> where T : struct, IComparable<T>
     {
-        private T _minValue;
-        private T _maxValue;
-        private T _value;
+        [SerializeField]private T _minValue;
+        [SerializeField]private T _maxValue;
+        [SerializeField]private T _value;
         
         public event Action<T> OnMinValueChanged;
         public event Action<T> OnMaxValueChanged;

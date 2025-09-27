@@ -1,13 +1,14 @@
 ﻿using IM.Abilities;
 using IM.Graphs;
 using IM.Health;
+using IM.Values;
 using UnityEngine;
 
 namespace IM.Modules
 {
     public class ModuleEntity : MonoBehaviour, IModuleEntity
     {
-        [SerializeField] private float _maxHealth;
+        [SerializeField] private CappedValue<float> _floatHealth;
         private ObservableModuleGraph _graph;
         private AbilitiesObserver _abilitiesObserver;
 
@@ -17,11 +18,11 @@ namespace IM.Modules
         
         private void Awake()
         {
-            HumanoidCoreModule coreModule = new HumanoidCoreModule(_maxHealth, _maxHealth);
-            _graph = new ObservableModuleGraph(coreModule);
+            HumanoidCoreExtension coreExtension = new HumanoidCoreExtension(_floatHealth);
+            _graph = new ObservableModuleGraph(coreExtension);
             
             _abilitiesObserver = new AbilitiesObserver();
-            _graph.AddObserver(new HealthModulesObserver(GetComponent<IFloatHealthValuesGroup>()));
+            _graph.AddObserver(new HealthExtensionsObserver(GetComponent<IFloatHealthValuesGroup>()));
             _graph.AddObserver(_abilitiesObserver);
             
             GetComponent<AbilitiesUserMono>().Pool = AbilitiesPool;

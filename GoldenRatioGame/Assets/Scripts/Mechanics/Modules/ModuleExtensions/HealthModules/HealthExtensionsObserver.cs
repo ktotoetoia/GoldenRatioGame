@@ -4,19 +4,19 @@ using IM.Health;
 
 namespace IM.Modules
 {
-    public class HealthModulesObserver : IModuleObserver
+    public class HealthExtensionsObserver : IModuleObserver
     {
-        private readonly List<IHealthModule> _modulesUsed = new();
+        private readonly List<IHealthExtension> _modulesUsed = new();
         private readonly IFloatHealthValuesGroup _floatHealthValuesGroup;
 
-        public HealthModulesObserver(IFloatHealthValuesGroup floatHealthValuesGroup)
+        public HealthExtensionsObserver(IFloatHealthValuesGroup floatHealthValuesGroup)
         {
             _floatHealthValuesGroup = floatHealthValuesGroup;
         }
         
         public void Add(IModule module)
         {
-            if (module is not IComponentModule gameModule || !gameModule.TryGetComponent(out IHealthModule healthModule))
+            if (!TryGetHealthModule(module, out IHealthExtension healthModule))
             {
                 return;
             }
@@ -27,13 +27,19 @@ namespace IM.Modules
 
         public void Remove(IModule module)
         {
-            if (module is not IComponentModule gameModule || !gameModule.TryGetComponent(out IHealthModule healthModule) || !_modulesUsed.Contains(healthModule))
+            if (!TryGetHealthModule(module, out IHealthExtension healthModule) || !_modulesUsed.Contains(healthModule))
             {
                 return;
             }
             
             _floatHealthValuesGroup.RemoveHealth(healthModule.Health);
             _modulesUsed.Remove(healthModule);
+        }
+
+        private bool TryGetHealthModule(IModule module, out IHealthExtension healthExtension)
+        {
+            healthExtension = null;
+            return module is  IExtensibleModule componentModule && componentModule.TryGetExtension(out healthExtension);
         }
     }
 }

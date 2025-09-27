@@ -804,7 +804,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb3915c5594416bb7e9853c684013f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
+  _floatHealth:
+    _minValue: 0
+    _maxValue: 100
+    _value: 100
 --- !u!114 &1908329189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,7 +841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e91bb83ecf4589882bd9882a72ec28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
+  _healthModulePrefab: {fileID: 8119833187759213420, guid: 3b100359c89b40d4f9b64f50b4303e1e, type: 3}
   _distance: 3
 --- !u!114 &1908329192
 MonoBehaviour:

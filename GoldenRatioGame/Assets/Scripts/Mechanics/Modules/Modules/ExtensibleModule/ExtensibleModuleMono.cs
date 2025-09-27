@@ -1,31 +1,34 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
-using IM.Values;
 using UnityEngine;
 
 namespace IM.Modules
 {
-    public class ComponentModule : MonoBehaviour, IComponentModule
+    public class ExtensibleModuleMono : MonoBehaviour, IExtensibleModule
     {
         [SerializeField] private int _inputPortCount;
         [SerializeField] private int _outputPortCount;
-        private List<IModulePort> _ports;
-
+        private readonly List<IModulePort> _ports = new();
+        private List<IModuleExtension> _extensions = new();
+        
+        public IReadOnlyList<IModuleExtension> Extensions => _extensions;
         public IEnumerable<IEdge> Edges => _ports.Select(x => x.Connection);
         public IEnumerable<IModulePort> Ports => _ports;
 
         private void Awake()
         {
+            GetComponents(_extensions);
+            
             for (int i = 0; i < _inputPortCount; i++)
                 _ports.Add(new ModulePort(this, PortDirection.Input));
             for (int i = 0; i < _outputPortCount; i++)
                 _ports.Add(new ModulePort(this, PortDirection.Output));
         }
 
-        T IComponentModule.GetComponent<T>()
+        public T GetExtension<T>()
         {
-            return base.GetComponent<T>();
+            return _extensions.OfType<T>().FirstOrDefault();
         }
     }
 }

@@ -6,7 +6,7 @@ namespace IM.Modules
 {
     public class ModuleEntityTestInput : MonoBehaviour
     {
-        [SerializeField] private float _maxHealth;
+        [SerializeField] private GameObject _healthModulePrefab;
         [SerializeField] private float _distance;
         private IModuleEntity _moduleEntity;
         
@@ -19,7 +19,7 @@ namespace IM.Modules
         {
             if (Input.GetKeyDown(KeyCode.O))
             {
-                IModule module = new HealthModifierModule(_maxHealth, _maxHealth);
+                IModule module = Instantiate(_healthModulePrefab).GetComponent<IModule>();
 
                 _moduleEntity.Graph.AddAndConnect(module,
                     module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input), 
