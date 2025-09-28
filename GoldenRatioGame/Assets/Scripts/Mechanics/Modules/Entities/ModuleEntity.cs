@@ -9,16 +9,16 @@ namespace IM.Modules
     public class ModuleEntity : MonoBehaviour, IModuleEntity
     {
         [SerializeField] private CappedValue<float> _floatHealth;
-        private ObservableModuleGraph _graph;
+        private GameModuleGraph _graph;
 
         public GameObject GameObject => gameObject;
-        public IObservableModuleGraph Graph => _graph;
+        public IGameModuleGraph Graph => _graph;
         public IAbilityPool AbilityPool { get; private set; }
         
         private void Awake()
         {
             HumanoidCoreModule coreModule = new HumanoidCoreModule(_floatHealth);
-            _graph = new ObservableModuleGraph(coreModule);
+            _graph = new GameModuleGraph(coreModule);
             AbilityPool = new AbilityPool();
             
             _graph.AddObserver(new EntityInjector(this));

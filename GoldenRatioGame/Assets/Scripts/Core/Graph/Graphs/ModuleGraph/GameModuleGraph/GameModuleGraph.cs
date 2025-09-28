@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace IM.Graphs
 {
-    public class ObservableModuleGraph : IObservableModuleGraph
+    public class GameModuleGraph : IGameModuleGraph
     {
         private readonly ICoreModuleGraph _graph;
         private readonly List<IModuleObserver> _observers;
@@ -15,15 +15,15 @@ namespace IM.Graphs
         public IModule CoreModule => _graph.CoreModule;
         public IReadOnlyCollection<IModuleObserver> Observers=> _observers;
 
-        public ObservableModuleGraph(IModule coreModule) : this(new CoreModuleGraph(coreModule ?? throw new ArgumentNullException(nameof(coreModule))))
+        public GameModuleGraph(IModule coreModule) : this(new CoreModuleGraph(coreModule ?? throw new ArgumentNullException(nameof(coreModule))))
         {
         }
         
-        public ObservableModuleGraph(ICoreModuleGraph graph) : this(graph, new List<IModuleObserver>())
+        public GameModuleGraph(ICoreModuleGraph graph) : this(graph, new List<IModuleObserver>())
         {
         }
 
-        public ObservableModuleGraph(ICoreModuleGraph graph, List<IModuleObserver> observers)
+        public GameModuleGraph(ICoreModuleGraph graph, List<IModuleObserver> observers)
         {
             _graph = graph ?? throw new ArgumentNullException(nameof(graph));
             _observers = observers ?? throw new ArgumentNullException(nameof(observers));
