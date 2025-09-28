@@ -21,7 +21,6 @@ namespace IM.Modules
             _graph = new ObservableModuleGraph(coreModule);
             AbilityPool = new AbilityPool();
             
-            _graph.AddObserver(new LookPositionProviderInjector());
             _graph.AddObserver(new EntityInjector(this));
             _graph.AddObserver(new HealthExtensionsObserver(GetComponent<IFloatHealthValuesGroup>()));
             _graph.AddObserver(new AbilityExtensionsObserver(AbilityPool as AbilityPool));

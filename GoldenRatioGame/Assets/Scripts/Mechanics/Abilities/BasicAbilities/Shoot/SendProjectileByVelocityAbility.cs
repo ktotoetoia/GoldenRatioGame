@@ -9,7 +9,7 @@ namespace IM.Abilities
     {
         private readonly IFactory<GameObject> _projectileFactory;
         private readonly ICooldown _cooldown;
-        private readonly Func<Vector2> _getDirection;
+        private readonly IDirectionProvider _directionProvider;
         
         public bool IsBeingUsed => false;
         public bool CanUse=>!Cooldown.IsOnCooldown;
@@ -17,14 +17,14 @@ namespace IM.Abilities
         public KeyCode Key { get; set; } = KeyCode.Q;
         public float Speed { get; set; } = 5f;
         
-        public SendProjectileByVelocityAbility(Func<Vector2> getDirection,IFactory<GameObject> projectileFactory, float cooldown) : this(getDirection, projectileFactory, new FloatCooldown(cooldown))
+        public SendProjectileByVelocityAbility(IDirectionProvider directionProvider,IFactory<GameObject> projectileFactory, float cooldown) : this(directionProvider, projectileFactory, new FloatCooldown(cooldown))
         {
             
         }
         
-        public SendProjectileByVelocityAbility(Func<Vector2>getDirection,IFactory<GameObject> projectileFactory, ICooldown cooldown)
+        public SendProjectileByVelocityAbility(IDirectionProvider directionProvider,IFactory<GameObject> projectileFactory, ICooldown cooldown)
         {
-            _getDirection = getDirection;
+            _directionProvider = directionProvider;
             _projectileFactory = projectileFactory;
             _cooldown = cooldown;
         }
@@ -35,7 +35,7 @@ namespace IM.Abilities
             
             GameObject projectile = _projectileFactory.Create();
             
-            projectile.GetComponent<Rigidbody2D>().linearVelocity = (_getDirection() - (Vector2)projectile.transform.position).normalized * Speed;
+            projectile.GetComponent<Rigidbody2D>().linearVelocity = _directionProvider.GetDirection().normalized * Speed;
                 
             return true;
 

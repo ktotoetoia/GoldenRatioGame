@@ -8,30 +8,28 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class BlinkAbilityModule : Module, IExtensibleModule, IRequireEntity, IRequireLookPosition
+    public class BlinkAbilityModule : Module, IExtensibleModule, IRequireEntity
     {
         private readonly BlinkForwardAbility _blinkForwardAbility;
         private IEntity _entity;
-        private ILookPositionProvider _lookPositionProvider;
 
         public IReadOnlyList<IModuleExtension> Extensions { get; }
-
-        public ILookPositionProvider LookPositionProvider
-        {
-            get => _lookPositionProvider;
-            set
-            {
-                _lookPositionProvider = value;
-                _blinkForwardAbility.GetLookDirection = _lookPositionProvider.GetLookPosition;
-            }
-        }
-
+        
         public IEntity Entity
         {
             get => _entity;
             set
             {
                 _entity = value;
+
+                if (value == null)
+                {
+                    _blinkForwardAbility.DirectionProvider = null;
+                    _blinkForwardAbility.Rigidbody = null;
+                    return;
+                }
+                
+                _blinkForwardAbility.DirectionProvider = _entity.GameObject.GetComponent<IDirectionProvider>();
                 _blinkForwardAbility.Rigidbody = _entity.GameObject.GetComponent<Rigidbody2D>();
             }
         }

@@ -5,7 +5,7 @@ namespace IM.Modules
 {
     public class AbilityExtensionsObserver : IModuleObserver
     {
-        private AbilityPool _abilityPool;
+        private readonly AbilityPool _abilityPool;
         
         public AbilityExtensionsObserver(AbilityPool abilityPool)
         {
@@ -29,7 +29,7 @@ namespace IM.Modules
                 return;
             }
             
-            _abilityPool.AddAbility(extension.Ability);
+            _abilityPool.RemoveAbility(extension.Ability);
         }
     }
 }

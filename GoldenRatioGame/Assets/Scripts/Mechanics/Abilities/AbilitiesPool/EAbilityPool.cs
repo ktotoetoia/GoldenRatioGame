@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace IM.Abilities
 {
+    [RequireComponent(typeof(IDirectionProvider))]
     public class EAbilityPool : MonoBehaviour, IAbilityPool
     {
         [SerializeField] private GameObject _projectilePrefab;
@@ -16,8 +17,8 @@ namespace IM.Abilities
 
         private void Awake()
         {
-            _abilities.Add(new BlinkForwardAbility(GetDirection,GetComponent<Rigidbody2D>(),_blinkCooldown));
-            _abilities.Add(new SendProjectileByVelocityAbility(GetDirection,new ProjectileFactory(_projectilePrefab,transform),_projectileCooldown));
+            _abilities.Add(new BlinkForwardAbility(GetComponent<IDirectionProvider>(),GetComponent<Rigidbody2D>(),_blinkCooldown));
+            _abilities.Add(new SendProjectileByVelocityAbility(GetComponent<IDirectionProvider>(),new ProjectileFactory(_projectilePrefab,transform),_projectileCooldown));
         }
 
         private void Update()
