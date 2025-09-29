@@ -5,39 +5,29 @@ namespace IM.Graphs
 {
     public class GameModuleGraph : IGameModuleGraph
     {
-        private readonly ICoreModuleGraph _graph;
+        private readonly IModuleGraph _graph;
         private readonly List<IModuleObserver> _observers;
         
         public IReadOnlyList<INode> Nodes => _graph.Nodes;
         public IReadOnlyList<IEdge> Edges => _graph.Edges;
         public IReadOnlyList<IConnection> Connections => _graph.Connections;
         public IReadOnlyList<IModule> Modules => _graph.Modules;
-        public IModule CoreModule => _graph.CoreModule;
         public IReadOnlyCollection<IModuleObserver> Observers=> _observers;
 
-        public GameModuleGraph(IModule coreModule) : this(new CoreModuleGraph(coreModule ?? throw new ArgumentNullException(nameof(coreModule))))
+        public GameModuleGraph() : this(new SafeModuleGraph())
         {
         }
         
-        public GameModuleGraph(ICoreModuleGraph graph) : this(graph, new List<IModuleObserver>())
+        public GameModuleGraph(IModuleGraph graph) : this(graph, new List<IModuleObserver>())
         {
         }
 
-        public GameModuleGraph(ICoreModuleGraph graph, List<IModuleObserver> observers)
+        public GameModuleGraph(IModuleGraph graph, List<IModuleObserver> observers)
         {
             _graph = graph ?? throw new ArgumentNullException(nameof(graph));
             _observers = observers ?? throw new ArgumentNullException(nameof(observers));
         }
         
-        public void SetCoreModule(IModule module)
-        {
-            if (module == null)
-                throw new Exception("Core module cannot be null");
-            
-            
-            _graph.SetCoreModule(module);
-        }
-
         public bool AddModule(IModule module)
         {
             if (!_graph.AddModule(module)) return false;

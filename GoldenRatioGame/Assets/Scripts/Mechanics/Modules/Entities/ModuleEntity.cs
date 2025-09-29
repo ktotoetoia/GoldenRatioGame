@@ -18,7 +18,9 @@ namespace IM.Modules
         private void Awake()
         {
             HumanoidCoreModule coreModule = new HumanoidCoreModule(_floatHealth);
-            _graph = new GameModuleGraph(coreModule);
+            _graph = new GameModuleGraph();
+            _graph.AddModule(coreModule);
+            
             AbilityPool = new AbilityPool();
             
             _graph.AddObserver(new EntityInjector(this));

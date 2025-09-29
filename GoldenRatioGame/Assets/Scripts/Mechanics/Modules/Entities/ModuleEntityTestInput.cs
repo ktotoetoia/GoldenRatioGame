@@ -26,7 +26,7 @@ namespace IM.Modules
 
                 _moduleEntity.Graph.AddAndConnect(module,
                     module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input), 
-                    _moduleEntity.Graph.CoreModule.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Output));
+                    _moduleEntity.Graph.Modules.FirstOrDefault()?.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Output));
             }
 
             if (Input.GetKeyDown(KeyCode.U))
@@ -35,13 +35,13 @@ namespace IM.Modules
 
                 _moduleEntity.Graph.AddAndConnect(module,
                     module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input),
-                    _moduleEntity.Graph.CoreModule.Ports.FirstOrDefault(x =>
+                    _moduleEntity.Graph.Modules.FirstOrDefault()?.Ports.FirstOrDefault(x =>
                         !x.IsConnected && x.Direction == PortDirection.Output));
             }
 
             if (Input.GetKeyDown(KeyCode.P))
             {
-                _moduleEntity.Graph.RemoveModule(_moduleEntity.Graph.Modules.LastOrDefault(x => x != _moduleEntity.Graph.CoreModule));
+                _moduleEntity.Graph.RemoveModule(_moduleEntity.Graph.Modules.LastOrDefault(x => x != _moduleEntity.Graph.Modules.FirstOrDefault()));
             }
         }
     }

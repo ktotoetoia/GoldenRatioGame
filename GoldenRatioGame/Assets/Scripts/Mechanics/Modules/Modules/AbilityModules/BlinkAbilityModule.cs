@@ -39,6 +39,7 @@ namespace IM.Modules
             Extensions = new List<IModuleExtension>()
             {
                 new AbilityExtension(_blinkForwardAbility = new BlinkForwardAbility(new FloatCooldown(1))),
+                new HealthExtension(0,100,100)
             };
             
             _ports.Add(new ModulePort(this,PortDirection.Input));

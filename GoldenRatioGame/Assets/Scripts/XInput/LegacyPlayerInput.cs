@@ -1,9 +1,12 @@
 ﻿using IM.StateMachines;
 using IM.Movement;
 using UnityEngine;
+using IM.ModuleGraphGizmosDebug;
+using IM.Modules;
 
 namespace Tests
 {
+    [DefaultExecutionOrder(1000)]
     public class LegacyPlayerInput : MonoBehaviour
     {
         [SerializeField] private GameObject _playerObject;
@@ -12,6 +15,7 @@ namespace Tests
 
         private void Awake()
         {
+            GetComponent<ModuleGraphGizmosDrawer>().Graph = _playerObject.GetComponent<IModuleEntity>().Graph;
             _movement = _playerObject.GetComponent<IMoveInVector>();
             _stateMachine = new StateMachine(new MovementState(_movement, () => new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"))));
         }

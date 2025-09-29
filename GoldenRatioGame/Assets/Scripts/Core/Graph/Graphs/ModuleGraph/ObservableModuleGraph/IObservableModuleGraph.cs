@@ -9,7 +9,7 @@ namespace IM.Graphs
         public void RemoveObserver(IModuleObserver observer);
     }
     
-    public interface IGameModuleGraph : IObservableModuleGraph, ICoreModuleGraph
+    public interface IGameModuleGraph : IObservableModuleGraph
     {
         bool AddAndConnect(IModule module, IModulePort modulePort, IModulePort targetPort);
     }
