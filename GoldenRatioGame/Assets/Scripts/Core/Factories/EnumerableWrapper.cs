@@ -10,6 +10,8 @@ namespace IM.Base
         private readonly IFactory<TOutput,TInput> _factory;
         private readonly Dictionary<TInput, TOutput> _cache;
         private readonly IEnumerable<TInput> _source;
+        
+        public IReadOnlyDictionary<TInput, TOutput> Cache => _cache;
 
         public EnumerableWrapper(IEnumerable<TInput> source, IFactory<TOutput,TInput> factory)
         {

@@ -10,10 +10,11 @@ namespace IM.ModuleGraphGizmosDebug
     {
         [SerializeField] private Vector2 _moduleSize = Vector2.one;
         [SerializeField] private Vector2 _moduleStartPosition;
+        [SerializeField] private bool _off;
         private IModuleGraph _graph;
-        private EnumerableWrapper<IModule,ModuleWrapper> _moduleEnumerableWrappers;
+        private EnumerableWrapper<IModule,IModuleVisualWrapper> _modules;
 
-        public IEnumerable<IModuleVisualWrapper> Modules =>  _moduleEnumerableWrappers ?? Enumerable.Empty<IModuleVisualWrapper>();
+        public IEnumerable<IModuleVisualWrapper> Modules =>  _modules ?? Enumerable.Empty<IModuleVisualWrapper>();
 
         public IModuleGraph Graph
         {
@@ -21,29 +22,41 @@ namespace IM.ModuleGraphGizmosDebug
             set
             {
                 _graph = value;
-                _moduleEnumerableWrappers = new EnumerableWrapper<IModule, ModuleWrapper>(_graph.Modules, new ModuleWrapperFactory(_moduleStartPosition, _moduleSize));
+                _modules = new EnumerableWrapper<IModule, IModuleVisualWrapper>(_graph.Modules, new ModuleWrapperFactory(_moduleStartPosition, _moduleSize));
             }
         }
 
         private void OnDrawGizmos()
         {
-            if (Graph == null) return;
+            if (Graph == null || _off) return;
             
             DrawModules();
+            DrawConnections();
         }
         
         private void DrawModules()
         {
-            foreach (ModuleWrapper module in Modules)
+            foreach (IModuleVisualWrapper module in Modules)
             {
                 Gizmos.color = new Color(251f/ 255f,195f/ 255f,74f/ 255f);
-                module.Visual.DrawGizmo();
+                module.Visual.DrawGizmos();
                 
                 Gizmos.color = new Color( 64f/ 255f,62f/ 255f,68f/ 255f);
                 foreach (IPortVisualWrapper port in module.Ports)
                 {
-                    port.Visual.DrawGizmo();
+                    port.Visual.DrawGizmos();
                 }
+            }
+        }
+
+        private void DrawConnections()
+        {
+            foreach (IConnection connection in Graph.Connections)
+            {
+                IPortVisualWrapper output = _modules.Cache[connection.Output.Module].Ports.First(x => x.Port == connection.Output);
+                IPortVisualWrapper input = _modules.Cache[connection.Input.Module].Ports.First(x => x.Port == connection.Input);
+                
+                Gizmos.DrawLine(output.Visual.Position, input.Visual.Position);
             }
         }
     }

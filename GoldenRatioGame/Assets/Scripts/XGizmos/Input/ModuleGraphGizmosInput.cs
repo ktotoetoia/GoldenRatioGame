@@ -5,6 +5,7 @@ namespace IM.ModuleGraphGizmosDebug
 {
     public class ModuleGraphGizmosInput : MonoBehaviour
     {
+        [SerializeField] private bool _off;
         private IModuleGraphDrawer _drawer;
         private IModuleVisualWrapper _selected;
         
@@ -15,7 +16,7 @@ namespace IM.ModuleGraphGizmosDebug
 
         private void Update()
         {
-            if(_drawer == null) return;
+            if(_drawer == null || _off ) return;
 
             if (Input.GetMouseButtonDown(0))
             {

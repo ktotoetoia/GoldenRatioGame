@@ -12,17 +12,25 @@
             Module = module;
             Direction = direction;
         }
-        
+
+        public bool CanConnect(IModulePort other)
+        {
+            return !IsConnected;
+        }
+
         public virtual void Connect(IConnection connection)
         {
-            if (!IsConnected)
-                Connection = connection;
+            Connection = connection;
+        }
+
+        public bool CanDisconnect()
+        {
+            return IsConnected;
         }
 
         public virtual void Disconnect()
         {
-            if (IsConnected)
-                Connection = null;
+            Connection = null;
         }
     }
 }

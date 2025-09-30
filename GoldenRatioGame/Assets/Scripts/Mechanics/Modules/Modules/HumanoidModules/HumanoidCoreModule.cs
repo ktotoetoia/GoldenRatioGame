@@ -24,11 +24,11 @@ namespace IM.Modules
         {
             Extensions = new List<IModuleExtension> { new HealthExtension(health) };
             
-            AddPort(HeadPort = new LimitPort(this,PortDirection.Output));
-            AddPort(LeftArmPort = new LimitPort(this,PortDirection.Output));
-            AddPort(RightArmPort = new LimitPort(this,PortDirection.Output));
-            AddPort(LeftLegPort = new LimitPort(this,PortDirection.Output));
-            AddPort(RightLegPort = new LimitPort(this,PortDirection.Output));
+            AddPort(HeadPort = new ModulePort(this,PortDirection.Output));
+            AddPort(LeftArmPort = new ModulePort(this,PortDirection.Output));
+            AddPort(RightArmPort = new ModulePort(this,PortDirection.Output));
+            AddPort(LeftLegPort = new ModulePort(this,PortDirection.Output));
+            AddPort(RightLegPort = new ModulePort(this,PortDirection.Output));
         }
 
         public T GetExtension<T>()

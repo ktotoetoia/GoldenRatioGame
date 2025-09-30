@@ -23,7 +23,7 @@ namespace IM.ModuleGraphGizmosDebug
             Position = point;
         }
 
-        public void DrawGizmo()
+        public void DrawGizmos()
         {
             Gizmos.DrawSphere(Position, Radius);
         }

@@ -36,8 +36,8 @@ namespace IM.ModuleGraphGizmosDebug
             
             for (int i = 0; i < ports.Count; i++)
             {
-                Vector3 position = Visual.Position + Vector3.right * i;
-                ports[i].Visual.MoveTo(position);
+                Vector3 offset = new Vector3((-ports.Count / 2f + i + 0.5f) * _portRadius * 2,0,0);
+                ports[i].Visual.MoveTo(Visual.Position + offset);
             }
         }
     }

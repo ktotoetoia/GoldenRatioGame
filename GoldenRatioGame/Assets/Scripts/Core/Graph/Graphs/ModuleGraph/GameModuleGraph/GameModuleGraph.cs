@@ -14,7 +14,7 @@ namespace IM.Graphs
         public IReadOnlyList<IModule> Modules => _graph.Modules;
         public IReadOnlyCollection<IModuleObserver> Observers=> _observers;
 
-        public GameModuleGraph() : this(new SafeModuleGraph())
+        public GameModuleGraph() : this(new ModuleGraph())
         {
         }
         
@@ -48,12 +48,6 @@ namespace IM.Graphs
 
         public IConnection Connect(IModulePort output, IModulePort input)
         {
-            if ((output is ILimitPort lOutput && !lOutput.CanConnect(input)) ||
-                (input is ILimitPort lInput && !lInput.CanConnect(output)))
-            {
-                return null;
-            }
-
             return _graph.Connect(output, input);
         }
 
@@ -84,6 +78,10 @@ namespace IM.Graphs
 
         public bool AddAndConnect(IModule module, IModulePort modulePort, IModulePort targetPort)
         {
+            if(module == null) throw new NullReferenceException(nameof(module));
+            if(modulePort == null)  throw new ArgumentNullException(nameof(modulePort));
+            if(targetPort == null)  throw new ArgumentNullException(nameof(targetPort));
+            
             if (_graph.AddModule(module) && Connect(modulePort, targetPort) != null)
             {
                 NotifyObserversAdd(module);

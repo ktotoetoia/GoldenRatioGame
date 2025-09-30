@@ -27,7 +27,7 @@ namespace IM.ModuleGraphGizmosDebug
             Bounds = new Bounds(point, Bounds.size);
         }
 
-        public void DrawGizmo()
+        public void DrawGizmos()
         {
             Gizmos.DrawCube(Bounds.center, Bounds.size);
         }
