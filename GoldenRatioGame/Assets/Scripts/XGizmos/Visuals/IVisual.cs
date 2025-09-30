@@ -1,13 +1,12 @@
-﻿using IM.Graphs;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace IM.ModuleGraphGizmosDebug
 {
-    public interface IModuleVisualWrapper
+    public interface IVisual
     {
-        IModule Module { get; }
-        
+        Vector3 Position { get; }
         bool ContainsPoint(Vector3 point);
         void MoveTo(Vector3 point);
+        void DrawGizmo();
     }
 }

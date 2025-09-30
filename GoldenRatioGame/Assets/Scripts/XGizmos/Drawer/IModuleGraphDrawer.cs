@@ -4,6 +4,6 @@ namespace IM.ModuleGraphGizmosDebug
 {
     public interface IModuleGraphDrawer
     {
-        public List<ModuleVisual> Modules { get; }
+        IEnumerable<IModuleVisualWrapper> Modules { get; }
     }
 }
