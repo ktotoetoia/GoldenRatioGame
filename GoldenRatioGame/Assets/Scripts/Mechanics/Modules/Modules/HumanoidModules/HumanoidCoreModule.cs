@@ -22,13 +22,27 @@ namespace IM.Modules
 
         public HumanoidCoreModule(ICappedValue<float> health)
         {
-            Extensions = new List<IModuleExtension> { new HealthExtension(health) };
+            Extensions = new List<IModuleExtension> 
+            {
+                new HealthExtension(health) ,
+                new SpeedExtension(new MultiplyingSpeedModifier(4f)),
+            };
             
-            AddPort(HeadPort = new ModulePort(this,PortDirection.Output));
-            AddPort(LeftArmPort = new ModulePort(this,PortDirection.Output));
-            AddPort(RightArmPort = new ModulePort(this,PortDirection.Output));
-            AddPort(LeftLegPort = new ModulePort(this,PortDirection.Output));
-            AddPort(RightLegPort = new ModulePort(this,PortDirection.Output));
+            AddPort(HeadPort = new SigmaModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
+            AddPort(LeftArmPort = new SigmaModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
+            AddPort(RightArmPort = new SigmaModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
+            AddPort(LeftLegPort = new SigmaModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
+            AddPort(RightLegPort = new SigmaModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
+        }
+
+        private bool CanConnect(IModulePort modulePort)
+        {
+            return true;
+        }
+
+        private bool CanDisconnect(IConnection connection)
+        {
+            return false;
         }
 
         public T GetExtension<T>()
