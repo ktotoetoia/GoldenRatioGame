@@ -22,8 +22,9 @@ namespace IM.Modules
             _graph.AddModule(coreModule);
             
             AbilityPool = new AbilityPool();
-            
+
             _graph.AddObserver(new EntityInjector(this));
+            _graph.AddObserver(new SpeedExtenionsObserver(GetComponent<IHaveSpeed>()));
             _graph.AddObserver(new HealthExtensionsObserver(GetComponent<IFloatHealthValuesGroup>()));
             _graph.AddObserver(new AbilityExtensionsObserver(AbilityPool as AbilityPool));
         }
