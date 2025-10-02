@@ -29,16 +29,6 @@ namespace IM.Modules
                     _moduleEntity.Graph.Modules.FirstOrDefault()?.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Output));
             }
 
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                IModule module = new BlinkAbilityModule();
-
-                _moduleEntity.Graph.AddAndConnect(module,
-                    module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input),
-                    _moduleEntity.Graph.Modules.FirstOrDefault()?.Ports.FirstOrDefault(x =>
-                        !x.IsConnected && x.Direction == PortDirection.Output));
-            }
-
             if (Input.GetKeyDown(KeyCode.P))
             {
                 _moduleEntity.Graph.RemoveModule(_moduleEntity.Graph.Modules.LastOrDefault(x => x != _moduleEntity.Graph.Modules.FirstOrDefault()));

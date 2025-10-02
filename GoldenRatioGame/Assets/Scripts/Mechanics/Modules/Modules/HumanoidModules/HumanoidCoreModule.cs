@@ -25,14 +25,14 @@ namespace IM.Modules
             Extensions = new List<IModuleExtension> 
             {
                 new HealthExtension(health) ,
-                new SpeedExtension(new MultiplyingSpeedModifier(4f)),
+                new SpeedExtension(new SpeedModifier(1f)),
             };
             
-            AddPort(HeadPort = new SigmaModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
-            AddPort(LeftArmPort = new SigmaModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
-            AddPort(RightArmPort = new SigmaModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
-            AddPort(LeftLegPort = new SigmaModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
-            AddPort(RightLegPort = new SigmaModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
+            AddPort(HeadPort = new FuncModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
+            AddPort(LeftArmPort = new FuncModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
+            AddPort(RightArmPort = new FuncModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
+            AddPort(LeftLegPort = new FuncModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
+            AddPort(RightLegPort = new FuncModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
         }
 
         private bool CanConnect(IModulePort modulePort)

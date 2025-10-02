@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 namespace IM.Modules
 {
-    public class SpeedExtenionsObserver : IModuleObserver
+    public class SpeedExtensionsObserver : IModuleObserver
     {
-        private IHaveSpeed _speed;
-        private List<ISpeedExtension> _used = new();
+        private readonly IHaveSpeed _speed;
+        private readonly List<ISpeedExtension> _used = new();
 
-        public SpeedExtenionsObserver(IHaveSpeed speed)
+        public SpeedExtensionsObserver(IHaveSpeed speed)
         {
             _speed = speed;
         }
@@ -17,11 +17,8 @@ namespace IM.Modules
         public void Add(IModule module)
         {
             if(module is not IExtensibleModule ext || !ext.TryGetExtension(out ISpeedExtension speedExtension) || speedExtension.SpeedModifier == null)
-            {
-
                 return;
-            }
-
+            
             _speed.Speed.AddModifier(speedExtension.SpeedModifier);
             _used.Add(speedExtension);
         }
@@ -29,10 +26,8 @@ namespace IM.Modules
         public void Remove(IModule module)
         {
             if (module is not IExtensibleModule ext || !ext.TryGetExtension(out ISpeedExtension speedExtension) || !_used.Contains(speedExtension))
-            {
                 return;
-            }
-
+            
             _speed.Speed.RemoveModifier(speedExtension.SpeedModifier);
             _used.Remove(speedExtension);
         }

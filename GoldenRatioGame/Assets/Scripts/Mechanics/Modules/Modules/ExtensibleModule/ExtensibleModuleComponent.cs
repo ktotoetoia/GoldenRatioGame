@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class ExtensibleModuleMono : MonoBehaviour, IExtensibleModule
+    public class ExtensibleModuleComponent : MonoBehaviour, IExtensibleModule
     {
         [SerializeField] private int _inputPortCount;
         [SerializeField] private int _outputPortCount;
         private readonly List<IModulePort> _ports = new();
-        private List<IModuleExtension> _extensions = new();
+        private readonly List<IModuleExtension> _extensions = new();
         
         public IReadOnlyList<IModuleExtension> Extensions => _extensions;
         public IEnumerable<IEdge> Edges => _ports.Select(x => x.Connection);

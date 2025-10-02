@@ -2,6 +2,7 @@
 {
     public interface ISpeedModifier
     {
-        public float GetModifiedValue(float value);
+        float Add { get; }
+        float Multiplication { get; }
     }
 }

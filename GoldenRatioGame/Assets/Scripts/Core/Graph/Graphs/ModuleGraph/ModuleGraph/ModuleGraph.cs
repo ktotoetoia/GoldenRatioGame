@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace IM.Graphs
 {
@@ -32,7 +31,7 @@ namespace IM.Graphs
         {
             if(module == null) throw new ArgumentNullException(nameof(module));
             
-            if (!Contains(module))
+            if (!Contains(module) || module.Ports.Any(x => !x.CanDisconnect()))
             {
                 return false;
             }
@@ -55,10 +54,10 @@ namespace IM.Graphs
                 throw new ArgumentException("Cannot connect ports of the same module.");
             if(output.IsConnected || input.IsConnected)
                 throw new ArgumentException("Port is already connected.");
-            (output, input) = FixPorts(output, input);
-            
             if (!output.CanConnect(input) || !input.CanConnect(output))
                 return null;
+            
+            (output, input) = FixPorts(output, input);
             
             Connection connection =  new Connection(output, input);
 

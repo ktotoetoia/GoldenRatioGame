@@ -2,7 +2,7 @@
 
 namespace IM.Graphs
 {
-    public class SigmaModulePort : IModulePort
+    public class FuncModulePort : IModulePort
     {
         private readonly Func<IModulePort,bool> _canConnect;
         private readonly Func<IConnection, bool> _canDisconnect;
@@ -12,7 +12,7 @@ namespace IM.Graphs
         public bool IsConnected => Connection != null;
         public PortDirection Direction { get; }
 
-        public SigmaModulePort(IModule module, PortDirection direction,Func<IModulePort,bool> canConnect,Func<IConnection,bool> canDisconnect)
+        public FuncModulePort(IModule module, PortDirection direction,Func<IModulePort,bool> canConnect,Func<IConnection,bool> canDisconnect)
         {
             Module = module;
             Direction = direction;
