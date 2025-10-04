@@ -1,7 +1,7 @@
 {
     "name": "Graph",
     "rootNamespace": "",
-    "references": [],
+    "references": ["GUID:3af9ee6c1821deb43baf0b4e8dd273c3"],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

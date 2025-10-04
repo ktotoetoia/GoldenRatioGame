@@ -1,4 +1,4 @@
-﻿namespace IM.Graphs
+﻿namespace IM.Commands
 {
     public interface ICommand
     {

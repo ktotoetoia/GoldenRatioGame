@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ICommand = IM.Commands.ICommand;
 
 namespace IM.Graphs
 {

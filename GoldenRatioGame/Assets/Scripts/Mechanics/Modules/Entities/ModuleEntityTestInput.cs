@@ -38,12 +38,12 @@ namespace IM.Modules
 
             if (Input.GetKeyDown(KeyCode.U))
             {
-                (_moduleEntity.Graph as CommandModuleGraph).UndoLast();
+                (_moduleEntity.Graph as ICommandModuleGraph).Undo(1);
             }
             
             if (Input.GetKeyDown(KeyCode.R))
             {
-                (_moduleEntity.Graph as CommandModuleGraph).RedoLast();
+                (_moduleEntity.Graph as ICommandModuleGraph).Redo(1);
             }
         }
     }
