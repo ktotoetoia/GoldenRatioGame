@@ -3,7 +3,7 @@ using IM.Graphs;
 
 namespace IM.Modules
 {
-    public class AbilityExtensionsObserver : IModuleObserver
+    public class AbilityExtensionsObserver
     {
         private readonly AbilityPool _abilityPool;
         

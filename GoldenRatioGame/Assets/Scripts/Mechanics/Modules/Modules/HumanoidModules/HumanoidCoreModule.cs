@@ -28,11 +28,11 @@ namespace IM.Modules
                 new SpeedExtension(new SpeedModifier(1f)),
             };
             
-            AddPort(HeadPort = new FuncModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
-            AddPort(LeftArmPort = new FuncModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
-            AddPort(RightArmPort = new FuncModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
-            AddPort(LeftLegPort = new FuncModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
-            AddPort(RightLegPort = new FuncModulePort(this,PortDirection.Output,CanConnect,CanDisconnect));
+            AddPort(HeadPort = new ModulePort(this,PortDirection.Output));
+            AddPort(LeftArmPort = new ModulePort(this,PortDirection.Output));
+            AddPort(RightArmPort = new ModulePort(this,PortDirection.Output));
+            AddPort(LeftLegPort = new ModulePort(this,PortDirection.Output));
+            AddPort(RightLegPort = new ModulePort(this,PortDirection.Output));
         }
 
         private bool CanConnect(IModulePort modulePort)

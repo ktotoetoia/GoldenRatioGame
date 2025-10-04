@@ -14,34 +14,31 @@ namespace IM.Graphs
         public IReadOnlyList<IModule> Modules => _modules;
         public IReadOnlyList<IConnection> Connections => _connections;
         
-        public bool AddModule(IModule module)
+        public void AddModule(IModule module)
         {
             if(module == null) throw new ArgumentNullException(nameof(module));
             
             if (Contains(module))
             {
-                return false;
+                return;
             }
             
             _modules.Add(module);
-            return true;
         }
 
-        public bool RemoveModule(IModule module)
+        public void RemoveModule(IModule module)
         {
             if(module == null) throw new ArgumentNullException(nameof(module));
             
-            if (!Contains(module) || module.Ports.Any(x => !x.CanDisconnect()))
+            if (!Contains(module))
             {
-                return false;
+                return;
             }
             
             foreach (IConnection connection in module.Ports.Select(p => p.Connection).Where(c => c != null))
             {
                 Disconnect(connection);
             }
-
-            return _modules.Remove(module);
         }
         
         public IConnection Connect(IModulePort output, IModulePort input)
@@ -54,8 +51,6 @@ namespace IM.Graphs
                 throw new ArgumentException("Cannot connect ports of the same module.");
             if(output.IsConnected || input.IsConnected)
                 throw new ArgumentException("Port is already connected.");
-            if (!output.CanConnect(input) || !input.CanConnect(output))
-                return null;
             
             (output, input) = FixPorts(output, input);
             
@@ -72,10 +67,6 @@ namespace IM.Graphs
         {
             if(connection == null) throw new ArgumentNullException(nameof(connection));
             if (!Contains(connection)) throw new ArgumentException("Graph does not contain this connection.");
-            if (!connection.Input.CanDisconnect() || !connection.Output.CanDisconnect())
-            {
-                return;
-            }
             
             connection.Input.Disconnect();
             connection.Output.Disconnect();

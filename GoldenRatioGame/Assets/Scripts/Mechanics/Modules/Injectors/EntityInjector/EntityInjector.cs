@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class EntityInjector : IModuleObserver
+    public class EntityInjector
     {
         private readonly List<IRequireEntity> _modules = new();
         private readonly IEntity _entity;

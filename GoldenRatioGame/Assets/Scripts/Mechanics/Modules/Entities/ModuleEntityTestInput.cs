@@ -23,15 +23,27 @@ namespace IM.Modules
             if (Input.GetKeyDown(KeyCode.O))
             {
                 IModule module = Instantiate(_healthModulePrefab).GetComponent<IModule>();
-
-                _moduleEntity.Graph.AddAndConnect(module,
-                    module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input), 
-                    _moduleEntity.Graph.Modules.FirstOrDefault()?.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Output));
+                
+                _moduleEntity.Graph.AddModule(module);
+                _moduleEntity.Graph.Connect(
+                    module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input),
+                    _moduleEntity.Graph.Modules.FirstOrDefault()?.Ports
+                        .FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Output));
             }
 
             if (Input.GetKeyDown(KeyCode.P))
             {
                 _moduleEntity.Graph.RemoveModule(_moduleEntity.Graph.Modules.LastOrDefault(x => x != _moduleEntity.Graph.Modules.FirstOrDefault()));
+            }
+
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                (_moduleEntity.Graph as CommandModuleGraph).UndoLast();
+            }
+            
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                (_moduleEntity.Graph as CommandModuleGraph).RedoLast();
             }
         }
     }

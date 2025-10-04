@@ -7,9 +7,7 @@
         PortDirection Direction { get; }
         bool IsConnected { get; }
     
-        bool CanConnect(IModulePort other);
         void Connect(IConnection connection);
-        bool CanDisconnect();
         void Disconnect();
     }
 }

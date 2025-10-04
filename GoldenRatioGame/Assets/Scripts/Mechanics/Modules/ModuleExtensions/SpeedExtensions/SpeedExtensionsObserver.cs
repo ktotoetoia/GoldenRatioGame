@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace IM.Modules
 {
-    public class SpeedExtensionsObserver : IModuleObserver
+    public class SpeedExtensionsObserver
     {
         private readonly IHaveSpeed _speed;
         private readonly List<ISpeedExtension> _used = new();

@@ -4,7 +4,7 @@ using IM.Health;
 
 namespace IM.Modules
 {
-    public class HealthExtensionsObserver : IModuleObserver
+    public class HealthExtensionsObserver
     {
         private readonly List<IHealthExtension> _modulesUsed = new();
         private readonly IFloatHealthValuesGroup _floatHealthValuesGroup;

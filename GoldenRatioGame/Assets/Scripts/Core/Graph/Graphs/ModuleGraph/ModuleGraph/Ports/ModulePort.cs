@@ -13,19 +13,9 @@
             Direction = direction;
         }
 
-        public bool CanConnect(IModulePort other)
-        {
-            return !IsConnected;
-        }
-
         public void Connect(IConnection connection)
         {
             Connection = connection;
-        }
-
-        public bool CanDisconnect()
-        {
-            return IsConnected;
         }
 
         public void Disconnect()
