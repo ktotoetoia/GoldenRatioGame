@@ -11,12 +11,12 @@ namespace IM.ModuleGraphGizmosDebug
         [SerializeField] private Vector2 _moduleSize = Vector2.one;
         [SerializeField] private Vector2 _moduleStartPosition;
         [SerializeField] private bool _off;
-        private IModuleGraph _graph;
+        private IModuleGraphReadOnly _graph;
         private EnumerableWrapper<IModule,IModuleVisualWrapper> _modules;
 
         public IEnumerable<IModuleVisualWrapper> Modules =>  _modules ?? Enumerable.Empty<IModuleVisualWrapper>();
 
-        public IModuleGraph Graph
+        public IModuleGraphReadOnly Graph
         {
             get => _graph;
             set

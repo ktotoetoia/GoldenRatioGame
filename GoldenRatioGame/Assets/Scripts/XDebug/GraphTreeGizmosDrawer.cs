@@ -34,9 +34,9 @@ namespace IM.Modules
 
         private void OnDrawGizmos()
         {
-            if (_entity is { Graph: not null })
+            if (_entity is { GraphEditor: not null })
             {
-                Graph = _entity.Graph;
+                Graph = _entity.GraphEditor.Graph;
             }
             
             if (Graph == null || Graph.Nodes == null || Graph.Edges == null) return;

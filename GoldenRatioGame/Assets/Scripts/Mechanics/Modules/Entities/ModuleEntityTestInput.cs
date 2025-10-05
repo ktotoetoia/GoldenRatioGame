@@ -11,6 +11,7 @@ namespace IM.Modules
         [SerializeField] private ModuleEntity _moduleEntity;
         [SerializeField] private GameObject _healthModulePrefab;
         private PreferredKeyboardBindingsAbilityUser _abilityUser;
+        private IModuleGraph  _graph;
         
         private void Awake()
         {
@@ -20,30 +21,45 @@ namespace IM.Modules
         private void Update()
         {
             _abilityUser.Update();
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                _graph = _moduleEntity.GraphEditor.StartEditing();
+                Debug.Log("start editing");
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (_moduleEntity.GraphEditor.TrySaveChanges())
+                {
+                    Debug.Log("Edit saved");
+                }
+                else
+                {
+                    Debug.Log("Save failed");
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                _moduleEntity.GraphEditor.CancelChanges();;
+                Debug.Log("Changes Cancelled");
+            }
+            
             if (Input.GetKeyDown(KeyCode.O))
             {
                 IModule module = Instantiate(_healthModulePrefab).GetComponent<IModule>();
                 
-                _moduleEntity.Graph.AddModule(module);
-                _moduleEntity.Graph.Connect(
+                _graph.AddModule(module);
+                _graph.Connect(
                     module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input),
-                    _moduleEntity.Graph.Modules.FirstOrDefault()?.Ports
+                    _moduleEntity.GraphEditor.Graph.Modules.FirstOrDefault()?.Ports
                         .FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Output));
             }
 
             if (Input.GetKeyDown(KeyCode.P))
             {
-                _moduleEntity.Graph.RemoveModule(_moduleEntity.Graph.Modules.LastOrDefault(x => x != _moduleEntity.Graph.Modules.FirstOrDefault()));
-            }
-
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                (_moduleEntity.Graph as ICommandModuleGraph).Undo(1);
-            }
-            
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                (_moduleEntity.Graph as ICommandModuleGraph).Redo(1);
+                _graph.RemoveModule(_moduleEntity.GraphEditor.Graph.Modules.LastOrDefault(x => x != _moduleEntity.GraphEditor.Graph.Modules.FirstOrDefault()));
             }
         }
     }
