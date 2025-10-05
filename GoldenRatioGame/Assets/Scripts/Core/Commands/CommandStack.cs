@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace IM.Commands
 {
@@ -8,11 +7,12 @@ namespace IM.Commands
         private readonly Stack<ICommand> _done = new();
         private readonly Stack<ICommand> _undone = new();
         
-        public IEnumerable<ICommand> Done => _done;
-        public IEnumerable<ICommand> Undone => _undone;
-
         public bool CanUndo => _done.Count > 0;
         public bool CanRedo => _undone.Count > 0;
+        public int CommandsToUndoCount => _done.Count;
+        public int CommandsToRedoCount => _undone.Count;
+        public IEnumerable<ICommand> Done => _done;
+        public IEnumerable<ICommand> Undone => _undone;
         
         public void ExecuteAndPush(ICommand command)
         {

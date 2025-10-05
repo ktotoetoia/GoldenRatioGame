@@ -11,6 +11,8 @@ namespace IM.Graphs
 
         public bool CanUndo => _commands.CanUndo;
         public bool CanRedo => _commands.CanRedo;
+        public int CommandsToUndoCount => _commands.CommandsToUndoCount;
+        public int CommandsToRedoCount => _commands.CommandsToRedoCount;
 
         public IReadOnlyList<INode> Nodes => _modules;
         public IReadOnlyList<IModule> Modules => _modules;
