@@ -1,34 +1,35 @@
 ﻿using System;
-using IM.Graphs;
 
-namespace IM.Modules
+namespace IM.Graphs
 {
     public class ModuleGraphEditor : IModuleGraphEditor
     {
         private readonly ICommandModuleGraph _graph;
-        private readonly IModuleGraphValidator _moduleGraphValidator;
+        private readonly IModuleGraphValidator _validator;
+        private readonly IModuleGraphObserver _observer;
         private IAccessModuleGraph _accessModuleGraph;
         private int _undoIndexAtEditStart;
 
+        public bool IsEditing => _accessModuleGraph != null;
+        public bool CanSaveChanges => IsEditing && _validator.IsValid(_accessModuleGraph);
         public IModuleGraphReadOnly Graph { get; }
 
-        public bool IsEditing => _accessModuleGraph != null;
-        public bool CanSaveChanges => IsEditing && _moduleGraphValidator.IsValid(_accessModuleGraph);
 
         public ModuleGraphEditor() : this(new CommandModuleGraph())
         {
             
         }
         
-        public ModuleGraphEditor(ICommandModuleGraph graph) : this(graph, new TrueModuleGraphValidator())
+        public ModuleGraphEditor(ICommandModuleGraph graph) : this(graph, new TrueModuleGraphValidator(), new EmptyObserver())
         {
             
         }
 
-        public ModuleGraphEditor(ICommandModuleGraph graph, IModuleGraphValidator moduleGraphValidator)
+        public ModuleGraphEditor(ICommandModuleGraph graph, IModuleGraphValidator moduleGraphValidator, IModuleGraphObserver observer)
         {
             _graph = graph ?? throw new ArgumentNullException(nameof(graph));
-            _moduleGraphValidator = moduleGraphValidator  ?? throw new ArgumentNullException(nameof(moduleGraphValidator));
+            _validator = moduleGraphValidator  ?? throw new ArgumentNullException(nameof(moduleGraphValidator));
+            _observer = observer;
             
             Graph = new ModuleGraphReadOnlyWrapper(_graph);
         }
@@ -55,10 +56,12 @@ namespace IM.Modules
         {
             if(!IsEditing) throw new InvalidOperationException("Graph is not being edited");
 
-            if (CanSaveChanges)
+            if (CanSaveChanges || _validator.TryFix(_accessModuleGraph))
             {
                 EndEditing();
-                
+
+                _observer.Update(Graph);
+
                 return true;
             }
 

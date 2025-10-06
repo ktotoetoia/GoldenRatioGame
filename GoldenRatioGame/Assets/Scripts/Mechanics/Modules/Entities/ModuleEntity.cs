@@ -1,5 +1,7 @@
-﻿using IM.Abilities;
+﻿using System.Collections.Generic;
+using IM.Abilities;
 using IM.Graphs;
+using IM.Health;
 using IM.Values;
 using UnityEngine;
 
@@ -16,17 +18,19 @@ namespace IM.Modules
         private void Awake()
         {
             HumanoidCoreModule coreModule = new HumanoidCoreModule(_floatHealth);
-            
-            ICommandModuleGraph graph = new CommandModuleGraph();
-            graph.AddModule(coreModule);
-            GraphEditor = new ModuleGraphEditor(graph);
-
             AbilityPool = new AbilityPool();
-
-            //_graph.AddObserver(new EntityInjector(this));
-            //_graph.AddObserver(new SpeedExtensionsObserver(GetComponent<IHaveSpeed>()));
-            //_graph.AddObserver(new HealthExtensionsObserver(GetComponent<IFloatHealthValuesGroup>()));
-            //_graph.AddObserver(new AbilityExtensionsObserver(AbilityPool as AbilityPool));
+            ICommandModuleGraph graph = new CommandModuleGraph();
+            
+            CompositeObserver observer = new CompositeObserver(new List<IModuleGraphObserver>()
+            {
+                new EntityInjector(this),
+                new SpeedExtensionsObserver(GetComponent<IHaveSpeed>()),
+                new HealthExtensionsObserver(GetComponent<IFloatHealthValuesGroup>()),
+                new AbilityExtensionsObserver(AbilityPool as AbilityPool),
+            });
+            
+            GraphEditor = new ModuleGraphEditor(graph, new TrueModuleGraphValidator(), observer);
+            graph.AddModule(coreModule);
         }
     }
 }

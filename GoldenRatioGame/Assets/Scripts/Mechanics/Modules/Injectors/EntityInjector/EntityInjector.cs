@@ -1,45 +1,54 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using IM.Entities;
 using IM.Graphs;
 using UnityEngine;
 
 namespace IM.Modules
 {
-    public class EntityInjector
+    public class EntityInjector : IModuleGraphObserver
     {
-        private readonly List<IRequireEntity> _modules = new();
+        private readonly HashSet<IRequireEntity> _injected = new();
         private readonly IEntity _entity;
 
         public EntityInjector(IEntity entity)
         {
-            _entity = entity;
-        }
-        
-        public void Add(IModule module)
-        {
-            if (module is not IRequireEntity requireEntity || _modules.Contains(requireEntity))
-            {
-                return;
-            }
-
-            if (requireEntity.Entity != null)
-            {
-                Debug.LogWarning("entity of a module should be removed before adding module to another entity");
-            }
-            
-            requireEntity.Entity = _entity;
-            _modules.Add(requireEntity);
+            _entity = entity ?? throw new ArgumentNullException(nameof(entity));
         }
 
-        public void Remove(IModule module)
+        public void Update(IModuleGraphReadOnly graph)
         {
-            if (module is not IRequireEntity requireEntity || !_modules.Contains(requireEntity))
+            if (graph == null) throw new ArgumentNullException(nameof(graph));
+
+            HashSet<IRequireEntity> current = new();
+
+            foreach (var module in graph.Modules)
             {
-                return;
+                if (module is IRequireEntity requireEntity)
+                {
+                    current.Add(requireEntity);
+                }
             }
-            
-            requireEntity.Entity = null;
-            _modules.Remove(requireEntity);
+
+            foreach (var requireEntity in current)
+            {
+                if (_injected.Add(requireEntity))
+                {
+                    if (requireEntity.Entity != null)
+                    {
+                        Debug.LogWarning($"Entity already set on {requireEntity}. Overwriting with new entity.");
+                    }
+
+                    requireEntity.Entity = _entity;
+                }
+            }
+
+            foreach (var requireEntity in _injected.Except(current).ToList())
+            {
+                requireEntity.Entity = null;
+                _injected.Remove(requireEntity);
+            }
         }
     }
 }

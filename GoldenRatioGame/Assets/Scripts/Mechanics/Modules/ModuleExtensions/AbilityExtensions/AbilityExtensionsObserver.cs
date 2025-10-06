@@ -1,35 +1,49 @@
-﻿using IM.Abilities;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using IM.Abilities;
 using IM.Graphs;
 
 namespace IM.Modules
 {
-    public class AbilityExtensionsObserver
+    public class AbilityExtensionsObserver : IModuleGraphObserver
     {
         private readonly AbilityPool _abilityPool;
-        
+        private readonly HashSet<IAbility> _knownAbilities = new();
+
         public AbilityExtensionsObserver(AbilityPool abilityPool)
         {
-            _abilityPool = abilityPool;
+            _abilityPool = abilityPool ?? throw new ArgumentNullException(nameof(abilityPool));
         }
 
-        public void Add(IModule module)
+        public void Update(IModuleGraphReadOnly graph)
         {
-            if (module is not IExtensibleModule componentModule || !componentModule.TryGetExtension(out IAbilityExtension extension))
-            {
-                return;
-            }
-            
-            _abilityPool.AddAbility(extension.Ability);
-        }
+            if (graph == null) throw new ArgumentNullException(nameof(graph));
 
-        public void Remove(IModule module)
-        {
-            if (module is not IExtensibleModule componentModule || !componentModule.TryGetExtension(out IAbilityExtension extension))
+            HashSet<IAbility> currentAbilities = new();
+        
+            foreach (IModule module in graph.Modules)
             {
-                return;
+                if (module is IExtensibleModule extensible &&
+                    extensible.TryGetExtension(out IAbilityExtension abilityExt))
+                {
+                    currentAbilities.Add(abilityExt.Ability);
+                }
             }
-            
-            _abilityPool.RemoveAbility(extension.Ability);
+
+            foreach (IAbility ability in currentAbilities)
+            {
+                if (_knownAbilities.Add(ability))
+                {
+                    _abilityPool.AddAbility(ability);
+                }
+            }
+
+            foreach (IAbility ability in _knownAbilities.Except(currentAbilities).ToList())
+            {
+                _knownAbilities.Remove(ability);
+                _abilityPool.RemoveAbility(ability);
+            }
         }
     }
 }

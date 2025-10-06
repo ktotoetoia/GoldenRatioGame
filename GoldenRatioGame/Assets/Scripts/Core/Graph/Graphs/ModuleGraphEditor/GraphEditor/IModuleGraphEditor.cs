@@ -1,6 +1,4 @@
-﻿using IM.Graphs;
-
-namespace IM.Modules
+﻿namespace IM.Graphs
 {
     public interface IModuleGraphEditor
     {

@@ -5,7 +5,7 @@ namespace IM.Graphs
 {
     public class CommandModuleGraph : ICommandModuleGraph
     {
-        private readonly CommandStack _commands = new ();
+        private readonly CommandStack _commands = new();
         private readonly List<IModule> _modules = new();
         private readonly List<IConnection> _connections = new();
 

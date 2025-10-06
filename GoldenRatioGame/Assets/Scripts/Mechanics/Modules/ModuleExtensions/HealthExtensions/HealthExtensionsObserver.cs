@@ -1,45 +1,48 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using IM.Graphs;
 using IM.Health;
 
 namespace IM.Modules
 {
-    public class HealthExtensionsObserver
+    public class HealthExtensionsObserver : IModuleGraphObserver
     {
-        private readonly List<IHealthExtension> _modulesUsed = new();
         private readonly IFloatHealthValuesGroup _floatHealthValuesGroup;
+        private readonly HashSet<IHealthExtension> _knownHealthModules = new();
 
         public HealthExtensionsObserver(IFloatHealthValuesGroup floatHealthValuesGroup)
         {
-            _floatHealthValuesGroup = floatHealthValuesGroup;
+            _floatHealthValuesGroup = floatHealthValuesGroup ?? throw new ArgumentNullException(nameof(floatHealthValuesGroup));
         }
-        
-        public void Add(IModule module)
+
+        public void Update(IModuleGraphReadOnly graph)
         {
-            if (!TryGetHealthModule(module, out IHealthExtension healthModule) || _modulesUsed.Contains(healthModule))
+            if (graph == null) throw new ArgumentNullException(nameof(graph));
+
+            HashSet<IHealthExtension> currentHealthModules = new();
+
+            foreach (IModule module in graph.Modules)
             {
-                return;
+                if (module is IExtensibleModule ext && ext.TryGetExtension(out IHealthExtension healthExt))
+                {
+                    currentHealthModules.Add(healthExt);
+                }
             }
 
-            _floatHealthValuesGroup.AddHealth(healthModule.Health);
-            _modulesUsed.Add(healthModule);
-        }
-
-        public void Remove(IModule module)
-        {
-            if (!TryGetHealthModule(module, out IHealthExtension healthModule) || !_modulesUsed.Contains(healthModule))
+            foreach (IHealthExtension healthExt in currentHealthModules)
             {
-                return;
+                if (_knownHealthModules.Add(healthExt))
+                {
+                    _floatHealthValuesGroup.AddHealth(healthExt.Health);
+                }
             }
-            
-            _floatHealthValuesGroup.RemoveHealth(healthModule.Health);
-            _modulesUsed.Remove(healthModule);
-        }
 
-        private bool TryGetHealthModule(IModule module, out IHealthExtension healthExtension)
-        {
-            healthExtension = null;
-            return module is  IExtensibleModule componentModule && componentModule.TryGetExtension(out healthExtension);
+            foreach (IHealthExtension healthExt in _knownHealthModules.Except(currentHealthModules).ToList())
+            {
+                _knownHealthModules.Remove(healthExt);
+                _floatHealthValuesGroup.RemoveHealth(healthExt.Health);
+            }
         }
     }
 }
