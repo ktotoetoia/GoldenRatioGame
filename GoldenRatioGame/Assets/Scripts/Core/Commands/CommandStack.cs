@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace IM.Commands
 {
@@ -6,14 +7,12 @@ namespace IM.Commands
     {
         private readonly Stack<ICommand> _done = new();
         private readonly Stack<ICommand> _undone = new();
-        
-        public bool CanUndo => _done.Count > 0;
-        public bool CanRedo => _undone.Count > 0;
+
         public int CommandsToUndoCount => _done.Count;
         public int CommandsToRedoCount => _undone.Count;
         public IEnumerable<ICommand> Done => _done;
         public IEnumerable<ICommand> Undone => _undone;
-        
+
         public void ExecuteAndPush(ICommand command)
         {
             try
@@ -24,41 +23,42 @@ namespace IM.Commands
             {
                 return;
             }
-            
+
             _done.Push(command);
             _undone.Clear();
         }
 
         public void Undo(int count)
         {
-            for (int i = 0; i < count && _done.Count > 0; i++)
-                UndoLast();
+            if (!CanUndo(count))
+                throw new InvalidOperationException("Not enough commands to undo.");
+
+            for (int i = 0; i < count; i++)
+            {
+                ICommand command = _done.Pop();
+                command.Undo();
+                _undone.Push(command);
+            }
         }
 
         public void Redo(int count)
         {
-            for (int i = 0; i < count && _undone.Count > 0; i++)
-                RedoLast();
+            if (!CanRedo(count))
+                throw new InvalidOperationException("Not enough commands to redo.");
+
+            for (int i = 0; i < count; i++)
+            {
+                ICommand command = _undone.Pop();
+                command.Execute();
+                _done.Push(command);
+            }
         }
 
-        public void UndoLast()
-        {
-            if(!CanUndo) return;
-            
-            ICommand command = _done.Pop();
-            
-            _undone.Push(command);
-            command.Undo();
-        }
-
-        public void RedoLast()
-        {
-            if(!CanRedo) return;
-            
-            ICommand command = _undone.Pop();
-            
-            _done.Push(command);
-            command.Execute();
-        }
+        public void UndoLast() => Undo(1);
+        public void RedoLast() => Redo(1);
+        public bool CanUndo(int count) => _done.Count >= count;
+        public bool CanRedo(int count) => _undone.Count >= count;
+        public void ClearUndoCommands() => _done.Clear();
+        public void ClearRedoCommands() => _undone.Clear();
     }
 }

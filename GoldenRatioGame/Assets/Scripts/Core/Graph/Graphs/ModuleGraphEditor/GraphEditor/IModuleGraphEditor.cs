@@ -7,7 +7,7 @@
         bool IsEditing { get; }
         bool CanSaveChanges { get; }
         
-        IModuleGraph StartEditing();
+        ICommandModuleGraph StartEditing();
         
         void CancelChanges();
         bool TrySaveChanges();

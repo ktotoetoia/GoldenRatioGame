@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace IM.Graphs
 {
@@ -7,7 +8,7 @@ namespace IM.Graphs
         private readonly ICommandModuleGraph _graph;
         private readonly IModuleGraphValidator _validator;
         private readonly IModuleGraphObserver _observer;
-        private IAccessModuleGraph _accessModuleGraph;
+        private IAccessCommandModuleGraph _accessModuleGraph;
         private int _undoIndexAtEditStart;
 
         public bool IsEditing => _accessModuleGraph != null;
@@ -34,13 +35,13 @@ namespace IM.Graphs
             Graph = new ModuleGraphReadOnlyWrapper(_graph);
         }
         
-        public IModuleGraph StartEditing()
+        public ICommandModuleGraph StartEditing()
         {
             if (IsEditing) throw new InvalidOperationException("Graph is already being edited");
 
             _undoIndexAtEditStart = _graph.CommandsToUndoCount;
             
-            return _accessModuleGraph = new AccessModuleGraph(_graph) {CanUse = true, ThrowIfCantUse = true};
+            return _accessModuleGraph = new AccessCommandModuleGraph(_graph) {CanUse = true, ThrowIfCantUse = true};
         }
 
         public void CancelChanges()
@@ -61,7 +62,7 @@ namespace IM.Graphs
                 EndEditing();
 
                 _observer.Update(Graph);
-
+                
                 return true;
             }
 
@@ -72,6 +73,12 @@ namespace IM.Graphs
         {
             _accessModuleGraph.CanUse = false;
             _accessModuleGraph = null;
+            
+            if (_graph is CommandModuleGraph cmd)
+            {
+                cmd.ClearUndoCommands();
+                cmd.ClearRedoCommands();
+            }
         }
     }
 }

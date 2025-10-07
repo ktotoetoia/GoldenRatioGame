@@ -19,7 +19,7 @@ namespace IM.Modules
         {
             HumanoidCoreModule coreModule = new HumanoidCoreModule(_floatHealth);
             AbilityPool = new AbilityPool();
-            ICommandModuleGraph graph = new CommandModuleGraph();
+            CommandModuleGraph graph = new CommandModuleGraph();
             
             CompositeObserver observer = new CompositeObserver(new List<IModuleGraphObserver>()
             {

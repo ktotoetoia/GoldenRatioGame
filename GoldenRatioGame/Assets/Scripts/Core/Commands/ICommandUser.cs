@@ -2,11 +2,11 @@
 {
     public interface ICommandUser
     {
-        bool CanUndo { get; }
-        bool CanRedo { get; }
         int CommandsToUndoCount { get; }
         int CommandsToRedoCount { get; }
-        
+
+        bool CanUndo(int count);
+        bool CanRedo(int count);
         void Undo(int count);
         void Redo(int count);
     }

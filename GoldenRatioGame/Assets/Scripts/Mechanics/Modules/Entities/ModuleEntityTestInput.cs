@@ -11,7 +11,7 @@ namespace IM.Modules
         [SerializeField] private ModuleEntity _moduleEntity;
         [SerializeField] private GameObject _healthModulePrefab;
         private PreferredKeyboardBindingsAbilityUser _abilityUser;
-        private IModuleGraph  _graph;
+        private ICommandModuleGraph  _graph;
         
         private void Awake()
         {
@@ -60,6 +60,16 @@ namespace IM.Modules
             if (Input.GetKeyDown(KeyCode.P))
             {
                 _graph.RemoveModule(_moduleEntity.GraphEditor.Graph.Modules.LastOrDefault(x => x != _moduleEntity.GraphEditor.Graph.Modules.FirstOrDefault()));
+            }
+
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                _graph.Undo(1);
+            }
+            
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                _graph.Redo(1);
             }
         }
     }

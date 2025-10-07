@@ -9,15 +9,13 @@ namespace IM.Graphs
         private readonly List<IModule> _modules = new();
         private readonly List<IConnection> _connections = new();
 
-        public bool CanUndo => _commands.CanUndo;
-        public bool CanRedo => _commands.CanRedo;
+        public IReadOnlyList<IModule> Modules => _modules;
+        public IReadOnlyList<INode> Nodes => _modules;
+        public IReadOnlyList<IConnection> Connections => _connections;
+        public IReadOnlyList<IEdge> Edges => _connections;
+        
         public int CommandsToUndoCount => _commands.CommandsToUndoCount;
         public int CommandsToRedoCount => _commands.CommandsToRedoCount;
-
-        public IReadOnlyList<INode> Nodes => _modules;
-        public IReadOnlyList<IModule> Modules => _modules;
-        public IReadOnlyList<IEdge> Edges => _connections;
-        public IReadOnlyList<IConnection> Connections => _connections;
         
         public void AddModule(IModule module)
         {
@@ -57,6 +55,26 @@ namespace IM.Graphs
         public void Redo(int count)
         {
             _commands.Redo(count);
+        }
+
+        public bool CanUndo(int count)
+        {
+            return _commands.CanUndo(count);
+        }
+
+        public bool CanRedo(int count)
+        {
+            return _commands.CanRedo(count);
+        }
+
+        public void ClearUndoCommands()
+        {
+            _commands.ClearUndoCommands();
+        }
+
+        public void ClearRedoCommands()
+        {
+            _commands.ClearRedoCommands();
         }
     }
 }
