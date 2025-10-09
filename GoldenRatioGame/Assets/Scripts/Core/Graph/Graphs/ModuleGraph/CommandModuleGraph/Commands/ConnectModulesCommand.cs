@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using ICommand = IM.Commands.ICommand;
 
 namespace IM.Graphs
 {
-    public class ConnectModulesCommand : ICommand
+    public class ConnectModulesCommand : IConnectCommand
     {
         private readonly IModulePort _output;
         private readonly IModulePort _input;
         private readonly ICollection<IConnection> _addTo;
         private bool _isExecuted;
         
-        public Connection Connection { get; }
+        public IConnection Connection { get; }
 
         public ConnectModulesCommand(IModulePort output, IModulePort input, ICollection<IConnection>  addTo)
         {
