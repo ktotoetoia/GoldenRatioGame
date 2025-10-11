@@ -1,13 +1,13 @@
 ﻿namespace IM.Graphs
 {
-    public interface IModuleGraphEditor
+    public interface IModuleGraphEditor<out TModuleGraph> where TModuleGraph : IModuleGraph
     {
         IModuleGraphReadOnly Graph { get; }
         
         bool IsEditing { get; }
         bool CanSaveChanges { get; }
         
-        ICommandModuleGraph StartEditing();
+        TModuleGraph StartEditing();
         
         void CancelChanges();
         bool TrySaveChanges();

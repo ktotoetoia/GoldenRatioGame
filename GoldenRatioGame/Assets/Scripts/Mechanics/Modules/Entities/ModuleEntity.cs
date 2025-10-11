@@ -12,7 +12,7 @@ namespace IM.Modules
         [SerializeField] private CappedValue<float> _floatHealth;
 
         public GameObject GameObject => gameObject;
-        public IModuleGraphEditor GraphEditor { get; private set; }
+        public IModuleGraphEditor<ICommandModuleGraph> GraphEditor { get; private set; }
         public IAbilityPool AbilityPool { get; private set; }
 
         private void Awake()
@@ -29,7 +29,7 @@ namespace IM.Modules
                 new AbilityExtensionsObserver(AbilityPool as AbilityPool),
             });
             
-            GraphEditor = new ModuleGraphEditor(graph, new TrueModuleGraphValidator(), observer);
+            GraphEditor = new CommandModuleGraphEditor(graph, new TrueModuleGraphValidator(), observer);
             graph.AddModule(coreModule);
         }
     }

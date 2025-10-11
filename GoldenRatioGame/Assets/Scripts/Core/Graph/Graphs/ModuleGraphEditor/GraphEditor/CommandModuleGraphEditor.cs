@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace IM.Graphs
 {
-    public class ModuleGraphEditor : IModuleGraphEditor
+    public class CommandModuleGraphEditor : IModuleGraphEditor<ICommandModuleGraph>
     {
         private readonly ICommandModuleGraph _graph;
         private readonly IModuleGraphValidator _validator;
@@ -16,17 +16,17 @@ namespace IM.Graphs
         public IModuleGraphReadOnly Graph { get; }
 
 
-        public ModuleGraphEditor() : this(new CommandModuleGraph())
+        public CommandModuleGraphEditor() : this(new CommandModuleGraph())
         {
             
         }
         
-        public ModuleGraphEditor(ICommandModuleGraph graph) : this(graph, new TrueModuleGraphValidator(), new EmptyObserver())
+        public CommandModuleGraphEditor(ICommandModuleGraph graph) : this(graph, new TrueModuleGraphValidator(), new EmptyObserver())
         {
             
         }
 
-        public ModuleGraphEditor(ICommandModuleGraph graph, IModuleGraphValidator moduleGraphValidator, IModuleGraphObserver observer)
+        public CommandModuleGraphEditor(ICommandModuleGraph graph, IModuleGraphValidator moduleGraphValidator, IModuleGraphObserver observer)
         {
             _graph = graph ?? throw new ArgumentNullException(nameof(graph));
             _validator = moduleGraphValidator  ?? throw new ArgumentNullException(nameof(moduleGraphValidator));
