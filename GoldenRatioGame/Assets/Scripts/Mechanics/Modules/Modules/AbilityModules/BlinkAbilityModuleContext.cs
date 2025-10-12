@@ -8,12 +8,11 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class BlinkAbilityModule : Module, IExtensibleModule, IRequireEntity
+    public class BlinkAbilityModuleContext : IModuleContext, IRequireEntity
     {
         private readonly BlinkForwardAbility _blinkForwardAbility;
         private IEntity _entity;
-
-        public IReadOnlyList<IModuleExtension> Extensions { get; }
+        public IModuleContextExtensions Extensions { get; }
         
         public IEntity Entity
         {
@@ -34,21 +33,22 @@ namespace IM.Modules
             }
         }
 
-        public BlinkAbilityModule()
+        public BlinkAbilityModuleContext()
         {
-            Extensions = new List<IModuleExtension>()
+            Extensions = new ModuleContextExtensions(new IModuleExtension[]
             {
                 new AbilityExtension(_blinkForwardAbility = new BlinkForwardAbility(new FloatCooldown(1))),
                 new HealthExtension(0,100,100)
-            };
-            
-            _ports.Add(new ModulePort(this,PortDirection.Input));
-            _ports.Add(new ModulePort(this, PortDirection.Output));
+            });
         }
-        
-        public T GetExtension<T>()
+
+        public IModule Create()
         {
-            return Extensions.OfType<T>().FirstOrDefault();
+            ModuleContextWrapper module =  new ModuleContextWrapper(this);
+            module.AddPort(new ModulePort(module,PortDirection.Output));
+            module.AddPort(new ModulePort(module,PortDirection.Input));
+
+            return module;
         }
     }
 }

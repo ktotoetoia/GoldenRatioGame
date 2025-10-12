@@ -3,7 +3,7 @@ using IM.Graphs;
 
 namespace IM.Modules
 {
-    public interface IExtensibleModule : IModule
+    public interface IModuleContextExtensions
     {
         IReadOnlyList<IModuleExtension> Extensions { get; }
         

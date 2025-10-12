@@ -24,8 +24,8 @@ namespace IM.Modules
         
             foreach (IModule module in graph.Modules)
             {
-                if (module is IExtensibleModule extensible &&
-                    extensible.TryGetExtension(out IAbilityExtension abilityExt))
+                if (module is IHaveModuleContext context &&
+                    context.ModuleContext.Extensions.TryGetExtension(out IAbilityExtension abilityExt))
                 {
                     currentAbilities.Add(abilityExt.Ability);
                 }

@@ -1,34 +1,30 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using IM.Graphs;
+﻿using IM.Graphs;
 using UnityEngine;
 
 namespace IM.Modules
 {
-    public class ExtensibleModuleComponent : MonoBehaviour, IExtensibleModule
+    public class ExtensibleModuleComponent : MonoBehaviour, IModuleContext
     {
         [SerializeField] private int _inputPortCount;
         [SerializeField] private int _outputPortCount;
-        private readonly List<IModulePort> _ports = new();
-        private readonly List<IModuleExtension> _extensions = new();
         
-        public IReadOnlyList<IModuleExtension> Extensions => _extensions;
-        public IEnumerable<IEdge> Edges => _ports.Select(x => x.Connection);
-        public IEnumerable<IModulePort> Ports => _ports;
+        public IModuleContextExtensions Extensions { get; private set; }
 
         private void Awake()
         {
-            GetComponents(_extensions);
-            
-            for (int i = 0; i < _inputPortCount; i++)
-                _ports.Add(new ModulePort(this, PortDirection.Input));
-            for (int i = 0; i < _outputPortCount; i++)
-                _ports.Add(new ModulePort(this, PortDirection.Output));
+            Extensions = new ModuleContextExtensions(GetComponents<IModuleExtension>());
         }
 
-        public T GetExtension<T>()
+        public IModule Create()
         {
-            return _extensions.OfType<T>().FirstOrDefault();
+            ModuleContextWrapper module =  new ModuleContextWrapper(this);
+
+            for (int i = 0; i < _inputPortCount; i++)
+                module.AddPort(new ModulePort(module,PortDirection.Input));
+            for (int i = 0; i < _outputPortCount; i++)
+                module.AddPort(new ModulePort(module,PortDirection.Output));
+
+            return module;
         }
     }
 }

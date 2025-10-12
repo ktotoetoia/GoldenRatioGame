@@ -30,14 +30,7 @@ namespace IM.Modules
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (_moduleEntity.GraphEditor.TrySaveChanges())
-                {
-                    Debug.Log("Edit saved");
-                }
-                else
-                {
-                    Debug.Log("Save failed");
-                }
+                Debug.Log(_moduleEntity.GraphEditor.TrySaveChanges() ? "Edit saved" : "Save failed");
             }
 
             if (Input.GetKeyDown(KeyCode.R))
@@ -48,7 +41,7 @@ namespace IM.Modules
             
             if (Input.GetKeyDown(KeyCode.O))
             {
-                IModule module = Instantiate(_healthModulePrefab).GetComponent<IModule>();
+                IModule module = Instantiate(_healthModulePrefab).GetComponent<IModuleContext>().Create();
                 
                 _graph.AddModule(module);
                 _graph.Connect(

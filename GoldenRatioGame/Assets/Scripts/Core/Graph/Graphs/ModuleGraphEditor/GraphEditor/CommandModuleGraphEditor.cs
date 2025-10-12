@@ -15,7 +15,6 @@ namespace IM.Graphs
         public bool CanSaveChanges => IsEditing && _validator.IsValid(_accessModuleGraph);
         public IModuleGraphReadOnly Graph { get; }
 
-
         public CommandModuleGraphEditor() : this(new CommandModuleGraph())
         {
             

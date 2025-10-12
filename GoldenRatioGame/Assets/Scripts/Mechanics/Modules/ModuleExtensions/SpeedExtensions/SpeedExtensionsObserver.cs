@@ -24,9 +24,7 @@ namespace IM.Modules
 
             foreach (IModule module in graph.Modules)
             {
-                if (module is IExtensibleModule ext &&
-                    ext.TryGetExtension(out ISpeedExtension speedExt) &&
-                    speedExt.SpeedModifier != null)
+                if (module is IHaveModuleContext c && c.ModuleContext.Extensions.TryGetExtension(out ISpeedExtension speedExt) && speedExt.SpeedModifier != null)
                 {
                     currentSpeedModules.Add(speedExt);
                 }
