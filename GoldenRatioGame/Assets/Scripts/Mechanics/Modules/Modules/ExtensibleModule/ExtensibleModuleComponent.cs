@@ -7,24 +7,26 @@ namespace IM.Modules
     {
         [SerializeField] private int _inputPortCount;
         [SerializeField] private int _outputPortCount;
+        private IModule _module;
         
         public IModuleContextExtensions Extensions { get; private set; }
 
         private void Awake()
         {
             Extensions = new ModuleContextExtensions(GetComponents<IModuleExtension>());
-        }
-
-        public IModule Create()
-        {
+            
             ModuleContextWrapper module =  new ModuleContextWrapper(this);
 
             for (int i = 0; i < _inputPortCount; i++)
                 module.AddPort(new ModulePort(module,PortDirection.Input));
             for (int i = 0; i < _outputPortCount; i++)
                 module.AddPort(new ModulePort(module,PortDirection.Output));
+            _module = module;
+        }
 
-            return module;
+        public IModule GetModule()
+        {
+            return _module;
         }
     }
 }

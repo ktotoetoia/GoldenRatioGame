@@ -30,7 +30,7 @@ namespace IM.Modules
             });
             
             GraphEditor = new CommandModuleGraphEditor<IConditionalCommandModuleGraph>(graph,new AccessConditionalCommandModuleGraphFactory(), new TrueModuleGraphValidator(), observer);
-            graph.AddModule(coreModuleContext.Create());
+            graph.AddModule(coreModuleContext.GetModule());
         }
     }
 }

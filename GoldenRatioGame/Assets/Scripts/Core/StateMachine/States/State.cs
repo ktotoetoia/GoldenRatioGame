@@ -5,7 +5,7 @@ namespace IM.StateMachines
 {
     public class State : IState
     {
-        private List<ITransition> _transitions = new List<ITransition>();
+        private readonly List<ITransition> _transitions = new List<ITransition>();
 
         public virtual void FixedUpdate()
         {

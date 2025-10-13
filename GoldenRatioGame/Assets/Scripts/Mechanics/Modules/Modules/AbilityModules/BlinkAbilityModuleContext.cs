@@ -9,6 +9,7 @@ namespace IM.Modules
     public class BlinkAbilityModuleContext : IModuleContext, IRequireEntity
     {
         private readonly BlinkForwardAbility _blinkForwardAbility;
+        private readonly IModule _module;
         private IEntity _entity;
         public IModuleContextExtensions Extensions { get; }
         
@@ -38,15 +39,17 @@ namespace IM.Modules
                 new AbilityExtension(_blinkForwardAbility = new BlinkForwardAbility(new FloatCooldown(1))),
                 new HealthExtension(0,100,100)
             });
-        }
-
-        public IModule Create()
-        {
+            
             ModuleContextWrapper module =  new ModuleContextWrapper(this);
             module.AddPort(new ModulePort(module,PortDirection.Output));
             module.AddPort(new ModulePort(module,PortDirection.Input));
 
-            return module;
+            _module = module;
+        }
+
+        public IModule GetModule()
+        {
+            return _module;
         }
     }
 }

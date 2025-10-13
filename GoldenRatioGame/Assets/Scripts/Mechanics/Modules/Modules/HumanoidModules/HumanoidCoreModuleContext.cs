@@ -5,6 +5,8 @@ namespace IM.Modules
 {
     public sealed class HumanoidCoreModuleContext : IModuleContext
     {
+        private readonly IModule _module;
+        
         public IModuleContextExtensions Extensions { get; }
         
         public HumanoidCoreModuleContext(float maxHealth, float currentHealth) : this(new CappedValue<float>(0,maxHealth,currentHealth))
@@ -19,18 +21,21 @@ namespace IM.Modules
                 new HealthExtension(health) ,
                 new SpeedExtension(new SpeedModifier(1f)),
             });
+            
+            ModuleContextWrapper module =  new ModuleContextWrapper(this);
+            
+            module.AddPort(new ModulePort(module,PortDirection.Output));
+            module.AddPort(new ModulePort(module,PortDirection.Output));
+            module.AddPort(new ModulePort(module,PortDirection.Output));
+            module.AddPort(new ModulePort(module,PortDirection.Output));
+            module.AddPort(new ModulePort(module,PortDirection.Output));
+            
+            _module = module;
         }
 
-        public IModule Create()
+        public IModule GetModule()
         {
-            ModuleContextWrapper module =  new ModuleContextWrapper(this);
-            module.AddPort(new ModulePort(module,PortDirection.Output));
-            module.AddPort(new ModulePort(module,PortDirection.Output));
-            module.AddPort(new ModulePort(module,PortDirection.Output));
-            module.AddPort(new ModulePort(module,PortDirection.Output));
-            module.AddPort(new ModulePort(module,PortDirection.Output));
-
-            return module;
+            return _module;
         }
     }
 }

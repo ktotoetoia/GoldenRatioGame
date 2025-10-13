@@ -4,7 +4,7 @@ namespace IM.StateMachines
 {
     public class Transition : ITransition
     {
-        private Func<bool> _condition;
+        private readonly Func<bool> _condition;
 
         public IState From { get; private set; }
         public IState To { get; private set; }

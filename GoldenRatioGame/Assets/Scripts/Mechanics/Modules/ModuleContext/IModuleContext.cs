@@ -3,8 +3,9 @@ using IM.Graphs;
 
 namespace IM.Modules
 {
-    public interface IModuleContext : IFactory<IModule>
+    public interface IModuleContext
     {
         IModuleContextExtensions Extensions { get; }
+        IModule GetModule();
     }
 }

@@ -41,7 +41,7 @@ namespace IM.Modules
             
             if (Input.GetKeyDown(KeyCode.O))
             {
-                IModule module = Instantiate(_healthModulePrefab).GetComponent<IModuleContext>().Create();
+                IModule module = Instantiate(_healthModulePrefab).GetComponent<IModuleContext>().GetModule();
                 
                 _graph.AddAndConnect(module,
                     module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input),
