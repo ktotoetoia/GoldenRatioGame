@@ -1,78 +1,84 @@
 ﻿using System;
-using UnityEngine;
+using IM.Base;
 
 namespace IM.Graphs
 {
-    public class CommandModuleGraphEditor : IModuleGraphEditor<ICommandModuleGraph>
+    public class CommandModuleGraphEditor<TGraph> : IModuleGraphEditor<TGraph>
+        where TGraph : class, ICommandModuleGraph
     {
-        private readonly ICommandModuleGraph _graph;
+        private readonly TGraph _graph;
         private readonly IModuleGraphValidator _validator;
         private readonly IModuleGraphObserver _observer;
-        private IAccessCommandModuleGraph _accessModuleGraph;
+        private readonly IFactory<IModuleGraphAccess, TGraph> _accessGraphFactory;
+
+        private IModuleGraphAccess _accessModuleGraph;
         private int _undoIndexAtEditStart;
 
         public bool IsEditing => _accessModuleGraph != null;
-        public bool CanSaveChanges => IsEditing && _validator.IsValid(_accessModuleGraph);
+        public bool CanSaveChanges => IsEditing && _validator.IsValid(Graph);
         public IModuleGraphReadOnly Graph { get; }
-
-        public CommandModuleGraphEditor() : this(new CommandModuleGraph())
-        {
-            
-        }
         
-        public CommandModuleGraphEditor(ICommandModuleGraph graph) : this(graph, new TrueModuleGraphValidator(), new EmptyObserver())
+        public CommandModuleGraphEditor(TGraph graph, IFactory<IModuleGraphAccess, TGraph> accessGraphFactory)
+            : this(graph, accessGraphFactory, new TrueModuleGraphValidator(), new EmptyObserver())
         {
             
         }
 
-        public CommandModuleGraphEditor(ICommandModuleGraph graph, IModuleGraphValidator moduleGraphValidator, IModuleGraphObserver observer)
+        public CommandModuleGraphEditor(
+            TGraph graph,
+            IFactory<IModuleGraphAccess, TGraph> accessGraphFactory,
+            IModuleGraphValidator validator,
+            IModuleGraphObserver observer
+            )
         {
             _graph = graph ?? throw new ArgumentNullException(nameof(graph));
-            _validator = moduleGraphValidator  ?? throw new ArgumentNullException(nameof(moduleGraphValidator));
-            _observer = observer;
-            
+            _validator = validator ?? throw new ArgumentNullException(nameof(validator));
+            _observer = observer ?? throw new ArgumentNullException(nameof(observer));
+            _accessGraphFactory = accessGraphFactory ?? throw new ArgumentNullException(nameof(accessGraphFactory));
+
             Graph = new ModuleGraphReadOnlyWrapper(_graph);
         }
-        
-        public ICommandModuleGraph StartEditing()
+
+        public TGraph StartEditing()
         {
-            if (IsEditing) throw new InvalidOperationException("Graph is already being edited");
+            if (IsEditing)
+                throw new InvalidOperationException("Graph is already being edited.");
 
             _undoIndexAtEditStart = _graph.CommandsToUndoCount;
+            _accessModuleGraph = _accessGraphFactory.Create(_graph);
             
-            return _accessModuleGraph = new AccessCommandModuleGraph(_graph) {CanUse = true, ThrowIfCantUse = true};
+            return (TGraph)_accessModuleGraph;
         }
 
         public void CancelChanges()
         {
-            if(!IsEditing) throw new InvalidOperationException("Graph is not being edited");
-            
+            if (!IsEditing)
+                throw new InvalidOperationException("Graph is not being edited.");
+
             _graph.Undo(_graph.CommandsToUndoCount - _undoIndexAtEditStart);
-            
             EndEditing();
         }
 
         public bool TrySaveChanges()
         {
-            if(!IsEditing) throw new InvalidOperationException("Graph is not being edited");
+            if (!IsEditing)
+                throw new InvalidOperationException("Graph is not being edited.");
 
-            if (CanSaveChanges || _validator.TryFix(_accessModuleGraph))
+            if (CanSaveChanges || _validator.TryFix(_graph))
             {
                 EndEditing();
-
                 _observer.Update(Graph);
-                
                 return true;
             }
 
             return false;
         }
-        
+
         private void EndEditing()
         {
             _accessModuleGraph.CanUse = false;
             _accessModuleGraph = null;
-            
+
             if (_graph is CommandModuleGraph cmd)
             {
                 cmd.ClearUndoCommands();

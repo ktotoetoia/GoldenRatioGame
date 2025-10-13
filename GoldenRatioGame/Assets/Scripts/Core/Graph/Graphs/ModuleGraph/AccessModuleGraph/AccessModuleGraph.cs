@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace IM.Graphs
 {
-    public class AccessModuleGraph : IAccessModuleGraph
+    public class AccessModuleGraph : IModuleGraphAccess, IModuleGraph
     {
         private readonly IModuleGraph _graph;
         public IReadOnlyList<INode> Nodes => _graph.Nodes;
@@ -29,6 +29,12 @@ namespace IM.Graphs
             if(!TryUse()) return;
             
             _graph.AddModule(module);
+        }
+
+        public void AddAndConnect(IModule module, IModulePort ownerPort, IModulePort targetPort)
+        {
+            if(!TryUse()) return;
+            _graph.AddAndConnect(module, ownerPort, targetPort);
         }
 
         public void RemoveModule(IModule module)

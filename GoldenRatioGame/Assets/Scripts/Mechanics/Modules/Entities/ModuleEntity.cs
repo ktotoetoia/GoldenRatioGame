@@ -12,14 +12,14 @@ namespace IM.Modules
         [SerializeField] private CappedValue<float> _floatHealth;
 
         public GameObject GameObject => gameObject;
-        public IModuleGraphEditor<ICommandModuleGraph> GraphEditor { get; private set; }
+        public IModuleGraphEditor<IConditionalCommandModuleGraph> GraphEditor { get; private set; }
         public IAbilityPool AbilityPool { get; private set; }
 
         private void Awake()
         {
             HumanoidCoreModuleContext coreModuleContext = new HumanoidCoreModuleContext(_floatHealth);
             AbilityPool = new AbilityPool();
-            CommandModuleGraph graph = new CommandModuleGraph();
+            ConditionalCommandModuleGraph graph = new ConditionalCommandModuleGraph();
             
             CompositeObserver observer = new CompositeObserver(new List<IModuleGraphObserver>()
             {
@@ -29,7 +29,7 @@ namespace IM.Modules
                 new AbilityExtensionsObserver(AbilityPool as AbilityPool),
             });
             
-            GraphEditor = new CommandModuleGraphEditor(graph, new TrueModuleGraphValidator(), observer);
+            GraphEditor = new CommandModuleGraphEditor<IConditionalCommandModuleGraph>(graph,new AccessConditionalCommandModuleGraphFactory(), new TrueModuleGraphValidator(), observer);
             graph.AddModule(coreModuleContext.Create());
         }
     }

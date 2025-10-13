@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using IM.Values;
+﻿using IM.Values;
 using IM.Graphs;
 
 namespace IM.Modules

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using IM.Base;
 using IM.Commands;
 
 namespace IM.Graphs
@@ -8,10 +9,10 @@ namespace IM.Graphs
         private readonly CommandStack _commands = new();
         private readonly List<IModule> _modules = new();
         private readonly List<IConnection> _connections = new();
-        private readonly IAddModuleCommandFactory _addModuleCommandFactory;
-        private readonly IRemoveModuleCommandFactory _removeModuleCommandFactory;
-        private readonly IConnectCommandFactory _connectCommandFactory;
-        private readonly IDisconnectCommandFactory _disconnectCommandFactory;
+        private readonly IFactory<ICommand, IModule, ICollection<IModule>> _addModuleCommandFactory;
+        private readonly IFactory<ICommand, IModule, ICollection<IModule>, ICollection<IConnection>> _removeModuleCommandFactory;
+        private readonly IFactory<IConnectCommand, IModulePort, IModulePort, ICollection<IConnection>> _connectCommandFactory;
+        private readonly IFactory<ICommand, IConnection, ICollection<IConnection>> _disconnectCommandFactory;
 
         public IReadOnlyList<IModule> Modules => _modules;
         public IReadOnlyList<INode> Nodes => _modules;
@@ -26,10 +27,10 @@ namespace IM.Graphs
         }
 
         public CommandModuleGraph(
-            IAddModuleCommandFactory addModuleCommandFactory,
-            IRemoveModuleCommandFactory removeModuleCommandFactory,
-            IConnectCommandFactory connectCommandFactory,
-            IDisconnectCommandFactory disconnectCommandFactory)
+            IFactory<ICommand, IModule, ICollection<IModule>> addModuleCommandFactory,
+            IFactory<ICommand, IModule, ICollection<IModule>, ICollection<IConnection>> removeModuleCommandFactory,
+            IFactory<IConnectCommand, IModulePort, IModulePort, ICollection<IConnection>> connectCommandFactory,
+            IFactory<ICommand, IConnection, ICollection<IConnection>> disconnectCommandFactory)
         {
             _addModuleCommandFactory = addModuleCommandFactory;
             _removeModuleCommandFactory = removeModuleCommandFactory;
@@ -62,9 +63,21 @@ namespace IM.Graphs
             ICommand command = _disconnectCommandFactory.Create(connection, _connections);
             _commands.ExecuteAndPush(command);
         }
+        
+        public void AddAndConnect(IModule module, IModulePort ownerPort, IModulePort targetPort)
+        {
+            ICommand command = new CompositeCommand(new List<ICommand>
+            {
+                _addModuleCommandFactory.Create(module, _modules),
+                _connectCommandFactory.Create(ownerPort, targetPort, _connections)
+            });
+            
+            _commands.ExecuteAndPush(command);
+        }
 
         public void Undo(int count) => _commands.Undo(count);
         public void Redo(int count) => _commands.Redo(count);
+
         public bool CanUndo(int count) => _commands.CanUndo(count);
         public bool CanRedo(int count) => _commands.CanRedo(count);
         public void ClearUndoCommands() => _commands.ClearUndoCommands();

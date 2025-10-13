@@ -1,6 +1,6 @@
 ﻿namespace IM.Graphs
 {
-    public interface IAccessModuleGraph : IModuleGraph
+    public interface IModuleGraphAccess
     {
         bool CanUse { get; set; }
     }

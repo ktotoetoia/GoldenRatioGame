@@ -63,6 +63,12 @@ namespace IM.Graphs
                 _graph.Redo(count);
         }
 
+        public void AddAndConnect(IModule module, IModulePort ownerPort, IModulePort targetPort)
+        {
+            if (!TryUse()) return;
+            _graph.AddAndConnect(module, ownerPort, targetPort);
+        }
+
         private bool TryUse()
         {
             if (!CanUse && ThrowIfCantUse)

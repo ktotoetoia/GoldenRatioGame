@@ -6,7 +6,7 @@ namespace IM.Modules
 {
     public interface IModuleEntity : IEntity
     {
-        IModuleGraphEditor<ICommandModuleGraph> GraphEditor { get; }
+        IModuleGraphEditor<IConditionalCommandModuleGraph> GraphEditor { get; }
         IAbilityPool AbilityPool { get; }
     }
 }

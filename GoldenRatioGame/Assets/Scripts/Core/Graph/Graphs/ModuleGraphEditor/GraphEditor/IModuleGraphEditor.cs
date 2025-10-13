@@ -1,6 +1,6 @@
 ﻿namespace IM.Graphs
 {
-    public interface IModuleGraphEditor<out TModuleGraph> where TModuleGraph : IModuleGraph
+    public interface IModuleGraphEditor<out TModuleGraph> where TModuleGraph : IModuleGraphReadOnly
     {
         IModuleGraphReadOnly Graph { get; }
         

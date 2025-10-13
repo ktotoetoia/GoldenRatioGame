@@ -35,7 +35,7 @@ namespace IM.Modules
 
             if (Input.GetKeyDown(KeyCode.R))
             {
-                _moduleEntity.GraphEditor.CancelChanges();;
+                _moduleEntity.GraphEditor.CancelChanges();
                 Debug.Log("Changes Cancelled");
             }
             
@@ -43,8 +43,7 @@ namespace IM.Modules
             {
                 IModule module = Instantiate(_healthModulePrefab).GetComponent<IModuleContext>().Create();
                 
-                _graph.AddModule(module);
-                _graph.Connect(
+                _graph.AddAndConnect(module,
                     module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input),
                     _moduleEntity.GraphEditor.Graph.Modules.FirstOrDefault()?.Ports
                         .FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Output));
