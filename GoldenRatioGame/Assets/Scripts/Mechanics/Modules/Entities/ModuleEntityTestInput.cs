@@ -11,7 +11,7 @@ namespace IM.Modules
         [SerializeField] private ModuleEntity _moduleEntity;
         [SerializeField] private GameObject _healthModulePrefab;
         private PreferredKeyboardBindingsAbilityUser _abilityUser;
-        private ICommandModuleGraph  _graph;
+        private IConditionalCommandModuleGraph  _graph;
         
         private void Awake()
         {
@@ -41,12 +41,12 @@ namespace IM.Modules
             
             if (Input.GetKeyDown(KeyCode.O))
             {
-                IModule module = Instantiate(_healthModulePrefab).GetComponent<IModuleContext>().GetModule();
+                IModule module = Instantiate(_healthModulePrefab).GetComponent<IGameModule>();
                 
                 _graph.AddAndConnect(module,
-                    module.Ports.FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Input),
-                    _moduleEntity.GraphEditor.Graph.Modules.FirstOrDefault()?.Ports
-                        .FirstOrDefault(x => !x.IsConnected && x.Direction == PortDirection.Output));
+                    module.Ports.FirstOrDefault(x => !x.IsConnected),
+                    _graph.Modules.FirstOrDefault()?.Ports
+                        .FirstOrDefault(x => !x.IsConnected));
             }
 
             if (Input.GetKeyDown(KeyCode.P))

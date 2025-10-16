@@ -5,12 +5,10 @@
         public IModule Module { get; }
         public IConnection Connection { get; private set; }
         public bool IsConnected => Connection != null;
-        public PortDirection Direction { get; }
 
-        public ModulePort(IModule module, PortDirection direction)
+        public ModulePort(IModule module)
         {
             Module = module;
-            Direction = direction;
         }
 
         public void Connect(IConnection connection)

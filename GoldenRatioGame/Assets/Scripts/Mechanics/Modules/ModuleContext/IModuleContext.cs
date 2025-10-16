@@ -1,11 +1,10 @@
-﻿using IM.Base;
-using IM.Graphs;
+﻿using IM.Graphs;
 
 namespace IM.Modules
 {
-    public interface IModuleContext
+    public interface IGameModule : IModule
     {
+        IModuleLayout Layout { get; }
         IModuleContextExtensions Extensions { get; }
-        IModule GetModule();
     }
 }

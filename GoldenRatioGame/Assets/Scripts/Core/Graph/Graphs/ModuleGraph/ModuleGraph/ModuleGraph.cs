@@ -58,8 +58,6 @@ namespace IM.Graphs
             if(output.IsConnected || input.IsConnected)
                 throw new ArgumentException("Port is already connected.");
             
-            (output, input) = FixPorts(output, input);
-            
             Connection connection =  new Connection(output, input);
 
             input.Connect(connection);
@@ -95,11 +93,6 @@ namespace IM.Graphs
             {
                 RemoveModule(module);
             }
-        }
-        
-        private (IModulePort, IModulePort) FixPorts(IModulePort output, IModulePort input)
-        {
-            return output.Direction == PortDirection.Input ? (input, output) : (output, input);
         }
     }
 }

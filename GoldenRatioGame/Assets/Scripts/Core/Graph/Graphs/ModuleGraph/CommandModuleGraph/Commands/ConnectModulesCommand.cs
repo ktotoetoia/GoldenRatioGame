@@ -17,10 +17,8 @@ namespace IM.Graphs
             _output = output ?? throw new ArgumentNullException(nameof(output));
             _input = input ?? throw new ArgumentNullException(nameof(input));
             _addTo = addTo ?? throw new ArgumentNullException(nameof(addTo));
-            (output, input) = FixPorts(output, input);
             Connection = new Connection(output, input);
             
-            if(output.Direction == input.Direction) throw new InvalidOperationException("ports must have different directions");
             if(output.Module == input.Module)
                 throw new ArgumentException("Cannot connect ports of the same module.");
             if(output.IsConnected || input.IsConnected)
@@ -47,11 +45,6 @@ namespace IM.Graphs
             _addTo.Remove(Connection);
             
             _isExecuted = false;
-        }
-        
-        private (IModulePort, IModulePort) FixPorts(IModulePort output, IModulePort input)
-        {
-            return output.Direction == PortDirection.Input ? (input, output) : (output, input);
         }
     }
 }

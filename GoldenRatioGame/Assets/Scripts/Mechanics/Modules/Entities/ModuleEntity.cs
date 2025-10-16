@@ -17,7 +17,7 @@ namespace IM.Modules
 
         private void Awake()
         {
-            HumanoidCoreModuleContext coreModuleContext = new HumanoidCoreModuleContext(_floatHealth);
+            HumanoidCoreModule coreModule = new HumanoidCoreModule(_floatHealth);
             AbilityPool = new AbilityPool();
             ConditionalCommandModuleGraph graph = new ConditionalCommandModuleGraph();
             
@@ -30,7 +30,7 @@ namespace IM.Modules
             });
             
             GraphEditor = new CommandModuleGraphEditor<IConditionalCommandModuleGraph>(graph,new AccessConditionalCommandModuleGraphFactory(), new TrueModuleGraphValidator(), observer);
-            graph.AddModule(coreModuleContext.GetModule());
+            graph.AddModule(coreModule);
         }
     }
 }

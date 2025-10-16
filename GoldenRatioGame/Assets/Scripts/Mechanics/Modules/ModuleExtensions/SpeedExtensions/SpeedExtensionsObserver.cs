@@ -24,7 +24,7 @@ namespace IM.Modules
 
             foreach (IModule module in graph.Modules)
             {
-                if (module is IHaveModuleContext c && c.ModuleContext.Extensions.TryGetExtension(out ISpeedExtension speedExt) && speedExt.SpeedModifier != null)
+                if (module is IGameModule gameModule && gameModule.Extensions.TryGetExtension(out ISpeedExtension speedExt) && speedExt.SpeedModifier != null)
                 {
                     currentSpeedModules.Add(speedExt);
                 }
