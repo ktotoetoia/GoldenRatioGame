@@ -9,6 +9,7 @@ namespace IM.Modules
 {
     public class ModuleEntity : MonoBehaviour, IModuleEntity
     {
+        [SerializeField] private GameObject _coreModulePrefab;
         [SerializeField] private CappedValue<float> _floatHealth;
 
         public GameObject GameObject => gameObject;
@@ -17,7 +18,7 @@ namespace IM.Modules
 
         private void Awake()
         {
-            HumanoidCoreModule coreModule = new HumanoidCoreModule(_floatHealth);
+            IModule coreModule = Instantiate(_coreModulePrefab).GetComponent<IModule>();
             AbilityPool = new AbilityPool();
             ConditionalCommandModuleGraph graph = new ConditionalCommandModuleGraph();
             

@@ -28,16 +28,6 @@ namespace IM.Graphs
             _graph = graph ?? throw new ArgumentNullException(nameof(graph));
         }
 
-        private bool TryUse()
-        {
-            if (CanUse) return true;
-
-            if (ThrowIfCantUse)
-                throw new InvalidOperationException("Graph access denied (CanUse = false).");
-
-            return false;
-        }
-
         public void AddModule(IModule module)
         {
             if (!TryUse()) return;
@@ -88,5 +78,15 @@ namespace IM.Graphs
         public bool CanDisconnect(IConnection connection) => _graph.CanDisconnect(connection);
         public bool CanAddAndConnect(IModule module, IModulePort ownerPort, IModulePort targetPort)
             => _graph.CanAddAndConnect(module, ownerPort, targetPort);
+
+        private bool TryUse()
+        {
+            if (CanUse) return true;
+
+            if (ThrowIfCantUse)
+                throw new InvalidOperationException("Graph access denied (CanUse = false).");
+
+            return false;
+        }
     }
 }
