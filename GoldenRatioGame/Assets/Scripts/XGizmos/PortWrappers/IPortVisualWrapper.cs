@@ -4,7 +4,7 @@ namespace IM.ModuleGraphGizmosDebug
 {
     public interface IPortVisualWrapper
     {
-        IModulePort Port { get;  }
+        IPort Port { get;  }
         IVisual Visual { get;  }
     }
 }

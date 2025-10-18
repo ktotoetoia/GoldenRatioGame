@@ -3,9 +3,9 @@
     public interface IModuleGraph : IModuleGraphReadOnly
     {
         void AddModule(IModule module);
-        void AddAndConnect(IModule module, IModulePort ownerPort, IModulePort targetPort);
+        void AddAndConnect(IModule module, IPort ownerPort, IPort targetPort);
         void RemoveModule(IModule module);
-        IConnection Connect(IModulePort output, IModulePort input);
+        IConnection Connect(IPort output, IPort input);
         void Disconnect(IConnection connection);
     }
 }

@@ -7,7 +7,7 @@ namespace IM.ModuleGraphGizmosDebug
 {
     public class ModuleWrapper : IModuleVisualWrapper
     {
-        private readonly EnumerableWrapper<IModulePort, IPortVisualWrapper> _ports;
+        private readonly EnumerableWrapper<IPort, IPortVisualWrapper> _ports;
         private const float _portRadius = 0.2f;
         
         public IModule Module { get; }
@@ -26,7 +26,7 @@ namespace IM.ModuleGraphGizmosDebug
         {
             Module = module;
             Visual = visual;
-            _ports= new EnumerableWrapper<IModulePort, IPortVisualWrapper>(Module.Ports,new PortWrapperFactory(Visual.Position, _portRadius));
+            _ports= new EnumerableWrapper<IPort, IPortVisualWrapper>(Module.Ports,new PortWrapperFactory(Visual.Position, _portRadius));
         }
 
         private void ArrangePorts()

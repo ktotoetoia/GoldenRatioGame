@@ -4,7 +4,7 @@ namespace IM.Graphs
 {
     public static class ConnectionExtensions
     {
-        public static IModulePort GetOther(this IConnection connection, IModulePort port)
+        public static IPort GetOther(this IConnection connection, IPort port)
         {
             if (connection.Input == port) return connection.Output;
             if (connection.Output == port) return connection.Input;

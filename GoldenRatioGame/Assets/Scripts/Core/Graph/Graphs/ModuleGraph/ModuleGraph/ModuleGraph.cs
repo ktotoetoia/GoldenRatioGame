@@ -26,7 +26,7 @@ namespace IM.Graphs
             _modules.Add(module);
         }
 
-        public void AddAndConnect(IModule module, IModulePort ownerPort, IModulePort targetPort)
+        public void AddAndConnect(IModule module, IPort ownerPort, IPort targetPort)
         {
             AddModule(module);
             Connect(ownerPort, targetPort);
@@ -47,7 +47,7 @@ namespace IM.Graphs
             }
         }
         
-        public IConnection Connect(IModulePort output, IModulePort input)
+        public IConnection Connect(IPort output, IPort input)
         {
             if (output == null) throw new ArgumentNullException(nameof(output));
             if (input == null) throw new ArgumentNullException(nameof(input));

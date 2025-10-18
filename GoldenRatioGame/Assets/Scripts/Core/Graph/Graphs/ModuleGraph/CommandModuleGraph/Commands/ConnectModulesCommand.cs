@@ -5,14 +5,14 @@ namespace IM.Graphs
 {
     public class ConnectModulesCommand : IConnectCommand
     {
-        private readonly IModulePort _output;
-        private readonly IModulePort _input;
+        private readonly IPort _output;
+        private readonly IPort _input;
         private readonly ICollection<IConnection> _addTo;
         private bool _isExecuted;
         
         public IConnection Connection { get; }
 
-        public ConnectModulesCommand(IModulePort output, IModulePort input, ICollection<IConnection>  addTo)
+        public ConnectModulesCommand(IPort output, IPort input, ICollection<IConnection>  addTo)
         {
             _output = output ?? throw new ArgumentNullException(nameof(output));
             _input = input ?? throw new ArgumentNullException(nameof(input));

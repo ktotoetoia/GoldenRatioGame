@@ -2,7 +2,7 @@
 
 namespace IM.Modules
 {
-    public interface IModuleContextExtensions
+    public interface IModuleExtensions
     {
         IReadOnlyList<IModuleExtension> Extensions { get; }
         

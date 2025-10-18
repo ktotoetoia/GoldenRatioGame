@@ -26,7 +26,7 @@ namespace IM.Graphs
             
             List<ICommand> commands = new List<ICommand>();
             
-            foreach (IModulePort port in _module.Ports.Where(x => x.IsConnected))
+            foreach (IPort port in _module.Ports.Where(x => x.IsConnected))
             {
                 commands.Add(new DisconnectModulesCommand(port.Connection,_connections));
             }

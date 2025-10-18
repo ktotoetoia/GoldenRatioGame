@@ -40,7 +40,7 @@ namespace IM.Graphs
             _graph.RemoveModule(module);
         }
 
-        public IConnection Connect(IModulePort output, IModulePort input)
+        public IConnection Connect(IPort output, IPort input)
         {
             if (!TryUse()) return null;
             return _graph.Connect(output, input);
@@ -52,7 +52,7 @@ namespace IM.Graphs
             _graph.Disconnect(connection);
         }
 
-        public void AddAndConnect(IModule module, IModulePort ownerPort, IModulePort targetPort)
+        public void AddAndConnect(IModule module, IPort ownerPort, IPort targetPort)
         {
             if (!TryUse()) return;
             _graph.AddAndConnect(module, ownerPort, targetPort);
@@ -74,9 +74,9 @@ namespace IM.Graphs
         public bool CanRedo(int count) => _graph.CanRedo(count);
         public bool CanAddModule(IModule module) => _graph.CanAddModule(module);
         public bool CanRemoveModule(IModule module) => _graph.CanRemoveModule(module);
-        public bool CanConnect(IModulePort output, IModulePort input) => _graph.CanConnect(output, input);
+        public bool CanConnect(IPort output, IPort input) => _graph.CanConnect(output, input);
         public bool CanDisconnect(IConnection connection) => _graph.CanDisconnect(connection);
-        public bool CanAddAndConnect(IModule module, IModulePort ownerPort, IModulePort targetPort)
+        public bool CanAddAndConnect(IModule module, IPort ownerPort, IPort targetPort)
             => _graph.CanAddAndConnect(module, ownerPort, targetPort);
 
         private bool TryUse()

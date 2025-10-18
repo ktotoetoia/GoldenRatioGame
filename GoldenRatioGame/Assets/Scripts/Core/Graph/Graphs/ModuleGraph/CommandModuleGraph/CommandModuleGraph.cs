@@ -11,7 +11,7 @@ namespace IM.Graphs
         private readonly List<IConnection> _connections = new();
         private readonly IFactory<ICommand, IModule, ICollection<IModule>> _addModuleCommandFactory;
         private readonly IFactory<ICommand, IModule, ICollection<IModule>, ICollection<IConnection>> _removeModuleCommandFactory;
-        private readonly IFactory<IConnectCommand, IModulePort, IModulePort, ICollection<IConnection>> _connectCommandFactory;
+        private readonly IFactory<IConnectCommand, IPort, IPort, ICollection<IConnection>> _connectCommandFactory;
         private readonly IFactory<ICommand, IConnection, ICollection<IConnection>> _disconnectCommandFactory;
 
         public IReadOnlyList<IModule> Modules => _modules;
@@ -29,7 +29,7 @@ namespace IM.Graphs
         public CommandModuleGraph(
             IFactory<ICommand, IModule, ICollection<IModule>> addModuleCommandFactory,
             IFactory<ICommand, IModule, ICollection<IModule>, ICollection<IConnection>> removeModuleCommandFactory,
-            IFactory<IConnectCommand, IModulePort, IModulePort, ICollection<IConnection>> connectCommandFactory,
+            IFactory<IConnectCommand, IPort, IPort, ICollection<IConnection>> connectCommandFactory,
             IFactory<ICommand, IConnection, ICollection<IConnection>> disconnectCommandFactory)
         {
             _addModuleCommandFactory = addModuleCommandFactory;
@@ -50,7 +50,7 @@ namespace IM.Graphs
             _commands.ExecuteAndPush(command);
         }
 
-        public IConnection Connect(IModulePort output, IModulePort input)
+        public IConnection Connect(IPort output, IPort input)
         {
             IConnectCommand command = _connectCommandFactory.Create(output, input, _connections);
             _commands.ExecuteAndPush(command);
@@ -64,7 +64,7 @@ namespace IM.Graphs
             _commands.ExecuteAndPush(command);
         }
         
-        public void AddAndConnect(IModule module, IModulePort ownerPort, IModulePort targetPort)
+        public void AddAndConnect(IModule module, IPort ownerPort, IPort targetPort)
         {
             ICommand command = new CompositeCommand(new List<ICommand>
             {

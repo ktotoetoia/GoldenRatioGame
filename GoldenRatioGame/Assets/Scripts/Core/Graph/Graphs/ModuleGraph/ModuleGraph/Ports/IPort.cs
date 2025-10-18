@@ -1,6 +1,6 @@
 ﻿namespace IM.Graphs
 {
-    public interface IModulePort
+    public interface IPort
     {
         IModule Module { get; }
         IConnection Connection { get; }

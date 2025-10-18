@@ -4,6 +4,6 @@ namespace IM.Graphs
 {
     public interface IModule : INode
     {
-        IEnumerable<IModulePort> Ports { get; }
+        IEnumerable<IPort> Ports { get; }
     }
 }

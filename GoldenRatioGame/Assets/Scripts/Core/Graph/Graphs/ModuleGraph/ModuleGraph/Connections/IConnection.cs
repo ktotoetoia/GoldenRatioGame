@@ -2,7 +2,7 @@
 {
     public interface IConnection : IEdge
     {
-        IModulePort Input { get; }
-        IModulePort Output { get; }
+        IPort Input { get; }
+        IPort Output { get; }
     }
 }

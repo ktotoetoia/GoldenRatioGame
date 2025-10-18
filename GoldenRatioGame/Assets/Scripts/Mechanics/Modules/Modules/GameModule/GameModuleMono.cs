@@ -5,22 +5,24 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class GameModuleComponent : MonoBehaviour, IGameModule
+    public class GameModuleMono : MonoBehaviour, IGameModule
     {
         [SerializeField] private int _portCount;
-        private readonly List<IModulePort>  _ports = new();
+        private readonly List<IPort>  _ports = new();
         
         public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection).ToList();
-        public IEnumerable<IModulePort> Ports => _ports;
+        public IEnumerable<IPort> Ports => _ports;
         public IModuleLayout Layout { get; private set; }
-        public IModuleContextExtensions Extensions { get; private set; }
+        public IModuleExtensions Extensions { get; private set; }
         
         private void Awake()
         {
-            Extensions = GetComponent<IModuleContextExtensions>();
+            Extensions = GetComponent<IModuleExtensions>();
             
             for (int i = 0; i < _portCount; i++)
-                _ports.Add(new ModulePort(this));
+                _ports.Add(new Port(this));
+            
+            Layout = new DefaultModuleLayout(_ports);
         }
     }
 }

@@ -2,13 +2,13 @@
 {
     public class Connection : IConnection
     {
-        public IModulePort Input { get; private set; }
-        public IModulePort Output { get; private set; }
+        public IPort Input { get; private set; }
+        public IPort Output { get; private set; }
 
         public INode From => Input.Module;
         public INode To => Output.Module;
         
-        public Connection(IModulePort from, IModulePort to)
+        public Connection(IPort from, IPort to)
         {
             Input = from;
             Output = to;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class ModuleContextExtensionsMono : MonoBehaviour, IModuleContextExtensions
+    public class ModuleExtensionsMono : MonoBehaviour, IModuleExtensions
     {
         private readonly List<IModuleExtension> _extensions = new();
 

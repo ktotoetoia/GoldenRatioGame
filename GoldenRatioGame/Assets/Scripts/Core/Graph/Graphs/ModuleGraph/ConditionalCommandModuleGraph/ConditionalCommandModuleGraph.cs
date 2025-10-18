@@ -44,7 +44,7 @@ namespace IM.Graphs
             _graph.RemoveModule(module);
         }
 
-        public IConnection Connect(IModulePort output, IModulePort input)
+        public IConnection Connect(IPort output, IPort input)
         {
             if (!_conditions.CanConnect(output, input))
                 throw new InvalidOperationException("Cannot connect modules (condition failed).");
@@ -60,7 +60,7 @@ namespace IM.Graphs
             _graph.Disconnect(connection);
         }
 
-        public void AddAndConnect(IModule module, IModulePort ownerPort, IModulePort targetPort)
+        public void AddAndConnect(IModule module, IPort ownerPort, IPort targetPort)
         {
             if (!_conditions.CanAddAndConnect(module, ownerPort, targetPort))
                 throw new InvalidOperationException("Cannot add and connect module (condition failed).");
@@ -70,9 +70,9 @@ namespace IM.Graphs
         
         public bool CanAddModule(IModule module) => _conditions.CanAddModule(module);
         public bool CanRemoveModule(IModule module) => _conditions.CanRemoveModule(module);
-        public bool CanConnect(IModulePort output, IModulePort input) => _conditions.CanConnect(output, input);
+        public bool CanConnect(IPort output, IPort input) => _conditions.CanConnect(output, input);
         public bool CanDisconnect(IConnection connection) => _conditions.CanDisconnect(connection);
-        public bool CanAddAndConnect(IModule module, IModulePort ownerPort, IModulePort targetPort)
+        public bool CanAddAndConnect(IModule module, IPort ownerPort, IPort targetPort)
             => _conditions.CanAddAndConnect(module, ownerPort, targetPort);
         public bool CanUndo(int count) => _graph.CanUndo(count);
         public bool CanRedo(int count) => _graph.CanRedo(count);

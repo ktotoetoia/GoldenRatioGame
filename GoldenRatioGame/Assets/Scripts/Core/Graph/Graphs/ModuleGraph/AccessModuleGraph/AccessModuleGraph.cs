@@ -31,7 +31,7 @@ namespace IM.Graphs
             _graph.AddModule(module);
         }
 
-        public void AddAndConnect(IModule module, IModulePort ownerPort, IModulePort targetPort)
+        public void AddAndConnect(IModule module, IPort ownerPort, IPort targetPort)
         {
             if(!TryUse()) return;
             _graph.AddAndConnect(module, ownerPort, targetPort);
@@ -44,7 +44,7 @@ namespace IM.Graphs
             _graph.RemoveModule(module);
         }
 
-        public IConnection Connect(IModulePort output, IModulePort input)
+        public IConnection Connect(IPort output, IPort input)
         {
             if(!TryUse()) return null;
             

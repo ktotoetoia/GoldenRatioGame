@@ -19,7 +19,7 @@
             return _condition;
         }
 
-        public bool CanConnect(IModulePort output, IModulePort input)
+        public bool CanConnect(IPort output, IPort input)
         {
             return _condition;
         }
@@ -29,7 +29,7 @@
             return _condition;
         }
 
-        public bool CanAddAndConnect(IModule module, IModulePort ownerPort, IModulePort targetPort)
+        public bool CanAddAndConnect(IModule module, IPort ownerPort, IPort targetPort)
         {
             return _condition;
         }

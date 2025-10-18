@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace IM.ModuleGraphGizmosDebug
 {
-    public class PortWrapperFactory : IFactory<PortWrapper, IModulePort>
+    public class PortWrapperFactory : IFactory<PortWrapper, IPort>
     {
         public Vector3 Position { get; set; }
         public float Size { get; set; }
@@ -15,7 +15,7 @@ namespace IM.ModuleGraphGizmosDebug
             Size = size;
         }
         
-        public PortWrapper Create(IModulePort port)
+        public PortWrapper Create(IPort port)
         {
             return new PortWrapper(port,new  CircleVisual(Position,Size));
         }
