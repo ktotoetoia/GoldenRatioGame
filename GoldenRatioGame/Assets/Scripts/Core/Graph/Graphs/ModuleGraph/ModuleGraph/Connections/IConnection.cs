@@ -4,5 +4,7 @@
     {
         IPort Input { get; }
         IPort Output { get; }
+        
+        IPort GetOtherPort(IPort port);
     }
 }

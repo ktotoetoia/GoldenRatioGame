@@ -45,7 +45,7 @@ namespace IM.Modules
                 
                 _graph.AddAndConnect(module,
                     module.Ports.FirstOrDefault(x => !x.IsConnected),
-                    _graph.Modules.FirstOrDefault()?.Ports
+                    _graph.Modules.FirstOrDefault(x => x.Ports.Any(p => !p.IsConnected))?.Ports
                         .FirstOrDefault(x => !x.IsConnected));
             }
 

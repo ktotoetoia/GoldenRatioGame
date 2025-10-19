@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public interface IPortSettings
+    public interface IPortLayout
     {
-        IPort Port { get; }
         Vector3 RelativePosition { get; }
+        IPort Port { get; }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace IM.Graphs
+﻿using System;
+
+namespace IM.Graphs
 {
     public class Connection : IConnection
     {
@@ -12,6 +14,14 @@
         {
             Input = from;
             Output = to;
+        }
+
+        public IPort GetOtherPort(IPort port)
+        {
+            if(Input== port) return Output;
+            if(Output == port) return Input;
+            
+            throw new Exception("Port is not a part of this connection");
         }
     }
 }

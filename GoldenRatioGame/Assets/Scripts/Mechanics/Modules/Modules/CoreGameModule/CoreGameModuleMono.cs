@@ -12,9 +12,9 @@ namespace IM.Modules
         
         public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection).ToList();
         public IEnumerable<IPort> Ports => _ports;
-        public IModuleLayout Layout { get; private set; }
         public IModuleExtensions Extensions { get; private set; }
-        
+        public IModuleLayout ModuleLayout { get; private set; }
+
         private void Awake()
         {
             Extensions = GetComponent<IModuleExtensions>();
@@ -22,7 +22,7 @@ namespace IM.Modules
             for (int i = 0; i < _portCount; i++)
                 _ports.Add(new Port(this));
             
-            Layout = new DefaultModuleLayout(_ports);
+            ModuleLayout = new ModuleLayout(this);
         }
     }
 }
