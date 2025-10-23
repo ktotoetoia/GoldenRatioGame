@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _portCount: 2
+  _sprite: {fileID: 8288426215254106694, guid: c57efa21a665cde4eb9b09328d35c035, type: 3}
 --- !u!114 &8535451133996336894
 MonoBehaviour:
   m_ObjectHideFlags: 0
