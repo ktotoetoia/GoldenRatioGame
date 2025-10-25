@@ -31,7 +31,7 @@ namespace IM.ModuleGraphGizmosDebug
                 Gizmos.color = Color.white;
                 Gizmos.DrawWireCube(position, Vector3.one * 0.9f);
 
-                foreach (IPortLayout portLayout in current.GetModuleLayout().PortLayouts)
+                foreach (IPortLayout portLayout in current.ModuleLayout.PortLayouts)
                 {
                     IPort port = portLayout.Port;
                     Vector3 portPos = position + portLayout.RelativePosition;
@@ -45,7 +45,7 @@ namespace IM.ModuleGraphGizmosDebug
 
                     if (otherPort.Module is not IGameModule nextModule || visited.Contains(nextModule)) continue;
 
-                    IPortLayout nextLayout = nextModule.GetModuleLayout().PortLayouts.FirstOrDefault(p => p.Port == otherPort);
+                    IPortLayout nextLayout = nextModule.ModuleLayout.PortLayouts.FirstOrDefault(p => p.Port == otherPort);
                     if (nextLayout == null) continue;
 
                     Vector3 direction = portLayout.Normal.normalized;

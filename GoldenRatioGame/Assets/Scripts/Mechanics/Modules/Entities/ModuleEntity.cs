@@ -21,14 +21,18 @@ namespace IM.Modules
             IModule coreModule = Instantiate(_coreModulePrefab).GetComponent<IModule>();
             AbilityPool = new AbilityPool();
             ConditionalCommandModuleGraph graph = new ConditionalCommandModuleGraph();
-            
-            CompositeObserver observer = new CompositeObserver(new List<IModuleGraphObserver>()
+
+            List<IModuleGraphObserver> graphObservers = new List<IModuleGraphObserver>()
             {
                 new EntityInjector(this),
                 new SpeedExtensionsObserver(GetComponent<IHaveSpeed>()),
                 new HealthExtensionsObserver(GetComponent<IFloatHealthValuesGroup>()),
                 new AbilityExtensionsObserver(AbilityPool as AbilityPool),
-            });
+            };
+            
+            graphObservers.AddRange(GetComponents<IModuleGraphObserver>());
+            
+            CompositeObserver observer = new CompositeObserver(graphObservers);
             
             GraphEditor = new CommandModuleGraphEditor<IConditionalCommandModuleGraph>(graph,new AccessConditionalCommandModuleGraphFactory(), new TrueModuleGraphValidator(), observer);
             graph.AddModule(coreModule);
