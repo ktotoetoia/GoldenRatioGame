@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace IM.Graphs
 {
     public interface ITraversal
     {
-        IGraphReadOnly GetSubGraph(INode start);
-        IGraphReadOnly GetSubGraph(INode node, Func<IReadOnlyList<INode>, bool> canPathTo);
+        IEnumerable<INode> Enumerate(INode start);
+        IEnumerable<TNode> Enumerate<TNode>(TNode start) where TNode : INode;
+        IEnumerable<(INode, IEdge)> EnumerateEdges(INode start);
+        IEnumerable<(TNode, TEdge)> EnumerateEdges<TNode,TEdge>(TNode start)  where TNode : INode where TEdge : IEdge;
+        
         bool HasPathTo(INode from, INode to);
     }
 } 

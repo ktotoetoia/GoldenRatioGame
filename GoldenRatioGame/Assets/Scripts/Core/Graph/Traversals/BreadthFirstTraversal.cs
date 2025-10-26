@@ -1,61 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace IM.Graphs
 {
     public class BreadthFirstTraversal : ITraversal
     {
-        public IGraphReadOnly GetSubGraph(INode start)
+        public IEnumerable<TNode> Enumerate<TNode>(TNode start) where TNode : INode
         {
-            return GetSubGraph(start, x => true);
-        }
-        
-        public IGraphReadOnly GetSubGraph(INode start, Func<IReadOnlyList<INode>, bool> canPathTo)
-        {
-            HashSet<INode> newNodes = new HashSet<INode>();
-            HashSet<IEdge> newEdges = new HashSet<IEdge>();
+            Queue<TNode> queue = new Queue<TNode>();
+            HashSet<TNode> visited = new HashSet<TNode>();
 
-            Queue<List<INode>> queue = new Queue<List<INode>>();
-            List<INode> startPath = new List<INode> { start };
-
-            newNodes.Add(start);
-            queue.Enqueue(startPath);
+            queue.Enqueue(start);
+            visited.Add(start);
 
             while (queue.Count > 0)
             {
-                List<INode> path = queue.Dequeue();
-                INode current = path[^1];
+                TNode current = queue.Dequeue();
+                yield return current;
 
                 foreach (IEdge edge in current.Edges)
                 {
-                    INode neighbor = edge.GetOther(current);
+                    if (edge.GetOther(current) is TNode next && visited.Add(next))
+                        queue.Enqueue(next);
+                }
+            }
+        }
 
-                    if (newNodes.Contains(neighbor))
+        public IEnumerable<(TNode, TEdge)> EnumerateEdges<TNode, TEdge>(TNode start)
+            where TNode : INode
+            where TEdge : IEdge
+        {
+            Queue<(TNode, TEdge)> queue = new Queue<(TNode, TEdge)>();
+            HashSet<TNode> visited = new HashSet<TNode>();
+
+            queue.Enqueue((start, default));
+            visited.Add(start);
+
+            while (queue.Count > 0)
+            {
+                (TNode current, TEdge via) = queue.Dequeue();
+                yield return (current, via);
+
+                foreach (IEdge edge in current.Edges)
+                {
+                    if (edge.GetOther(current) is TNode next && visited.Add(next))
                     {
-                        if (newNodes.Contains(current))
-                            newEdges.Add(edge);
-
-                        continue;
-                    }
-
-                    List<INode> newPath = new List<INode>(path) { neighbor };
-
-                    if (canPathTo(newPath))
-                    {
-                        newNodes.Add(neighbor);
-                        newEdges.Add(edge);
-                        queue.Enqueue(newPath);
+                        if (edge is TEdge typedEdge)
+                            queue.Enqueue((next, typedEdge));
                     }
                 }
             }
-
-            return new GraphReadOnly(newNodes.ToList(), newEdges.ToList());
         }
 
+        public IEnumerable<INode> Enumerate(INode start)
+            => Enumerate<INode>(start);
+        public IEnumerable<(INode, IEdge)> EnumerateEdges(INode start)
+            => EnumerateEdges<INode, IEdge>(start);
+        
         public bool HasPathTo(INode from, INode to)
         {
-            return GetSubGraph(from).Nodes.Contains(to);
+            foreach (INode node in Enumerate(from))
+                if (Equals(node, to))
+                    return true;
+            return false;
         }
     }
 } 
