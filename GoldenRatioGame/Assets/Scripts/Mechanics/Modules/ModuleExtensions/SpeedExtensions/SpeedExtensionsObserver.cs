@@ -16,7 +16,7 @@ namespace IM.Modules
             _speed = speed ?? throw new ArgumentNullException(nameof(speed));
         }
 
-        public void Update(IModuleGraphReadOnly graph)
+        public void OnGraphUpdated(IModuleGraphReadOnly graph)
         {
             if (graph == null) throw new ArgumentNullException(nameof(graph));
 

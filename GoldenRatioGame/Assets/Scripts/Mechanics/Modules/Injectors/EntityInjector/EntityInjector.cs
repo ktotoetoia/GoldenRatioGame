@@ -17,7 +17,7 @@ namespace IM.Modules
             _entity = entity ?? throw new ArgumentNullException(nameof(entity));
         }
 
-        public void Update(IModuleGraphReadOnly graph)
+        public void OnGraphUpdated(IModuleGraphReadOnly graph)
         {
             if (graph == null) throw new ArgumentNullException(nameof(graph));
 

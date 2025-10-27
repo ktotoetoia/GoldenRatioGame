@@ -2,7 +2,7 @@
 {
     public class EmptyObserver : IModuleGraphObserver
     {
-        public void Update(IModuleGraphReadOnly graph)
+        public void OnGraphUpdated(IModuleGraphReadOnly graph)
         {
 
         }

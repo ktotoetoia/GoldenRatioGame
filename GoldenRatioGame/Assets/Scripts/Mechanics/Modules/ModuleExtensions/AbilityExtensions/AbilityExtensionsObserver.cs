@@ -16,7 +16,7 @@ namespace IM.Modules
             _abilityPool = abilityPool ?? throw new ArgumentNullException(nameof(abilityPool));
         }
 
-        public void Update(IModuleGraphReadOnly graph)
+        public void OnGraphUpdated(IModuleGraphReadOnly graph)
         {
             if (graph == null) throw new ArgumentNullException(nameof(graph));
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
 using UnityEngine;
@@ -10,23 +11,33 @@ namespace IM.Modules
         [SerializeField] private GameObject _visualPrefab;
         private readonly ITraversal _traversal = new BreadthFirstTraversal();
         private ICoreGameModule _coreGameModule;
-
-
-        private void Update()
+        
+        public void OnGraphUpdated(IModuleGraphReadOnly graph)
         {
-            if (_coreGameModule == null) return;
+            if (graph == null) throw new ArgumentNullException(nameof(graph));
+            
+            _coreGameModule = graph.Modules.OfType<ICoreGameModule>().FirstOrDefault();
             
             foreach ((IGameModule gameModule, IConnection connection) in _traversal.EnumerateEdges<IGameModule,IConnection>(_coreGameModule))
             {
                 
             }
         }
+    }
+    
+    public class ModuleUnit
+    {
+        private ICoreGameModule _coreModule;
+        private List<ModuleVisual> _visuals = new();
         
-        public void Update(IModuleGraphReadOnly graph)
+        public ModuleUnit(ICoreGameModule coreModule)
         {
-            if (graph == null) throw new ArgumentNullException(nameof(graph));
-            
-            _coreGameModule = graph.Modules.OfType<ICoreGameModule>().FirstOrDefault();
+            _coreModule = coreModule;
         }
+    }
+
+    public class ModuleVisual
+    {
+        
     }
 }

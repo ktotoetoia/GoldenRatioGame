@@ -21,11 +21,11 @@ namespace IM.Graphs
             _observers.Remove(observer);
         }
 
-        public void Update(IModuleGraphReadOnly graph)
+        public void OnGraphUpdated(IModuleGraphReadOnly graph)
         {
             foreach(IModuleGraphObserver observer in _observers)
             {
-                observer.Update(graph);
+                observer.OnGraphUpdated(graph);
             }
         }
     }

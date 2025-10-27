@@ -67,7 +67,7 @@ namespace IM.Graphs
             if (CanSaveChanges || _validator.TryFix(_graph))
             {
                 EndEditing();
-                _observer.Update(Graph);
+                _observer.OnGraphUpdated(Graph);
                 return true;
             }
 

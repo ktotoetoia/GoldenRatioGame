@@ -16,7 +16,7 @@ namespace IM.Modules
             _floatHealthValuesGroup = floatHealthValuesGroup ?? throw new ArgumentNullException(nameof(floatHealthValuesGroup));
         }
 
-        public void Update(IModuleGraphReadOnly graph)
+        public void OnGraphUpdated(IModuleGraphReadOnly graph)
         {
             if (graph == null) throw new ArgumentNullException(nameof(graph));
 

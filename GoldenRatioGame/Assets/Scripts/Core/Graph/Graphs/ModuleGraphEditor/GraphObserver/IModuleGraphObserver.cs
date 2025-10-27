@@ -2,6 +2,6 @@
 {
     public interface IModuleGraphObserver
     {
-        void Update(IModuleGraphReadOnly graph);
+        void OnGraphUpdated(IModuleGraphReadOnly graph);
     }
 }
