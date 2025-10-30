@@ -15,7 +15,6 @@ namespace Tests
 
         private void Awake()
         {
-            GetComponent<GameModuleGizmosDrawer>().Graph = _playerObject.GetComponent<IModuleEntity>().GraphEditor.Graph;
             _movement = _playerObject.GetComponent<IMoveInVector>();
             _stateMachine = new StateMachine(new MovementState(_movement, () => new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"))));
         }

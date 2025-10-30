@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using IM.Graphs;
 using UnityEngine;
 
 namespace IM.Modules
@@ -7,14 +8,17 @@ namespace IM.Modules
     public class ModuleLayout : IModuleLayout
     {
         public IEnumerable<IPortLayout> PortLayouts { get; }
-        public IGameModule Module { get; }
         public Sprite Sprite { get; }
 
-        public ModuleLayout(IGameModule module, IEnumerable<IPortLayout> portLayouts, Sprite sprite)
+        public ModuleLayout(IEnumerable<IPortLayout> portLayouts, Sprite sprite)
         {
-            Module = module;
             PortLayouts = portLayouts.ToList();
             Sprite = sprite;
+        }
+
+        public IPortLayout GetLayoutFor(IPort port)
+        {
+            return PortLayouts.FirstOrDefault(x => x.Port == port);
         }
     }
 }

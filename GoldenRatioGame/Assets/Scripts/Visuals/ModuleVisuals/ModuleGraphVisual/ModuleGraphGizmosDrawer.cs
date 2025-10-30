@@ -6,15 +6,19 @@ using UnityEngine;
 
 namespace IM.ModuleGraphGizmosDebug
 {
-    public class GameModuleGizmosDrawer : MonoBehaviour
+    public class ModuleGraphGizmosDrawer : MonoBehaviour, IModuleGraphVisual
     {
         [SerializeField] private float _portSize = 1f;
 
-        public IModuleGraphReadOnly Graph { get; set; }
+        public IModuleGraphReadOnly Source { get; set; }
+        
+        public void RebuildSource()
+        {
+        }
 
         private void OnDrawGizmos()
         {
-            ICoreGameModule start = Graph?.Modules.OfType<ICoreGameModule>().FirstOrDefault();
+            ICoreGameModule start = Source?.Modules.OfType<ICoreGameModule>().FirstOrDefault();
             if (start == null) return;
 
             BreadthFirstTraversal traversal = new BreadthFirstTraversal();
