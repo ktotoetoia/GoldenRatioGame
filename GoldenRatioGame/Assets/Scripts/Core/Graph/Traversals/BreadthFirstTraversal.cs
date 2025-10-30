@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace IM.Graphs
 {
@@ -43,20 +42,39 @@ namespace IM.Graphs
 
                 foreach (IEdge edge in current.Edges)
                 {
-                    if (edge.GetOther(current) is TNode next && visited.Add(next))
+                    if (edge.GetOther(current) is TNode next && visited.Add(next) && edge is TEdge typedEdge)
                     {
-                        if (edge is TEdge typedEdge)
-                            queue.Enqueue((next, typedEdge));
+                        queue.Enqueue((next, typedEdge));
                     }
                 }
             }
         }
 
-        public IEnumerable<INode> Enumerate(INode start)
-            => Enumerate<INode>(start);
-        public IEnumerable<(INode, IEdge)> EnumerateEdges(INode start)
-            => EnumerateEdges<INode, IEdge>(start);
-        
+        public IEnumerable<(TModule, TPort)> EnumerateModules<TModule, TPort>(TModule start) 
+            where TModule : IModule 
+            where TPort : IPort
+        {
+            Queue<(TModule, TPort)> queue = new Queue<(TModule, TPort)>();
+            HashSet<TModule> visited = new HashSet<TModule>();
+
+            queue.Enqueue((start, default));
+            visited.Add(start);
+
+            while (queue.Count > 0)
+            {
+                (TModule current, TPort via) = queue.Dequeue();
+                yield return (current, via);
+
+                foreach (IPort port in current.Ports)
+                {
+                    if (port.IsConnected && port.Connection.GetOtherPort(port).Module is TModule next && visited.Add(next) && port is TPort typedPort)
+                    {
+                        queue.Enqueue((next, typedPort));
+                    }
+                }
+            }
+        }
+
         public bool HasPathTo(INode from, INode to)
         {
             foreach (INode node in Enumerate(from))
