@@ -6,8 +6,9 @@ namespace IM.Modules
 {
     public interface IModuleLayout
     {
+        IGameModule Module { get; }
         IEnumerable<IPortLayout> PortLayouts { get; }
         Sprite Sprite { get; }
-        IPortLayout GetLayoutFor(IPort port);
+        IPortLayout GetPortLayoutFor(IPort port);
     }
 }

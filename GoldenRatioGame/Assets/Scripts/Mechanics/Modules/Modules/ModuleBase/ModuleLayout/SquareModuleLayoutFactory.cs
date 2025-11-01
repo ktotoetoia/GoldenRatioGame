@@ -33,7 +33,7 @@ namespace IM.Modules
             for (int i = 0; i < n; i++)
                 portLayouts.Add(new PortLayout(ports[i], positions[i],positions[i]));
             
-            return new ModuleLayout(portLayouts,sprite);
+            return new ModuleLayout(module,portLayouts,sprite);
         }
     }
 }

@@ -4,8 +4,8 @@ namespace IM.Modules
 {
     public interface IModuleGraphVisual
     {
-        IModuleGraphReadOnly Source { get; set; }
-
-        void RebuildSource();
+        IModuleGraphReadOnly Source { get;}
+        
+        void SetSource(IModuleGraphReadOnly source, ICoreGameModule coreModule);
     }
 }

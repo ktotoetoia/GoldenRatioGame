@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using IM.Graphs;
 using UnityEngine;
 
@@ -6,26 +6,21 @@ namespace IM.Modules
 {
     public class ModuleGraphVisual : MonoBehaviour, IModuleGraphVisual
     {
-        private IModuleGraphReadOnly _source;
+        private ICoreGameModule _coreModule;
+        
+        public IModuleGraphReadOnly Source { get; private set; }
 
-        public IModuleGraphReadOnly Source
+        public void SetSource(IModuleGraphReadOnly source, ICoreGameModule coreModule)
         {
-            get => _source;
-            set
-            {
-                _source = value;
-                RebuildSource();
-            }
+            Source = source;
+            _coreModule = coreModule;
+            
+            RebuildSource();
         }
-     
-        public void RebuildSource()
+
+        private void RebuildSource()
         {
             Debug.Log("rebuilt");
-        }
-
-        public void Update()
-        {
-            throw new NotImplementedException();
         }
     }
 }

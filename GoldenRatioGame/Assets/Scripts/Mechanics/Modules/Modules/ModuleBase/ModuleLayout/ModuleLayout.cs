@@ -7,16 +7,18 @@ namespace IM.Modules
 {
     public class ModuleLayout : IModuleLayout
     {
+        public IGameModule Module { get; }
         public IEnumerable<IPortLayout> PortLayouts { get; }
         public Sprite Sprite { get; }
-
-        public ModuleLayout(IEnumerable<IPortLayout> portLayouts, Sprite sprite)
+        
+        public ModuleLayout(IGameModule module,IEnumerable<IPortLayout> portLayouts, Sprite sprite)
         {
+            Module = module;
             PortLayouts = portLayouts.ToList();
             Sprite = sprite;
         }
 
-        public IPortLayout GetLayoutFor(IPort port)
+        public IPortLayout GetPortLayoutFor(IPort port)
         {
             return PortLayouts.FirstOrDefault(x => x.Port == port);
         }

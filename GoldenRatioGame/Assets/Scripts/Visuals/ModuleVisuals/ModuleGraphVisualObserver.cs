@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using IM.Graphs;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace IM.Modules
         {
             if (graph == null) throw new ArgumentNullException(nameof(graph));
             
-            GetComponent<IModuleGraphVisual>().Source = graph;
+            GetComponent<IModuleGraphVisual>().SetSource(graph,graph.Modules.FirstOrDefault(x => x is ICoreGameModule) as ICoreGameModule);
         }
     }
 }
