@@ -1,8 +1,6 @@
 ﻿using IM.StateMachines;
 using IM.Movement;
 using UnityEngine;
-using IM.ModuleGraphGizmosDebug;
-using IM.Modules;
 
 namespace Tests
 {

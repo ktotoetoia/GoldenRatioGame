@@ -444,6 +444,7 @@ GameObject:
   - component: {fileID: 1908329188}
   - component: {fileID: 1908329179}
   - component: {fileID: 1908329195}
+  - component: {fileID: 1908329196}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -700,7 +701,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76944ca716b48fabf2c69d88215c045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.VisualModuleGraphObserver
-  _visualPrefab: {fileID: 377053588700831526, guid: ad7c2121906937141968a07abdb7e0fc, type: 3}
+--- !u!114 &1908329196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908329172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9c9dff2193e4134813856e3c8b0adf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisuals::IM.ModuleGraphGizmosDebug.ModuleGraphGizmosDrawer
+  _portSize: 0.1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
