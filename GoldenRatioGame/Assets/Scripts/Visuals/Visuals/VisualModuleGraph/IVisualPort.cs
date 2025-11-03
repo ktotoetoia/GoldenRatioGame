@@ -4,6 +4,7 @@ namespace IM.ModuleGraph
 {
     public interface IVisualPort : IPort, IHavePosition, IHaveRelativePosition
     {
-        IVisualModule VisualModule { get; }
+        new IVisualModule Module { get; }
+        new IVisualConnection Connection { get; }
     }
 }

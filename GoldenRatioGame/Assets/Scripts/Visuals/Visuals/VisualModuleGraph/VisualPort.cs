@@ -5,15 +5,15 @@ namespace IM.ModuleGraph
 {
     public class VisualPort : IVisualPort
     {
-        public IVisualModule VisualModule { get; }
-
-        public IModule Module => VisualModule;
-        public IConnection Connection { get; private set; }
+        public IVisualModule Module { get; }
+        IModule IPort.Module => Module;
+        public IVisualConnection Connection { get; private set; }
+        IConnection IPort.Connection => Connection;
         public bool IsConnected => Connection != null;
 
         public Vector3 Position
         {
-            get => RelativePosition + VisualModule.Position;
+            get => RelativePosition + Module.Position;
             set
             {
             }
@@ -24,14 +24,17 @@ namespace IM.ModuleGraph
 
         public VisualPort(IVisualModule module, Vector3 relativePosition,  Vector3 normal)
         {
-            VisualModule = module;
+            Module = module;
             RelativePosition = relativePosition;
             Normal = normal;
         }
 
         public void Connect(IConnection connection)
         {
-            Connection = connection;
+            if(connection is not IVisualConnection visualConnection)
+                throw new System.Exception("Invalid connection type");
+            
+            Connection = visualConnection;
         }
 
         public void Disconnect()

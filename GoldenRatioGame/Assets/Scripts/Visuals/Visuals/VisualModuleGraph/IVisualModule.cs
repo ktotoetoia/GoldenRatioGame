@@ -5,6 +5,6 @@ namespace IM.ModuleGraph
 {
     public interface IVisualModule : IModule, IHavePosition
     {
-        IEnumerable<IVisualPort> VisualPorts { get; }
+        new IEnumerable<IVisualPort> Ports { get; }
     }
 }
