@@ -9,8 +9,8 @@ namespace IM.Graphs
         private readonly List<IEdge> _edges;
         private readonly List<INode> _nodes;
 
-        public IReadOnlyList<IEdge> Edges => _edges;
-        public IReadOnlyList<INode> Nodes => _nodes;
+        public IEnumerable<IEdge> Edges => _edges;
+        public IEnumerable<INode> Nodes => _nodes;
 
         public BiDirectionalGraph()
         {

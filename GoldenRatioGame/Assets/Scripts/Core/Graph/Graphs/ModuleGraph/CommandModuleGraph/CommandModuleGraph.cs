@@ -14,10 +14,10 @@ namespace IM.Graphs
         private readonly IFactory<IConnectCommand, IPort, IPort, ICollection<IConnection>> _connectCommandFactory;
         private readonly IFactory<ICommand, IConnection, ICollection<IConnection>> _disconnectCommandFactory;
 
-        public IReadOnlyList<IModule> Modules => _modules;
-        public IReadOnlyList<INode> Nodes => _modules;
-        public IReadOnlyList<IConnection> Connections => _connections;
-        public IReadOnlyList<IEdge> Edges => _connections;
+        public IEnumerable<IModule> Modules => _modules;
+        public IEnumerable<INode> Nodes => _modules;
+        public IEnumerable<IConnection> Connections => _connections;
+        public IEnumerable<IEdge> Edges => _connections;
         public int CommandsToUndoCount => _commands.CommandsToUndoCount;
         public int CommandsToRedoCount => _commands.CommandsToRedoCount;
 

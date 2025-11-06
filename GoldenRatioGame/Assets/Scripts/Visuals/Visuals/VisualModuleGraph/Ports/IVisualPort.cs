@@ -1,4 +1,5 @@
 ﻿using IM.Graphs;
+using UnityEngine;
 
 namespace IM.ModuleGraph
 {
@@ -6,5 +7,6 @@ namespace IM.ModuleGraph
     {
         new IVisualModule Module { get; }
         new IVisualConnection Connection { get; }
+        public Vector3 Normal { get; set; }
     }
 }

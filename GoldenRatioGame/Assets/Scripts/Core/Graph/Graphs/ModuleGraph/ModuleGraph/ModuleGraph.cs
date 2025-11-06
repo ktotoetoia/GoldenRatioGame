@@ -9,10 +9,10 @@ namespace IM.Graphs
         private readonly List<IConnection> _connections = new();
         private readonly List<IModule> _modules = new();
 
-        public IReadOnlyList<INode> Nodes => _modules;
-        public IReadOnlyList<IEdge> Edges => _connections;
-        public IReadOnlyList<IModule> Modules => _modules;
-        public IReadOnlyList<IConnection> Connections => _connections;
+        public IEnumerable<INode> Nodes => _modules;
+        public IEnumerable<IEdge> Edges => _connections;
+        public IEnumerable<IModule> Modules => _modules;
+        public IEnumerable<IConnection> Connections => _connections;
         
         public void AddModule(IModule module)
         {

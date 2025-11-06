@@ -4,7 +4,7 @@ namespace IM.Graphs
 {
     public interface IGraphReadOnly
     {
-        IReadOnlyList<INode> Nodes { get; }
-        IReadOnlyList<IEdge> Edges { get; }
+        IEnumerable<INode> Nodes { get; }
+        IEnumerable<IEdge> Edges { get; }
     }
 }

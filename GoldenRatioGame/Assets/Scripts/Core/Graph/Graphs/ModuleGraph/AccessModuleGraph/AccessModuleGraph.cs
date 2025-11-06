@@ -6,10 +6,10 @@ namespace IM.Graphs
     public class AccessModuleGraph : IModuleGraphAccess, IModuleGraph
     {
         private readonly IModuleGraph _graph;
-        public IReadOnlyList<INode> Nodes => _graph.Nodes;
-        public IReadOnlyList<IEdge> Edges => _graph.Edges;
-        public IReadOnlyList<IConnection> Connections => _graph.Connections;
-        public IReadOnlyList<IModule> Modules => _graph.Modules;
+        public IEnumerable<INode> Nodes => _graph.Nodes;
+        public IEnumerable<IEdge> Edges => _graph.Edges;
+        public IEnumerable<IConnection> Connections => _graph.Connections;
+        public IEnumerable<IModule> Modules => _graph.Modules;
 
         public bool CanUse { get; set; }
         public bool ThrowIfCantUse { get; set; }

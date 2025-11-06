@@ -4,7 +4,7 @@ namespace IM.Graphs
 {
     public interface IModuleGraphReadOnly : IGraphReadOnly
     {
-        IReadOnlyList<IModule> Modules { get; }
-        IReadOnlyList<IConnection> Connections { get; }
+        IEnumerable<IModule> Modules { get; }
+        IEnumerable<IConnection> Connections { get; }
     }
 }
