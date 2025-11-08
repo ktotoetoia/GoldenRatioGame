@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace IM.ModuleGraph
 {
-    public interface IVisualPort : IPort, IHavePosition, IHaveRelativePosition
+    public interface IVisualPort : IPort
     {
+        ITransform Transform { get; }
         new IVisualModule Module { get; }
         new IVisualConnection Connection { get; }
-        public Vector3 Normal { get; set; }
     }
 }

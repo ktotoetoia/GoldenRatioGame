@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
 using IM.ModuleGraph;
+using IM.Values;
 using UnityEngine;
+using Transform = IM.ModuleGraph.Transform;
 
 namespace IM.Modules
 {
-    public class ModuleGraphVisual : MonoBehaviour, IModuleGraphVisual
+    public class ModuleGraphVisual : MonoBehaviour,IModuleGraphVisual
     {
         public IModuleGraphReadOnly Source { get; private set; }
 
@@ -20,7 +22,7 @@ namespace IM.Modules
             Source = source;
             _visualGraph = new VisualCommandModuleGraph();
             _visualPortMap.Clear();
-
+            
             var traversal = new BreadthFirstTraversal();
             var moduleToVisual = new Dictionary<IGameModule, IVisualModule>();
 
@@ -51,47 +53,63 @@ namespace IM.Modules
 
         private IVisualModule Create(IModuleLayout moduleLayout)
         {
-            VisualModule visualModule = new VisualModule();
-
+            GizmosVisualModule gizmosVisualModule = new GizmosVisualModule(new Transform(Vector3.zero, Vector3.one, new Quaternion(0,0,0,1)));
             foreach (IPortLayout portLayout in moduleLayout.PortLayouts)
             {
                 IVisualPort visualPort = new VisualPort(
-                    visualModule,
-                    portLayout.RelativePosition,
-                    portLayout.Normal
+                    gizmosVisualModule,
+                    new Transform(gizmosVisualModule.Transform, portLayout.RelativePosition,Vector3.one,  Quaternion.LookRotation(portLayout.Normal, Vector3.up))
                 );
 
-                visualModule.AddPort(visualPort);
+                gizmosVisualModule.AddPort(visualPort);
                 _visualPortMap[portLayout.Port] = visualPort;
             }
 
-            return visualModule;
+            return gizmosVisualModule;
         }
 
         private void OnDrawGizmos()
         {
             if (_visualGraph == null) return;
 
-            Gizmos.color = Color.white;
             foreach (IVisualModule module in _visualGraph.Modules)
             {
-                Gizmos.DrawWireCube(module.Position, Vector3.one);
+                IEnumerable<Vector3> worldPorts = module.Ports.Select(p => p.Transform.Position);
+                IEnumerable<Vector3> localPorts = worldPorts.Select(w =>
+                {
+                    Vector3 local = Quaternion.Inverse(module.Transform.Rotation) * (w - module.Transform.Position);
+                    return new Vector3(
+                        local.x / module.Transform.Scale.x,
+                        local.y / module.Transform.Scale.y,
+                        local.z / module.Transform.Scale.z
+                    );
+                });
 
-                Gizmos.color = Color.yellow;
+                Bounds localBounds = BoundsUtility.CreateBoundsNormalized(localPorts);
+
+                Matrix4x4 oldMatrix = Gizmos.matrix;
+                Gizmos.matrix = Matrix4x4.TRS(
+                    module.Transform.Position,
+                    module.Transform.Rotation,
+                    Vector3.one);
+
+                Gizmos.color = Color.white;
+                Gizmos.DrawWireCube(Vector3.zero, localBounds.size);
+
+                Gizmos.matrix = oldMatrix;
+
                 foreach (IVisualPort port in module.Ports)
                 {
-                    Vector3 portPos = module.Position + port.RelativePosition;
-                    Gizmos.DrawSphere(portPos, 0.1f);
+                    Gizmos.color = Color.yellow;
+                    Gizmos.DrawSphere(port.Transform.Position, 0.1f);
                 }
             }
 
             Gizmos.color = Color.cyan;
             foreach (IVisualConnection connection in _visualGraph.Connections)
             {
-                Debug.Log(connection);
-                
-                Vector3 from = connection.Output.Position;
-                Vector3 to = connection.Input.Position;
+                Vector3 from = connection.Output.Transform.Position;
+                Vector3 to = connection.Input.Transform.Position;
                 Gizmos.DrawLine(from, to);
             }
         }

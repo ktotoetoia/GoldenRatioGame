@@ -14,23 +14,26 @@ namespace IM.ModuleGraph
 
         public IConnection Connection { get; }
 
+        private Vector3 _prevInputPosition;
+        private Quaternion _prevInputRotation;
+
         public ConnectVisualModulesCommand(IVisualPort output, IVisualPort input, ICollection<IConnection> addTo)
         {
             _output = output ?? throw new ArgumentNullException(nameof(output));
             _input = input ?? throw new ArgumentNullException(nameof(input));
             _addTo = addTo ?? throw new ArgumentNullException(nameof(addTo));
+            Connection = new VisualConnection(output, input);
 
             if (output.Module == input.Module)
                 throw new ArgumentException("Cannot connect ports of the same module.");
             if (output.IsConnected || input.IsConnected)
                 throw new ArgumentException("Port is already connected.");
-
-            Connection = new VisualConnection(output, input);
         }
 
         public void Execute()
         {
-            if (_isExecuted) throw new InvalidOperationException("Command already executed");
+            if (_isExecuted)
+                throw new InvalidOperationException("Command already executed");
 
             AlignModules();
 
@@ -43,7 +46,12 @@ namespace IM.ModuleGraph
 
         public void Undo()
         {
-            if (!_isExecuted) throw new InvalidOperationException("Command must be executed before undo");
+            if (!_isExecuted)
+                throw new InvalidOperationException("Command must be executed before undo");
+
+            ITransform inputTransform = _input.Module.Transform;
+            inputTransform.Position = _prevInputPosition;
+            inputTransform.Rotation = _prevInputRotation;
 
             _input.Disconnect();
             _output.Disconnect();
@@ -54,28 +62,27 @@ namespace IM.ModuleGraph
 
         private void AlignModules()
         {
-            Vector3 outputWorldPos = _output.Module.Position + _output.RelativePosition;
+            ITransform outputTransform = _output.Module.Transform;
+            ITransform inputTransform = _input.Module.Transform;
 
-            Vector3 outputWorldNormal = _output.Normal.normalized;
-            Vector3 inputWorldNormal = _input.Normal.normalized;
+            _prevInputPosition = inputTransform.Position;
+            _prevInputRotation = inputTransform.Rotation;
 
-            Quaternion rotationToMatch = Quaternion.FromToRotation(inputWorldNormal, -outputWorldNormal);
+            Vector3 outputWorldPos = outputTransform.Position + outputTransform.Rotation * _output.Transform.LocalPosition;
+            Quaternion outputWorldRot = outputTransform.Rotation * _output.Transform.LocalRotation;
 
-            RotateModule(_input.Module, rotationToMatch);
+            Vector3 inputWorldPos = inputTransform.Position + inputTransform.Rotation * _input.Transform.LocalPosition;
+            Quaternion inputWorldRot = inputTransform.Rotation * _input.Transform.LocalRotation;
 
-            Vector3 rotatedInputPortPos = _input.Module.Position + rotationToMatch * _input.RelativePosition;
+            Quaternion desiredRotation = Quaternion.FromToRotation(inputWorldRot * Vector3.forward, -(outputWorldRot * Vector3.forward))
+                                         * inputTransform.Rotation;
 
-            Vector3 offset = outputWorldPos - rotatedInputPortPos;
-            _input.Module.Position += offset;
-        }
+            Vector3 rotatedInputRelPos = desiredRotation * _input.Transform.LocalPosition;
 
-        private void RotateModule(IVisualModule module, Quaternion rotation)
-        {
-            foreach (IVisualPort port in module.Ports)
-            {
-                port.RelativePosition = rotation * port.RelativePosition;
-                port.Normal = rotation * port.Normal;
-            }
+            Vector3 desiredPosition = outputWorldPos - rotatedInputRelPos;
+
+            inputTransform.Position = desiredPosition;
+            inputTransform.Rotation = desiredRotation;
         }
     }
 }

@@ -710,10 +710,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1908329172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9c9dff2193e4134813856e3c8b0adf3, type: 3}
+  m_Script: {fileID: 11500000, guid: e70ca35a434f4c8aa5090ea8463c8504, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: ModuleVisuals::IM.ModuleGraphGizmosDebug.ModuleGraphGizmosDrawer
-  _portSize: 0.1
+  m_EditorClassIdentifier: ModuleVisuals::IM.Modules.ModuleGraphVisual
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

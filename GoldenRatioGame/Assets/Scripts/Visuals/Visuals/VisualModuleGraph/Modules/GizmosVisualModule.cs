@@ -2,24 +2,22 @@
 using System.Linq;
 using UnityEngine;
 using IM.Graphs;
-using IM.Modules;
+using IM.Values;
 
 namespace IM.ModuleGraph
 {
-    public class VisualModule : IVisualModule
+    public class GizmosVisualModule : IVisualModule
     {
         private readonly List<IVisualPort> _ports = new();
         
         public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection);
-        
         IEnumerable<IPort> IModule.Ports => _ports;
         public IEnumerable<IVisualPort> Ports => _ports;
-
-        public Vector3 Position { get; set; }
+        public ITransform Transform { get; }
         
-        public VisualModule(Vector3 position = new())
+        public GizmosVisualModule(ITransform transform)
         {
-            Position = position;
+            Transform = transform;
         }
         
         public void AddPort(IVisualPort port)

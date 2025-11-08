@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using IM.Graphs;
+﻿using IM.Graphs;
 
 namespace IM.ModuleGraph
 {
@@ -10,23 +9,12 @@ namespace IM.ModuleGraph
         public IVisualConnection Connection { get; private set; }
         IConnection IPort.Connection => Connection;
         public bool IsConnected => Connection != null;
+        public ITransform Transform { get; }
 
-        public Vector3 Position
-        {
-            get => RelativePosition + Module.Position;
-            set
-            {
-            }
-        }
-
-        public Vector3 RelativePosition { get; set; }
-        public Vector3 Normal { get; set; }
-
-        public VisualPort(IVisualModule module, Vector3 relativePosition,  Vector3 normal)
+        public VisualPort(IVisualModule module, ITransform transform)
         {
             Module = module;
-            RelativePosition = relativePosition;
-            Normal = normal;
+            Transform = transform;
         }
 
         public void Connect(IConnection connection)
