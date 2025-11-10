@@ -5,21 +5,22 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class ModuleExtensionsMono : MonoBehaviour, IModuleExtensions
+    public class ModuleExtensions : IModuleExtensions
     {
+        private readonly GameObject _gameObject;
         private readonly List<IModuleExtension> _extensions = new();
 
         public IReadOnlyList<IModuleExtension> Extensions => _extensions;
-        
-        private void Awake()
+
+        public ModuleExtensions(GameObject gameObject)
         {
-            GetComponents(_extensions);
+            _gameObject = gameObject;
         }
         
         public void AddExtension(IModuleExtension extension)
         {
             if (_extensions.Contains(extension)) throw new InvalidOperationException("Already contains this extension");
-            if (extension is MonoBehaviour m && m.gameObject != gameObject) throw new InvalidOperationException("Cannot add MonoBehaviour extension of a different gameObject") ;
+            if (extension is MonoBehaviour m && m.gameObject != _gameObject) throw new InvalidOperationException("Cannot add MonoBehaviour extension of a different gameObject") ;
             
             _extensions.Add(extension);
         }

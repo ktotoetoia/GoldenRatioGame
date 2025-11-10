@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using IM.Abilities;
 using IM.Graphs;
 using UnityEngine;
@@ -9,7 +10,8 @@ namespace IM.Modules
     public class ModuleEntityTestInput : MonoBehaviour
     {
         [SerializeField] private ModuleEntity _moduleEntity;
-        [SerializeField] private GameObject _healthModulePrefab;
+        [SerializeField] private List<GameObject> _modulesPrefabs;
+        private int _modulesAdded;
         private PreferredKeyboardBindingsAbilityUser _abilityUser;
         private IConditionalCommandModuleGraph  _graph;
         
@@ -41,7 +43,9 @@ namespace IM.Modules
             
             if (Input.GetKeyDown(KeyCode.O))
             {
-                IModule module = Instantiate(_healthModulePrefab).GetComponent<IGameModule>();
+                IModule module = GetNextModule();
+                
+                if(module == null) return;
                 
                 _graph.AddAndConnect(module,
                     module.Ports.FirstOrDefault(x => !x.IsConnected),
@@ -63,6 +67,17 @@ namespace IM.Modules
             {
                 _graph.Redo(1);
             }
+        }
+
+        private IModule GetNextModule()
+        {
+            if(_modulesPrefabs.Count < _modulesAdded) return null;
+            
+            IModule module = Instantiate(_modulesPrefabs[_modulesAdded]).GetComponent<IModule>();
+            
+            _modulesAdded++;
+            
+            return module;
         }
     }
 }

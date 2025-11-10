@@ -9,12 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2805714054282062599}
-  - component: {fileID: 5469737783865499535}
+  - component: {fileID: 2505596575068069975}
   - component: {fileID: 8535451133996336894}
   - component: {fileID: 4479085341360621510}
-  - component: {fileID: -116844899510949824}
   m_Layer: 0
-  m_Name: DefaultModule
+  m_Name: DefaultCoreModule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +34,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5469737783865499535
+--- !u!114 &2505596575068069975
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,10 +43,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 8119833187759213420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2b2da4ff9bc41a5ab268251bf7c2e97, type: 3}
+  m_Script: {fileID: 11500000, guid: 4474704c0f614e8286756bdf2257d795, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  _portCount: 2
+  m_EditorClassIdentifier: Modules::IM.Modules.CoreGameModuleMono
+  _portInfos:
+  - <Position>k__BackingField: {x: 0, y: 0.5, z: 0}
+    <Normal>k__BackingField: {x: 0, y: 1, z: 0}
+  - <Position>k__BackingField: {x: 0.5, y: 0.5, z: 0}
+    <Normal>k__BackingField: {x: 1, y: 0, z: 0}
+  - <Position>k__BackingField: {x: -0.5, y: 0.5, z: 0}
+    <Normal>k__BackingField: {x: -1, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 0.5, y: -0.5, z: 0}
+    <Normal>k__BackingField: {x: 0, y: -1, z: 0}
+  - <Position>k__BackingField: {x: -0.5, y: -0.5, z: 0}
+    <Normal>k__BackingField: {x: 0, y: -1, z: 0}
   _sprite: {fileID: 8288426215254106694, guid: c57efa21a665cde4eb9b09328d35c035, type: 3}
 --- !u!114 &8535451133996336894
 MonoBehaviour:
@@ -80,15 +89,3 @@ MonoBehaviour:
   _speedModifier:
     <Add>k__BackingField: 3
     <Multiplication>k__BackingField: 1
---- !u!114 &-116844899510949824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8119833187759213420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd0275da6e724cf1ae272c14a8cd4f09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Modules::IM.Modules.ModuleContextExtensionsMono

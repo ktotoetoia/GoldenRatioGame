@@ -7,7 +7,7 @@ namespace IM.Modules
 {
     public class GameModuleMono : MonoBehaviour, IGameModule
     {
-        [SerializeField] private int _portCount;
+        private List<Vector4> _portsInfosS;
         [SerializeField] private Sprite _sprite;
         private readonly List<IPort>  _ports = new();
 
@@ -18,11 +18,18 @@ namespace IM.Modules
 
         private void Awake()
         {
-            for (int i = 0; i < _portCount; i++)
-                _ports.Add(new Port(this));
+            Dictionary<IPort, Vector4> created = new();
+            
+            foreach (Vector4 portInfo in _portsInfosS)
+            {
+                IPort port = new Port(this);
+                
+                created.Add(port, portInfo);
+                _ports.Add(port);
+            }
 
-            Extensions = GetComponent<IModuleExtensions>();
-            ModuleLayout = new SquareModuleLayoutFactory().Create(this,_sprite);
+            Extensions = new ModuleExtensions(gameObject);
+            ModuleLayout = new ModuleLayout(this, created.Select(x =>new PortLayout(x.Key,new Vector3(x.Value.x,x.Value.y),new Vector3(x.Value.z, x.Value.w))),_sprite);
         }
     }
 }
