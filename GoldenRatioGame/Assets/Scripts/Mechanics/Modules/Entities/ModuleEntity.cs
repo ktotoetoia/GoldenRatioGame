@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using IM.Abilities;
+﻿using IM.Abilities;
 using IM.Graphs;
 using IM.Health;
 using IM.Values;
@@ -19,22 +18,15 @@ namespace IM.Modules
         private void Awake()
         {
             IModule coreModule = Instantiate(_coreModulePrefab).GetComponent<IModule>();
-            AbilityPool = new AbilityPool();
             ConditionalCommandModuleGraph graph = new ConditionalCommandModuleGraph();
-
-            List<IModuleGraphObserver> graphObservers = new List<IModuleGraphObserver>()
-            {
-                new EntityInjector(this),
-                new SpeedExtensionsObserver(GetComponent<IHaveSpeed>()),
-                new HealthExtensionsObserver(GetComponent<IFloatHealthValuesGroup>()),
-                new AbilityExtensionsObserver(AbilityPool as AbilityPool),
-            };
+            AbilityPool = new AbilityPool();
+            GraphEditor = new CommandModuleGraphEditor<IConditionalCommandModuleGraph>(graph,new AccessConditionalCommandModuleGraphFactory(), new TrueModuleGraphValidator());
             
-            graphObservers.AddRange(GetComponents<IModuleGraphObserver>());
+            GraphEditor.AddObserver(new EntityInjector(this));
+            GraphEditor.AddObserver(new SpeedExtensionsObserver(GetComponent<IHaveSpeed>()));
+            GraphEditor.AddObserver(new HealthExtensionsObserver(GetComponent<IFloatHealthValuesGroup>()));
+            GraphEditor.AddObserver(new AbilityExtensionsObserver(AbilityPool as AbilityPool));
             
-            CompositeObserver observer = new CompositeObserver(graphObservers);
-            
-            GraphEditor = new CommandModuleGraphEditor<IConditionalCommandModuleGraph>(graph,new AccessConditionalCommandModuleGraphFactory(), new TrueModuleGraphValidator(), observer);
             graph.AddModule(coreModule);
         }
     }

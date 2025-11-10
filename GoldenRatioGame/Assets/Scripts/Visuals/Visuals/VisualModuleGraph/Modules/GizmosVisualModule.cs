@@ -2,7 +2,6 @@
 using System.Linq;
 using UnityEngine;
 using IM.Graphs;
-using IM.Values;
 
 namespace IM.ModuleGraph
 {
@@ -11,6 +10,7 @@ namespace IM.ModuleGraph
         private readonly List<IVisualPort> _ports = new();
         
         public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection);
+        public Sprite Sprite { get; set; }
         IEnumerable<IPort> IModule.Ports => _ports;
         public IEnumerable<IVisualPort> Ports => _ports;
         public ITransform Transform { get; }

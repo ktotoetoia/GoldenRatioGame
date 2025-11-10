@@ -71,7 +71,7 @@ namespace IM.Modules
 
         private IModule GetNextModule()
         {
-            if(_modulesPrefabs.Count < _modulesAdded) return null;
+            if(_modulesPrefabs.Count <= _modulesAdded) return null;
             
             IModule module = Instantiate(_modulesPrefabs[_modulesAdded]).GetComponent<IModule>();
             

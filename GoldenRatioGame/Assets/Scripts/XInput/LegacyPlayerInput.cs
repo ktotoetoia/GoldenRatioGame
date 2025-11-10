@@ -1,4 +1,6 @@
-﻿using IM.StateMachines;
+﻿using IM.Graphs;
+using IM.Modules;
+using IM.StateMachines;
 using IM.Movement;
 using UnityEngine;
 
@@ -13,6 +15,10 @@ namespace Tests
 
         private void Awake()
         {
+            foreach (IModuleGraphObserver observer in GetComponents<IModuleGraphObserver>())
+            {
+                _playerObject.GetComponent<IModuleEntity>().GraphEditor.AddObserver(observer);
+            }
             _movement = _playerObject.GetComponent<IMoveInVector>();
             _stateMachine = new StateMachine(new MovementState(_movement, () => new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"))));
         }

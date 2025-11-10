@@ -7,29 +7,21 @@ namespace IM.Modules
 {
     public class GameModuleMono : MonoBehaviour, IGameModule
     {
-        private List<Vector4> _portsInfosS;
         [SerializeField] private Sprite _sprite;
-        private readonly List<IPort>  _ports = new();
 
-        public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection).ToList();
-        public IEnumerable<IPort> Ports => _ports;
-        public IModuleExtensions Extensions { get; private set;}
+        public IEnumerable<IEdge> Edges => Ports.Where(x => x.IsConnected).Select(x => x.Connection).ToList();
+        public IEnumerable<IPort> Ports { get; private set; }
+        public IModuleExtensions Extensions { get; private set; }
         public IModuleLayout ModuleLayout { get; private set; }
 
         private void Awake()
         {
-            Dictionary<IPort, Vector4> created = new();
+            IEnumerable<(IPort, IPortLayout)> created = GetComponent<IPortInitializer>().GetPorts(this);
             
-            foreach (Vector4 portInfo in _portsInfosS)
-            {
-                IPort port = new Port(this);
-                
-                created.Add(port, portInfo);
-                _ports.Add(port);
-            }
-
             Extensions = new ModuleExtensions(gameObject);
-            ModuleLayout = new ModuleLayout(this, created.Select(x =>new PortLayout(x.Key,new Vector3(x.Value.x,x.Value.y),new Vector3(x.Value.z, x.Value.w))),_sprite);
+
+            Ports = new List<IPort>(created.Select(x => x.Item1));
+            ModuleLayout = new ModuleLayout(this,created.Select(x => x.Item2), _sprite);
         }
     }
 }

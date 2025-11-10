@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5469737783865499535}
   - component: {fileID: 8535451133996336894}
   - component: {fileID: 4479085341360621510}
+  - component: {fileID: -6247044516614984738}
   m_Layer: 0
   m_Name: DefaultModule
   m_TagString: Untagged
@@ -46,11 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b2da4ff9bc41a5ab268251bf7c2e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _portInfos:
-  - <Position>k__BackingField: {x: -0.5, y: 0.5, z: 0}
-    <Normal>k__BackingField: {x: -1, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 0.5, y: 0, z: 0}
-    <Normal>k__BackingField: {x: 1, y: 0, z: 0}
+  _portsInfos:
+  - _position: {x: 0.5, y: 0, z: 0}
+    _normal: {x: 1, y: 0, z: 0}
+  - _position: {x: -0.5, y: 0, z: 0}
+    _normal: {x: -1, y: 0, z: 0}
   _sprite: {fileID: 8288426215254106694, guid: c57efa21a665cde4eb9b09328d35c035, type: 3}
 --- !u!114 &8535451133996336894
 MonoBehaviour:
@@ -83,3 +84,20 @@ MonoBehaviour:
   _speedModifier:
     <Add>k__BackingField: 3
     <Multiplication>k__BackingField: 1
+--- !u!114 &-6247044516614984738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8119833187759213420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea2cd5c190d94fe6ba08f08e8834cd63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules::IM.Modules.PortInitializer
+  _portsInfos:
+  - _position: {x: 0.5, y: 0, z: 0}
+    _normal: {x: 1, y: 0, z: 0}
+  - _position: {x: -0.5, y: 0, z: 0}
+    _normal: {x: -1, y: 0, z: 0}
