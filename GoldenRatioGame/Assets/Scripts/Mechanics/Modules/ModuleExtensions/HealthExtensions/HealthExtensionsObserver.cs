@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
 using IM.Health;
+using UnityEngine;
 
 namespace IM.Modules
 {
@@ -19,7 +20,7 @@ namespace IM.Modules
         public void OnGraphUpdated(IModuleGraphReadOnly graph)
         {
             if (graph == null) throw new ArgumentNullException(nameof(graph));
-
+            
             HashSet<IHealthExtension> currentHealthModules = new();
 
             foreach (IModule module in graph.Modules)

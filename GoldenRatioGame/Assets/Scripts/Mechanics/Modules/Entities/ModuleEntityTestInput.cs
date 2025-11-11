@@ -23,7 +23,7 @@ namespace IM.Modules
         private void Update()
         {
             _abilityUser.Update();
-
+            
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 _graph = _moduleEntity.GraphEditor.StartEditing();
@@ -46,11 +46,19 @@ namespace IM.Modules
                 IModule module = GetNextModule();
                 
                 if(module == null) return;
-                
-                _graph.AddAndConnect(module,
-                    module.Ports.FirstOrDefault(x => !x.IsConnected),
-                    _graph.Modules.FirstOrDefault(x => x.Ports.Any(p => !p.IsConnected))?.Ports
-                        .FirstOrDefault(x => !x.IsConnected));
+
+                foreach (IPort port in module.Ports)
+                {
+                    foreach (IPort targetPort in _graph.Modules.SelectMany(x => x.Ports))
+                    {
+                        if (_graph.CanAddAndConnect(module, port, targetPort))
+                        {
+                            _graph.AddAndConnect(module,port, targetPort);
+                            
+                            return;
+                        }
+                    }
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.P))

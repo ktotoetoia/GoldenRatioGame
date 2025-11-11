@@ -1,11 +1,10 @@
 ﻿using IM.Graphs;
+using IM.ModuleGraph;
 
 namespace IM.Modules
 {
     public interface IModuleGraphVisual
     {
-        IModuleGraphReadOnly Source { get;}
-        
-        void SetSource(IModuleGraphReadOnly source, ICoreGameModule coreModule);
+        IVisualModuleGraph Source { get; set; }
     }
 }

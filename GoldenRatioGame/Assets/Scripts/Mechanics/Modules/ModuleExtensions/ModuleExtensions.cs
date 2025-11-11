@@ -15,6 +15,8 @@ namespace IM.Modules
         public ModuleExtensions(GameObject gameObject)
         {
             _gameObject = gameObject;
+            
+            gameObject.GetComponents(_extensions);
         }
         
         public void AddExtension(IModuleExtension extension)

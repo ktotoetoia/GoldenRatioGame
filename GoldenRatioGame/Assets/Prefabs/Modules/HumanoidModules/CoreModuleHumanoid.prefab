@@ -47,17 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4474704c0f614e8286756bdf2257d795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Modules::IM.Modules.CoreGameModuleMono
-  _portsInfos:
-  - _position: {x: 0, y: 0.5, z: 0}
-    _normal: {x: 0, y: 1, z: 0}
-  - _position: {x: -0.5, y: 0.5, z: 0}
-    _normal: {x: -1, y: 0, z: 0}
-  - _position: {x: 0.5, y: 0.5, z: 0}
-    _normal: {x: 1, y: 0, z: 0}
-  - _position: {x: -0.5, y: -0.5, z: 0}
-    _normal: {x: 0, y: -1, z: 0}
-  - _position: {x: 0.5, y: -0.5, z: 0}
-    _normal: {x: 0, y: -1, z: 0}
   _sprite: {fileID: 8288426215254106694, guid: c57efa21a665cde4eb9b09328d35c035, type: 3}
 --- !u!114 &8535451133996336894
 MonoBehaviour:
@@ -105,11 +94,16 @@ MonoBehaviour:
   _portsInfos:
   - _position: {x: 0, y: 0.5, z: 0}
     _normal: {x: 0, y: 1, z: 0}
+    _tag: Head
   - _position: {x: -0.5, y: 0.5, z: 0}
     _normal: {x: -1, y: 0, z: 0}
+    _tag: ArmLeft
   - _position: {x: 0.5, y: 0.5, z: 0}
     _normal: {x: 1, y: 0, z: 0}
+    _tag: ArmRight
   - _position: {x: -0.5, y: -0.5, z: 0}
     _normal: {x: 0, y: -1, z: 0}
+    _tag: LegLeft
   - _position: {x: 0.5, y: -0.5, z: 0}
     _normal: {x: 0, y: -1, z: 0}
+    _tag: LegRight

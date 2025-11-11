@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6787663460826836495, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[0]._tag
+      value: LegLeft
+      objectReference: {fileID: 0}
+    - target: {fileID: -6787663460826836495, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[1]._tag
+      value: blocked4
+      objectReference: {fileID: 0}
     - target: {fileID: 2805714054282062599, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

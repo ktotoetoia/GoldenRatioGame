@@ -1,4 +1,5 @@
-﻿using IM.Abilities;
+﻿using Codice.Client.BaseCommands.BranchExplorer;
+using IM.Abilities;
 using IM.Graphs;
 using IM.Health;
 using IM.Values;
@@ -18,7 +19,7 @@ namespace IM.Modules
         private void Awake()
         {
             IModule coreModule = Instantiate(_coreModulePrefab).GetComponent<IModule>();
-            ConditionalCommandModuleGraph graph = new ConditionalCommandModuleGraph();
+            ConditionalCommandModuleGraph graph = new ConditionalCommandModuleGraph(new CommandModuleGraph(), new PortTagsModuleGraphConditions());
             AbilityPool = new AbilityPool();
             GraphEditor = new CommandModuleGraphEditor<IConditionalCommandModuleGraph>(graph,new AccessConditionalCommandModuleGraphFactory(), new TrueModuleGraphValidator());
             

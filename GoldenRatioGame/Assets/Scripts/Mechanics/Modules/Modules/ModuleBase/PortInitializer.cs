@@ -15,7 +15,10 @@ namespace IM.Modules
 
             foreach (PortInfo portInfo in _portsInfos)
             {
-                IPort port = new Port(module);
+                IPort port;
+                
+                if(!string.IsNullOrEmpty(portInfo.Tag)) port = new TaggedPort(module, portInfo.Tag);
+                else port = new Port(module);
                 
                 ports.Add((port,new PortLayout(port,portInfo.Position,portInfo.Normal)));
             }
