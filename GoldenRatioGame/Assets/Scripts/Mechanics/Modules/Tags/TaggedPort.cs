@@ -7,9 +7,9 @@ namespace IM.Modules
         public IModule Module { get; }
         public IConnection Connection { get; private set; }
         public bool IsConnected => Connection != null;
-        public string Tag { get; private set; }
+        public ITag Tag { get; private set; }
         
-        public TaggedPort(IModule module, string tag)
+        public TaggedPort(IModule module, ITag tag)
         {
             Module = module;
             Tag = tag;

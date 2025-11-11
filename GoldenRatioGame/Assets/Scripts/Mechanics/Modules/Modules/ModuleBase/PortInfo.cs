@@ -8,10 +8,10 @@ namespace IM.Modules
     {
         [SerializeField] private Vector3 _position;
         [SerializeField] private Vector3 _normal;
-        [SerializeField] private string _tag;
+        [SerializeField] private LazyTag _tag;
         
         public Vector3 Position => _position;
         public Vector3 Normal => _normal;
-        public string Tag => _tag;
+        public ITag Tag => _tag;
     }
 }

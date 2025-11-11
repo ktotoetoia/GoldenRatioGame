@@ -78,7 +78,7 @@ MonoBehaviour:
   _portsInfos:
   - _position: {x: -0.5, y: -0.5, z: 0}
     _normal: {x: -1, y: -1, z: 0}
-    _tag: Head
+    _tag: {fileID: 11400000, guid: 9780612eeb15ddb4e872a9faa88ec63a, type: 2}
   - _position: {x: 0.5, y: 0.5, z: 0}
     _normal: {x: 1, y: 1, z: 0}
-    _tag: blocked3
+    _tag: {fileID: 0}
