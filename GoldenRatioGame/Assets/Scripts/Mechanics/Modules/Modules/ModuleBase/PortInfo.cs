@@ -12,6 +12,6 @@ namespace IM.Modules
         
         public Vector3 Position => _position;
         public Vector3 Normal => _normal;
-        public ITag Tag => _tag;
+        public ITag Tag => (ITag)_tag ?? new EmptyTag();
     }
 }
