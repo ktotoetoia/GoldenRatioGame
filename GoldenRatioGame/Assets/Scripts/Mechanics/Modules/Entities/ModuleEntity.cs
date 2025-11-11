@@ -1,5 +1,4 @@
-﻿using Codice.Client.BaseCommands.BranchExplorer;
-using IM.Abilities;
+﻿using IM.Abilities;
 using IM.Graphs;
 using IM.Health;
 using IM.Values;
@@ -10,7 +9,6 @@ namespace IM.Modules
     public class ModuleEntity : MonoBehaviour, IModuleEntity
     {
         [SerializeField] private GameObject _coreModulePrefab;
-        [SerializeField] private CappedValue<float> _floatHealth;
 
         public GameObject GameObject => gameObject;
         public IModuleGraphEditor<IConditionalCommandModuleGraph> GraphEditor { get; private set; }

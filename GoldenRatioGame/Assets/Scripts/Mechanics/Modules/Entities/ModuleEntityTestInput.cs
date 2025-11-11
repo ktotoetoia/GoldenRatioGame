@@ -43,21 +43,25 @@ namespace IM.Modules
             
             if (Input.GetKeyDown(KeyCode.O))
             {
-                IModule module = GetNextModule();
-                
-                if(module == null) return;
-
-                foreach (IPort port in module.Ports)
+                foreach (GameObject prefab in _modulesPrefabs)
                 {
-                    foreach (IPort targetPort in _graph.Modules.SelectMany(x => x.Ports))
+                    GameObject created =  Instantiate(prefab);
+                    IModule module = created.GetComponent<IModule>();
+                    
+                    foreach (IPort port in module.Ports)
                     {
-                        if (_graph.CanAddAndConnect(module, port, targetPort))
+                        foreach (IPort targetPort in _graph.Modules.SelectMany(x => x.Ports))
                         {
-                            _graph.AddAndConnect(module,port, targetPort);
-                            
-                            return;
+                            if (_graph.CanAddAndConnect(module, port, targetPort))
+                            {
+                                _graph.AddAndConnect(module,port, targetPort);
+                                
+                                return;
+                            }
                         }
                     }
+                    
+                    Destroy(created);
                 }
             }
 
@@ -75,17 +79,6 @@ namespace IM.Modules
             {
                 _graph.Redo(1);
             }
-        }
-
-        private IModule GetNextModule()
-        {
-            if(_modulesPrefabs.Count <= _modulesAdded) return null;
-            
-            IModule module = Instantiate(_modulesPrefabs[_modulesAdded]).GetComponent<IModule>();
-            
-            _modulesAdded++;
-            
-            return module;
         }
     }
 }
