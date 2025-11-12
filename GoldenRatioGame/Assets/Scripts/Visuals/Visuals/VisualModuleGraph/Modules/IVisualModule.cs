@@ -2,7 +2,7 @@
 using IM.Graphs;
 using UnityEngine;
 
-namespace IM.ModuleGraph
+namespace IM.Visuals
 {
     public interface IVisualModule : IModule
     {

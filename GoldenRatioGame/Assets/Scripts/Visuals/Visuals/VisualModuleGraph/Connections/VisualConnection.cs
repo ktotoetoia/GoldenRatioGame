@@ -1,7 +1,7 @@
 ﻿using System;
 using IM.Graphs;
 
-namespace IM.ModuleGraph
+namespace IM.Visuals
 {
     public class VisualConnection : IVisualConnection
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace IM.ModuleGraph
+namespace IM.Visuals
 {
     public interface ITransform : IHavePosition,  IHaveScale, IHaveRotation
     {

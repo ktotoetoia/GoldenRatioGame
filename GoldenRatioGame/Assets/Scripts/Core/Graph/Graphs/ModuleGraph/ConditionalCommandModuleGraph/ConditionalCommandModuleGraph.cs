@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace IM.Graphs
 {
-    public class ConditionalCommandModuleGraph : IConditionalCommandModuleGraph,INotifyOnEditingEnded
+    public class ConditionalCommandModuleGraph : IConditionalCommandModuleGraph, INotifyOnEditingEnded
     {
         private readonly ICommandModuleGraph _graph;
         private readonly IModuleGraphConditions _conditions;
@@ -20,7 +20,7 @@ namespace IM.Graphs
             
         }
         
-        public ConditionalCommandModuleGraph(ICommandModuleGraph graph) : this(graph, new StillModuleGraphConditions()){}
+        public ConditionalCommandModuleGraph(ICommandModuleGraph graph) : this(graph, new StillModuleGraphConditions()) { }
 
         public ConditionalCommandModuleGraph(ICommandModuleGraph graph, IModuleGraphConditions conditions)
         {

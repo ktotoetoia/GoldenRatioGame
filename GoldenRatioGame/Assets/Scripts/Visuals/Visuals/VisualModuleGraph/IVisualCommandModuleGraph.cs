@@ -1,6 +1,6 @@
 ﻿using IM.Commands;
 
-namespace IM.ModuleGraph
+namespace IM.Visuals
 {
     public interface IVisualCommandModuleGraph : IVisualModuleGraph, ICommandUser
     {

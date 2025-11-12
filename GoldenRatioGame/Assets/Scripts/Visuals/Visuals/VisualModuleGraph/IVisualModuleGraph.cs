@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using IM.Graphs;
 
-namespace IM.ModuleGraph
+namespace IM.Visuals
 {
     public interface IVisualModuleGraph : IModuleGraphReadOnly
     {

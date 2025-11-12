@@ -26,7 +26,14 @@ namespace IM.Modules
             GraphEditor.AddObserver(new HealthExtensionsObserver(GetComponent<IFloatHealthValuesGroup>()));
             GraphEditor.AddObserver(new AbilityExtensionsObserver(AbilityPool as AbilityPool));
             
-            graph.AddModule(coreModule);
+            foreach (IModuleGraphObserver observer in GetComponents<IModuleGraphObserver>())
+            {
+                GraphEditor.AddObserver(observer);
+            }
+
+            ICommandModuleGraph f = GraphEditor.StartEditing();
+            f.AddModule(coreModule);
+            GraphEditor.TrySaveChanges();
         }
     }
 }

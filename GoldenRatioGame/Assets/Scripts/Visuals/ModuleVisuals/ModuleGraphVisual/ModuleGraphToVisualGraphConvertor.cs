@@ -1,25 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using IM.Base;
 using IM.Graphs;
-using IM.ModuleGraph;
+using IM.Visuals;
 using UnityEngine;
+using Transform = IM.Visuals.Transform;
 
 namespace IM.Modules
 {
-    public class ModuleGraphVisualObserver : MonoBehaviour, IModuleGraphObserver
+    public class ModuleGraphToVisualGraphConvertor : IFactory<IVisualModuleGraph, IModuleGraphReadOnly>
     {
-        private readonly Dictionary<IPort, IVisualPort> _visualPortMap = new();
-        
-        public void OnGraphUpdated(IModuleGraphReadOnly graph)
+        public IVisualModuleGraph Create(IModuleGraphReadOnly source)
         {
-            if (graph == null) throw new ArgumentNullException(nameof(graph));
-            
-            GetComponent<IModuleGraphVisual>().Source = CreateVisualGraph(graph);
-        }
-        
-        private IVisualModuleGraph CreateVisualGraph(IModuleGraphReadOnly source)
-        {
+            Dictionary<IPort, IVisualPort> visualPortMap = new();
             ICoreGameModule coreModule = source.Modules.FirstOrDefault(x => x is ICoreGameModule) as ICoreGameModule;
             IVisualModuleGraph visualGraph = new VisualCommandModuleGraph();
             
@@ -28,7 +21,7 @@ namespace IM.Modules
 
             foreach (IGameModule module in traversal.Enumerate<IGameModule>(coreModule))
             {
-                IVisualModule visualModule = Create(module.ModuleLayout);
+                IVisualModule visualModule = Create(module.ModuleLayout,visualPortMap);
                 moduleToVisual[module] = visualModule;
                 visualGraph.AddModule(visualModule);
                 visualModule.Sprite =  module.ModuleLayout.Sprite;
@@ -44,8 +37,8 @@ namespace IM.Modules
                     !moduleToVisual.TryGetValue(outputModule, out IVisualModule outputVisual))
                     continue;
 
-                if (!_visualPortMap.TryGetValue(connection.Input, out IVisualPort inputPort) ||
-                    !_visualPortMap.TryGetValue(connection.Output, out IVisualPort outputPort))
+                if (!visualPortMap.TryGetValue(connection.Input, out IVisualPort inputPort) ||
+                    !visualPortMap.TryGetValue(connection.Output, out IVisualPort outputPort))
                     continue;
 
                 visualGraph.Connect(outputPort, inputPort);
@@ -54,19 +47,19 @@ namespace IM.Modules
             return visualGraph;
         }
 
-        private IVisualModule Create(IModuleLayout moduleLayout)
+        private IVisualModule Create(IModuleLayout moduleLayout,Dictionary<IPort, IVisualPort> visualPortMap)
         {
-            GizmosVisualModule gizmosVisualModule = new GizmosVisualModule(new ModuleGraph.Transform(Vector3.zero, Vector3.one, new Quaternion(0,0,0,1)));
+            GizmosVisualModule gizmosVisualModule = new GizmosVisualModule(new Transform(Vector3.zero, Vector3.one, new Quaternion(0,0,0,1)));
             
             foreach (IPortLayout portLayout in moduleLayout.PortLayouts)
             {
                 IVisualPort visualPort = new VisualPort(
                     gizmosVisualModule,
-                    new ModuleGraph.Transform(gizmosVisualModule.Transform, portLayout.RelativePosition,Vector3.one,  Quaternion.LookRotation(portLayout.Normal, Vector3.up))
+                    new Transform(gizmosVisualModule.Transform, portLayout.RelativePosition,Vector3.one,  Quaternion.LookRotation(portLayout.Normal, Vector3.up))
                 );
 
                 gizmosVisualModule.AddPort(visualPort);
-                _visualPortMap[portLayout.Port] = visualPort;
+                visualPortMap[portLayout.Port] = visualPort;
             }
 
             return gizmosVisualModule;

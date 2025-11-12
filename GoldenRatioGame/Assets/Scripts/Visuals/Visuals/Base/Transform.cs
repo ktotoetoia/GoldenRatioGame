@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace IM.ModuleGraph
+namespace IM.Visuals
 {
     public class Transform : ITransform
     {

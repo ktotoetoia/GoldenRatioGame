@@ -1,22 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using IM.ModuleGraph;
 using IM.Values;
+using IM.Visuals;
 using UnityEngine;
 
 namespace IM.Modules
 {
-    public class ModuleGraphVisual : MonoBehaviour,IModuleGraphVisual
+    public class ModuleGraphVisualDrawer : IModuleGraphVisualDrawer
     {
         private readonly Dictionary<Texture, Material> _materialCache = new();
         
-        public IVisualModuleGraph Source { get; set; }
-        
-        private void OnDrawGizmos()
+        public void Draw(IVisualModuleGraph source)
         {
-            if (Source == null) return;
+            if (source == null) return;
 
-            foreach (IVisualModule module in Source.Modules)
+            foreach (IVisualModule module in source.Modules)
             {
                 Bounds localBounds = BoundsUtility.CreateBoundsNormalized(module.Ports.Select(p => p.Transform.LocalPosition));
 
@@ -57,7 +55,7 @@ namespace IM.Modules
             }
 
             Gizmos.color = Color.cyan;
-            foreach (IVisualConnection connection in Source.Connections)
+            foreach (IVisualConnection connection in source.Connections)
             {
                 Vector3 from = connection.Output.Transform.Position;
                 Vector3 to = connection.Input.Transform.Position;
