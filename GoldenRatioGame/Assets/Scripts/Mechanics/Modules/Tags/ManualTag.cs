@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    [CreateAssetMenu(menuName = "Tags/Tag")]
+    [CreateAssetMenu(menuName = "Tags/ManualTag")]
     public class ManualTag : LazyTag, IEquatable<ManualTag>
     {
         [SerializeField] private string _tagName;
@@ -12,10 +12,7 @@ namespace IM.Modules
         
         public bool Equals(ManualTag other)
         {
-            if (!other) return false;
-            if (ReferenceEquals(this, other)) return true;
-
-            return _tagName == other._tagName;
+            return other && _tagName == other._tagName;
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace IM.Graphs
 {
-    public class ConditionalCommandModuleGraph : IConditionalCommandModuleGraph
+    public class ConditionalCommandModuleGraph : IConditionalCommandModuleGraph,INotifyOnEditingEnded
     {
         private readonly ICommandModuleGraph _graph;
         private readonly IModuleGraphConditions _conditions;
@@ -78,5 +78,13 @@ namespace IM.Graphs
         public bool CanRedo(int count) => _graph.CanRedo(count);
         public void Undo(int count) => _graph.Undo(count);
         public void Redo(int count) => _graph.Redo(count);
+
+        public void OnEditingEnded()
+        {
+            if (_graph is INotifyOnEditingEnded ntf)
+            {
+                ntf.OnEditingEnded();
+            }
+        }
     }
 }

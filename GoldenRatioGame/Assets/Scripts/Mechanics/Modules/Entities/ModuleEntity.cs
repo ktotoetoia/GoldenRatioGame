@@ -19,7 +19,7 @@ namespace IM.Modules
             IModule coreModule = Instantiate(_coreModulePrefab).GetComponent<IModule>();
             ConditionalCommandModuleGraph graph = new ConditionalCommandModuleGraph(new CommandModuleGraph(), new PortTagsModuleGraphConditions());
             AbilityPool = new AbilityPool();
-            GraphEditor = new CommandModuleGraphEditor<IConditionalCommandModuleGraph>(graph,new AccessConditionalCommandModuleGraphFactory(), new TrueModuleGraphValidator());
+            GraphEditor = new CommandModuleGraphEditor<IConditionalCommandModuleGraph>(graph,new AccessConditionalCommandModuleGraphFactory());
             
             GraphEditor.AddObserver(new EntityInjector(this));
             GraphEditor.AddObserver(new SpeedExtensionsObserver(GetComponent<IHaveSpeed>()));

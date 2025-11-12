@@ -4,7 +4,7 @@ using IM.Commands;
 
 namespace IM.Graphs
 {
-    public class CommandModuleGraph : ICommandModuleGraph
+    public class CommandModuleGraph : ICommandModuleGraph, INotifyOnEditingEnded
     {
         private readonly CommandStack _commands = new();
         private readonly List<IModule> _modules = new();
@@ -75,9 +75,14 @@ namespace IM.Graphs
             _commands.ExecuteAndPush(command);
         }
 
+        public void OnEditingEnded()
+        {
+            ClearUndoCommands();
+            ClearRedoCommands();
+        }
+        
         public void Undo(int count) => _commands.Undo(count);
         public void Redo(int count) => _commands.Redo(count);
-
         public bool CanUndo(int count) => _commands.CanUndo(count);
         public bool CanRedo(int count) => _commands.CanRedo(count);
         public void ClearUndoCommands() => _commands.ClearUndoCommands();

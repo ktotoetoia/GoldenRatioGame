@@ -11,9 +11,9 @@ namespace IM.Modules
     {
         [SerializeField] private ModuleEntity _moduleEntity;
         [SerializeField] private List<GameObject> _modulesPrefabs;
-        private int _modulesAdded;
         private PreferredKeyboardBindingsAbilityUser _abilityUser;
         private IConditionalCommandModuleGraph  _graph;
+        private int _modulesAdded;
         
         private void Awake()
         {

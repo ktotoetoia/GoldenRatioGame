@@ -91,10 +91,9 @@ namespace IM.Graphs
             _accessModuleGraph.CanUse = false;
             _accessModuleGraph = null;
 
-            if (_graph is CommandModuleGraph cmd)
+            if (_graph is INotifyOnEditingEnded ntf)
             {
-                cmd.ClearUndoCommands();
-                cmd.ClearRedoCommands();
+                ntf.OnEditingEnded();
             }
         }
     }

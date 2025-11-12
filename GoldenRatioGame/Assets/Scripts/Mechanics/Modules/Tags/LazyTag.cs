@@ -10,16 +10,12 @@ namespace IM.Modules
 
         public virtual bool Equals(LazyTag other)
         {
-            if (!other) return false;
-            if (ReferenceEquals(this, other)) return true;
-
-            return TagName == other.TagName;
+            return other && TagName == other.TagName;
         }
 
         public virtual bool Equals(ITag other)
         {
-            if (other is LazyTag tag) return Equals(tag);
-            return false;
+            return other is LazyTag tag && Equals(tag);
         }
     }
 }
