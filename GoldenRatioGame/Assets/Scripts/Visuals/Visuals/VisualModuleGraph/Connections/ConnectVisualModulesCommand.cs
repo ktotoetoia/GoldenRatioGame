@@ -62,27 +62,32 @@ namespace IM.Visuals
 
         private void AlignModules()
         {
-            ITransform outputTransform = _output.Module.Transform;
-            ITransform inputTransform = _input.Module.Transform;
+            ITransform outputT = _output.Module.Transform;
+            ITransform inputT  = _input.Module.Transform;
 
-            _prevInputPosition = inputTransform.Position;
-            _prevInputRotation = inputTransform.Rotation;
+            _prevInputPosition = inputT.Position;
+            _prevInputRotation = inputT.Rotation;
 
-            Vector3 outputWorldPos = outputTransform.Position + outputTransform.Rotation * _output.Transform.LocalPosition;
-            Quaternion outputWorldRot = outputTransform.Rotation * _output.Transform.LocalRotation;
+            Vector3 outputLocal = Vector3.Scale(_output.Transform.LocalPosition, outputT.Scale);
+            Vector3 inputLocal  = Vector3.Scale(_input.Transform.LocalPosition, inputT.Scale);
 
-            Vector3 inputWorldPos = inputTransform.Position + inputTransform.Rotation * _input.Transform.LocalPosition;
-            Quaternion inputWorldRot = inputTransform.Rotation * _input.Transform.LocalRotation;
+            Vector3 outputWorldPos = outputT.Position + outputT.Rotation * outputLocal;
 
-            Quaternion desiredRotation = Quaternion.FromToRotation(inputWorldRot * Vector3.forward, -(outputWorldRot * Vector3.forward))
-                                         * inputTransform.Rotation;
+            Quaternion outputWorldRot = outputT.Rotation * _output.Transform.LocalRotation;
+            Quaternion inputWorldRot  = inputT.Rotation * _input.Transform.LocalRotation;
 
-            Vector3 rotatedInputRelPos = desiredRotation * _input.Transform.LocalPosition;
+            Quaternion deltaRot =
+                Quaternion.FromToRotation(inputWorldRot * Vector3.forward,
+                    -(outputWorldRot * Vector3.forward));
+
+            Quaternion desiredRotation = deltaRot * inputT.Rotation;
+
+            Vector3 rotatedInputRelPos = desiredRotation * inputLocal;
 
             Vector3 desiredPosition = outputWorldPos - rotatedInputRelPos;
 
-            inputTransform.Position = desiredPosition;
-            inputTransform.Rotation = desiredRotation;
+            inputT.Position = desiredPosition;
+            inputT.Rotation = desiredRotation;
         }
     }
 }

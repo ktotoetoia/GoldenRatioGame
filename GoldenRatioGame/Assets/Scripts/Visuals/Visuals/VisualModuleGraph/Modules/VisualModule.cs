@@ -5,7 +5,7 @@ using IM.Graphs;
 
 namespace IM.Visuals
 {
-    public class GizmosVisualModule : IVisualModule
+    public class VisualModule : IVisualModule
     {
         private readonly List<IVisualPort> _ports = new();
         
@@ -15,7 +15,7 @@ namespace IM.Visuals
         public IEnumerable<IVisualPort> Ports => _ports;
         public ITransform Transform { get; }
         
-        public GizmosVisualModule(ITransform transform)
+        public VisualModule(ITransform transform)
         {
             Transform = transform;
         }

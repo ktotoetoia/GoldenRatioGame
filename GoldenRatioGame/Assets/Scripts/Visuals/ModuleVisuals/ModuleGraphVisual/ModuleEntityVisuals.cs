@@ -7,7 +7,12 @@ namespace IM.Modules
 {
     public class ModuleEntityVisuals : MonoBehaviour, IModuleEntityVisuals, IModuleGraphObserver
     {
-        private IModuleGraphVisualDrawer _graphVisualDrawer;
+        [SerializeField] private bool _drawBounds = true;
+        [SerializeField] private bool _drawSprites = true;
+        [SerializeField] private bool _drawPorts = true;
+        
+        private readonly ModuleGraphToVisualGraphConvertor _graphToVisualGraphConvertor = new();
+        private ModuleGraphVisualDrawer _graphVisualDrawer;
         private IVisualModuleGraph _graphToDraw;
         private Vector3 _lastPosition;
         
@@ -18,6 +23,10 @@ namespace IM.Modules
 
         private void Update()
         {
+            _graphVisualDrawer.DrawBounds = _drawBounds;
+            _graphVisualDrawer.DrawSprites = _drawSprites;
+            _graphVisualDrawer.DrawPorts = _drawPorts;
+            
             Vector3 diff = transform.position - _lastPosition;
 
             foreach (IVisualModule module in _graphToDraw.Modules)
@@ -39,7 +48,8 @@ namespace IM.Modules
         {
             if (graph == null) throw new ArgumentNullException(nameof(graph));
 
-            _graphToDraw = new ModuleGraphToVisualGraphConvertor().Create(graph);
+            _graphToVisualGraphConvertor.Position = transform.position;
+            _graphToDraw = _graphToVisualGraphConvertor.Create(graph);
         }
     }
 }

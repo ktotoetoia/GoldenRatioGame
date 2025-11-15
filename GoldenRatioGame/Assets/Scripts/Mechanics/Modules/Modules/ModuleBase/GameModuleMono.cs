@@ -21,7 +21,7 @@ namespace IM.Modules
             Extensions = new ModuleExtensions(gameObject);
 
             Ports = new List<IPort>(created.Select(x => x.Item1));
-            ModuleLayout = new ModuleLayout(this,created.Select(x => x.Item2), _sprite);
+            ModuleLayout = new ModuleLayout(this,created.Select(x => x.Item2), _sprite, _sprite.bounds);
         }
     }
 }

@@ -9,13 +9,15 @@ namespace IM.Modules
     {
         public IGameModule Module { get; }
         public IEnumerable<IPortLayout> PortLayouts { get; }
+        public Bounds Bounds { get; }
         public Sprite Sprite { get; }
         
-        public ModuleLayout(IGameModule module,IEnumerable<IPortLayout> portLayouts, Sprite sprite)
+        public ModuleLayout(IGameModule module,IEnumerable<IPortLayout> portLayouts, Sprite sprite, Bounds bounds)
         {
             Module = module;
             PortLayouts = portLayouts.ToList();
             Sprite = sprite;
+            Bounds = bounds;
         }
 
         public IPortLayout GetPortLayoutFor(IPort port)

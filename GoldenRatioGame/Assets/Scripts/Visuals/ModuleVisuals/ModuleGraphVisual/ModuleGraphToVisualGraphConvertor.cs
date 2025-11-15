@@ -10,6 +10,8 @@ namespace IM.Modules
 {
     public class ModuleGraphToVisualGraphConvertor : IFactory<IVisualModuleGraph, IModuleGraphReadOnly>
     {
+        public Vector3 Position { get; set; }
+        
         public IVisualModuleGraph Create(IModuleGraphReadOnly source)
         {
             Dictionary<IPort, IVisualPort> visualPortMap = new();
@@ -49,20 +51,20 @@ namespace IM.Modules
 
         private IVisualModule Create(IModuleLayout moduleLayout,Dictionary<IPort, IVisualPort> visualPortMap)
         {
-            GizmosVisualModule gizmosVisualModule = new GizmosVisualModule(new Transform(Vector3.zero, Vector3.one, new Quaternion(0,0,0,1)));
+            VisualModule visualModule = new VisualModule(new Transform(Position, moduleLayout.Bounds.size, new Quaternion(0,0,0,1)));
             
             foreach (IPortLayout portLayout in moduleLayout.PortLayouts)
             {
                 IVisualPort visualPort = new VisualPort(
-                    gizmosVisualModule,
-                    new Transform(gizmosVisualModule.Transform, portLayout.RelativePosition,Vector3.one,  Quaternion.LookRotation(portLayout.Normal, Vector3.up))
+                    visualModule,
+                    new Transform(visualModule.Transform, portLayout.RelativePosition,Vector3.one,  Quaternion.LookRotation(portLayout.Normal, Vector3.up))
                 );
 
-                gizmosVisualModule.AddPort(visualPort);
+                visualModule.AddPort(visualPort);
                 visualPortMap[portLayout.Port] = visualPort;
             }
 
-            return gizmosVisualModule;
+            return visualModule;
         }
     }
 }

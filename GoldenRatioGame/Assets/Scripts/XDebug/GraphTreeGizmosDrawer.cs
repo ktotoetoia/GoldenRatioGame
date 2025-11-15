@@ -3,7 +3,6 @@ using System.Linq;
 using IM.Graphs;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace IM.Modules
 {
@@ -12,6 +11,8 @@ namespace IM.Modules
     {
         private IModuleEntity _entity;
         public IGraphReadOnly Graph { get; set; }
+
+        [SerializeField] private bool _isOn = true;
 
         [Header("Layout")]
         [SerializeField] private float _levelSpacing    = 2.0f;
@@ -34,6 +35,8 @@ namespace IM.Modules
 
         private void OnDrawGizmos()
         {
+            if(!_isOn) return;
+            
             if (_entity is { GraphEditor: not null })
             {
                 Graph = _entity.GraphEditor.Graph;

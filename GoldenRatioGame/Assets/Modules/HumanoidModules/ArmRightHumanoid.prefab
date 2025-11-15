@@ -16,6 +16,38 @@ PrefabInstance:
       propertyPath: _portsInfos.Array.data[1]._tag
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: -6787663460826836495, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[0]._normal.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6787663460826836495, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[0]._normal.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6787663460826836495, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[1]._normal.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6787663460826836495, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[1]._normal.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6787663460826836495, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[0]._position.x
+      value: -0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -6787663460826836495, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[0]._position.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -6787663460826836495, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[1]._position.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -6787663460826836495, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[1]._position.y
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2805714054282062599, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -55,6 +87,14 @@ PrefabInstance:
     - target: {fileID: 2805714054282062599, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469737783865499535, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _sprite
+      value: 
+      objectReference: {fileID: -5711908598854653283, guid: 86cab99528ae4794fbd0765ef014b145, type: 3}
+    - target: {fileID: 5469737783865499535, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _bounds.m_Extent.x
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5469737783865499535, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: _portInfos.Array.size

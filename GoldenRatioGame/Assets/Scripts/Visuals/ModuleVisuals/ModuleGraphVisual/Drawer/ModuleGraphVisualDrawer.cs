@@ -8,6 +8,10 @@ namespace IM.Modules
 {
     public class ModuleGraphVisualDrawer : IModuleGraphVisualDrawer
     {
+        public bool DrawBounds { get; set; }= true;
+        public bool DrawSprites { get; set; }= true;
+        public bool DrawPorts { get; set; }= true;
+        
         private readonly Dictionary<Texture, Material> _materialCache = new();
         
         public void Draw(IVisualModuleGraph source)
@@ -16,19 +20,17 @@ namespace IM.Modules
 
             foreach (IVisualModule module in source.Modules)
             {
-                Bounds localBounds = BoundsUtility.CreateBoundsNormalized(module.Ports.Select(p => p.Transform.LocalPosition));
-
                 Matrix4x4 oldMatrix = Gizmos.matrix;
                 Gizmos.matrix = Matrix4x4.TRS(module.Transform.Position, module.Transform.Rotation, Vector3.one);
                 Gizmos.color = Color.white;
-                Gizmos.DrawWireCube(Vector3.zero, localBounds.size);
+                if (DrawBounds) Gizmos.DrawWireCube(Vector3.zero, module.Transform.Scale);
                 Gizmos.matrix = oldMatrix;
 
                 Vector3 center = module.Transform.Position;
-                Vector3 size = localBounds.size;
+                Vector3 size = module.Transform.Scale;
                 Sprite sprite = module.Sprite;
                 
-                if (sprite && sprite.texture)
+                if (sprite && sprite.texture && DrawSprites)
                 {
                     Material mat = GetMaterialForSprite(sprite);
                     mat.SetPass(0);
@@ -46,11 +48,14 @@ namespace IM.Modules
 
                     GL.End();
                 }
-                
-                foreach (IVisualPort port in module.Ports)
+
+                if (DrawPorts)
                 {
-                    Gizmos.color = Color.yellow;
-                    Gizmos.DrawSphere(port.Transform.Position, 0.1f);
+                    foreach (IVisualPort port in module.Ports)
+                    {
+                        Gizmos.color = Color.yellow;
+                        Gizmos.DrawSphere(port.Transform.Position, 0.1f);
+                    }
                 }
             }
 

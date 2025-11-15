@@ -8,6 +8,7 @@ namespace IM.Modules
     {
         IGameModule Module { get; }
         IEnumerable<IPortLayout> PortLayouts { get; }
+        Bounds Bounds { get; }
         Sprite Sprite { get; }
         IPortLayout GetPortLayoutFor(IPort port);
     }

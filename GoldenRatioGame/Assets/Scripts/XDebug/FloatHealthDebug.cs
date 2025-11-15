@@ -5,11 +5,12 @@ namespace IM.Health
     public class FloatHealthDebug : MonoBehaviour
     {
         [SerializeField] private GameObject _target;
+        [SerializeField] private bool _isOn = true;
         private IFloatHealth _health;
         
         private void OnDrawGizmos()
         {
-            if (_target == null || _health == null && !_target.TryGetComponent(out _health))
+            if (_target == null || _health == null && !_target.TryGetComponent(out _health) || !_isOn)
                 return;
 
             float ratio = Mathf.InverseLerp(_health.Health.MinValue, _health.Health.MaxValue, _health.Health.Value);

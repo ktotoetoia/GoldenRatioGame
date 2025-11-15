@@ -5,11 +5,12 @@ namespace IM.Health
     public class FloatHealthValuesGroupDebug : MonoBehaviour
     {
         [SerializeField] private GameObject _target;
+        [SerializeField] private bool _isOn = true;
         private IFloatHealthValuesGroup _health;
 
         private void OnDrawGizmos()
         {
-            if (_target == null || _health == null && !_target.TryGetComponent(out _health))
+            if (!_isOn || _target == null || _health == null && !_target.TryGetComponent(out _health))
                 return;
 
             var health = _health.Health;

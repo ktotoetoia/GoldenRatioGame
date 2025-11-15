@@ -7,6 +7,7 @@ namespace IM.Health
     {
         [SerializeField] private GameObject _target;
         [SerializeField] private float _value;
+        [SerializeField] private bool _isOn = true;
         private IFloatHealth _health;
         private HealthChangeResult _healthChangeResult;
         private bool _hasResult;
@@ -31,6 +32,8 @@ namespace IM.Health
 
         private void OnDrawGizmos()
         {
+            if(!_isOn) return;
+            
             Vector3 pos = _target.transform.position + Vector3.up * 3.5f;
 
             string text =
