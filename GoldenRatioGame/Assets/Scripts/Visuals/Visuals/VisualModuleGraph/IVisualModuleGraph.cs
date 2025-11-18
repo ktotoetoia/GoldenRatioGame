@@ -5,6 +5,8 @@ namespace IM.Visuals
 {
     public interface IVisualModuleGraph : IModuleGraphReadOnly
     {
+        ITransform Transform { get; }
+        
         new IEnumerable<IVisualModule> Modules { get; }
         new IEnumerable<IVisualConnection> Connections { get; }
         void AddModule(IVisualModule module);

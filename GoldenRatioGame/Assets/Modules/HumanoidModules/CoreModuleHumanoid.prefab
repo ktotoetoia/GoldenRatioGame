@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedModifier:
-    <Add>k__BackingField: 3
+    <Add>k__BackingField: 1
     <Multiplication>k__BackingField: 1
 --- !u!114 &-5815071029666591363
 MonoBehaviour:

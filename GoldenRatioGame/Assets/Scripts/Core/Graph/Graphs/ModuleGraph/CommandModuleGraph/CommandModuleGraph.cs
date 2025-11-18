@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using IM.Base;
 using IM.Commands;
 
 namespace IM.Graphs
@@ -9,10 +8,10 @@ namespace IM.Graphs
         private readonly CommandStack _commands = new();
         private readonly List<IModule> _modules = new();
         private readonly List<IConnection> _connections = new();
-        private readonly IFactory<ICommand, IModule, ICollection<IModule>> _addModuleCommandFactory;
-        private readonly IFactory<ICommand, IModule, ICollection<IModule>, ICollection<IConnection>> _removeModuleCommandFactory;
-        private readonly IFactory<IConnectCommand, IPort, IPort, ICollection<IConnection>> _connectCommandFactory;
-        private readonly IFactory<ICommand, IConnection, ICollection<IConnection>> _disconnectCommandFactory;
+        private readonly IAddModuleCommandFactory _addModuleCommandFactory;
+        private readonly IRemoveModuleCommandFactory _removeModuleCommandFactory;
+        private readonly IConnectCommandFactory _connectCommandFactory;
+        private readonly IDisconnectCommandFactory _disconnectCommandFactory;
 
         public IEnumerable<IModule> Modules => _modules;
         public IEnumerable<INode> Nodes => _modules;
@@ -27,10 +26,10 @@ namespace IM.Graphs
         }
 
         public CommandModuleGraph(
-            IFactory<ICommand, IModule, ICollection<IModule>> addModuleCommandFactory,
-            IFactory<ICommand, IModule, ICollection<IModule>, ICollection<IConnection>> removeModuleCommandFactory,
-            IFactory<IConnectCommand, IPort, IPort, ICollection<IConnection>> connectCommandFactory,
-            IFactory<ICommand, IConnection, ICollection<IConnection>> disconnectCommandFactory)
+            IAddModuleCommandFactory addModuleCommandFactory,
+            IRemoveModuleCommandFactory removeModuleCommandFactory,
+            IConnectCommandFactory connectCommandFactory,
+            IDisconnectCommandFactory disconnectCommandFactory)
         {
             _addModuleCommandFactory = addModuleCommandFactory;
             _removeModuleCommandFactory = removeModuleCommandFactory;

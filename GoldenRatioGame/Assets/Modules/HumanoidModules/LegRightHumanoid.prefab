@@ -15,7 +15,7 @@ PrefabInstance:
     - target: {fileID: -6787663460826836495, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: _portsInfos.Array.data[1]._tag
       value: 
-      objectReference: {fileID: 11400000, guid: fb69546f865b0a7489a6e04e9bf3cad9, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: -6787663460826836495, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: _portsInfos.Array.data[0]._normal.x
       value: 0
@@ -130,5 +130,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Modules::IM.Modules.SpeedExtensionComponent
   _speedModifier:
-    <Add>k__BackingField: 3
+    <Add>k__BackingField: 2
     <Multiplication>k__BackingField: 1

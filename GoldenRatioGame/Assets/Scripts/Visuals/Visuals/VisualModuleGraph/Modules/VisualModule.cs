@@ -14,6 +14,11 @@ namespace IM.Visuals
         IEnumerable<IPort> IModule.Ports => _ports;
         public IEnumerable<IVisualPort> Ports => _ports;
         public ITransform Transform { get; }
+
+        public VisualModule() : this(new Transform())
+        {
+            
+        }
         
         public VisualModule(ITransform transform)
         {

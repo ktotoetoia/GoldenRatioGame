@@ -684,7 +684,7 @@ MonoBehaviour:
     m_PreInfinity: 0
     m_PostInfinity: 0
     m_RotationOrder: 4
-  _rawSpeed: 5.21
+  _rawSpeed: 0
   _accelerationTime: 0.2
 --- !u!114 &1908329183
 MonoBehaviour:
@@ -781,9 +781,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad5a98d0347404180f0ac8e5d4dfe78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.ModuleEntityVisuals
-  _drawBounds: 0
+  _drawBounds: 1
   _drawSprites: 1
   _drawPorts: 0
+  _flip: 0
+  _position: {x: 1, y: 1, z: 1}
+  _scale: {x: 1, y: 1, z: 1}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ namespace IM.Visuals
     public class VisualCommandModuleGraph : IVisualCommandModuleGraph
     {
         private readonly ICommandModuleGraph _commandModuleGraph = new CommandModuleGraph(new AddModuleCommandFactory(),new RemoveAndDisconnectCommandFactory(),new ConnectVisualCommandFactory(), new DisconnectCommandFactory());
+        public ITransform Transform { get; } = new Transform();
         
         public IEnumerable<INode> Nodes => _commandModuleGraph.Nodes;
         public IEnumerable<IEdge> Edges => _commandModuleGraph.Edges;

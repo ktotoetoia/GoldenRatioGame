@@ -10,7 +10,9 @@ namespace IM.Modules
         [SerializeField] private bool _drawBounds = true;
         [SerializeField] private bool _drawSprites = true;
         [SerializeField] private bool _drawPorts = true;
-        
+        [SerializeField] private bool _flip;
+        [SerializeField] private Vector3 _position = Vector3.one;
+        [SerializeField] private Vector3 _scale = Vector3.one;
         private readonly ModuleGraphToVisualGraphConvertor _graphToVisualGraphConvertor = new();
         private ModuleGraphVisualDrawer _graphVisualDrawer;
         private IVisualModuleGraph _graphToDraw;
@@ -27,14 +29,8 @@ namespace IM.Modules
             _graphVisualDrawer.DrawSprites = _drawSprites;
             _graphVisualDrawer.DrawPorts = _drawPorts;
             
-            Vector3 diff = transform.position - _lastPosition;
-
-            foreach (IVisualModule module in _graphToDraw.Modules)
-            {
-                module.Transform.Position += diff;
-            }
-            
-            _lastPosition = transform.position;
+            _graphToDraw.Transform.Position = transform.position;
+            _graphToDraw.Transform.Scale = _scale;
         }
 
         private void OnDrawGizmos()
@@ -48,7 +44,6 @@ namespace IM.Modules
         {
             if (graph == null) throw new ArgumentNullException(nameof(graph));
 
-            _graphToVisualGraphConvertor.Position = transform.position;
             _graphToDraw = _graphToVisualGraphConvertor.Create(graph);
         }
     }

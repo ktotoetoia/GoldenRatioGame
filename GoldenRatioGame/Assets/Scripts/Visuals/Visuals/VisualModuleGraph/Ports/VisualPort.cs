@@ -11,6 +11,11 @@ namespace IM.Visuals
         public bool IsConnected => Connection != null;
         public ITransform Transform { get; }
 
+        public VisualPort(IVisualModule module) : this(module, new Transform())
+        {
+            
+        }
+
         public VisualPort(IVisualModule module, ITransform transform)
         {
             Module = module;

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using IM.Base;
 using IM.Graphs;
 
 namespace IM.Visuals
 {
-    public class ConnectVisualCommandFactory : IFactory<IConnectCommand, IPort, IPort, ICollection<IConnection>>
+    public class ConnectVisualCommandFactory : IConnectCommandFactory
     {
         public IConnectCommand Create(IPort param1, IPort param2, ICollection<IConnection> param3)
         {

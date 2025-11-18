@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using IM.Base;
 using IM.Commands;
 
 namespace IM.Graphs
 {
-    public class DisconnectCommandFactory : IFactory<ICommand, IConnection, ICollection<IConnection>>
+    public class DisconnectCommandFactory : IDisconnectCommandFactory
     {
         public ICommand Create(IConnection param1, ICollection<IConnection> param2)
         {

@@ -4,14 +4,11 @@ using IM.Base;
 using IM.Graphs;
 using IM.Visuals;
 using UnityEngine;
-using Transform = IM.Visuals.Transform;
 
 namespace IM.Modules
 {
     public class ModuleGraphToVisualGraphConvertor : IFactory<IVisualModuleGraph, IModuleGraphReadOnly>
     {
-        public Vector3 Position { get; set; }
-        
         public IVisualModuleGraph Create(IModuleGraphReadOnly source)
         {
             Dictionary<IPort, IVisualPort> visualPortMap = new();
@@ -23,7 +20,7 @@ namespace IM.Modules
 
             foreach (IGameModule module in traversal.Enumerate<IGameModule>(coreModule))
             {
-                IVisualModule visualModule = Create(module.ModuleLayout,visualPortMap);
+                IVisualModule visualModule = Create(module.ModuleLayout,visualPortMap,visualGraph.Transform);
                 moduleToVisual[module] = visualModule;
                 visualGraph.AddModule(visualModule);
                 visualModule.Sprite =  module.ModuleLayout.Sprite;
@@ -49,17 +46,23 @@ namespace IM.Modules
             return visualGraph;
         }
 
-        private IVisualModule Create(IModuleLayout moduleLayout,Dictionary<IPort, IVisualPort> visualPortMap)
+        private IVisualModule Create(IModuleLayout moduleLayout,Dictionary<IPort, IVisualPort> visualPortMap, ITransform t)
         {
-            VisualModule visualModule = new VisualModule(new Transform(Position, moduleLayout.Bounds.size, new Quaternion(0,0,0,1)));
+            VisualModule visualModule = new VisualModule();
+            t.AddChild(visualModule.Transform);
+
+            visualModule.Transform.Scale = moduleLayout.Bounds.size;
             
             foreach (IPortLayout portLayout in moduleLayout.PortLayouts)
             {
-                IVisualPort visualPort = new VisualPort(
-                    visualModule,
-                    new Transform(visualModule.Transform, portLayout.RelativePosition,Vector3.one,  Quaternion.LookRotation(portLayout.Normal, Vector3.up))
-                );
+                IVisualPort visualPort = new VisualPort(visualModule);
+                
+                visualModule.Transform.AddChild(visualPort.Transform);
 
+                visualPort.Transform.LocalPosition = portLayout.RelativePosition;
+                visualPort.Transform.LocalScale = Vector3.one;
+                visualPort.Transform.LocalRotation = Quaternion.LookRotation(portLayout.Normal, Vector3.up);
+                
                 visualModule.AddPort(visualPort);
                 visualPortMap[portLayout.Port] = visualPort;
             }
