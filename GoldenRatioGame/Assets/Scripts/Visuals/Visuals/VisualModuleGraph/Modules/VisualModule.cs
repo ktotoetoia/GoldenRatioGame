@@ -10,19 +10,20 @@ namespace IM.Visuals
         private readonly List<IVisualPort> _ports = new();
         
         public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection);
-        public Sprite Sprite { get; set; }
         IEnumerable<IPort> IModule.Ports => _ports;
         public IEnumerable<IVisualPort> Ports => _ports;
+        public Sprite Sprite { get; }
         public ITransform Transform { get; }
 
-        public VisualModule() : this(new Transform())
+        public VisualModule(Sprite sprite) : this(new Transform(), sprite)
         {
             
         }
         
-        public VisualModule(ITransform transform)
+        public VisualModule(ITransform transform,Sprite sprite)
         {
             Transform = transform;
+            Sprite = sprite;
         }
         
         public void AddPort(IVisualPort port)

@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using IM.Graphs;
+using UnityEngine;
 
 namespace IM.Visuals
 {
-    public interface ITransform : ITransformReadOnly, IHierarchyElement<ITransform>
+    public interface ITransform : ITransformReadOnly, IHierarchyElement
     {
         new Vector3 Position { get; set; }
         new Vector3 Scale { get; set; }

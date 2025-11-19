@@ -7,7 +7,7 @@ namespace IM.Visuals
     public interface IVisualModule : IModule
     {
         ITransform Transform { get; }
-        Sprite Sprite { get; set; }
+        Sprite Sprite { get;}
         
         new IEnumerable<IVisualPort> Ports { get; }
     }

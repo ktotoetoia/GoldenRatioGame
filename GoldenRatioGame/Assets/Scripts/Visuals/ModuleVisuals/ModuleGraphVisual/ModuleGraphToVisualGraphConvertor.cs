@@ -23,7 +23,6 @@ namespace IM.Modules
                 IVisualModule visualModule = Create(module.ModuleLayout,visualPortMap,visualGraph.Transform);
                 moduleToVisual[module] = visualModule;
                 visualGraph.AddModule(visualModule);
-                visualModule.Sprite =  module.ModuleLayout.Sprite;
             }
 
             foreach (IConnection connection in source.Connections)
@@ -46,9 +45,9 @@ namespace IM.Modules
             return visualGraph;
         }
 
-        private IVisualModule Create(IModuleLayout moduleLayout,Dictionary<IPort, IVisualPort> visualPortMap, ITransform t)
+        private IVisualModule Create(IModuleLayout moduleLayout ,Dictionary<IPort, IVisualPort> visualPortMap, ITransform t)
         {
-            VisualModule visualModule = new VisualModule();
+            VisualModule visualModule = new VisualModule(moduleLayout.Sprite);
             t.AddChild(visualModule.Transform);
 
             visualModule.Transform.Scale = moduleLayout.Bounds.size;

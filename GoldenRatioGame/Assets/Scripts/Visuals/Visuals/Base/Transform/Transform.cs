@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using IM.Graphs;
 
 namespace IM.Visuals
 {
-    public class Transform : ITransform
+    public class Transform : HierarchyElement, ITransform
     {
-        public ITransform Parent => _hierarchy.Parent;
-        public IReadOnlyList<ITransform> Children => _hierarchy.Children;
-
-        private readonly Hierarchy<ITransform> _hierarchy;
-        private Vector3 _cachedParentPosition;
-        private Vector3 _cachedParentScale;
-        private Quaternion _cachedParentRotation;
         private Vector3 _localPosition;
         private Vector3 _localScale;
         private Quaternion _localRotation;
-        private Vector3 _worldPosition;
-        private Vector3 _worldScale;
-        private Quaternion _worldRotation;
+
+        private bool _hasPendingOldWorld;
+        private Vector3 _pendingOldWorldPos;
+        private Vector3 _pendingOldWorldScale;
+        private Quaternion _pendingOldWorldRot;
 
         public Transform() : this(Vector3.zero, Vector3.one, Quaternion.identity) { }
 
@@ -26,13 +21,10 @@ namespace IM.Visuals
 
         public Transform(Vector3 localPosition, Vector3 localScale, Quaternion localRotation)
         {
-            _hierarchy = new Hierarchy<ITransform>(this);
             _localPosition = localPosition;
             _localScale = localScale;
             _localRotation = localRotation;
-            _cachedParentPosition = Vector3.zero;
-            _cachedParentScale = Vector3.one;
-            _cachedParentRotation = Quaternion.identity;
+            _hasPendingOldWorld = false;
             RecalculateWorldAndPropagate();
         }
 
@@ -68,167 +60,156 @@ namespace IM.Visuals
 
         public Vector3 Position
         {
-            get => _worldPosition;
+            get => ComputeWorldUsingParent().pos;
             set
             {
-                Quaternion inverseParentRot = Quaternion.Inverse(_cachedParentRotation);
-                Vector3 tmp = inverseParentRot * (value - _cachedParentPosition);
-                _localPosition = new Vector3(
-                    SafeDiv(tmp.x, _cachedParentScale.x),
-                    SafeDiv(tmp.y, _cachedParentScale.y),
-                    SafeDiv(tmp.z, _cachedParentScale.z)
-                );
+                var parent = Parent as ITransform;
+                SetLocalFromWorld(value, ComputeWorldUsingParent().scale, ComputeWorldUsingParent().rot, parent);
                 RecalculateWorldAndPropagate();
             }
         }
 
         public Vector3 Scale
         {
-            get => _worldScale;
+            get => ComputeWorldUsingParent().scale;
             set
             {
-                _localScale = new Vector3(
-                    SafeDiv(value.x, _cachedParentScale.x),
-                    SafeDiv(value.y, _cachedParentScale.y),
-                    SafeDiv(value.z, _cachedParentScale.z)
-                );
+                var parent = Parent as ITransform;
+                SetLocalFromWorld(ComputeWorldUsingParent().pos, value, ComputeWorldUsingParent().rot, parent);
                 RecalculateWorldAndPropagate();
             }
         }
 
         public Quaternion Rotation
         {
-            get => _worldRotation;
+            get => ComputeWorldUsingParent().rot;
             set
             {
-                _localRotation = Quaternion.Inverse(_cachedParentRotation) * value;
+                var parent = Parent as ITransform;
+                if (parent != null)
+                    _localRotation = Quaternion.Inverse(parent.Rotation) * value;
+                else
+                    _localRotation = value;
                 RecalculateWorldAndPropagate();
             }
         }
 
-        public void SetParent(ITransform newParent, bool keepWorld = true)
-        {
-            if (newParent == _hierarchy.Parent) return;
-            if (newParent == this) throw new ArgumentException("Cannot set parent to self.", nameof(newParent));
-            ITransform walker = newParent;
-            while (walker != null)
-            {
-                if (walker == this) throw new ArgumentException("Cannot set parent to a descendant (would create cycle).", nameof(newParent));
-                walker = walker.Parent;
-            }
-
-            Vector3 oldWorldPos = _worldPosition;
-            Vector3 oldWorldScale = _worldScale;
-            Quaternion oldWorldRot = _worldRotation;
-
-            ITransform oldParent = _hierarchy.Parent;
-            if (oldParent != null)
-            {
-                bool removed = oldParent.RemoveChildInternal(this);
-                bool removedUnused = removed;
-            }
-
-            _hierarchy.SetParentInternal(newParent);
-
-            if (newParent != null)
-            {
-                if (!newParent.Contains(this))
-                {
-                    newParent.AddChildInternal(this);
-                }
-
-                if (keepWorld)
-                {
-                    Quaternion inv = Quaternion.Inverse(newParent.Rotation);
-                    Vector3 relPos = inv * (oldWorldPos - newParent.Position);
-                    _localPosition = new Vector3(
-                        SafeDiv(relPos.x, newParent.Scale.x),
-                        SafeDiv(relPos.y, newParent.Scale.y),
-                        SafeDiv(relPos.z, newParent.Scale.z)
-                    );
-
-                    _localScale = new Vector3(
-                        SafeDiv(oldWorldScale.x, newParent.Scale.x),
-                        SafeDiv(oldWorldScale.y, newParent.Scale.y),
-                        SafeDiv(oldWorldScale.z, newParent.Scale.z)
-                    );
-
-                    _localRotation = Quaternion.Inverse(newParent.Rotation) * oldWorldRot;
-                }
-
-                OnParentTransformChanged(newParent.Position, newParent.Scale, newParent.Rotation);
-            }
-            else
-            {
-                if (keepWorld)
-                {
-                    _localPosition = oldWorldPos;
-                    _localScale = oldWorldScale;
-                    _localRotation = oldWorldRot;
-                }
-
-                OnParentTransformChanged(Vector3.zero, Vector3.one, Quaternion.identity);
-            }
-        }
-
-        public void AddChild(ITransform child)
-        {
-            if (child == null) throw new ArgumentNullException(nameof(child));
-            child.SetParent(this, true);
-        }
-
-        public bool RemoveChild(ITransform child)
-        {
-            if (child == null) return false;
-            if (child.Parent != this) return false;
-            child.SetParent(null, true);
-            return true;
-        }
-
-        public bool Contains(ITransform child)
-        {
-            if (child == null) return false;
-            return _hierarchy.Contains(child);
-        }
-
-        public void AddChildInternal(ITransform child)
-        {
-            _hierarchy.AddChildInternal(child);
-        }
-
-        public bool RemoveChildInternal(ITransform child)
-        {
-            return _hierarchy.RemoveChildInternal(child);
-        }
-
         public void OnParentTransformChanged(Vector3 parentPosition, Vector3 parentScale, Quaternion parentRotation)
         {
-            _cachedParentPosition = parentPosition;
-            _cachedParentScale = parentScale;
-            _cachedParentRotation = parentRotation;
             RecalculateWorldAndPropagate();
         }
 
         private void RecalculateWorldAndPropagate()
         {
-            RecalculateWorldFromLocalAndParent();
-            foreach (ITransform child in _hierarchy.Children)
+            (Vector3 pos, Vector3 scale, Quaternion rot) world = ComputeWorldUsingParent();
+
+            foreach (IHierarchyElement child in Children)
             {
-                child.OnParentTransformChanged(_worldPosition, _worldScale, _worldRotation);
+                if (child is ITransform t)
+                    t.OnParentTransformChanged(world.pos, world.scale, world.rot);
             }
         }
 
-        private void RecalculateWorldFromLocalAndParent()
+        private (Vector3 pos, Vector3 scale, Quaternion rot) ComputeWorldUsingParent()
         {
-            _worldPosition = _cachedParentPosition + _cachedParentRotation * Vector3.Scale(_localPosition, _cachedParentScale);
-            _worldScale = Vector3.Scale(_cachedParentScale, _localScale);
-            _worldRotation = _cachedParentRotation * _localRotation;
+            var parent = Parent as ITransform;
+            if (parent == null)
+            {
+                return (_localPosition, _localScale, _localRotation);
+            }
+
+            Vector3 parentPos = parent.Position;
+            Vector3 parentScale = parent.Scale;
+            Quaternion parentRot = parent.Rotation;
+
+            Vector3 worldPos = parentPos + parentRot * Vector3.Scale(_localPosition, parentScale);
+            Vector3 worldScale = Vector3.Scale(parentScale, _localScale);
+            Quaternion worldRot = parentRot * _localRotation;
+            return (worldPos, worldScale, worldRot);
         }
 
         private static float SafeDiv(float a, float b)
         {
             if (Mathf.Approximately(b, 0f)) return 0f;
             return a / b;
+        }
+
+        protected override void OnParentChanging(IHierarchyElement oldParent, IHierarchyElement newParent)
+        {
+            if (oldParent is ITransform optOld)
+            {
+                Vector3 oldPos = optOld.Position + optOld.Rotation * Vector3.Scale(_localPosition, optOld.Scale);
+                Vector3 oldScale = Vector3.Scale(optOld.Scale, _localScale);
+                Quaternion oldRot = optOld.Rotation * _localRotation;
+                _pendingOldWorldPos = oldPos;
+                _pendingOldWorldScale = oldScale;
+                _pendingOldWorldRot = oldRot;
+            }
+            else
+            {
+                _pendingOldWorldPos = _localPosition;
+                _pendingOldWorldScale = _localScale;
+                _pendingOldWorldRot = _localRotation;
+            }
+            _hasPendingOldWorld = true;
+        }
+
+        protected override void OnParentSet(IHierarchyElement parent)
+        {
+            if (_hasPendingOldWorld)
+            {
+                if (parent is ITransform pt)
+                {
+                    SetLocalFromWorld(_pendingOldWorldPos, _pendingOldWorldScale, _pendingOldWorldRot, pt);
+                }
+                else
+                {
+                    _localPosition = _pendingOldWorldPos;
+                    _localScale = _pendingOldWorldScale;
+                    _localRotation = _pendingOldWorldRot;
+                }
+
+                _hasPendingOldWorld = false;
+            }
+
+            RecalculateWorldAndPropagate();
+        }
+
+        protected override void OnChildAdded(IHierarchyElement child)
+        {
+            if (child is ITransform t)
+            {
+                var world = ComputeWorldUsingParent();
+                t.OnParentTransformChanged(world.pos, world.scale, world.rot);
+            }
+        }
+
+        private void SetLocalFromWorld(Vector3 worldPos, Vector3 worldScale, Quaternion worldRot, ITransform parent)
+        {
+            if (parent != null)
+            {
+                Quaternion inv = Quaternion.Inverse(parent.Rotation);
+                Vector3 relPos = inv * (worldPos - parent.Position);
+                _localPosition = new Vector3(
+                    SafeDiv(relPos.x, parent.Scale.x),
+                    SafeDiv(relPos.y, parent.Scale.y),
+                    SafeDiv(relPos.z, parent.Scale.z)
+                );
+
+                _localScale = new Vector3(
+                    SafeDiv(worldScale.x, parent.Scale.x),
+                    SafeDiv(worldScale.y, parent.Scale.y),
+                    SafeDiv(worldScale.z, parent.Scale.z)
+                );
+
+                _localRotation = Quaternion.Inverse(parent.Rotation) * worldRot;
+            }
+            else
+            {
+                _localPosition = worldPos;
+                _localScale = worldScale;
+                _localRotation = worldRot;
+            }
         }
     }
 }
