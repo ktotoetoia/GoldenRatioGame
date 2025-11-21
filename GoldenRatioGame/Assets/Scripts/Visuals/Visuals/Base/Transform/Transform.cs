@@ -9,24 +9,10 @@ namespace IM.Visuals
         private Vector3 _localPosition;
         private Vector3 _localScale;
         private Quaternion _localRotation;
-
         private bool _hasPendingOldWorld;
         private Vector3 _pendingOldWorldPos;
         private Vector3 _pendingOldWorldScale;
         private Quaternion _pendingOldWorldRot;
-
-        public Transform() : this(Vector3.zero, Vector3.one, Quaternion.identity) { }
-
-        public Transform(Vector3 localPosition) : this(localPosition, Vector3.one, Quaternion.identity) { }
-
-        public Transform(Vector3 localPosition, Vector3 localScale, Quaternion localRotation)
-        {
-            _localPosition = localPosition;
-            _localScale = localScale;
-            _localRotation = localRotation;
-            _hasPendingOldWorld = false;
-            RecalculateWorldAndPropagate();
-        }
 
         public Vector3 LocalPosition
         {
@@ -85,8 +71,7 @@ namespace IM.Visuals
             get => ComputeWorldUsingParent().rot;
             set
             {
-                var parent = Parent as ITransform;
-                if (parent != null)
+                if (Parent is ITransform parent)
                     _localRotation = Quaternion.Inverse(parent.Rotation) * value;
                 else
                     _localRotation = value;
@@ -94,6 +79,19 @@ namespace IM.Visuals
             }
         }
 
+        public Transform() : this(Vector3.zero, Vector3.one, Quaternion.identity) { }
+
+        public Transform(Vector3 localPosition) : this(localPosition, Vector3.one, Quaternion.identity) { }
+
+        public Transform(Vector3 localPosition, Vector3 localScale, Quaternion localRotation)
+        {
+            _localPosition = localPosition;
+            _localScale = localScale;
+            _localRotation = localRotation;
+            _hasPendingOldWorld = false;
+            RecalculateWorldAndPropagate();
+        }
+        
         public void OnParentTransformChanged(Vector3 parentPosition, Vector3 parentScale, Quaternion parentRotation)
         {
             RecalculateWorldAndPropagate();
@@ -126,12 +124,6 @@ namespace IM.Visuals
             Vector3 worldScale = Vector3.Scale(parentScale, _localScale);
             Quaternion worldRot = parentRot * _localRotation;
             return (worldPos, worldScale, worldRot);
-        }
-
-        private static float SafeDiv(float a, float b)
-        {
-            if (Mathf.Approximately(b, 0f)) return 0f;
-            return a / b;
         }
 
         protected override void OnParentChanging(IHierarchyElement oldParent, IHierarchyElement newParent)
@@ -210,6 +202,12 @@ namespace IM.Visuals
                 _localScale = worldScale;
                 _localRotation = worldRot;
             }
+        }
+        
+        private static float SafeDiv(float a, float b)
+        {
+            if (Mathf.Approximately(b, 0f)) return 0f;
+            return a / b;
         }
     }
 }

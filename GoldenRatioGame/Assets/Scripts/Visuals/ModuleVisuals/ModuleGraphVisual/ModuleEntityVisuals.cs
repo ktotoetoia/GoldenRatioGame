@@ -5,23 +5,14 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class ModuleEntityVisuals : MonoBehaviour, IModuleEntityVisuals, IModuleGraphObserver
+    public class ModuleEntityVisuals : MonoBehaviour, IModuleGraphObserver
     {
         [SerializeField] private bool _drawBounds = true;
         [SerializeField] private bool _drawSprites = true;
         [SerializeField] private bool _drawPorts = true;
-        [SerializeField] private bool _flip;
-        [SerializeField] private Vector3 _position = Vector3.one;
-        [SerializeField] private Vector3 _scale = Vector3.one;
         private readonly ModuleGraphToVisualGraphConvertor _graphToVisualGraphConvertor = new();
-        private ModuleGraphVisualDrawer _graphVisualDrawer;
+        private readonly ModuleGraphVisualDrawer _graphVisualDrawer= new();
         private IVisualModuleGraph _graphToDraw;
-        private Vector3 _lastPosition;
-        
-        private void Awake()
-        {
-            _graphVisualDrawer = new ModuleGraphVisualDrawer();
-        }
 
         private void Update()
         {
@@ -30,7 +21,6 @@ namespace IM.Modules
             _graphVisualDrawer.DrawPorts = _drawPorts;
             
             _graphToDraw.Transform.Position = transform.position;
-            _graphToDraw.Transform.Scale = _scale;
         }
 
         private void OnDrawGizmos()
@@ -43,8 +33,14 @@ namespace IM.Modules
         public void OnGraphUpdated(IModuleGraphReadOnly graph)
         {
             if (graph == null) throw new ArgumentNullException(nameof(graph));
+            
+            UpdateGraphToDraw(graph);
+        }
 
-            _graphToDraw = _graphToVisualGraphConvertor.Create(graph);
+        private void UpdateGraphToDraw(IModuleGraphReadOnly graph)
+        {
+            _graphToVisualGraphConvertor.Position = transform.position;
+            _graphToDraw = _graphToVisualGraphConvertor.Create(graph);            
         }
     }
 }

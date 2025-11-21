@@ -1,6 +1,6 @@
 ﻿using IM.Visuals;
 
-namespace IM.Modules
+namespace IM.Visuals
 {
     public interface IModuleGraphVisualDrawer
     {

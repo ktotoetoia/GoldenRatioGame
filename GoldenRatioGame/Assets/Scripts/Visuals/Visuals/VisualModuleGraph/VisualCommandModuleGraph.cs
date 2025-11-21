@@ -6,9 +6,9 @@ namespace IM.Visuals
 {
     public class VisualCommandModuleGraph : IVisualCommandModuleGraph
     {
-        private readonly ICommandModuleGraph _commandModuleGraph = new CommandModuleGraph(new AddModuleCommandFactory(),new RemoveAndDisconnectCommandFactory(),new ConnectVisualCommandFactory(), new DisconnectCommandFactory());
-        public ITransform Transform { get; } = new Transform();
+        private readonly ICommandModuleGraph _commandModuleGraph;
         
+        public ITransform Transform { get; }
         public IEnumerable<INode> Nodes => _commandModuleGraph.Nodes;
         public IEnumerable<IEdge> Edges => _commandModuleGraph.Edges;
         public IEnumerable<IVisualModule> Modules => _commandModuleGraph.Modules.Cast<IVisualModule>();
@@ -18,6 +18,19 @@ namespace IM.Visuals
         public int CommandsToUndoCount => _commandModuleGraph.CommandsToUndoCount;
         public int CommandsToRedoCount => _commandModuleGraph.CommandsToRedoCount;
 
+        public VisualCommandModuleGraph() : this(new Transform())
+        {
+            
+        }
+
+        public VisualCommandModuleGraph(ITransform transform)
+        {
+            Transform = transform;
+            _commandModuleGraph = new CommandModuleGraph(new AddVisualModuleCommandFactory(Transform),
+                new RemoveAndDisconnectCommandFactory(), new ConnectVisualCommandFactory(),
+                new DisconnectCommandFactory());
+        }
+        
         public void AddModule(IVisualModule module) => _commandModuleGraph.AddModule(module);
         public void AddAndConnect(IVisualModule module, IVisualPort ownerPort, IVisualPort targetPort) => _commandModuleGraph.AddAndConnect(module, ownerPort, targetPort);
         public void RemoveModule(IVisualModule module) => _commandModuleGraph.RemoveModule(module);

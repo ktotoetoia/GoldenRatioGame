@@ -50,8 +50,8 @@ namespace IM.Visuals
                 throw new InvalidOperationException("Command must be executed before undo");
 
             ITransform inputTransform = _input.Module.Transform;
-            inputTransform.Position = _prevInputPosition;
-            inputTransform.Rotation = _prevInputRotation;
+            inputTransform.LocalPosition = _prevInputPosition;
+            inputTransform.LocalRotation = _prevInputRotation;
 
             _input.Disconnect();
             _output.Disconnect();

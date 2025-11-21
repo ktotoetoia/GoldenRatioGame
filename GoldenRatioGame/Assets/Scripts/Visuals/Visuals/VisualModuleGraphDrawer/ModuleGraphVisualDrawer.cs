@@ -2,7 +2,7 @@
 using IM.Visuals;
 using UnityEngine;
 
-namespace IM.Modules
+namespace IM.Visuals
 {
     public class ModuleGraphVisualDrawer : IModuleGraphVisualDrawer
     {
