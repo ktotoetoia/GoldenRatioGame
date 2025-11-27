@@ -5,6 +5,5 @@ namespace IM.Modules
     public interface IGameModule : IModule
     {
         IModuleExtensions Extensions { get; }
-        IModuleLayout ModuleLayout { get; }
     }
 }

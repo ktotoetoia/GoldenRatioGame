@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace IM.Graphs
 {
@@ -67,11 +68,11 @@ namespace IM.Graphs
 
             SetParentInternal(newParent);
 
-            if (newParent != null && !newParent.Contains(this))
+            if (newParent != null && !newParent.ContainsChild(this))
                 newParent.AddChildInternal(this);
         }
 
-        public bool Contains(IHierarchyElement child)
+        public bool ContainsChild(IHierarchyElement child)
         {
             return _children.Contains(child);
         }

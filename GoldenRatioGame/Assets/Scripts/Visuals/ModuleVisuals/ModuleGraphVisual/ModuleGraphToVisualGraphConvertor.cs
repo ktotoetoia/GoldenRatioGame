@@ -10,9 +10,10 @@ namespace IM.Modules
 {
     public class ModuleGraphToVisualGraphConvertor : IFactory<IVisualModuleGraph, IModuleGraphReadOnly>
     {
+        private readonly IFactory<IVisualModule, IModuleLayout, IDictionary<IPort, IVisualPort>> _moduleConverter = new ModuleLayoutToVisualModuleConvertor();
         private readonly ITraversal _traversal = new BreadthFirstTraversal();
         
-        public Vector3 Position {get; set; }
+        public Vector3 Position { get; set; }
         
         public IVisualModuleGraph Create(IModuleGraphReadOnly source)
         {
@@ -23,7 +24,8 @@ namespace IM.Modules
 
             foreach (IGameModule module in _traversal.Enumerate<IGameModule>(coreModule))
             {
-                IVisualModule visualModule = Create(module.ModuleLayout,visualPortMap);
+                IVisualModule visualModule = _moduleConverter.Create(module.Extensions.GetExtension<IModuleLayout>(), visualPortMap);
+                
                 moduleToVisual[module] = visualModule;
                 visualGraph.AddModule(visualModule);
             }
@@ -41,33 +43,6 @@ namespace IM.Modules
             }
             
             return visualGraph;
-        }
-
-        private IVisualModule Create(IModuleLayout moduleLayout ,Dictionary<IPort, IVisualPort> visualPortMap)
-        {
-            VisualModule visualModule = new (moduleLayout.Sprite)
-            {
-                Transform =
-                {
-                    Scale = moduleLayout.Bounds.size,
-                }
-            };
-
-            foreach (IPortLayout portLayout in moduleLayout.PortLayouts)
-            {
-                IVisualPort visualPort = new VisualPort(visualModule);
-                
-                visualModule.Transform.AddChild(visualPort.Transform);
-
-                visualPort.Transform.LocalPosition = portLayout.RelativePosition;
-                visualPort.Transform.LocalScale = Vector3.one;
-                visualPort.Transform.LocalRotation = Quaternion.LookRotation(portLayout.Normal, Vector3.up);
-                
-                visualModule.AddPort(visualPort);
-                visualPortMap[portLayout.Port] = visualPort;
-            }
-
-            return visualModule;
         }
     }
 }

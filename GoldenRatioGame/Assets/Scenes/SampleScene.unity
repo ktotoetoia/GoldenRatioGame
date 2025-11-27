@@ -784,9 +784,6 @@ MonoBehaviour:
   _drawBounds: 1
   _drawSprites: 1
   _drawPorts: 0
-  _flip: 0
-  _position: {x: 1, y: 1, z: 1}
-  _scale: {x: 1, y: 1, z: 1}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

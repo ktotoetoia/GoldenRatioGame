@@ -5,6 +5,6 @@ namespace IM.Modules
 {
     public interface IPortInitializer
     {
-        IEnumerable<(IPort,IPortLayout)> GetPorts(IGameModule module);
+        IEnumerable<IPort> GetPorts();
     }
 }
