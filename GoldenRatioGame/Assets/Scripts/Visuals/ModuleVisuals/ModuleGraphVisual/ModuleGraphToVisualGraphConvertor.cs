@@ -10,10 +10,21 @@ namespace IM.Modules
 {
     public class ModuleGraphToVisualGraphConvertor : IFactory<IVisualModuleGraph, IModuleGraphReadOnly>
     {
-        private readonly IFactory<IVisualModule, IModuleLayout, IDictionary<IPort, IVisualPort>> _moduleConverter = new ModuleLayoutToVisualModuleConvertor();
+        private readonly IFactory<IVisualModule, IModuleLayout, IDictionary<IPort, IVisualPort>> _moduleConverter;
         private readonly ITraversal _traversal = new BreadthFirstTraversal();
         
         public Vector3 Position { get; set; }
+
+        public ModuleGraphToVisualGraphConvertor() : this(new ModuleLayoutToVisualModuleConvertor())
+        {
+            
+        }
+
+        public ModuleGraphToVisualGraphConvertor(
+            IFactory<IVisualModule, IModuleLayout, IDictionary<IPort, IVisualPort>> moduleConverter)
+        {
+            _moduleConverter = moduleConverter;
+        }
         
         public IVisualModuleGraph Create(IModuleGraphReadOnly source)
         {
@@ -27,6 +38,7 @@ namespace IM.Modules
                 IVisualModule visualModule = _moduleConverter.Create(module.Extensions.GetExtension<IModuleLayout>(), visualPortMap);
                 
                 moduleToVisual[module] = visualModule;
+                Debug.Log("adding");
                 visualGraph.AddModule(visualModule);
             }
 

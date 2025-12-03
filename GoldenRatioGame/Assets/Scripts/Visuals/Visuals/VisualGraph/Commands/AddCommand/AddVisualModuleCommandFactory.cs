@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using IM.Commands;
 using IM.Graphs;
+using UnityEngine;
 
 namespace IM.Visuals
 {
@@ -17,8 +18,8 @@ namespace IM.Visuals
         public ICommand Create(IModule param1, ICollection<IModule> param2)
         {
             if(param1 is not IVisualModule visualModule)
-                throw new ArgumentException($"{nameof(AddVisualModuleCommandFactory)} must be used with visual graph"); 
-            
+                throw new ArgumentException($"{nameof(AddVisualModuleCommandFactory)} must be used with visual graph");
+            Debug.Log("adidngasfg sadf");
             return new AddVisualModuleCommand(visualModule, param2, _parent);
         }
     }

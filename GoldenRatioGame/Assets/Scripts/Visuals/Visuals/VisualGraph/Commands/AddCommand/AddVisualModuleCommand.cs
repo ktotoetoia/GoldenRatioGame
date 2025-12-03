@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using IM.Commands;
 using IM.Graphs;
+using UnityEngine;
 
 namespace IM.Visuals
 {
@@ -22,11 +23,11 @@ namespace IM.Visuals
         public void Execute()
         {
             if (_isExecuted) throw new InvalidOperationException("Command already executed");
-            if (_addTo.Contains(_module))
+             if (_addTo.Contains(_module))
                 throw new InvalidOperationException($"Other command already added this module {_module}");
-            if (_parentTransform.ContainsChild(_module.Transform))
+              if (_parentTransform.ContainsChild(_module.Transform))
                 throw new InvalidOperationException($"other command or user added the visual module ({_module}) to the transform ({_parentTransform})");
-            
+
             _addTo.Add(_module);
             _parentTransform.AddChild(_module.Transform);
             _module.Transform.LocalPosition = _module.Transform.Position;

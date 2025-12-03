@@ -31,9 +31,9 @@ namespace IM.Graphs
 
             if (_traversal.HasPathTo(child, this))
                 throw new InvalidOperationException("Hierarchy cycle detected.");
+            
 
             child.Parent?.RemoveChildInternal(child);
-
             child.SetParentInternal(this);
 
             AddChildInternal(child);

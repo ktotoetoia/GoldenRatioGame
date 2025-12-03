@@ -1,27 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace IM.Graphs
 {
     public class BreadthFirstTraversal : ITraversal
     {
-        public IEnumerable<TNode> Enumerate<TNode>(TNode start) where TNode : INode
-        {
+        public IEnumerable<TNode> Enumerate<TNode>(TNode start) where TNode : INode 
+        { 
             Queue<TNode> queue = new Queue<TNode>();
             HashSet<TNode> visited = new HashSet<TNode>();
-
-            queue.Enqueue(start);
-            visited.Add(start);
-
+            queue.Enqueue(start); visited.Add(start);
+            
             while (queue.Count > 0)
             {
-                TNode current = queue.Dequeue();
-                yield return current;
-
-                foreach (IEdge edge in current.Edges)
-                {
-                    if (edge.GetOther(current) is TNode next && visited.Add(next))
-                        queue.Enqueue(next);
-                }
+                TNode current = queue.Dequeue(); yield return current; foreach (IEdge edge in current.Edges) { if (edge.GetOther(current) is TNode next && visited.Add(next)) queue.Enqueue(next); } 
+                
             }
         }
 
@@ -78,8 +72,11 @@ namespace IM.Graphs
         public bool HasPathTo(INode from, INode to)
         {
             foreach (INode node in Enumerate(from))
+            {
                 if (Equals(node, to))
                     return true;
+            }
+            
             return false;
         }
     }

@@ -48,7 +48,6 @@ namespace IM.Modules
                     GameObject created =  Instantiate(prefab);
                     IModule module = created.GetComponent<IModule>();
                     
-                    Debug.Log(module.Ports.Count());
                     foreach (IPort port in module.Ports)
                     {
                         
@@ -59,7 +58,6 @@ namespace IM.Modules
                             if (_graph.CanAddAndConnect(module, port, targetPort))
                             {
                                 _graph.AddAndConnect(module,port, targetPort);
-                                Debug.Log("ultra max");
                                 return;
                             }
                         }
