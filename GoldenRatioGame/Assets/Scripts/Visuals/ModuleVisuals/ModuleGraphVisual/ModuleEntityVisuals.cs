@@ -11,23 +11,23 @@ namespace IM.Modules
         [SerializeField] private bool _drawSprites = true;
         [SerializeField] private bool _drawPorts = true;
         private readonly ModuleGraphToVisualGraphConvertor _graphToVisualGraphConvertor = new();
-        private readonly ModuleGraphVisualDrawer _graphVisualDrawer= new();
+        private readonly VisualGraphIconDrawer _visualGraphIconDrawer= new();
         private IVisualModuleGraph _graphToDraw;
 
         private void Update()
         {
-            _graphVisualDrawer.DrawBounds = _drawBounds;
-            _graphVisualDrawer.DrawSprites = _drawSprites;
-            _graphVisualDrawer.DrawPorts = _drawPorts;
+            _visualGraphIconDrawer.DrawBounds = _drawBounds;
+            _visualGraphIconDrawer.DrawSprites = _drawSprites;
+            _visualGraphIconDrawer.DrawPorts = _drawPorts;
             
             _graphToDraw.Transform.Position = transform.position;
         }
 
         private void OnDrawGizmos()
         {
-            if(_graphVisualDrawer == null || _graphToDraw == null) return;
+            if(_visualGraphIconDrawer == null || _graphToDraw == null) return;
             
-            _graphVisualDrawer.Draw(_graphToDraw);
+            _visualGraphIconDrawer.Draw(_graphToDraw);
         }
 
         public void OnGraphUpdated(IModuleGraphReadOnly graph)

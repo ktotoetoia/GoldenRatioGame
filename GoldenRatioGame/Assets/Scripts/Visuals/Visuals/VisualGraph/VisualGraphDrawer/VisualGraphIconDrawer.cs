@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class ModuleGraphVisualDrawer : IModuleGraphVisualDrawer
+    public class VisualGraphIconDrawer : IVisualGraphDrawer
     {
         public bool DrawBounds { get; set; } = true;
         public bool DrawSprites { get; set; } = true;
@@ -58,15 +58,15 @@ namespace IM.Visuals
             Matrix4x4 oldMatrix = Gizmos.matrix;
             Gizmos.matrix = Matrix4x4.TRS(module.Transform.Position, module.Transform.Rotation, Vector3.one);
             Gizmos.color = Color.white;
-            Gizmos.DrawWireCube(Vector3.zero, module.Transform.Scale);
+            Gizmos.DrawWireCube(Vector3.zero, module.Transform.LossyScale);
             Gizmos.matrix = oldMatrix;
         }
 
         private void DrawGLModule(IVisualModule module)
         {
             Vector3 center = module.Transform.Position;
-            Vector3 size = module.Transform.Scale;
-            Sprite sprite = module.Sprite;
+            Vector3 size = module.Transform.LossyScale;
+            Sprite sprite = module.Icon;
                 
             if (sprite && sprite.texture)
             {

@@ -54,16 +54,7 @@ namespace IM.Visuals
             }
         }
 
-        public Vector3 Scale
-        {
-            get => ComputeWorldUsingParent().scale;
-            set
-            {
-                var parent = Parent as ITransform;
-                SetLocalFromWorld(ComputeWorldUsingParent().pos, value, ComputeWorldUsingParent().rot, parent);
-                RecalculateWorldAndPropagate();
-            }
-        }
+        public Vector3 LossyScale => ComputeWorldUsingParent().scale;
 
         public Quaternion Rotation
         {
@@ -116,7 +107,7 @@ namespace IM.Visuals
             }
 
             Vector3 parentPos = parent.Position;
-            Vector3 parentScale = parent.Scale;
+            Vector3 parentScale = parent.LossyScale;
             Quaternion parentRot = parent.Rotation;
 
             Vector3 worldPos = parentPos + parentRot * Vector3.Scale(_localPosition, parentScale);
@@ -129,8 +120,8 @@ namespace IM.Visuals
         {
             if (oldParent is ITransform optOld)
             {
-                Vector3 oldPos = optOld.Position + optOld.Rotation * Vector3.Scale(_localPosition, optOld.Scale);
-                Vector3 oldScale = Vector3.Scale(optOld.Scale, _localScale);
+                Vector3 oldPos = optOld.Position + optOld.Rotation * Vector3.Scale(_localPosition, optOld.LossyScale);
+                Vector3 oldScale = Vector3.Scale(optOld.LossyScale, _localScale);
                 Quaternion oldRot = optOld.Rotation * _localRotation;
                 _pendingOldWorldPos = oldPos;
                 _pendingOldWorldScale = oldScale;
@@ -182,15 +173,15 @@ namespace IM.Visuals
                 Quaternion inv = Quaternion.Inverse(parent.Rotation);
                 Vector3 relPos = inv * (worldPos - parent.Position);
                 _localPosition = new Vector3(
-                    SafeDiv(relPos.x, parent.Scale.x),
-                    SafeDiv(relPos.y, parent.Scale.y),
-                    SafeDiv(relPos.z, parent.Scale.z)
+                    SafeDiv(relPos.x, parent.LossyScale.x),
+                    SafeDiv(relPos.y, parent.LossyScale.y),
+                    SafeDiv(relPos.z, parent.LossyScale.z)
                 );
 
                 _localScale = new Vector3(
-                    SafeDiv(worldScale.x, parent.Scale.x),
-                    SafeDiv(worldScale.y, parent.Scale.y),
-                    SafeDiv(worldScale.z, parent.Scale.z)
+                    SafeDiv(worldScale.x, parent.LossyScale.x),
+                    SafeDiv(worldScale.y, parent.LossyScale.y),
+                    SafeDiv(worldScale.z, parent.LossyScale.z)
                 );
 
                 _localRotation = Quaternion.Inverse(parent.Rotation) * worldRot;

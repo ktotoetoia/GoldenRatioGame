@@ -100,6 +100,22 @@ PrefabInstance:
       propertyPath: _portsInfos.Array.data[0]._tag
       value: 
       objectReference: {fileID: 11400000, guid: fb69546f865b0a7489a6e04e9bf3cad9, type: 2}
+    - target: {fileID: 4556875372869762170, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[0]._normal.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4556875372869762170, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[0]._position.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4556875372869762170, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[0]._position.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4556875372869762170, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[1]._position.y
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5469737783865499535, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: _sprite
       value: 

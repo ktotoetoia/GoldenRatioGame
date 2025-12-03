@@ -10,11 +10,11 @@ namespace IM.Modules
     {
         public IVisualModule Create(IModuleLayout moduleLayout, IDictionary<IPort, IVisualPort> dictionary)
         {
-            VisualModule visualModule = new (moduleLayout.Icon)
+            SingleIconVisualModule visualModule = new (moduleLayout.Icon)
             {
                 Transform =
                 {
-                    Scale = moduleLayout.Bounds.size,
+                    LocalScale = moduleLayout.Bounds.size,
                 }
             };
 

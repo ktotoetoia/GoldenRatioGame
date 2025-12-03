@@ -68,8 +68,8 @@ namespace IM.Visuals
             _prevInputPosition = inputT.Position;
             _prevInputRotation = inputT.Rotation;
 
-            Vector3 outputLocal = Vector3.Scale(_output.Transform.LocalPosition, outputT.Scale);
-            Vector3 inputLocal  = Vector3.Scale(_input.Transform.LocalPosition, inputT.Scale);
+            Vector3 outputLocal = Vector3.Scale(_output.Transform.LocalPosition, outputT.LossyScale);
+            Vector3 inputLocal  = Vector3.Scale(_input.Transform.LocalPosition, inputT.LossyScale);
 
             Vector3 outputWorldPos = outputT.Position + outputT.Rotation * outputLocal;
 

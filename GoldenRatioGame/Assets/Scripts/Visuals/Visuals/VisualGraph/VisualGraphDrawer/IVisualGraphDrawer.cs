@@ -2,7 +2,7 @@
 
 namespace IM.Visuals
 {
-    public interface IModuleGraphVisualDrawer
+    public interface IVisualGraphDrawer
     {
         public void Draw(IVisualModuleGraph source);
     }
