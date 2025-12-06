@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using IM.Visuals;
 using UnityEngine;
 
 namespace IM.Visuals

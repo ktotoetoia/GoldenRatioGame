@@ -1,6 +1,4 @@
-﻿using IM.Visuals;
-
-namespace IM.Visuals
+﻿namespace IM.Visuals
 {
     public interface IVisualGraphDrawer
     {

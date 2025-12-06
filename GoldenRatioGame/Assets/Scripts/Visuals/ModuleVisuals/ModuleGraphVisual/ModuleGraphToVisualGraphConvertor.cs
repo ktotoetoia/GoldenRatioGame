@@ -29,16 +29,15 @@ namespace IM.Modules
         public IVisualModuleGraph Create(IModuleGraphReadOnly source)
         {
             Dictionary<IPort, IVisualPort> visualPortMap = new();
+            Dictionary<IGameModule, IVisualModule> moduleToVisual = new Dictionary<IGameModule, IVisualModule>();
             ICoreGameModule coreModule = source.Modules.FirstOrDefault(x => x is ICoreGameModule) as ICoreGameModule;
             IVisualModuleGraph visualGraph = new VisualCommandModuleGraph(new Transform(Position));
-            Dictionary<IGameModule, IVisualModule> moduleToVisual = new Dictionary<IGameModule, IVisualModule>();
 
             foreach (IGameModule module in _traversal.Enumerate<IGameModule>(coreModule))
             {
                 IVisualModule visualModule = _moduleConverter.Create(module.Extensions.GetExtension<IModuleLayout>(), visualPortMap);
                 
                 moduleToVisual[module] = visualModule;
-                Debug.Log("adding");
                 visualGraph.AddModule(visualModule);
             }
 

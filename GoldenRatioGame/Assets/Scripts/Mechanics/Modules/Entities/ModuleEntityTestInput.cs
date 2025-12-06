@@ -50,11 +50,8 @@ namespace IM.Modules
                     
                     foreach (IPort port in module.Ports)
                     {
-                        
                         foreach (IPort targetPort in _graph.Modules.SelectMany(x => x.Ports))
                         {
-                            Debug.Log(port + "   " + targetPort);
-                            
                             if (_graph.CanAddAndConnect(module, port, targetPort))
                             {
                                 _graph.AddAndConnect(module,port, targetPort);

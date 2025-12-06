@@ -6,9 +6,7 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class
-        ModuleLayoutToVisualModuleMonoConvertor : IFactory<IVisualModule, IModuleLayout,
-        IDictionary<IPort, IVisualPort>>
+    public class ModuleLayoutToVisualModuleMonoConvertor : IFactory<IVisualModule, IModuleLayout, IDictionary<IPort, IVisualPort>>
     {
         private readonly GameObject _prefab;
         

@@ -19,7 +19,7 @@ namespace IM.Visuals
         {
             if(param1 is not IVisualModule visualModule)
                 throw new ArgumentException($"{nameof(AddVisualModuleCommandFactory)} must be used with visual graph");
-            Debug.Log("adidngasfg sadf");
+
             return new AddVisualModuleCommand(visualModule, param2, _parent);
         }
     }
