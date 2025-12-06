@@ -1,7 +1,7 @@
 ﻿using IM.Graphs;
 using UnityEngine;
 
-namespace IM.Modules
+namespace IM.Visuals
 {
     public interface IPortLayout
     {

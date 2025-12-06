@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace IM.Visuals
+namespace IM.Visuals.Debug
 {
     public class VisualGraphIconDrawer : IVisualGraphDrawer
     {

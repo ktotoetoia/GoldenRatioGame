@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using IM.Graphs;
+using IM.Modules;
 using UnityEngine;
 
-namespace IM.Modules
+namespace IM.Visuals
 {
     public interface IModuleLayout : IModuleExtension
     {

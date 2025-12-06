@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
-using UnityEngine;
 
 namespace IM.Visuals
 {

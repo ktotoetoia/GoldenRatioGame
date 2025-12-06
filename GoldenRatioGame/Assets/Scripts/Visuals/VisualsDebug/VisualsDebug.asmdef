@@ -1,0 +1,17 @@
+{
+    "name": "VisualsDebug",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a8c9e6e47bc86bb4aa567cf5d0cb48ff",
+        "GUID:8b31c08b0b931e4429f3b97ac0400ee9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

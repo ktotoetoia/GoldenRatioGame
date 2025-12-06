@@ -1,4 +1,4 @@
-﻿namespace IM.Visuals
+﻿namespace IM.Visuals.Debug
 {
     public interface IVisualGraphDrawer
     {

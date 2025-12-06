@@ -2,11 +2,10 @@
 using System.Linq;
 using IM.Base;
 using IM.Graphs;
-using IM.Visuals;
+using IM.Modules;
 using UnityEngine;
-using Transform = IM.Visuals.Transform;
 
-namespace IM.Modules
+namespace IM.Visuals
 {
     public class ModuleGraphToVisualGraphConvertor : IFactory<IVisualModuleGraph, IModuleGraphReadOnly>
     {

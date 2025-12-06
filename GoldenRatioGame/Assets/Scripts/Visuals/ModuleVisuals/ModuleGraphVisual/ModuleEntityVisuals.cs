@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Linq;
 using IM.Graphs;
-using IM.Visuals;
 using UnityEngine;
 
-namespace IM.Modules
+namespace IM.Visuals
 {
     [DefaultExecutionOrder(-1)]
     public class ModuleEntityVisuals : MonoBehaviour, IModuleGraphObserver

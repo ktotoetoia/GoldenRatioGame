@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using IM.Base;
 using IM.Graphs;
-using IM.Visuals;
 using UnityEngine;
 
-namespace IM.Modules
+namespace IM.Visuals
 {
     public class ModuleLayoutToVisualModuleConvertor : IFactory<IVisualModule, IModuleLayout, IDictionary<IPort, IVisualPort>>
     {
