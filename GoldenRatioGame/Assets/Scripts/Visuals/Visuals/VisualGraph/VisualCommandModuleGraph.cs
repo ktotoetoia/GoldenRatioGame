@@ -9,7 +9,7 @@ namespace IM.Visuals
     {
         private readonly ICommandModuleGraph _commandModuleGraph;
         
-        public ITransform Transform { get; }
+        public IHierarchyTransform Transform { get; }
         public IEnumerable<INode> Nodes => _commandModuleGraph.Nodes;
         public IEnumerable<IEdge> Edges => _commandModuleGraph.Edges;
         public IEnumerable<IVisualModule> Modules => _commandModuleGraph.Modules.Cast<IVisualModule>();
@@ -24,7 +24,7 @@ namespace IM.Visuals
             
         }
 
-        public VisualCommandModuleGraph(ITransform transform)
+        public VisualCommandModuleGraph(IHierarchyTransform transform)
         {
             Transform = transform;
             _commandModuleGraph = new CommandModuleGraph(new AddVisualModuleCommandFactory(Transform),

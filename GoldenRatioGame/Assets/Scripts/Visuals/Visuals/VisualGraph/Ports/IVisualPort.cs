@@ -4,7 +4,7 @@ namespace IM.Visuals
 {
     public interface IVisualPort : IPort
     {
-        ITransform Transform { get; }
+        IHierarchyTransform Transform { get; }
         new IVisualModule Module { get; }
         new IVisualConnection Connection { get; }
     }

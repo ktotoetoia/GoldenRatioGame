@@ -6,7 +6,7 @@ namespace IM.Visuals
 {
     public interface IVisualModule : IModule
     {
-        ITransform Transform { get; }
+        IHierarchyTransform Transform { get; }
         Sprite Icon { get; }
         
         new IEnumerable<IVisualPort> Ports { get; }

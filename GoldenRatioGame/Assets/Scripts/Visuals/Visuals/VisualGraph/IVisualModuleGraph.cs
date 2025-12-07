@@ -6,7 +6,7 @@ namespace IM.Visuals
 {
     public interface IVisualModuleGraph : IModuleGraphReadOnly, IDisposable
     {
-        ITransform Transform { get; }
+        IHierarchyTransform Transform { get; }
         
         new IEnumerable<IVisualModule> Modules { get; }
         new IEnumerable<IVisualConnection> Connections { get; }

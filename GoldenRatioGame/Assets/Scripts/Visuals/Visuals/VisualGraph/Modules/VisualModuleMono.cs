@@ -28,7 +28,7 @@ namespace IM.Visuals
         public IEnumerable<IVisualPort> Ports => _ports;
         IEnumerable<IPort> IModule.Ports => _ports;
 
-        public ITransform Transform
+        public IHierarchyTransform Transform
         {
             get
             {

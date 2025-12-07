@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class Transform : HierarchyElement, ITransform
+    public class Transform : HierarchyElement, IHierarchyTransform
     {
-        private readonly TransformCore _core;
+        private readonly ParentlessTransform _core;
 
         private bool _hasPendingOldWorld;
         private Vector3 _pendingOldWorldPos;
@@ -40,14 +40,14 @@ namespace IM.Visuals
             remove => _core.LocalRotationChanged -= value;
         }
 
-        public Transform() : this(new TransformCore()) { }
+        public Transform() : this(new ParentlessTransform()) { }
 
-        public Transform(Vector3 localPosition) : this(new TransformCore(localPosition, Vector3.one, Quaternion.identity)) { }
+        public Transform(Vector3 localPosition) : this(new ParentlessTransform(localPosition, Vector3.one, Quaternion.identity)) { }
 
         public Transform(Vector3 localPosition, Vector3 localScale, Quaternion localRotation)
-            : this(new TransformCore(localPosition, localScale, localRotation)) { }
+            : this(new ParentlessTransform(localPosition, localScale, localRotation)) { }
 
-        public Transform(TransformCore core)
+        public Transform(ParentlessTransform core)
         {
             _core = core ?? throw new ArgumentNullException(nameof(core));
             _hasPendingOldWorld = false;
@@ -102,7 +102,7 @@ namespace IM.Visuals
                 (Vector3 pos, Vector3 scale, Quaternion rot) oldWorld = ComputeWorldUsingParent();
                 Vector3 oldPos = oldWorld.pos;
 
-                ITransform parent = Parent as ITransform;
+                IHierarchyTransform parent = Parent as IHierarchyTransform;
                 _core.SetLocalFromWorld(value, oldWorld.scale, oldWorld.rot,
                     parent?.Position, parent?.LossyScale, parent?.Rotation);
 
@@ -128,7 +128,7 @@ namespace IM.Visuals
                 (Vector3 pos, Vector3 scale, Quaternion rot) oldWorld = ComputeWorldUsingParent();
                 Quaternion oldRot = oldWorld.rot;
 
-                ITransform parent = Parent as ITransform;
+                IHierarchyTransform parent = Parent as IHierarchyTransform;
                 if (parent != null)
                     _core.LocalRotation = Quaternion.Inverse(parent.Rotation) * value;
                 else
@@ -186,14 +186,15 @@ namespace IM.Visuals
             (Vector3 pos, Vector3 scale, Quaternion rot) world = ComputeWorldUsingParent();
             foreach (IHierarchyElement child in Children)
             {
-                if (child is ITransform t)
+                if (child is IHierarchyTransform t)
                     t.OnParentTransformChanged(world.pos, world.scale, world.rot);
             }
         }
 
         private (Vector3 pos, Vector3 scale, Quaternion rot) ComputeWorldUsingParent()
         {
-            ITransform parent = Parent as ITransform;
+            IHierarchyTransform parent = Parent as IHierarchyTransform;
+            
             if (parent == null)
                 return (_core.LocalPosition, _core.LocalScale, _core.LocalRotation);
 
@@ -209,7 +210,7 @@ namespace IM.Visuals
         
         protected override void OnParentChanging(IHierarchyElement oldParent, IHierarchyElement newParent)
         {
-            if (oldParent is ITransform oldT)
+            if (oldParent is IHierarchyTransform oldT)
             {
                 Vector3 oldPos = oldT.Position + oldT.Rotation * Vector3.Scale(_core.LocalPosition, oldT.LossyScale);
                 Vector3 oldScale = Vector3.Scale(oldT.LossyScale, _core.LocalScale);
@@ -232,7 +233,7 @@ namespace IM.Visuals
         {
             if (_hasPendingOldWorld)
             {
-                if (parent is ITransform pt)
+                if (parent is IHierarchyTransform pt)
                 {
                     _core.SetLocalFromWorld(_pendingOldWorldPos, _pendingOldWorldScale, _pendingOldWorldRot,
                         pt.Position, pt.LossyScale, pt.Rotation);
@@ -245,7 +246,7 @@ namespace IM.Visuals
                 _hasPendingOldWorld = false;
             }
 
-            if (parent is ITransform ip)
+            if (parent is IHierarchyTransform ip)
             {
                 _lastParentPos = ip.Position;
                 _lastParentScale = ip.LossyScale;
@@ -262,7 +263,7 @@ namespace IM.Visuals
 
         protected override void OnChildAdded(IHierarchyElement child)
         {
-            if (child is ITransform t)
+            if (child is IHierarchyTransform t)
             {
                 (Vector3 pos, Vector3 scale, Quaternion rot) world = ComputeWorldUsingParent();
                 t.OnParentTransformChanged(world.pos, world.scale, world.rot);

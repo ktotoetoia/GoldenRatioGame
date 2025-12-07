@@ -7,9 +7,9 @@ namespace IM.Visuals
 {
     public class AddVisualModuleCommandFactory : IAddModuleCommandFactory
     {
-        private readonly ITransform _parent;
+        private readonly IHierarchyTransform _parent;
         
-        public AddVisualModuleCommandFactory(ITransform parent)
+        public AddVisualModuleCommandFactory(IHierarchyTransform parent)
         {
             _parent = parent;
         }

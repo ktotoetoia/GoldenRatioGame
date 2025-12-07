@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class TransformCore
+    public class ParentlessTransform : ITransform
     {
         private Vector3 _localPosition;
         private Vector3 _localScale;
@@ -13,9 +13,9 @@ namespace IM.Visuals
         public event Action<Vector3, Vector3> LocalScaleChanged;
         public event Action<Quaternion, Quaternion> LocalRotationChanged;
 
-        public TransformCore() : this(Vector3.zero, Vector3.one, Quaternion.identity) { }
+        public ParentlessTransform() : this(Vector3.zero, Vector3.one, Quaternion.identity) { }
 
-        public TransformCore(Vector3 localPosition, Vector3 localScale, Quaternion localRotation)
+        public ParentlessTransform(Vector3 localPosition, Vector3 localScale, Quaternion localRotation)
         {
             _localPosition = localPosition;
             _localScale = localScale;
@@ -34,18 +34,6 @@ namespace IM.Visuals
             }
         }
 
-        public Vector3 LocalScale
-        {
-            get => _localScale;
-            set
-            {
-                Vector3 old = _localScale;
-                if (old == value) return;
-                _localScale = value;
-                LocalScaleChanged?.Invoke(old, value);
-            }
-        }
-
         public Quaternion LocalRotation
         {
             get => _localRotation;
@@ -58,22 +46,31 @@ namespace IM.Visuals
             }
         }
 
-        public (Vector3 pos, Vector3 scale, Quaternion rot) ComputeWorld(
-            Vector3? parentPosition,
-            Vector3? parentScale,
-            Quaternion? parentRotation)
+
+        public Vector3 LocalScale
         {
-            if (!parentPosition.HasValue || !parentScale.HasValue || !parentRotation.HasValue)
-                return (_localPosition, _localScale, _localRotation);
+            get => _localScale;
+            set
+            {
+                Vector3 old = _localScale;
+                if (old == value) return;
+                _localScale = value;
+                LocalScaleChanged?.Invoke(old, value);
+            }
+        }
+        
+        public Vector3 LossyScale => LocalScale;
+        
+        public Vector3 Position 
+        {
+            get => LocalPosition;
+            set =>  LocalPosition = value;
+        }
 
-            Vector3 pPos = parentPosition.Value;
-            Vector3 pScale = parentScale.Value;
-            Quaternion pRot = parentRotation.Value;
-
-            Vector3 worldPos = pPos + pRot * Vector3.Scale(_localPosition, pScale);
-            Vector3 worldScale = Vector3.Scale(pScale, _localScale);
-            Quaternion worldRot = pRot * _localRotation;
-            return (worldPos, worldScale, worldRot);
+        public Quaternion Rotation
+        {
+            get => LocalRotation;
+            set =>  LocalRotation = value;
         }
 
         public void SetLocalFromWorld(Vector3 worldPos, Vector3 worldScale, Quaternion worldRot,

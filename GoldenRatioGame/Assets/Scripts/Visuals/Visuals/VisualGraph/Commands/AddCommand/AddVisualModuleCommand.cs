@@ -9,10 +9,10 @@ namespace IM.Visuals
     {
         private readonly ICollection<IModule> _addTo;
         private readonly IVisualModule _module;
-        private readonly ITransform _parentTransform;
+        private readonly IHierarchyTransform _parentTransform;
         private bool _isExecuted;
 
-        public AddVisualModuleCommand(IVisualModule module, ICollection<IModule> addTo, ITransform parentTransform)
+        public AddVisualModuleCommand(IVisualModule module, ICollection<IModule> addTo, IHierarchyTransform parentTransform)
         {
             _module = module ?? throw new ArgumentNullException(nameof(module));
             _addTo = addTo ?? throw new ArgumentNullException(nameof(addTo));
@@ -22,9 +22,9 @@ namespace IM.Visuals
         public void Execute()
         {
             if (_isExecuted) throw new InvalidOperationException("Command already executed");
-             if (_addTo.Contains(_module))
+            if (_addTo.Contains(_module))
                 throw new InvalidOperationException($"Other command already added this module {_module}");
-              if (_parentTransform.ContainsChild(_module.Transform))
+            if (_parentTransform.ContainsChild(_module.Transform))
                 throw new InvalidOperationException($"other command or user added the visual module ({_module}) to the transform ({_parentTransform})");
 
             _addTo.Add(_module);

@@ -13,14 +13,14 @@ namespace IM.Visuals
         IEnumerable<IPort> IModule.Ports => _ports;
         public IEnumerable<IVisualPort> Ports => _ports;
         public Sprite Icon { get; }
-        public ITransform Transform { get; }
+        public IHierarchyTransform Transform { get; }
 
         public SingleIconVisualModule(Sprite sprite) : this(new Transform(), sprite)
         {
             
         }
         
-        public SingleIconVisualModule(ITransform transform,Sprite sprite)
+        public SingleIconVisualModule(IHierarchyTransform transform,Sprite sprite)
         {
             Transform = transform;
             Icon = sprite;

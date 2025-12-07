@@ -9,14 +9,14 @@ namespace IM.Visuals
         public IVisualConnection Connection { get; private set; }
         IConnection IPort.Connection => Connection;
         public bool IsConnected => Connection != null;
-        public ITransform Transform { get; }
+        public IHierarchyTransform Transform { get; }
 
         public VisualPort(IVisualModule module) : this(module, new Transform())
         {
             
         }
 
-        public VisualPort(IVisualModule module, ITransform transform)
+        public VisualPort(IVisualModule module, IHierarchyTransform transform)
         {
             Module = module;
             Transform = transform;
