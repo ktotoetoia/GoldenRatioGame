@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using IM.Graphs;
 
 namespace IM.Visuals
 {
-    public interface IVisualModuleGraph : IModuleGraphReadOnly
+    public interface IVisualModuleGraph : IModuleGraphReadOnly, IDisposable
     {
         ITransform Transform { get; }
         

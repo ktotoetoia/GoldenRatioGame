@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
 
@@ -40,5 +41,13 @@ namespace IM.Visuals
         public bool CanRedo(int count) => _commandModuleGraph.CanRedo(count);
         public void Undo(int count) => _commandModuleGraph.Undo(count);
         public void Redo(int count) => _commandModuleGraph.Redo(count);
+
+        public void Dispose()
+        {
+            foreach (IDisposable module in Modules.OfType<IDisposable>())
+            {
+                module.Dispose();
+            }
+        }
     }
 }

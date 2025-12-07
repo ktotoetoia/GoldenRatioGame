@@ -8,9 +8,6 @@ namespace IM.Visuals
     public class ModuleEntityVisuals : MonoBehaviour, IModuleGraphObserver
     {
         [SerializeField] private GameObject _visualModulePrefab;
-        [SerializeField] private bool _drawBounds = true;
-        [SerializeField] private bool _drawSprites = true;
-        [SerializeField] private bool _drawPorts = true;
         private ModuleGraphToVisualGraphConvertor _graphToVisualGraphConvertor;
         private IVisualModuleGraph _graphToDraw;
 
@@ -34,7 +31,8 @@ namespace IM.Visuals
         private void UpdateGraphToDraw(IModuleGraphReadOnly graph)
         {
             _graphToVisualGraphConvertor.Position = transform.position;
-            
+            _graphToDraw?.Dispose();
+            Debug.Log("Graph created at frame: " + Time.frameCount);
             _graphToDraw = _graphToVisualGraphConvertor.Create(graph);
         }
     }
