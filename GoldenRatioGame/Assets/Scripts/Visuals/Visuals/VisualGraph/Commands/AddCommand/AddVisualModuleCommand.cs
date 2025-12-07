@@ -24,12 +24,12 @@ namespace IM.Visuals
             if (_isExecuted) throw new InvalidOperationException("Command already executed");
             if (_addTo.Contains(_module))
                 throw new InvalidOperationException($"Other command already added this module {_module}");
-            if (_parentTransform.ContainsChild(_module.Transform))
+            if (_parentTransform.ContainsChild(_module.HierarchyTransform))
                 throw new InvalidOperationException($"other command or user added the visual module ({_module}) to the transform ({_parentTransform})");
 
             _addTo.Add(_module);
-            _parentTransform.AddChild(_module.Transform);
-            _module.Transform.LocalPosition = _module.Transform.Position;
+            _parentTransform.AddChild(_module.HierarchyTransform);
+            _module.HierarchyTransform.LocalPosition = _module.HierarchyTransform.Position;
             _isExecuted = true;
         }
 
@@ -38,11 +38,11 @@ namespace IM.Visuals
             if (!_isExecuted) throw new InvalidOperationException("Command must be executed before undo");
             if (!_addTo.Contains(_module))
                 throw new InvalidOperationException($"Other command already removed this module{_module}");
-            if (!_parentTransform.ContainsChild(_module.Transform))
+            if (!_parentTransform.ContainsChild(_module.HierarchyTransform))
                 throw new InvalidOperationException($"other command or user removed the visual module ({_module}) from the transform ({_parentTransform})");
 
             _addTo.Remove(_module);
-            _parentTransform.RemoveChild(_module.Transform);
+            _parentTransform.RemoveChild(_module.HierarchyTransform);
             _isExecuted = false;
         }
     }

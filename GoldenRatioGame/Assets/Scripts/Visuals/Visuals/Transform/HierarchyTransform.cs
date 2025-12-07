@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class Transform : HierarchyElement, IHierarchyTransform
+    public class HierarchyTransform : HierarchyElement, IHierarchyTransform
     {
         private readonly ParentlessTransform _core;
 
@@ -40,14 +40,14 @@ namespace IM.Visuals
             remove => _core.LocalRotationChanged -= value;
         }
 
-        public Transform() : this(new ParentlessTransform()) { }
+        public HierarchyTransform() : this(new ParentlessTransform()) { }
 
-        public Transform(Vector3 localPosition) : this(new ParentlessTransform(localPosition, Vector3.one, Quaternion.identity)) { }
+        public HierarchyTransform(Vector3 localPosition) : this(new ParentlessTransform(localPosition, Vector3.one, Quaternion.identity)) { }
 
-        public Transform(Vector3 localPosition, Vector3 localScale, Quaternion localRotation)
+        public HierarchyTransform(Vector3 localPosition, Vector3 localScale, Quaternion localRotation)
             : this(new ParentlessTransform(localPosition, localScale, localRotation)) { }
 
-        public Transform(ParentlessTransform core)
+        public HierarchyTransform(ParentlessTransform core)
         {
             _core = core ?? throw new ArgumentNullException(nameof(core));
             _hasPendingOldWorld = false;

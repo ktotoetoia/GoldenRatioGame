@@ -55,16 +55,16 @@ namespace IM.Visuals.Debug
         private void DrawGizmosModule(IVisualModule module)
         {
             Matrix4x4 oldMatrix = Gizmos.matrix;
-            Gizmos.matrix = Matrix4x4.TRS(module.Transform.Position, module.Transform.Rotation, Vector3.one);
+            Gizmos.matrix = Matrix4x4.TRS(module.HierarchyTransform.Position, module.HierarchyTransform.Rotation, Vector3.one);
             Gizmos.color = Color.white;
-            Gizmos.DrawWireCube(Vector3.zero, module.Transform.LossyScale);
+            Gizmos.DrawWireCube(Vector3.zero, module.HierarchyTransform.LossyScale);
             Gizmos.matrix = oldMatrix;
         }
 
         private void DrawGLModule(IVisualModule module)
         {
-            Vector3 center = module.Transform.Position;
-            Vector3 size = module.Transform.LossyScale;
+            Vector3 center = module.HierarchyTransform.Position;
+            Vector3 size = module.HierarchyTransform.LossyScale;
             Sprite sprite = module.Icon;
                 
             if (sprite && sprite.texture)
@@ -72,8 +72,8 @@ namespace IM.Visuals.Debug
                 Material mat = GetMaterialForSprite(sprite);
                 mat.SetPass(0);
 
-                Vector3 right = module.Transform.Rotation * Vector3.right * size.x * 0.5f;
-                Vector3 up = module.Transform.Rotation * Vector3.up    * size.y * 0.5f;
+                Vector3 right = module.HierarchyTransform.Rotation * Vector3.right * size.x * 0.5f;
+                Vector3 up = module.HierarchyTransform.Rotation * Vector3.up    * size.y * 0.5f;
 
                 GL.Begin(GL.QUADS);
                 GL.Color(Color.white);

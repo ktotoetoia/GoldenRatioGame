@@ -11,7 +11,7 @@ namespace IM.Visuals
         {
             SingleIconVisualModule visualModule = new (moduleLayout.Icon)
             {
-                Transform =
+                HierarchyTransform =
                 {
                     LocalScale = moduleLayout.Bounds.size,
                 }
@@ -21,7 +21,7 @@ namespace IM.Visuals
             {
                 IVisualPort visualPort = new VisualPort(visualModule);
                 
-                visualModule.Transform.AddChild(visualPort.Transform);
+                visualModule.HierarchyTransform.AddChild(visualPort.Transform);
 
                 visualPort.Transform.LocalPosition = portLayout.RelativePosition;
                 visualPort.Transform.LocalScale = Vector3.one;

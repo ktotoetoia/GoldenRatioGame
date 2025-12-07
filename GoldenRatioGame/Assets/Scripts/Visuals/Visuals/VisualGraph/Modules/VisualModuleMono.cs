@@ -11,7 +11,7 @@ namespace IM.Visuals
         private readonly List<IVisualPort> _ports = new();
         private Sprite _icon;
         private SpriteRenderer _renderer;
-        private Transform _transform;
+        private HierarchyTransform _hierarchyTransform;
 
         public Sprite Icon
         {
@@ -28,21 +28,21 @@ namespace IM.Visuals
         public IEnumerable<IVisualPort> Ports => _ports;
         IEnumerable<IPort> IModule.Ports => _ports;
 
-        public IHierarchyTransform Transform
+        public IHierarchyTransform HierarchyTransform
         {
             get
             {
-                if (_transform == null)
+                if (_hierarchyTransform == null)
                 {
-                    _transform = new();
-                    _transform.PositionChanged += (_, newValue) =>
+                    _hierarchyTransform = new();
+                    _hierarchyTransform.PositionChanged += (_, newValue) =>
                     {
                         transform.position = newValue;
                     };
                     
                 }
                 
-                return _transform;
+                return _hierarchyTransform;
             }  
         }
 

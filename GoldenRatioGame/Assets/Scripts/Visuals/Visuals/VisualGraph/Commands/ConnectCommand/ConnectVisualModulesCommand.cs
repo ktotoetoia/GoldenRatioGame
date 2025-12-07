@@ -49,7 +49,7 @@ namespace IM.Visuals
             if (!_isExecuted)
                 throw new InvalidOperationException("Command must be executed before undo");
 
-            IHierarchyTransform inputTransform = _input.Module.Transform;
+            IHierarchyTransform inputTransform = _input.Module.HierarchyTransform;
             inputTransform.LocalPosition = _prevInputPosition;
             inputTransform.LocalRotation = _prevInputRotation;
 
@@ -62,8 +62,8 @@ namespace IM.Visuals
 
         private void AlignModules()
         {
-            IHierarchyTransform outputT = _output.Module.Transform;
-            IHierarchyTransform inputT  = _input.Module.Transform;
+            IHierarchyTransform outputT = _output.Module.HierarchyTransform;
+            IHierarchyTransform inputT  = _input.Module.HierarchyTransform;
 
             _prevInputPosition = inputT.Position;
             _prevInputRotation = inputT.Rotation;

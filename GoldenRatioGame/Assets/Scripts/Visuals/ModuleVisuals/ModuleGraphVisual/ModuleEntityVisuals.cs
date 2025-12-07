@@ -13,7 +13,7 @@ namespace IM.Visuals
 
         private void Awake()
         {
-            _graphToVisualGraphConvertor = new ModuleGraphToVisualGraphConvertor(new ModuleLayoutToVisualModuleMonoConvertor(_visualModulePrefab));
+            _graphToVisualGraphConvertor = new ModuleGraphToVisualGraphConvertor(new ModuleLayoutToVisualModuleMonoConvertor(_visualModulePrefab,transform));
         }
 
         private void Update()
@@ -32,7 +32,7 @@ namespace IM.Visuals
         {
             _graphToVisualGraphConvertor.Position = transform.position;
             _graphToDraw?.Dispose();
-            Debug.Log("Graph created at frame: " + Time.frameCount);
+            
             _graphToDraw = _graphToVisualGraphConvertor.Create(graph);
         }
     }

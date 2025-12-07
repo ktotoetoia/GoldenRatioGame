@@ -19,7 +19,7 @@ namespace IM.Visuals
         public int CommandsToUndoCount => _commandModuleGraph.CommandsToUndoCount;
         public int CommandsToRedoCount => _commandModuleGraph.CommandsToRedoCount;
 
-        public VisualCommandModuleGraph() : this(new Transform())
+        public VisualCommandModuleGraph() : this(new HierarchyTransform())
         {
             
         }

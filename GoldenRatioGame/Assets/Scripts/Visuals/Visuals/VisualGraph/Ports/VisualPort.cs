@@ -11,7 +11,7 @@ namespace IM.Visuals
         public bool IsConnected => Connection != null;
         public IHierarchyTransform Transform { get; }
 
-        public VisualPort(IVisualModule module) : this(module, new Transform())
+        public VisualPort(IVisualModule module) : this(module, new HierarchyTransform())
         {
             
         }
