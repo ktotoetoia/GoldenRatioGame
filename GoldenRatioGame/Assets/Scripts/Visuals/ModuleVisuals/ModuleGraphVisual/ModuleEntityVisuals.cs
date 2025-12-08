@@ -4,17 +4,16 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    [DefaultExecutionOrder(-1)]
     public class ModuleEntityVisuals : MonoBehaviour, IModuleGraphObserver
     {
         [SerializeField] private GameObject _visualModulePrefab;
-        private ModuleGraphToVisualGraphConvertor _graphToVisualGraphConvertor;
+        private ModuleGraphToVisualGraphConvertor _c;
         private IVisualModuleGraph _graphToDraw;
 
-        private void Awake()
-        {
-            _graphToVisualGraphConvertor = new ModuleGraphToVisualGraphConvertor(new ModuleLayoutToVisualModuleMonoConvertor(_visualModulePrefab,transform));
-        }
+        private ModuleGraphToVisualGraphConvertor Convertor =>
+            _c ??=
+                new ModuleGraphToVisualGraphConvertor(
+                    new ModuleLayoutToVisualModuleMonoConvertor(_visualModulePrefab, transform));
 
         private void Update()
         {
@@ -30,10 +29,10 @@ namespace IM.Visuals
 
         private void UpdateGraphToDraw(IModuleGraphReadOnly graph)
         {
-            _graphToVisualGraphConvertor.Position = transform.position;
             _graphToDraw?.Dispose();
             
-            _graphToDraw = _graphToVisualGraphConvertor.Create(graph);
+            Convertor.Position = transform.position;
+            _graphToDraw = Convertor.Create(graph);
         }
     }
 }

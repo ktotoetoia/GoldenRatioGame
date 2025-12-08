@@ -8,20 +8,20 @@ namespace IM.Visuals
     public class ModuleLayoutToVisualModuleMonoConvertor : IFactory<IVisualModule, IModuleLayout, IDictionary<IPort, IVisualPort>>
     {
         private readonly GameObject _prefab;
-        public Transform Parent { get; set; }
+        private readonly Transform _parent;
 
         public ModuleLayoutToVisualModuleMonoConvertor(GameObject prefab, Transform parent = null)
         {
-            Parent = parent;
+            _parent = parent;
             _prefab = prefab;
         } 
         
         public IVisualModule Create(IModuleLayout moduleLayout, IDictionary<IPort, IVisualPort> dictionary)
         {
             
-            VisualModuleMono visualModule = Parent == null ?
+            VisualModuleMono visualModule = _parent == null ?
                 Object.Instantiate(_prefab).GetComponent<VisualModuleMono>() :
-                Object.Instantiate(_prefab,Parent).GetComponent<VisualModuleMono>();
+                Object.Instantiate(_prefab,_parent).GetComponent<VisualModuleMono>();
             visualModule.Icon = moduleLayout.Icon;
             visualModule.HierarchyTransform.LocalScale = moduleLayout.Bounds.size;
 

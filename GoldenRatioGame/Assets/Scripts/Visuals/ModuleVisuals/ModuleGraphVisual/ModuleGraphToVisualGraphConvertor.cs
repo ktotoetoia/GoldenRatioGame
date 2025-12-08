@@ -14,11 +14,6 @@ namespace IM.Visuals
         
         public Vector3 Position { get; set; }
 
-        public ModuleGraphToVisualGraphConvertor() : this(new ModuleLayoutToVisualModuleConvertor())
-        {
-            
-        }
-
         public ModuleGraphToVisualGraphConvertor(
             IFactory<IVisualModule, IModuleLayout, IDictionary<IPort, IVisualPort>> moduleConverter)
         {
