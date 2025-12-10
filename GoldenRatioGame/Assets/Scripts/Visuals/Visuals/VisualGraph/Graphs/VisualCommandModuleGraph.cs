@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
 
 namespace IM.Visuals
 {
-    public class AnimatedModuleGraph : IVisualCommandModuleGraph
+    public class VisualCommandModuleGraph : IVisualCommandModuleGraph
     {
         private readonly ICommandModuleGraph _commandModuleGraph;
         
@@ -19,12 +18,12 @@ namespace IM.Visuals
         public int CommandsToUndoCount => _commandModuleGraph.CommandsToUndoCount;
         public int CommandsToRedoCount => _commandModuleGraph.CommandsToRedoCount;
 
-        public AnimatedModuleGraph() : this(new HierarchyTransform())
+        public VisualCommandModuleGraph() : this(new HierarchyTransform())
         {
             
         }
 
-        public AnimatedModuleGraph(IHierarchyTransform transform)
+        public VisualCommandModuleGraph(IHierarchyTransform transform)
         {
             Transform = transform;
             _commandModuleGraph = new CommandModuleGraph(new AddVisualModuleCommandFactory(Transform),
@@ -41,13 +40,5 @@ namespace IM.Visuals
         public bool CanRedo(int count) => _commandModuleGraph.CanRedo(count);
         public void Undo(int count) => _commandModuleGraph.Undo(count);
         public void Redo(int count) => _commandModuleGraph.Redo(count);
-
-        public void Dispose()
-        {
-            foreach (IDisposable module in Modules.OfType<IDisposable>())
-            {
-                module.Dispose();
-            }
-        }
     }
 }

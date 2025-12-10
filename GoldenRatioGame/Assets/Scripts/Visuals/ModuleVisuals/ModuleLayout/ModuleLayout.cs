@@ -11,6 +11,7 @@ namespace IM.Visuals
         [SerializeField] private List<PortInfo> _portsInfos;
         private List<IPortLayout> _portLayouts;
         
+        [field: SerializeField] public RuntimeAnimatorController AnimatorController { get; private set; }
         [field: SerializeField] public Sprite Icon { get; private set; }
         public IGameModule Module { get; private set; }
         public Bounds Bounds => Icon.bounds;
@@ -36,11 +37,6 @@ namespace IM.Visuals
 
                 return _portLayouts;
             }
-        }
-
-        public IPortLayout GetPortLayoutFor(IPort port)
-        {
-            return PortLayouts.FirstOrDefault(x => x.Port == port);
         }
 
         public IEnumerable<IPort> GetPorts()

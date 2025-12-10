@@ -198,13 +198,9 @@ namespace IM.Visuals
             if (parent == null)
                 return (_core.LocalPosition, _core.LocalScale, _core.LocalRotation);
 
-            Vector3 parentPos = parent.Position;
-            Vector3 parentScale = parent.LossyScale;
-            Quaternion parentRot = parent.Rotation;
-
-            Vector3 worldPos = parentPos + parentRot * Vector3.Scale(_core.LocalPosition, parentScale);
-            Vector3 worldScale = Vector3.Scale(parentScale, _core.LocalScale);
-            Quaternion worldRot = parentRot * _core.LocalRotation;
+            Vector3 worldPos = parent.Position + parent.Rotation * Vector3.Scale(_core.LocalPosition, parent.LossyScale);
+            Vector3 worldScale = Vector3.Scale(parent.LossyScale, _core.LocalScale);
+            Quaternion worldRot = parent.Rotation * _core.LocalRotation;
             return (worldPos, worldScale, worldRot);
         }
         

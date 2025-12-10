@@ -12,17 +12,6 @@ namespace IM.Visuals
         private Sprite _icon;
         private SpriteRenderer _renderer;
         private HierarchyTransform _hierarchyTransform;
-
-        public Sprite Icon
-        {
-            get => _icon;
-            set
-            {
-                _icon = value;
-                _renderer ??= GetComponent<SpriteRenderer>();
-                _renderer.sprite = _icon;
-            }
-        }
         
         public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection);
         public IEnumerable<IVisualPort> Ports => _ports;
@@ -45,15 +34,19 @@ namespace IM.Visuals
                 return _hierarchyTransform;
             }  
         }
-
-        public void AddPort(IVisualPort port)
+        
+        public Sprite Icon
         {
-            _ports.Add(port);
+            get => _icon;
+            set
+            {
+                _icon = value;
+                _renderer ??= GetComponent<SpriteRenderer>();
+                _renderer.sprite = _icon;
+            }
         }
 
-        public void Dispose()
-        {
-            Destroy(gameObject);
-        }
+        public void AddPort(IVisualPort port) => _ports.Add(port);
+        public void Dispose() => Destroy(gameObject);
     }
 }

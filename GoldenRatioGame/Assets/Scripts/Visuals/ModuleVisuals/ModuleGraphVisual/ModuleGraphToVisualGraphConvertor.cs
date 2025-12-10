@@ -25,7 +25,7 @@ namespace IM.Visuals
             Dictionary<IPort, IVisualPort> visualPortMap = new();
             Dictionary<IGameModule, IVisualModule> moduleToVisual = new Dictionary<IGameModule, IVisualModule>();
             ICoreGameModule coreModule = source.Modules.FirstOrDefault(x => x is ICoreGameModule) as ICoreGameModule;
-            IVisualModuleGraph visualGraph = new VisualCommandModuleGraph(new HierarchyTransform(Position));
+            IVisualModuleGraph visualGraph = new DisposableVisualCommandModuleGraph(new HierarchyTransform(Position));
 
             foreach (IGameModule module in _traversal.Enumerate<IGameModule>(coreModule))
             {

@@ -82,4 +82,5 @@ MonoBehaviour:
   - _position: {x: 0, y: 0.5, z: 0}
     _normal: {x: 0, y: 0, z: 0}
     _tag: {fileID: 0}
+  <AnimatorController>k__BackingField: {fileID: 9100000, guid: ba3f8d1ee5402fb41932ff364bab178e, type: 2}
   <Icon>k__BackingField: {fileID: -6859097844572071575, guid: ba9b3dfaaaff42b4492aed0cbede6265, type: 3}

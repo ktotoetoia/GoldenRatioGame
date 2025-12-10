@@ -29,7 +29,7 @@ namespace IM.Visuals
 
         private void UpdateGraphToDraw(IModuleGraphReadOnly graph)
         {
-            _graphToDraw?.Dispose();
+            (_graphToDraw as IDisposable)?.Dispose();
             
             Convertor.Position = transform.position;
             _graphToDraw = Convertor.Create(graph);
