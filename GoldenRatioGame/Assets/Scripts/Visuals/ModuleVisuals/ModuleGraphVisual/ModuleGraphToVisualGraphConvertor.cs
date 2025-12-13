@@ -9,17 +9,10 @@ namespace IM.Visuals
 {
     public class ModuleGraphToVisualGraphConvertor : IFactory<IVisualModuleGraph, IModuleGraphReadOnly>
     {
-        private readonly IFactory<IVisualModule, IModuleLayout, IDictionary<IPort, IVisualPort>> _moduleConverter;
         private readonly ITraversal _traversal = new BreadthFirstTraversal();
         
         public Vector3 Position { get; set; }
 
-        public ModuleGraphToVisualGraphConvertor(
-            IFactory<IVisualModule, IModuleLayout, IDictionary<IPort, IVisualPort>> moduleConverter)
-        {
-            _moduleConverter = moduleConverter;
-        }
-        
         public IVisualModuleGraph Create(IModuleGraphReadOnly source)
         {
             Dictionary<IPort, IVisualPort> visualPortMap = new();
@@ -29,7 +22,7 @@ namespace IM.Visuals
 
             foreach (IGameModule module in _traversal.Enumerate<IGameModule>(coreModule))
             {
-                IVisualModule visualModule = _moduleConverter.Create(module.Extensions.GetExtension<IModuleLayout>(), visualPortMap);
+                IVisualModule visualModule = module.Extensions.GetExtension<IModuleLayout>().CreateVisualModule(visualPortMap);
                 
                 moduleToVisual[module] = visualModule;
                 visualGraph.AddModule(visualModule);

@@ -10,7 +10,8 @@ namespace IM.Visuals
         IGameModule Module { get; }
         IEnumerable<IPortLayout> PortLayouts { get; }
         Bounds Bounds { get; }
-        RuntimeAnimatorController AnimatorController { get; }
         Sprite Icon { get; }
+
+        IVisualModule CreateVisualModule(IDictionary<IPort, IVisualPort> visualPortMap);
     }
 }

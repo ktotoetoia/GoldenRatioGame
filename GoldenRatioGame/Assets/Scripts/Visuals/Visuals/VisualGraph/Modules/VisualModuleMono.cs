@@ -28,7 +28,6 @@ namespace IM.Visuals
                     {
                         transform.position = newValue;
                     };
-                    
                 }
                 
                 return _hierarchyTransform;

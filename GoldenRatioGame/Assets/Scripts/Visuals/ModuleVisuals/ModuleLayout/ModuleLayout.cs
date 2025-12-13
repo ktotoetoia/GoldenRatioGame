@@ -8,11 +8,12 @@ namespace IM.Visuals
 {
     public class ModuleLayout : MonoBehaviour, IModuleLayout, IPortInitializer
     {
+        [SerializeField] private GameObject _visualPrefab;
         [SerializeField] private List<PortInfo> _portsInfos;
         private List<IPortLayout> _portLayouts;
         
-        [field: SerializeField] public RuntimeAnimatorController AnimatorController { get; private set; }
         [field: SerializeField] public Sprite Icon { get; private set; }
+
         public IGameModule Module { get; private set; }
         public Bounds Bounds => Icon.bounds;
 
@@ -37,6 +38,30 @@ namespace IM.Visuals
 
                 return _portLayouts;
             }
+        }
+        
+        public IVisualModule CreateVisualModule(IDictionary<IPort, IVisualPort> visualPortMap)
+        {            
+            VisualModuleMono visualModule = Instantiate(_visualPrefab).GetComponent<VisualModuleMono>();
+            
+            visualModule.Icon = Icon;
+            visualModule.HierarchyTransform.LocalScale = Bounds.size;
+
+            foreach (IPortLayout portLayout in PortLayouts)
+            {
+                IVisualPort visualPort = new VisualPort(visualModule);
+                
+                visualModule.HierarchyTransform.AddChild(visualPort.Transform);
+
+                visualPort.Transform.LocalPosition = portLayout.RelativePosition;
+                visualPort.Transform.LocalScale = Vector3.one;
+                visualPort.Transform.LocalRotation = Quaternion.LookRotation(portLayout.Normal, Vector3.up);
+                
+                visualModule.AddPort(visualPort);
+                visualPortMap[portLayout.Port] = visualPort;
+            }
+
+            return visualModule;
         }
 
         public IEnumerable<IPort> GetPorts()

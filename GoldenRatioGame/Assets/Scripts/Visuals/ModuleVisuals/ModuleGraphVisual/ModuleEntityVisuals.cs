@@ -10,14 +10,11 @@ namespace IM.Visuals
         private ModuleGraphToVisualGraphConvertor _c;
         private IVisualModuleGraph _graphToDraw;
 
-        private ModuleGraphToVisualGraphConvertor Convertor =>
-            _c ??=
-                new ModuleGraphToVisualGraphConvertor(
-                    new ModuleLayoutToVisualModuleMonoConvertor(_visualModulePrefab, transform));
+        private ModuleGraphToVisualGraphConvertor Convertor => _c ??= new ModuleGraphToVisualGraphConvertor();
 
         private void Update()
         {
-            _graphToDraw.Transform.Position = transform.position;
+            if (_graphToDraw != null) _graphToDraw.Transform.Position = transform.position;
         }
 
         public void OnGraphUpdated(IModuleGraphReadOnly graph)

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fortnite
+  m_Name: ArmRightIdle
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -22,14 +22,6 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: -6696705774333872909, guid: 99a85b001a58d164695718abe96c09ac, type: 3}
-    - time: 0.016666668
-      value: {fileID: -5711908598854653283, guid: 86cab99528ae4794fbd0765ef014b145, type: 3}
-    - time: 0.033333335
-      value: {fileID: -4124243804936795257, guid: 0c05a9dd7b4237a4eabe8ab881b7d9ab, type: 3}
-    - time: 0.05
-      value: {fileID: -6859097844572071575, guid: ba9b3dfaaaff42b4492aed0cbede6265, type: 3}
-    - time: 0.06666667
-      value: {fileID: 4309042506995017036, guid: 2f7a8d99764e5614baa86273bf655edf, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -53,21 +45,17 @@ AnimationClip:
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
     - {fileID: -6696705774333872909, guid: 99a85b001a58d164695718abe96c09ac, type: 3}
-    - {fileID: -5711908598854653283, guid: 86cab99528ae4794fbd0765ef014b145, type: 3}
-    - {fileID: -4124243804936795257, guid: 0c05a9dd7b4237a4eabe8ab881b7d9ab, type: 3}
-    - {fileID: -6859097844572071575, guid: ba9b3dfaaaff42b4492aed0cbede6265, type: 3}
-    - {fileID: 4309042506995017036, guid: 2f7a8d99764e5614baa86273bf655edf, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.083333336
+    m_StopTime: 0.016666668
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 1
+    m_LoopTime: 0
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
