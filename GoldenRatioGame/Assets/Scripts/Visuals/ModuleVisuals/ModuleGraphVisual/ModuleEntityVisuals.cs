@@ -6,7 +6,6 @@ namespace IM.Visuals
 {
     public class ModuleEntityVisuals : MonoBehaviour, IModuleGraphObserver
     {
-        [SerializeField] private GameObject _visualModulePrefab;
         private ModuleGraphToVisualGraphConvertor _c;
         private IVisualModuleGraph _graphToDraw;
 

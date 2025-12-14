@@ -7,11 +7,6 @@ namespace IM.Visuals
 {
     public interface IModuleLayout : IModuleExtension
     {
-        IGameModule Module { get; }
-        IEnumerable<IPortLayout> PortLayouts { get; }
-        Bounds Bounds { get; }
-        Sprite Icon { get; }
-
-        IVisualModule CreateVisualModule(IDictionary<IPort, IVisualPort> visualPortMap);
+        IVisualModule CreateTemporaryVisualModule(IDictionary<IPort, IVisualPort> visualPortMap);
     }
 }

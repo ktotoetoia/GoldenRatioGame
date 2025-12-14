@@ -108,4 +108,4 @@ MonoBehaviour:
   - _position: {x: 0.3, y: -0.4, z: 0}
     _normal: {x: 0, y: -1, z: 0}
     _tag: {fileID: 11400000, guid: fb69546f865b0a7489a6e04e9bf3cad9, type: 2}
-  <Icon>k__BackingField: {fileID: -4124243804936795257, guid: 0c05a9dd7b4237a4eabe8ab881b7d9ab, type: 3}
+  _sprite: {fileID: -4124243804936795257, guid: 0c05a9dd7b4237a4eabe8ab881b7d9ab, type: 3}

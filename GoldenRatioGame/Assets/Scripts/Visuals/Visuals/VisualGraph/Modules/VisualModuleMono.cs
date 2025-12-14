@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class VisualModuleMono : MonoBehaviour, IVisualModule, IDisposable
+    public class VisualModuleMono : MonoBehaviour, IVisualModule
     {
         private readonly List<IVisualPort> _ports = new();
         private Sprite _icon;

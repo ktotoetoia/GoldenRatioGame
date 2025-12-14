@@ -8,16 +8,16 @@ namespace IM.Modules
     public class GameModuleMono : MonoBehaviour, IGameModule
     {
         [SerializeField] private Sprite _sprite;
-
-        public IEnumerable<IEdge> Edges => Ports.Where(x => x.IsConnected).Select(x => x.Connection).ToList();
-        public IEnumerable<IPort> Ports { get; private set; }
-        public IModuleExtensions Extensions { get; private set; }
+        private readonly List<IPort> _ports =  new();
+        private IModuleExtensions _extensions;
         
-        private void Awake()
+        public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection).ToList();
+        public IEnumerable<IPort> Ports => _ports;
+        public IModuleExtensions Extensions => _extensions ??= new ModuleExtensions(gameObject);
+
+        public void AddPort(IPort port)
         {
-            Extensions = new ModuleExtensions(gameObject);
-            
-            Ports = new List<IPort>(GetComponent<IPortInitializer>().GetPorts());
+            _ports.Add(port);
         }
     }
 }

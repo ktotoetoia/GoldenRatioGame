@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using IM.Graphs;
 using UnityEngine;
 
 namespace IM.Visuals
 {
-    public interface IVisualModule : IModule
+    public interface IVisualModule : IModule, IDisposable
     {
         IHierarchyTransform HierarchyTransform { get; }
         Sprite Icon { get; }
