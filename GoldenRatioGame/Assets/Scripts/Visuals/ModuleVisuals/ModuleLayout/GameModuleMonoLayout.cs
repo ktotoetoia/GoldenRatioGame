@@ -32,7 +32,7 @@ namespace IM.Visuals
         }
 
         public IVisualModule CreateTemporaryVisualModule(IDictionary<IPort, IVisualPort> visualPortMap)
-        {            
+        {
             VisualModuleMono visualModule = Instantiate(_visualPrefab).GetComponent<VisualModuleMono>();
             
             visualModule.Icon = _sprite;

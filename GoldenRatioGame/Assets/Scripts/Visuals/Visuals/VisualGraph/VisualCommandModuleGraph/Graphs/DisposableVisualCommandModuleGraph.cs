@@ -5,11 +5,6 @@ namespace IM.Visuals
 {
     public class DisposableVisualCommandModuleGraph : VisualCommandModuleGraph, IDisposable
     {
-        public DisposableVisualCommandModuleGraph()
-        {
-            
-        }
-        
         public DisposableVisualCommandModuleGraph(IHierarchyTransform transform) : base(transform)
         {
             
