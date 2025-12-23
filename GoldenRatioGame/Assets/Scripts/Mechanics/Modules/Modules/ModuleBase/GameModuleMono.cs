@@ -7,7 +7,6 @@ namespace IM.Modules
 {
     public class GameModuleMono : MonoBehaviour, IGameModule
     {
-        [SerializeField] private Sprite _sprite;
         private readonly List<IPort> _ports =  new();
         private IModuleExtensions _extensions;
         

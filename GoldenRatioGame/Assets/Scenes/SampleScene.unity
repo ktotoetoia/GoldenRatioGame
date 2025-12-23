@@ -632,7 +632,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad5a98d0347404180f0ac8e5d4dfe78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.ModuleEntityVisuals
-  _visualModulePrefab: {fileID: 2343830096638419963, guid: 4852f279d6ad1f84dbfacb7bb447587b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

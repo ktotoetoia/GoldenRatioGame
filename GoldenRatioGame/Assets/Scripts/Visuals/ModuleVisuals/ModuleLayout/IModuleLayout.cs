@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using IM.Graphs;
 using IM.Modules;
-using UnityEngine;
 
 namespace IM.Visuals
 {

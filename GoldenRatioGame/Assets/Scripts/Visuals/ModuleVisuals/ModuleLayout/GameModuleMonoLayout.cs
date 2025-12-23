@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using IM.Graphs;
 using IM.Modules;
 using UnityEngine;
@@ -11,7 +10,6 @@ namespace IM.Visuals
     {
         [SerializeField] private GameObject _visualPrefab;
         [SerializeField] private List<PortInfo> _portsInfos;
-        [SerializeField] private Sprite _sprite;
         private readonly Dictionary<PortInfo, IPort>  _ports = new();
         private GameModuleMono _module;
 
@@ -34,9 +32,6 @@ namespace IM.Visuals
         public IVisualModule CreateTemporaryVisualModule(IDictionary<IPort, IVisualPort> visualPortMap)
         {
             VisualModuleMono visualModule = Instantiate(_visualPrefab).GetComponent<VisualModuleMono>();
-            
-            visualModule.Icon = _sprite;
-            visualModule.HierarchyTransform.LocalScale = _sprite.bounds.size;
 
             foreach ((PortInfo portInfo, IPort port) in _ports)
             {

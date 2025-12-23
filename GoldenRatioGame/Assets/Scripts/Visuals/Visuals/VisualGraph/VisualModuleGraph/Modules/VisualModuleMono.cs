@@ -9,10 +9,11 @@ namespace IM.Visuals
     public class VisualModuleMono : MonoBehaviour, IVisualModule
     {
         private readonly List<IVisualPort> _ports = new();
-        private Sprite _icon;
-        private SpriteRenderer _renderer;
         private HierarchyTransform _hierarchyTransform;
-        
+        private SpriteRenderer _renderer;
+        private Sprite _icon;
+        private bool _initialized;
+
         public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection);
         public IEnumerable<IVisualPort> Ports => _ports;
         IEnumerable<IPort> IModule.Ports => _ports;
@@ -20,14 +21,7 @@ namespace IM.Visuals
         {
             get
             {
-                if (_hierarchyTransform == null)
-                {
-                    _hierarchyTransform = new();
-                    _hierarchyTransform.PositionChanged += (_, newValue) =>
-                    {
-                        transform.position = newValue;
-                    };
-                }
+                if (_hierarchyTransform == null) Initialize();
                 
                 return _hierarchyTransform;
             }  
@@ -35,13 +29,27 @@ namespace IM.Visuals
         
         public Sprite Icon
         {
-            get => _icon;
-            set
+            get
             {
-                _icon = value;
-                _renderer ??= GetComponent<SpriteRenderer>();
-                _renderer.sprite = _icon;
+                if(_renderer == null) Initialize();
+                return _renderer.sprite;
             }
+        }
+
+        private void Initialize()
+        {
+            if (_initialized) throw new Exception(); 
+            
+            _renderer = GetComponent<SpriteRenderer>();
+            _hierarchyTransform = new();
+            _hierarchyTransform.PositionChanged += (_, newValue) =>
+            {
+                transform.position = newValue;
+            };
+            
+            _hierarchyTransform.LocalScale = Icon.bounds.size;
+            
+            _initialized = true;
         }
 
         public void AddPort(IVisualPort port) => _ports.Add(port);

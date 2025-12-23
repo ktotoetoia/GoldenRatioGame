@@ -93,6 +93,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -6696705774333872909, guid: 99a85b001a58d164695718abe96c09ac, type: 3}
     - target: {fileID: 4556875372869762170, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _visualPrefab
+      value: 
+      objectReference: {fileID: 2156244532669732079, guid: 840872b778351f04b8c956f046141407, type: 3}
+    - target: {fileID: 4556875372869762170, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: <Icon>k__BackingField
       value: 
       objectReference: {fileID: -6696705774333872909, guid: 99a85b001a58d164695718abe96c09ac, type: 3}

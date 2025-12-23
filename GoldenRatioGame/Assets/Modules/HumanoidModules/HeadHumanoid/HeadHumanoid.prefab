@@ -75,9 +75,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b689c94a11470785683a05a4b508ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.ModuleLayout
-  _visualPrefab: {fileID: 3988393057665413362, guid: a708894eacb405b41b6b38116320cffd, type: 3}
+  _visualPrefab: {fileID: 2156244532669732079, guid: e31406646bfbbfb4d96f36dea99f9cbf, type: 3}
   _portsInfos:
   - _position: {x: 0, y: -0.4, z: 0}
     _normal: {x: 0, y: -1, z: 0}
     _tag: {fileID: 11400000, guid: 9780612eeb15ddb4e872a9faa88ec63a, type: 2}
-  _sprite: {fileID: -6859097844572071575, guid: ba9b3dfaaaff42b4492aed0cbede6265, type: 3}
