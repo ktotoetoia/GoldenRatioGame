@@ -5,47 +5,10 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class AnimationModule : MonoBehaviour, IAnimationModule
+    public class AnimationModule : VisualModuleMono, IAnimationModule
     {
-        private readonly List<IVisualPort> _ports = new();
-        private Sprite _icon;
-        private SpriteRenderer _renderer;
-        private HierarchyTransform _hierarchyTransform;
         private Animator _animator;
         
-        public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection);
-        public IEnumerable<IVisualPort> Ports => _ports;
-        IEnumerable<IPort> IModule.Ports => _ports;
-        public IHierarchyTransform HierarchyTransform
-        {
-            get
-            {
-                if (_hierarchyTransform == null)
-                {
-                    _hierarchyTransform = new();
-                    _hierarchyTransform.PositionChanged += (_, newValue) =>
-                    {
-                        transform.position = newValue;
-                    };
-                }
-                
-                return _hierarchyTransform;
-            }  
-        }
-        
-        public Sprite Icon
-        {
-            get => _icon;
-            set
-            {
-                _icon = value;
-                _renderer ??= GetComponent<SpriteRenderer>();
-                _renderer.sprite = _icon;
-            }
-        }
         public Animator Animator => _animator??= GetComponent<Animator>();
-
-        public void AddPort(IVisualPort port) => _ports.Add(port);
-        public void Dispose() => Destroy(gameObject);
     }
 }

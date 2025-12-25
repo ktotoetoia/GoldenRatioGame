@@ -6,6 +6,6 @@ namespace IM.Visuals
 {
     public interface IModuleLayout : IModuleExtension
     {
-        IVisualModule CreateTemporaryVisualModule(IDictionary<IPort, IVisualPort> visualPortMap);
+        IVisualModule CreateVisualModule(IDictionary<IPort, IVisualPort> visualPortMap);
     }
 }

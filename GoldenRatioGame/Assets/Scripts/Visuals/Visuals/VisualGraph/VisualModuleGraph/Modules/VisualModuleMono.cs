@@ -26,12 +26,11 @@ namespace IM.Visuals
                 return _hierarchyTransform;
             }  
         }
-        
         public Sprite Icon
         {
             get
             {
-                if(_renderer == null) Initialize();
+                if(!_renderer) Initialize();
                 return _renderer.sprite;
             }
         }
@@ -42,12 +41,10 @@ namespace IM.Visuals
             
             _renderer = GetComponent<SpriteRenderer>();
             _hierarchyTransform = new();
-            _hierarchyTransform.PositionChanged += (_, newValue) =>
-            {
-                transform.position = newValue;
-            };
             
-            _hierarchyTransform.LocalScale = Icon.bounds.size;
+            _hierarchyTransform.PositionChanged += (_, newValue) => transform.position = newValue;
+            _hierarchyTransform.LossyScaleChanged += (_, newValue) => transform.localScale = newValue;
+            _hierarchyTransform.RotationChanged += (_, newValue) => transform.localRotation = newValue;
             
             _initialized = true;
         }

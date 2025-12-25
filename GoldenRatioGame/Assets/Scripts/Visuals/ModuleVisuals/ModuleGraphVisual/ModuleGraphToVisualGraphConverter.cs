@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class ModuleGraphToVisualGraphConvertor : IFactory<IVisualModuleGraph, IModuleGraphReadOnly>
+    public class ModuleGraphToVisualGraphConverter : IFactory<IVisualModuleGraph, IModuleGraphReadOnly>
     {
         private readonly ITraversal _traversal = new BreadthFirstTraversal();
         
@@ -22,7 +22,7 @@ namespace IM.Visuals
 
             foreach (IGameModule module in _traversal.Enumerate<IGameModule>(coreModule))
             {
-                IVisualModule visualModule = module.Extensions.GetExtension<IModuleLayout>().CreateTemporaryVisualModule(visualPortMap);
+                IVisualModule visualModule = module.Extensions.GetExtension<IModuleLayout>().CreateVisualModule(visualPortMap);
                 
                 moduleToVisual[module] = visualModule;
                 visualGraph.AddModule(visualModule);

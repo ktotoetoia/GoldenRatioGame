@@ -41,7 +41,7 @@ namespace IM.Modules
                 Debug.Log("Changes Cancelled");
             }
             
-            if (Input.GetKeyDown(KeyCode.O))
+            if (Input.GetKeyDown(KeyCode.O) && _moduleEntity.GraphEditor.IsEditing)
             {
                 foreach (GameObject prefab in _modulesPrefabs)
                 {

@@ -19,17 +19,14 @@ namespace IM.Visuals
             
             foreach (PortInfo portInfo in _portsInfos)
             {
-                IPort port;
-                
-                if(portInfo.Tag !=null) port = new TaggedPort(_module, portInfo.Tag);
-                else port = new Port(_module);
+                IPort port = portInfo.Tag == null ? new Port(_module) : new TaggedPort(_module, portInfo.Tag);
                 
                 _module.AddPort(port);
                 _ports.Add(portInfo, port);
             }
         }
 
-        public IVisualModule CreateTemporaryVisualModule(IDictionary<IPort, IVisualPort> visualPortMap)
+        public IVisualModule CreateVisualModule(IDictionary<IPort, IVisualPort> visualPortMap)
         {
             VisualModuleMono visualModule = Instantiate(_visualPrefab).GetComponent<VisualModuleMono>();
 
