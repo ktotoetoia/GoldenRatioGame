@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using IM.Abilities;
 using IM.Graphs;
@@ -9,7 +8,7 @@ namespace IM.Modules
     public class AbilityExtensionsObserver : IModuleGraphObserver
     {
         private readonly AbilityPool _abilityPool;
-        private readonly HashSet<IAbility> _knownAbilities = new();
+        private readonly EnumerableDiffTracker<IAbility> _diffTracker = new (); 
 
         public AbilityExtensionsObserver(AbilityPool abilityPool)
         {
@@ -19,29 +18,17 @@ namespace IM.Modules
         public void OnGraphUpdated(IModuleGraphReadOnly graph)
         {
             if (graph == null) throw new ArgumentNullException(nameof(graph));
-
-            HashSet<IAbility> currentAbilities = new();
-        
-            foreach (IModule module in graph.Modules)
+            
+            DiffResult<IAbility> diffResult = _diffTracker.Update(graph.Modules.Where(x => x is IGameModule module && module.Extensions.HasExtensionOfType<IAbility>())
+                .SelectMany(x => (x as IGameModule).Extensions.GetExtensions<IAbility>()));
+            
+            foreach (IAbility ability in diffResult.Added)
             {
-                if (module is IGameModule gameModule &&
-                    gameModule.Extensions.TryGetExtension(out IAbilityExtension abilityExt))
-                {
-                    currentAbilities.Add(abilityExt.Ability);
-                }
+                _abilityPool.AddAbility(ability);
             }
-
-            foreach (IAbility ability in currentAbilities)
+            
+            foreach (IAbility ability in diffResult.Removed)
             {
-                if (_knownAbilities.Add(ability))
-                {
-                    _abilityPool.AddAbility(ability);
-                }
-            }
-
-            foreach (IAbility ability in _knownAbilities.Except(currentAbilities).ToList())
-            {
-                _knownAbilities.Remove(ability);
                 _abilityPool.RemoveAbility(ability);
             }
         }

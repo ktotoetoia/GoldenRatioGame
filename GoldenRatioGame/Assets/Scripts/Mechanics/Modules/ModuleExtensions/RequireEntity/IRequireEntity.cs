@@ -2,7 +2,7 @@
 
 namespace IM.Modules
 {
-    public interface IRequireEntity
+    public interface IRequireEntity : IModuleExtension
     {
         IEntity Entity { get; set; }
     }

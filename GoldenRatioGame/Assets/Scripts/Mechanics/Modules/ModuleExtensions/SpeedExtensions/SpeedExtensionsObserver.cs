@@ -1,7 +1,6 @@
 ﻿using System;
 using IM.Graphs;
 using IM.Values;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace IM.Modules
@@ -9,7 +8,7 @@ namespace IM.Modules
     public class SpeedExtensionsObserver : IModuleGraphObserver
     {
         private readonly IHaveSpeed _speed;
-        private readonly HashSet<ISpeedExtension> _usedSpeedModules = new();
+        private readonly EnumerableDiffTracker<ISpeedExtension> _diffTracker = new ();
 
         public SpeedExtensionsObserver(IHaveSpeed speed)
         {
@@ -20,27 +19,16 @@ namespace IM.Modules
         {
             if (graph == null) throw new ArgumentNullException(nameof(graph));
 
-            HashSet<ISpeedExtension> currentSpeedModules = new();
-
-            foreach (IModule module in graph.Modules)
+            DiffResult<ISpeedExtension> diffResult = _diffTracker.Update(graph.Modules.Where(x => x is IGameModule module && module.Extensions.HasExtensionOfType<ISpeedExtension>())
+                .SelectMany(x => (x as IGameModule).Extensions.GetExtensions<ISpeedExtension>()));
+            
+            foreach (ISpeedExtension speedExt in diffResult.Added)
             {
-                if (module is IGameModule gameModule && gameModule.Extensions.TryGetExtension(out ISpeedExtension speedExt) && speedExt.SpeedModifier != null)
-                {
-                    currentSpeedModules.Add(speedExt);
-                }
+                _speed.Speed.AddModifier(speedExt.SpeedModifier);
             }
             
-            foreach (ISpeedExtension speedExt in currentSpeedModules)
+            foreach (ISpeedExtension speedExt in diffResult.Removed)
             {
-                if (_usedSpeedModules.Add(speedExt))
-                {
-                    _speed.Speed.AddModifier(speedExt.SpeedModifier);
-                }
-            }
-            
-            foreach (ISpeedExtension speedExt in _usedSpeedModules.Except(currentSpeedModules).ToList())
-            {
-                _usedSpeedModules.Remove(speedExt);
                 _speed.Speed.RemoveModifier(speedExt.SpeedModifier);
             }
         }

@@ -8,7 +8,9 @@ namespace IM.Movement
     {
         private VelocityInfo _velocity;
         private Rigidbody2D _rigidbody;
-
+        
+        public Vector2 LastAppliedNonZeroVelocity { get; private set; }
+        
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
@@ -18,6 +20,9 @@ namespace IM.Movement
         {
             _rigidbody.linearVelocity = _velocity.Velocity;
 
+            if(_velocity.Velocity != Vector2.zero)
+                LastAppliedNonZeroVelocity = _rigidbody.linearVelocity;
+ 
             _velocity = default;
         }
 

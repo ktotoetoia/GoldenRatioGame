@@ -9,10 +9,10 @@ namespace IM.Movement
         [SerializeField] private float _rawSpeed;
         [SerializeField] private float _accelerationTime;
         private IVelocityModifier _modifier;
-        private Vector2 _direction;
         private Accelerator _accelerator;
 
         public ISpeed Speed { get; private set; }
+        public Vector2 CurrentMovementDirection { get; private set; }
 
         private void Awake()
         {
@@ -24,7 +24,7 @@ namespace IM.Movement
         private void FixedUpdate()
         {
             _accelerator.AccelerationTime = _accelerationTime;
-            _accelerator.Update(_direction,Time.fixedDeltaTime);
+            _accelerator.Update(CurrentMovementDirection,Time.fixedDeltaTime);
             Vector2 value = new Vector2(Mathf.Sign(_accelerator.Acceleration.x) * _curve.Evaluate(_accelerator.Acceleration.x),Mathf.Sign(_accelerator.Acceleration.y)* _curve.Evaluate(_accelerator.Acceleration.y));
             
             _modifier.ChangeVelocity(new VelocityInfo(VelocityAction.Add, value * Speed.FinalValue));
@@ -32,7 +32,7 @@ namespace IM.Movement
 
         public void Move(Vector2 direction)
         {
-            _direction = direction;
+            CurrentMovementDirection = direction;
         }
     }
 }

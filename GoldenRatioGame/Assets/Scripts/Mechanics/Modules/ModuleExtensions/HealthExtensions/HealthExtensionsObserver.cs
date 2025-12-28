@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
 using IM.Health;
@@ -9,7 +8,7 @@ namespace IM.Modules
     public class HealthExtensionsObserver : IModuleGraphObserver
     {
         private readonly IFloatHealthValuesGroup _floatHealthValuesGroup;
-        private readonly HashSet<IHealthExtension> _knownHealthModules = new();
+        private readonly EnumerableDiffTracker<IHealthExtension> _diffTracker = new ();
 
         public HealthExtensionsObserver(IFloatHealthValuesGroup floatHealthValuesGroup)
         {
@@ -20,27 +19,16 @@ namespace IM.Modules
         {
             if (graph == null) throw new ArgumentNullException(nameof(graph));
             
-            HashSet<IHealthExtension> currentHealthModules = new();
-
-            foreach (IModule module in graph.Modules)
+            DiffResult<IHealthExtension> diffResult = _diffTracker.Update(graph.Modules.Where(x => x is IGameModule module && module.Extensions.HasExtensionOfType<IHealthExtension>())
+                .SelectMany(x => (x as IGameModule).Extensions.GetExtensions<IHealthExtension>()));
+            
+            foreach (IHealthExtension healthExt in diffResult.Added)
             {
-                if (module is IGameModule gameModule && gameModule.Extensions.TryGetExtension(out IHealthExtension healthExt))
-                {
-                    currentHealthModules.Add(healthExt);
-                }
+                _floatHealthValuesGroup.AddHealth(healthExt.Health);
             }
-
-            foreach (IHealthExtension healthExt in currentHealthModules)
+            
+            foreach (IHealthExtension healthExt in diffResult.Removed)
             {
-                if (_knownHealthModules.Add(healthExt))
-                {
-                    _floatHealthValuesGroup.AddHealth(healthExt.Health);
-                }
-            }
-
-            foreach (IHealthExtension healthExt in _knownHealthModules.Except(currentHealthModules).ToList())
-            {
-                _knownHealthModules.Remove(healthExt);
                 _floatHealthValuesGroup.RemoveHealth(healthExt.Health);
             }
         }

@@ -12,7 +12,7 @@ namespace IM.Modules
         
         public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection).ToList();
         public IEnumerable<IPort> Ports => _ports;
-        public IModuleExtensions Extensions => _extensions ??= new ModuleExtensions(gameObject);
+        public IModuleExtensions Extensions => _extensions ??= new GameObjectModuleExtensions(gameObject);
 
         public void AddPort(IPort port)
         {

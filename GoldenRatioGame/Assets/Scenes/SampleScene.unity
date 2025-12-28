@@ -438,6 +438,7 @@ GameObject:
   - component: {fileID: 1908329179}
   - component: {fileID: 1908329183}
   - component: {fileID: 1908329194}
+  - component: {fileID: 1908329196}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -632,6 +633,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad5a98d0347404180f0ac8e5d4dfe78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.ModuleEntityVisuals
+--- !u!114 &1908329196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908329172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94679672fb114ec28397c62aca4f5c18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules::IM.Modules.MovementReflector
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

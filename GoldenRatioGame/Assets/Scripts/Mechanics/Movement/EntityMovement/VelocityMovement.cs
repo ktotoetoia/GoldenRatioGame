@@ -8,9 +8,9 @@ namespace IM.Movement
     {
         [SerializeField] private float _rawSpeed;
         private IVelocityModifier _modifier;
-        private Vector2 _direction;
 
         public ISpeed Speed { get; private set; }
+        public Vector2 CurrentMovementDirection { get; private set; }
 
         private void Awake()
         {
@@ -21,12 +21,12 @@ namespace IM.Movement
         private void FixedUpdate()
         {
             Speed.RawValue = _rawSpeed;
-            _modifier.ChangeVelocity(new VelocityInfo(VelocityAction.Add, _direction * Speed.FinalValue));
+            _modifier.ChangeVelocity(new VelocityInfo(VelocityAction.Add, CurrentMovementDirection * Speed.FinalValue));
         }
 
         public void Move(Vector2 direction)
         {
-            _direction = direction;
+            CurrentMovementDirection = direction;
         }
     }
 }

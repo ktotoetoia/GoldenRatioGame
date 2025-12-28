@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class ModuleExtensions : IModuleExtensions
+    public class GameObjectModuleExtensions : IModuleExtensions
     {
         private readonly GameObject _gameObject;
         private readonly List<IModuleExtension> _extensions = new();
 
         public IReadOnlyList<IModuleExtension> Extensions => _extensions;
 
-        public ModuleExtensions(GameObject gameObject)
+        public GameObjectModuleExtensions(GameObject gameObject)
         {
             _gameObject = gameObject;
             
@@ -30,7 +30,6 @@ namespace IM.Modules
         public void RemoveExtension(IModuleExtension extension)
         {
             if(!_extensions.Contains(extension)) throw new Exception("Does not contain this extension");
-            if (extension is MonoBehaviour m) throw new InvalidOperationException("Cannot remove MonoBehaviour extension");
             
             _extensions.Remove(extension);
         }
@@ -38,6 +37,29 @@ namespace IM.Modules
         public T GetExtension<T>()
         {
             return Extensions.OfType<T>().FirstOrDefault();
+        }
+
+        public bool HasExtensionOfType<T>()
+        {
+            return Extensions.OfType<T>().Any();
+        }
+
+        public List<T> GetExtensions<T>()
+        {
+            return _extensions.OfType<T>().ToList();
+        }
+        
+        public bool TryGetExtension<T>(out T extension)
+        {
+            extension = GetExtension<T>();
+            return extension != null;
+        }
+
+        public bool TryGetExtension<T>(out List<T> extensions)
+        {
+            extensions = GetExtensions<T>();
+            
+            return extensions != null && extensions.Count != 0;
         }
     }
 }
