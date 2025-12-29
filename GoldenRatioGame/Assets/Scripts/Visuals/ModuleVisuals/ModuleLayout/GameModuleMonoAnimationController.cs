@@ -6,12 +6,15 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class GameModuleMonoLayout : MonoBehaviour, IModuleLayout
+    public class GameModuleMonoAnimationController : MonoBehaviour, IModuleAnimationController
     {
         [SerializeField] private GameObject _visualPrefab;
         [SerializeField] private List<PortInfo> _portsInfos;
         private readonly Dictionary<PortInfo, IPort>  _ports = new();
+        private Dictionary<IPort,IVisualPort> _visualPorts;
         private GameModuleMono _module;
+        
+        public IAnimationModule ReferenceModule { get; private set; }
 
         private void Awake()
         {
@@ -26,25 +29,37 @@ namespace IM.Visuals
             }
         }
 
-        public IVisualModule CreateVisualModule(IDictionary<IPort, IVisualPort> visualPortMap)
+        public IVisualPort GetReferencePort(IPort port)
         {
-            VisualModuleMono visualModule = Instantiate(_visualPrefab).GetComponent<VisualModuleMono>();
+            return _visualPorts[port];
+        }
+
+        public IAnimationModule CreateNewReferenceModule()
+        {
+            ReferenceModule?.Dispose();
+
+            return ReferenceModule = CreateVisualModuleCopy(_visualPorts = new());
+        }
+
+        public IAnimationModule CreateVisualModuleCopy(IDictionary<IPort, IVisualPort> visualPortMap)
+        {
+            AnimationModule visualModule2 = Instantiate(_visualPrefab).GetComponent<AnimationModule>();
 
             foreach ((PortInfo portInfo, IPort port) in _ports)
             {
-                IVisualPort visualPort = new VisualPort(visualModule);
+                IVisualPort visualPort = new VisualPort(visualModule2);
                 
-                visualModule.HierarchyTransform.AddChild(visualPort.Transform);
+                visualModule2.HierarchyTransform.AddChild(visualPort.Transform);
 
                 visualPort.Transform.LocalPosition = portInfo.Position;
                 visualPort.Transform.LocalScale = Vector3.one;
                 visualPort.Transform.LocalRotation = Quaternion.LookRotation(portInfo.Normal, Vector3.up);
                 
-                visualModule.AddPort(visualPort);
+                visualModule2.AddPort(visualPort);
                 visualPortMap[port] = visualPort;
             }
 
-            return visualModule;
+            return visualModule2;
         }
     }
 }

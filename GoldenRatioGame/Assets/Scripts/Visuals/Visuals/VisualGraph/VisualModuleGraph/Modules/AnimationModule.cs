@@ -6,14 +6,16 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class VisualModuleMono : MonoBehaviour, IVisualModule
+    public class AnimationModule : MonoBehaviour,IAnimationModule
     {
+        private Animator _animator;
         private readonly List<IVisualPort> _ports = new();
         private HierarchyTransform _hierarchyTransform;
         private SpriteRenderer _renderer;
         private Sprite _icon;
         private bool _initialized;
-
+        
+        public Animator Animator => _animator??= GetComponent<Animator>();
         public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection);
         public IEnumerable<IVisualPort> Ports => _ports;
         IEnumerable<IPort> IModule.Ports => _ports;

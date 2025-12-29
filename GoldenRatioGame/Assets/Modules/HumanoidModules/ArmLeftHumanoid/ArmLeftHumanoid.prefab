@@ -154,14 +154,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -1664967374565881386}
+      addedObject: {fileID: 1544099887957844428}
   m_SourcePrefab: {fileID: 100100000, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
 --- !u!1 &7210977406679086040 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
   m_PrefabInstance: {fileID: 1494624419277551796}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-1664967374565881386
+--- !u!114 &1544099887957844428
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,3 +173,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e75fde05024d4b73894a5c43830fc917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.MovementToPrint
+  _boolName: IsRunning

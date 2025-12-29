@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
 using IM.Graphs;
+using IM.Modules;
 using IM.Movement;
+using TDS.Events;
+using TDS.Handlers;
 using UnityEngine;
 
 namespace IM.Visuals
@@ -24,20 +27,15 @@ namespace IM.Visuals
         {
             if (_graphToDraw == null) return;
 
-            if (_vectorMovement.CurrentMovementDirection.x != 0)
-                _graphToDraw.Transform.LocalScale = _vectorMovement.CurrentMovementDirection.x > 0 ? Vector3.one : new Vector3(-1, 1, 1);
+            if (_vectorMovement.MovementDirection.x != 0)
+                _graphToDraw.Transform.LocalScale = _vectorMovement.MovementDirection.x > 0 ? Vector3.one : new Vector3(-1, 1, 1);
             
             _graphToDraw.Transform.Position = transform.position;
-            
-            foreach (IAnimationModule module in _graphToDraw.Modules.OfType<IAnimationModule>())
-                module.Animator.SetBool(IsRunning, true);
         }
 
         public void OnGraphUpdated(IModuleGraphReadOnly graph)
         {
             if (graph == null) throw new ArgumentNullException(nameof(graph));
-            
-            (_graphToDraw as IDisposable)?.Dispose();
             
             Converter.Position = transform.position;
             _graphToDraw = Converter.Create(graph);

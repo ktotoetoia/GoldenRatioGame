@@ -23,7 +23,7 @@ namespace IM.Modules
 
             foreach (IRequireMovement requireMovement in _requireMovement)
             {
-                requireMovement.UpdateCurrentVelocity(_movement.CurrentMovementDirection);
+                requireMovement.UpdateCurrentVelocity(_movement.MovementVelocity);
             }
         }
         

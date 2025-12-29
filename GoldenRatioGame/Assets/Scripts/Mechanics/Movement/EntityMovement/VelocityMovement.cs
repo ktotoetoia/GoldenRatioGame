@@ -10,7 +10,8 @@ namespace IM.Movement
         private IVelocityModifier _modifier;
 
         public ISpeed Speed { get; private set; }
-        public Vector2 CurrentMovementDirection { get; private set; }
+        public Vector2 MovementDirection { get; private set; }
+        public Vector2 MovementVelocity { get; private set; }
 
         private void Awake()
         {
@@ -21,12 +22,13 @@ namespace IM.Movement
         private void FixedUpdate()
         {
             Speed.RawValue = _rawSpeed;
-            _modifier.ChangeVelocity(new VelocityInfo(VelocityAction.Add, CurrentMovementDirection * Speed.FinalValue));
+            MovementVelocity = MovementDirection * Speed.FinalValue;
+            _modifier.ChangeVelocity(new VelocityInfo(VelocityAction.Add, MovementVelocity));
         }
 
         public void Move(Vector2 direction)
         {
-            CurrentMovementDirection = direction;
+            MovementDirection = direction;
         }
     }
 }

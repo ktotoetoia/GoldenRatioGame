@@ -22,7 +22,13 @@ namespace IM.Visuals
 
             foreach (IGameModule module in _traversal.Enumerate<IGameModule>(coreModule))
             {
-                IVisualModule visualModule = module.Extensions.GetExtension<IModuleLayout>().CreateVisualModule(visualPortMap);
+                IModuleAnimationController moduleAnimationController = module.Extensions.GetExtension<IModuleAnimationController>();
+                IVisualModule visualModule = moduleAnimationController.CreateNewReferenceModule();
+
+                foreach (IPort port in module.Ports)
+                {
+                    visualPortMap[port] = moduleAnimationController.GetReferencePort(port);
+                }
                 
                 moduleToVisual[module] = visualModule;
                 visualGraph.AddModule(visualModule);
