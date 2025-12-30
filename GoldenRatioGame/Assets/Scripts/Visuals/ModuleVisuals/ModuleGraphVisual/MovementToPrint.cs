@@ -6,7 +6,7 @@ namespace IM.Visuals
     [RequireComponent(typeof(IModuleAnimationController))]
     public class MovementToPrint : MonoBehaviour, IRequireMovement
     {
-        [SerializeField] private string _boolName;
+        [SerializeField] private AnimationChange _animationChange;
         private IModuleAnimationController _animationController;
 
         private void Awake()
@@ -16,9 +16,7 @@ namespace IM.Visuals
         
         public void UpdateCurrentVelocity(Vector2 velocity)
         {
-            if(_animationController?.ReferenceModule == null) return;
-            
-            _animationController.ReferenceModule.Animator.SetBool(_boolName, velocity != Vector2.zero);
+            _animationChange.ApplyToAnimator(_animationController.ReferenceModule.Animator);
         }
     }
 }

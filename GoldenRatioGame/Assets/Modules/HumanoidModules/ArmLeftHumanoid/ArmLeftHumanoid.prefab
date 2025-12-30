@@ -173,4 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e75fde05024d4b73894a5c43830fc917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.MovementToPrint
-  _boolName: IsRunning
+  _animationChange:
+    _animationChangeType: 1
+    _propertyName: IsRunning
+    _boolValue: 1
+    _intValue: 0
+    _floatValue: 0
