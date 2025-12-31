@@ -10,6 +10,6 @@ namespace IM.Visuals
         
         IVisualPort GetReferencePort(IPort port);
         IAnimationModule CreateNewReferenceModule();
-        IAnimationModule CreateVisualModuleCopy(IDictionary<IPort, IVisualPort> visualPortMap);
+        IAnimationModule CreateAnimationModuleCopy(IDictionary<IPort, IVisualPort> visualPortMap);
     }
 }

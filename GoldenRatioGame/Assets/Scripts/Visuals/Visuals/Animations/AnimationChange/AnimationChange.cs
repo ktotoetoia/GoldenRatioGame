@@ -7,32 +7,32 @@ namespace IM.Visuals
     public class AnimationChange : IAnimationChange
     {
         [SerializeField] private AnimationChangeType _animationChangeType;
-        [SerializeField] private string _propertyName;
+        [SerializeField] private string _parameterName;
         [SerializeField] private bool _boolValue;
         [SerializeField] private int _intValue;
         [SerializeField] private float _floatValue;
 
         public AnimationChangeType AnimationChangeType => _animationChangeType;
-        public string PropertyName => _propertyName;
+        public string ParameterName => _parameterName;
 
         public void ApplyToAnimator(Animator animator)
         {
             switch (_animationChangeType)
             {
                 case AnimationChangeType.Bool:
-                    animator.SetBool(_propertyName, _boolValue);
+                    animator.SetBool(_parameterName, _boolValue);
                     break;
 
                 case AnimationChangeType.Int:
-                    animator.SetInteger(_propertyName, _intValue);
+                    animator.SetInteger(_parameterName, _intValue);
                     break;
 
                 case AnimationChangeType.Float:
-                    animator.SetFloat(_propertyName, _floatValue);
+                    animator.SetFloat(_parameterName, _floatValue);
                     break;
 
                 case AnimationChangeType.Trigger:
-                    animator.SetTrigger(_propertyName);
+                    animator.SetTrigger(_parameterName);
                     break;
 
                 case AnimationChangeType.None:
@@ -41,4 +41,3 @@ namespace IM.Visuals
         }
     }
 }
-

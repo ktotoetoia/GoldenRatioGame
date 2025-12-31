@@ -48,6 +48,22 @@ PrefabInstance:
       propertyPath: _portsInfos.Array.data[1]._position.y
       value: -0.5
       objectReference: {fileID: 0}
+    - target: {fileID: -6607928970512855544, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[0]._tag
+      value: 
+      objectReference: {fileID: 11400000, guid: 283e38cd9ded3fe4190c65370ec14be0, type: 2}
+    - target: {fileID: -6607928970512855544, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[0]._normal.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6607928970512855544, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[0]._normal.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6607928970512855544, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[0]._position.y
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 2805714054282062599, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -159,5 +175,27 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7159168158908889065}
   m_SourcePrefab: {fileID: 100100000, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+--- !u!1 &826108804021744781 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+  m_PrefabInstance: {fileID: 8924336587707858913}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7159168158908889065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826108804021744781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e75fde05024d4b73894a5c43830fc917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.MovementToPrint
+  <AnimationChangeType>k__BackingField: 1
+  <ParameterName>k__BackingField: IsRunning

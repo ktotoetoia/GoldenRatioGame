@@ -48,6 +48,18 @@ PrefabInstance:
       propertyPath: _portsInfos.Array.data[1]._position.y
       value: -0.5
       objectReference: {fileID: 0}
+    - target: {fileID: -6607928970512855544, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[0]._tag
+      value: 
+      objectReference: {fileID: 11400000, guid: fb69546f865b0a7489a6e04e9bf3cad9, type: 2}
+    - target: {fileID: -6607928970512855544, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[0]._normal.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6607928970512855544, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portsInfos.Array.data[0]._position.y
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2805714054282062599, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -151,6 +163,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       insertIndex: -1
       addedObject: {fileID: -122121014652897532}
+    - targetCorrespondingSourceObject: {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7184595628077187316}
   m_SourcePrefab: {fileID: 100100000, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
 --- !u!1 &7210977406679086040 stripped
 GameObject:
@@ -172,3 +187,17 @@ MonoBehaviour:
   _speedModifier:
     <Add>k__BackingField: 2
     <Multiplication>k__BackingField: 1
+--- !u!114 &-7184595628077187316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210977406679086040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e75fde05024d4b73894a5c43830fc917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.MovementToPrint
+  <AnimationChangeType>k__BackingField: 1
+  <ParameterName>k__BackingField: IsRunning

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using IM.Graphs;
 using IM.Modules;
 using UnityEngine;
@@ -9,23 +8,25 @@ namespace IM.Visuals
     public class GameModuleMonoAnimationController : MonoBehaviour, IModuleAnimationController
     {
         [SerializeField] private GameObject _visualPrefab;
-        [SerializeField] private List<PortInfo> _portsInfos;
-        private readonly Dictionary<PortInfo, IPort>  _ports = new();
+        private readonly List<IAnimationChange>  _animationChange = new();
         private Dictionary<IPort,IVisualPort> _visualPorts;
-        private GameModuleMono _module;
+        private ModulePortSetup _portSetup;
         
         public IAnimationModule ReferenceModule { get; private set; }
 
         private void Awake()
         {
-            _module = GetComponent<GameModuleMono>() ?? throw new NullReferenceException("GameModuleMono component not found");
-            
-            foreach (PortInfo portInfo in _portsInfos)
+            _portSetup = GetComponent<ModulePortSetup>();
+            GetComponents(_animationChange);
+        }
+
+        private void Update()
+        {
+            if(ReferenceModule == null) return;
+
+            foreach (IAnimationChange animationChange in _animationChange)
             {
-                IPort port = portInfo.Tag == null ? new Port(_module) : new TaggedPort(_module, portInfo.Tag);
-                
-                _module.AddPort(port);
-                _ports.Add(portInfo, port);
+                animationChange.ApplyToAnimator(ReferenceModule.Animator);
             }
         }
 
@@ -38,28 +39,28 @@ namespace IM.Visuals
         {
             ReferenceModule?.Dispose();
 
-            return ReferenceModule = CreateVisualModuleCopy(_visualPorts = new());
+            return ReferenceModule = CreateAnimationModuleCopy(_visualPorts = new());
         }
 
-        public IAnimationModule CreateVisualModuleCopy(IDictionary<IPort, IVisualPort> visualPortMap)
+        public IAnimationModule CreateAnimationModuleCopy(IDictionary<IPort, IVisualPort> visualPortMap)
         {
-            AnimationModule visualModule2 = Instantiate(_visualPrefab).GetComponent<AnimationModule>();
+            AnimationModule animationModule = Instantiate(_visualPrefab).GetComponent<AnimationModule>();
 
-            foreach ((PortInfo portInfo, IPort port) in _ports)
+            foreach ((IPort port, PortInfo portInfo) in _portSetup.PortsInfos)
             {
-                IVisualPort visualPort = new VisualPort(visualModule2);
+                IVisualPort visualPort = new VisualPort(animationModule);
                 
-                visualModule2.HierarchyTransform.AddChild(visualPort.Transform);
+                animationModule.HierarchyTransform.AddChild(visualPort.Transform);
 
                 visualPort.Transform.LocalPosition = portInfo.Position;
                 visualPort.Transform.LocalScale = Vector3.one;
                 visualPort.Transform.LocalRotation = Quaternion.LookRotation(portInfo.Normal, Vector3.up);
                 
-                visualModule2.AddPort(visualPort);
+                animationModule.AddPort(visualPort);
                 visualPortMap[port] = visualPort;
             }
 
-            return visualModule2;
+            return animationModule;
         }
     }
 }
