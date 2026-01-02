@@ -2,7 +2,7 @@
 
 namespace IM.Visuals
 {
-    public interface IAnimationModule : IVisualModule
+    public interface IAnimationModule : ITransformModule
     {
         Animator Animator { get; }
     }

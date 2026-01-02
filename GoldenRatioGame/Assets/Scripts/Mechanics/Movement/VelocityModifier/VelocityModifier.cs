@@ -8,8 +8,8 @@ namespace IM.Movement
     {
         private VelocityInfo _velocity;
         private Rigidbody2D _rigidbody;
-        
-        public Vector2 LastAppliedNonZeroVelocity { get; private set; }
+
+        public Vector2 VelocityToApply => _velocity.Velocity;
         
         private void Start()
         {
@@ -19,10 +19,6 @@ namespace IM.Movement
         private void FixedUpdate()
         {
             _rigidbody.linearVelocity = _velocity.Velocity;
-
-            if(_velocity.Velocity != Vector2.zero)
-                LastAppliedNonZeroVelocity = _rigidbody.linearVelocity;
- 
             _velocity = default;
         }
 

@@ -3,18 +3,18 @@ using IM.Graphs;
 
 namespace IM.Visuals
 {
-    public class VisualConnection : IVisualConnection
+    public class TransformConnection : ITransformConnection
     {
         public INode From => Output.Module;
         public INode To => Input.Module;
 
-        public IVisualPort Output { get; }
-        public IVisualPort Input { get; }
+        public ITransformPort Output { get; }
+        public ITransformPort Input { get; }
 
         IPort IConnection.Input => Input;
         IPort IConnection.Output => Output;
 
-        public VisualConnection(IVisualPort output, IVisualPort input)
+        public TransformConnection(ITransformPort output, ITransformPort input)
         {
             Output = output;
             Input = input;

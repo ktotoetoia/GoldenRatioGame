@@ -128,8 +128,7 @@ namespace IM.Visuals
                 (Vector3 pos, Vector3 scale, Quaternion rot) oldWorld = ComputeWorldUsingParent();
                 Quaternion oldRot = oldWorld.rot;
 
-                IHierarchyTransform parent = Parent as IHierarchyTransform;
-                if (parent != null)
+                if (Parent is IHierarchyTransform parent)
                     _core.LocalRotation = Quaternion.Inverse(parent.Rotation) * value;
                 else
                     _core.LocalRotation = value;

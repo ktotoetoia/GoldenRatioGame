@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace IM.Visuals
 {
-    public class DisposableVisualCommandModuleGraph : VisualCommandModuleGraph, IDisposable
+    public class DisposableTransformCommandModuleGraph : TransformCommandModuleGraph, IDisposable
     {
-        public DisposableVisualCommandModuleGraph(IHierarchyTransform transform) : base(transform)
+        public DisposableTransformCommandModuleGraph(IHierarchyTransform transform) : base(transform)
         {
             
         }

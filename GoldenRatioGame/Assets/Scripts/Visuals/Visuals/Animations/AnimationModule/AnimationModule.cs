@@ -9,15 +9,16 @@ namespace IM.Visuals
     public class AnimationModule : MonoBehaviour,IAnimationModule
     {
         private Animator _animator;
-        private readonly List<IVisualPort> _ports = new();
+        private readonly List<ITransformPort> _ports = new();
         private HierarchyTransform _hierarchyTransform;
         private SpriteRenderer _renderer;
         private Sprite _icon;
         private bool _initialized;
+        private ITransformPort _anchorPort;
         
         public Animator Animator => _animator??= GetComponent<Animator>();
         public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection);
-        public IEnumerable<IVisualPort> Ports => _ports;
+        public IEnumerable<ITransformPort> Ports => _ports;
         IEnumerable<IPort> IModule.Ports => _ports;
         public IHierarchyTransform HierarchyTransform
         {
@@ -27,14 +28,6 @@ namespace IM.Visuals
                 
                 return _hierarchyTransform;
             }  
-        }
-        public Sprite Icon
-        {
-            get
-            {
-                if(!_renderer) Initialize();
-                return _renderer.sprite;
-            }
         }
 
         private void Initialize()
@@ -51,7 +44,7 @@ namespace IM.Visuals
             _initialized = true;
         }
 
-        public void AddPort(IVisualPort port) => _ports.Add(port);
+        public void AddPort(ITransformPort port) => _ports.Add(port);
         public void Dispose() => Destroy(gameObject);
     }
 }

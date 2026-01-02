@@ -9,7 +9,7 @@ namespace IM.Visuals
     {
         [SerializeField] private GameObject _visualPrefab;
         private readonly List<IAnimationChange>  _animationChange = new();
-        private Dictionary<IPort,IVisualPort> _visualPorts;
+        private Dictionary<IPort,ITransformPort> _visualPorts;
         private ModulePortSetup _portSetup;
         
         public IAnimationModule ReferenceModule { get; private set; }
@@ -30,7 +30,7 @@ namespace IM.Visuals
             }
         }
 
-        public IVisualPort GetReferencePort(IPort port)
+        public ITransformPort GetReferencePort(IPort port)
         {
             return _visualPorts[port];
         }
@@ -42,22 +42,22 @@ namespace IM.Visuals
             return ReferenceModule = CreateAnimationModuleCopy(_visualPorts = new());
         }
 
-        public IAnimationModule CreateAnimationModuleCopy(IDictionary<IPort, IVisualPort> visualPortMap)
+        public IAnimationModule CreateAnimationModuleCopy(IDictionary<IPort, ITransformPort> visualPortMap)
         {
             AnimationModule animationModule = Instantiate(_visualPrefab).GetComponent<AnimationModule>();
 
             foreach ((IPort port, PortInfo portInfo) in _portSetup.PortsInfos)
             {
-                IVisualPort visualPort = new VisualPort(animationModule);
+                ITransformPort transformPort = new TransformPort(animationModule);
                 
-                animationModule.HierarchyTransform.AddChild(visualPort.Transform);
+                animationModule.HierarchyTransform.AddChild(transformPort.Transform);
 
-                visualPort.Transform.LocalPosition = portInfo.Position;
-                visualPort.Transform.LocalScale = Vector3.one;
-                visualPort.Transform.LocalRotation = Quaternion.LookRotation(portInfo.Normal, Vector3.up);
+                transformPort.Transform.LocalPosition = portInfo.Position;
+                transformPort.Transform.LocalScale = Vector3.one;
+                transformPort.Transform.LocalRotation = Quaternion.LookRotation(portInfo.Normal, Vector3.up);
                 
-                animationModule.AddPort(visualPort);
-                visualPortMap[port] = visualPort;
+                animationModule.AddPort(transformPort);
+                visualPortMap[port] = transformPort;
             }
 
             return animationModule;

@@ -2,6 +2,6 @@
 {
     public interface IVisualGraphDrawer
     {
-        public void Draw(IVisualModuleGraph source);
+        public void Draw(ITransformModuleGraphReadOnly source);
     }
 }

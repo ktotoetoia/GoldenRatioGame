@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using IM.Graphs;
-using UnityEngine;
 
 namespace IM.Visuals
 {
-    public interface IVisualModule : IModule, IDisposable
+    public interface ITransformModule : IModule, IDisposable
     {
         IHierarchyTransform HierarchyTransform { get; }
-        Sprite Icon { get; }
         
-        new IEnumerable<IVisualPort> Ports { get; }
+        new IEnumerable<ITransformPort> Ports { get; }
     }
 }

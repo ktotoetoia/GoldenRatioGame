@@ -439,6 +439,7 @@ GameObject:
   - component: {fileID: 1908329183}
   - component: {fileID: 1908329194}
   - component: {fileID: 1908329196}
+  - component: {fileID: 1908329197}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -645,6 +646,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94679672fb114ec28397c62aca4f5c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Modules::IM.Modules.MovementReflector
+--- !u!114 &1908329197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908329172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a713170cde5142a2b58cef30d697d86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VisualsDebug::IM.Visuals.Debug.ModuleEntityDrawer
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

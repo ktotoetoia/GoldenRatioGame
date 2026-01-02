@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace IM.Visuals.Debug
@@ -12,17 +13,17 @@ namespace IM.Visuals.Debug
         
         private readonly Dictionary<Texture, Material> _materialCache = new();
         
-        public void Draw(IVisualModuleGraph source)
+        public void Draw(ITransformModuleGraphReadOnly source)
         {
             if (source == null) return;
 
-            foreach (IVisualModule module in source.Modules)
+            foreach (ITransformModule module in source.Modules)
             {
                 if(DrawBounds) DrawGizmosModule(module);
                 if(DrawSprites) DrawGLModule(module);
                 if (DrawPorts)
                 {
-                    foreach (IVisualPort port in module.Ports)
+                    foreach (ITransformPort port in module.Ports)
                     {
                         DrawGizmosPort(port);
                     }
@@ -31,14 +32,14 @@ namespace IM.Visuals.Debug
 
             if (DrawConnections)
             {
-                foreach (IVisualConnection connection in source.Connections)
+                foreach (ITransformConnection connection in source.Connections)
                 {
                     DrawConnection(connection);
                 }
             }
         }
 
-        private void DrawConnection(IVisualConnection connection)
+        private void DrawConnection(ITransformConnection connection)
         {
             Gizmos.color = Color.cyan;
             Vector3 from = connection.Output.Transform.Position;
@@ -46,13 +47,13 @@ namespace IM.Visuals.Debug
             Gizmos.DrawLine(from, to);
         }
 
-        private void DrawGizmosPort(IVisualPort port)
+        private void DrawGizmosPort(ITransformPort port)
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawSphere(port.Transform.Position, 0.1f);
         }
 
-        private void DrawGizmosModule(IVisualModule module)
+        private void DrawGizmosModule(ITransformModule module)
         {
             Matrix4x4 oldMatrix = Gizmos.matrix;
             Gizmos.matrix = Matrix4x4.TRS(module.HierarchyTransform.Position, module.HierarchyTransform.Rotation, Vector3.one);
@@ -61,11 +62,11 @@ namespace IM.Visuals.Debug
             Gizmos.matrix = oldMatrix;
         }
 
-        private void DrawGLModule(IVisualModule module)
+        private void DrawGLModule(ITransformModule module)
         {
             Vector3 center = module.HierarchyTransform.Position;
             Vector3 size = module.HierarchyTransform.LossyScale;
-            Sprite sprite = module.Icon;
+            Sprite sprite = null;
                 
             if (sprite && sprite.texture)
             {

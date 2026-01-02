@@ -5,14 +5,14 @@ using IM.Graphs;
 
 namespace IM.Visuals
 {
-    public class AddVisualModuleCommand : ICommand
+    public class AddTransformModuleCommand : ICommand
     {
         private readonly ICollection<IModule> _addTo;
-        private readonly IVisualModule _module;
+        private readonly ITransformModule _module;
         private readonly IHierarchyTransform _parentTransform;
         private bool _isExecuted;
 
-        public AddVisualModuleCommand(IVisualModule module, ICollection<IModule> addTo, IHierarchyTransform parentTransform)
+        public AddTransformModuleCommand(ITransformModule module, ICollection<IModule> addTo, IHierarchyTransform parentTransform)
         {
             _module = module ?? throw new ArgumentNullException(nameof(module));
             _addTo = addTo ?? throw new ArgumentNullException(nameof(addTo));
@@ -26,7 +26,7 @@ namespace IM.Visuals
                 throw new InvalidOperationException($"Other command already added this module {_module}");
             if (_parentTransform.ContainsChild(_module.HierarchyTransform))
                 throw new InvalidOperationException($"other command or user added the visual module ({_module}) to the transform ({_parentTransform})");
-
+            
             _addTo.Add(_module);
             _parentTransform.AddChild(_module.HierarchyTransform);
             _module.HierarchyTransform.LocalPosition = _module.HierarchyTransform.Position;

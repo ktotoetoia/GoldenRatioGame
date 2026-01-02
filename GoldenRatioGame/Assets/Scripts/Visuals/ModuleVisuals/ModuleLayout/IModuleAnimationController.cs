@@ -8,8 +8,8 @@ namespace IM.Visuals
     {
         IAnimationModule ReferenceModule { get; }
         
-        IVisualPort GetReferencePort(IPort port);
+        ITransformPort GetReferencePort(IPort port);
         IAnimationModule CreateNewReferenceModule();
-        IAnimationModule CreateAnimationModuleCopy(IDictionary<IPort, IVisualPort> visualPortMap);
+        IAnimationModule CreateAnimationModuleCopy(IDictionary<IPort, ITransformPort> visualPortMap);
     }
 }

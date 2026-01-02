@@ -11,12 +11,12 @@ namespace IM.Visuals
 {
     public class ModuleEntityVisuals : MonoBehaviour, IModuleGraphObserver
     {
-        private static readonly int IsRunning = Animator.StringToHash("IsRunning");
         private ModuleGraphToVisualGraphConverter _converter;
-        private IVisualModuleGraph _graphToDraw;
+        private ITransformModuleGraph _graphToDraw;
         private IVectorMovement _vectorMovement;
         
         private ModuleGraphToVisualGraphConverter Converter => _converter ??= new ModuleGraphToVisualGraphConverter();
+        public ITransformModuleGraph GraphToDraw => _graphToDraw;
 
         private void Awake()
         {
@@ -39,6 +39,7 @@ namespace IM.Visuals
             
             Converter.Position = transform.position;
             _graphToDraw = Converter.Create(graph);
+            new TransformPortAligner().Align(_graphToDraw.Modules.FirstOrDefault());
         }
     }
 }
