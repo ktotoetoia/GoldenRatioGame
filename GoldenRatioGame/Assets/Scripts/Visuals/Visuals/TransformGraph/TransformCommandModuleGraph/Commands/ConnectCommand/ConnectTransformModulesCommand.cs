@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using IM.Commands;
 using IM.Graphs;
 using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class ConnectTransformModulesCommand : IConnectCommand
+    public class ConnectTransformModulesCommand : Command, IConnectCommand
     {
         private readonly ITransformPort _output;
         private readonly ITransformPort _input;
         private readonly ICollection<IConnection> _addTo;
-        private bool _isExecuted;
 
         public IConnection Connection { get; }
 
@@ -27,28 +27,18 @@ namespace IM.Visuals
                 throw new ArgumentException("Port is already connected.");
         }
 
-        public void Execute()
+        protected override void InternalExecute()
         {
-            if (_isExecuted)
-                throw new InvalidOperationException("Command already executed");
-
             _input.Connect(Connection);
             _output.Connect(Connection);
             _addTo.Add(Connection);
-
-            _isExecuted = true;
         }
 
-        public void Undo()
+        protected override void InternalUndo()
         {
-            if (!_isExecuted)
-                throw new InvalidOperationException("Command must be executed before undo");
-
             _input.Disconnect();
             _output.Disconnect();
             _addTo.Remove(Connection);
-
-            _isExecuted = false;
         }
     }
 }

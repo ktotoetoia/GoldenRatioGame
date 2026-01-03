@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using IM.Commands;
 
 namespace IM.Graphs
 {
-    public class ConnectModulesCommand : IConnectCommand
+    public class ConnectModulesCommand : Command,IConnectCommand
     {
         private readonly IPort _output;
         private readonly IPort _input;
         private readonly ICollection<IConnection> _addTo;
-        private bool _isExecuted;
         
         public IConnection Connection { get; }
 
@@ -24,27 +24,19 @@ namespace IM.Graphs
             if(output.IsConnected || input.IsConnected)
                 throw new ArgumentException("Port is already connected.");
         }
-        
-        public void Execute()
+
+        protected override void InternalExecute()
         {
-            if (_isExecuted) throw new InvalidOperationException("Command already executed");
-            
             _input.Connect(Connection);
             _output.Connect(Connection);
             _addTo.Add(Connection);
-            
-            _isExecuted = true;
         }
 
-        public void Undo()
+        protected override void InternalUndo()
         {
-            if (!_isExecuted) throw new InvalidOperationException("Command must be executed before undo");
-            
             _input.Disconnect();
             _output.Disconnect();
             _addTo.Remove(Connection);
-            
-            _isExecuted = false;
         }
     }
 }

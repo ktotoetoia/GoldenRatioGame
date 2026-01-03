@@ -7,7 +7,7 @@ namespace IM.Graphs
     {
         public ICommand Create(IModule param1, ICollection<IModule> param2, ICollection<IConnection> param3)
         {
-            return new RemoveAndDisconnectModule(param1, param2, param3);
+            return new RemoveAndDisconnectModuleCommand(param1, param2, param3);
         }
     }
 }
