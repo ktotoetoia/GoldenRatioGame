@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class ModuleEntityVisuals : MonoBehaviour, IModuleGraphObserver
+    public class ModuleEntityVisuals : MonoBehaviour, IModuleGraphSnapshotObserver
     {
         private ModuleGraphToVisualGraphConverter _converter;
         private ITransformModuleGraph _graphToDraw;
@@ -39,7 +39,6 @@ namespace IM.Visuals
             
             Converter.Position = transform.position;
             _graphToDraw = Converter.Create(graph);
-            new TransformPortAligner().Align(_graphToDraw.Modules.FirstOrDefault());
         }
     }
 }

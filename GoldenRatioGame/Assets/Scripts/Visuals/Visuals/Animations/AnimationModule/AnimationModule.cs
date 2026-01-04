@@ -11,7 +11,6 @@ namespace IM.Visuals
         private Animator _animator;
         private readonly List<ITransformPort> _ports = new();
         private HierarchyTransform _hierarchyTransform;
-        private SpriteRenderer _renderer;
         private Sprite _icon;
         private bool _initialized;
         private ITransformPort _anchorPort;
@@ -20,7 +19,7 @@ namespace IM.Visuals
         public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection);
         public IEnumerable<ITransformPort> Ports => _ports;
         IEnumerable<IPort> IModule.Ports => _ports;
-        public IHierarchyTransform HierarchyTransform
+        public IHierarchyTransformReadOnly HierarchyTransform
         {
             get
             {
@@ -34,7 +33,6 @@ namespace IM.Visuals
         {
             if (_initialized) throw new Exception(); 
             
-            _renderer = GetComponent<SpriteRenderer>();
             _hierarchyTransform = new();
             
             _hierarchyTransform.PositionChanged += (_, newValue) => transform.position = newValue;

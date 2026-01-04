@@ -48,13 +48,14 @@ namespace IM.Visuals
 
             foreach ((IPort port, PortInfo portInfo) in _portSetup.PortsInfos)
             {
-                ITransformPort transformPort = new TransformPort(animationModule);
+                IHierarchyTransform transform = new HierarchyTransform();
+                ITransformPort transformPort = new TransformPort(animationModule, transform);
                 
-                animationModule.HierarchyTransform.AddChild(transformPort.Transform);
+                (animationModule.HierarchyTransform as IHierarchyTransform).AddChild(transform);
 
-                transformPort.Transform.LocalPosition = portInfo.Position;
-                transformPort.Transform.LocalScale = Vector3.one;
-                transformPort.Transform.LocalRotation = Quaternion.LookRotation(portInfo.Normal, Vector3.up);
+                transform.LocalPosition = portInfo.Position;
+                transform.LocalScale = Vector3.one;
+                transform.LocalRotation = Quaternion.LookRotation(portInfo.Normal, Vector3.up);
                 
                 animationModule.AddPort(transformPort);
                 visualPortMap[port] = transformPort;

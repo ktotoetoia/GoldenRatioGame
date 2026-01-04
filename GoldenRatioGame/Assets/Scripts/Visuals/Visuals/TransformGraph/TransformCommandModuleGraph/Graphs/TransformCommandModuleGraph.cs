@@ -7,8 +7,9 @@ namespace IM.Visuals
     public class TransformCommandModuleGraph : ITransformCommandModuleGraph
     {
         private readonly ICommandModuleGraph _commandModuleGraph;
+        private readonly TransformGraphStructureBuilder _builder;
         
-        public IHierarchyTransform Transform { get; }
+        public ITransform Transform => _builder.GlobalTransform;
         public IEnumerable<INode> Nodes => _commandModuleGraph.Nodes;
         public IEnumerable<IEdge> Edges => _commandModuleGraph.Edges;
         public IEnumerable<ITransformModule> Modules => _commandModuleGraph.Modules.Cast<ITransformModule>();
@@ -25,10 +26,11 @@ namespace IM.Visuals
 
         public TransformCommandModuleGraph(IHierarchyTransform transform)
         {
-            Transform = transform;
-            _commandModuleGraph = new CommandModuleGraph(new AddTransformModuleCommandFactory(Transform),
-                new RemoveAndDisconnectCommandFactory(), new ConnectTransformCommandFactory(),
-                new DisconnectCommandFactory());
+            _builder = new TransformGraphStructureBuilder(transform);
+            _commandModuleGraph = new CommandModuleGraph(new AddModuleAndNotifyObserverCommandFactory(_builder),
+                new RemoveAndDisconnectModuleNotifyObserverCommandFactory(_builder),
+                new ConnectTransformModulesAndNotifyObserverCommandFactory(_builder),
+                new DisconnectModuleAndNotifyObserverCommandFactory(_builder));
         }
         
         public void AddModule(ITransformModule module) => _commandModuleGraph.AddModule(module);

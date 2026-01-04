@@ -5,7 +5,7 @@ using IM.Health;
 
 namespace IM.Modules
 {
-    public class HealthExtensionsObserver : IModuleGraphObserver
+    public class HealthExtensionsObserver : IModuleGraphSnapshotObserver
     {
         private readonly IFloatHealthValuesGroup _floatHealthValuesGroup;
         private readonly EnumerableDiffTracker<IHealthExtension> _diffTracker = new ();

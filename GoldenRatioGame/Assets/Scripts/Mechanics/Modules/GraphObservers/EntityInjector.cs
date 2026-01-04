@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class EntityInjector : IModuleGraphObserver
+    public class EntityInjector : IModuleGraphSnapshotObserver
     {
         private readonly IEntity _entity;
         private readonly EnumerableDiffTracker<IRequireEntity> _diffTracker = new (); 

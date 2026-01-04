@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class MovementReflector : MonoBehaviour, IModuleGraphObserver
+    public class MovementReflector : MonoBehaviour, IModuleGraphSnapshotObserver
     {
         private IVectorMovement _movement;
         private IEnumerable<IRequireMovement> _requireMovement;

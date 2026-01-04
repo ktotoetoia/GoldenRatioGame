@@ -1,4 +1,5 @@
 ﻿using IM.Graphs;
+using UnityEngine;
 
 namespace IM.Visuals
 {
@@ -9,7 +10,7 @@ namespace IM.Visuals
         public ITransformConnection Connection { get; private set; }
         IConnection IPort.Connection => Connection;
         public bool IsConnected => Connection != null;
-        public IHierarchyTransform Transform { get; }
+        public IHierarchyTransformReadOnly Transform { get; }
 
         public TransformPort(ITransformModule module) : this(module, new HierarchyTransform())
         {
@@ -26,7 +27,6 @@ namespace IM.Visuals
         {
             if(connection is not ITransformConnection visualConnection)
                 throw new System.Exception("Invalid connection type");
-            
             Connection = visualConnection;
         }
 

@@ -15,7 +15,7 @@ namespace Tests
 
         private void Awake()
         {
-            foreach (IModuleGraphObserver observer in GetComponents<IModuleGraphObserver>())
+            foreach (IModuleGraphSnapshotObserver observer in GetComponents<IModuleGraphSnapshotObserver>())
             {
                 _playerObject.GetComponent<IModuleEntity>().GraphEditor.AddObserver(observer);
             }

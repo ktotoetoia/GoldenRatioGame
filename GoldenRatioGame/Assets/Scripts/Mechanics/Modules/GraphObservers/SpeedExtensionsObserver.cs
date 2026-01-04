@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace IM.Modules
 {
-    public class SpeedExtensionsObserver : IModuleGraphObserver
+    public class SpeedExtensionsObserver : IModuleGraphSnapshotObserver
     {
         private readonly IHaveSpeed _speed;
         private readonly EnumerableDiffTracker<ISpeedExtension> _diffTracker = new ();

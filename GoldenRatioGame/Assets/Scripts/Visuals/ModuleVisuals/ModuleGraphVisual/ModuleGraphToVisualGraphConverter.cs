@@ -18,8 +18,8 @@ namespace IM.Visuals
             Dictionary<IPort, ITransformPort> visualPortMap = new();
             Dictionary<IGameModule, ITransformModule> moduleToVisual = new Dictionary<IGameModule, ITransformModule>();
             ICoreGameModule coreModule = source.Modules.FirstOrDefault(x => x is ICoreGameModule) as ICoreGameModule;
-            ITransformModuleGraph transformGraph = new DisposableTransformCommandModuleGraph(new HierarchyTransform(Position));
-
+            ITransformModuleGraph transformGraph = new TransformCommandModuleGraph();
+            
             foreach (IGameModule module in _traversal.Enumerate<IGameModule>(coreModule))
             {
                 IModuleAnimationController moduleAnimationController = module.Extensions.GetExtension<IModuleAnimationController>();
@@ -46,6 +46,7 @@ namespace IM.Visuals
                 transformGraph.Connect(outputPort, inputPort);
             }
             
+            transformGraph.Transform.Position = Position;
             return transformGraph;
         }
     }

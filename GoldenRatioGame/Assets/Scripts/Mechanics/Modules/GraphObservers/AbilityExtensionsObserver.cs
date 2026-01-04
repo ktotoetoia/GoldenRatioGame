@@ -5,7 +5,7 @@ using IM.Graphs;
 
 namespace IM.Modules
 {
-    public class AbilityExtensionsObserver : IModuleGraphObserver
+    public class AbilityExtensionsObserver : IModuleGraphSnapshotObserver
     {
         private readonly AbilityPool _abilityPool;
         private readonly EnumerableDiffTracker<IAbility> _diffTracker = new (); 

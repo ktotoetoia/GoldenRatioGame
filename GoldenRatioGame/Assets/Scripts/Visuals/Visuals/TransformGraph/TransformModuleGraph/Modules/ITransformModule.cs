@@ -6,7 +6,7 @@ namespace IM.Visuals
 {
     public interface ITransformModule : IModule, IDisposable
     {
-        IHierarchyTransform HierarchyTransform { get; }
+        IHierarchyTransformReadOnly HierarchyTransform { get; }
         
         new IEnumerable<ITransformPort> Ports { get; }
     }
