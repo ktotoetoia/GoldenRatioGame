@@ -10,14 +10,14 @@ namespace IM.Graphs
         private readonly TGraph _graph;
         private readonly IModuleGraphValidator _validator;
         private readonly IFactory<IModuleGraphAccess, TGraph> _accessGraphFactory;
-        private readonly List<IModuleGraphObserver> _observers = new();
+        private readonly List<IModuleGraphSnapshotObserver> _observers = new();
         private IModuleGraphAccess _accessModuleGraph;
         private int _undoIndexAtEditStart;
 
         public bool IsEditing => _accessModuleGraph != null;
         public bool CanSaveChanges => IsEditing && _validator.IsValid(Graph);
         public IModuleGraphReadOnly Graph { get; }
-        public IEnumerable<IModuleGraphObserver> Observers => _observers;
+        public IEnumerable<IModuleGraphSnapshotObserver> Observers => _observers;
         
         public CommandModuleGraphEditor(TGraph graph, IFactory<IModuleGraphAccess, TGraph> accessGraphFactory)
             : this(graph, accessGraphFactory, new TrueModuleGraphValidator())
@@ -73,7 +73,7 @@ namespace IM.Graphs
             return false;
         }
         
-        public void AddObserver(IModuleGraphObserver observer)
+        public void AddObserver(IModuleGraphSnapshotObserver observer)
         {
             if (!_observers.Contains(observer))
             {
@@ -81,7 +81,7 @@ namespace IM.Graphs
             }
         }
 
-        public void RemoveObserver(IModuleGraphObserver observer)
+        public void RemoveObserver(IModuleGraphSnapshotObserver observer)
         {
             _observers.Remove(observer);
         }

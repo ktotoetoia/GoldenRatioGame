@@ -14,8 +14,8 @@ namespace IM.Graphs
         bool TrySaveChanges();
         
         
-        IEnumerable<IModuleGraphObserver> Observers { get; }
-        void AddObserver(IModuleGraphObserver observer);
-        void RemoveObserver(IModuleGraphObserver observer);
+        IEnumerable<IModuleGraphSnapshotObserver> Observers { get; }
+        void AddObserver(IModuleGraphSnapshotObserver observer);
+        void RemoveObserver(IModuleGraphSnapshotObserver observer);
     }
 }

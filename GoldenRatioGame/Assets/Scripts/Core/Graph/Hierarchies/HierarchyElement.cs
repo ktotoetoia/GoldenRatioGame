@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace IM.Graphs
 {
@@ -7,7 +8,9 @@ namespace IM.Graphs
     {
         private readonly List<IHierarchyElement> _children = new();
         private readonly ITraversal _traversal = new BreadthFirstTraversal();
-
+        
+        IHierarchyElementReadOnly IHierarchyElementReadOnly.Parent => Parent;
+        IReadOnlyList<IHierarchyElementReadOnly> IHierarchyElementReadOnly.Children => Children;
         public IHierarchyElement Parent { get; private set; }
         public IReadOnlyList<IHierarchyElement> Children => _children;
 
@@ -71,7 +74,7 @@ namespace IM.Graphs
                 newParent.AddChildInternal(this);
         }
 
-        public bool ContainsChild(IHierarchyElement child)
+        public bool ContainsChild(IHierarchyElementReadOnly child)
         {
             return _children.Contains(child);
         }

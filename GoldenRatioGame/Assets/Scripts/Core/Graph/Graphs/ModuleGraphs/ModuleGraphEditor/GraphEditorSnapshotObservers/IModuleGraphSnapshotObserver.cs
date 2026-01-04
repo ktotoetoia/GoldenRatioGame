@@ -1,6 +1,6 @@
 ﻿namespace IM.Graphs
 {
-    public interface IModuleGraphObserver
+    public interface IModuleGraphSnapshotObserver
     {
         void OnGraphUpdated(IModuleGraphReadOnly graph);
     }

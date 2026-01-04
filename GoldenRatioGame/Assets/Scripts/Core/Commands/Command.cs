@@ -22,7 +22,7 @@ namespace IM.Commands
 
         protected virtual void InternalExecute()
         {
-            
+
         }
 
         protected virtual void InternalUndo()
