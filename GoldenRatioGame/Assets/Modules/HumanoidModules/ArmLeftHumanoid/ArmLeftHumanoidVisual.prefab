@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -7644578825757335302}
   - component: {fileID: 655896773114017808}
   - component: {fileID: -4211974235829571510}
+  - component: {fileID: 6134553503932375177}
   m_Layer: 0
   m_Name: ArmLeftHumanoidVisual
   m_TagString: Untagged
@@ -126,3 +127,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44cc123346e042788e60e087003cf3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Visuals::IM.Visuals.AnimationModule
+--- !u!114 &6134553503932375177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156244532669732079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 999d08846bdf44658440a31f6a271647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Visuals::IM.Visuals.HierarchyTransformMono

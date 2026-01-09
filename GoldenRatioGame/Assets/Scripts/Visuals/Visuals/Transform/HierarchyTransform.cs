@@ -6,262 +6,223 @@ namespace IM.Visuals
 {
     public class HierarchyTransform : HierarchyElement, IHierarchyTransform
     {
-        private readonly ParentlessTransform _core;
+        private Vector3 _localPosition = Vector3.zero;
+        private Vector3 _localScale = Vector3.one;
+        private Quaternion _localRotation = Quaternion.identity;
 
-        private bool _hasPendingOldWorld;
-        private Vector3 _pendingOldWorldPos;
-        private Vector3 _pendingOldWorldScale;
-        private Quaternion _pendingOldWorldRot;
+        private bool _hasPendingWorldSnapshot;
+        private TransformReadOnly _pendingWorldSnapshot;
 
-        private Vector3 _lastParentPos;
-        private Vector3 _lastParentScale;
-        private Quaternion _lastParentRot;
-        private bool _hasLastParent;
+        private bool _hasCachedParent;
+        private Vector3 _cachedParentPosition;
+        private Vector3 _cachedParentScale;
+        private Quaternion _cachedParentRotation;
 
         public event Action<Vector3, Vector3> PositionChanged;
         public event Action<Quaternion, Quaternion> RotationChanged;
         public event Action<Vector3, Vector3> LossyScaleChanged;
 
-        public event Action<Vector3, Vector3> LocalPositionChanged
-        {
-            add => _core.LocalPositionChanged += value;
-            remove => _core.LocalPositionChanged -= value;
-        }
+        public event Action<Vector3, Vector3> LocalPositionChanged;
+        public event Action<Vector3, Vector3> LocalScaleChanged;
+        public event Action<Quaternion, Quaternion> LocalRotationChanged;
 
-        public event Action<Vector3, Vector3> LocalScaleChanged
-        {
-            add => _core.LocalScaleChanged += value;
-            remove => _core.LocalScaleChanged -= value;
-        }
-
-        public event Action<Quaternion, Quaternion> LocalRotationChanged
-        {
-            add => _core.LocalRotationChanged += value;
-            remove => _core.LocalRotationChanged -= value;
-        }
-
-        public HierarchyTransform() : this(new ParentlessTransform()) { }
-
-        public HierarchyTransform(Vector3 localPosition) : this(new ParentlessTransform(localPosition, Vector3.one, Quaternion.identity)) { }
-
-        public HierarchyTransform(Vector3 localPosition, Vector3 localScale, Quaternion localRotation)
-            : this(new ParentlessTransform(localPosition, localScale, localRotation)) { }
-
-        public HierarchyTransform(ParentlessTransform core)
-        {
-            _core = core ?? throw new ArgumentNullException(nameof(core));
-            _hasPendingOldWorld = false;
-            _hasLastParent = false;
-            RecalculateWorldAndPropagate();
-        }
-        
         public Vector3 LocalPosition
         {
-            get => _core.LocalPosition;
-            set => HandleLocalChange(
-                () => _core.LocalPosition = value
-            );
+            get => _localPosition;
+            set
+            {
+                if (_localPosition == value) return;
+                Vector3 old = _localPosition;
+                ApplyLocalChangeAndNotify(() => _localPosition = value);
+                LocalPositionChanged?.Invoke(old, value);
+            }
         }
 
         public Vector3 LocalScale
         {
-            get => _core.LocalScale;
-            set => HandleLocalChange(
-                () => _core.LocalScale = value
-            );
+            get => _localScale;
+            set
+            {
+                if (_localScale == value) return;
+                Vector3 old = _localScale;
+                ApplyLocalChangeAndNotify(() => _localScale = value);
+                LocalScaleChanged?.Invoke(old, value);
+            }
         }
 
         public Quaternion LocalRotation
         {
-            get => _core.LocalRotation;
-            set => HandleLocalChange(
-                () => _core.LocalRotation = value
-            );
-        }
-        
-        private void HandleLocalChange(Action applyLocalChange)
-        {
-            (Vector3 pos, Vector3 scale, Quaternion rot) oldWorld = ComputeWorldUsingParent();
-            applyLocalChange();
-            (Vector3 pos, Vector3 scale, Quaternion rot) newWorld = ComputeWorldUsingParent();
-            RecalculateWorldAndPropagate();
-
-            if (oldWorld.pos != newWorld.pos)
-                PositionChanged?.Invoke(oldWorld.pos, newWorld.pos);
-            if (oldWorld.scale != newWorld.scale)
-                LossyScaleChanged?.Invoke(oldWorld.scale, newWorld.scale);
-            if (oldWorld.rot != newWorld.rot)
-                RotationChanged?.Invoke(oldWorld.rot, newWorld.rot);
-        }
-        
-        public Vector3 Position
-        {
-            get => ComputeWorldUsingParent().pos;
+            get => _localRotation;
             set
             {
-                (Vector3 pos, Vector3 scale, Quaternion rot) oldWorld = ComputeWorldUsingParent();
-                Vector3 oldPos = oldWorld.pos;
-
-                IHierarchyTransform parent = Parent as IHierarchyTransform;
-                _core.SetLocalFromWorld(value, oldWorld.scale, oldWorld.rot,
-                    parent?.Position, parent?.LossyScale, parent?.Rotation);
-
-                (Vector3 pos, Vector3 scale, Quaternion rot) newWorld = ComputeWorldUsingParent();
-                RecalculateWorldAndPropagate();
-
-                if (oldPos != newWorld.pos)
-                    PositionChanged?.Invoke(oldPos, newWorld.pos);
-                if (oldWorld.scale != newWorld.scale)
-                    LossyScaleChanged?.Invoke(oldWorld.scale, newWorld.scale);
-                if (oldWorld.rot != newWorld.rot)
-                    RotationChanged?.Invoke(oldWorld.rot, newWorld.rot);
+                if (_localRotation == value) return;
+                Quaternion old = _localRotation;
+                ApplyLocalChangeAndNotify(() => _localRotation = value);
+                LocalRotationChanged?.Invoke(old, value);
             }
         }
 
-        public Vector3 LossyScale => ComputeWorldUsingParent().scale;
+        public Vector3 Position
+        {
+            get => GetWorldSnapshot().Position;
+            set
+            {
+                TransformReadOnly oldWorld = GetWorldSnapshot();
+
+                TransformOperations.SetLocalFromWorld(
+                    this,
+                    value,
+                    oldWorld.LossyScale,
+                    oldWorld.Rotation,
+                    Parent as ITransformReadOnly
+                );
+
+                TransformReadOnly newWorld = GetWorldSnapshot();
+                PropagateWorldToChildren();
+
+                NotifyWorldChanges(oldWorld, newWorld);
+            }
+        }
+
+        public Vector3 LossyScale => GetWorldSnapshot().LossyScale;
 
         public Quaternion Rotation
         {
-            get => ComputeWorldUsingParent().rot;
+            get => GetWorldSnapshot().Rotation;
             set
             {
-                (Vector3 pos, Vector3 scale, Quaternion rot) oldWorld = ComputeWorldUsingParent();
-                Quaternion oldRot = oldWorld.rot;
+                TransformReadOnly oldWorld = GetWorldSnapshot();
 
-                if (Parent is IHierarchyTransform parent)
-                    _core.LocalRotation = Quaternion.Inverse(parent.Rotation) * value;
+                if (Parent is ITransformReadOnly parent)
+                    _localRotation = TransformOperations.LocalRotationFromWorld(value, parent);
                 else
-                    _core.LocalRotation = value;
+                    _localRotation = value;
 
-                (Vector3 pos, Vector3 scale, Quaternion rot) newWorld = ComputeWorldUsingParent();
-                RecalculateWorldAndPropagate();
+                TransformReadOnly newWorld = GetWorldSnapshot();
+                PropagateWorldToChildren();
 
-                if (oldRot != newWorld.rot)
-                    RotationChanged?.Invoke(oldRot, newWorld.rot);
-                if (oldWorld.pos != newWorld.pos)
-                    PositionChanged?.Invoke(oldWorld.pos, newWorld.pos);
-                if (oldWorld.scale != newWorld.scale)
-                    LossyScaleChanged?.Invoke(oldWorld.scale, newWorld.scale);
+                NotifyWorldChanges(oldWorld, newWorld);
             }
         }
-        
+
+        private void ApplyLocalChangeAndNotify(Action applyLocalChange)
+        {
+            TransformReadOnly before = GetWorldSnapshot();
+            applyLocalChange();
+            TransformReadOnly after = GetWorldSnapshot();
+
+            PropagateWorldToChildren();
+            NotifyWorldChanges(before, after);
+        }
+
+        private TransformReadOnly GetWorldSnapshot()
+        {
+            var result = TransformOperations.ComputeWorld(
+                Parent as ITransformReadOnly,
+                _localPosition,
+                _localScale,
+                _localRotation
+            );
+
+            return new TransformReadOnly(result.pos, result.scale, result.rot);
+        }
+
+        private void PropagateWorldToChildren()
+        {
+            TransformReadOnly world = GetWorldSnapshot();
+            foreach (IHierarchyElement child in Children)
+            {
+                if (child is IHierarchyTransform childTransform)
+                    childTransform.OnParentTransformChanged(world.Position, world.LossyScale, world.Rotation);
+            }
+        }
+
+        private void NotifyWorldChanges(TransformReadOnly oldWorld, TransformReadOnly newWorld)
+        {
+            if (oldWorld.Position != newWorld.Position)
+                PositionChanged?.Invoke(oldWorld.Position, newWorld.Position);
+
+            if (oldWorld.LossyScale != newWorld.LossyScale)
+                LossyScaleChanged?.Invoke(oldWorld.LossyScale, newWorld.LossyScale);
+
+            if (oldWorld.Rotation != newWorld.Rotation)
+                RotationChanged?.Invoke(oldWorld.Rotation, newWorld.Rotation);
+        }
+
         public void OnParentTransformChanged(Vector3 parentPosition, Vector3 parentScale, Quaternion parentRotation)
         {
-            if (!_hasLastParent)
+            if (!_hasCachedParent)
             {
-                _lastParentPos = parentPosition;
-                _lastParentScale = parentScale;
-                _lastParentRot = parentRotation;
-                _hasLastParent = true;
-
-                RecalculateWorldAndPropagate();
+                _cachedParentPosition = parentPosition;
+                _cachedParentScale = parentScale;
+                _cachedParentRotation = parentRotation;
+                _hasCachedParent = true;
+                PropagateWorldToChildren();
                 return;
             }
 
-            Vector3 oldPos = _lastParentPos + _lastParentRot * Vector3.Scale(_core.LocalPosition, _lastParentScale);
-            Vector3 oldScale = Vector3.Scale(_lastParentScale, _core.LocalScale);
-            Quaternion oldRot = _lastParentRot * _core.LocalRotation;
+            var oldWorldTuple = TransformOperations.ComputeWorld(
+                new TransformReadOnly(_cachedParentPosition, _cachedParentScale, _cachedParentRotation),
+                _localPosition, _localScale, _localRotation
+            );
+            var newWorldTuple = TransformOperations.ComputeWorld(
+                new TransformReadOnly(parentPosition, parentScale, parentRotation),
+                _localPosition, _localScale, _localRotation
+            );
 
-            Vector3 newPos = parentPosition + parentRotation * Vector3.Scale(_core.LocalPosition, parentScale);
-            Vector3 newScale = Vector3.Scale(parentScale, _core.LocalScale);
-            Quaternion newRot = parentRotation * _core.LocalRotation;
+            var oldWorld = new TransformReadOnly(oldWorldTuple.pos, oldWorldTuple.scale, oldWorldTuple.rot);
+            var newWorld = new TransformReadOnly(newWorldTuple.pos, newWorldTuple.scale, newWorldTuple.rot);
 
-            _lastParentPos = parentPosition;
-            _lastParentScale = parentScale;
-            _lastParentRot = parentRotation;
+            _cachedParentPosition = parentPosition;
+            _cachedParentScale = parentScale;
+            _cachedParentRotation = parentRotation;
 
-            if (oldPos != newPos)
-                PositionChanged?.Invoke(oldPos, newPos);
-            if (oldScale != newScale)
-                LossyScaleChanged?.Invoke(oldScale, newScale);
-            if (oldRot != newRot)
-                RotationChanged?.Invoke(oldRot, newRot);
-
-            RecalculateWorldAndPropagate();
+            NotifyWorldChanges(oldWorld, newWorld);
+            PropagateWorldToChildren();
         }
 
-        private void RecalculateWorldAndPropagate()
-        {
-            (Vector3 pos, Vector3 scale, Quaternion rot) world = ComputeWorldUsingParent();
-            foreach (IHierarchyElement child in Children)
-            {
-                if (child is IHierarchyTransform t)
-                    t.OnParentTransformChanged(world.pos, world.scale, world.rot);
-            }
-        }
-
-        private (Vector3 pos, Vector3 scale, Quaternion rot) ComputeWorldUsingParent()
-        {
-            IHierarchyTransform parent = Parent as IHierarchyTransform;
-            
-            if (parent == null)
-                return (_core.LocalPosition, _core.LocalScale, _core.LocalRotation);
-
-            Vector3 worldPos = parent.Position + parent.Rotation * Vector3.Scale(_core.LocalPosition, parent.LossyScale);
-            Vector3 worldScale = Vector3.Scale(parent.LossyScale, _core.LocalScale);
-            Quaternion worldRot = parent.Rotation * _core.LocalRotation;
-            return (worldPos, worldScale, worldRot);
-        }
-        
         protected override void OnParentChanging(IHierarchyElement oldParent, IHierarchyElement newParent)
         {
-            if (oldParent is IHierarchyTransform oldT)
-            {
-                Vector3 oldPos = oldT.Position + oldT.Rotation * Vector3.Scale(_core.LocalPosition, oldT.LossyScale);
-                Vector3 oldScale = Vector3.Scale(oldT.LossyScale, _core.LocalScale);
-                Quaternion oldRot = oldT.Rotation * _core.LocalRotation;
-
-                _pendingOldWorldPos = oldPos;
-                _pendingOldWorldScale = oldScale;
-                _pendingOldWorldRot = oldRot;
-            }
-            else
-            {
-                _pendingOldWorldPos = _core.LocalPosition;
-                _pendingOldWorldScale = _core.LocalScale;
-                _pendingOldWorldRot = _core.LocalRotation;
-            }
-            _hasPendingOldWorld = true;
+            TransformReadOnly currentWorld = GetWorldSnapshot();
+            _pendingWorldSnapshot = currentWorld;
+            _hasPendingWorldSnapshot = true;
         }
 
         protected override void OnParentSet(IHierarchyElement parent)
         {
-            if (_hasPendingOldWorld)
+            if (_hasPendingWorldSnapshot)
             {
-                if (parent is IHierarchyTransform pt)
-                {
-                    _core.SetLocalFromWorld(_pendingOldWorldPos, _pendingOldWorldScale, _pendingOldWorldRot,
-                        pt.Position, pt.LossyScale, pt.Rotation);
-                }
-                else
-                {
-                    _core.SetLocalFromWorld(_pendingOldWorldPos, _pendingOldWorldScale, _pendingOldWorldRot,
-                        null, null, null);
-                }
-                _hasPendingOldWorld = false;
+                TransformOperations.SetLocalFromWorld(
+                    this,
+                    _pendingWorldSnapshot.Position,
+                    _pendingWorldSnapshot.LossyScale,
+                    _pendingWorldSnapshot.Rotation,
+                    parent as ITransformReadOnly
+                );
+                _hasPendingWorldSnapshot = false;
             }
 
-            if (parent is IHierarchyTransform ip)
+            if (parent is ITransformReadOnly ip)
             {
-                _lastParentPos = ip.Position;
-                _lastParentScale = ip.LossyScale;
-                _lastParentRot = ip.Rotation;
-                _hasLastParent = true;
+                _cachedParentPosition = ip.Position;
+                _cachedParentScale = ip.LossyScale;
+                _cachedParentRotation = ip.Rotation;
+                _hasCachedParent = true;
             }
             else
             {
-                _hasLastParent = false;
+                _hasCachedParent = false;
             }
 
-            RecalculateWorldAndPropagate();
+            PropagateWorldToChildren();
         }
 
         protected override void OnChildAdded(IHierarchyElement child)
         {
             if (child is IHierarchyTransform t)
             {
-                (Vector3 pos, Vector3 scale, Quaternion rot) world = ComputeWorldUsingParent();
-                t.OnParentTransformChanged(world.pos, world.scale, world.rot);
+                TransformReadOnly world = GetWorldSnapshot();
+                t.OnParentTransformChanged(world.Position, world.LossyScale, world.Rotation);
             }
         }
     }

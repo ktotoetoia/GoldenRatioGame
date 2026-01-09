@@ -9,7 +9,6 @@ namespace IM.Visuals
     {
         private readonly List<ITransformModule> _transformModules = new();
         private readonly IHierarchyTransform _globalTransform;
-        private readonly ITraversal _traversal = new BreadthFirstTraversal();
 
         public ITransform GlobalTransform => _globalTransform;
 

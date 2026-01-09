@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5732603980309163905}
   - component: {fileID: -7644578825757335302}
   - component: {fileID: 6377991156395474928}
+  - component: {fileID: -3973296874447651770}
   m_Layer: 0
   m_Name: CoreModuleHumanoidVisual
   m_TagString: Untagged
@@ -126,3 +127,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-3973296874447651770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156244532669732079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 999d08846bdf44658440a31f6a271647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Visuals::IM.Visuals.HierarchyTransformMono
