@@ -2,8 +2,8 @@
 {
     public interface IConnection : IEdge
     {
-        IPort Input { get; }
-        IPort Output { get; }
+        IPort Port1 { get; }
+        IPort Port2 { get; }
         
         IPort GetOtherPort(IPort port);
     }

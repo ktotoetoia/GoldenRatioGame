@@ -17,21 +17,21 @@ namespace IM.Graphs
 
         protected override void InternalExecute()
         {
-            if (!_connection.Input.IsConnected || !_connection.Output.IsConnected)
+            if (!_connection.Port1.IsConnected || !_connection.Port2.IsConnected)
                 throw new InvalidOperationException("Other command disconnected this connection");
 
-            _connection.Input.Disconnect();
-            _connection.Output.Disconnect();
+            _connection.Port1.Disconnect();
+            _connection.Port2.Disconnect();
             _removeFrom.Remove(_connection);
         }
 
         protected override void InternalUndo()
         {
-            if (_connection.Input.IsConnected || _connection.Output.IsConnected)
+            if (_connection.Port1.IsConnected || _connection.Port2.IsConnected)
                 throw new InvalidOperationException("Other command connected this port");
 
-            _connection.Input.Connect(_connection);
-            _connection.Output.Connect(_connection);
+            _connection.Port1.Connect(_connection);
+            _connection.Port2.Connect(_connection);
             _removeFrom.Add(_connection);
         }
     }

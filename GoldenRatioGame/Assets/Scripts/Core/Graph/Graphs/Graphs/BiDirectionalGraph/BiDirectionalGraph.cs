@@ -50,11 +50,11 @@ namespace IM.Graphs
 
         public void Disconnect(IEdge edge)
         {
-            if (!_edges.Contains(edge) || !_nodes.Contains(edge.From) || !_nodes.Contains(edge.To))
+            if (!_edges.Contains(edge) || !_nodes.Contains(edge.Node1) || !_nodes.Contains(edge.Node2))
                 throw new ArgumentException();
 
-            (edge.From as ICollection<IEdge>).Remove(edge);
-            (edge.To as ICollection<IEdge>).Remove(edge);
+            (edge.Node1 as ICollection<IEdge>).Remove(edge);
+            (edge.Node2 as ICollection<IEdge>).Remove(edge);
             _edges.Remove(edge);
         }
     }

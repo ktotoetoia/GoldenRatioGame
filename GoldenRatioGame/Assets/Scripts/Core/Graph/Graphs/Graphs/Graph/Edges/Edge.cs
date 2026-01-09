@@ -2,13 +2,13 @@
 {
     public class Edge : IEdge
     {
-        public INode From { get; }
-        public INode To { get; }
+        public INode Node1 { get; }
+        public INode Node2 { get; }
 
         public Edge(INode from, INode to)
         {
-            From = from;
-            To = to;
+            Node1 = from;
+            Node2 = to;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace IM.Graphs
             
         }
         
-        public ConditionalCommandModuleGraph(ICommandModuleGraph graph) : this(graph, new StillModuleGraphConditions()) { }
+        public ConditionalCommandModuleGraph(ICommandModuleGraph graph) : this(graph, new DefaultModuleGraphConditions()) { }
 
         public ConditionalCommandModuleGraph(ICommandModuleGraph graph, IModuleGraphConditions conditions)
         {

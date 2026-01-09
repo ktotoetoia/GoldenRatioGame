@@ -6,8 +6,8 @@ namespace IM.Graphs
     {
         public static INode GetOther(this IEdge edge, INode node)
         {
-            if(edge.From == node) return edge.To;
-            if(edge.To == node) return edge.From;
+            if(edge.Node1 == node) return edge.Node2;
+            if(edge.Node2 == node) return edge.Node1;
 
             throw new SystemException("edge does not contains this node");
         }

@@ -55,8 +55,8 @@ namespace IM.Modules
             Gizmos.color = _edgeColor;
             foreach (var edge in Graph.Edges)
             {
-                if (positions.TryGetValue(edge.From, out var p1) &&
-                    positions.TryGetValue(edge.To,   out var p2))
+                if (positions.TryGetValue(edge.Node1, out var p1) &&
+                    positions.TryGetValue(edge.Node2,   out var p2))
                 {
                     Gizmos.DrawLine(p1, p2);
                 }
@@ -83,7 +83,7 @@ namespace IM.Modules
         private static List<INode> FindRootNodes(IGraphReadOnly graph)
         {
             var allNodes = new HashSet<INode>(graph.Nodes);
-            var targets  = new HashSet<INode>(graph.Edges.Select(e => e.To));
+            var targets  = new HashSet<INode>(graph.Edges.Select(e => e.Node2));
             allNodes.ExceptWith(targets);
             return allNodes.ToList();
         }
@@ -111,9 +111,9 @@ namespace IM.Modules
                 var current = queue.Dequeue();
                 int curLevel = levels[current];
 
-                foreach (var edge in graph.Edges.Where(e => e.From == current))
+                foreach (var edge in graph.Edges.Where(e => e.Node1 == current))
                 {
-                    var child = edge.To;
+                    var child = edge.Node2;
                     if (child == null || seen.Contains(child)) continue;
 
                     seen.Add(child);

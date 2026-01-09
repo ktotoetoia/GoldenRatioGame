@@ -36,12 +36,12 @@ namespace IM.Visuals
 
             foreach (IConnection connection in source.Connections)
             {
-                if (connection.Input?.Module is not IGameModule inputModule ||
-                    connection.Output?.Module is not IGameModule outputModule ||
+                if (connection.Port1?.Module is not IGameModule inputModule ||
+                    connection.Port2?.Module is not IGameModule outputModule ||
                     !moduleToVisual.TryGetValue(inputModule, out ITransformModule inputVisual) ||
                     !moduleToVisual.TryGetValue(outputModule, out ITransformModule outputVisual) ||
-                    !visualPortMap.TryGetValue(connection.Input, out ITransformPort inputPort) ||
-                    !visualPortMap.TryGetValue(connection.Output, out ITransformPort outputPort)) continue;
+                    !visualPortMap.TryGetValue(connection.Port1, out ITransformPort inputPort) ||
+                    !visualPortMap.TryGetValue(connection.Port2, out ITransformPort outputPort)) continue;
                 
                 transformGraph.Connect(outputPort, inputPort);
             }

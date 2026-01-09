@@ -2,7 +2,7 @@
 {
     public interface IEdge
     {
-        INode From { get; }
-        INode To { get; }
+        INode Node1 { get; }
+        INode Node2 { get; }
     }
 }

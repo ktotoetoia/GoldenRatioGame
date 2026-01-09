@@ -44,7 +44,7 @@ namespace IM.Visuals
 
         public void OnConnected(IConnection connection)
         {            
-            if(connection.Input is not ITransformPort input || connection.Output is not ITransformPort output)
+            if(connection.Port1 is not ITransformPort input || connection.Port2 is not ITransformPort output)
                 throw new ArgumentException($"this observer only supports ITransformPort");
             IHierarchyTransform outputT = output.Module.HierarchyTransform as IHierarchyTransform;
             IHierarchyTransform inputT = input.Module.HierarchyTransform as IHierarchyTransform;

@@ -1,10 +1,10 @@
 ﻿namespace IM.Graphs
 {
-    public class StillModuleGraphConditions : IModuleGraphConditions
+    public class DefaultModuleGraphConditions : IModuleGraphConditions
     {
         private readonly bool _condition;
 
-        public StillModuleGraphConditions(bool condition = true)
+        public DefaultModuleGraphConditions(bool condition = true)
         {
             _condition = condition;
         }

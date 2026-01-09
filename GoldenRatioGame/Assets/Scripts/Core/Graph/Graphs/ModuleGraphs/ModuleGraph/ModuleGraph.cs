@@ -72,8 +72,8 @@ namespace IM.Graphs
             if(connection == null) throw new ArgumentNullException(nameof(connection));
             if (!Contains(connection)) throw new ArgumentException("Graph does not contain this connection.");
             
-            connection.Input.Disconnect();
-            connection.Output.Disconnect();
+            connection.Port1.Disconnect();
+            connection.Port2.Disconnect();
             _connections.Remove(connection);
         }
 

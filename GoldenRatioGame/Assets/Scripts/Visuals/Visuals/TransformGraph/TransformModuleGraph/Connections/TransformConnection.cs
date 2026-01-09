@@ -5,14 +5,14 @@ namespace IM.Visuals
 {
     public class TransformConnection : ITransformConnection
     {
-        public INode From => Output.Module;
-        public INode To => Input.Module;
+        public INode Node1 => Output.Module;
+        public INode Node2 => Input.Module;
 
         public ITransformPort Output { get; }
         public ITransformPort Input { get; }
 
-        IPort IConnection.Input => Input;
-        IPort IConnection.Output => Output;
+        IPort IConnection.Port1 => Input;
+        IPort IConnection.Port2 => Output;
 
         public TransformConnection(ITransformPort output, ITransformPort input)
         {
