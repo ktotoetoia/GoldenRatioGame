@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2805714054282062599}
   - component: {fileID: 5469737783865499535}
   - component: {fileID: -6607928970512855544}
-  - component: {fileID: 4556875372869762170}
   - component: {fileID: 8535451133996336894}
+  - component: {fileID: 4556875372869762170}
   m_Layer: 0
   m_Name: HeadHumanoid
   m_TagString: Untagged
@@ -61,21 +61,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ModulePortSetup
   _portsInfos:
   - _position: {x: 0, y: -0.4, z: 0}
-    _normal: {x: 0, y: -1, z: 0}
+    _eulerZRotation: -90
     _tag: {fileID: 11400000, guid: 9780612eeb15ddb4e872a9faa88ec63a, type: 2}
---- !u!114 &4556875372869762170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8119833187759213420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62b689c94a11470785683a05a4b508ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleVisuals::IM.Modules.ModuleLayout
-  _visualPrefab: {fileID: 2156244532669732079, guid: e31406646bfbbfb4d96f36dea99f9cbf, type: 3}
 --- !u!114 &8535451133996336894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,3 +79,16 @@ MonoBehaviour:
     _minValue: 0
     _maxValue: 100
     _value: 100
+--- !u!114 &4556875372869762170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8119833187759213420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62b689c94a11470785683a05a4b508ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisuals::IM.Modules.ModuleLayout
+  _visualPrefab: {fileID: 2156244532669732079, guid: e31406646bfbbfb4d96f36dea99f9cbf, type: 3}

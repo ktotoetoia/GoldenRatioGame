@@ -92,22 +92,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.ModuleLayout
   _visualPrefab: {fileID: 2156244532669732079, guid: 52e97c3efc198d045a8ad39c8259d687, type: 3}
-  _portsInfos:
-  - _position: {x: 0, y: 0.5, z: 0}
-    _normal: {x: 0, y: 1, z: 0}
-    _tag: {fileID: 11400000, guid: 9780612eeb15ddb4e872a9faa88ec63a, type: 2}
-  - _position: {x: -0.3, y: 0.5, z: 0}
-    _normal: {x: -1, y: 0, z: 0}
-    _tag: {fileID: 11400000, guid: 1ff08b80b7b3bd742af5255242f014b3, type: 2}
-  - _position: {x: 0.2, y: 0.5, z: 0}
-    _normal: {x: 1, y: 0, z: 0}
-    _tag: {fileID: 11400000, guid: 283e38cd9ded3fe4190c65370ec14be0, type: 2}
-  - _position: {x: -0.12, y: -0.3, z: 0}
-    _normal: {x: 0, y: -1, z: 0}
-    _tag: {fileID: 11400000, guid: fb69546f865b0a7489a6e04e9bf3cad9, type: 2}
-  - _position: {x: 0.21, y: -0.3, z: 0}
-    _normal: {x: 0, y: -1, z: 0}
-    _tag: {fileID: 11400000, guid: a4f3c7a9ac7c9eb44ac8fcc8cf7ad835, type: 2}
 --- !u!114 &787205705335210789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,17 +106,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ModulePortSetup
   _portsInfos:
   - _position: {x: 0, y: 0.5, z: 0}
-    _normal: {x: 0, y: 1, z: 0}
+    _eulerZRotation: 90
     _tag: {fileID: 11400000, guid: 9780612eeb15ddb4e872a9faa88ec63a, type: 2}
   - _position: {x: -0.3, y: 0.5, z: 0}
-    _normal: {x: -1, y: 0, z: 0}
+    _eulerZRotation: 180
     _tag: {fileID: 11400000, guid: 1ff08b80b7b3bd742af5255242f014b3, type: 2}
   - _position: {x: 0.2, y: 0.5, z: 0}
-    _normal: {x: 1, y: 0, z: 0}
+    _eulerZRotation: 0
     _tag: {fileID: 11400000, guid: 283e38cd9ded3fe4190c65370ec14be0, type: 2}
   - _position: {x: -0.12, y: -0.3, z: 0}
-    _normal: {x: 0, y: -1, z: 0}
+    _eulerZRotation: -90
     _tag: {fileID: 11400000, guid: fb69546f865b0a7489a6e04e9bf3cad9, type: 2}
   - _position: {x: 0.21, y: -0.3, z: 0}
-    _normal: {x: 0, y: -1, z: 0}
-    _tag: {fileID: 11400000, guid: a4f3c7a9ac7c9eb44ac8fcc8cf7ad835, type: 2}
+    _eulerZRotation: -90
+    _tag: {fileID: 0}

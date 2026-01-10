@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using IM.Commands;
 
 namespace IM.Graphs

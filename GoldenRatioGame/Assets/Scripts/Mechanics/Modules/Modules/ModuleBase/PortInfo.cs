@@ -7,11 +7,11 @@ namespace IM.Modules
     public class PortInfo
     {
         [SerializeField] private Vector3 _position;
-        [SerializeField] private Vector3 _normal;
+        [SerializeField] private float _eulerZRotation;
         [SerializeField] private LazyTag _tag;
         
         public Vector3 Position => _position;
-        public Vector3 Normal => _normal;
+        public float EulerZRotation => _eulerZRotation;
         public ITag Tag => (ITag)_tag ?? new EmptyTag();
     }
 }

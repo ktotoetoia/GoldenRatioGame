@@ -55,7 +55,7 @@ namespace IM.Visuals
 
                 transform.LocalPosition = portInfo.Position;
                 transform.LocalScale = Vector3.one;
-                transform.LocalRotation = Quaternion.LookRotation(portInfo.Normal, Vector3.up);
+                transform.LocalRotation = Quaternion.Euler(0f, 0f, portInfo.EulerZRotation);
                 
                 animationModule.AddPort(transformPort);
                 visualPortMap[port] = transformPort;

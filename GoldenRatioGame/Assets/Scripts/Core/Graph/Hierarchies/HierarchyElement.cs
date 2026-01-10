@@ -31,7 +31,7 @@ namespace IM.Graphs
             if (child == null || child == this || _children.Contains(child))
                 return;
 
-            if (_traversal.HasPathTo(child, this))
+            if (_traversal.HasPath(child, this))
                 throw new InvalidOperationException("Hierarchy cycle detected.");
             
 
@@ -63,7 +63,7 @@ namespace IM.Graphs
             if (Parent == newParent)
                 return;
 
-            if (newParent != null && _traversal.HasPathTo(newParent, this))
+            if (newParent != null && _traversal.HasPath(newParent, this))
                 throw new InvalidOperationException("Hierarchy cycle detected.");
 
             Parent?.RemoveChildInternal(this);

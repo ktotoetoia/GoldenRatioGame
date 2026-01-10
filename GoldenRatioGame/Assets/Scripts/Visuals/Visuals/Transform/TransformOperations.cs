@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace IM.Visuals
@@ -80,28 +81,7 @@ namespace IM.Visuals
                 target.LocalRotation = localRot;
             }
         }
-
-        /// <summary>
-        /// Batch SetLocalFromWorld for multiple targets using the same parent.
-        /// </summary>
-        public static void SetLocalFromWorlds(
-            IEnumerable<ITransform> targets,
-            IEnumerable<(Vector3 pos, Vector3 scale, Quaternion rot)> worlds,
-            ITransformReadOnly parent)
-        {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
-            if (worlds == null) throw new ArgumentNullException(nameof(worlds));
-
-            using (var tEnum = targets.GetEnumerator())
-            using (var wEnum = worlds.GetEnumerator())
-            {
-                while (tEnum.MoveNext() && wEnum.MoveNext())
-                {
-                    SetLocalFromWorld(tEnum.Current, wEnum.Current.pos, wEnum.Current.scale, wEnum.Current.rot, parent);
-                }
-            }
-        }
-
+        
         /// <summary>
         /// Compute local rotation that would produce the given world rotation under parent.
         /// Returns worldRotation unchanged if parent == null.

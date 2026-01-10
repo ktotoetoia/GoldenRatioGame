@@ -5,25 +5,25 @@ namespace IM.Visuals
 {
     public class TransformConnection : ITransformConnection
     {
-        public INode Node1 => Output.Module;
-        public INode Node2 => Input.Module;
+        public INode Node1 => Port2.Module;
+        public INode Node2 => Port1.Module;
 
-        public ITransformPort Output { get; }
-        public ITransformPort Input { get; }
+        public ITransformPort Port2 { get; }
+        public ITransformPort Port1 { get; }
 
-        IPort IConnection.Port1 => Input;
-        IPort IConnection.Port2 => Output;
+        IPort IConnection.Port1 => Port1;
+        IPort IConnection.Port2 => Port2;
 
         public TransformConnection(ITransformPort output, ITransformPort input)
         {
-            Output = output;
-            Input = input;
+            Port2 = output;
+            Port1 = input;
         }
 
         public IPort GetOtherPort(IPort port)
         {
-            if(Input== port) return Output;
-            if(Output == port) return Input;
+            if(Port1== port) return Port2;
+            if(Port2 == port) return Port1;
             
             throw new Exception("Port is not a part of this connection");
         }

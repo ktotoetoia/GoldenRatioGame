@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Linq;
 using IM.Graphs;
-using IM.Modules;
 using IM.Movement;
-using TDS.Events;
-using TDS.Handlers;
 using UnityEngine;
 
 namespace IM.Visuals

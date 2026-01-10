@@ -1,5 +1,4 @@
 ﻿using IM.Graphs;
-using UnityEngine;
 
 namespace IM.Visuals
 {

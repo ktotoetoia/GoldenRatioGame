@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace IM.Visuals
+﻿namespace IM.Visuals
 {
     public enum AnimationChangeType
     {

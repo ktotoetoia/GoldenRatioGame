@@ -4,7 +4,7 @@ namespace IM.Visuals
 {
     public interface ITransformConnection : IConnection
     {
-        new ITransformPort Input { get; }
-        new ITransformPort Output { get; }   
+        new ITransformPort Port1 { get; }
+        new ITransformPort Port2 { get; }   
     }
 }

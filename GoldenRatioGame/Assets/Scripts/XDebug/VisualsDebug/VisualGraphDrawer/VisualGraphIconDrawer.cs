@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace IM.Visuals.Debug
@@ -42,8 +41,8 @@ namespace IM.Visuals.Debug
         private void DrawConnection(ITransformConnection connection)
         {
             Gizmos.color = Color.cyan;
-            Vector3 from = connection.Output.Transform.Position;
-            Vector3 to = connection.Input.Transform.Position;
+            Vector3 from = connection.Port2.Transform.Position;
+            Vector3 to = connection.Port1.Transform.Position;
             Gizmos.DrawLine(from, to);
         }
 

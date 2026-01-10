@@ -16,7 +16,7 @@
 
         public bool CanConnect(IPort output, IPort input)
         {
-            return !_traversal.HasPathTo(output.Module,input.Module) && !_traversal.HasPathTo(input.Module,output.Module);
+            return !_traversal.HasPath(output.Module,input.Module) && !_traversal.HasPath(input.Module,output.Module);
         }
 
         public bool CanDisconnect(IConnection connection)
