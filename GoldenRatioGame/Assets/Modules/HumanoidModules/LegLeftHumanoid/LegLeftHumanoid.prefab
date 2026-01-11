@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6607928970512855544, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: _portsInfos.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -6607928970512855544, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: _portsInfos.Array.data[0]._tag

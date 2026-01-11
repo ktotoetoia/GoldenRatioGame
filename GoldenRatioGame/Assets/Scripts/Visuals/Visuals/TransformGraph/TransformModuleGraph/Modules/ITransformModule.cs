@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using IM.Graphs;
+using IM.Transforms;
 
 namespace IM.Visuals
 {
     public interface ITransformModule : IModule, IDisposable
     {
-        IHierarchyTransformReadOnly HierarchyTransform { get; }
+        IHierarchyTransform HierarchyTransform { get; }
         
         new IEnumerable<ITransformPort> Ports { get; }
     }

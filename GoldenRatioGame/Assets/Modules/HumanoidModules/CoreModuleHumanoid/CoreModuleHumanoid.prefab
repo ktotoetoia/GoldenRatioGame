@@ -119,4 +119,4 @@ MonoBehaviour:
     _tag: {fileID: 11400000, guid: fb69546f865b0a7489a6e04e9bf3cad9, type: 2}
   - _position: {x: 0.21, y: -0.3, z: 0}
     _eulerZRotation: -90
-    _tag: {fileID: 0}
+    _tag: {fileID: 11400000, guid: a4f3c7a9ac7c9eb44ac8fcc8cf7ad835, type: 2}

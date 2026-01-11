@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-namespace IM.Visuals
+namespace IM.Transforms
 {
     public static class TransformOperations
     {

@@ -2,7 +2,7 @@
 using IM.Graphs;
 using UnityEngine;
 
-namespace IM.Visuals
+namespace IM.Transforms
 {
     public class HierarchyTransform : HierarchyElement, IHierarchyTransform
     {

@@ -25,7 +25,6 @@ namespace IM.Modules
         [SerializeField] private Color _modeColor  = Color.cyan;
         [SerializeField] private Color _rootColor  = Color.yellow;
         [SerializeField] private Color _edgeColor  = Color.white;
-        
         [SerializeField] private bool _drawLabels = true;
 
         private void Awake()

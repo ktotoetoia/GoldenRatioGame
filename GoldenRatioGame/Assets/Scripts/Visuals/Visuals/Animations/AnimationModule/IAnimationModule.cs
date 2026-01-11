@@ -1,21 +1,20 @@
-﻿using IM.Graphs;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace IM.Visuals
 {
-    public interface IAnimationModule : INameModule
+    public interface IAnimationModule : IPortTransformModule
     {
         Animator Animator { get; }
     }
 
-    public interface INameModule : ITransformModule
+    public interface IPortTransformModule : ITransformModule
     {
-        IModuleTransformChanger TransformChanger { get; set; }
+        IPortTransformChanger TransformChanger { get; set; }
     }
 
-    public interface IModuleTransformChanger
+    public interface IPortTransformChanger
     {
-        void TranslatePort(ITransformPort port, Vector3 displacement);
-        void RotatePort(ITransformPort port, float zRotation);
+        void SetPortPosition(ITransformPort port, Vector3 newPosition);
+        void SetPortRotation(ITransformPort port, float zRotation);
     }
 }

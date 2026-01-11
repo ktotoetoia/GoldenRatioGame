@@ -1,7 +1,7 @@
 ﻿using IM.Graphs;
 using UnityEngine;
 
-namespace IM.Visuals
+namespace IM.Transforms
 {
     public interface IHierarchyTransform : IHierarchyTransformReadOnly, ITransform, IHierarchyElement
     {

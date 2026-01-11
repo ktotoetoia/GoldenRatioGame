@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
+using IM.Transforms;
 using UnityEngine;
 
 namespace IM.Visuals
@@ -21,7 +21,7 @@ namespace IM.Visuals
         public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection);
         public IEnumerable<ITransformPort> Ports => _ports;
         IEnumerable<IPort> IModule.Ports => _ports;
-        public IHierarchyTransformReadOnly HierarchyTransform => _hierarchyTransform;
+        public IHierarchyTransform HierarchyTransform => _hierarchyTransform;
 
         private void Awake()
         {
@@ -32,14 +32,14 @@ namespace IM.Visuals
         
         public void AddPort(ITransformPort port) => _ports.Add(port);
         public void Dispose() => Destroy(gameObject);
-        public IModuleTransformChanger TransformChanger { get; set; }
+        public IPortTransformChanger TransformChanger { get; set; }
 
         private void Update()
         {
             if(!_isUsing) return;
             
-            TransformChanger?.TranslatePort(_ports[_portNumber],_position);
-            TransformChanger?.RotatePort(_ports[_portNumber],_rotation);
+            TransformChanger?.SetPortPosition(_ports[_portNumber],_position);
+            TransformChanger?.SetPortRotation(_ports[_portNumber],_rotation);
         }
     }
 }

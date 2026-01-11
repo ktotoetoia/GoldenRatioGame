@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using IM.Graphs;
+using IM.Transforms;
 
 namespace IM.Visuals
 {

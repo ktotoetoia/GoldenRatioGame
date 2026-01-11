@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using IM.Graphs;
+using IM.Transforms;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace IM.Visuals
 {
-    public class TransformGraphStructureBuilder : IModuleGraphObserver,IModuleTransformChanger
+    public class TransformGraphStructureBuilder : IModuleGraphObserver,IPortTransformChanger
     {
         private readonly List<ITransformModule> _transformModules = new();
         private readonly IHierarchyTransform _globalTransform;
@@ -27,68 +26,37 @@ namespace IM.Visuals
 
         public void OnModuleAdded(IModule addedModule)
         {
-            if(addedModule is not INameModule module) 
-                throw new ArgumentException($"this observer only supports ITransformModule");
+            if(addedModule is not IPortTransformModule module) 
+                throw new ArgumentException("this observer only supports ITransformModule");
             if (_transformModules.Contains(module))
                 throw new ArgumentException($"module ({module}) was already added to structure builder");
             module.TransformChanger = this;
             _transformModules.Add(module);
-            _globalTransform.AddChild(module.HierarchyTransform as IHierarchyTransform);
+            _globalTransform.AddChild(module.HierarchyTransform);
         }
 
         public void OnModuleRemoved(IModule removedModule)
         {
-            if(removedModule is not INameModule module) 
-                throw new ArgumentException($"this observer only supports ITransformModule");
+            if(removedModule is not IPortTransformModule module) 
+                throw new ArgumentException("this observer only supports ITransformModule");
             module.TransformChanger = null;
             
             _transformModules.Remove(module);
-            _globalTransform.RemoveChild(module.HierarchyTransform as IHierarchyTransform);
+            _globalTransform.RemoveChild(module.HierarchyTransform);
         }
 
         public void OnConnected(IConnection connection)
         {            
             if(connection.Port1 is not ITransformPort input || connection.Port2 is not ITransformPort output)
-                throw new ArgumentException($"this observer only supports ITransformPort");
+                throw new ArgumentException("this observer only supports ITransformPort");
             
             AlignPorts(input, output);
-        }
-
-        public void TranslatePort(ITransformPort port, Vector3 displacement)
-        {
-            (port.Transform as ITransform).Position += displacement;
-            
-            AlignSubtree(port);
-        }
-        
-        public void RotatePort(ITransformPort port, float zRotation)
-        {
-            (port.Transform as ITransform).LocalRotation = Quaternion.Euler(0,0,zRotation);
-            
-            AlignSubtree(port);
-        }
-
-        private void AlignSubtree(ITransformPort port)
-        {
-            foreach ((ITransformModule module, ITransformPort via)  in _traversal.EnumerateModulesAlongConnection<ITransformModule, ITransformPort>(port))
-            {
-                AlignPorts(via,via.Connection.GetOtherPort(via) as ITransformPort);
-            }
-        }
-        private void AlignAll()
-        {
-            foreach ((ITransformModule module, ITransformPort via)  in _traversal.EnumerateModules<ITransformModule, ITransformPort>(_transformModules.FirstOrDefault()))
-            {
-                if(via == null || via.Connection == null) continue;
-                
-                AlignPorts(via,via.Connection.GetOtherPort(via) as ITransformPort);
-            }
         }
         
         private void AlignPorts(ITransformPort input, ITransformPort output)
         {
-            IHierarchyTransform inputT = (IHierarchyTransform)input.Module.HierarchyTransform;
-            IHierarchyTransform outputT = (IHierarchyTransform)output.Module.HierarchyTransform;
+            IHierarchyTransform inputT = input.Module.HierarchyTransform;
+            IHierarchyTransform outputT = output.Module.HierarchyTransform;
 
             Vector3 inputLocal = Vector3.Scale(input.Transform.LocalPosition, inputT.LossyScale);
             Vector3 outputLocal = Vector3.Scale(output.Transform.LocalPosition, outputT.LossyScale);
@@ -120,10 +88,27 @@ namespace IM.Visuals
         {
             
         }
-
-        public void SetPortLocal(IPort port, Vector3 localPosition)
+        
+        public void SetPortPosition(ITransformPort port, Vector3 newPosition)
         {
-            throw new NotImplementedException();
+            port.Transform.Position = newPosition;
+            
+            AlignSubtree(port);
+        }
+        
+        public void SetPortRotation(ITransformPort port, float zRotation)
+        {
+            port.Transform.LocalRotation = Quaternion.Euler(0,0,zRotation);
+            
+            AlignSubtree(port);
+        }
+
+        private void AlignSubtree(ITransformPort port)
+        {
+            foreach ((ITransformModule module, ITransformPort via)  in _traversal.EnumerateModulesAlongConnection<ITransformModule, ITransformPort>(port))
+            {
+                AlignPorts(via,via.Connection.GetOtherPort(via) as ITransformPort);
+            }
         }
     }
 }

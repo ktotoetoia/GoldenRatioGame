@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using IM.Graphs;
 using IM.Modules;
+using IM.Transforms;
 using UnityEngine;
 
 namespace IM.Visuals
@@ -51,7 +52,7 @@ namespace IM.Visuals
                 IHierarchyTransform transform = new HierarchyTransform();
                 ITransformPort transformPort = new TransformPort(animationModule, transform);
                 
-                (animationModule.HierarchyTransform as IHierarchyTransform).AddChild(transform);
+                animationModule.HierarchyTransform.AddChild(transform);
 
                 transform.LocalPosition = portInfo.Position;
                 transform.LocalScale = Vector3.one;

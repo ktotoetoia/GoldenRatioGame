@@ -1,4 +1,5 @@
 ﻿using IM.Graphs;
+using IM.Transforms;
 
 namespace IM.Visuals
 {
@@ -9,7 +10,7 @@ namespace IM.Visuals
         public ITransformConnection Connection { get; private set; }
         IConnection IPort.Connection => Connection;
         public bool IsConnected => Connection != null;
-        public IHierarchyTransformReadOnly Transform { get; }
+        public IHierarchyTransform Transform { get; }
 
         public TransformPort(ITransformModule module) : this(module, new HierarchyTransform())
         {

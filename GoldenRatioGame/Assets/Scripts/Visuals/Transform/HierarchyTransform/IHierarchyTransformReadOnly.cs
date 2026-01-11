@@ -1,6 +1,6 @@
 ﻿using IM.Graphs;
 
-namespace IM.Visuals
+namespace IM.Transforms
 {
     public interface IHierarchyTransformReadOnly : ITransformReadOnly, IHierarchyElementReadOnly
     {

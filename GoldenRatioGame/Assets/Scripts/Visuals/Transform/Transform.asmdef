@@ -1,13 +1,8 @@
 {
-    "name": "Visuals",
+    "name": "Transform",
     "rootNamespace": "",
     "references": [
-        "GUID:8b31c08b0b931e4429f3b97ac0400ee9",
-        "GUID:9bf81f7bcd64f4f45818fc5a123cb397",
-        "GUID:3af9ee6c1821deb43baf0b4e8dd273c3",
-        "GUID:3626ecde29ce49d4c88e80cbd9ce6a67",
-        "GUID:1dee8d5f378a1b541bcb58c14825461d",
-        "GUID:acd84d4bbc3005442b548f446825555c"
+        "GUID:8b31c08b0b931e4429f3b97ac0400ee9"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

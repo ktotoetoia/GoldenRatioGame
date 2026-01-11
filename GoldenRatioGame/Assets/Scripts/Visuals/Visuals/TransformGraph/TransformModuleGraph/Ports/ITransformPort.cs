@@ -1,10 +1,11 @@
 ﻿using IM.Graphs;
+using IM.Transforms;
 
 namespace IM.Visuals
 {
     public interface ITransformPort : IPort
     {
-        IHierarchyTransformReadOnly Transform { get; }
+        IHierarchyTransform Transform { get; }
         new ITransformModule Module { get; }
         new ITransformConnection Connection { get; }
     }
