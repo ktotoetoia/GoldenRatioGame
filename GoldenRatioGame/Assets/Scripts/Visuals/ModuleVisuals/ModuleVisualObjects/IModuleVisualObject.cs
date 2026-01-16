@@ -5,10 +5,12 @@ using IM.Transforms;
 
 namespace IM.Visuals
 {
-    public interface IModuleVisualObject : IDisposable
+    public interface IModuleVisualObject : IVisualObject,IDisposable
     {
         IModule Owner { get; }
         IHierarchyTransform Transform { get; }
         IReadOnlyDictionary<IPort, IHierarchyTransform>  PortsTransforms { get; }
+        
+        void ResetTransform();
     }
 }

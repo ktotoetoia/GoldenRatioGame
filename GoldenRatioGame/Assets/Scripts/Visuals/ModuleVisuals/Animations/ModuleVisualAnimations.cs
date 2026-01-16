@@ -17,7 +17,7 @@ namespace IM.Visuals
 
         private void Update()
         {
-            if(_moduleVisual is not { ModuleVisualObject: IModuleVisualObjectAnimated animated }) return;
+            if(_moduleVisual is not { ReferenceModuleVisualObject: IModuleVisualObjectAnimated animated }) return;
 
             foreach (IAnimationChange animationChange in _animationChange)
             {

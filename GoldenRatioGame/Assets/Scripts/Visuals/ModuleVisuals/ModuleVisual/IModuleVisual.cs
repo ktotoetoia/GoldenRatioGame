@@ -4,9 +4,9 @@ namespace IM.Visuals
 {
     public interface IModuleVisual : IModuleExtension
     {
-        IModuleVisualObject ModuleVisualObject { get; }
+        IModuleVisualObject ReferenceModuleVisualObject { get; }
         IIcon Icon { get; }
         
-        void ResetReferenceModule();
+        IModuleVisualObject CreateModuleVisualObject();
     }
 }

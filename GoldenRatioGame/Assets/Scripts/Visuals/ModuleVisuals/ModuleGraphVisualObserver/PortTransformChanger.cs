@@ -21,8 +21,8 @@ namespace IM.Visuals
         {
             if (Input.GetKeyDown(KeyCode.L))
             {
-                IPort port = _moduleVisual.ModuleVisualObject.Owner.Ports.ElementAt(_port);
-                _moduleVisual.ModuleVisualObject.PortsTransforms[port].LocalPosition = _newPosition;
+                IPort port = _moduleVisual.ReferenceModuleVisualObject.Owner.Ports.ElementAt(_port);
+                _moduleVisual.ReferenceModuleVisualObject.PortsTransforms[port].LocalPosition = _newPosition;
                 ModuleGraphStructureUpdater.OnPortTransformChanged(port);
             }
         }

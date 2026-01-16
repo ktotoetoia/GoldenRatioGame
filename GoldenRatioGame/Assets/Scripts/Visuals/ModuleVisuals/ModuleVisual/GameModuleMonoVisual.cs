@@ -12,22 +12,16 @@ namespace IM.Visuals
         [SerializeField] private Icon _icon;
         private ModulePortSetup _portSetup;
         
-        public IModuleVisualObject ModuleVisualObject { get; private set; }
+        public IModuleVisualObject ReferenceModuleVisualObject { get; private set; }
         public IIcon Icon => _icon;
-
+        
         private void Awake()
         {
             _portSetup = GetComponent<ModulePortSetup>();
+            ReferenceModuleVisualObject = CreateModuleVisualObject();
         }
         
-        public void ResetReferenceModule()
-        {
-            ModuleVisualObject?.Dispose();
-
-            ModuleVisualObject = CreateAnimationModuleCopy();
-        }
-
-        private ModuleVisualObject CreateAnimationModuleCopy()
+        public IModuleVisualObject CreateModuleVisualObject()
         {
             ModuleVisualObject moduleVisualObject = Instantiate(_visualPrefab,transform).GetComponent<ModuleVisualObject>();
             moduleVisualObject.Owner = GetComponent<IModule>();

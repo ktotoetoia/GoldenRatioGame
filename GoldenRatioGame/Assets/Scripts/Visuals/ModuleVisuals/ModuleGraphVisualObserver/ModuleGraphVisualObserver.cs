@@ -15,18 +15,17 @@ namespace IM.Visuals
         private readonly ITraversal _traversal = new BreadthFirstTraversal();
         private ModuleGraphSnapshotDiffer _graphSnapshotDiffer;
         private IVectorMovement _vectorMovement;
-
-        public ITransform GlobalTransform => _globalTransform;
         
+        private ModuleGraphSnapshotDiffer GraphSnapshotDiffer => _graphSnapshotDiffer??= new ModuleGraphSnapshotDiffer()
+        {
+            OnModuleAdded = OnModuleAdded,
+            OnModuleRemoved = OnModuleRemoved,
+            OnConnected = OnConnected,
+        };
+
         private void Awake()
         {
             _vectorMovement = GetComponent<IVectorMovement>();
-            _graphSnapshotDiffer = new ModuleGraphSnapshotDiffer()
-            {
-                OnModuleAdded = OnModuleAdded,
-                OnModuleRemoved = OnModuleRemoved,
-                OnConnected = OnConnected,
-            };
         }
 
         private void Update()
@@ -39,7 +38,7 @@ namespace IM.Visuals
 
         public void OnGraphUpdated(IModuleGraphReadOnly graph)
         {
-            _graphSnapshotDiffer.OnGraphUpdated(graph);
+            GraphSnapshotDiffer.OnGraphUpdated(graph);
         }
         
         private void OnModuleAdded(IModule addedModule)
@@ -47,34 +46,41 @@ namespace IM.Visuals
             if(addedModule is not IGameModule module) 
                 throw new ArgumentException("this observer only supports IGameModule");
             if (_transformModules.Contains(module))
-                throw new ArgumentException($"module ({module}) was already added to structure builder");
+                throw new ArgumentException($"module ({module}) was already added to observer");
             
             _transformModules.Add(module);
-            module.Extensions.GetExtension<IModuleVisual>().ResetReferenceModule();
-            if(module.Extensions.TryGetExtension(out IPortTransformChanger changer)) changer.ModuleGraphStructureUpdater = this;
-            _globalTransform.AddChild(module.Extensions.GetExtension<IModuleVisual>().ModuleVisualObject.Transform);
+            
+            if(module.Extensions.TryGetExtension(out IPortTransformChanger changer)) 
+                changer.ModuleGraphStructureUpdater = this;
+
+            module.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.Visibility = true;
+            _globalTransform.AddChildKeepLocal(module.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.Transform);
         }
 
-        public void OnModuleRemoved(IModule removedModule)
+        private void OnModuleRemoved(IModule removedModule)
         {
             if(removedModule is not IGameModule module) 
                 throw new ArgumentException("this observer only supports IGameModule");
+            if(!_transformModules.Remove(module))
+                throw new ArgumentException($"module ({module}) was not added to observer");
             
-            _transformModules.Remove(module);
-            if(module.Extensions.TryGetExtension(out IPortTransformChanger changer)) changer.ModuleGraphStructureUpdater = null;
-            _globalTransform.RemoveChild(module.Extensions.GetExtension<IModuleVisual>().ModuleVisualObject.Transform);
+            if(module.Extensions.TryGetExtension(out IPortTransformChanger changer)) 
+                changer.ModuleGraphStructureUpdater = null;
+
+            module.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.Visibility = false;
+            _globalTransform.RemoveChild(module.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.Transform);
         }
 
         private void OnConnected(IConnection connection)
         {
             if(connection.Port1.Module is not IGameModule module1 ||  connection.Port2.Module is not IGameModule module2)
-                throw new ArgumentException("this observer only supports ITransformPort");
+                throw new ArgumentException("this observer only supports IGameModule");
 
             AlignPorts(
-                module1.Extensions.GetExtension<IModuleVisual>().ModuleVisualObject.PortsTransforms[connection.Port1],
-                module2.Extensions.GetExtension<IModuleVisual>().ModuleVisualObject.PortsTransforms[connection.Port2],
-                module1.Extensions.GetExtension<IModuleVisual>().ModuleVisualObject.Transform,
-                module2.Extensions.GetExtension<IModuleVisual>().ModuleVisualObject.Transform);
+                module1.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.PortsTransforms[connection.Port1],
+                module2.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.PortsTransforms[connection.Port2],
+                module1.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.Transform,
+                module2.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.Transform);
         }
 
         public void OnPortTransformChanged(IPort port)
@@ -90,10 +96,10 @@ namespace IM.Visuals
                 IModuleVisual toVisualExt = otherModule.Extensions.GetExtension<IModuleVisual>();
                 if (toVisualExt == null) continue;
 
-                if (!fromVisualExt.ModuleVisualObject.PortsTransforms.TryGetValue(via, out var fromPortTransform)) continue;
-                if (!toVisualExt.ModuleVisualObject.PortsTransforms.TryGetValue(otherPort, out var toPortTransform)) continue;
+                if (!fromVisualExt.ReferenceModuleVisualObject.PortsTransforms.TryGetValue(via, out var fromPortTransform)) continue;
+                if (!toVisualExt.ReferenceModuleVisualObject.PortsTransforms.TryGetValue(otherPort, out var toPortTransform)) continue;
 
-                AlignPorts(toPortTransform, fromPortTransform, toVisualExt.ModuleVisualObject.Transform,fromVisualExt.ModuleVisualObject.Transform);
+                AlignPorts(toPortTransform, fromPortTransform, toVisualExt.ReferenceModuleVisualObject.Transform,fromVisualExt.ReferenceModuleVisualObject.Transform);
             }
         }
         

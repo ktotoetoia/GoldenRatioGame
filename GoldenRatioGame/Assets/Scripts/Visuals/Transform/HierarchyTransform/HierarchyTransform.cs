@@ -104,7 +104,7 @@ namespace IM.Transforms
                 NotifyWorldChanges(oldWorld, newWorld);
             }
         }
-
+        
         private void ApplyLocalChangeAndNotify(Action applyLocalChange)
         {
             TransformReadOnly before = GetWorldSnapshot();
@@ -216,7 +216,23 @@ namespace IM.Transforms
 
             PropagateWorldToChildren();
         }
+        
+        public void AddChildKeepLocal(IHierarchyTransform child)
+        {
+            if (child == null || child == this)
+                return;
 
+            Vector3 localPos = child.LocalPosition;
+            Vector3 localScale = child.LocalScale;
+            Quaternion localRot = child.LocalRotation;
+
+            AddChild(child);
+
+            child.LocalPosition = localPos;
+            child.LocalScale = localScale;
+            child.LocalRotation = localRot;
+        }
+        
         protected override void OnChildAdded(IHierarchyElement child)
         {
             if (child is IHierarchyTransform t)
