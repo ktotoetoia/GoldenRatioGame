@@ -7,7 +7,6 @@ namespace IM.Abilities
     {
         private readonly string _textToLog;
         
-
         public KeyCode Key { get; set; } = KeyCode.G;
         public ICooldownReadOnly Cooldown { get; }
         public bool IsBeingUsed => false;

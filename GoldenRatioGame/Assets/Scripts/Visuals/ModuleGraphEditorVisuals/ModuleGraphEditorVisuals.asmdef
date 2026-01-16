@@ -1,0 +1,18 @@
+{
+    "name": "ModuleGraphEditorVisuals",
+    "rootNamespace": "",
+    "references": [
+        "GUID:8b31c08b0b931e4429f3b97ac0400ee9",
+        "GUID:033dc73b24732d34fa710de1693ded1a",
+        "GUID:3af9ee6c1821deb43baf0b4e8dd273c3"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

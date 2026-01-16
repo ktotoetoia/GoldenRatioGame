@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 99
+  controlID: 45
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -255,7 +255,7 @@ MonoBehaviour:
   - {fileID: 18}
   - {fileID: 19}
   m_Selected: 0
-  m_LastSelected: 1
+  m_LastSelected: 2
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -432,7 +432,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 79
+    y: 24
     width: 384
     height: 913
   m_SerializedDataModeController:
@@ -497,8 +497,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 385
-    y: 79
+    x: 386
+    y: 24
     width: 1512
     height: 913
   m_SerializedDataModeController:
@@ -1266,7 +1266,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 1018
+    y: 963
     width: 1898
     height: 336
   m_SerializedDataModeController:
@@ -1310,7 +1310,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 79}
     m_SelectedIDs: 58bb0000
     m_LastClickedID: 47960
-    m_ExpandedIDs: 0000000058bb00005abb00005cbb00005ebb000060bb000062bb000064bb000066bb000068bb00006abb00006cbb00006ebb000070bb000072bb0000c8bc0000e0bc000000ca9a3b
+    m_ExpandedIDs: 0000000058bb00005abb00005cbb00005ebb000060bb000062bb000064bb000066bb000068bb00006abb00006cbb00006ebb000070bb000072bb0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1367,7 +1367,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300007ebb0000a4ba0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1491,8 +1491,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1899
-    y: 79
+    x: 1900
+    y: 24
     width: 660
     height: 1275
   m_SerializedDataModeController:
