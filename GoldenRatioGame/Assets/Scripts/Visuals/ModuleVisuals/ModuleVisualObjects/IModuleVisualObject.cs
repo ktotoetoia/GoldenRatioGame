@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using IM.Graphs;
 using IM.Transforms;
 
 namespace IM.Visuals
 {
-    public interface IModuleVisualObject : IVisualObject,IDisposable
+    public interface IModuleVisualObject : IVisualObject
     {
         IModule Owner { get; }
         IHierarchyTransform Transform { get; }
-        IReadOnlyDictionary<IPort, IHierarchyTransform>  PortsTransforms { get; }
+        IReadOnlyList<IPortVisualObject> PortsVisuals { get; }
+        
+        IPortVisualObject GetPortVisual(IPort port);
         
         void ResetTransform();
     }

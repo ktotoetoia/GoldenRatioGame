@@ -22,7 +22,7 @@ namespace IM.Visuals
             if (Input.GetKeyDown(KeyCode.L))
             {
                 IPort port = _moduleVisual.ReferenceModuleVisualObject.Owner.Ports.ElementAt(_port);
-                _moduleVisual.ReferenceModuleVisualObject.PortsTransforms[port].LocalPosition = _newPosition;
+                _moduleVisual.ReferenceModuleVisualObject.GetPortVisual(port).Transform.LocalPosition = _newPosition;
                 ModuleGraphStructureUpdater.OnPortTransformChanged(port);
             }
         }

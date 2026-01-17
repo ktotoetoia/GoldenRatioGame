@@ -77,10 +77,8 @@ namespace IM.Visuals
                 throw new ArgumentException("this observer only supports IGameModule");
 
             AlignPorts(
-                module1.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.PortsTransforms[connection.Port1],
-                module2.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.PortsTransforms[connection.Port2],
-                module1.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.Transform,
-                module2.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.Transform);
+                module1.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.GetPortVisual(connection.Port1),
+                module2.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.GetPortVisual(connection.Port2));
         }
 
         public void OnPortTransformChanged(IPort port)
@@ -92,43 +90,43 @@ namespace IM.Visuals
 
                 IPort otherPort = via.Connection.GetOtherPort(via);
                 if (otherPort?.Module is not IGameModule otherModule) continue;
-
+                
                 IModuleVisual toVisualExt = otherModule.Extensions.GetExtension<IModuleVisual>();
                 if (toVisualExt == null) continue;
 
-                if (!fromVisualExt.ReferenceModuleVisualObject.PortsTransforms.TryGetValue(via, out var fromPortTransform)) continue;
-                if (!toVisualExt.ReferenceModuleVisualObject.PortsTransforms.TryGetValue(otherPort, out var toPortTransform)) continue;
+                if (fromVisualExt.ReferenceModuleVisualObject.GetPortVisual(via) is not { } fromPortVisual) continue;
+                if (toVisualExt.ReferenceModuleVisualObject.GetPortVisual(otherPort) is not { } toPortVisual) continue;
 
-                AlignPorts(toPortTransform, fromPortTransform, toVisualExt.ReferenceModuleVisualObject.Transform,fromVisualExt.ReferenceModuleVisualObject.Transform);
+                AlignPorts(toPortVisual, fromPortVisual);
             }
         }
         
-        private void AlignPorts(ITransformReadOnly moduleToMoveTransform, ITransformReadOnly anchorPortTransform, ITransform moduleToMove, ITransformReadOnly anchorModule)
+        private void AlignPorts(IPortVisualObject portToMove, IPortVisualObject anchorPort)
         {
-            Vector3 inputLocal = Vector3.Scale(moduleToMoveTransform.LocalPosition, moduleToMove.LossyScale);
-            Vector3 outputLocal = Vector3.Scale(anchorPortTransform.LocalPosition, anchorModule.LossyScale);
+            Vector3 inputLocal = Vector3.Scale(portToMove.Transform.LocalPosition, portToMove.OwnerVisualObject.Transform.LossyScale);
+            Vector3 outputLocal = Vector3.Scale(anchorPort.Transform.LocalPosition, anchorPort.OwnerVisualObject.Transform.LossyScale);
 
             Vector3 outputWorldPos =
-                anchorModule.Position + anchorModule.Rotation * outputLocal;
+                anchorPort.OwnerVisualObject.Transform.Position + anchorPort.OwnerVisualObject.Transform.Rotation * outputLocal;
 
             float inputWorldZ =
-                (moduleToMove.Rotation * moduleToMoveTransform.LocalRotation).eulerAngles.z;
+                (portToMove.OwnerVisualObject.Transform.Rotation * portToMove.Transform.LocalRotation).eulerAngles.z;
 
             float outputWorldZ =
-                (anchorModule.Rotation * anchorPortTransform.LocalRotation).eulerAngles.z;
+                (anchorPort.OwnerVisualObject.Transform.Rotation * anchorPort.Transform.LocalRotation).eulerAngles.z;
 
             float desiredInputWorldZ = outputWorldZ + 180f;
 
             float deltaZ = Mathf.DeltaAngle(inputWorldZ, desiredInputWorldZ);
 
-            float newInputWorldZ = moduleToMove.Rotation.eulerAngles.z + deltaZ;
+            float newInputWorldZ = portToMove.OwnerVisualObject.Transform.Rotation.eulerAngles.z + deltaZ;
             Quaternion desiredRotation = Quaternion.Euler(0f, 0f, newInputWorldZ);
 
             Vector3 rotatedInputLocal = desiredRotation * inputLocal;
             Vector3 desiredPosition = outputWorldPos - rotatedInputLocal;
 
-            moduleToMove.Position = desiredPosition;
-            moduleToMove.Rotation = desiredRotation;
+            portToMove.OwnerVisualObject.Transform.Position = desiredPosition;
+            portToMove.OwnerVisualObject.Transform.Rotation = desiredRotation;
         }
     }
 }

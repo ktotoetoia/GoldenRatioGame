@@ -176,7 +176,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArmRightHumanoid
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -2333933364575743899, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

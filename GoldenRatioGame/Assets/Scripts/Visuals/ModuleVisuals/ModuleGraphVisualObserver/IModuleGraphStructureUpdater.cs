@@ -1,5 +1,4 @@
-﻿using System;
-using IM.Graphs;
+﻿using IM.Graphs;
 
 namespace IM.Visuals
 {

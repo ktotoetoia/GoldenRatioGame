@@ -25,6 +25,7 @@ namespace IM.Visuals
         {
             ModuleVisualObject moduleVisualObject = Instantiate(_visualPrefab,transform).GetComponent<ModuleVisualObject>();
             moduleVisualObject.Owner = GetComponent<IModule>();
+            moduleVisualObject.AnimationChanges = GetComponents<IAnimationChange>();
             
             foreach ((IPort port, PortInfo portInfo) in _portSetup.PortsInfos)
             {
@@ -34,7 +35,7 @@ namespace IM.Visuals
                 portTransform.LocalScale = Vector3.one;
                 portTransform.LocalRotation = Quaternion.Euler(0f, 0f, portInfo.EulerZRotation);
                 
-                moduleVisualObject.AddPort(port,portTransform);
+                moduleVisualObject.AddPort(new PortVisualObject(moduleVisualObject,port, portTransform));
             }
             
             return moduleVisualObject;
