@@ -176,9 +176,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1544099887957844428}
-    - targetCorrespondingSourceObject: {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -4125236648327191420}
   m_SourcePrefab: {fileID: 100100000, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
 --- !u!1 &7210977406679086040 stripped
 GameObject:
@@ -199,17 +196,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.MovementToPrint
   <AnimationChangeType>k__BackingField: 1
   <ParameterName>k__BackingField: IsRunning
---- !u!114 &-4125236648327191420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7210977406679086040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 622ef1a7eb6443c582526f583648da2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.PortTransformChanger
-  _port: 0
-  _newPosition: {x: 0, y: 0}

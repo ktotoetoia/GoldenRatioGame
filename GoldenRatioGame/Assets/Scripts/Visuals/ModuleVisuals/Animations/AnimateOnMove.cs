@@ -20,7 +20,7 @@ namespace IM.Visuals
             switch (AnimationChangeType)
             {
                 case AnimationChangeType.Bool:
-                    animator.SetBool(ParameterName, _velocity.x != 0 || _velocity.y != 0);
+                    animator.SetBool(ParameterName, _velocity.magnitude != 0);
                     break;
                 case AnimationChangeType.Int:
                     animator.SetInteger(ParameterName, (int)_velocity.magnitude);

@@ -12,14 +12,8 @@ namespace IM.Visuals
         [SerializeField] private Icon _icon;
         private ModulePortSetup _portSetup;
         
-        public IModuleVisualObject ReferenceModuleVisualObject { get; private set; }
+        private ModulePortSetup PortSetup => _portSetup ??= GetComponent<ModulePortSetup>();
         public IIcon Icon => _icon;
-        
-        private void Awake()
-        {
-            _portSetup = GetComponent<ModulePortSetup>();
-            ReferenceModuleVisualObject = CreateModuleVisualObject();
-        }
         
         public IModuleVisualObject CreateModuleVisualObject()
         {
@@ -27,7 +21,7 @@ namespace IM.Visuals
             moduleVisualObject.Owner = GetComponent<IModule>();
             moduleVisualObject.AnimationChanges = GetComponents<IAnimationChange>();
             
-            foreach ((IPort port, PortInfo portInfo) in _portSetup.PortsInfos)
+            foreach ((IPort port, PortInfo portInfo) in PortSetup.PortsInfos)
             {
                 IHierarchyTransform portTransform =  new HierarchyTransform();
                 

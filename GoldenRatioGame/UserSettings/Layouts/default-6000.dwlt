@@ -255,7 +255,7 @@ MonoBehaviour:
   - {fileID: 18}
   - {fileID: 19}
   m_Selected: 0
-  m_LastSelected: 1
+  m_LastSelected: 2
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -306,7 +306,7 @@ MonoBehaviour:
     x: 385
     y: 79
     width: 1512
-    height: 909
+    height: 912
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -356,9 +356,9 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: f8f20902a8aa0bf4c9d7349b7c86a8ce, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: f001b9d7c61f4a049a861478e03cc6e3, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: -2362426929665087647, guid: f8f20902a8aa0bf4c9d7349b7c86a8ce, type: 2}
+  - m_Target: {fileID: -2362426929665087647, guid: f001b9d7c61f4a049a861478e03cc6e3, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -432,7 +432,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 24
+    y: 79
     width: 384
     height: 912
   m_SerializedDataModeController:
@@ -497,8 +497,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 386
-    y: 24
+    x: 385
+    y: 79
     width: 1512
     height: 912
   m_SerializedDataModeController:
@@ -1057,7 +1057,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 0.7541333, y: -0.27485445, z: 0.38402367}
     speed: 2
-    m_Value: {x: 0.7541333, y: -0.27485445, z: 0.38402367}
+    m_Value: {x: 0, y: 0, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1109,7 +1109,7 @@ MonoBehaviour:
   m_Size:
     m_Target: 2.7653944
     speed: 2
-    m_Value: 2.7653944
+    m_Value: 10
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1266,7 +1266,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 962
+    y: 1017
     width: 1898
     height: 337
   m_SerializedDataModeController:
@@ -1291,7 +1291,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Modules/HumanoidModules/ArmLeftHumanoid
+    - Assets
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1301,16 +1301,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Modules/HumanoidModules/ArmLeftHumanoid
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\ILLIA\Unity Projects\GoldenRatioGame\GoldenRatioGame
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: a6bc0000
-    m_LastClickedID: 48294
-    m_ExpandedIDs: 0000000050bb000052bb000054bb000056bb000058bb00005abb00005cbb00005ebb000060bb000062bb000064bb000066bb000068bb00006abb0000
+    m_SelectedIDs: 50bb0000
+    m_LastClickedID: 47952
+    m_ExpandedIDs: 0000000050bb000052bb000054bb000056bb000058bb00005abb00005cbb00005ebb000060bb000062bb000064bb000066bb000068bb00006abb000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1491,8 +1491,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1900
-    y: 24
+    x: 1899
+    y: 79
     width: 660
     height: 1275
   m_SerializedDataModeController:

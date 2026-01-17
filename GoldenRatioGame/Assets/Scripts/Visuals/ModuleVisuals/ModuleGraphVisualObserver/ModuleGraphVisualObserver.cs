@@ -8,20 +8,22 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class ModuleGraphVisualObserver : MonoBehaviour, IModuleGraphSnapshotObserver,IModuleGraphStructureUpdater
+    public class ModuleGraphVisualObserver : MonoBehaviour, IModuleGraphSnapshotObserver, IModuleGraphStructureUpdater
     {
-        private readonly List<IGameModule> _transformModules = new();
         private readonly IHierarchyTransform _globalTransform = new HierarchyTransform();
         private readonly ITraversal _traversal = new BreadthFirstTraversal();
-        private ModuleGraphSnapshotDiffer _graphSnapshotDiffer;
+        private readonly IPortAligner _portAligner = new PortAligner();
+        private ModuleGraphSnapshotDiffer _snapshotDiffer;
+        private readonly Dictionary<IGameModule, IModuleVisualObject> _moduleVisuals = new();
         private IVectorMovement _vectorMovement;
-        
-        private ModuleGraphSnapshotDiffer GraphSnapshotDiffer => _graphSnapshotDiffer??= new ModuleGraphSnapshotDiffer()
-        {
-            OnModuleAdded = OnModuleAdded,
-            OnModuleRemoved = OnModuleRemoved,
-            OnConnected = OnConnected,
-        };
+
+        private ModuleGraphSnapshotDiffer SnapshotDiffer =>
+            _snapshotDiffer ??= new ModuleGraphSnapshotDiffer
+            {
+                OnModuleAdded = HandleModuleAdded,
+                OnModuleRemoved = HandleModuleRemoved,
+                OnConnected = HandleConnected,
+            };
 
         private void Awake()
         {
@@ -31,102 +33,82 @@ namespace IM.Visuals
         private void Update()
         {
             if (_vectorMovement.MovementDirection.x != 0)
-                _globalTransform.LocalScale = _vectorMovement.MovementDirection.x > 0 ? Vector3.one : new Vector3(-1, 1, 1);
-            
+            {
+                _globalTransform.LocalScale =
+                    _vectorMovement.MovementDirection.x > 0
+                        ? Vector3.one
+                        : new Vector3(-1f, 1f, 1f);
+            }
+
             _globalTransform.Position = transform.position;
         }
 
         public void OnGraphUpdated(IModuleGraphReadOnly graph)
         {
-            GraphSnapshotDiffer.OnGraphUpdated(graph);
+            SnapshotDiffer.OnGraphUpdated(graph);
         }
-        
-        private void OnModuleAdded(IModule addedModule)
+
+        private void HandleModuleAdded(IModule module)
         {
-            if(addedModule is not IGameModule module) 
-                throw new ArgumentException("this observer only supports IGameModule");
-            if (_transformModules.Contains(module))
-                throw new ArgumentException($"module ({module}) was already added to observer");
-            
-            _transformModules.Add(module);
-            
-            if(module.Extensions.TryGetExtension(out IPortTransformChanger changer)) 
+            if (module is not IGameModule gameModule)
+                throw new ArgumentException("Observer supports only IGameModule");
+            if (_moduleVisuals.ContainsKey(gameModule))
+                throw new ArgumentException($"Module ({gameModule}) already added");
+            if (!gameModule.Extensions.TryGetExtension(out IModuleVisual moduleVisual))
+                throw new ArgumentException("IModuleVisual extension required");
+
+            IModuleVisualObject visualObject = moduleVisual.CreateModuleVisualObject();
+            _moduleVisuals.Add(gameModule, visualObject);
+
+            _globalTransform.AddChildKeepLocal(visualObject.Transform);
+
+            if (gameModule.Extensions.TryGetExtension(out IPortTransformChanger changer))
                 changer.ModuleGraphStructureUpdater = this;
 
-            module.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.Visibility = true;
-            _globalTransform.AddChildKeepLocal(module.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.Transform);
+            visualObject.Visibility = true;
         }
 
-        private void OnModuleRemoved(IModule removedModule)
+        private void HandleModuleRemoved(IModule module)
         {
-            if(removedModule is not IGameModule module) 
-                throw new ArgumentException("this observer only supports IGameModule");
-            if(!_transformModules.Remove(module))
-                throw new ArgumentException($"module ({module}) was not added to observer");
-            
-            if(module.Extensions.TryGetExtension(out IPortTransformChanger changer)) 
+            if (module is not IGameModule gameModule)
+                throw new ArgumentException("Observer supports only IGameModule");
+            if (!_moduleVisuals.Remove(gameModule, out IModuleVisualObject visualObject))
+                throw new ArgumentException($"Module ({gameModule}) was not added");
+            if (gameModule.Extensions.TryGetExtension(out IPortTransformChanger changer))
                 changer.ModuleGraphStructureUpdater = null;
 
-            module.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.Visibility = false;
-            _globalTransform.RemoveChild(module.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.Transform);
+            visualObject.Visibility = false;
+            _globalTransform.RemoveChild(visualObject.Transform);
         }
 
-        private void OnConnected(IConnection connection)
+        private void HandleConnected(IConnection connection)
         {
-            if(connection.Port1.Module is not IGameModule module1 ||  connection.Port2.Module is not IGameModule module2)
-                throw new ArgumentException("this observer only supports IGameModule");
+            if (connection.Port1.Module is not IGameModule moduleA ||
+                connection.Port2.Module is not IGameModule moduleB)
+                throw new ArgumentException("Observer supports only IGameModule");
 
-            AlignPorts(
-                module1.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.GetPortVisual(connection.Port1),
-                module2.Extensions.GetExtension<IModuleVisual>().ReferenceModuleVisualObject.GetPortVisual(connection.Port2));
+            _portAligner.AlignPorts(
+                _moduleVisuals[moduleA].GetPortVisual(connection.Port1),
+                _moduleVisuals[moduleB].GetPortVisual(connection.Port2));
         }
 
         public void OnPortTransformChanged(IPort port)
         {
-            foreach ((IGameModule module, IPort via) in _traversal.EnumerateModulesAlongConnection<IGameModule, IPort>(port))
+            foreach ((IGameModule module, IPort viaPort) in
+                     _traversal.EnumerateModulesAlongConnection<IGameModule, IPort>(port))
             {
-                IModuleVisual fromVisualExt = module.Extensions.GetExtension<IModuleVisual>();
-                if (fromVisualExt == null) continue;
+                IPort otherPort = viaPort.Connection.GetOtherPort(viaPort);
+                if (otherPort?.Module is not IGameModule otherModule)
+                    continue;
 
-                IPort otherPort = via.Connection.GetOtherPort(via);
-                if (otherPort?.Module is not IGameModule otherModule) continue;
-                
-                IModuleVisual toVisualExt = otherModule.Extensions.GetExtension<IModuleVisual>();
-                if (toVisualExt == null) continue;
+                if (_moduleVisuals[module].GetPortVisual(viaPort) is not { } fromVisual)
+                    continue;
 
-                if (fromVisualExt.ReferenceModuleVisualObject.GetPortVisual(via) is not { } fromPortVisual) continue;
-                if (toVisualExt.ReferenceModuleVisualObject.GetPortVisual(otherPort) is not { } toPortVisual) continue;
+                if (_moduleVisuals[otherModule].GetPortVisual(otherPort) is not { } toVisual)
+                    continue;
 
-                AlignPorts(toPortVisual, fromPortVisual);
+                _portAligner.AlignPorts(toVisual, fromVisual);
             }
-        }
-        
-        private void AlignPorts(IPortVisualObject portToMove, IPortVisualObject anchorPort)
-        {
-            Vector3 inputLocal = Vector3.Scale(portToMove.Transform.LocalPosition, portToMove.OwnerVisualObject.Transform.LossyScale);
-            Vector3 outputLocal = Vector3.Scale(anchorPort.Transform.LocalPosition, anchorPort.OwnerVisualObject.Transform.LossyScale);
-
-            Vector3 outputWorldPos =
-                anchorPort.OwnerVisualObject.Transform.Position + anchorPort.OwnerVisualObject.Transform.Rotation * outputLocal;
-
-            float inputWorldZ =
-                (portToMove.OwnerVisualObject.Transform.Rotation * portToMove.Transform.LocalRotation).eulerAngles.z;
-
-            float outputWorldZ =
-                (anchorPort.OwnerVisualObject.Transform.Rotation * anchorPort.Transform.LocalRotation).eulerAngles.z;
-
-            float desiredInputWorldZ = outputWorldZ + 180f;
-
-            float deltaZ = Mathf.DeltaAngle(inputWorldZ, desiredInputWorldZ);
-
-            float newInputWorldZ = portToMove.OwnerVisualObject.Transform.Rotation.eulerAngles.z + deltaZ;
-            Quaternion desiredRotation = Quaternion.Euler(0f, 0f, newInputWorldZ);
-
-            Vector3 rotatedInputLocal = desiredRotation * inputLocal;
-            Vector3 desiredPosition = outputWorldPos - rotatedInputLocal;
-
-            portToMove.OwnerVisualObject.Transform.Position = desiredPosition;
-            portToMove.OwnerVisualObject.Transform.Rotation = desiredRotation;
         }
     }
 }
