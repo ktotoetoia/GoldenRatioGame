@@ -6,9 +6,9 @@ namespace IM.Visuals.Graph
     public interface IModuleGraphEditorVisual
     {
         IModuleGraphEditor<IConditionalCommandModuleGraph> ModuleGraphEditor { get; }
-        IStorage Source { get; }
+        ICellFactoryStorage Source { get; }
 
         void StartEditing(IModuleGraphEditor<IConditionalCommandModuleGraph> moduleGraphEditor,
-            IStorage source);
+            ICellFactoryStorage source);
     }
 }

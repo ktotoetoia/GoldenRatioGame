@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
+using IM.Modules;
 using IM.Transforms;
 using UnityEngine;
 
@@ -10,14 +11,16 @@ namespace IM.Visuals
     {
         [SerializeField] bool _isVisibleOnAwake;
         private readonly List<IPortVisualObject> _portVisuals = new();
-        private readonly HierarchyTransform _transform= new();
+        private readonly HierarchyTransform _transform = new();
         private Animator _animator;
         
-        public IModule Owner { get; set; }
         public IHierarchyTransform Transform => _transform;
         public IReadOnlyList<IPortVisualObject> PortsVisuals => _portVisuals;
+        public IGameModule Owner { get; set; }
+        public bool IsAnimating { get; set; } = true;
         public IEnumerable<IAnimationChange> AnimationChanges { get; set; }
-        
+        public IModuleGraphStructureUpdater ModuleGraphStructureUpdater { get; set; }
+
         public bool Visibility
         {
             get => gameObject.activeSelf;
@@ -35,8 +38,8 @@ namespace IM.Visuals
 
         private void Update()
         {
-            if(AnimationChanges == null) return;
-
+            if (AnimationChanges == null || !IsAnimating) return;
+         
             foreach (IAnimationChange animationChange in AnimationChanges)
             {
                 animationChange.ApplyToAnimator(_animator);

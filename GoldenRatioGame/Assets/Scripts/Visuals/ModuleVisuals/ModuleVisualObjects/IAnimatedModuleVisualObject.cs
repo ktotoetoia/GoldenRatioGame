@@ -4,6 +4,7 @@ namespace IM.Visuals
 {
     public interface IAnimatedModuleVisualObject : IModuleVisualObject
     {
-        public IEnumerable<IAnimationChange> AnimationChanges { get; set; }
+        bool IsAnimating { get; set; }
+        IEnumerable<IAnimationChange> AnimationChanges { get; set; }
     }
 }

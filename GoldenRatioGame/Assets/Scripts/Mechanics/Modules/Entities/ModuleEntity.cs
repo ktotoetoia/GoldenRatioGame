@@ -16,21 +16,16 @@ namespace IM.Modules
 
         private void Awake()
         {
-            IModule coreModule = Instantiate(_coreModulePrefab).GetComponent<IModule>();
-            ConditionalCommandModuleGraph graph = new ConditionalCommandModuleGraph(new CommandModuleGraph(), new PortTagsModuleGraphConditions());
             AbilityPool = new AbilityPool();
+            ConditionalCommandModuleGraph graph = new ConditionalCommandModuleGraph(new CommandModuleGraph(), new PortTagsModuleGraphConditions());
             GraphEditor = new CommandModuleGraphEditor<IConditionalCommandModuleGraph>(graph,new AccessConditionalCommandModuleGraphFactory());
-            
-            GraphEditor.AddObserver(new EntityInjector(this));
-            GraphEditor.AddObserver(new SpeedExtensionsObserver(GetComponent<IHaveSpeed>()));
-            GraphEditor.AddObserver(new HealthExtensionsObserver(GetComponent<IFloatHealthValuesGroup>()));
-            GraphEditor.AddObserver(new AbilityExtensionsObserver(AbilityPool as AbilityPool));
             
             foreach (IModuleGraphSnapshotObserver observer in GetComponents<IModuleGraphSnapshotObserver>())
             {
                 GraphEditor.AddObserver(observer);
             }
 
+            IModule coreModule = Instantiate(_coreModulePrefab).GetComponent<IModule>();
             ICommandModuleGraph f = GraphEditor.StartEditing();
             f.AddModule(coreModule);
             GraphEditor.TrySaveChanges();

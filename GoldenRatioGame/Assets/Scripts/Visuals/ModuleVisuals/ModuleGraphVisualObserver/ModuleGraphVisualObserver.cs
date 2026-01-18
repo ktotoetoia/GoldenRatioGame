@@ -13,8 +13,8 @@ namespace IM.Visuals
         private readonly IHierarchyTransform _globalTransform = new HierarchyTransform();
         private readonly ITraversal _traversal = new BreadthFirstTraversal();
         private readonly IPortAligner _portAligner = new PortAligner();
-        private ModuleGraphSnapshotDiffer _snapshotDiffer;
         private readonly Dictionary<IGameModule, IModuleVisualObject> _moduleVisuals = new();
+        private ModuleGraphSnapshotDiffer _snapshotDiffer;
         private IVectorMovement _vectorMovement;
 
         private ModuleGraphSnapshotDiffer SnapshotDiffer =>
@@ -59,11 +59,8 @@ namespace IM.Visuals
 
             IModuleVisualObject visualObject = moduleVisual.CreateModuleVisualObject();
             _moduleVisuals.Add(gameModule, visualObject);
-
             _globalTransform.AddChildKeepLocal(visualObject.Transform);
-
-            if (gameModule.Extensions.TryGetExtension(out IPortTransformChanger changer))
-                changer.ModuleGraphStructureUpdater = this;
+            visualObject.ModuleGraphStructureUpdater = this;
 
             visualObject.Visibility = true;
         }
@@ -74,11 +71,11 @@ namespace IM.Visuals
                 throw new ArgumentException("Observer supports only IGameModule");
             if (!_moduleVisuals.Remove(gameModule, out IModuleVisualObject visualObject))
                 throw new ArgumentException($"Module ({gameModule}) was not added");
-            if (gameModule.Extensions.TryGetExtension(out IPortTransformChanger changer))
-                changer.ModuleGraphStructureUpdater = null;
-
+            
             visualObject.Visibility = false;
+            visualObject.ModuleGraphStructureUpdater = null;
             _globalTransform.RemoveChild(visualObject.Transform);
+            visualObject.Dispose();
         }
 
         private void HandleConnected(IConnection connection)
@@ -106,8 +103,8 @@ namespace IM.Visuals
 
                 if (_moduleVisuals[otherModule].GetPortVisual(otherPort) is not { } toVisual)
                     continue;
-
-                _portAligner.AlignPorts(toVisual, fromVisual);
+                
+                _portAligner.AlignPorts(fromVisual, toVisual);
             }
         }
     }
