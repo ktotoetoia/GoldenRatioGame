@@ -47,6 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b2da4ff9bc41a5ab268251bf7c2e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _icon:
+    <Texture>k__BackingField: {fileID: 0}
+  <Name>k__BackingField: Humanoid Head
+  <Description>k__BackingField: 
 --- !u!114 &-6607928970512855544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,5 +96,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.ModuleLayout
   _visualPrefab: {fileID: 2156244532669732079, guid: e31406646bfbbfb4d96f36dea99f9cbf, type: 3}
-  _icon:
-    <Texture>k__BackingField: {fileID: 0}

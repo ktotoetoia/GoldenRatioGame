@@ -130,6 +130,8 @@ GameObject:
   - component: {fileID: 233926212}
   - component: {fileID: 233926211}
   - component: {fileID: 233926217}
+  - component: {fileID: 233926219}
+  - component: {fileID: 233926218}
   m_Layer: 0
   m_Name: Input
   m_TagString: Untagged
@@ -184,6 +186,42 @@ MonoBehaviour:
   - {fileID: 826108804021744781, guid: 56b483d2a19049244a3d09238fbbd0b9, type: 3}
   - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
   - {fileID: 826108804021744781, guid: bdeb95364b5c5654583dbc189433133c, type: 3}
+--- !u!114 &233926218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233926210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 26296ce5bac6104418fb111e33e3de6c, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: d87bc0ba5be958c4b8881a645c083306, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &233926219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233926210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8518444a7f88477aa501845eeaf202e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: StorageUI::IM.UI.DocumentSigma
+  _document: {fileID: 233926218}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,6 +477,10 @@ GameObject:
   - component: {fileID: 1908329194}
   - component: {fileID: 1908329196}
   - component: {fileID: 1908329198}
+  - component: {fileID: 1908329202}
+  - component: {fileID: 1908329201}
+  - component: {fileID: 1908329200}
+  - component: {fileID: 1908329199}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -645,6 +687,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84fcd05b82d47a4a6d3f13f4491f01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ModuleGraphVisualObserver
+--- !u!114 &1908329199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908329172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a9af549a5cd42cca85ddfd3ef67b06b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModulesExt::IM.Modules.EntityInjector
+--- !u!114 &1908329200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908329172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcaa15f1f2d20d84ba18b2704c2161a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModulesExt::IM.Modules.SpeedExtensionsObserver
+--- !u!114 &1908329201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908329172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79e36a2f07e04c2c815f729f7f9ea415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModulesExt::IM.Modules.HealthExtensionsObserver
+--- !u!114 &1908329202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908329172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7542ec886754804a7bd3eee39d1809b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModulesExt::IM.Modules.AbilityExtensionsObserver
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

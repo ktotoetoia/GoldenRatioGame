@@ -13,7 +13,7 @@ namespace IM.Visuals
         private readonly IHierarchyTransform _globalTransform = new HierarchyTransform();
         private readonly ITraversal _traversal = new BreadthFirstTraversal();
         private readonly IPortAligner _portAligner = new PortAligner();
-        private readonly Dictionary<IGameModule, IModuleVisualObject> _moduleVisuals = new();
+        private readonly Dictionary<IExtensibleModule, IModuleVisualObject> _moduleVisuals = new();
         private ModuleGraphSnapshotDiffer _snapshotDiffer;
         private IVectorMovement _vectorMovement;
 
@@ -50,7 +50,7 @@ namespace IM.Visuals
 
         private void HandleModuleAdded(IModule module)
         {
-            if (module is not IGameModule gameModule)
+            if (module is not IExtensibleModule gameModule)
                 throw new ArgumentException("Observer supports only IGameModule");
             if (_moduleVisuals.ContainsKey(gameModule))
                 throw new ArgumentException($"Module ({gameModule}) already added");
@@ -67,7 +67,7 @@ namespace IM.Visuals
 
         private void HandleModuleRemoved(IModule module)
         {
-            if (module is not IGameModule gameModule)
+            if (module is not IExtensibleModule gameModule)
                 throw new ArgumentException("Observer supports only IGameModule");
             if (!_moduleVisuals.Remove(gameModule, out IModuleVisualObject visualObject))
                 throw new ArgumentException($"Module ({gameModule}) was not added");
@@ -80,8 +80,8 @@ namespace IM.Visuals
 
         private void HandleConnected(IConnection connection)
         {
-            if (connection.Port1.Module is not IGameModule moduleA ||
-                connection.Port2.Module is not IGameModule moduleB)
+            if (connection.Port1.Module is not IExtensibleModule moduleA ||
+                connection.Port2.Module is not IExtensibleModule moduleB)
                 throw new ArgumentException("Observer supports only IGameModule");
 
             _portAligner.AlignPorts(
@@ -91,11 +91,11 @@ namespace IM.Visuals
 
         public void OnPortTransformChanged(IPort port)
         {
-            foreach ((IGameModule module, IPort viaPort) in
-                     _traversal.EnumerateModulesAlongConnection<IGameModule, IPort>(port))
+            foreach ((IExtensibleModule module, IPort viaPort) in
+                     _traversal.EnumerateModulesAlongConnection<IExtensibleModule, IPort>(port))
             {
                 IPort otherPort = viaPort.Connection.GetOtherPort(viaPort);
-                if (otherPort?.Module is not IGameModule otherModule)
+                if (otherPort?.Module is not IExtensibleModule otherModule)
                     continue;
 
                 if (_moduleVisuals[module].GetPortVisual(viaPort) is not { } fromVisual)

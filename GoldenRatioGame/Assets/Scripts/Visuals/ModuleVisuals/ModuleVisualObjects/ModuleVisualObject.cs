@@ -16,7 +16,7 @@ namespace IM.Visuals
         
         public IHierarchyTransform Transform => _transform;
         public IReadOnlyList<IPortVisualObject> PortsVisuals => _portVisuals;
-        public IGameModule Owner { get; set; }
+        public IExtensibleModule Owner { get; set; }
         public bool IsAnimating { get; set; } = true;
         public IEnumerable<IAnimationChange> AnimationChanges { get; set; }
         public IModuleGraphStructureUpdater ModuleGraphStructureUpdater { get; set; }

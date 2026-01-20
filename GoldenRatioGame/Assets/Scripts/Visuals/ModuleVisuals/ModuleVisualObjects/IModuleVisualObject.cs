@@ -7,7 +7,7 @@ namespace IM.Visuals
 {
     public interface IModuleVisualObject : IVisualObject
     {
-        IGameModule Owner { get; }
+        IExtensibleModule Owner { get; }
         IHierarchyTransform Transform { get; }
         IReadOnlyList<IPortVisualObject> PortsVisuals { get; }
         IModuleGraphStructureUpdater ModuleGraphStructureUpdater { get; set; }

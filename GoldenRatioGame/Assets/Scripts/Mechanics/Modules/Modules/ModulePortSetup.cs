@@ -10,13 +10,13 @@ namespace IM.Visuals
     public class ModulePortSetup : MonoBehaviour
     {
         [SerializeField] private List<PortInfo> _portsInfos;
-        private GameModuleMono _module;
+        private ExtensibleModuleMono _module;
         
         public Dictionary<IPort, PortInfo> PortsInfos { get; } = new();
         
         private void Awake()
         {
-            _module = GetComponent<GameModuleMono>() ?? throw new NullReferenceException("GameModuleMono component not found");
+            _module = GetComponent<ExtensibleModuleMono>() ?? throw new NullReferenceException("GameModuleMono component not found");
             
             foreach (PortInfo portInfo in _portsInfos)
             {

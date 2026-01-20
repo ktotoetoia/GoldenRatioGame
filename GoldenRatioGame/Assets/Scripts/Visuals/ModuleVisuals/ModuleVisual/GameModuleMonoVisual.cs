@@ -16,7 +16,7 @@ namespace IM.Visuals
         public IModuleVisualObject CreateModuleVisualObject()
         {
             ModuleVisualObject moduleVisualObject = Instantiate(_visualPrefab,transform).GetComponent<ModuleVisualObject>();
-            moduleVisualObject.Owner = GetComponent<IGameModule>();
+            moduleVisualObject.Owner = GetComponent<IExtensibleModule>();
             moduleVisualObject.AnimationChanges = GetComponents<IAnimationChange>();
             
             foreach ((IPort port, PortInfo portInfo) in PortSetup.PortsInfos)

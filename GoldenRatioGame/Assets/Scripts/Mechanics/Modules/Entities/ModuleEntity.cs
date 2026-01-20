@@ -1,11 +1,11 @@
 ﻿using IM.Abilities;
 using IM.Graphs;
-using IM.Health;
-using IM.Values;
+using IM.Storages;
 using UnityEngine;
 
 namespace IM.Modules
 {
+    [DefaultExecutionOrder(10)]
     public class ModuleEntity : MonoBehaviour, IModuleEntity
     {
         [SerializeField] private GameObject _coreModulePrefab;

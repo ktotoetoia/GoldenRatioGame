@@ -2,6 +2,7 @@
 using System.Linq;
 using IM.Abilities;
 using IM.Graphs;
+using IM.Storages;
 using UnityEngine;
 
 namespace IM.Modules
@@ -14,7 +15,8 @@ namespace IM.Modules
         private PreferredKeyboardBindingsAbilityUser _abilityUser;
         private IConditionalCommandModuleGraph  _graph;
         private int _modulesAdded;
-        
+        public CellFactoryStorage Storage { get; set; } = new CellFactoryStorage();
+
         private void Awake()
         {
             _abilityUser = new PreferredKeyboardBindingsAbilityUser(_moduleEntity.AbilityPool);
@@ -46,7 +48,7 @@ namespace IM.Modules
                 foreach (GameObject prefab in _modulesPrefabs)
                 {
                     GameObject created =  Instantiate(prefab);
-                    IModule module = created.GetComponent<IModule>();
+                    IExtensibleModule module = created.GetComponent<IExtensibleModule>();
                     
                     foreach (IPort port in module.Ports)
                     {
@@ -54,11 +56,16 @@ namespace IM.Modules
                         {
                             if (_graph.CanAddAndConnect(module, port, targetPort))
                             {
+                                IStorageCell cell  = Storage.FirstOrDefault(x => x.Item==null) ?? Storage.CreateCellAt(Storage.Count);
                                 _graph.AddAndConnect(module,port, targetPort);
+                                
+                                Storage.SetItem(cell,module);
+                                
                                 return;
                             }
                         }
                     }
+
                     
                     Destroy(created);
                 }

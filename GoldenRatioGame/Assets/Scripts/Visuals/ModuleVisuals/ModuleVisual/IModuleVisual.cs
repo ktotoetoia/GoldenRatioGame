@@ -2,7 +2,7 @@
 
 namespace IM.Visuals
 {
-    public interface IModuleVisual : IModuleExtension
+    public interface IModuleVisual : IExtension
     {
         IModuleVisualObject CreateModuleVisualObject();
     }

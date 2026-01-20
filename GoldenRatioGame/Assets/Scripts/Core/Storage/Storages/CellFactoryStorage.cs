@@ -10,8 +10,8 @@ namespace IM.Storages
         public int Count => _cells.Count;
 
         public event Action<int, int> CellsCountChanged;
-        public event Action<IStorageCell, IStorageItem> ItemAdded;
-        public event Action<IStorageCell, IStorageItem> ItemRemoved;
+        public event Action<IStorageCell, IStorableReadOnly> ItemAdded;
+        public event Action<IStorageCell, IStorableReadOnly> ItemRemoved;
         
         public IStorageCell this[int index] => _cells[index];
         
@@ -25,14 +25,14 @@ namespace IM.Storages
             return cell;
         }
 
-        public IStorageItem ClearCell(IStorageCell cell)
+        public IStorableReadOnly ClearCell(IStorageCell cell)
         {            
             if (!_cells.Contains(cell))
             {
                 throw new ArgumentException($"This storage does not contains cell: {cell}" );
             }
 
-            IStorageItem item = cell.Item;
+            IStorableReadOnly item = cell.Item;
             
             cell.Item = null;
             
@@ -41,14 +41,14 @@ namespace IM.Storages
             return item;
         }
 
-        public void SetItem(IStorageCell cell, IStorageItem item)
+        public void SetItem(IStorageCell cell, IStorableReadOnly item)
         {
             if (!_cells.Contains(cell))
             {
                 throw new ArgumentException($"This storage does not contain cell: {cell}");
             }
 
-            IStorageItem previous = cell.Item;
+            IStorableReadOnly previous = cell.Item;
             cell.Item = item;
 
             if (previous != null)
@@ -79,6 +79,11 @@ namespace IM.Storages
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public IList GetListForUI()
+        {
+            return _cells;
         }
     }
 }
