@@ -4,7 +4,7 @@ using IM.Commands;
 
 namespace IM.Graphs
 {
-    public class ConnectModulesCommand : Command,IConnectCommand
+    public class ConnectModulesCommand : Command, IConnectCommand
     {
         private readonly IPort _output;
         private readonly IPort _input;

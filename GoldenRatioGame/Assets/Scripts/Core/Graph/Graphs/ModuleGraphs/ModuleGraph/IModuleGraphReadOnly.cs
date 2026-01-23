@@ -6,5 +6,8 @@ namespace IM.Graphs
     {
         IEnumerable<IModule> Modules { get; }
         IEnumerable<IConnection> Connections { get; }
+        
+        bool Contains(IModule module);
+        bool Contains(IConnection connection);
     }
 }

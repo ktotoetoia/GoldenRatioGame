@@ -15,7 +15,7 @@ namespace IM.Modules
         private PreferredKeyboardBindingsAbilityUser _abilityUser;
         private IConditionalCommandModuleGraph _graph;
         private int _modulesAdded;
-        public CellFactoryStorage Storage { get; set; } = new();
+        public CellFactoryStorage Storage { get; } = new();
 
         private void Awake()
         {
@@ -24,17 +24,18 @@ namespace IM.Modules
             foreach (GameObject prefab in _modulesPrefabs)
             {
                 GameObject created = Instantiate(prefab);
+                IExtensibleModule module = created.GetComponent<IExtensibleModule>();
                 
-                if (created.TryGetComponent(out ICoreExtensibleModule module))
+                if (module is ICoreExtensibleModule)
                 {
                     _moduleEntity.Initialize(module);
                     continue;
                 }
-                
-                
+
                 IStorageCell cell = Storage.FirstOrDefault(x => x.Item == null) ??
-                                    Storage.CreateCellAt(Storage.Count);
+                                    Storage.CreateCell();
                 Storage.SetItem(cell, module);
+                module.State = ModuleState.StorableState;
             }
         }
 
@@ -85,30 +86,23 @@ namespace IM.Modules
 
         private void AddModule()
         {
-            foreach (GameObject prefab in _modulesPrefabs)
+            foreach (IExtensibleModule module in Storage.Select(x => x.Item).Where(x => x is IExtensibleModule))
             {
-                GameObject created = Instantiate(prefab);
-                IExtensibleModule module = created.GetComponent<IExtensibleModule>();
-
                 foreach (IPort port in module.Ports)
                 {
                     foreach (IPort targetPort in _graph.Modules.SelectMany(x => x.Ports))
                     {
                         if (_graph.CanAddAndConnect(module, port, targetPort))
                         {
-                            IStorageCell cell = Storage.FirstOrDefault(x => x.Item == null) ??
-                                                Storage.CreateCellAt(Storage.Count);
+                            Storage.ClearAndRemoveCell(module.Cell);
+                            
                             _graph.AddAndConnect(module, port, targetPort);
-
-                            Storage.SetItem(cell, module);
-
+                            module.State = ModuleState.GraphState;
+                            
                             return;
                         }
                     }
                 }
-
-
-                Destroy(created);
             }
         }
 

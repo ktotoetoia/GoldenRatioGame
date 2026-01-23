@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace IM.Storages
 {
@@ -14,7 +15,12 @@ namespace IM.Storages
         public event Action<IStorageCell, IStorableReadOnly> ItemRemoved;
         
         public IStorageCell this[int index] => _cells[index];
-        
+
+        public IStorageCell CreateCell()
+        {
+            return CreateCellAt(_cells.Count);
+        }
+
         public IStorageCell CreateCellAt(int index)
         {            
             StorageCell cell = new StorageCell();
@@ -23,6 +29,21 @@ namespace IM.Storages
             CellsCountChanged?.Invoke(Count,Count - 1);
             
             return cell;
+        }
+
+        public IStorableReadOnly ClearAndRemoveCell(IStorageCell cell)
+        {
+            IStorableReadOnly stored =ClearCell(cell);
+            
+            RemoveCell(cell);
+
+            return stored;
+        }
+
+        public void RemoveCell(IStorageCell cell)
+        {
+            if (_cells.Remove(cell))
+                CellsCountChanged?.Invoke(Count,Count + 1);
         }
 
         public IStorableReadOnly ClearCell(IStorageCell cell)
@@ -47,7 +68,7 @@ namespace IM.Storages
             {
                 throw new ArgumentException($"This storage does not contain cell: {cell}");
             }
-
+            
             IStorableReadOnly previous = cell.Item;
             cell.Item = item;
 

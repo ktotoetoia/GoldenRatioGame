@@ -2,36 +2,36 @@
 {
     public class DefaultModuleGraphConditions : IModuleGraphConditions
     {
-        private readonly bool _condition;
+        private readonly IModuleGraph _graph;
 
-        public DefaultModuleGraphConditions(bool condition = true)
+        public DefaultModuleGraphConditions(IModuleGraph graph)
         {
-            _condition = condition;
+            _graph = graph;
         }
-        
+
         public bool CanAddModule(IModule module)
         {
-            return _condition;
+            return module != null && !_graph.Contains(module);
         }
 
         public bool CanRemoveModule(IModule module)
-        {            
-            return _condition;
+        {
+            return module != null && _graph.Contains(module);
         }
 
         public bool CanConnect(IPort output, IPort input)
         {
-            return _condition;
+            return  output != null && input != null && output.Module != input.Module && !output.IsConnected && !input.IsConnected;
         }
 
         public bool CanDisconnect(IConnection connection)
         {
-            return _condition;
+            return connection != null && _graph.Contains(connection);
         }
 
         public bool CanAddAndConnect(IModule module, IPort ownerPort, IPort targetPort)
         {
-            return _condition;
+            return CanAddModule(module)  && CanConnect(ownerPort, targetPort);
         }
     }
 }

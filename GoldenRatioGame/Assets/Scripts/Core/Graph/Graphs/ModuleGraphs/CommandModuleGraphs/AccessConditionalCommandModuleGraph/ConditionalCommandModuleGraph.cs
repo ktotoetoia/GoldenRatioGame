@@ -9,6 +9,7 @@ namespace IM.Graphs
         private readonly IModuleGraphConditions _conditions;
 
         public IEnumerable<IConnection> Connections => _graph.Connections;
+
         public IEnumerable<IModule> Modules => _graph.Modules;
         public IEnumerable<INode> Nodes => _graph.Nodes;
         public IEnumerable<IEdge> Edges => _graph.Edges;
@@ -20,7 +21,7 @@ namespace IM.Graphs
             
         }
         
-        public ConditionalCommandModuleGraph(ICommandModuleGraph graph) : this(graph, new DefaultModuleGraphConditions()) { }
+        public ConditionalCommandModuleGraph(ICommandModuleGraph graph) : this(graph, new DefaultModuleGraphConditions(graph)) { }
 
         public ConditionalCommandModuleGraph(ICommandModuleGraph graph, IModuleGraphConditions conditions)
         {
@@ -85,6 +86,16 @@ namespace IM.Graphs
             {
                 ntf.OnEditingEnded();
             }
+        }
+        
+        public bool Contains(IModule module)
+        {
+            return _graph.Contains(module);
+        }
+
+        public bool Contains(IConnection connection)
+        {
+            return _graph.Contains(connection);
         }
     }
 }

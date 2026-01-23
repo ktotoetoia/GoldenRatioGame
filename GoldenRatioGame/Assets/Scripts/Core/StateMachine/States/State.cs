@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace IM.StateMachines
 {
-    public class State : IState
+    public class State : IState, IUpdatable
     {
-        private readonly List<ITransition> _transitions = new List<ITransition>();
+        private readonly List<ITransition> _transitions = new();
 
         public virtual void FixedUpdate()
         {

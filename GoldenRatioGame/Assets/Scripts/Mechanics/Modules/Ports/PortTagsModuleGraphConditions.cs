@@ -16,12 +16,7 @@ namespace IM.Modules
 
         public bool CanConnect(IPort output, IPort input)
         {
-            if (input == output || output.Module == input.Module || output.IsConnected || input.IsConnected)
-            {
-                return false;
-            }
-            
-            if (output is TaggedPort outTg && input is TaggedPort inpTg)
+            if (output is IHaveTag outTg && input is IHaveTag inpTg)
             {
                 return outTg.Tag.Equals(inpTg.Tag);
             }
@@ -36,7 +31,7 @@ namespace IM.Modules
 
         public bool CanAddAndConnect(IModule module, IPort ownerPort, IPort targetPort)
         {
-            return CanAddModule(module) && CanConnect(ownerPort, targetPort);
+            return true;
         }
     }
 }

@@ -1,6 +1,7 @@
-﻿using IM.Abilities;
+﻿using System.Collections.Generic;
+using IM.Abilities;
 using IM.Graphs;
-using IM.Storages;
+using NUnit.Framework;
 using UnityEngine;
 
 namespace IM.Modules
@@ -9,12 +10,20 @@ namespace IM.Modules
     {
         public GameObject GameObject => gameObject;
         public IModuleGraphEditor<IConditionalCommandModuleGraph> GraphEditor { get; private set; }
-        public IAbilityPool AbilityPool { get; private set; } = new AbilityPool();
+        public IAbilityPool AbilityPool { get; } = new AbilityPool();
 
-        public void Initialize(IModule coreModule)
+        public void Initialize(IExtensibleModule coreModule)
         {
-            ConditionalCommandModuleGraph graph = new ConditionalCommandModuleGraph(new CommandModuleGraph(), new PortTagsModuleGraphConditions());
-            GraphEditor = new CommandModuleGraphEditor<IConditionalCommandModuleGraph>(graph,new AccessConditionalCommandModuleGraphFactory());
+            CommandModuleGraph graph = new();
+            
+            ConditionalCommandModuleGraph conditionalCommandModuleGraph = new ConditionalCommandModuleGraph(graph, 
+                new CompositeModuleGraphConditions(new List<IModuleGraphConditions>()
+            {
+                new DefaultModuleGraphConditions(graph),
+                new PortTagsModuleGraphConditions(),
+            }));
+            
+            GraphEditor = new CommandModuleGraphEditor<IConditionalCommandModuleGraph>(conditionalCommandModuleGraph,new AccessConditionalCommandModuleGraphFactory());
             
             foreach (IModuleGraphSnapshotObserver observer in GetComponents<IModuleGraphSnapshotObserver>())
             {
@@ -22,6 +31,7 @@ namespace IM.Modules
             }
 
             ICommandModuleGraph f = GraphEditor.StartEditing();
+            coreModule.State = ModuleState.GraphState;
             f.AddModule(coreModule);
             GraphEditor.TrySaveChanges();
         }

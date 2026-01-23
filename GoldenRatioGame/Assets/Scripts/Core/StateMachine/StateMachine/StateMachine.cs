@@ -8,11 +8,8 @@ namespace IM.StateMachines
 
         public IState CurrentState
         {
-            get
-            {
-                return _currentState;
-            }
-
+            get => _currentState;
+            
             private set
             {
                 _currentState.OnExit();
@@ -28,13 +25,21 @@ namespace IM.StateMachines
 
         public void Update()
         {
-            _currentState.Update();
+            if (CurrentState is IUpdate update)
+            {
+                update.Update();
+            }
+            
             TryTransition();
         }
 
         public void FixedUpdate()
         {
-            _currentState.FixedUpdate();
+            if (CurrentState is IFixedUpdate fixedUpdate)
+            {
+                fixedUpdate.FixedUpdate();
+            }
+            
             TryTransition();
         }
 
@@ -42,10 +47,9 @@ namespace IM.StateMachines
         {
             ITransition transition = _currentState.GetAvailableTransitions().FirstOrDefault();
 
-            if (transition != null)
-            {
-                CurrentState = transition.To;
-            }
+            if (transition == null) return;
+            
+            CurrentState = transition.To;
         }
     }
 }

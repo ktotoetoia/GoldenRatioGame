@@ -6,8 +6,8 @@ namespace IM.StateMachines
     {
         private readonly Func<bool> _condition;
 
-        public IState From { get; private set; }
-        public IState To { get; private set; }
+        public IState From { get; }
+        public IState To { get; }
 
         public Transition(IState from, IState to, Func<bool> condition)
         {

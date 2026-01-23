@@ -2,7 +2,7 @@
 
 namespace IM.Modules
 {
-    public class TaggedPort : IPort
+    public class TaggedPort : IPort, IHaveTag
     {
         public IModule Module { get; }
         public IConnection Connection { get; private set; }

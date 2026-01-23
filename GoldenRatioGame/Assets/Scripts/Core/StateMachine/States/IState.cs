@@ -2,7 +2,7 @@
 
 namespace IM.StateMachines
 {
-    public interface IState : IUpdatable
+    public interface IState
     {
         void OnEnter();
         void OnExit();

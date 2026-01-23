@@ -2,7 +2,7 @@
     margin-top: 10%;
     margin-right: 10%;
     margin-bottom: 10%;
-    margin-left: 10%;
+    margin-left: 70%;
     background-color: rgb(23, 21, 24);
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;

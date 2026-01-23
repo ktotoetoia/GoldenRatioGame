@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2805714054282062599}
-  - component: {fileID: -2291135132241503381}
+  - component: {fileID: 6758064773000630412}
   - component: {fileID: 8535451133996336894}
   - component: {fileID: 4479085341360621510}
   - component: {fileID: 1563791358509127018}
@@ -38,7 +38,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-2291135132241503381
+--- !u!114 &6758064773000630412
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,9 +47,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8119833187759213420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2b2da4ff9bc41a5ab268251bf7c2e97, type: 3}
+  m_Script: {fileID: 11500000, guid: 910832e40fd14d2c9074a9542d5149e2, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Modules::IM.Modules.ExtensibleModuleMono
+  m_EditorClassIdentifier: Modules::IM.Modules.CoreExtensibleModule
   <Name>k__BackingField: Humanoid Core
   <Description>k__BackingField: 
 --- !u!114 &8535451133996336894

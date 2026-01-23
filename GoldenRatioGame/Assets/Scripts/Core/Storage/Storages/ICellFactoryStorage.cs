@@ -4,7 +4,10 @@ namespace IM.Storages
 {
     public interface ICellFactoryStorage : IItemMutableStorage
     {
+        IStorableReadOnly ClearAndRemoveCell(IStorageCell cell);
         IStorableReadOnly ClearCell(IStorageCell cell);
+        IStorageCell CreateCell();
         IStorageCell CreateCellAt(int index);
+        void RemoveCell(IStorageCell cell);
     }
 }

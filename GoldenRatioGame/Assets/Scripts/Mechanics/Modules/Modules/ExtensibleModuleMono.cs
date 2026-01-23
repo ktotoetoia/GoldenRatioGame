@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
 using IM.Items;
@@ -7,35 +8,37 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    //todo
-    //add state machine with 3 states: module on ground, module in storage, module as a part of a graph
     [RequireComponent(typeof(SpriteRendererIconDrawer))]
     public class ExtensibleModuleMono : MonoBehaviour, IExtensibleModule
     {
         private readonly List<IPort> _ports =  new();
         private IExtensionController _extensions;
-        private IStorageCell _cell;
         private IIconDrawer  _iconDrawer;
-
+        private ModuleState _state;
         private IIconDrawer IconDrawer => _iconDrawer ??= GetComponent<IIconDrawer>();
         
-        public IIcon Icon => IconDrawer.Icon;
         [field: SerializeField] public string Name { get; private set; }
         [field: SerializeField] public string Description { get; private set;}
+        public IIcon Icon => IconDrawer.Icon;
 
-        public IStorageCell Cell
+        public ModuleState State
         {
-            get => _cell;
+            get => _state;
             set
             {
-                _cell = value;
-                IconDrawer.IsDrawing = value == null;
+                if(_state == value) return;
+                
+                _state = value;
+                IconDrawer.IsDrawing = value == ModuleState.OnGround;
             }
         }
+        
+        public IStorageCell Cell { get; set; }
+
         public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection).ToList();
         public IEnumerable<IPort> Ports => _ports;
         public IExtensionController Extensions => _extensions ??= new GameObjectExtensionController(gameObject);
-
+        
         public void AddPort(IPort port)
         {
             _ports.Add(port);

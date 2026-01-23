@@ -186,6 +186,7 @@ MonoBehaviour:
   - {fileID: 826108804021744781, guid: 56b483d2a19049244a3d09238fbbd0b9, type: 3}
   - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
   - {fileID: 826108804021744781, guid: bdeb95364b5c5654583dbc189433133c, type: 3}
+  - {fileID: 8119833187759213420, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
 --- !u!114 &233926218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -604,7 +605,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb3915c5594416bb7e9853c684013f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coreModulePrefab: {fileID: 8119833187759213420, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
 --- !u!61 &1908329193
 BoxCollider2D:
   m_ObjectHideFlags: 0

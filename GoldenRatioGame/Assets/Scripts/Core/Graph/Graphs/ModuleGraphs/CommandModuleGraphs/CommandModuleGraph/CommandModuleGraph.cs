@@ -86,5 +86,15 @@ namespace IM.Graphs
         public bool CanRedo(int count) => _commands.CanRedo(count);
         public void ClearUndoCommands() => _commands.ClearUndoCommands();
         public void ClearRedoCommands() => _commands.ClearRedoCommands();
+        
+        public bool Contains(IModule module)
+        {
+            return _modules.Contains(module);
+        }
+
+        public bool Contains(IConnection connection)
+        {
+            return _connections.Contains(connection);
+        }
     }
 }

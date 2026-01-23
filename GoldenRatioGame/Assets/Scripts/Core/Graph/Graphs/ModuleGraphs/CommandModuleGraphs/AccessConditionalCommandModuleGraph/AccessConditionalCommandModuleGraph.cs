@@ -88,5 +88,14 @@ namespace IM.Graphs
 
             return false;
         }
+        public bool Contains(IModule module)
+        {
+            return _graph.Contains(module);
+        }
+
+        public bool Contains(IConnection connection)
+        {
+            return _graph.Contains(connection);
+        }
     }
 }
