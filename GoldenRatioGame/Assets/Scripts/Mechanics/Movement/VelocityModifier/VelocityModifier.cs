@@ -3,7 +3,7 @@
 namespace IM.Movement
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    [DefaultExecutionOrder(10)]
+    [DefaultExecutionOrder(VelocityModifierApplyVelocityOrder)]
     public class VelocityModifier : MonoBehaviour, IVelocityModifier
     {
         private VelocityInfo _velocity;
@@ -35,5 +35,7 @@ namespace IM.Movement
                 _velocity = velocityInfo;
             }
         }
+
+        private const int VelocityModifierApplyVelocityOrder = 10;
     }
 }
