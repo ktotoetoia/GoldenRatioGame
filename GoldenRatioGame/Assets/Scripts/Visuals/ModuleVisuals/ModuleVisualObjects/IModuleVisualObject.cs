@@ -13,6 +13,5 @@ namespace IM.Visuals
         IModuleGraphStructureUpdater ModuleGraphStructureUpdater { get; set; }
         
         IPortVisualObject GetPortVisual(IPort port);
-        void ResetTransform();
     }
 }

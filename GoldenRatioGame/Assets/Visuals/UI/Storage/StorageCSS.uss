@@ -1,0 +1,80 @@
+:root {
+    --inv-bg: rgb(26, 26, 26);
+    --inv-border: rgb(180, 180, 180);
+    --cell-bg: rgb(40, 40, 40);
+    --cell-border: rgb(220, 220, 220);
+    --cell-hover-bg: rgb(90, 90, 90);
+    --cell-selected-bg: rgb(255, 128, 0);
+    --cell-selected-border: rgb(255, 200, 120);
+}
+
+.icon {
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    width: 10%;
+}
+
+.storage {
+    padding: 6px;
+    flex-direction: row;
+    flex-grow: 1;
+    background-color: var(--inv-bg);
+    border-width: 6px;
+    border-radius: 0;
+    border-color: var(--inv-border);
+    margin: 14%;
+}
+
+.itemLabel {
+    font-size: 150%;
+    color: white;
+    -unity-font-definition: url("project://database/Assets/Visuals/Fonts/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf?fileID=12800000&guid=585188cdc4600544eb408bee749e4b3a&type=3#ThaleahFat_TTF");
+    -unity-font-style: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    align-self: center;
+}
+
+.cell {
+    margin: 0;
+    background-color: var(--cell-bg);
+    border-width: 6px;
+    border-color: var(--cell-border);
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    padding: 0;
+    height: 80px;
+}
+
+.cell:hover {
+    background-color: var(--cell-hover-bg);
+}
+
+.cell.unity-collection-view__item--selected {
+    background-color: var(--cell-selected-bg);
+    border-color: var(--cell-selected-border);
+}
+
+.unity-repeat-button {
+    display: none;
+}
+
+.unity-base-slider__tracker {
+    display: none;
+}
+
+.unity-base-slider__dragger {
+    width: 50%;
+    border-radius: 10px;
+    left: 25%;
+    right: 25%;
+    margin: 0;
+}
+
+.unity-slider {
+    margin: 0;
+}

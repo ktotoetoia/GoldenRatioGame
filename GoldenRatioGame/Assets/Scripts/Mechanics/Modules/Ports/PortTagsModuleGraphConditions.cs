@@ -1,4 +1,5 @@
 ﻿using IM.Graphs;
+using UnityEngine;
 
 namespace IM.Modules
 {
@@ -31,7 +32,7 @@ namespace IM.Modules
 
         public bool CanAddAndConnect(IModule module, IPort ownerPort, IPort targetPort)
         {
-            return true;
+            return CanAddModule(module) && CanConnect(ownerPort, targetPort);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using IM.Abilities;
 using IM.Graphs;
@@ -10,8 +11,10 @@ namespace IM.Modules
     [DefaultExecutionOrder(10000)]
     public class ModuleEntityTestInput : MonoBehaviour
     {
+        [SerializeField] private bool _debugEditor;
         [SerializeField] private ModuleEntity _moduleEntity;
         [SerializeField] private List<GameObject> _modulesPrefabs;
+        private readonly ModuleTransitioner _moduleTransitioner = new();
         private PreferredKeyboardBindingsAbilityUser _abilityUser;
         private IConditionalCommandModuleGraph _graph;
         private int _modulesAdded;
@@ -31,11 +34,10 @@ namespace IM.Modules
                     _moduleEntity.Initialize(module);
                     continue;
                 }
-
-                IStorageCell cell = Storage.FirstOrDefault(x => x.Item == null) ??
-                                    Storage.CreateCell();
-                Storage.SetItem(cell, module);
-                module.State = ModuleState.StorableState;
+                
+                _moduleTransitioner.ClearState(module,Storage,_graph);
+                _moduleTransitioner.SetStateToStorage(module,Storage,Storage.FirstOrDefault(x => x.Item == null) ??
+                                                                     Storage.CreateCell());
             }
         }
 
@@ -51,26 +53,26 @@ namespace IM.Modules
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 _graph = _moduleEntity.GraphEditor.StartEditing();
-                Debug.Log("start editing");
+                if(_debugEditor) Debug.Log("start editing");
             }
 
             if (Input.GetKeyDown(KeyCode.E))
             {
                 if(_moduleEntity.GraphEditor.TrySaveChanges())
                 {
-                    Debug.Log("Edit Saved");
+                    if(_debugEditor) Debug.Log("Edit Saved");
                     _graph = null;
                     return;
                 }
                 
-                Debug.Log( "Save failed");
+                if(_debugEditor) Debug.Log( "Save failed");
             }
 
             if (Input.GetKeyDown(KeyCode.R))
             {
                 _moduleEntity.GraphEditor.CancelChanges();
                 _graph = null;
-                Debug.Log("Changes Cancelled");
+                if(_debugEditor) Debug.Log("Changes Cancelled");
             }
         }
 
@@ -92,24 +94,24 @@ namespace IM.Modules
                 {
                     foreach (IPort targetPort in _graph.Modules.SelectMany(x => x.Ports))
                     {
-                        if (_graph.CanAddAndConnect(module, port, targetPort))
-                        {
-                            Storage.ClearAndRemoveCell(module.Cell);
+                        if (!_graph.CanAddAndConnect(module, port, targetPort)) continue;
+                        
+                        _moduleTransitioner.ClearState(module,Storage, _graph);
+                        _moduleTransitioner.SetStateToGraphAndAdd(module,port,targetPort,_graph);
                             
-                            _graph.AddAndConnect(module, port, targetPort);
-                            module.State = ModuleState.GraphState;
-                            
-                            return;
-                        }
+                        return;
                     }
                 }
             }
         }
 
         private void RemoveModule()
-        {     
-            _graph.RemoveModule(_moduleEntity.GraphEditor.Graph.Modules.LastOrDefault(x => 
-                x != _moduleEntity.GraphEditor.Graph.Modules.FirstOrDefault()));
+        {
+            IModule module = _moduleEntity.GraphEditor.Graph.Modules.LastOrDefault(x =>
+                x != _moduleEntity.GraphEditor.Graph.Modules.FirstOrDefault());
+            
+            _moduleTransitioner.ClearState(module as IExtensibleModule, Storage,_graph);
+            _moduleTransitioner.SetStateToStorage(module as IExtensibleModule, Storage,Storage.FirstOrDefault(x => x.Item == null));
         }
     }
 }

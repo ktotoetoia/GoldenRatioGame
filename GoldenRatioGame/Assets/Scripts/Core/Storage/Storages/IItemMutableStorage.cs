@@ -10,6 +10,7 @@ namespace IM.Storages
         event Action<IStorageCell, IStorableReadOnly> ItemRemoved;
 
         void SetItem(IStorageCell cell, IStorableReadOnly item);
+        IStorableReadOnly ClearCell(IStorageCell cell);
 
         IList GetListForUI();
     }

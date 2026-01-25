@@ -2,7 +2,8 @@
 {
     public enum ModuleState
     {
-        OnGround,
+        None,
+        GroundState,
         StorableState,
         GraphState,
     }

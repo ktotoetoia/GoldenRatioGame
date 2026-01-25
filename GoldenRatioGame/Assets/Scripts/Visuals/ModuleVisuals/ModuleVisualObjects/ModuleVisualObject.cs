@@ -46,22 +46,15 @@ namespace IM.Visuals
             }
         }
         
-        public void AddPort(IPortVisualObject port)
+        public void AddPort(IPortVisualObject port, IHierarchyTransform hierarchyTransform)
         {
             _portVisuals.Add(port);
+            _transform.AddChildKeepLocal(hierarchyTransform);
         }
         
         public IPortVisualObject GetPortVisual(IPort port)
         {
             return _portVisuals.FirstOrDefault(x => x.Port == port);
-        }
-
-        public void ResetTransform()
-        {
-            _transform.SetParent(null);
-            _transform.LocalPosition = default;
-            _transform.LocalRotation = default;
-            _transform.LocalScale = default;
         }
 
         public void Dispose()

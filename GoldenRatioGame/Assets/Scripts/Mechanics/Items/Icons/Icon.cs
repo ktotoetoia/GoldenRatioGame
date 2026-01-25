@@ -6,11 +6,11 @@ namespace IM.Items
     [Serializable]
     public class Icon : IIcon
     {
-        [field: SerializeField] public Sprite Texture { get; private set; }
+        [field: SerializeField] public Sprite Sprite { get; private set; }
         
         public Icon(Sprite texture)
         {
-            Texture = texture;
+            Sprite = texture;
         }
     }
 }

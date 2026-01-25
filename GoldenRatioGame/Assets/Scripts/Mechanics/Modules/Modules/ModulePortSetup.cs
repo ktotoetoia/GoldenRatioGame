@@ -22,7 +22,7 @@ namespace IM.Visuals
             {
                 IPort port = portInfo.Tag == null ? new Port(_module) : new TaggedPort(_module, portInfo.Tag);
                 
-                _module.AddPort(port);
+                _module.PortsList.Add(port);
                 PortsInfos.Add(port,portInfo);
             }
         }

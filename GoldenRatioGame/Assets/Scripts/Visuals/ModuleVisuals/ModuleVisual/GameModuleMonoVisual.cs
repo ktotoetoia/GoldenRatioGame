@@ -27,7 +27,7 @@ namespace IM.Visuals
                 portTransform.LocalScale = Vector3.one;
                 portTransform.LocalRotation = Quaternion.Euler(0f, 0f, portInfo.EulerZRotation);
                 
-                moduleVisualObject.AddPort(new PortVisualObject(moduleVisualObject,port, portTransform));
+                moduleVisualObject.AddPort(new PortVisualObject(moduleVisualObject,port, portTransform), portTransform);
             }
             
             return moduleVisualObject;
