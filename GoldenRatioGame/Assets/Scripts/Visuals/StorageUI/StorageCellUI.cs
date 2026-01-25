@@ -29,13 +29,14 @@ namespace IM.UI
 
         public StorageCellUI()
         {
-            _label = new Label();
             _iconDisplay = new VisualElement();
+            _label = new Label();
             
             Add(_iconDisplay);
             Add(_label);
+            
             AddToClassList(StorageClassLists.Cell); 
-            _iconDisplay.AddToClassList("icon");
+            _iconDisplay.AddToClassList(StorageClassLists.Icon);
             _label.AddToClassList(StorageClassLists.ItemLabel);
         }
         
@@ -44,7 +45,7 @@ namespace IM.UI
             _label.text = (newStorable as IHaveName)?.Name ?? "empty";
             if (newStorable is IHaveIcon haveIcon)
             {
-                _iconDisplay.style.backgroundImage = new StyleBackground(Background.FromSprite(haveIcon.Icon.Sprite) );
+                _iconDisplay.style.backgroundImage = new StyleBackground(Background.FromSprite(haveIcon.Icon.Sprite));
             }
         }
     }

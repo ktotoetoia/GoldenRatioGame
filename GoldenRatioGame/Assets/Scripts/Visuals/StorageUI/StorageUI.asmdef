@@ -1,4 +1,4 @@
 {
 	"name": "StorageUI",
-	"references":[ "GUID:033dc73b24732d34fa710de1693ded1a", "GUID:dd0de67dea1cdae4b972addcee29e5e5", "GUID:9bf81f7bcd64f4f45818fc5a123cb397" ]
+	"references":[ "GUID:033dc73b24732d34fa710de1693ded1a", "GUID:dd0de67dea1cdae4b972addcee29e5e5"]
 }

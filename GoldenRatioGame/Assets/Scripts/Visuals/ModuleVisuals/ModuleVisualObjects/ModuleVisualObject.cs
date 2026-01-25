@@ -62,5 +62,13 @@ namespace IM.Visuals
             _transform.SetParent(null);
             Destroy(gameObject);
         }
+        
+        public void Reset()
+        {
+            _transform.SetParent(null);
+            _transform.LocalPosition = new Vector3(0, 0, 0);
+            _transform.LocalScale = new Vector3(1, 1, 1);
+            _transform.LocalRotation = Quaternion.identity;
+        }
     }
 }

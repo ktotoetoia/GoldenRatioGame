@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e91bb83ecf4589882bd9882a72ec28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Modules::IM.Modules.ModuleEntityTestInput
+  _debugEditor: 0
   _moduleEntity: {fileID: 1908329188}
   _modulesPrefabs:
   - {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
@@ -201,7 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
   m_PanelSettings: {fileID: 11400000, guid: 26296ce5bac6104418fb111e33e3de6c, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: d87bc0ba5be958c4b8881a645c083306, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 5dbed2480c8136c4885264341684cfb6, type: 3}
   m_SortingOrder: 0
   m_Position: 0
   m_WorldSpaceSizeMode: 1
@@ -687,6 +688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84fcd05b82d47a4a6d3f13f4491f01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ModuleGraphVisualObserver
+  _moduleN: 0
 --- !u!114 &1908329199
 MonoBehaviour:
   m_ObjectHideFlags: 0

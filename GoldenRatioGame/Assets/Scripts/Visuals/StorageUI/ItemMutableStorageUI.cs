@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using IM.Storages;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace IM.UI
@@ -16,24 +18,28 @@ namespace IM.UI
             ListView = new ListView
             {
                 virtualizationMethod = CollectionVirtualizationMethod.DynamicHeight,
-                style = { flexGrow = 1 }   
+                style = { flexGrow = 1 },
+                focusable = false,
+                allowAdd = false,
+                allowRemove = false,
             };
-
+            
             Add(ListView);
+            AddToClassList(StorageClassLists.Storage);
         }
 
         public void SetStorage(IItemMutableStorage itemMutableStorage)
         {
-            ItemMutableStorage = itemMutableStorage ?? throw new System.NullReferenceException("ItemMutableStorage is null");
+            ItemMutableStorage = itemMutableStorage ?? throw new NullReferenceException("ItemMutableStorage is null");
 
             ListView.itemsSource = ItemMutableStorage.GetListForUI();
             ListView.makeItem = () => new StorageCellUI();
             
             ListView.bindItem = (element, index) =>
             {
-                StorageCellUI label = element as StorageCellUI;
+                if (element is not StorageCellUI cellUI) throw new InvalidOperationException();
                 
-                label.Cell = ItemMutableStorage[index];
+                cellUI.Cell = ItemMutableStorage[index];
             };
 
             itemMutableStorage.ItemAdded += (_, _) => ListView.Rebuild();

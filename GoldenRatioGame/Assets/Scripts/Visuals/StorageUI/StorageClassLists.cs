@@ -2,10 +2,8 @@
 {
     public static class StorageClassLists
     {
-        public const string StorageContainer = "storageContainer";
-        public const string Inventory = "inventory";
-        public const string SelectedItemNameLabel = "selectedItemNameLabel";
-        public const string SelectedItemDisplay = "selectedItemDisplay";
+        public const string Icon = "icon";
+        public const string Storage = "storage";
         public const string Cell = "cell";
         public const string ItemLabel = "itemLabel";
     }

@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Visuals/UI/Storage/StorageCSS.uss?fileID=7433441132597879392&amp;guid=7068e01175a38d842a96de40e03466f2&amp;type=3#StorageCSS" />
+    <Style src="project://database/Assets/Visuals/UI/ModuleEditor/ModuleEditorCSS.uss?fileID=7433441132597879392&amp;guid=5c0938a162ce8f140a4c9f402f357cbb&amp;type=3#ModuleEditorCSS" />
+    <ui:VisualElement name="AllContainer" class="allContainer" style="flex-grow: 1;">
+        <ui:VisualElement name="ModuleEditorContainer" class="moduleEditorContainer" style="flex-grow: 1;" />
+        <ui:VisualElement name="StorageContainer" class="storageContainer" style="flex-grow: 1;">
+            <IM.UI.ItemMutableStorageUI />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

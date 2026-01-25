@@ -1,0 +1,15 @@
+.allContainer {
+    flex-direction: row;
+    padding-top: 3%;
+    padding-right: 3%;
+    padding-bottom: 3%;
+    padding-left: 3%;
+}
+
+.moduleEditorContainer {
+    width: 70%;
+}
+
+.storageContainer {
+    width: 30%;
+}

@@ -58,7 +58,7 @@ namespace IM.Visuals
             if (!gameModule.Extensions.TryGetExtension(out IModuleVisual moduleVisual))
                 throw new ArgumentException("IModuleVisual extension required");
             
-            IModuleVisualObject visualObject = moduleVisual.CreateModuleVisualObject();
+            IModuleVisualObject visualObject = moduleVisual.Get();
             _moduleVisuals.Add(gameModule, visualObject);
             _globalTransform.AddChildKeepLocal(visualObject.Transform);
             visualObject.ModuleGraphStructureUpdater = this;
@@ -75,7 +75,7 @@ namespace IM.Visuals
             visualObject.Visibility = false;
             visualObject.ModuleGraphStructureUpdater = null;
             _globalTransform.RemoveChild(visualObject.Transform);
-            visualObject.Dispose();
+            gameModule.Extensions.GetExtension<IModuleVisual>().Release(visualObject);
         }
 
         private void HandleConnected(IConnection connection)
