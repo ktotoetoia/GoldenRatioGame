@@ -6,11 +6,11 @@ namespace IM.Storages
     public interface IItemMutableStorage : IReadOnlyStorage
     {
         event Action<int, int> CellsCountChanged;
-        event Action<IStorageCell, IStorableReadOnly> ItemAdded;
-        event Action<IStorageCell, IStorableReadOnly> ItemRemoved;
+        event Action<IStorageCellReadonly, IStorableReadOnly> ItemAdded;
+        event Action<IStorageCellReadonly, IStorableReadOnly> ItemRemoved;
 
-        void SetItem(IStorageCell cell, IStorableReadOnly item);
-        IStorableReadOnly ClearCell(IStorageCell cell);
+        void SetItem(IStorageCellReadonly cell, IStorableReadOnly item);
+        IStorableReadOnly ClearCell(IStorageCellReadonly cell);
 
         IList GetListForUI();
     }

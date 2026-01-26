@@ -1,11 +1,7 @@
-﻿using System;
-
-namespace IM.Storages
+﻿namespace IM.Storages
 {
-    public interface IStorageCell
+    public interface IStorageCell : IStorageCellReadonly
     {
-        IStorableReadOnly Item { get; set; }
-        
-        event Action<IStorableReadOnly, IStorableReadOnly> ItemChanged;
+        void SetItem(IStorableReadOnly item);
     }
 }

@@ -2,9 +2,9 @@
 
 namespace IM.Storages
 {
-    public interface IReadOnlyStorage : IReadOnlyList<IStorageCell>
+    public interface IReadOnlyStorage : IReadOnlyList<IStorageCellReadonly>
     {
-        bool Contains(IStorageCell cell);
-        int IndexOf(IStorageCell cell);
+        bool Contains(IStorageCellReadonly cell);
+        int IndexOf(IStorageCellReadonly cell);
     }
 }

@@ -1,38 +1,40 @@
 ﻿using System;
-using UnityEngine;
 
 namespace IM.Storages
 {
     public class StorageCell : IStorageCell
     {
         private IStorable _item;
+
         public event Action<IStorableReadOnly, IStorableReadOnly> ItemChanged;
+        public IItemMutableStorage Owner { get; private set; }
+        public IStorableReadOnly Item => _item;
 
-        public IStorableReadOnly Item
+        public StorageCell(IItemMutableStorage owner)
         {
-            get => _item;
-            set
-            {
-                if (_item == value)
-                {
-                    return;
-                }
-                
-                if (value is null)
-                {
-                    SetItemToNull();
-                    return;
-                }
-
-                if (value is not IStorable internalStorageItem)
-                {
-                    throw new ArgumentException("Item must implement IStorageItemSetter");
-                }
-
-                SetItem(internalStorageItem);
-            }
+            Owner = owner;
         }
 
+        public void SetItem(IStorableReadOnly item)
+        {
+            if (_item == item)
+            {
+                return;
+            }
+                
+            if (item is null)
+            {
+                SetItemToNull();
+                return;
+            }
+
+            if (item is not IStorable internalStorageItem)
+            {
+                throw new ArgumentException("Item must implement IStorable");
+            }
+
+            SetItem(internalStorageItem);
+        }
 
         private void SetItemToNull()
         {

@@ -10,11 +10,11 @@ namespace IM.UI
     {
         private readonly Label _label;
         private readonly VisualElement _iconDisplay;
-        private IStorageCell _cell;
+        private IStorageCellReadonly _cell;
 
         public string Name { get => _label.text; set => _label.text = value; }
         
-        public IStorageCell Cell
+        public IStorageCellReadonly Cell
         {
             get => _cell;
             set

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace IM.Storages
 {
@@ -11,19 +10,19 @@ namespace IM.Storages
         public int Count => _cells.Count;
 
         public event Action<int, int> CellsCountChanged;
-        public event Action<IStorageCell, IStorableReadOnly> ItemAdded;
-        public event Action<IStorageCell, IStorableReadOnly> ItemRemoved;
+        public event Action<IStorageCellReadonly, IStorableReadOnly> ItemAdded;
+        public event Action<IStorageCellReadonly, IStorableReadOnly> ItemRemoved;
         
-        public IStorageCell this[int index] => _cells[index];
+        public IStorageCellReadonly this[int index] => _cells[index];
 
-        public IStorageCell CreateCell()
+        public IStorageCellReadonly CreateCell()
         {
             return CreateCellAt(_cells.Count);
         }
 
-        public IStorageCell CreateCellAt(int index)
+        public IStorageCellReadonly CreateCellAt(int index)
         {            
-            StorageCell cell = new StorageCell();
+            StorageCell cell = new StorageCell(this);
             
             _cells.Insert(index,cell);
             CellsCountChanged?.Invoke(Count,Count - 1);
@@ -31,46 +30,46 @@ namespace IM.Storages
             return cell;
         }
 
-        public IStorableReadOnly ClearAndRemoveCell(IStorageCell cell)
+        public IStorableReadOnly ClearAndRemoveCell(IStorageCellReadonly cell)
         {
-            IStorableReadOnly stored =ClearCell(cell);
+            IStorableReadOnly stored = ClearCell(cell);
             
             RemoveCell(cell);
 
             return stored;
         }
 
-        public void RemoveCell(IStorageCell cell)
+        public void RemoveCell(IStorageCellReadonly cell)
         {
-            if (_cells.Remove(cell))
+            if (cell is IStorageCell c && _cells.Remove(c))
                 CellsCountChanged?.Invoke(Count,Count + 1);
         }
 
-        public IStorableReadOnly ClearCell(IStorageCell cell)
+        public IStorableReadOnly ClearCell(IStorageCellReadonly cell)
         {            
-            if (!_cells.Contains(cell))
+            if (cell is not IStorageCell c || !_cells.Contains(c))
             {
                 throw new ArgumentException($"This storage does not contains cell: {cell}" );
             }
 
             IStorableReadOnly item = cell.Item;
             
-            cell.Item = null;
+            c.SetItem(null);
             
             ItemRemoved?.Invoke(cell, item);
             
             return item;
         }
 
-        public void SetItem(IStorageCell cell, IStorableReadOnly item)
+        public void SetItem(IStorageCellReadonly cell, IStorableReadOnly item)
         {
-            if (!_cells.Contains(cell))
+            if (cell is not IStorageCell c || !_cells.Contains(c))
             {
                 throw new ArgumentException($"This storage does not contain cell: {cell}");
             }
             
             IStorableReadOnly previous = cell.Item;
-            cell.Item = item;
+            c.SetItem( item);
 
             if (previous != null)
             {
@@ -82,17 +81,19 @@ namespace IM.Storages
             }
         }
 
-        public bool Contains(IStorageCell cell)
+        public bool Contains(IStorageCellReadonly cell)
         {
-            return _cells.Contains(cell);
+            return cell is IStorageCell c && _cells.Contains(c);
         }
 
-        public int IndexOf(IStorageCell cell)
+        public int IndexOf(IStorageCellReadonly cell)
         {
-            return _cells.IndexOf(cell);
+            if(cell is not IStorageCell c) return -1;
+            
+            return _cells.IndexOf(c);
         }
         
-        public IEnumerator<IStorageCell> GetEnumerator()
+        public IEnumerator<IStorageCellReadonly> GetEnumerator()
         {
             return _cells.GetEnumerator();
         }
