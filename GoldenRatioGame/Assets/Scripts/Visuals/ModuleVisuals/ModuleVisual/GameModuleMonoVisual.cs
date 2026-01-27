@@ -10,31 +10,28 @@ namespace IM.Visuals
     public class GameModuleMonoVisual : MonoBehaviour, IModuleVisual
     {
         [SerializeField] private GameObject _visualPrefab;
-
         private ModulePortSetup _portSetup;
         private IObjectPool<IModuleVisualObject> _pool;
-        private ModulePortSetup PortSetup => _portSetup ??= GetComponent<ModulePortSetup>();
-
-        private void Awake()
-        {
-            _pool = new ObjectPool<IModuleVisualObject>(
-                Create,
-                OnGet,
-                OnRelease,
-                OnDestroyPooledObject
-            );
-        }
         
-        public int CountInactive => _pool.CountInactive;
-        public IModuleVisualObject Get() => _pool.Get();
-        public PooledObject<IModuleVisualObject> Get(out IModuleVisualObject v) => _pool.Get(out v);
-        public void Release(IModuleVisualObject element)=> _pool.Release(element);
-        public void Clear() => _pool.Clear();
+        private IObjectPool<IModuleVisualObject> Pool => _pool ??=new ObjectPool<IModuleVisualObject>(
+            Create,
+            OnGet,
+            OnRelease,
+            OnDestroyPooledObject
+        );
+        
+        private ModulePortSetup PortSetup => _portSetup ??= GetComponent<ModulePortSetup>();
+        
+        public int CountInactive => Pool.CountInactive;
+        public IModuleVisualObject Get() => Pool.Get();
+        public PooledObject<IModuleVisualObject> Get(out IModuleVisualObject v) => Pool.Get(out v);
+        public void Release(IModuleVisualObject element)=> Pool.Release(element);
+        public void Clear() => Pool.Clear();
 
         private IModuleVisualObject Create()
         {
-            var go = Instantiate(_visualPrefab, transform);
-            var visual = go.GetComponent<ModuleVisualObject>();
+            GameObject go = Instantiate(_visualPrefab, transform);
+            ModuleVisualObject visual = go.GetComponent<ModuleVisualObject>();
 
             visual.Owner = GetComponent<IExtensibleModule>();
             visual.AnimationChanges = GetComponents<IAnimationChange>();
@@ -54,17 +51,11 @@ namespace IM.Visuals
                 );
             }
 
-            visual.Visibility = false;
-            
             return visual;
         }
 
         private static void OnGet(IModuleVisualObject visual) => visual.Visibility = true;
-        private static void OnRelease(IModuleVisualObject visual)
-        {
-            visual.Reset();
-            visual.Visibility = false;
-        }
+        private static void OnRelease(IModuleVisualObject visual) => visual.Reset();
         private static void OnDestroyPooledObject(IModuleVisualObject visual) => visual.Dispose();
     }
 }

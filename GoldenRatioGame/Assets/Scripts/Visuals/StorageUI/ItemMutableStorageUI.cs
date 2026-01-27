@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Linq;
 using IM.Storages;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace IM.UI
@@ -11,7 +8,7 @@ namespace IM.UI
     public partial class ItemMutableStorageUI : VisualElement
     {
         public ListView ListView { get; private set; }
-        public IItemMutableStorage ItemMutableStorage { get; private set; }
+        public IStorage Storage { get; private set; }
 
         public ItemMutableStorageUI()
         {
@@ -28,23 +25,23 @@ namespace IM.UI
             AddToClassList(StorageClassLists.Storage);
         }
 
-        public void SetStorage(IItemMutableStorage itemMutableStorage)
+        public void SetStorage(IStorage storage)
         {
-            ItemMutableStorage = itemMutableStorage ?? throw new NullReferenceException("ItemMutableStorage is null");
+            Storage = storage ?? throw new NullReferenceException("ItemMutableStorage is null");
 
-            ListView.itemsSource = ItemMutableStorage.GetListForUI();
+            ListView.itemsSource = Storage.GetListForUI();
             ListView.makeItem = () => new StorageCellUI();
             
             ListView.bindItem = (element, index) =>
             {
                 if (element is not StorageCellUI cellUI) throw new InvalidOperationException();
                 
-                cellUI.Cell = ItemMutableStorage[index];
+                cellUI.Cell = Storage[index];
             };
 
-            itemMutableStorage.ItemAdded += (_, _) => ListView.Rebuild();
-            itemMutableStorage.ItemRemoved += (_, _) => ListView.Rebuild();
-            itemMutableStorage.CellsCountChanged += (_, _) => ListView.Rebuild();
+            storage.ItemAdded += (_, _) => ListView.Rebuild();
+            storage.ItemRemoved += (_, _) => ListView.Rebuild();
+            storage.CellsCountChanged += (_, _) => ListView.Rebuild();
         }
     }
 }

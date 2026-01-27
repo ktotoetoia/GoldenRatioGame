@@ -1,8 +1,6 @@
-﻿using System.Collections;
-
-namespace IM.Storages
+﻿namespace IM.Storages
 {
-    public interface ICellFactoryStorage : IItemMutableStorage
+    public interface ICellFactoryStorage : IStorage
     {
         IStorableReadOnly ClearAndRemoveCell(IStorageCellReadonly cell);
         IStorageCellReadonly CreateCell();

@@ -59,12 +59,14 @@ namespace IM.Visuals
 
         public void Dispose()
         {
-            _transform.SetParent(null);
+            Reset();
             Destroy(gameObject);
         }
         
         public void Reset()
         {
+            Visibility = false;
+            ModuleGraphStructureUpdater = null;
             _transform.SetParent(null);
             _transform.LocalPosition = new Vector3(0, 0, 0);
             _transform.LocalScale = new Vector3(1, 1, 1);

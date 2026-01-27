@@ -3,7 +3,7 @@ using IM.Transforms;
 
 namespace IM.Visuals
 {
-    public interface IPortVisualObject 
+    public interface IPortVisualObject : IVisualObject
     {
         IModuleVisualObject OwnerVisualObject { get; }
         IPort Port { get; }

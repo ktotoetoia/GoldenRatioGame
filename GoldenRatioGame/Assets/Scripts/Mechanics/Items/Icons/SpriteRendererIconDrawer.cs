@@ -28,7 +28,6 @@ namespace IM.Items
                 _renderer ??= GetComponent<SpriteRenderer>();
                 _renderer.enabled = value;
                 _isDrawing = value;
-                
             }
         }
     }

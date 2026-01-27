@@ -1,6 +1,5 @@
 ﻿using IM.Items;
 using IM.Storages;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace IM.UI

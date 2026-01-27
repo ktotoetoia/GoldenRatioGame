@@ -36,9 +36,9 @@ namespace IM.Modules
         {
             if(!_isOn) return;
             
-            if (_entity is { GraphEditor: not null })
+            if (_entity is { ModuleController: not null })
             {
-                Graph = _entity.GraphEditor.Graph;
+                Graph = _entity.ModuleController.GraphEditor.Graph;
             }
             
             if (Graph == null || Graph.Nodes == null || Graph.Edges == null) return;

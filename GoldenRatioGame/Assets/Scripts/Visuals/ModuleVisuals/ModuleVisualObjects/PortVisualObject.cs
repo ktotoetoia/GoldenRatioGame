@@ -9,11 +9,15 @@ namespace IM.Visuals
         public IPort Port { get; }
         public ITransform Transform { get; }
         
+        public bool Visibility { get; set; }
+        
         public PortVisualObject(IModuleVisualObject ownerVisualObject, IPort port, ITransform transform)
         {
             OwnerVisualObject = ownerVisualObject;
             Port = port;
             Transform = transform;
         }
+
+        public void Dispose() => Visibility = false;
     }
 }

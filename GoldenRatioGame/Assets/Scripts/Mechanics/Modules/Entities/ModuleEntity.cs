@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using IM.Abilities;
+﻿using IM.Abilities;
 using IM.Graphs;
-using NUnit.Framework;
+using IM.Storages;
 using UnityEngine;
 
 namespace IM.Modules
@@ -9,31 +8,20 @@ namespace IM.Modules
     public class ModuleEntity : MonoBehaviour, IModuleEntity
     {
         public GameObject GameObject => gameObject;
-        public IModuleGraphEditor<IConditionalCommandModuleGraph> GraphEditor { get; private set; }
+        public IModuleController ModuleController { get; private set; }
         public IAbilityPool AbilityPool { get; } = new AbilityPool();
 
         public void Initialize(IExtensibleModule coreModule)
         {
-            CommandModuleGraph graph = new();
-            
-            ConditionalCommandModuleGraph conditionalCommandModuleGraph = new ConditionalCommandModuleGraph(graph, 
-                new CompositeModuleGraphConditions(new List<IModuleGraphConditions>()
-            {
-                new DefaultModuleGraphConditions(graph),
-                new PortTagsModuleGraphConditions(),
-            }));
-            
-            GraphEditor = new CommandModuleGraphEditor<IConditionalCommandModuleGraph>(conditionalCommandModuleGraph,new AccessConditionalCommandModuleGraphFactory());
+            ModuleController = new ModuleController(new CellFactoryStorage());
             
             foreach (IModuleGraphSnapshotObserver observer in GetComponents<IModuleGraphSnapshotObserver>())
-            {
-                GraphEditor.AddObserver(observer);
-            }
-
-            ICommandModuleGraph f = GraphEditor.StartEditing();
-            coreModule.State = ModuleState.GraphState;
+                ModuleController.GraphEditor.Observers.Add(observer);
+            Debug.Log("initialzied");
+            ModuleController.AddToStorage(coreModule);
+            ICommandModuleGraph f = ModuleController.GraphEditor.StartEditing();
             f.AddModule(coreModule);
-            GraphEditor.TrySaveChanges();
+            ModuleController.GraphEditor.TrySaveChanges();
         }
     }
 }

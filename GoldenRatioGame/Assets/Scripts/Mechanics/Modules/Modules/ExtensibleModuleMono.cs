@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
 using IM.Items;
@@ -28,7 +27,7 @@ namespace IM.Modules
         public ModuleState State
         {
             get => _state;
-            set => IconDrawer.IsDrawing = (_state = value) == ModuleState.GroundState;
+            set => IconDrawer.IsDrawing = (_state = value) == ModuleState.Show;
         }
     }
 }

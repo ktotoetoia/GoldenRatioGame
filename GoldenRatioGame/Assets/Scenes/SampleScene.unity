@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8518444a7f88477aa501845eeaf202e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: StorageUI::IM.UI.DocumentSigma
+  _moduleEntity: {fileID: 1908329188}
   _document: {fileID: 233926218}
 --- !u!1 &519420028
 GameObject:
@@ -688,7 +689,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84fcd05b82d47a4a6d3f13f4491f01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ModuleGraphVisualObserver
-  _moduleN: 0
 --- !u!114 &1908329199
 MonoBehaviour:
   m_ObjectHideFlags: 0

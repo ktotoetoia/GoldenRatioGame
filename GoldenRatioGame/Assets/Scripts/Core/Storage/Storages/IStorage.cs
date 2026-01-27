@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace IM.Storages
 {
-    public interface IItemMutableStorage : IReadOnlyStorage
+    public interface IStorage : IReadOnlyStorage
     {
         event Action<int, int> CellsCountChanged;
         event Action<IStorageCellReadonly, IStorableReadOnly> ItemAdded;

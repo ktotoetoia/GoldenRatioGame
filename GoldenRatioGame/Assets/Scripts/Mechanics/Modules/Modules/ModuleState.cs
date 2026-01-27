@@ -3,8 +3,7 @@
     public enum ModuleState
     {
         None,
-        GroundState,
-        StorableState,
-        GraphState,
+        Show,
+        Hide,
     }
 }

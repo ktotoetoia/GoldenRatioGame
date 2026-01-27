@@ -2,105 +2,130 @@
 using System.Collections.Generic;
 using IM.Graphs;
 using IM.Modules;
-using IM.Movement;
 using IM.Transforms;
-using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class ModuleGraphVisualObserver : MonoBehaviour, IModuleGraphSnapshotObserver, IModuleGraphStructureUpdater
+    public class ModuleGraphVisualObserver : IModuleGraphSnapshotObserver, IModuleGraphStructureUpdater, IDisposable
     {
-        [SerializeField] private int _moduleN;
-        private readonly IHierarchyTransform _globalTransform = new HierarchyTransform();
+        private readonly IHierarchyTransform _transform;
         private readonly ITraversal _traversal = new BreadthFirstTraversal();
         private readonly IPortAligner _portAligner = new PortAligner();
         private readonly Dictionary<IExtensibleModule, IModuleVisualObject> _moduleVisuals = new();
-        private ModuleGraphSnapshotDiffer _snapshotDiffer;
-        private IVectorMovement _vectorMovement;
+        private readonly ModuleGraphSnapshotDiffer _snapshotDiffer;
 
-        private ModuleGraphSnapshotDiffer SnapshotDiffer =>
-            _snapshotDiffer ??= new ModuleGraphSnapshotDiffer
+        public ModuleGraphVisualObserver() : this(new HierarchyTransform())
+        {
+        }
+
+        public ModuleGraphVisualObserver(IHierarchyTransform transform)
+        {
+            _transform = transform ?? throw new ArgumentNullException(nameof(transform));
+
+            _snapshotDiffer = new ModuleGraphSnapshotDiffer
             {
                 OnModuleAdded = HandleModuleAdded,
                 OnModuleRemoved = HandleModuleRemoved,
                 OnConnected = HandleConnected,
             };
-
-        private void Awake()
-        {
-            _vectorMovement = GetComponent<IVectorMovement>();
-        }
-
-        private void Update()
-        {
-            if (_vectorMovement.MovementDirection.x != 0)
-            {
-                _globalTransform.LocalScale =
-                    _vectorMovement.MovementDirection.x > 0
-                        ? Vector3.one
-                        : new Vector3(-1f, 1f, 1f);
-            }
-
-            _globalTransform.Position = transform.position;
         }
 
         public void OnGraphUpdated(IModuleGraphReadOnly graph)
         {
-            SnapshotDiffer.OnGraphUpdated(graph);
+            if (graph == null)
+                throw new ArgumentNullException(nameof(graph));
+
+            _snapshotDiffer.OnGraphUpdated(graph);
         }
 
         private void HandleModuleAdded(IModule module)
         {
-            if (module is not IExtensibleModule gameModule)
-                throw new ArgumentException("Observer supports only IGameModule");
-            if (_moduleVisuals.ContainsKey(gameModule))
-                throw new ArgumentException($"Module ({gameModule}) already added");
-            if (!gameModule.Extensions.TryGetExtension(out IModuleVisual moduleVisual))
-                throw new ArgumentException("IModuleVisual extension required");
-            
+            if (module == null)
+                throw new ArgumentNullException(nameof(module));
+            if (module is not IExtensibleModule extensibleModule)
+                throw new InvalidOperationException("Module must implement IExtensibleModule.");
+            if (_moduleVisuals.ContainsKey(extensibleModule))
+                throw new InvalidOperationException("Module visual already exists.");
+            if (!extensibleModule.Extensions.TryGetExtension(out IModuleVisual moduleVisual))
+                throw new InvalidOperationException("IModuleVisual extension is required.");
+
             IModuleVisualObject visualObject = moduleVisual.Get();
-            _moduleVisuals.Add(gameModule, visualObject);
-            _globalTransform.AddChildKeepLocal(visualObject.Transform);
+
+            _moduleVisuals.Add(extensibleModule, visualObject);
+            _transform.AddChildKeepLocal(visualObject.Transform);
+
             visualObject.ModuleGraphStructureUpdater = this;
             visualObject.Visibility = true;
         }
 
         private void HandleModuleRemoved(IModule module)
         {
-            if (module is not IExtensibleModule gameModule)
-                throw new ArgumentException("Observer supports only IGameModule");
-            if (!_moduleVisuals.Remove(gameModule, out IModuleVisualObject visualObject))
-                throw new ArgumentException($"Module ({gameModule}) was not added");
-            
-            visualObject.Visibility = false;
-            visualObject.ModuleGraphStructureUpdater = null;
-            _globalTransform.RemoveChild(visualObject.Transform);
-            gameModule.Extensions.GetExtension<IModuleVisual>().Release(visualObject);
+            if (module == null)
+                throw new ArgumentNullException(nameof(module));
+            if (module is not IExtensibleModule extensibleModule)
+                throw new InvalidOperationException("Module must implement IExtensibleModule.");
+            if (!_moduleVisuals.Remove(extensibleModule, out IModuleVisualObject visualObject))
+                throw new InvalidOperationException("Module visual does not exist.");
+
+            _transform.RemoveChild(visualObject.Transform);
+            extensibleModule.Extensions.GetExtension<IModuleVisual>().Release(visualObject);
         }
 
         private void HandleConnected(IConnection connection)
         {
+            if (connection == null)
+                throw new ArgumentNullException(nameof(connection));
             if (connection.Port1.Module is not IExtensibleModule moduleA ||
                 connection.Port2.Module is not IExtensibleModule moduleB)
-                throw new ArgumentException("Observer supports only IGameModule");
+                throw new InvalidOperationException("Both modules must implement IExtensibleModule.");
+            if (!_moduleVisuals.TryGetValue(moduleA, out var visualA) ||
+                !_moduleVisuals.TryGetValue(moduleB, out var visualB))
+                throw new InvalidOperationException("Module visual does not exist.");
 
             _portAligner.AlignPorts(
-                _moduleVisuals[moduleA].GetPortVisual(connection.Port1),
-                _moduleVisuals[moduleB].GetPortVisual(connection.Port2));
+                visualA.GetPortVisual(connection.Port1),
+                visualB.GetPortVisual(connection.Port2));
         }
 
         public void OnPortTransformChanged(IPort port)
         {
+            if (port == null)
+                throw new ArgumentNullException(nameof(port));
+
             foreach ((IExtensibleModule module, IPort viaPort) in
                      _traversal.EnumerateModulesAlongConnection<IExtensibleModule, IPort>(port))
             {
                 IPort otherPort = viaPort.Connection.GetOtherPort(viaPort);
-                
-                if (otherPort?.Module is not IExtensibleModule otherModule) continue;
-                if (_moduleVisuals[module].GetPortVisual(viaPort) is not { } fromVisual) continue;
-                if (_moduleVisuals[otherModule].GetPortVisual(otherPort) is not { } toVisual) continue;
-                
+
+                if (otherPort?.Module is not IExtensibleModule otherModule)
+                    continue;
+                if (!_moduleVisuals.TryGetValue(module, out var fromModuleVisual))
+                    continue;
+                if (!_moduleVisuals.TryGetValue(otherModule, out var toModuleVisual))
+                    continue;
+
+                var fromVisual = fromModuleVisual.GetPortVisual(viaPort);
+                var toVisual = toModuleVisual.GetPortVisual(otherPort);
+
+                if (fromVisual == null || toVisual == null)
+                    continue;
+
                 _portAligner.AlignPorts(fromVisual, toVisual);
+            }
+        }
+
+        public void Dispose()
+        {
+            _transform.SetParent(null);
+            
+            foreach ((IExtensibleModule module, IModuleVisualObject visualObject) in _moduleVisuals)
+            {
+                module.Extensions.GetExtension<IModuleVisual>().Release(visualObject);
+            }
+
+            foreach (IHierarchyElement child in _transform.Children)
+            {
+                _transform.RemoveChild(child);
             }
         }
     }
