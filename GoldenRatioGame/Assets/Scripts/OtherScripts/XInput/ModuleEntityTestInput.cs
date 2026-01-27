@@ -2,7 +2,6 @@
 using System.Linq;
 using IM.Abilities;
 using IM.Graphs;
-using IM.Storages;
 using UnityEngine;
 
 namespace IM.Modules
@@ -19,7 +18,7 @@ namespace IM.Modules
         private void Awake()
         {
             _abilityUser = new PreferredKeyboardBindingsAbilityUser(_moduleEntity.AbilityPool);
-            _moduleEntity.Initialize(Instantiate(_modulesPrefabs.FirstOrDefault(x => x.GetComponent< ICoreExtensibleModule>()!= null)).GetComponent<ICoreExtensibleModule>());
+            _moduleEntity.SetCoreModule(Instantiate(_modulesPrefabs.FirstOrDefault(x => x.GetComponent< ICoreExtensibleModule>()!= null)).GetComponent<ICoreExtensibleModule>());
             
             foreach (GameObject prefab in _modulesPrefabs)
             {
@@ -83,7 +82,7 @@ namespace IM.Modules
 
         private void AddModule()
         {
-            foreach (IExtensibleModule module in _moduleEntity.ModuleController.Storage.Select(x => x.Item).Where(x => x is IExtensibleModule))
+            foreach (IExtensibleModule module in _moduleEntity.ModuleController.Storage.Select(x => x.Item).OfType<IExtensibleModule>())
             {
                 foreach (IPort port in module.Ports)
                 {

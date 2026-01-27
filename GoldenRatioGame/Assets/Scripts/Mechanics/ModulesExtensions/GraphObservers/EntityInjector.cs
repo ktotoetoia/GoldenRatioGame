@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using IM.Entities;
+﻿using IM.Entities;
 using IM.Graphs;
 using UnityEngine;
 
@@ -8,35 +6,28 @@ namespace IM.Modules
 {
     public class EntityInjector : MonoBehaviour, IModuleGraphSnapshotObserver
     {
-        private readonly EnumerableDiffTracker<IRequireEntity> _diffTracker = new (); 
+        private ModuleExtensionsObserver<IRequireEntity> _extensionsObserver;
         private IEntity _entity;
 
         private void Awake()
         {
             _entity = GetComponent<IEntity>();
+
+            _extensionsObserver = new ModuleExtensionsObserver<IRequireEntity>(OnExtensionAdded, OnExtensionRemoved);
         }
 
-        public void OnGraphUpdated(IModuleGraphReadOnly graph)
+        private void OnExtensionAdded(IExtensibleModule module,IRequireEntity requireEntity)
         {
-            if (graph == null) throw new ArgumentNullException(nameof(graph));
-            
-            DiffResult<IRequireEntity> diffResult = _diffTracker.Update(graph.Modules.Where(x => x is IExtensibleModule module && module.Extensions.HasExtensionOfType<IRequireEntity>())
-                .SelectMany(x => (x as IExtensibleModule).Extensions.GetExtensions<IRequireEntity>()));
-            
-            foreach (IRequireEntity requireEntity in diffResult.Added)
-            {
-                if (requireEntity.Entity != null)
-                {
-                    Debug.LogWarning($"Entity already set on {requireEntity}. Overwriting with new entity.");
-                }
+            if (requireEntity.Entity != null) Debug.LogWarning($"Entity already set on {requireEntity}. Overwriting with new entity.");
 
-                requireEntity.Entity = _entity;
-            }
-            
-            foreach (IRequireEntity requireEntity in diffResult.Removed)
-            {
-                requireEntity.Entity = null;
-            }
+            requireEntity.Entity = _entity;
         }
+        
+        private void OnExtensionRemoved(IExtensibleModule module,IRequireEntity requireEntity)
+        {
+            requireEntity.Entity = null;
+        }
+
+        public void OnGraphUpdated(IModuleGraphReadOnly graph) => _extensionsObserver.OnGraphUpdated(graph);
     }
 }

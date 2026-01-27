@@ -1,8 +1,9 @@
 ﻿using IM.Graphs;
+using IM.Items;
 
 namespace IM.Modules
 {
-    public class PortTagsModuleGraphConditions : IModuleGraphConditions
+    public class AllowConnectionIfTagsMatch : IModuleGraphConditions
     {
         public bool CanAddModule(IModule module)
         {

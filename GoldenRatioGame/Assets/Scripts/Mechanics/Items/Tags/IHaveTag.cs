@@ -1,4 +1,4 @@
-﻿namespace IM.Modules
+﻿namespace IM.Items
 {
     public interface IHaveTag
     {

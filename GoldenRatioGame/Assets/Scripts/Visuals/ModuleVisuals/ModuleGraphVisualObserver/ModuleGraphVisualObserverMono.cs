@@ -30,9 +30,6 @@ namespace IM.Visuals
             _transform.Position = transform.position;
         }
 
-        public void OnGraphUpdated(IModuleGraphReadOnly graph)
-        {
-            _moduleGraphVisualObserver.OnGraphUpdated(graph);
-        }
+        public void OnGraphUpdated(IModuleGraphReadOnly graph) => _moduleGraphVisualObserver.OnGraphUpdated(graph);
     }
 }

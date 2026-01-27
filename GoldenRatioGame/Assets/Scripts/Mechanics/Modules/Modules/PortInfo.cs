@@ -1,4 +1,5 @@
 ﻿using System;
+using IM.Items;
 using UnityEngine;
 
 namespace IM.Modules

@@ -1,4 +1,6 @@
-﻿using IM.Abilities;
+﻿using System;
+using System.Linq;
+using IM.Abilities;
 using IM.Graphs;
 using IM.Storages;
 using UnityEngine;
@@ -8,16 +10,28 @@ namespace IM.Modules
     public class ModuleEntity : MonoBehaviour, IModuleEntity
     {
         public GameObject GameObject => gameObject;
-        public IModuleController ModuleController { get; private set; }
-        public IAbilityPool AbilityPool { get; } = new AbilityPool();
+        private IModuleController _moduleController;
 
-        public void Initialize(IExtensibleModule coreModule)
+        public IAbilityPool AbilityPool { get; } = new AbilityPool();
+        public IModuleController ModuleController
         {
-            ModuleController = new ModuleController(new CellFactoryStorage());
+            get
+            {
+                if (_moduleController == null)
+                {
+                    _moduleController = new ModuleController(new CellFactoryStorage());
+                    foreach (IModuleGraphSnapshotObserver observer in GetComponents<IModuleGraphSnapshotObserver>())
+                        ModuleController.GraphEditor.Observers.Add(observer);
+                }
+
+                return _moduleController;
+            }
+        }
+        
+        public void SetCoreModule(ICoreExtensibleModule coreModule)
+        {
+            if (ModuleController.GraphEditor.Graph.Modules.Any()) throw new InvalidOperationException("Graph must be clear before setting coreModule");
             
-            foreach (IModuleGraphSnapshotObserver observer in GetComponents<IModuleGraphSnapshotObserver>())
-                ModuleController.GraphEditor.Observers.Add(observer);
-            Debug.Log("initialzied");
             ModuleController.AddToStorage(coreModule);
             ICommandModuleGraph f = ModuleController.GraphEditor.StartEditing();
             f.AddModule(coreModule);

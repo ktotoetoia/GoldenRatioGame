@@ -395,7 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 1908329172}
-  _isOn: 0
+  _isOn: 1
 --- !u!114 &1293916505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,7 +410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 1908329172}
   _value: 30
-  _isOn: 0
+  _isOn: 1
 --- !u!4 &1293916506
 Transform:
   m_ObjectHideFlags: 0
@@ -439,7 +439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 1908329172}
-  _isOn: 0
+  _isOn: 1
 --- !u!114 &1293916508
 MonoBehaviour:
   m_ObjectHideFlags: 0

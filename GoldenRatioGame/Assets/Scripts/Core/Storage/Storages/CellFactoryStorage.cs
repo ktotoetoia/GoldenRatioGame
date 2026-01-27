@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace IM.Storages
 {
@@ -92,7 +93,17 @@ namespace IM.Storages
             
             return _cells.IndexOf(c);
         }
-        
+
+        public bool ContainsItem(IStorableReadOnly item)
+        {
+            return _cells.Any(x => x.Item == item);
+        }
+
+        public IStorageCellReadonly GetCell(IStorableReadOnly item)
+        {
+            return _cells.FirstOrDefault(x => x.Item == item);
+        }
+
         public IEnumerator<IStorageCellReadonly> GetEnumerator()
         {
             return _cells.GetEnumerator();

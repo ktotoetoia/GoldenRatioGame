@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using IM.Abilities;
+﻿using IM.Abilities;
 using IM.Graphs;
 using UnityEngine;
 
@@ -8,30 +6,18 @@ namespace IM.Modules
 {
     public class AbilityExtensionsObserver : MonoBehaviour, IModuleGraphSnapshotObserver
     {
-        private readonly EnumerableDiffTracker<IAbility> _diffTracker = new (); 
+        private ModuleExtensionsObserver<IAbility> _extensionsObserver;
         private AbilityPool _abilityPool;
         
         private void Awake()
         {
             _abilityPool = GetComponent<IModuleEntity>().AbilityPool as AbilityPool;
+
+            _extensionsObserver = new ModuleExtensionsObserver<IAbility>(OnExtensionAdded, OnExtensionRemoved);
         }
 
-        public void OnGraphUpdated(IModuleGraphReadOnly graph)
-        {
-            if (graph == null) throw new ArgumentNullException(nameof(graph));
-            
-            DiffResult<IAbility> diffResult = _diffTracker.Update(graph.Modules.Where(x => x is IExtensibleModule module && module.Extensions.HasExtensionOfType<IAbility>())
-                .SelectMany(x => (x as IExtensibleModule).Extensions.GetExtensions<IAbility>()));
-            
-            foreach (IAbility ability in diffResult.Added)
-            {
-                _abilityPool.AddAbility(ability);
-            }
-            
-            foreach (IAbility ability in diffResult.Removed)
-            {
-                _abilityPool.RemoveAbility(ability);
-            }
-        }
+        private void OnExtensionAdded(IExtensibleModule module,IAbility ability) => _abilityPool.AddAbility(ability);
+        private void OnExtensionRemoved(IExtensibleModule module,IAbility ability) => _abilityPool.RemoveAbility(ability);
+        public void OnGraphUpdated(IModuleGraphReadOnly graph) => _extensionsObserver.OnGraphUpdated(graph);
     }
 }

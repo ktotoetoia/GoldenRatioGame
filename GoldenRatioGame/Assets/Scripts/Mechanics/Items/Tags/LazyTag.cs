@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace IM.Modules
+namespace IM.Items
 {
     [CreateAssetMenu(menuName = "Tags/LazyTag")]
     public class LazyTag : ScriptableObject, ITag, IEquatable<LazyTag>

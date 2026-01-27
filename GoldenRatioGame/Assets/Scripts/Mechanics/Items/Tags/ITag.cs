@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IM.Modules
+namespace IM.Items
 {
     public interface ITag : IEquatable<ITag>
     {
