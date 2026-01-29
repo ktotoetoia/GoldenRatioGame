@@ -14,11 +14,13 @@ namespace IM.Health
 
         private void Awake()
         {
-            _target?.TryGetComponent(out _health);
+            if(_target) _target.TryGetComponent(out _health);
         }
 
         private void Update()
         {
+            if(!_isOn) return;
+            
             if (Input.GetKeyDown(KeyCode.K))
             {
                 _healthChangeResult = _health.TakeDamage(_value); 

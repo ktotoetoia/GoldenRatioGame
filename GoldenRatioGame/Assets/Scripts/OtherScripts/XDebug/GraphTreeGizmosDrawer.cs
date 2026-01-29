@@ -29,16 +29,16 @@ namespace IM.Modules
 
         private void Awake()
         {
-            _entity = _origin.GetComponent<IModuleEntity>();
+            if(_origin) _entity = _origin.GetComponent<IModuleEntity>();
         }
 
         private void OnDrawGizmos()
         {
             if(!_isOn) return;
             
-            if (_entity is { ModuleController: not null })
+            if (_entity is { ModuleEditingContext: not null })
             {
-                Graph = _entity.ModuleController.GraphEditor.Graph;
+                Graph = _entity.ModuleEditingContext.GraphEditor.Graph;
             }
             
             if (Graph == null || Graph.Nodes == null || Graph.Edges == null) return;

@@ -3,7 +3,7 @@ using IM.Storages;
 
 namespace IM.Modules
 {
-    public interface IModuleController
+    public interface IModuleEditingContext
     {
         IModuleGraphEditor<IConditionalCommandModuleGraph> GraphEditor { get; }
         IReadOnlyStorage Storage { get; }

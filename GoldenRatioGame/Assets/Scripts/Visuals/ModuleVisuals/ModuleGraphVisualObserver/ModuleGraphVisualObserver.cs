@@ -78,8 +78,8 @@ namespace IM.Visuals
             if (connection.Port1.Module is not IExtensibleModule moduleA ||
                 connection.Port2.Module is not IExtensibleModule moduleB)
                 throw new InvalidOperationException("Both modules must implement IExtensibleModule.");
-            if (!_moduleVisuals.TryGetValue(moduleA, out var visualA) ||
-                !_moduleVisuals.TryGetValue(moduleB, out var visualB))
+            if (!_moduleVisuals.TryGetValue(moduleA, out IModuleVisualObject visualA) ||
+                !_moduleVisuals.TryGetValue(moduleB, out IModuleVisualObject visualB))
                 throw new InvalidOperationException("Module visual does not exist.");
 
             _portAligner.AlignPorts(
@@ -99,13 +99,13 @@ namespace IM.Visuals
 
                 if (otherPort?.Module is not IExtensibleModule otherModule)
                     continue;
-                if (!_moduleVisuals.TryGetValue(module, out var fromModuleVisual))
+                if (!_moduleVisuals.TryGetValue(module, out IModuleVisualObject fromModuleVisual))
                     continue;
-                if (!_moduleVisuals.TryGetValue(otherModule, out var toModuleVisual))
+                if (!_moduleVisuals.TryGetValue(otherModule, out IModuleVisualObject toModuleVisual))
                     continue;
 
-                var fromVisual = fromModuleVisual.GetPortVisual(viaPort);
-                var toVisual = toModuleVisual.GetPortVisual(otherPort);
+                IPortVisualObject fromVisual = fromModuleVisual.GetPortVisual(viaPort);
+                IPortVisualObject toVisual = toModuleVisual.GetPortVisual(otherPort);
 
                 if (fromVisual == null || toVisual == null)
                     continue;

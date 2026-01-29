@@ -13,9 +13,9 @@ namespace IM.Graphs
         private readonly IConnectCommandFactory _connectCommandFactory;
         private readonly IDisconnectCommandFactory _disconnectCommandFactory;
 
-        public IEnumerable<IModule> Modules => _modules;
+        public IReadOnlyList<IModule> Modules => _modules;
         public IEnumerable<INode> Nodes => _modules;
-        public IEnumerable<IConnection> Connections => _connections;
+        public IReadOnlyList<IConnection> Connections => _connections;
         public IEnumerable<IEdge> Edges => _connections;
         public int CommandsToUndoCount => _commands.CommandsToUndoCount;
         public int CommandsToRedoCount => _commands.CommandsToRedoCount;

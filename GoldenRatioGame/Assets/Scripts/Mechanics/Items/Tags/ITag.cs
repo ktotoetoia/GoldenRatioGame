@@ -1,9 +1,9 @@
-﻿using System;
-
-namespace IM.Items
+﻿namespace IM.Items
 {
-    public interface ITag : IEquatable<ITag>
+    public interface ITag
     {
         string TagName { get; }
+        
+        bool Matches(ITag other);
     }
 }

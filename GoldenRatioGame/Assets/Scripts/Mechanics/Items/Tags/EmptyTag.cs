@@ -4,7 +4,7 @@
     {
         public string TagName => string.Empty;
         
-        public bool Equals(ITag other)
+        public bool Matches(ITag other)
         {
             return false;
         }

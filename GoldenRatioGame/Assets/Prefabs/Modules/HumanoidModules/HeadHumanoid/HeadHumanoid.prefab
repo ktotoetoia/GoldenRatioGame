@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4556875372869762170}
   - component: {fileID: 3521067284498834333}
   - component: {fileID: 3187650734492596957}
+  - component: {fileID: 3861873684401809517}
   m_Layer: 0
   m_Name: HeadHumanoid
   m_TagString: Untagged
@@ -166,3 +167,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ace7e90e7f446959f9ceabaa968f4cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Items::IM.Items.SpriteRendererIconDrawer
+--- !u!114 &3861873684401809517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8119833187759213420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1493264ef8f44edbf48a2b6ead5db0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules::IM.Modules.AddModuleToStorageOnInteract

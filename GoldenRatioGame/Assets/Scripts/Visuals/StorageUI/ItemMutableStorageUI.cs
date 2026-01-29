@@ -8,7 +8,7 @@ namespace IM.UI
     public partial class ItemMutableStorageUI : VisualElement
     {
         public ListView ListView { get; private set; }
-        public IStorage Storage { get; private set; }
+        public IReadOnlyStorage Storage { get; private set; }
 
         public ItemMutableStorageUI()
         {
@@ -25,7 +25,7 @@ namespace IM.UI
             AddToClassList(StorageClassLists.Storage);
         }
 
-        public void SetStorage(IStorage storage)
+        public void SetStorage(IReadOnlyStorage storage)
         {
             Storage = storage ?? throw new NullReferenceException("ItemMutableStorage is null");
 

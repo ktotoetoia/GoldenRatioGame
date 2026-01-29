@@ -9,7 +9,7 @@ namespace IM.Visuals
 {
     public class ModuleVisualObject : MonoBehaviour, IAnimatedModuleVisualObject
     {
-        [SerializeField] bool _isVisibleOnAwake;
+        [SerializeField] private bool _isVisibleOnAwake;
         private readonly List<IPortVisualObject> _portVisuals = new();
         private readonly HierarchyTransform _transform = new();
         private Animator _animator;

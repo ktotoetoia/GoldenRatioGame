@@ -6,14 +6,14 @@ using IM.Storages;
 
 namespace IM.Modules
 {
-    public class ModuleController : IModuleController
+    public class ModuleEditingContext : IModuleEditingContext
     {
         private readonly ICellFactoryStorage _storage;
         
         public IModuleGraphEditor<IConditionalCommandModuleGraph> GraphEditor { get; }
         public IReadOnlyStorage Storage => _storage;
 
-        public ModuleController(ICellFactoryStorage storage)
+        public ModuleEditingContext(ICellFactoryStorage storage)
         {
             _storage = storage;
             
@@ -28,6 +28,7 @@ namespace IM.Modules
                 new CompositeModuleGraphConditions(new List<IModuleGraphConditions>
                 {
                     new DefaultModuleGraphConditions(graph),
+                    new AllowSingleFirstCoreModule(graph),
                     new AllowConnectionIfTagsMatch(),
                 }));
             

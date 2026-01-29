@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
 using IM.Items;
@@ -24,10 +25,13 @@ namespace IM.Modules
         public IEnumerable<IEdge> Edges => PortsList.Where(x => x.IsConnected).Select(x => x.Connection).ToList();
         public IEnumerable<IPort> Ports => PortsList;
         public IExtensionProvider Extensions => _extensions ??= new GameObjectExtensionProvider(gameObject);
+
         public ModuleState State
         {
             get => _state;
             set => IconDrawer.IsDrawing = (_state = value) == ModuleState.Show;
         }
+
+        private void Awake() => State = ModuleState.Show;
     }
 }

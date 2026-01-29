@@ -2,7 +2,7 @@
 
 namespace IM.Entities
 {
-    public interface IEntity
+    public interface IEntity : IPausable
     {
         GameObject GameObject { get; }
     }

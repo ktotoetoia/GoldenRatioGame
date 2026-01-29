@@ -5,8 +5,7 @@ namespace IM.Modules
 {
     public interface IModuleEntity : IEntity
     {
-        IModuleController ModuleController { get; }
+        IModuleEditingContext ModuleEditingContext { get; }
         IAbilityPool AbilityPool { get; }
-        
     }
 }

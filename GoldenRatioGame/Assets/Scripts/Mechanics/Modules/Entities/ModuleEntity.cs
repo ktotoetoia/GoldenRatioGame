@@ -1,41 +1,42 @@
 ﻿using System;
 using System.Linq;
 using IM.Abilities;
+using IM.Entities;
 using IM.Graphs;
 using IM.Storages;
 using UnityEngine;
 
 namespace IM.Modules
 {
-    public class ModuleEntity : MonoBehaviour, IModuleEntity
+    [DisallowMultipleComponent]
+    public class ModuleEntity : DefaultEntity, IModuleEntity, IRequireInteractionProvider
     {
-        public GameObject GameObject => gameObject;
-        private IModuleController _moduleController;
-
+        private IModuleEditingContext _moduleEditingContext;
+        
         public IAbilityPool AbilityPool { get; } = new AbilityPool();
-        public IModuleController ModuleController
+        public IModuleEditingContext ModuleEditingContext
         {
             get
             {
-                if (_moduleController == null)
+                if (_moduleEditingContext == null)
                 {
-                    _moduleController = new ModuleController(new CellFactoryStorage());
+                    _moduleEditingContext = new ModuleEditingContext(new CellFactoryStorage());
                     foreach (IModuleGraphSnapshotObserver observer in GetComponents<IModuleGraphSnapshotObserver>())
-                        ModuleController.GraphEditor.Observers.Add(observer);
+                        ModuleEditingContext.GraphEditor.Observers.Add(observer);
                 }
 
-                return _moduleController;
+                return _moduleEditingContext;
             }
         }
-        
-        public void SetCoreModule(ICoreExtensibleModule coreModule)
+
+        public IInteractionProvider InteractionProvider { get; set; }
+
+        private void Update()
         {
-            if (ModuleController.GraphEditor.Graph.Modules.Any()) throw new InvalidOperationException("Graph must be clear before setting coreModule");
-            
-            ModuleController.AddToStorage(coreModule);
-            ICommandModuleGraph f = ModuleController.GraphEditor.StartEditing();
-            f.AddModule(coreModule);
-            ModuleController.GraphEditor.TrySaveChanges();
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                InteractionProvider.GetAvailableInteractions(this).OrderBy(x => Vector3.Distance(transform.position, x.GameObject.transform.position)).FirstOrDefault()?.Interact(this);
+            }
         }
     }
 }

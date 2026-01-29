@@ -2,10 +2,10 @@
 {
     public interface IModuleGraphConditions
     {
-        bool CanAddModule(IModule module);
-        bool CanRemoveModule(IModule module);
-        bool CanConnect(IPort output, IPort input);
-        bool CanDisconnect(IConnection connection);
-        bool CanAddAndConnect(IModule module, IPort ownerPort, IPort targetPort);
+        bool CanAddModule(IModule module) => true;
+        bool CanRemoveModule(IModule module) => true;
+        bool CanConnect(IPort output, IPort input) => true;
+        bool CanDisconnect(IConnection connection) => true;
+        bool CanAddAndConnect(IModule module, IPort ownerPort, IPort targetPort) => true;
     }
 }

@@ -1,21 +1,15 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace IM.Items
 {
     [CreateAssetMenu(menuName = "Tags/LazyTag")]
-    public class LazyTag : ScriptableObject, ITag, IEquatable<LazyTag>
+    public class LazyTag : ScriptableObject, ITag
     {
         public virtual string TagName => name;
-
-        public virtual bool Equals(LazyTag other)
+        
+        public bool Matches(ITag other)
         {
-            return other && TagName == other.TagName;
-        }
-
-        public virtual bool Equals(ITag other)
-        {
-            return other is LazyTag tag && Equals(tag);
+            return other != null  && other.TagName == TagName;
         }
     }
 }

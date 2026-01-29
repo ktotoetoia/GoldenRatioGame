@@ -10,8 +10,8 @@ namespace IM.Graphs
         public bool CanUse { get; set; }
         public bool ThrowIfCantUse { get; set; }
 
-        public IEnumerable<IConnection> Connections => _graph.Connections;
-        public IEnumerable<IModule> Modules => _graph.Modules;
+        public IReadOnlyList<IConnection> Connections => _graph.Connections;
+        public IReadOnlyList<IModule> Modules => _graph.Modules;
         public IEnumerable<INode> Nodes => _graph.Nodes;
         public IEnumerable<IEdge> Edges => _graph.Edges;
 

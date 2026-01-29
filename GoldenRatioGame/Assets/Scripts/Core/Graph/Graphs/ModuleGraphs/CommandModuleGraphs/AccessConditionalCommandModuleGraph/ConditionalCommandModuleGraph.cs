@@ -8,9 +8,9 @@ namespace IM.Graphs
         private readonly ICommandModuleGraph _graph;
         private readonly IModuleGraphConditions _conditions;
 
-        public IEnumerable<IConnection> Connections => _graph.Connections;
+        public IReadOnlyList<IConnection> Connections => _graph.Connections;
 
-        public IEnumerable<IModule> Modules => _graph.Modules;
+        public IReadOnlyList<IModule> Modules => _graph.Modules;
         public IEnumerable<INode> Nodes => _graph.Nodes;
         public IEnumerable<IEdge> Edges => _graph.Edges;
         public int CommandsToUndoCount => _graph.CommandsToUndoCount;

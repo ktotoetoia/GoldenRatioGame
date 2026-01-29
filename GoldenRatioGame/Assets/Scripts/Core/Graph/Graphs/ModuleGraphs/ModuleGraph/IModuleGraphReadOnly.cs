@@ -4,8 +4,8 @@ namespace IM.Graphs
 {
     public interface IModuleGraphReadOnly : IGraphReadOnly
     {
-        IEnumerable<IModule> Modules { get; }
-        IEnumerable<IConnection> Connections { get; }
+        IReadOnlyList<IModule> Modules { get; }
+        IReadOnlyList<IConnection> Connections { get; }
         
         bool Contains(IModule module);
         bool Contains(IConnection connection);
