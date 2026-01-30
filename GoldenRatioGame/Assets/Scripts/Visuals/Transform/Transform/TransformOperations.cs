@@ -1,55 +1,58 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace IM.Transforms
 {
     public static class TransformOperations
     {
+        private static Matrix4x4 TRS(Vector3 pos, Quaternion rot, Vector3 scale) =>
+            Matrix4x4.TRS(pos, rot, scale);
+
+        private static void DecomposeMatrix(Matrix4x4 m, out Vector3 pos, out Vector3 scale, out Quaternion rot)
+        {
+            pos = m.GetColumn(3);
+
+            Vector3 col0 = new Vector3(m.m00, m.m10, m.m20);
+            Vector3 col1 = new Vector3(m.m01, m.m11, m.m21);
+            Vector3 col2 = new Vector3(m.m02, m.m12, m.m22);
+
+            float sx = col0.magnitude;
+            float sy = col1.magnitude;
+            float sz = col2.magnitude;
+
+            Vector3 cross = Vector3.Cross(col0, col1);
+            float detSign = (Vector3.Dot(cross, col2) < 0f) ? -1f : 1f;
+            if (detSign < 0f)
+            {
+                sx = -sx;
+                col0 = -col0;
+            }
+
+            Vector3 norm0 = (sx == 0f) ? Vector3.right : col0 / Mathf.Abs(sx);
+            Vector3 norm1 = (sy == 0f) ? Vector3.up    : col1 / Mathf.Abs(sy);
+            Vector3 norm2 = (sz == 0f) ? Vector3.forward: col2 / Mathf.Abs(sz);
+
+            rot = Quaternion.LookRotation(norm2, norm1);
+
+            scale = new Vector3(sx, sy, sz);
+        }
+
         public static (Vector3 pos, Vector3 scale, Quaternion rot) ComputeWorld(
-            ITransformReadOnly parent,
-            Vector3 localPosition,
-            Vector3 localScale,
-            Quaternion localRotation)
+            ITransformReadOnly parent, Vector3 localPosition, Vector3 localScale, Quaternion localRotation)
         {
             if (parent == null)
                 return (localPosition, localScale, localRotation);
 
-            Vector3 worldPos = parent.Position + parent.Rotation * Vector3.Scale(localPosition, parent.LossyScale);
-            Vector3 worldScale = Vector3.Scale(parent.LossyScale, localScale);
-            Quaternion worldRot = parent.Rotation * localRotation;
+            var parentMatrix = TRS(parent.Position, parent.Rotation, parent.LossyScale);
+            var localMatrix = TRS(localPosition, localRotation, localScale);
+            var worldMatrix = parentMatrix * localMatrix;
+
+            DecomposeMatrix(worldMatrix, out Vector3 worldPos, out Vector3 worldScale, out Quaternion worldRot);
             return (worldPos, worldScale, worldRot);
         }
 
-        /// <summary>
-        /// Compute world transforms for multiple local transforms given a single parent.
-        /// Returns an array of tuples in the same order as the inputs.
-        /// </summary>
-        public static (Vector3 pos, Vector3 scale, Quaternion rot)[] ComputeWorlds(
-            ITransformReadOnly parent,
-            IEnumerable<ITransformReadOnly> locals)
-        {
-            var list = new List<(Vector3, Vector3, Quaternion)>();
-            if (locals == null) return list.ToArray();
-
-            foreach (var l in locals)
-            {
-                list.Add(ComputeWorld(parent, l.LocalPosition, l.LocalScale, l.LocalRotation));
-            }
-
-            return list.ToArray();
-        }
-
-        /// <summary>
-        /// Given a desired world transform and an optional parent, computes & sets the local transform on target.
-        /// Uses safe divide for scale components (if parent scale component is zero, leaves local scale same as world scale).
-        /// </summary>
         public static void SetLocalFromWorld(
-            ITransform target,
-            Vector3 worldPosition,
-            Vector3 worldScale,
-            Quaternion worldRotation,
-            ITransformReadOnly parent)
+            ITransform target, Vector3 worldPosition, Vector3 worldScale, Quaternion worldRotation, ITransformReadOnly parent)
         {
             if (target == null) throw new ArgumentNullException(nameof(target));
 
@@ -58,46 +61,36 @@ namespace IM.Transforms
                 target.LocalPosition = worldPosition;
                 target.LocalScale = worldScale;
                 target.LocalRotation = worldRotation;
+                return;
             }
-            else
-            {
-                Quaternion localRot = Quaternion.Inverse(parent.Rotation) * worldRotation;
 
-                Vector3 delta = worldPosition - parent.Position;
-                Vector3 unrotated = Quaternion.Inverse(parent.Rotation) * delta;
+            var worldMatrix = TRS(worldPosition, worldRotation, worldScale);
 
-                Vector3 invParentScale = SafeInverse(parent.LossyScale);
-                Vector3 localPos = Vector3.Scale(unrotated, invParentScale);
+            var parentMatrix = TRS(parent.Position, parent.Rotation, parent.LossyScale);
 
-                Vector3 localScale = new Vector3(
-                    parent.LossyScale.x != 0f ? worldScale.x / parent.LossyScale.x : worldScale.x,
-                    parent.LossyScale.y != 0f ? worldScale.y / parent.LossyScale.y : worldScale.y,
-                    parent.LossyScale.z != 0f ? worldScale.z / parent.LossyScale.z : worldScale.z
-                );
+            var invParent = parentMatrix.inverse;
+            var localMatrix = invParent * worldMatrix;
 
-                target.LocalPosition = localPos;
-                target.LocalScale = localScale;
-                target.LocalRotation = localRot;
-            }
+            DecomposeMatrix(localMatrix, out Vector3 localPos, out Vector3 localScale, out Quaternion localRot);
+
+            target.LocalPosition = localPos;
+            target.LocalScale = localScale;
+            target.LocalRotation = localRot;
         }
-        
-        /// <summary>
-        /// Compute local rotation that would produce the given world rotation under parent.
-        /// Returns worldRotation unchanged if parent == null.
-        /// </summary>
+
         public static Quaternion LocalRotationFromWorld(Quaternion worldRotation, ITransformReadOnly parent)
         {
             if (parent == null) return worldRotation;
-            return Quaternion.Inverse(parent.Rotation) * worldRotation;
-        }
 
-        private static Vector3 SafeInverse(Vector3 v)
-        {
-            return new Vector3(
-                v.x != 0f ? 1f / v.x : 1f,
-                v.y != 0f ? 1f / v.y : 1f,
-                v.z != 0f ? 1f / v.z : 1f
-            );
+            var worldMatrix = TRS(Vector3.zero, worldRotation, Vector3.one);
+            var parentMatrix = TRS(Vector3.zero, parent.Rotation, parent.LossyScale);
+
+            var invParent = parentMatrix.inverse;
+            var localMatrix = invParent * worldMatrix;
+
+            DecomposeMatrix(localMatrix, out _, out Vector3 localScale, out Quaternion localRot);
+            return localRot;
         }
     }
+
 }
