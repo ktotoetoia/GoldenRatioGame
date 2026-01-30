@@ -31,13 +31,30 @@ namespace IM.Visuals
         {
             _animator = GetComponent<Animator>();
             Visibility = _isVisibleOnAwake;
+
+            transform.position = _transform.Position;
+            transform.rotation  = _transform.Rotation;
+            transform.localScale = _transform.LossyScale;
             _transform.PositionChanged += (_, newValue) => transform.position = newValue;
             _transform.LossyScaleChanged += (_, newValue) => transform.localScale = newValue;
-            _transform.RotationChanged += (_, newValue) => transform.rotation = newValue;
+            _transform.LocalRotationChanged += (_, newValue) =>
+            {
+                Debug.Log(newValue);
+                transform.rotation = newValue;
+            };
+            _transform.RotationChanged += (_, newValue) =>
+            {
+                Debug.Log(newValue);
+                transform.rotation = newValue;
+            };
         }
 
         private void Update()
         {
+            transform.position = _transform.Position;
+            transform.rotation  = _transform.Rotation;
+            transform.localScale = _transform.LossyScale;
+            
             if (AnimationChanges == null || !IsAnimating) return;
          
             foreach (IAnimationChange animationChange in AnimationChanges)

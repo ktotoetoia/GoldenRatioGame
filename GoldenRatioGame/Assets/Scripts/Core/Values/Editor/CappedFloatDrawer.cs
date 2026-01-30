@@ -2,8 +2,6 @@
 using UnityEditor;
 using UnityEngine;
 
-//Generated via Copilot
-
 namespace IM.Values
 {
     [CustomPropertyDrawer(typeof(CappedValue<float>))]

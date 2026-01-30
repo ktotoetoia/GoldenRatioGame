@@ -55,7 +55,6 @@ namespace IM.Visuals.Graph
             {
                 foreach (ICoreExtensibleModule module in _entity.ModuleEditingContext.Storage.Select(x => x.Item).OfType<ICoreExtensibleModule>())
                 {
-                    Debug.Log(_graph.CanAddModule(module));
                     if (_graph.CanAddModule(module))
                     {
                         _graph.AddModule(module);

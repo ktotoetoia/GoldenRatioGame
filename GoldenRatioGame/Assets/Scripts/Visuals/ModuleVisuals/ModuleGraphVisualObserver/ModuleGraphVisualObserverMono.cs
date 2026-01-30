@@ -26,7 +26,8 @@ namespace IM.Visuals
                         ? Vector3.one
                         : new Vector3(-1f, 1f, 1f);
             }
-
+            
+            
             _transform.Position = transform.position;
         }
 

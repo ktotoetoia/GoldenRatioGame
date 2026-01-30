@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using IM.Graphs;
 using IM.Modules;
 using IM.Transforms;
+using UnityEngine;
 
 namespace IM.Visuals
 {
@@ -53,7 +54,7 @@ namespace IM.Visuals
 
             _moduleVisuals.Add(extensibleModule, visualObject);
             _transform.AddChildKeepLocal(visualObject.Transform);
-
+            
             visualObject.ModuleGraphStructureUpdater = this;
             visualObject.Visibility = true;
         }

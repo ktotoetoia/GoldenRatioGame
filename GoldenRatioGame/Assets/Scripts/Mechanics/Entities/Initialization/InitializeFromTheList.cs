@@ -5,7 +5,6 @@ namespace IM.Entities
 {
     public class InitializeFromTheList : MonoBehaviour
     {
-        [SerializeField] private List<GameObject> _entities;
         [SerializeField] private List<GameObject> _toInitialize = new();
         [SerializeField] private Bounds _bounds = new (Vector3.zero, Vector3.one * 5); 
         private IGameObjectFactory _gameObjectFactory;

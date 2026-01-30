@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9105580942014384913}
   - component: {fileID: 8054565667691421690}
   m_Layer: 0
-  m_Name: LegLeftHumanoidVisual
+  m_Name: Leg Humanoid Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

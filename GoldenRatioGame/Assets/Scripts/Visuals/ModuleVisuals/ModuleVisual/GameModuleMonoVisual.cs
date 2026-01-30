@@ -6,11 +6,10 @@ using UnityEngine.Pool;
 
 namespace IM.Visuals
 {
-    [RequireComponent(typeof(ModulePortSetup))]
     public class GameModuleMonoVisual : MonoBehaviour, IModuleVisual
     {
         [SerializeField] private GameObject _visualPrefab;
-        private ModulePortSetup _portSetup;
+        private IPortInfoProvider _portInfoProvider;
         private IObjectPool<IModuleVisualObject> _pool;
         
         private IObjectPool<IModuleVisualObject> Pool => _pool ??=new ObjectPool<IModuleVisualObject>(
@@ -20,7 +19,7 @@ namespace IM.Visuals
             OnDestroyPooledObject
         );
         
-        private ModulePortSetup PortSetup => _portSetup ??= GetComponent<ModulePortSetup>();
+        private IPortInfoProvider PortSetup => _portInfoProvider ??= GetComponent<IPortInfoProvider>();
         
         public int CountInactive => Pool.CountInactive;
         public IModuleVisualObject Get() => Pool.Get();

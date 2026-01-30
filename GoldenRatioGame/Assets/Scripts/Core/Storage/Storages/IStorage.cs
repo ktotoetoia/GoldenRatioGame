@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-
-namespace IM.Storages
+﻿namespace IM.Storages
 {
     public interface IStorage : IReadOnlyStorage
     {
