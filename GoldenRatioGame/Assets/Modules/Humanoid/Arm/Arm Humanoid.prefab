@@ -174,7 +174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5469737783865499535, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: _portsInfos.Array.data[0]._eulerZRotation
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5469737783865499535, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: _portInfos.Array.data[0].<Normal>k__BackingField.x
@@ -197,5 +197,25 @@ PrefabInstance:
     - {fileID: -6607928970512855544, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1310531306497470001}
   m_SourcePrefab: {fileID: 100100000, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+--- !u!1 &7210977406679086040 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+  m_PrefabInstance: {fileID: 1494624419277551796}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-1310531306497470001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210977406679086040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 173d7568d32a46c09799c41a563a675c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules::IM.Modules.HorizontalDirectionEnumStateExtension

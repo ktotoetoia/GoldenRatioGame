@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
 using IM.Modules;
@@ -10,12 +11,12 @@ namespace IM.Visuals
     public class ModuleVisualObject : MonoBehaviour, IAnimatedModuleVisualObject
     {
         [SerializeField] private bool _isVisibleOnAwake;
-        private readonly List<IPortVisualObject> _portVisuals = new();
+        private readonly List<IPortVisualObject> _portVisualObjects = new();
         private readonly HierarchyTransform _transform = new();
         private Animator _animator;
         
         public IHierarchyTransform Transform => _transform;
-        public IReadOnlyList<IPortVisualObject> PortsVisuals => _portVisuals;
+        public IReadOnlyList<IPortVisualObject> PortsVisualObjects => _portVisualObjects;
         public IExtensibleModule Owner { get; set; }
         public bool IsAnimating { get; set; } = true;
         public IEnumerable<IAnimationChange> AnimationChanges { get; set; }
@@ -37,24 +38,11 @@ namespace IM.Visuals
             transform.localScale = _transform.LossyScale;
             _transform.PositionChanged += (_, newValue) => transform.position = newValue;
             _transform.LossyScaleChanged += (_, newValue) => transform.localScale = newValue;
-            _transform.LocalRotationChanged += (_, newValue) =>
-            {
-                Debug.Log(newValue);
-                transform.rotation = newValue;
-            };
-            _transform.RotationChanged += (_, newValue) =>
-            {
-                Debug.Log(newValue);
-                transform.rotation = newValue;
-            };
+            _transform.RotationChanged += (_, newValue) => transform.rotation = newValue;
         }
 
         private void Update()
         {
-            transform.position = _transform.Position;
-            transform.rotation  = _transform.Rotation;
-            transform.localScale = _transform.LossyScale;
-            
             if (AnimationChanges == null || !IsAnimating) return;
          
             foreach (IAnimationChange animationChange in AnimationChanges)
@@ -65,13 +53,13 @@ namespace IM.Visuals
         
         public void AddPort(IPortVisualObject port, IHierarchyTransform hierarchyTransform)
         {
-            _portVisuals.Add(port);
+            _portVisualObjects.Add(port);
             _transform.AddChildKeepLocal(hierarchyTransform);
         }
         
-        public IPortVisualObject GetPortVisual(IPort port)
+        public IPortVisualObject GetPortVisualObject(IPort port)
         {
-            return _portVisuals.FirstOrDefault(x => x.Port == port);
+            return _portVisualObjects.FirstOrDefault(x => x.Port == port);
         }
 
         public void Dispose()

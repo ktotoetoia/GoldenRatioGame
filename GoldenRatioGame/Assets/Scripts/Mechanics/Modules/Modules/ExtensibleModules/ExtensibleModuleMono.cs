@@ -11,7 +11,6 @@ namespace IM.Modules
     [RequireComponent(typeof(SpriteRendererIconDrawer))]
     public class ExtensibleModuleMono : MonoBehaviour, IExtensibleModule, IPortInfoProvider
     {
-        [SerializeField] private List<PortInfo> _portsInfos;
         private readonly List<IPort> _ports =  new();
         private readonly Dictionary<IPort, PortInfo>  _portInfos = new();
         private IExtensionProvider _extensions;
@@ -20,6 +19,7 @@ namespace IM.Modules
         
         [field: SerializeField] public string Name { get; private set; }
         [field: SerializeField] public string Description { get; private set; }
+        [SerializeField] private List<PortInfo> _portsInfos;
 
         public IIcon Icon => _iconDrawer.Icon;
         public IStorageCell Cell { get; set; }
@@ -28,7 +28,7 @@ namespace IM.Modules
         public IExtensionProvider Extensions => _extensions ??= new GameObjectExtensionProvider(gameObject);
         public IReadOnlyDictionary<IPort, PortInfo> PortsInfos => _portInfos;
 
-        public ModuleState State
+        public ModuleState ModuleState
         {
             get => _state;
             set => _iconDrawer.IsDrawing = (_state = value) == ModuleState.Show;
@@ -37,11 +37,12 @@ namespace IM.Modules
         private void Awake()
         {
             _iconDrawer = GetComponent<IIconDrawer>();
-            State = ModuleState.Show;
+            ModuleState = ModuleState.Show;
             
             foreach (PortInfo portInfo in _portsInfos)
             {
-                IPort port = portInfo.Tag == null ? new Port(this) : new TaggedPort(this, portInfo.Tag);
+                ITag tag = portInfo.Tag ?? new FreeTag();
+                IPort port = portInfo.Direction == HorizontalDirection.None ?new TaggedPort(this, tag): new EnumChangingTaggedPort<HorizontalDirection>(this,tag,portInfo.Direction); 
                 
                 _ports.Add(port);
                 _portInfos.Add(port, portInfo);

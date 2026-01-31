@@ -7,6 +7,6 @@ namespace IM.Modules
     public interface IExtensibleModule : IModule, IItem, IStorable
     {
         IExtensionProvider Extensions { get; }
-        ModuleState State { get; set; }
+        ModuleState ModuleState { get; set; }
     }
 }

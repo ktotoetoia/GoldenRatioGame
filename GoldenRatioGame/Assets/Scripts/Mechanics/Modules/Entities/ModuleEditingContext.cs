@@ -29,7 +29,7 @@ namespace IM.Modules
                 {
                     new DefaultModuleGraphConditions(graph),
                     new AllowSingleFirstCoreModule(graph),
-                    new AllowConnectionIfTagsMatch(),
+                    new AllowConnectionIfPortsMatch(),
                 }));
             
             GraphEditor = new CommandModuleGraphEditor<IConditionalCommandModuleGraph>(conditionalCommandModuleGraph,new AccessConditionalCommandModuleGraphFactory());
@@ -37,11 +37,11 @@ namespace IM.Modules
 
         public void AddToStorage(IExtensibleModule module)
         {
-            if (module.State == ModuleState.Hide) throw new ArgumentException("some other storage already contains this module");
+            if (module.ModuleState == ModuleState.Hide) throw new ArgumentException("some other storage already contains this module");
             if (_storage.ContainsItem(module)) throw new ArgumentException("this storage already contains this item");
             
             _storage.SetItem(_storage.FirstOrDefault(x => x.Item == null) ?? _storage.CreateCell(), module);
-            module.State = ModuleState.Hide;
+            module.ModuleState = ModuleState.Hide;
         }
 
         public void RemoveFromStorage(IExtensibleModule module)
@@ -49,7 +49,7 @@ namespace IM.Modules
             if (!_storage.ContainsItem(module)) throw new ArgumentException("this storage does not contains this item");
 
             _storage.ClearCell(_storage.GetCell(module));
-            module.State = ModuleState.Show;
+            module.ModuleState = ModuleState.Show;
         }
     }
 }

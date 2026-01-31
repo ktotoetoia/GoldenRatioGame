@@ -39,7 +39,7 @@ namespace Tests
 
         public void SetPlayerEntity(IEntity playerEntity)
         {
-            _moduleEntity = playerEntity as IModuleEntity ?? throw new System.NullReferenceException();
+            _moduleEntity = playerEntity as IModuleEntity ?? throw new NullReferenceException();
             
             _movement = _moduleEntity.GameObject.GetComponent<IMoveInVector>();
             _documentTest.SetStorage(_moduleEntity.ModuleEditingContext.Storage);

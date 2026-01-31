@@ -131,12 +131,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b2da4ff9bc41a5ab268251bf7c2e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _portsInfos:
-  - _position: {x: 0, y: -0.4, z: 0}
-    _eulerZRotation: -65.9
-    _tag: {fileID: 11400000, guid: 9780612eeb15ddb4e872a9faa88ec63a, type: 2}
   <Name>k__BackingField: Humanoid Head
   <Description>k__BackingField: 
+  _portsInfos:
+  - _position: {x: 0, y: -0.4, z: 0}
+    _eulerZRotation: -90
+    _tag: {fileID: 11400000, guid: 9780612eeb15ddb4e872a9faa88ec63a, type: 2}
+    _direction: 0
 --- !u!114 &8535451133996336894
 MonoBehaviour:
   m_ObjectHideFlags: 0

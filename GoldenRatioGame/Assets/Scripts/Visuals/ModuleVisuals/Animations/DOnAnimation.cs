@@ -17,17 +17,17 @@ namespace IM.Visuals
         private void Awake()
         {
             _moduleVisualObject = GetComponent<IModuleVisualObject>();
-            _portsDefaultPosition = _moduleVisualObject.PortsVisuals.Select(x => x.Transform.LocalPosition).ToList();
-            _portsDefaultRotation = _moduleVisualObject.PortsVisuals.Select(x => x.Transform.LocalRotation).ToList();
+            _portsDefaultPosition = _moduleVisualObject.PortsVisualObjects.Select(x => x.Transform.LocalPosition).ToList();
+            _portsDefaultRotation = _moduleVisualObject.PortsVisualObjects.Select(x => x.Transform.LocalRotation).ToList();
         }
 
         private void Update()
         {
             if (!_isWalking)
             {
-                for (int i = 0; i < _moduleVisualObject.PortsVisuals.Count; i++)
+                for (int i = 0; i < _moduleVisualObject.PortsVisualObjects.Count; i++)
                 {
-                    IPortVisualObject portVisual = _moduleVisualObject.PortsVisuals[i];
+                    IPortVisualObject portVisual = _moduleVisualObject.PortsVisualObjects[i];
                     
                     portVisual.Transform.LocalPosition = _portsDefaultPosition[i];
                     portVisual.Transform.LocalRotation = _portsDefaultRotation[i];
@@ -37,26 +37,26 @@ namespace IM.Visuals
                 return;
             }
 
-            _moduleVisualObject.PortsVisuals[1].Transform.LocalPosition = _portsDefaultPosition[1] + GetTransition();
-            _moduleVisualObject.PortsVisuals[1].Transform.LocalRotation =
+            _moduleVisualObject.PortsVisualObjects[1].Transform.LocalPosition = _portsDefaultPosition[1] + GetTransition();
+            _moduleVisualObject.PortsVisualObjects[1].Transform.LocalRotation =
                 Quaternion.Euler(0, 0, _portsDefaultRotation[1].eulerAngles.z + GetRotation());
-            _moduleVisualObject.ModuleGraphStructureUpdater.OnPortTransformChanged(_moduleVisualObject.PortsVisuals[1].Port);
+            _moduleVisualObject.ModuleGraphStructureUpdater.OnPortTransformChanged(_moduleVisualObject.PortsVisualObjects[1].Port);
 
-            _moduleVisualObject.PortsVisuals[3].Transform.LocalPosition = _portsDefaultPosition[3] - GetTransition();
-            _moduleVisualObject.PortsVisuals[3].Transform.LocalRotation =
+            _moduleVisualObject.PortsVisualObjects[3].Transform.LocalPosition = _portsDefaultPosition[3] - GetTransition();
+            _moduleVisualObject.PortsVisualObjects[3].Transform.LocalRotation =
                 Quaternion.Euler(0, 0, _portsDefaultRotation[3].eulerAngles.z - GetRotation());
-            _moduleVisualObject.ModuleGraphStructureUpdater.OnPortTransformChanged(_moduleVisualObject.PortsVisuals[3].Port);
+            _moduleVisualObject.ModuleGraphStructureUpdater.OnPortTransformChanged(_moduleVisualObject.PortsVisualObjects[3].Port);
             
-            _moduleVisualObject.PortsVisuals[2].Transform.LocalPosition =_portsDefaultPosition[2] - GetTransition();
-            _moduleVisualObject.PortsVisuals[2].Transform.LocalRotation =
+            _moduleVisualObject.PortsVisualObjects[2].Transform.LocalPosition =_portsDefaultPosition[2] - GetTransition();
+            _moduleVisualObject.PortsVisualObjects[2].Transform.LocalRotation =
                 Quaternion.Euler(0, 0, _portsDefaultRotation[2].eulerAngles.z - GetRotation());
-            _moduleVisualObject.ModuleGraphStructureUpdater.OnPortTransformChanged(_moduleVisualObject.PortsVisuals[2].Port);
+            _moduleVisualObject.ModuleGraphStructureUpdater.OnPortTransformChanged(_moduleVisualObject.PortsVisualObjects[2].Port);
 
 
-            _moduleVisualObject.PortsVisuals[4].Transform.LocalRotation =
+            _moduleVisualObject.PortsVisualObjects[4].Transform.LocalRotation =
                 Quaternion.Euler(0, 0, _portsDefaultRotation[4].eulerAngles.z + GetRotation());
-            _moduleVisualObject.PortsVisuals[4].Transform.LocalPosition =_portsDefaultPosition[4] +GetTransition();
-            _moduleVisualObject.ModuleGraphStructureUpdater.OnPortTransformChanged(_moduleVisualObject.PortsVisuals[4].Port);
+            _moduleVisualObject.PortsVisualObjects[4].Transform.LocalPosition =_portsDefaultPosition[4] +GetTransition();
+            _moduleVisualObject.ModuleGraphStructureUpdater.OnPortTransformChanged(_moduleVisualObject.PortsVisualObjects[4].Port);
         }
 
         private Vector3 GetTransition()

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -7644578825757335302}
   - component: {fileID: 655896773114017808}
   - component: {fileID: 8589094120568950576}
+  - component: {fileID: 2195755362611227546}
   m_Layer: 0
   m_Name: Arm Humanoid Visual
   m_TagString: Untagged
@@ -127,3 +128,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ReferenceModule
   _isVisibleOnAwake: 0
+--- !u!114 &2195755362611227546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156244532669732079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed30ba40738f4ada940314e39786d025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.HorizontalDirectionBasedSprite
+  _leftSprite: {fileID: -6696705774333872909, guid: 99a85b001a58d164695718abe96c09ac, type: 3}
+  _rightSprite: {fileID: -5711908598854653283, guid: 86cab99528ae4794fbd0765ef014b145, type: 3}

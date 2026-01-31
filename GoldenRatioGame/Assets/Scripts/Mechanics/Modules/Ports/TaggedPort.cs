@@ -3,7 +3,7 @@ using IM.Items;
 
 namespace IM.Modules
 {
-    public class TaggedPort : IPort, IHaveTag
+    public class TaggedPort : IConditionalPort, IHaveTag
     {
         public IModule Module { get; }
         public IConnection Connection { get; private set; }
@@ -24,6 +24,16 @@ namespace IM.Modules
         public void Disconnect()
         {
             Connection = null;
+        }
+
+        public bool CanConnect(IPort other)
+        {
+            return other is not IHaveTag otherTag || Tag.Matches(otherTag.Tag);
+        }
+
+        public bool CanDisconnect()
+        {
+            return IsConnected;
         }
     }
 }

@@ -9,10 +9,10 @@ namespace IM.Visuals
     {
         IExtensibleModule Owner { get; }
         IHierarchyTransform Transform { get; }
-        IReadOnlyList<IPortVisualObject> PortsVisuals { get; }
+        IReadOnlyList<IPortVisualObject> PortsVisualObjects { get; }
         IModuleGraphStructureUpdater ModuleGraphStructureUpdater { get; set; }
         
-        IPortVisualObject GetPortVisual(IPort port);
+        IPortVisualObject GetPortVisualObject(IPort port);
         void Reset();
     }
 }

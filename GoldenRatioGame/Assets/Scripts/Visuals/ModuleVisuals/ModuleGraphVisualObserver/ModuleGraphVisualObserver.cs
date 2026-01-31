@@ -54,7 +54,6 @@ namespace IM.Visuals
 
             _moduleVisuals.Add(extensibleModule, visualObject);
             _transform.AddChildKeepLocal(visualObject.Transform);
-            
             visualObject.ModuleGraphStructureUpdater = this;
             visualObject.Visibility = true;
         }
@@ -84,8 +83,8 @@ namespace IM.Visuals
                 throw new InvalidOperationException("Module visual does not exist.");
 
             _portAligner.AlignPorts(
-                visualA.GetPortVisual(connection.Port1),
-                visualB.GetPortVisual(connection.Port2));
+                visualA.GetPortVisualObject(connection.Port1),
+                visualB.GetPortVisualObject(connection.Port2));
         }
 
         public void OnPortTransformChanged(IPort port)
@@ -105,8 +104,8 @@ namespace IM.Visuals
                 if (!_moduleVisuals.TryGetValue(otherModule, out IModuleVisualObject toModuleVisual))
                     continue;
 
-                IPortVisualObject fromVisual = fromModuleVisual.GetPortVisual(viaPort);
-                IPortVisualObject toVisual = toModuleVisual.GetPortVisual(otherPort);
+                IPortVisualObject fromVisual = fromModuleVisual.GetPortVisualObject(viaPort);
+                IPortVisualObject toVisual = toModuleVisual.GetPortVisualObject(otherPort);
 
                 if (fromVisual == null || toVisual == null)
                     continue;
