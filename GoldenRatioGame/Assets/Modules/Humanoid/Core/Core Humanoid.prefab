@@ -132,29 +132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910832e40fd14d2c9074a9542d5149e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Modules::IM.Modules.CoreExtensibleModule
+  _portInitialization: {fileID: 11400000, guid: 26e5bdefabebc534397d29ad97ad96eb, type: 2}
   <Name>k__BackingField: Humanoid Core
   <Description>k__BackingField: 
-  _portsInfos:
-  - _position: {x: 0, y: 0.5, z: 0}
-    _eulerZRotation: 90
-    _tag: {fileID: 11400000, guid: 9780612eeb15ddb4e872a9faa88ec63a, type: 2}
-    _direction: 0
-  - _position: {x: -0.2, y: 0.5, z: 0}
-    _eulerZRotation: 180
-    _tag: {fileID: 11400000, guid: 791016066ffda454c8d008bf90537974, type: 2}
-    _direction: 1
-  - _position: {x: 0.1, y: 0.5, z: 0}
-    _eulerZRotation: 180
-    _tag: {fileID: 11400000, guid: 791016066ffda454c8d008bf90537974, type: 2}
-    _direction: 2
-  - _position: {x: -0.12, y: -0.3, z: 0}
-    _eulerZRotation: -90
-    _tag: {fileID: 11400000, guid: e758e15608f899a4f8b75cacce2acad7, type: 2}
-    _direction: 1
-  - _position: {x: 0.21, y: -0.3, z: 0}
-    _eulerZRotation: -90
-    _tag: {fileID: 11400000, guid: e758e15608f899a4f8b75cacce2acad7, type: 2}
-    _direction: 2
 --- !u!114 &1563791358509127018
 MonoBehaviour:
   m_ObjectHideFlags: 0

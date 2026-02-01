@@ -6,6 +6,6 @@ namespace IM.Visuals
 {
     public interface IPortInfoProvider
     {
-        public IReadOnlyDictionary<IPort, PortInfo> PortsInfos { get; }
+        public IReadOnlyDictionary<IPort, IPortInfo> PortsInfos { get; }
     }
 }

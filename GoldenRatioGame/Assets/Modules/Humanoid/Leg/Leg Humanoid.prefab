@@ -173,6 +173,10 @@ PrefabInstance:
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5469737783865499535, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portInitialization
+      value: 
+      objectReference: {fileID: 11400000, guid: d8a6636f007763f4d9ac5991545131c1, type: 2}
+    - target: {fileID: 5469737783865499535, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: <Name>k__BackingField
       value: Humanoid Leg
       objectReference: {fileID: 0}

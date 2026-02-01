@@ -157,6 +157,10 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5469737783865499535, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _portInitialization
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ae7c0df07a6bde4c96cdb7b900d9b4c, type: 2}
+    - target: {fileID: 5469737783865499535, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: <Name>k__BackingField
       value: Humanoid Arm
       objectReference: {fileID: 0}

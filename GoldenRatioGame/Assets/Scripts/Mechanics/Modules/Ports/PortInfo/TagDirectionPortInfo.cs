@@ -5,7 +5,7 @@ using UnityEngine;
 namespace IM.Modules
 {
     [Serializable]
-    public class PortInfo
+    public class TagDirectionPortInfo : IPortInfo
     {
         [SerializeField] private Vector3 _position;
         [SerializeField] private float _eulerZRotation;

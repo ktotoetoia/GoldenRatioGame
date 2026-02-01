@@ -10,14 +10,24 @@ namespace IM.Visuals
 {
     public class ModuleVisualObject : MonoBehaviour, IAnimatedModuleVisualObject
     {
-        [SerializeField] private bool _isVisibleOnAwake;
         private readonly List<IPortVisualObject> _portVisualObjects = new();
         private readonly HierarchyTransform _transform = new();
         private Animator _animator;
-        
+        private IExtensibleModule _owner;
+
         public IHierarchyTransform Transform => _transform;
         public IReadOnlyList<IPortVisualObject> PortsVisualObjects => _portVisualObjects;
-        public IExtensibleModule Owner { get; set; }
+        public IExtensibleModule Owner
+        {
+            get => _owner;
+            set
+            {
+                if(_owner != null) throw new InvalidOperationException("Owner can only be set once");
+                
+                _owner = value;
+            }
+        }
+
         public bool IsAnimating { get; set; } = true;
         public IEnumerable<IAnimationChange> AnimationChanges { get; set; }
         public IModuleGraphStructureUpdater ModuleGraphStructureUpdater { get; set; }
@@ -31,7 +41,6 @@ namespace IM.Visuals
         private void Awake()
         {
             _animator = GetComponent<Animator>();
-            Visibility = _isVisibleOnAwake;
 
             transform.position = _transform.Position;
             transform.rotation  = _transform.Rotation;
@@ -60,6 +69,14 @@ namespace IM.Visuals
         public IPortVisualObject GetPortVisualObject(IPort port)
         {
             return _portVisualObjects.FirstOrDefault(x => x.Port == port);
+        }
+
+        public void OnInitializationFinished()
+        {
+            foreach (IRequireModuleVisualObjectInitialization initialization in GetComponents<IRequireModuleVisualObjectInitialization>())
+            {
+                initialization.OnModuleVisualObjectInitialized(this);
+            }
         }
 
         public void Dispose()

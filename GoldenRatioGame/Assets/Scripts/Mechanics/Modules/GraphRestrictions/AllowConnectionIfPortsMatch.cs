@@ -21,13 +21,15 @@ namespace IM.Modules
 
         public bool CanDisconnect(IConnection connection)
         {
-            return connection.Port1 is not IConditionalPort port1 || connection.Port2 is not IConditionalPort port2|| 
-                   (port1.CanConnect(port2) && port2.CanConnect(port1));
+            if (connection.Port1 is not IConditionalPort p1 || connection.Port2 is not IConditionalPort p2)
+                return true;
+
+            return p1.CanDisconnect() && p2.CanDisconnect();
         }
 
         public bool CanRemoveModule(IModule module)
         {
-            return module.Ports.Where(x => x.IsConnected).All(x => CanDisconnect(x.Connection));
+            return module.Ports.All(port => !port.IsConnected || CanDisconnect(port.Connection));
         }
     }
 }

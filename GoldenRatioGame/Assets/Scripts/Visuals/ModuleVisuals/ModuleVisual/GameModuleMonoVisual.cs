@@ -1,5 +1,4 @@
-﻿using System;
-using IM.Graphs;
+﻿using IM.Graphs;
 using IM.Modules;
 using IM.Transforms;
 using UnityEngine;
@@ -13,7 +12,7 @@ namespace IM.Visuals
         private IPortInfoProvider _portInfoProvider;
         private IObjectPool<IModuleVisualObject> _pool;
         
-        private IObjectPool<IModuleVisualObject> Pool => _pool ??=new ObjectPool<IModuleVisualObject>(
+        private IObjectPool<IModuleVisualObject> Pool => _pool ??= new ObjectPool<IModuleVisualObject>(
             Create,
             OnGet,
             OnRelease,
@@ -34,9 +33,10 @@ namespace IM.Visuals
             ModuleVisualObject visual = go.GetComponent<ModuleVisualObject>();
 
             visual.Owner = GetComponent<IExtensibleModule>();
+            visual.Visibility = false;
             visual.AnimationChanges = GetComponents<IAnimationChange>();
-
-            foreach ((IPort port, PortInfo portInfo) in PortSetup.PortsInfos)
+            
+            foreach ((IPort port, IPortInfo portInfo) in PortSetup.PortsInfos)
             {
                 IHierarchyTransform portTransform = new HierarchyTransform
                 {
@@ -50,7 +50,9 @@ namespace IM.Visuals
                     portTransform
                 );
             }
-
+            
+            visual.OnInitializationFinished();
+            
             return visual;
         }
 
