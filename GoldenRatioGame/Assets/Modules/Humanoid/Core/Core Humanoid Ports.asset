@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e110da0f6a0946d6ab63dc64ebaa41f2, type: 3}
-  m_Name: Core Humanoid Module Ports
+  m_Name: Core Humanoid Ports
   m_EditorClassIdentifier: Modules:IM.Modules:TagPortInitialization
   _portInfos:
   - _position: {x: 0, y: 0.5, z: 0}

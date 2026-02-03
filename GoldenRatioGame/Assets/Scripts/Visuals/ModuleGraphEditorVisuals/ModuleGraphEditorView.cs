@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using IM.Graphs;
 using IM.Modules;
 using UnityEngine;
@@ -45,7 +46,7 @@ namespace IM.Visuals.Graph
             if (Input.GetKeyDown(KeyCode.P)) RemoveModule();
             if (Input.GetKeyDown(KeyCode.Z)) _graph.Undo(1);
             if (Input.GetKeyDown(KeyCode.X)) _graph.Redo(1);
-            
+
             _visualObserver.OnGraphUpdated(_graph);
         }
 
@@ -81,7 +82,7 @@ namespace IM.Visuals.Graph
         }
 
         private void RemoveModule()
-        {
+        {   
             IModule module = _entity.ModuleEditingContext.GraphEditor.Graph.Modules.LastOrDefault();
             
             _graph.RemoveModule(module);

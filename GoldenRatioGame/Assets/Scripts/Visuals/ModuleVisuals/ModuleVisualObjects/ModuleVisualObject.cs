@@ -10,7 +10,10 @@ namespace IM.Visuals
 {
     public class ModuleVisualObject : MonoBehaviour, IAnimatedModuleVisualObject
     {
+        [SerializeField] private PortBinderBase _portBinder;
+        
         private readonly List<IPortVisualObject> _portVisualObjects = new();
+        private readonly List<IPoolObject> _poolObjects = new();
         private readonly HierarchyTransform _transform = new();
         private Animator _animator;
         private IExtensibleModule _owner;
@@ -25,6 +28,7 @@ namespace IM.Visuals
                 if(_owner != null) throw new InvalidOperationException("Owner can only be set once");
                 
                 _owner = value;
+                _portBinder.Bind(_owner.Ports, _portVisualObjects,this);
             }
         }
 
@@ -41,6 +45,8 @@ namespace IM.Visuals
         private void Awake()
         {
             _animator = GetComponent<Animator>();
+            GetComponents(_poolObjects);
+            _poolObjects.Remove(this);
 
             transform.position = _transform.Position;
             transform.rotation  = _transform.Rotation;
@@ -60,12 +66,6 @@ namespace IM.Visuals
             }
         }
         
-        public void AddPort(IPortVisualObject port, IHierarchyTransform hierarchyTransform)
-        {
-            _portVisualObjects.Add(port);
-            _transform.AddChildKeepLocal(hierarchyTransform);
-        }
-        
         public IPortVisualObject GetPortVisualObject(IPort port)
         {
             return _portVisualObjects.FirstOrDefault(x => x.Port == port);
@@ -73,19 +73,20 @@ namespace IM.Visuals
 
         public void OnInitializationFinished()
         {
-            foreach (IRequireModuleVisualObjectInitialization initialization in GetComponents<IRequireModuleVisualObjectInitialization>())
+            foreach (IRequireModuleVisualObjectInitialization initialization in
+                     GetComponents<IRequireModuleVisualObjectInitialization>())
             {
                 initialization.OnModuleVisualObjectInitialized(this);
             }
         }
-
+        
         public void Dispose()
         {
-            Reset();
+            OnRelease();
             Destroy(gameObject);
         }
-        
-        public void Reset()
+
+        public void OnRelease()
         {
             Visibility = false;
             ModuleGraphStructureUpdater = null;
@@ -93,6 +94,16 @@ namespace IM.Visuals
             _transform.LocalPosition = new Vector3(0, 0, 0);
             _transform.LocalScale = new Vector3(1, 1, 1);
             _transform.LocalRotation = Quaternion.identity;
+            
+            foreach (IPoolObject resettable in _poolObjects) resettable.OnRelease();
+            foreach (IPortVisualObject portVisualObject in _portVisualObjects) portVisualObject.Reset();
+        }
+
+        public void OnGet()
+        {
+            Visibility = true;
+            
+            foreach (IPoolObject resettable in _poolObjects) resettable.OnGet();;
         }
     }
 }

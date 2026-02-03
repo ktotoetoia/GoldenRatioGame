@@ -146,7 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b689c94a11470785683a05a4b508ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.ModuleLayout
-  _visualPrefab: {fileID: 2156244532669732079, guid: e31406646bfbbfb4d96f36dea99f9cbf, type: 3}
+  _inGamePrefab: {fileID: 2156244532669732079, guid: e31406646bfbbfb4d96f36dea99f9cbf, type: 3}
+  _editorPrefab: {fileID: 2156244532669732079, guid: 7104e5c87a0e65345a6a9321c64669d3, type: 3}
 --- !u!114 &8535451133996336894
 MonoBehaviour:
   m_ObjectHideFlags: 0

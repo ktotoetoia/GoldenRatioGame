@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9105580942014384913}
   - component: {fileID: 8054565667691421690}
   m_Layer: 0
-  m_Name: Leg Humanoid Visual
+  m_Name: Leg Humanoid In Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,3 +126,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77546388e06d497d92107f9a3da1fb07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ReferenceModule
+  _portBinder: {fileID: 11400000, guid: 901a667ce3bbb794cae180b53410a31e, type: 2}

@@ -6,6 +6,6 @@ namespace IM.Modules
 {
     public abstract class PortInitializationBase : ScriptableObject
     {
-        public abstract void Initialize(IList<IPort> ports,IDictionary<IPort, IPortInfo> portsDictionary, IModule module);
+        public abstract void Initialize(IList<IPort> ports, IModule module);
     }
 }

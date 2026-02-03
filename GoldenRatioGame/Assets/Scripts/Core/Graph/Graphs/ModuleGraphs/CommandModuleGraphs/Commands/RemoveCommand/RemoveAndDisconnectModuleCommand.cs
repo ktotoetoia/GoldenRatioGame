@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using IM.Commands;
+using UnityEngine;
 
 namespace IM.Graphs
 {
@@ -29,7 +30,7 @@ namespace IM.Graphs
             }
             
             commands.Add(new RemoveModuleCommand(_module,_modules));
-
+            
             _compositeCommand = new CompositeCommand(commands);
             _compositeCommand.Execute();
         }

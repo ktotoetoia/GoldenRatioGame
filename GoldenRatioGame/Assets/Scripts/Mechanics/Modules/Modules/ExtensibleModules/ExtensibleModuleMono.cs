@@ -3,17 +3,15 @@ using System.Linq;
 using IM.Graphs;
 using IM.Items;
 using IM.Storages;
-using IM.Visuals;
 using UnityEngine;
 
 namespace IM.Modules
 {
     [RequireComponent(typeof(SpriteRendererIconDrawer))]
-    public class ExtensibleModuleMono : MonoBehaviour, IExtensibleModule, IPortInfoProvider
+    public class ExtensibleModuleMono : MonoBehaviour, IExtensibleModule
     {
         [SerializeField] private PortInitializationBase _portInitialization;
         private readonly List<IPort> _ports =  new();
-        private readonly Dictionary<IPort, IPortInfo>  _portInfos = new();
         private IExtensionProvider _extensions;
         private IIconDrawer _iconDrawer;
         private ModuleState _state;
@@ -25,7 +23,6 @@ namespace IM.Modules
         public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection);
         public IEnumerable<IPort> Ports => _ports;
         public IExtensionProvider Extensions => _extensions ??= new GameObjectExtensionProvider(gameObject);
-        public IReadOnlyDictionary<IPort, IPortInfo> PortsInfos => _portInfos;
 
         public ModuleState ModuleState
         {
@@ -38,7 +35,7 @@ namespace IM.Modules
             _iconDrawer = GetComponent<IIconDrawer>();
             ModuleState = ModuleState.Show;
             
-            _portInitialization.Initialize(_ports, _portInfos, this);
+            _portInitialization.Initialize(_ports, this);
         }
     }
 }

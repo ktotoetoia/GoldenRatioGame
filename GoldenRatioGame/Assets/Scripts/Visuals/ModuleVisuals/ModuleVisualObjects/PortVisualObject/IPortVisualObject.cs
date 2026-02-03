@@ -8,5 +8,7 @@ namespace IM.Visuals
         IModuleVisualObject OwnerVisualObject { get; }
         IPort Port { get; }
         ITransform Transform { get; }
+
+        void Reset();
     }
 }

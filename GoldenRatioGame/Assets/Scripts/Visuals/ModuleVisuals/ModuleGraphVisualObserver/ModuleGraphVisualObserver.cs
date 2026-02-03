@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using IM.Graphs;
 using IM.Modules;
 using IM.Transforms;
-using UnityEngine;
 
 namespace IM.Visuals
 {
@@ -50,7 +50,7 @@ namespace IM.Visuals
             if (!extensibleModule.Extensions.TryGetExtension(out IModuleVisual moduleVisual))
                 throw new InvalidOperationException("IModuleVisual extension is required.");
 
-            IModuleVisualObject visualObject = moduleVisual.Get();
+            IModuleVisualObject visualObject = moduleVisual.GamePool.Get();
 
             _moduleVisuals.Add(extensibleModule, visualObject);
             _transform.AddChildKeepLocal(visualObject.Transform);
@@ -68,7 +68,7 @@ namespace IM.Visuals
                 throw new InvalidOperationException("Module visual does not exist.");
 
             _transform.RemoveChild(visualObject.Transform);
-            extensibleModule.Extensions.GetExtension<IModuleVisual>().Release(visualObject);
+            extensibleModule.Extensions.GetExtension<IModuleVisual>().GamePool.Release(visualObject as IAnimatedModuleVisualObject);
         }
 
         private void HandleConnected(IConnection connection)
@@ -81,7 +81,7 @@ namespace IM.Visuals
             if (!_moduleVisuals.TryGetValue(moduleA, out IModuleVisualObject visualA) ||
                 !_moduleVisuals.TryGetValue(moduleB, out IModuleVisualObject visualB))
                 throw new InvalidOperationException("Module visual does not exist.");
-
+            
             _portAligner.AlignPorts(
                 visualA.GetPortVisualObject(connection.Port1),
                 visualB.GetPortVisualObject(connection.Port2));
@@ -91,9 +91,9 @@ namespace IM.Visuals
         {
             if (port == null)
                 throw new ArgumentNullException(nameof(port));
-
+            
             foreach ((IExtensibleModule module, IPort viaPort) in
-                     _traversal.EnumerateModulesAlongConnection<IExtensibleModule, IPort>(port))
+                     _traversal.EnumerateModules<IExtensibleModule, IPort>(_moduleVisuals.Keys.FirstOrDefault()))
             {
                 IPort otherPort = viaPort.Connection.GetOtherPort(viaPort);
 
@@ -120,7 +120,7 @@ namespace IM.Visuals
             
             foreach ((IExtensibleModule module, IModuleVisualObject visualObject) in _moduleVisuals)
             {
-                module.Extensions.GetExtension<IModuleVisual>().Release(visualObject);
+                module.Extensions.GetExtension<IModuleVisual>().GamePool.Release(visualObject as IAnimatedModuleVisualObject);
             }
 
             foreach (IHierarchyElement child in _transform.Children)

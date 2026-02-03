@@ -8,56 +8,44 @@ namespace IM.Visuals
 {
     public class GameModuleMonoVisual : MonoBehaviour, IModuleVisual
     {
-        [SerializeField] private GameObject _visualPrefab;
-        private IPortInfoProvider _portInfoProvider;
+        [SerializeField] private GameObject _inGamePrefab;
+        [SerializeField] private GameObject _editorPrefab;
         private IObjectPool<IModuleVisualObject> _pool;
         
-        private IObjectPool<IModuleVisualObject> Pool => _pool ??= new ObjectPool<IModuleVisualObject>(
-            Create,
-            OnGet,
-            OnRelease,
-            OnDestroyPooledObject
-        );
-        
-        private IPortInfoProvider PortSetup => _portInfoProvider ??= GetComponent<IPortInfoProvider>();
-        
-        public int CountInactive => Pool.CountInactive;
-        public IModuleVisualObject Get() => Pool.Get();
-        public PooledObject<IModuleVisualObject> Get(out IModuleVisualObject v) => Pool.Get(out v);
-        public void Release(IModuleVisualObject element)=> Pool.Release(element);
-        public void Clear() => Pool.Clear();
+        public IObjectPool<IModuleVisualObject> EditorPool { get; private set; }
+        public IObjectPool<IAnimatedModuleVisualObject> GamePool { get; private set; }
 
-        private IModuleVisualObject Create()
+        private void Awake()
         {
-            GameObject go = Instantiate(_visualPrefab, transform);
+            GamePool = new ObjectPool<IAnimatedModuleVisualObject>(
+                () => Create(_inGamePrefab),
+                OnGet,
+                OnRelease,
+                OnDestroyPooledObject
+            );
+            
+            EditorPool= new ObjectPool<IModuleVisualObject>(
+                () => Create(_editorPrefab),
+                OnGet,
+                OnRelease,
+                OnDestroyPooledObject
+            ); 
+        }
+        
+        private IAnimatedModuleVisualObject Create(GameObject prefab)
+        {
+            GameObject go = Instantiate(prefab, transform);
             ModuleVisualObject visual = go.GetComponent<ModuleVisualObject>();
 
             visual.Owner = GetComponent<IExtensibleModule>();
-            visual.Visibility = false;
             visual.AnimationChanges = GetComponents<IAnimationChange>();
-            
-            foreach ((IPort port, IPortInfo portInfo) in PortSetup.PortsInfos)
-            {
-                IHierarchyTransform portTransform = new HierarchyTransform
-                {
-                    LocalPosition = portInfo.Position,
-                    LocalScale = Vector3.one,
-                    LocalRotation = Quaternion.Euler(0f, 0f, portInfo.EulerZRotation)
-                };
-
-                visual.AddPort(
-                    new PortVisualObject(visual, port, portTransform),
-                    portTransform
-                );
-            }
-            
             visual.OnInitializationFinished();
             
             return visual;
         }
 
-        private static void OnGet(IModuleVisualObject visual) => visual.Visibility = true;
-        private static void OnRelease(IModuleVisualObject visual) => visual.Reset();
+        private static void OnGet(IModuleVisualObject visual) => visual.OnGet();
+        private static void OnRelease(IModuleVisualObject visual) => visual.OnRelease();
         private static void OnDestroyPooledObject(IModuleVisualObject visual) => visual.Dispose();
     }
 }

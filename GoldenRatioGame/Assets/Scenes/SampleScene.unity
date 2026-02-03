@@ -152,11 +152,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Entities::IM.Entities.InitializeFromTheList
   _toInitialize:
   - {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
+  - {fileID: 8119833187759213420, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
   - {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
   - {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
   - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
   - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
-  - {fileID: 8119833187759213420, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
   _bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 5, y: 5, z: 5}

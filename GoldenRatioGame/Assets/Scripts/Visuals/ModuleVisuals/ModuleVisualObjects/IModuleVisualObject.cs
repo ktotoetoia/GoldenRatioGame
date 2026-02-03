@@ -6,7 +6,7 @@ using IM.Transforms;
 
 namespace IM.Visuals
 {
-    public interface IModuleVisualObject : IVisualObject
+    public interface IModuleVisualObject : IVisualObject, IPoolObject
     {
         IExtensibleModule Owner { get; }
         IHierarchyTransform Transform { get; }
@@ -14,6 +14,5 @@ namespace IM.Visuals
         IModuleGraphStructureUpdater ModuleGraphStructureUpdater { get; set; }
         
         IPortVisualObject GetPortVisualObject(IPort port);
-        void Reset();
     }
 }

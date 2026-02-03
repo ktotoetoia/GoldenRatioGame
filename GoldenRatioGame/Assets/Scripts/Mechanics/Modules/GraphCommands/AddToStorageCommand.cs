@@ -1,6 +1,7 @@
 ﻿using System;
 using IM.Commands;
 using IM.Storages;
+using UnityEngine;
 
 namespace IM.Modules
 {
@@ -22,8 +23,15 @@ namespace IM.Modules
         protected override void InternalExecute()
         {
             if (_cell.Item != null) throw new InvalidOperationException("Cell was modified by another operation");
-
-            _command.Execute();
+            
+            try
+            {
+                _command.Execute();
+            }
+            catch(Exception e)
+            {
+                Debug.LogException(e);
+            }
             
             _storage.SetItem(_cell,_storable);
         }

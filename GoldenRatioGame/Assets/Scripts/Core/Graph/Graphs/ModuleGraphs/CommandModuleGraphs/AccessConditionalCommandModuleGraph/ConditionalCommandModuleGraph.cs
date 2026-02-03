@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace IM.Graphs
 {
@@ -41,7 +42,7 @@ namespace IM.Graphs
         {
             if (!_conditions.CanRemoveModule(module))
                 throw new InvalidOperationException("Cannot remove module (condition failed).");
-
+            
             _graph.RemoveModule(module);
         }
 
