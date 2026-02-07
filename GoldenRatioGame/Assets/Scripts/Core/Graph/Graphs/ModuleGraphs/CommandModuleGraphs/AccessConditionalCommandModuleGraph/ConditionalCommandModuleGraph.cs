@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace IM.Graphs
 {
@@ -44,7 +43,7 @@ namespace IM.Graphs
                 throw new InvalidOperationException("Cannot remove module (condition failed).");
             
             _graph.RemoveModule(module);
-        }
+         }
 
         public IConnection Connect(IPort output, IPort input)
         {

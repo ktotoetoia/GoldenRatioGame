@@ -262,3 +262,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84fcd05b82d47a4a6d3f13f4491f01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ModuleGraphVisualObserver
+  _parent: {fileID: 2365714068825351273}

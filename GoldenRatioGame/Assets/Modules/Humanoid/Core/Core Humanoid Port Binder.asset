@@ -15,11 +15,17 @@ MonoBehaviour:
   _portPositionRotations:
   - <Position>k__BackingField: {x: 0, y: 0.5, z: 0}
     <EulerZRotation>k__BackingField: 90
+    <OutputOrderAdjustment>k__BackingField: 1
   - <Position>k__BackingField: {x: -0.2, y: 0.5, z: 0}
     <EulerZRotation>k__BackingField: 180
+    <OutputOrderAdjustment>k__BackingField: 2
   - <Position>k__BackingField: {x: 0.1, y: 0.5, z: 0}
     <EulerZRotation>k__BackingField: 0
+    <OutputOrderAdjustment>k__BackingField: -2
   - <Position>k__BackingField: {x: -0.12, y: -0.3, z: 0}
     <EulerZRotation>k__BackingField: -90
+    <OutputOrderAdjustment>k__BackingField: 2
   - <Position>k__BackingField: {x: 0.21, y: -0.3, z: 0}
     <EulerZRotation>k__BackingField: -90
+    <OutputOrderAdjustment>k__BackingField: -2
+  _portVisualObjectMonoPrefab: {fileID: 1794855348921911399, guid: 1fd770fb30e523b44b7424aa9f9339bd, type: 3}

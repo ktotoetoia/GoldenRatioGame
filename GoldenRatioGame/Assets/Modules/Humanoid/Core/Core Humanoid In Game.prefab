@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -7644578825757335302}
   - component: {fileID: 6377991156395474928}
   - component: {fileID: -6034804467400656449}
+  - component: {fileID: -7239767369713268034}
   m_Layer: 0
   m_Name: Core Humanoid In Game
   m_TagString: Untagged
@@ -127,3 +128,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ReferenceModule
   _portBinder: {fileID: 11400000, guid: 13643a2c93cb000499bf64d91c758fff, type: 2}
+  _renderer: {fileID: -7644578825757335302}
+--- !u!114 &-7239767369713268034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156244532669732079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd3d71c28bc042a597ff6ab715823292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Transform::IM.Transforms.TransformMono

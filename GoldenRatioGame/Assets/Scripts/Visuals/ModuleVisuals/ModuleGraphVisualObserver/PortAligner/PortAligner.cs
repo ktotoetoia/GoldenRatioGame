@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using IM.Transforms;
+using UnityEngine;
 
 namespace IM.Visuals
 {
@@ -6,30 +7,31 @@ namespace IM.Visuals
     {
         public void AlignPorts(IPortVisualObject portToMove, IPortVisualObject anchorPort)
         {
-            Vector3 inputLocal = Vector3.Scale(portToMove.Transform.LocalPosition, portToMove.OwnerVisualObject.Transform.LossyScale);
-            Vector3 outputLocal = Vector3.Scale(anchorPort.Transform.LocalPosition, anchorPort.OwnerVisualObject.Transform.LossyScale);
+            ITransform owner = portToMove.OwnerVisualObject.Transform;
 
-            Vector3 outputWorldPos =
-                anchorPort.OwnerVisualObject.Transform.Position + anchorPort.OwnerVisualObject.Transform.Rotation * outputLocal;
+            owner.Rotation = GetRotation(portToMove, anchorPort);
+            owner.Position = GetPosition(portToMove, anchorPort, owner.Rotation);
+        }
+        
+        private Quaternion GetRotation(IPortVisualObject portToMove, IPortVisualObject anchorPort)
+        {
+            ITransform owner = portToMove.OwnerVisualObject.Transform;
 
-            float inputWorldZ =
-                (portToMove.OwnerVisualObject.Transform.Rotation * portToMove.Transform.LocalRotation).eulerAngles.z;
+            Quaternion portLocal =
+                Quaternion.Inverse(owner.Rotation) *
+                portToMove.Transform.Rotation;
 
-            float outputWorldZ =
-                (anchorPort.OwnerVisualObject.Transform.Rotation * anchorPort.Transform.LocalRotation).eulerAngles.z;
+            return anchorPort.Transform.Rotation *
+                   Quaternion.Inverse(portLocal) * Quaternion.Euler(0,0,180);
+        }
+        
+        private Vector3 GetPosition(IPortVisualObject portToMove, IPortVisualObject anchorPort, Quaternion ownerRot)
+        {
+            Vector3 portLocalPos = portToMove.Transform.LocalPosition;
+            Vector3 ownerScale = portToMove.OwnerVisualObject.Transform.LossyScale;
+            Vector3 offset = ownerRot * Vector3.Scale(ownerScale, portLocalPos);
 
-            float desiredInputWorldZ = outputWorldZ + 180f;
-
-            float deltaZ = Mathf.DeltaAngle(inputWorldZ, desiredInputWorldZ);
-
-            float newInputWorldZ = portToMove.OwnerVisualObject.Transform.Rotation.eulerAngles.z + deltaZ;
-            Quaternion desiredRotation = Quaternion.Euler(0f, 0f, newInputWorldZ);
-
-            Vector3 rotatedInputLocal = desiredRotation * inputLocal;
-            Vector3 desiredPosition = outputWorldPos - rotatedInputLocal;
-
-            portToMove.OwnerVisualObject.Transform.Position = desiredPosition;
-            portToMove.OwnerVisualObject.Transform.Rotation = desiredRotation;
+            return anchorPort.Transform.Position - offset;
         }
     }
 }

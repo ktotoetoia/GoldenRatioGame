@@ -10,5 +10,7 @@ namespace IM.Transforms
         new Vector3 LocalPosition { get; set; }
         new Vector3 LocalScale { get; set; }
         new Quaternion LocalRotation { get; set; }
+        
+        Transform Transform { get; }
     }
 }

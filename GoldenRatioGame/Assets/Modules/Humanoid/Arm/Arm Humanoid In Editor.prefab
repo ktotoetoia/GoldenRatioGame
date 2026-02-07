@@ -12,6 +12,10 @@ GameObject:
   - component: {fileID: -7644578825757335302}
   - component: {fileID: 655896773114017808}
   - component: {fileID: 8589094120568950576}
+  - component: {fileID: 1817530647307273206}
+  - component: {fileID: 7748644744376630002}
+  - component: {fileID: -5828061840266793445}
+  - component: {fileID: -445026668575163568}
   m_Layer: 0
   m_Name: Arm Humanoid In Editor
   m_TagString: Untagged
@@ -127,3 +131,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ReferenceModule
   _portBinder: {fileID: 11400000, guid: 401bb15b2795fd74391d08a5c017f818, type: 2}
+  _renderer: {fileID: -7644578825757335302}
+--- !u!114 &1817530647307273206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156244532669732079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba0f19c22de4ee18b093ec90fb11088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.HorizontalDirectionSetter
+--- !u!114 &7748644744376630002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156244532669732079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed30ba40738f4ada940314e39786d025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.HorizontalDirectionSpriteChange
+  _leftSprite: {fileID: -6696705774333872909, guid: 99a85b001a58d164695718abe96c09ac, type: 3}
+  _rightSprite: {fileID: -5711908598854653283, guid: 86cab99528ae4794fbd0765ef014b145, type: 3}
+  _spriteRenderer: {fileID: -7644578825757335302}
+--- !u!114 &-5828061840266793445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156244532669732079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daeefd5a0dfc41daa5c8fa7b7046699e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.HorizontalDirectionPortVisualRotationChange
+  _rotationInfos:
+  - <PortID>k__BackingField: 0
+    <DefaultRotation>k__BackingField: 0
+    <LeftRotation>k__BackingField: 0
+    <RightRotation>k__BackingField: 180
+--- !u!114 &-445026668575163568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156244532669732079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd3d71c28bc042a597ff6ab715823292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Transform::IM.Transforms.TransformMono

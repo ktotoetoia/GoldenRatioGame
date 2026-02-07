@@ -6,6 +6,6 @@ namespace IM.Visuals
     public interface IModuleVisual : IExtension
     {
         IObjectPool<IModuleVisualObject> EditorPool {get;}
-        IObjectPool<IAnimatedModuleVisualObject> GamePool { get; }
+        IObjectPool<IModuleVisualObject> GamePool { get; }
     }
 }

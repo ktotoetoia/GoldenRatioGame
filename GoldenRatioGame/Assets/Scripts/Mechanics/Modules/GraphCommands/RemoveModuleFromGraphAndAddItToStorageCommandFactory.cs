@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using IM.Commands;
 using IM.Graphs;
 using IM.Storages;
-using UnityEngine;
 
 namespace IM.Modules
 {
@@ -19,7 +18,6 @@ namespace IM.Modules
         public ICommand Create(IModule param1, ICollection<IModule> param2, ICollection<IConnection> param3)
         {
             IStorableReadOnly storable = param1 as IStorableReadOnly ?? throw new ArgumentException();
-            
             return new AddToStorageCommand(new RemoveAndDisconnectModuleCommand(param1, param2,param3),_getStorageCell(param1),storable);
         }
     }

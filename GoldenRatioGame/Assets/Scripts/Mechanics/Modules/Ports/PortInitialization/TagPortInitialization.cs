@@ -18,7 +18,7 @@ namespace IM.Modules
             foreach (PortTag portInfo in _portInfos)
             {
                 ITag tag = portInfo.Tag ?? new FreeTag();
-                IPort port = new TaggedPort(module, tag);
+                IPort port =portInfo.Direction == HorizontalDirection.None ? new TaggedPort(module, tag) : new EnumChangingTaggedPort<HorizontalDirection>(module, tag, portInfo.Direction);
                 
                 ports.Add(port);
             }

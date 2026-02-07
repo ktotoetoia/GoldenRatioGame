@@ -65,9 +65,9 @@ namespace IM.Graphs
 
                 foreach (IPort port in current.Ports)
                 {
-                    if (port.IsConnected && port.Connection.GetOtherPort(port).Module is TModule next && visited.Add(next) && port is TPort typedPort)
+                    if (port.IsConnected && port.Connection.GetOtherPort(port) is TPort { Module: TModule next } nextPort && visited.Add(next))
                     {
-                        queue.Enqueue((next, typedPort));
+                        queue.Enqueue((next, nextPort));
                     }
                 }
             }

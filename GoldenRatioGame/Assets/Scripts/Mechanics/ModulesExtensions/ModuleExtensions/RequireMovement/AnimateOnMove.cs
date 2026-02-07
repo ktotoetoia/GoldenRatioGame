@@ -17,6 +17,8 @@ namespace IM.Visuals
 
         public void ApplyToAnimator(Animator animator)
         {
+            if(!animator.isActiveAndEnabled) return;
+            
             switch (AnimationChangeType)
             {
                 case AnimationChangeType.Bool:

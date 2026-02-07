@@ -2,7 +2,7 @@
 
 namespace IM.Transforms
 {
-    public struct TransformReadOnly : ITransformReadOnly
+    public readonly struct LocalTransformReadOnly : ITransformReadOnly
     {
         public Vector3 Position { get; }
         public Vector3 LocalPosition => Vector3.zero;
@@ -11,11 +11,18 @@ namespace IM.Transforms
         public Quaternion Rotation { get; }
         public Quaternion LocalRotation => Quaternion.identity;
     
-        public TransformReadOnly(Vector3 p, Vector3 s, Quaternion r)
+        public LocalTransformReadOnly(Vector3 p, Quaternion r,Vector3 s)
         {
             Position = p;
             LossyScale = s;
             Rotation = r;
+        }
+
+        public void ApplyTo(ITransform target)
+        {
+            target.LocalPosition = Position;
+            target.LocalRotation = Rotation;
+            target.LocalScale = LossyScale;
         }
     }
 }

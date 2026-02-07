@@ -12,11 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd48ae14d54cd5a45a639e978308b08a, type: 3}
   m_Name: Head Humanoid Port Binder
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.DirectionalPortBinder
-  _portInfos:
-  - _position: {x: 0, y: 0.35, z: 0}
-    _eulerZRotation: 0
-    _tag: {fileID: 11400000, guid: 791016066ffda454c8d008bf90537974, type: 2}
-    _direction: 0
   _portPositionRotations:
   - <Position>k__BackingField: {x: 0, y: -0.4, z: 0}
     <EulerZRotation>k__BackingField: -90
+    <OutputOrderAdjustment>k__BackingField: 0
+  _portVisualObjectMonoPrefab: {fileID: 1794855348921911399, guid: 1fd770fb30e523b44b7424aa9f9339bd, type: 3}

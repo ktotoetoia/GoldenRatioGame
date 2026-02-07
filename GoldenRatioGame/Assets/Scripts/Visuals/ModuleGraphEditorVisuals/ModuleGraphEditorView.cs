@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using IM.Graphs;
 using IM.Modules;
 using UnityEngine;
@@ -18,7 +17,7 @@ namespace IM.Visuals.Graph
             
             _entity = moduleEntity;
             _graph = _entity.ModuleEditingContext.GraphEditor.StartEditing();
-            _visualObserver = new ModuleGraphVisualObserver();
+            _visualObserver = new ModuleGraphVisualObserver(transform,false);
             _entity.Paused = true;
         }
 
@@ -48,6 +47,7 @@ namespace IM.Visuals.Graph
             if (Input.GetKeyDown(KeyCode.X)) _graph.Redo(1);
 
             _visualObserver.OnGraphUpdated(_graph);
+            _visualObserver.Update();
         }
 
         private void AddModule()
@@ -84,8 +84,11 @@ namespace IM.Visuals.Graph
         private void RemoveModule()
         {   
             IModule module = _entity.ModuleEditingContext.GraphEditor.Graph.Modules.LastOrDefault();
-            
-            _graph.RemoveModule(module);
+
+            if (_graph.CanRemoveModule(module))
+            {
+                _graph.RemoveModule(module);
+            }
         }
     }
 }

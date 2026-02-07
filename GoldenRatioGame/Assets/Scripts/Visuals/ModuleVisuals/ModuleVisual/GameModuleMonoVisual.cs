@@ -1,6 +1,4 @@
-﻿using IM.Graphs;
-using IM.Modules;
-using IM.Transforms;
+﻿using IM.Modules;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -13,11 +11,11 @@ namespace IM.Visuals
         private IObjectPool<IModuleVisualObject> _pool;
         
         public IObjectPool<IModuleVisualObject> EditorPool { get; private set; }
-        public IObjectPool<IAnimatedModuleVisualObject> GamePool { get; private set; }
+        public IObjectPool<IModuleVisualObject> GamePool { get; private set; }
 
         private void Awake()
         {
-            GamePool = new ObjectPool<IAnimatedModuleVisualObject>(
+            GamePool = new ObjectPool<IModuleVisualObject>(
                 () => Create(_inGamePrefab),
                 OnGet,
                 OnRelease,
@@ -40,6 +38,7 @@ namespace IM.Visuals
             visual.Owner = GetComponent<IExtensibleModule>();
             visual.AnimationChanges = GetComponents<IAnimationChange>();
             visual.OnInitializationFinished();
+            visual.DefaultParent = transform;
             
             return visual;
         }
