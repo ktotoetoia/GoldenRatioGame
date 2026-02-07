@@ -11,10 +11,11 @@ namespace IM.Visuals
     [DisallowMultipleComponent]
     public class ModuleVisualObject : MonoBehaviour, IAnimatedModuleVisualObject
     {
+        [SerializeField] private PortVisualObjectFactory _portVisualObjectFactory;
         [SerializeField] private PortBinderBase _portBinder;
+        [SerializeField] private Renderer _renderer;
         private readonly List<IPortVisualObject> _portVisualObjects = new();
         private readonly List<IPoolObject> _poolObjects = new();
-        [SerializeField] private Renderer _renderer;
         private Animator _animator;
         private IExtensibleModule _owner;
         
@@ -36,7 +37,8 @@ namespace IM.Visuals
                 if(_owner != null) throw new InvalidOperationException("Owner can only be set once");
                 
                 _owner = value;
-                _portBinder.Bind(_owner.Ports, _portVisualObjects,this);
+                _portVisualObjectFactory.CreateVisualObjects(_owner.Ports,_portVisualObjects,this);
+                _portBinder.Bind(_owner.Ports, _portVisualObjects);
             }
         }
         
@@ -44,7 +46,17 @@ namespace IM.Visuals
         public bool IsAnimating { get; set; } = true;
         public IEnumerable<IAnimationChange> AnimationChanges { get; set; }
 
-        public bool Visibility
+        public PortBinderBase PortBinder
+        {
+            get => _portBinder;
+            set 
+            { 
+                _portBinder = value;
+                _portBinder.Bind(_owner.Ports, _portVisualObjects);
+            }
+        }
+        
+        public bool Visible
         {
             get => gameObject.activeSelf;
             set => gameObject.SetActive(value);
@@ -60,7 +72,8 @@ namespace IM.Visuals
 
         private void Update()
         {
-            if (AnimationChanges == null || !IsAnimating || !Visibility) return;
+            if (AnimationChanges == null || !IsAnimating || !Visible || !_animator || !_animator.isActiveAndEnabled ||
+                !_animator.runtimeAnimatorController) return;
             
             foreach (IAnimationChange animationChange in AnimationChanges)
             {
@@ -90,21 +103,21 @@ namespace IM.Visuals
 
         public void OnRelease()
         {
-            Visibility = false;
+            Visible = false;
             transform.SetParent(DefaultParent);
             Transform.LocalPosition = new Vector3(0, 0, 0);
             Transform.LocalScale = new Vector3(1, 1, 1);
             Transform.LocalRotation = Quaternion.identity;
             
-            foreach (IPoolObject resettable in _poolObjects) resettable.OnRelease();
+            foreach (IPoolObject poolObject in _poolObjects) poolObject.OnRelease();
             foreach (IPortVisualObject portVisualObject in _portVisualObjects) portVisualObject.Reset();
         }
 
         public void OnGet()
         {
-            Visibility = true;
+            Visible = true;
             
-            foreach (IPoolObject resettable in _poolObjects) resettable.OnGet();
+            foreach (IPoolObject poolObject in _poolObjects) poolObject.OnGet();
         }
     }
 }

@@ -13,9 +13,7 @@ GameObject:
   - component: {fileID: 5781148197955682510}
   - component: {fileID: 8589094120568950576}
   - component: {fileID: 2715104972337031929}
-  - component: {fileID: 1582017850880201774}
-  - component: {fileID: -3097322670328349808}
-  - component: {fileID: 5270794720843568056}
+  - component: {fileID: 2120567519094471437}
   m_Layer: 0
   m_Name: Arm Humanoid In Game
   m_TagString: Untagged
@@ -85,6 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77546388e06d497d92107f9a3da1fb07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ReferenceModule
+  _portVisualObjectFactory: {fileID: 11400000, guid: f83ca7d4da93a794e8950b5a2d1d48c6, type: 2}
   _portBinder: {fileID: 11400000, guid: 401bb15b2795fd74391d08a5c017f818, type: 2}
   _renderer: {fileID: 2660879371163632053}
 --- !u!114 &2715104972337031929
@@ -99,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba0f19c22de4ee18b093ec90fb11088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.HorizontalDirectionSetter
---- !u!114 &1582017850880201774
+--- !u!114 &2120567519094471437
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,49 +107,64 @@ MonoBehaviour:
   m_GameObject: {fileID: 2156244532669732079}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daeefd5a0dfc41daa5c8fa7b7046699e, type: 3}
+  m_Script: {fileID: 11500000, guid: c53f83b12a50b544fb07493ed6194700, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.HorizontalDirectionPortVisualRotationChange
-  _rotationInfos:
-  - <PortID>k__BackingField: 0
-    <DefaultRotation>k__BackingField: 0
-    <LeftRotation>k__BackingField: 0
-    <RightRotation>k__BackingField: 180
---- !u!114 &-3097322670328349808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2156244532669732079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed30ba40738f4ada940314e39786d025, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.HorizontalDirectionSpriteChange
-  _leftSprite: {fileID: -6696705774333872909, guid: 99a85b001a58d164695718abe96c09ac, type: 3}
-  _rightSprite: {fileID: -5711908598854653283, guid: 86cab99528ae4794fbd0765ef014b145, type: 3}
-  _spriteRenderer: {fileID: 2660879371163632053}
---- !u!114 &5270794720843568056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2156244532669732079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a05c937381f4cff83afe991554c37c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Transform::IM.Transforms.SinOffsetAnimator
-  _target: {fileID: 7198272707218317425}
-  _isAnimating: 0
-  _period: 0.4
-  _range: 0.1
-  _rotationAngle: 50
-  _rotationAxis: {x: 0, y: 0, z: 1}
-  _useUnscaledTime: 0
-  _phaseOffset: 0
+  m_EditorClassIdentifier: ModuleVisuals::DirectionFieldSetterMulti
+  _entries:
+  - targetComponent: {fileID: 8589094120568950576}
+    memberName: PortBinder
+    left:
+      objectValue: {fileID: 11400000, guid: 401bb15b2795fd74391d08a5c017f818, type: 2}
+      intValue: 0
+      floatValue: 0
+      doubleValue: 0
+      boolValue: 0
+      stringValue: 
+      enumIndex: 0
+    right:
+      objectValue: {fileID: 11400000, guid: e397a04360ea21d4e9fa8d1ee91d648c, type: 2}
+      intValue: 0
+      floatValue: 0
+      doubleValue: 0
+      boolValue: 0
+      stringValue: 
+      enumIndex: 0
+  - targetComponent: {fileID: 2660879371163632053}
+    memberName: sprite
+    left:
+      objectValue: {fileID: -6696705774333872909, guid: 99a85b001a58d164695718abe96c09ac, type: 3}
+      intValue: 0
+      floatValue: 0
+      doubleValue: 0
+      boolValue: 0
+      stringValue: 
+      enumIndex: 0
+    right:
+      objectValue: {fileID: -5711908598854653283, guid: 86cab99528ae4794fbd0765ef014b145, type: 3}
+      intValue: 0
+      floatValue: 0
+      doubleValue: 0
+      boolValue: 0
+      stringValue: 
+      enumIndex: 0
+  - targetComponent: {fileID: 8613448808743045286}
+    memberName: _phaseOffset
+    left:
+      objectValue: {fileID: -6696705774333872909, guid: 99a85b001a58d164695718abe96c09ac, type: 3}
+      intValue: 0
+      floatValue: 0
+      doubleValue: 0
+      boolValue: 0
+      stringValue: 
+      enumIndex: 0
+    right:
+      objectValue: {fileID: -5711908598854653283, guid: 86cab99528ae4794fbd0765ef014b145, type: 3}
+      intValue: 0
+      floatValue: 1
+      doubleValue: 0
+      boolValue: 0
+      stringValue: 
+      enumIndex: 0
 --- !u!1 &4264971063537793248
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,6 +175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7198272707218317425}
   - component: {fileID: 2660879371163632053}
+  - component: {fileID: 8613448808743045286}
   m_Layer: 0
   m_Name: Texture
   m_TagString: Untagged
@@ -241,3 +256,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8613448808743045286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4264971063537793248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a05c937381f4cff83afe991554c37c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Transform::IM.Transforms.SinOffsetAnimator
+  _target: {fileID: 7198272707218317425}
+  _isAnimating: 0
+  _period: 0.4
+  _range: 0.2
+  _rotationAngle: 50
+  _rotationAxis: {x: 0, y: 0, z: 1}
+  _useUnscaledTime: 0
+  _phaseOffset: 0

@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77546388e06d497d92107f9a3da1fb07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ReferenceModule
+  _portVisualObjectFactory: {fileID: 11400000, guid: f83ca7d4da93a794e8950b5a2d1d48c6, type: 2}
   _portBinder: {fileID: 11400000, guid: b1c347e5845345547b4f9211b49f7671, type: 2}
   _renderer: {fileID: -7644578825757335302}
 --- !u!114 &483543952204984512

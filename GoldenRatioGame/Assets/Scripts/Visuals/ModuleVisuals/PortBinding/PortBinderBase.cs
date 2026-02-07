@@ -7,6 +7,6 @@ namespace IM.Modules
 {
     public abstract class PortBinderBase : ScriptableObject
     {
-        public abstract void Bind(IEnumerable<IPort> ports, IList<IPortVisualObject> portVisualObjects, IModuleVisualObject moduleVisualObject);
+        public abstract void Bind(IEnumerable<IPort> ports, IList<IPortVisualObject> portVisualObjects);
     }
 }

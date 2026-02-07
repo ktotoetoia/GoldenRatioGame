@@ -11,7 +11,7 @@ namespace IM.Visuals
         
         private void Awake()
         {
-            GetComponents(_dependants);
+            GetComponentsInChildren(_dependants);
         }
         
         public void OnModuleVisualObjectInitialized(IModuleVisualObject moduleVisualObject)

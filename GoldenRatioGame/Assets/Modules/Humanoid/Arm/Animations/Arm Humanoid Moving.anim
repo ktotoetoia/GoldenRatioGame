@@ -43,7 +43,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: _isAnimating
-    path: 
+    path: Texture
     classID: 114
     script: {fileID: 11500000, guid: 3a05c937381f4cff83afe991554c37c7, type: 3}
     flags: 0
@@ -56,7 +56,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 0
+      path: 1306211566
       attribute: 2326793728
       script: {fileID: 11500000, guid: 3a05c937381f4cff83afe991554c37c7, type: 3}
       typeID: 114
@@ -112,7 +112,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: _isAnimating
-    path: 
+    path: Texture
     classID: 114
     script: {fileID: 11500000, guid: 3a05c937381f4cff83afe991554c37c7, type: 3}
     flags: 0

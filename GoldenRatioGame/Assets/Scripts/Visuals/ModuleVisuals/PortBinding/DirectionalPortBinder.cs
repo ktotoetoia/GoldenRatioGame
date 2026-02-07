@@ -11,9 +11,8 @@ namespace IM.Modules
     public class DirectionalPortBinder : PortBinderBase
     {
         [SerializeField] private List<PortPositionRotation>  _portPositionRotations;
-        [SerializeField] private GameObject _portVisualObjectMonoPrefab;
         
-        public override void Bind(IEnumerable<IPort> ports, IList<IPortVisualObject> portVisualObjects, IModuleVisualObject moduleVisualObject)
+        public override void Bind(IEnumerable<IPort> ports, IList<IPortVisualObject> portVisualObjects)
         {
             List<IPort> portList = new List<IPort>(ports);
             if (portList.Count > _portPositionRotations.Count)
@@ -21,16 +20,15 @@ namespace IM.Modules
             
             for (int i = 0; i < _portPositionRotations.Count; i++)
             {
-                IPort port =  portList[i];
+                if(portVisualObjects[i] is not PortVisualObjectMono portVisualObject) continue;
+                
                 PortPositionRotation portInfo = _portPositionRotations[i];
-                PortVisualObjectMono portVisualObject = Instantiate(_portVisualObjectMonoPrefab).GetComponent<PortVisualObjectMono>();
                 
                 LocalTransformReadOnly defaultTransform = new LocalTransformReadOnly(portInfo.Position,
                     Quaternion.Euler(0f, 0f, portInfo.EulerZRotation), Vector3.one);
                 
-                portVisualObjects.Add(portVisualObject);
-                portVisualObject.Initialize(moduleVisualObject, port, portInfo.OutputOrderAdjustment, defaultTransform);
-                portVisualObject.Transform.Transform.SetParent(moduleVisualObject.Transform.Transform,false);
+                portVisualObject.OutputOrderAdjustment = portInfo.OutputOrderAdjustment;
+                portVisualObject.LocalTransformReadOnly = defaultTransform;
             }
         }
     }

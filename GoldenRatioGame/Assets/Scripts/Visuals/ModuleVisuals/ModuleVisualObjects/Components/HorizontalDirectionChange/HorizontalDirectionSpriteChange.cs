@@ -3,12 +3,16 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    [RequireComponent(typeof(HorizontalDirectionSetter))]
     public class HorizontalDirectionSpriteChange : MonoBehaviour,IHorizontalDirectionDependant
     {
         [SerializeField] private Sprite _leftSprite;
         [SerializeField] private Sprite _rightSprite;
-        [SerializeField] private SpriteRenderer _spriteRenderer;
+        private SpriteRenderer _spriteRenderer;
+
+        private void Awake()
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+        }
 
         public void OnDirectionChanged(HorizontalDirection direction)
         {

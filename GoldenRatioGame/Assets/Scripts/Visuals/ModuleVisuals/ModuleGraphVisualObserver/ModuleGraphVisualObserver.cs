@@ -61,7 +61,7 @@ namespace IM.Visuals
             
             _moduleVisuals.Add(extensibleModule, visualObject);
             visualObject.Transform.Transform.SetParent(_parent, false);
-            visualObject.Visibility = true;
+            visualObject.Visible = true;
         }
 
         private void HandleModuleRemoved(IModule module)
