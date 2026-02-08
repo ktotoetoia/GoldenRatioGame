@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TDS.Handlers
+namespace TDS.Events
 {
     public class ActionHandler<T> : IHandler<T>
     {

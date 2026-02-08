@@ -31,5 +31,33 @@ namespace IM.Modules
                 portVisualObject.LocalTransformReadOnly = defaultTransform;
             }
         }
+
+        public override void GizmosPreview(Transform transform)
+        {
+            const float sphereSize = 0.05f;
+            const float smallSphereSize = 0.03f;
+            const float angleLength = 0.3f;
+
+            foreach (PortPositionRotation portInfo in _portPositionRotations)
+            {
+                Vector3 position = transform.TransformPoint(portInfo.Position);
+                
+                Gizmos.color = Color.blue;
+                Gizmos.DrawSphere(position, sphereSize);
+            }
+            
+            foreach (PortPositionRotation portInfo in _portPositionRotations)
+            {
+                Vector3 position = transform.TransformPoint(portInfo.Position);
+                Quaternion rotation =  Quaternion.Euler(0,0,portInfo.EulerZRotation);
+
+                Vector3 forward = rotation * Vector3.right;
+
+                Gizmos.color = Color.red;
+                
+                Gizmos.DrawLine(position, position + forward * angleLength);
+                Gizmos.DrawSphere(position + forward* angleLength, smallSphereSize);
+            }
+        }
     }
 }

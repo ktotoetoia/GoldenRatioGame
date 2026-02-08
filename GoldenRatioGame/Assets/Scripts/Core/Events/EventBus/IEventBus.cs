@@ -1,6 +1,4 @@
-﻿using TDS.Handlers;
-
-namespace TDS.Events
+﻿namespace TDS.Events
 {
     public interface IEventBus: IPublisher, ISubscriber
     {

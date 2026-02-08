@@ -14,13 +14,13 @@ namespace IM.Visuals
         private readonly IPortAligner _portAligner = new PortAlignerOrder();
         private readonly Dictionary<IExtensibleModule, IModuleVisualObject> _moduleVisuals = new();
         private readonly ModuleGraphSnapshotDiffer _snapshotDiffer;
-        private readonly bool _isInGame;
+        private readonly bool _useInGameObjectPool;
         private readonly Transform _parent;
 
-        public ModuleGraphVisualObserver(Transform parent, bool isInGame)
+        public ModuleGraphVisualObserver(Transform parent, bool useInGameObjectPool)
         {
             _parent = parent;
-            _isInGame = isInGame;
+            _useInGameObjectPool = useInGameObjectPool;
 
             _snapshotDiffer = new ModuleGraphSnapshotDiffer
             {
@@ -32,7 +32,14 @@ namespace IM.Visuals
 
         public void Update()
         {
+            if(!_moduleVisuals.Values.Any(x=> x.DirtyTracker.HasDirty)) return;
+            
             AlignAll();
+            
+            foreach (IModuleVisualObject moduleVisualObject in _moduleVisuals.Values)
+            {
+                moduleVisualObject.DirtyTracker.Clear();
+            }
         }
 
         public void OnGraphUpdated(IModuleGraphReadOnly graph)
@@ -99,10 +106,12 @@ namespace IM.Visuals
 
         private void AlignAll()
         {
-            if (_moduleVisuals.Count == 0) return;
+            if (_moduleVisuals.Count == 0 ||
+                _moduleVisuals.Keys.FirstOrDefault(x => x is ICoreExtensibleModule) is not ICoreExtensibleModule
+                    coreExtensibleModule) return;
 
             foreach ((IExtensibleModule module, IPort ownerPort) in
-                     _traversal.EnumerateModules<IExtensibleModule, IPort>(_moduleVisuals.Keys.FirstOrDefault()))
+                     _traversal.EnumerateModules<IExtensibleModule, IPort>(coreExtensibleModule))
             {
                 if (ownerPort == null) continue;
 
@@ -135,7 +144,7 @@ namespace IM.Visuals
 
         private IObjectPool<IModuleVisualObject> GetObjectPool(IModuleVisual moduleVisual)
         {
-            return _isInGame ? moduleVisual.GamePool : moduleVisual.EditorPool;
+            return _useInGameObjectPool ? moduleVisual.GamePool : moduleVisual.EditorPool;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace IM.Visuals
                     continue;
                 }
 
-                SerializedValue sv = entry.GetC(newValue);
+                SerializedValue sv = entry.GetT(newValue);
                 object value = sv.GetValue(accessor.MemberType);
 
                 try

@@ -1,6 +1,4 @@
-﻿using System;
-using IM.Graphs;
-using IM.Movement;
+﻿using IM.Graphs;
 using UnityEngine;
 
 namespace IM.Visuals

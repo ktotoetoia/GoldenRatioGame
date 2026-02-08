@@ -1,4 +1,4 @@
-﻿namespace TDS.Handlers
+﻿namespace TDS.Events
 {
     public interface IHandler<in T>
     {

@@ -13,7 +13,6 @@ namespace Tests
     public class LegacyPlayerInput : MonoBehaviour, IRequirePlayerEntity
     {
         [SerializeField] private ModuleGraphEditorView _moduleGraphEditor;
-        [SerializeField] private DocumentTest _documentTest;
         private PreferredKeyboardBindingsAbilityUser _abilityUser;
         private IModuleEntity _moduleEntity;
         private IMoveInVector _movement;
@@ -41,7 +40,6 @@ namespace Tests
             _moduleEntity = playerEntity as IModuleEntity ?? throw new NullReferenceException();
             
             _movement = _moduleEntity.GameObject.GetComponent<IMoveInVector>();
-            _documentTest.SetStorage(_moduleEntity.ModuleEditingContext.Storage);
             _stateMachine = new StateMachine(new MovementState(_movement, () => new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"))));
             //_abilityUser = new PreferredKeyboardBindingsAbilityUser(_moduleEntity.AbilityPool);
         }

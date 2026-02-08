@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using IM.Modules;
 using IM.Movement;
+using TDS.Events;
 using UnityEngine;
 
 namespace IM.Visuals
@@ -9,8 +9,9 @@ namespace IM.Visuals
     {
         [SerializeField] private List<MovementDirectionEntry> _entries = new ();
         private readonly FieldSetterEntryResolver<MovementDirection> _resolver= new(); 
-        private IValueStateExtension<MovementDirection> _extension;
-            
+        private IValueStorageContainer _container;
+        private IValueStorage<MovementDirection> _storage;
+        
 #if UNITY_EDITOR
         private void OnValidate() => _resolver.Resolve(_entries);
 #endif
@@ -19,22 +20,23 @@ namespace IM.Visuals
 
         public void OnModuleVisualObjectInitialized(IModuleVisualObject moduleVisualObject)
         {
-            _extension = moduleVisualObject.Owner.Extensions.GetExtension<IValueStateExtension<MovementDirection>>();
+            _container = moduleVisualObject.Owner.Extensions.GetExtension<IValueStorageContainer>();
         }
         
         public void OnRelease()
         {
-            if(_extension == null) return;
-            
-            _extension.ValueChanged -= OnEnumChanged;
+            if(_container == null || _storage == null) return;
+
+            _storage.Changed -= OnEnumChanged;
         }
 
         public void OnGet()
         {
-            if(_extension == null) return;
-
-            _extension.ValueChanged += OnEnumChanged;
-            OnEnumChanged(_extension.Value);
+            if(_container == null) return;
+            
+            _storage = _container.GetOrCreate<MovementDirection>();
+            _storage.Changed += OnEnumChanged;
+            OnEnumChanged(_storage.Value);
         }
 
         private void OnEnumChanged(MovementDirection direction)

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.DirectionalPortBinder
   _portPositionRotations:
   - <Position>k__BackingField: {x: 0, y: 0.35, z: 0}
-    <EulerZRotation>k__BackingField: 0
+    <EulerZRotation>k__BackingField: 180
     <OutputOrderAdjustment>k__BackingField: 0

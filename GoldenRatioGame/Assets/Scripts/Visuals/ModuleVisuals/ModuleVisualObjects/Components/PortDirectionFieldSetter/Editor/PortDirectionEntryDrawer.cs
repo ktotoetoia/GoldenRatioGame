@@ -5,7 +5,7 @@ using UnityEngine;
 namespace IM.Visuals
 {
     [CustomPropertyDrawer(typeof(PortDirectionEntry))]
-    public class TargetEntryDrawer : EntryDrawerBase
+    public class PortDirectionEntryDrawer : EntryDrawerBase
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {

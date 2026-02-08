@@ -7,6 +7,6 @@ namespace IM.Visuals
         public Component TargetComponent { get; }
         public string MemberName { get; }
 
-        SerializedValue GetC(T t);
+        SerializedValue GetT(T t);
     }
 }

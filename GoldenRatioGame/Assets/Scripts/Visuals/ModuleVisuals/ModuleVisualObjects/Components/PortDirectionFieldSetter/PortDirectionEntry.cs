@@ -15,7 +15,7 @@ namespace IM.Visuals
         public Component TargetComponent => targetComponent;
         public string MemberName => memberName;
         
-        public SerializedValue GetC(PortDirection t)
+        public SerializedValue GetT(PortDirection t)
         {
             return t == PortDirection.Left ? left : right;
         }

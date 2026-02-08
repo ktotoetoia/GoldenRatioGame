@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using IM.Modules;
+using TDS.Events;
 using UnityEngine;
 
 namespace IM.Visuals
@@ -8,7 +9,8 @@ namespace IM.Visuals
     {
         [SerializeField] private List<PortDirectionEntry> _entries = new ();
         private readonly FieldSetterEntryResolver<PortDirection> _resolver= new(); 
-        private IValueStateExtension<PortDirection> _extension;
+        private IValueStorageContainer _container;
+        private IValueStorage<PortDirection> _storage;
         
         
 #if UNITY_EDITOR
@@ -19,21 +21,23 @@ namespace IM.Visuals
 
         public void OnModuleVisualObjectInitialized(IModuleVisualObject moduleVisualObject)
         {
-            _extension = moduleVisualObject.Owner.Extensions.GetExtension<IValueStateExtension<PortDirection>>();
+            _container = moduleVisualObject.Owner.Extensions.GetExtension<IValueStorageContainer>();
         }
+        
         public void OnRelease()
         {
-            if(_extension == null) return;
-            
-            _extension.ValueChanged -= OnEnumChanged;
+            if(_container == null || _storage == null) return;
+
+            _storage.Changed -= OnEnumChanged;
         }
 
         public void OnGet()
         {
-            if(_extension == null) return;
-
-            _extension.ValueChanged += OnEnumChanged;
-            OnEnumChanged(_extension.Value);
+            if(_container == null) return;
+            
+            _storage = _container.GetOrCreate<PortDirection>();
+            _storage.Changed += OnEnumChanged;
+            OnEnumChanged(_storage.Value);
         }
         
         private void OnEnumChanged(PortDirection direction)

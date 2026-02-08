@@ -4,7 +4,7 @@
     <ui:VisualElement name="AllContainer" class="allContainer" style="flex-grow: 1;">
         <ui:VisualElement name="ModuleEditorContainer" class="moduleEditorContainer" style="flex-grow: 1;" />
         <ui:VisualElement name="StorageContainer" class="storageContainer" style="flex-grow: 1;">
-            <IM.UI.ItemMutableStorageUI />
+            <IM.UI.ItemMutableStorageVisual />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

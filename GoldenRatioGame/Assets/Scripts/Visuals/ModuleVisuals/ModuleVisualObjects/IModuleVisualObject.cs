@@ -10,7 +10,7 @@ namespace IM.Visuals
         IExtensibleModule Owner { get; }
         ITransform Transform { get; }
         IReadOnlyList<IPortVisualObject> PortsVisualObjects { get; }
-        IPortVisualObjectChange Change { get; }
+        IPortVisualObjectDirtyTracker DirtyTracker { get; }
         int Order { get; set; }
 
         IPortVisualObject GetPortVisualObject(IPort port);

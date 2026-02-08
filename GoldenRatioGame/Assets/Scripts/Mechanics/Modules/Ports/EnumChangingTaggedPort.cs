@@ -1,6 +1,7 @@
 ﻿using System;
 using IM.Graphs;
 using IM.Items;
+using TDS.Events;
 
 namespace IM.Modules
 {
@@ -25,18 +26,18 @@ namespace IM.Modules
             Connection = connection;
             
             if (connection.GetOtherPort(this).Module is IExtensibleModule module &&
-                module.Extensions.TryGetExtension(out IValueStateExtension<TEnum> e))
+                module.Extensions.TryGetExtension(out IValueStorageContainer e))
             {
-                e.Value = _value;
+                e.GetOrCreate<TEnum>().Value = _value;
             }
         }
 
         public void Disconnect()
         {
             if (Connection.GetOtherPort(this).Module is IExtensibleModule module &&
-                module.Extensions.TryGetExtension(out IValueStateExtension<TEnum> e)) 
+                module.Extensions.TryGetExtension(out IValueStorageContainer e)) 
             {
-                e.Value = default;
+                e.GetOrCreate<TEnum>().Value = default;
             }
             
             Connection = null;

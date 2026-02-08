@@ -21,7 +21,7 @@ namespace IM.Visuals
         
         public ITransform Transform { get; private set; }
         public IReadOnlyList<IPortVisualObject> PortsVisualObjects => _portVisualObjects;
-        public IPortVisualObjectChange Change { get; } = new PortVisualObjectChange();
+        public IPortVisualObjectDirtyTracker DirtyTracker { get; } = new PortVisualObjectDirtyTracker();
 
         public int Order
         {
@@ -38,7 +38,7 @@ namespace IM.Visuals
                 
                 _owner = value;
                 _portVisualObjectFactory.CreateVisualObjects(_owner.Ports,_portVisualObjects,this);
-                _portBinder.Bind(_owner.Ports, _portVisualObjects);
+                PortBinder = _portBinder;
             }
         }
         
@@ -53,6 +53,8 @@ namespace IM.Visuals
             { 
                 _portBinder = value;
                 _portBinder.Bind(_owner.Ports, _portVisualObjects);
+
+                foreach (IPortVisualObject portVisualObject in _portVisualObjects) DirtyTracker.MarkDirty(portVisualObject);
             }
         }
         
