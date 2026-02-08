@@ -14,9 +14,9 @@ namespace IM.Entities
             get => _paused;
             set
             {
-                _pausableList ??= GetComponents<IPausable>();
-                
                 if(value ==_paused) return;
+                
+                _pausableList ??= GetComponents<IPausable>();
                 
                 _paused = value;
                 

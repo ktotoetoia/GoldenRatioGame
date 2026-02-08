@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 9105580942014384913}
   - component: {fileID: 8054565667691421690}
   - component: {fileID: 7307849000960923032}
-  - component: {fileID: 8795353170048841121}
   - component: {fileID: 2085694027768260616}
+  - component: {fileID: 5333593449026897718}
   m_Layer: 0
   m_Name: Leg Humanoid In Game
   m_TagString: Untagged
@@ -86,18 +86,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3d71c28bc042a597ff6ab715823292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Transform::IM.Transforms.TransformMono
---- !u!114 &8795353170048841121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2156244532669732079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bba0f19c22de4ee18b093ec90fb11088, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.HorizontalDirectionSetter
 --- !u!114 &2085694027768260616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +107,37 @@ MonoBehaviour:
       floatValue: 1
       doubleValue: 0
       boolValue: 0
+      stringValue: 
+      enumIndex: 0
+    right:
+      objectValue: {fileID: 0}
+      intValue: 0
+      floatValue: 0
+      doubleValue: 0
+      boolValue: 0
+      stringValue: 
+      enumIndex: 0
+--- !u!114 &5333593449026897718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156244532669732079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d842b18c4047f0985e1e563da6aa12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.MovementDirectionFieldSetter
+  _entries:
+  - targetComponent: {fileID: 4749500029243602080}
+    memberName: flipX
+    left:
+      objectValue: {fileID: 0}
+      intValue: 0
+      floatValue: 0
+      doubleValue: 0
+      boolValue: 1
       stringValue: 
       enumIndex: 0
     right:

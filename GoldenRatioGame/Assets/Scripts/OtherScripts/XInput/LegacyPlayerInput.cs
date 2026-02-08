@@ -22,7 +22,6 @@ namespace Tests
         private void Update()
         {
             _stateMachine.Update();
-            _abilityUser.Update();
             EditorInput();
         }
 
@@ -44,7 +43,7 @@ namespace Tests
             _movement = _moduleEntity.GameObject.GetComponent<IMoveInVector>();
             _documentTest.SetStorage(_moduleEntity.ModuleEditingContext.Storage);
             _stateMachine = new StateMachine(new MovementState(_movement, () => new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"))));
-            _abilityUser = new PreferredKeyboardBindingsAbilityUser(_moduleEntity.AbilityPool);
+            //_abilityUser = new PreferredKeyboardBindingsAbilityUser(_moduleEntity.AbilityPool);
         }
     }
 }

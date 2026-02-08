@@ -7,7 +7,7 @@ namespace IM.Modules
     {
         IModuleGraphEditor<IConditionalCommandModuleGraph> GraphEditor { get; }
         IReadOnlyStorage Storage { get; }
-        void AddToStorage(IExtensibleModule module);
-        void RemoveFromStorage(IExtensibleModule module);
+        void AddToContext(IExtensibleModule module);
+        void RemoveFromContext(IExtensibleModule module);
     }
 }

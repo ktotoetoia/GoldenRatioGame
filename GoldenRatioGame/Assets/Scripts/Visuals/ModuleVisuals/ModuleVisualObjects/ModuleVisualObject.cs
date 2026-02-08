@@ -108,6 +108,7 @@ namespace IM.Visuals
             Transform.LocalPosition = new Vector3(0, 0, 0);
             Transform.LocalScale = new Vector3(1, 1, 1);
             Transform.LocalRotation = Quaternion.identity;
+            Order = 0;
             
             foreach (IPoolObject poolObject in _poolObjects) poolObject.OnRelease();
             foreach (IPortVisualObject portVisualObject in _portVisualObjects) portVisualObject.Reset();

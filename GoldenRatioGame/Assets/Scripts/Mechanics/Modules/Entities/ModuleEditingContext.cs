@@ -35,7 +35,7 @@ namespace IM.Modules
             GraphEditor = new CommandModuleGraphEditor<IConditionalCommandModuleGraph>(conditionalCommandModuleGraph,new AccessConditionalCommandModuleGraphFactory());
         }
 
-        public void AddToStorage(IExtensibleModule module)
+        public void AddToContext(IExtensibleModule module)
         {
             if (module.ModuleState == ModuleState.Hide) throw new ArgumentException("some other storage already contains this module");
             if (_storage.ContainsItem(module)) throw new ArgumentException("this storage already contains this item");
@@ -44,7 +44,7 @@ namespace IM.Modules
             module.ModuleState = ModuleState.Hide;
         }
 
-        public void RemoveFromStorage(IExtensibleModule module)
+        public void RemoveFromContext(IExtensibleModule module)
         {
             if (!_storage.ContainsItem(module)) throw new ArgumentException("this storage does not contains this item");
 

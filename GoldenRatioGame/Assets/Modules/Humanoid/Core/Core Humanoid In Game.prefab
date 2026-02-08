@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6377991156395474928}
   - component: {fileID: -6034804467400656449}
   - component: {fileID: -7239767369713268034}
+  - component: {fileID: -1733959713801920240}
   m_Layer: 0
   m_Name: Core Humanoid In Game
   m_TagString: Untagged
@@ -142,3 +143,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3d71c28bc042a597ff6ab715823292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Transform::IM.Transforms.TransformMono
+--- !u!114 &-1733959713801920240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156244532669732079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d842b18c4047f0985e1e563da6aa12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.MovementDirectionFieldSetter
+  _entries:
+  - targetComponent: {fileID: -7644578825757335302}
+    memberName: flipX
+    left:
+      objectValue: {fileID: 0}
+      intValue: 0
+      floatValue: 0
+      doubleValue: 0
+      boolValue: 1
+      stringValue: 
+      enumIndex: 0
+    right:
+      objectValue: {fileID: 0}
+      intValue: 0
+      floatValue: 0
+      doubleValue: 0
+      boolValue: 0
+      stringValue: 
+      enumIndex: 0
+  - targetComponent: {fileID: -6034804467400656449}
+    memberName: PortBinder
+    left:
+      objectValue: {fileID: 11400000, guid: 13643a2c93cb000499bf64d91c758fff, type: 2}
+      intValue: 0
+      floatValue: 0
+      doubleValue: 0
+      boolValue: 1
+      stringValue: 
+      enumIndex: 0
+    right:
+      objectValue: {fileID: 11400000, guid: fbd3d9a8dcdbae9489b5798b5f2f7882, type: 2}
+      intValue: 0
+      floatValue: 0
+      doubleValue: 0
+      boolValue: 0
+      stringValue: 
+      enumIndex: 0

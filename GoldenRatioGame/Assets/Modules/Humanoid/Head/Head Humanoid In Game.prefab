@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -7644578825757335302}
   - component: {fileID: -6148535274042687074}
   - component: {fileID: 483543952204984512}
+  - component: {fileID: -2843514780123615667}
   m_Layer: 0
   m_Name: Head Humanoid In Game
   m_TagString: Untagged
@@ -119,3 +120,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3d71c28bc042a597ff6ab715823292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Transform::IM.Transforms.TransformMono
+--- !u!114 &-2843514780123615667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156244532669732079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d842b18c4047f0985e1e563da6aa12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.MovementDirectionFieldSetter
+  _entries:
+  - targetComponent: {fileID: -7644578825757335302}
+    memberName: flipX
+    left:
+      objectValue: {fileID: 0}
+      intValue: 0
+      floatValue: 0
+      doubleValue: 0
+      boolValue: 1
+      stringValue: 
+      enumIndex: 0
+    right:
+      objectValue: {fileID: 0}
+      intValue: 0
+      floatValue: 0
+      doubleValue: 0
+      boolValue: 0
+      stringValue: 
+      enumIndex: 0

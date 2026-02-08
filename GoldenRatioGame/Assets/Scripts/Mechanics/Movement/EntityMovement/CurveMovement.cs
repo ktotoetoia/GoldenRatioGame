@@ -26,8 +26,11 @@ namespace IM.Movement
         {
             _accelerator.AccelerationTime = _accelerationTime;
             _accelerator.Update(MovementDirection,Time.fixedDeltaTime);
-            Vector2 value = new Vector2(Mathf.Sign(_accelerator.Acceleration.x) * _curve.Evaluate(_accelerator.Acceleration.x),Mathf.Sign(_accelerator.Acceleration.y)* _curve.Evaluate(_accelerator.Acceleration.y));
-            
+            Vector2 acceleration = _accelerator.Acceleration;
+
+            Vector2 value = new Vector2(_curve.Evaluate(acceleration.x), _curve.Evaluate(acceleration.y)) *
+                            new Vector2(acceleration.normalized.x, acceleration.normalized.y);
+
             MovementVelocity = value * Speed.FinalValue;
             _modifier.ChangeVelocity(new VelocityInfo(VelocityAction.Add, MovementVelocity));
         }

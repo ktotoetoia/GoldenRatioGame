@@ -8,7 +8,6 @@ namespace IM.Visuals
     {
         [SerializeField] private GameObject _inGamePrefab;
         [SerializeField] private GameObject _editorPrefab;
-        private IObjectPool<IModuleVisualObject> _pool;
         
         public IObjectPool<IModuleVisualObject> EditorPool { get; private set; }
         public IObjectPool<IModuleVisualObject> GamePool { get; private set; }

@@ -3,21 +3,21 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class HorizontalDirectionEnumStateExtension : MonoBehaviour, IEnumStateExtension<HorizontalDirection>
+    public class HorizontalDirectionEnumStateExtension : MonoBehaviour, IValueStateExtension<PortDirection>
     {
-        private HorizontalDirection _horizontalDirection;
+        private PortDirection _portDirection;
 
-        public HorizontalDirection Value
+        public PortDirection Value
         {
-            get=> _horizontalDirection;
+            get => _portDirection;
             set 
             {
-                _horizontalDirection = value; 
+                _portDirection = value; 
                 
                 ValueChanged?.Invoke(value);
             }
         }
         
-        public event Action<HorizontalDirection> ValueChanged;
+        public event Action<PortDirection> ValueChanged;
     }
 }

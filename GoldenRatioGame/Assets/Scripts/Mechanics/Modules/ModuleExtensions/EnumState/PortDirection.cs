@@ -1,6 +1,6 @@
 ﻿namespace IM.Modules
 {
-    public enum HorizontalDirection
+    public enum PortDirection
     {
         None,
         Left,

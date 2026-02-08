@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1563791358509127018}
   - component: {fileID: 8535451133996336894}
   - component: {fileID: 4479085341360621510}
+  - component: {fileID: 1302179019533880352}
   m_Layer: 0
   m_Name: Core Humanoid
   m_TagString: Untagged
@@ -180,3 +181,15 @@ MonoBehaviour:
   _speedModifier:
     <Add>k__BackingField: 1
     <Multiplication>k__BackingField: 1
+--- !u!114 &1302179019533880352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8119833187759213420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a67969369ac84590a1ca5d296d5d6c24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModulesExtensions::IM.Modules.MovementEnumStateExtension

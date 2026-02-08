@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 655896773114017808}
   - component: {fileID: -445026668575163568}
   - component: {fileID: 8589094120568950576}
-  - component: {fileID: 1817530647307273206}
   - component: {fileID: 8084296690069182958}
   m_Layer: 0
   m_Name: Arm Humanoid In Editor
@@ -144,18 +143,6 @@ MonoBehaviour:
   _portVisualObjectFactory: {fileID: 11400000, guid: f83ca7d4da93a794e8950b5a2d1d48c6, type: 2}
   _portBinder: {fileID: 11400000, guid: 401bb15b2795fd74391d08a5c017f818, type: 2}
   _renderer: {fileID: -7644578825757335302}
---- !u!114 &1817530647307273206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2156244532669732079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bba0f19c22de4ee18b093ec90fb11088, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.HorizontalDirectionSetter
 --- !u!114 &8084296690069182958
 MonoBehaviour:
   m_ObjectHideFlags: 0

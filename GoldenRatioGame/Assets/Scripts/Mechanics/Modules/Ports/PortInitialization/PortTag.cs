@@ -10,6 +10,6 @@ namespace IM.Modules
         [SerializeField] private LazyTag _tag;
         
         public ITag Tag => (ITag)_tag ?? new EmptyTag();
-        [field: SerializeField]public HorizontalDirection Direction { get; private set; }
+        [field: SerializeField]public PortDirection Direction { get; private set; }
     }
 }

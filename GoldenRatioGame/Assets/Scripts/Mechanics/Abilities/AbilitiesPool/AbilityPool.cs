@@ -4,8 +4,8 @@ namespace IM.Abilities
 {
     public class AbilityPool : IAbilityPool
     {
-        private readonly List<IAbility> _abilities = new List<IAbility>();
-        
+        private readonly List<IAbility> _abilities = new();
+
         public IEnumerable<IAbility> Abilities => _abilities;
 
         public void AddAbility(IAbility ability)

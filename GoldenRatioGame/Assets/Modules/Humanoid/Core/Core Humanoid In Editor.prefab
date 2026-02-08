@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ReferenceModule
   _portVisualObjectFactory: {fileID: 11400000, guid: f83ca7d4da93a794e8950b5a2d1d48c6, type: 2}
-  _portBinder: {fileID: 11400000, guid: 13643a2c93cb000499bf64d91c758fff, type: 2}
+  _portBinder: {fileID: 11400000, guid: fbd3d9a8dcdbae9489b5798b5f2f7882, type: 2}
   _renderer: {fileID: -7644578825757335302}
 --- !u!114 &-1549051384620993999
 MonoBehaviour:

@@ -11,7 +11,7 @@ namespace IM.Modules
         
         private void Awake()
         {
-            _abilityPool = GetComponent<IModuleEntity>().AbilityPool as AbilityPool;
+            //_abilityPool = GetComponent<IModuleEntity>().AbilityPool as AbilityPool;
 
             _extensionsObserver = new ModuleExtensionsObserver<IAbility>(OnExtensionAdded, OnExtensionRemoved);
         }

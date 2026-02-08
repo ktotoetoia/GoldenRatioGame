@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using IM.Abilities;
 using IM.Entities;
 using IM.Graphs;
 using IM.Storages;
@@ -12,7 +11,6 @@ namespace IM.Modules
     {
         private IModuleEditingContext _moduleEditingContext;
         
-        public IAbilityPool AbilityPool { get; } = new AbilityPool();
         public IModuleEditingContext ModuleEditingContext
         {
             get

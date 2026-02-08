@@ -21,9 +21,9 @@ namespace IM.Modules
 
         public void Interact(IEntity interactor)
         {
-            if (interactor is not IModuleEntity moduleEntity) throw new ArgumentException();
+            if (interactor is not IModuleEntity moduleEntity ||!CanInteract(interactor)) throw new ArgumentException();
             
-            moduleEntity.ModuleEditingContext.AddToStorage(_extensibleModule);
+            moduleEntity.ModuleEditingContext.AddToContext(_extensibleModule);
         }
     }
 }

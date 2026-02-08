@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 655896773114017808}
   - component: {fileID: 5781148197955682510}
   - component: {fileID: 8589094120568950576}
-  - component: {fileID: 2715104972337031929}
   - component: {fileID: 2120567519094471437}
+  - component: {fileID: -6229999823334190815}
   m_Layer: 0
   m_Name: Arm Humanoid In Game
   m_TagString: Untagged
@@ -86,18 +86,6 @@ MonoBehaviour:
   _portVisualObjectFactory: {fileID: 11400000, guid: f83ca7d4da93a794e8950b5a2d1d48c6, type: 2}
   _portBinder: {fileID: 11400000, guid: 401bb15b2795fd74391d08a5c017f818, type: 2}
   _renderer: {fileID: 2660879371163632053}
---- !u!114 &2715104972337031929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2156244532669732079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bba0f19c22de4ee18b093ec90fb11088, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.HorizontalDirectionSetter
 --- !u!114 &2120567519094471437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +149,37 @@ MonoBehaviour:
       objectValue: {fileID: -5711908598854653283, guid: 86cab99528ae4794fbd0765ef014b145, type: 3}
       intValue: 0
       floatValue: 1
+      doubleValue: 0
+      boolValue: 0
+      stringValue: 
+      enumIndex: 0
+--- !u!114 &-6229999823334190815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156244532669732079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d842b18c4047f0985e1e563da6aa12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.MovementDirectionFieldSetter
+  _entries:
+  - targetComponent: {fileID: 2660879371163632053}
+    memberName: flipX
+    left:
+      objectValue: {fileID: 0}
+      intValue: 0
+      floatValue: 0
+      doubleValue: 0
+      boolValue: 1
+      stringValue: 
+      enumIndex: 0
+    right:
+      objectValue: {fileID: 0}
+      intValue: 0
+      floatValue: 0
       doubleValue: 0
       boolValue: 0
       stringValue: 

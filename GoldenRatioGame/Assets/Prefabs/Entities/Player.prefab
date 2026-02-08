@@ -189,7 +189,7 @@ MonoBehaviour:
     m_PostInfinity: 0
     m_RotationOrder: 4
   _rawSpeed: 0
-  _accelerationTime: 0.2
+  _accelerationTime: 0.4
 --- !u!114 &1419353838767174824
 MonoBehaviour:
   m_ObjectHideFlags: 0
