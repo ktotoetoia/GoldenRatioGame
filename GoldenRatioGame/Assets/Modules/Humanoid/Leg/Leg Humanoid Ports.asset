@@ -13,7 +13,5 @@ MonoBehaviour:
   m_Name: Leg Humanoid Ports
   m_EditorClassIdentifier: Modules::IM.Modules.TagPortInitialization
   _portInfos:
-  - _position: {x: 0, y: 0.2, z: 0}
-    _eulerZRotation: 90
-    _tag: {fileID: 11400000, guid: e758e15608f899a4f8b75cacce2acad7, type: 2}
-    _direction: 0
+  - _tag: {fileID: 11400000, guid: e758e15608f899a4f8b75cacce2acad7, type: 2}
+    <Direction>k__BackingField: 0

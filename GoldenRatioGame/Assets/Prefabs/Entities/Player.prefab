@@ -263,3 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ModuleGraphVisualObserver
   _parent: {fileID: 2365714068825351273}
+  _preset:
+    _order: 0
+    _layer: 0
+    _visible: 1

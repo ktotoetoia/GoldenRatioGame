@@ -12,7 +12,7 @@ namespace Tests
 {
     public class LegacyPlayerInput : MonoBehaviour, IRequirePlayerEntity
     {
-        [SerializeField] private ModuleGraphEditorView _moduleGraphEditor;
+        [SerializeField] private ModuleContextView moduleContext;
         private PreferredKeyboardBindingsAbilityUser _abilityUser;
         private IModuleEntity _moduleEntity;
         private IMoveInVector _movement;
@@ -31,8 +31,8 @@ namespace Tests
 
         private void EditorInput()
         {
-            if (Input.GetKeyDown(KeyCode.Q)) _moduleGraphEditor.SetModuleEntity(_moduleEntity);
-            if (Input.GetKeyDown(KeyCode.E)) _moduleGraphEditor.ClearModuleEntity();
+            if (Input.GetKeyDown(KeyCode.Q)) moduleContext.SetModuleContext(_moduleEntity.ModuleEditingContext);
+            if (Input.GetKeyDown(KeyCode.E)) moduleContext.ClearModuleContext();
         }
 
         public void SetPlayerEntity(IEntity playerEntity)

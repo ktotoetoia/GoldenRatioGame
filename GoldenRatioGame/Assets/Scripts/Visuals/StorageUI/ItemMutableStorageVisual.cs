@@ -1,5 +1,6 @@
 ﻿using System;
 using IM.Storages;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace IM.UI
@@ -10,6 +11,11 @@ namespace IM.UI
         public ListView ListView { get; private set; }
         public IReadOnlyStorage Storage { get; private set; }
 
+        public event Action<IStorableReadOnly> ObjectInteracted;
+        public event Action<IStorableReadOnly> ObjectSelected;
+        public event Action<IStorableReadOnly> ObjectHovered;
+        public event Action<IStorableReadOnly> ObjectReleased;
+        
         public ItemMutableStorageVisual()
         {
             ListView = new ListView
@@ -23,14 +29,46 @@ namespace IM.UI
             
             Add(ListView);
             AddToClassList(StorageClassLists.Storage);
-            
-            ListView.makeItem = () => new StorageCellUI();
+
+            ListView.makeItem = () =>
+            {
+                StorageCellVisual storageCellVisual = new StorageCellVisual();
+                
+                storageCellVisual.AddManipulator(new ListEntryManipulator(CheckDoubleClick,OnSelected,OnHovered,OnReleased));
+                
+                return storageCellVisual;
+            };
             ListView.bindItem = (element, index) =>
             {
-                if (element is not StorageCellUI cellUI) throw new InvalidOperationException();
+                if (element is not StorageCellVisual cellUI) throw new InvalidOperationException();
                 
                 cellUI.Cell = Storage[index];
             };
+        }
+
+        private void OnSelected(VisualElement el)
+        {
+            if (el is not StorageCellVisual cellVisual || cellVisual.Cell?.Item == null) return;
+            
+            ObjectSelected?.Invoke(cellVisual.Cell.Item);
+        }
+        
+        private void OnHovered(VisualElement el)
+        {
+            if (el is not StorageCellVisual cellVisual || cellVisual.Cell?.Item == null) return;
+            
+            ObjectHovered?.Invoke(cellVisual.Cell.Item);
+        }
+        private void OnReleased(VisualElement el)
+        {
+            if (el is not StorageCellVisual cellVisual || cellVisual.Cell?.Item == null) return;
+            ObjectReleased?.Invoke(cellVisual.Cell.Item);
+        }
+        private void CheckDoubleClick(VisualElement el)
+        {
+            if (el is not StorageCellVisual cellVisual || cellVisual.Cell?.Item == null) return;
+            
+            ObjectInteracted?.Invoke(cellVisual.Cell.Item);
         }
 
         public void SetStorage(IReadOnlyStorage storage)

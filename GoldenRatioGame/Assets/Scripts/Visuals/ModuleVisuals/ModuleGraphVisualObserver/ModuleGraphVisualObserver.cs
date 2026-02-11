@@ -16,8 +16,14 @@ namespace IM.Visuals
         private readonly ModuleGraphSnapshotDiffer _snapshotDiffer;
         private readonly bool _useInGameObjectPool;
         private readonly Transform _parent;
-
-        public ModuleGraphVisualObserver(Transform parent, bool useInGameObjectPool)
+        private readonly ModuleVisualObjectPreset _preset;
+        
+        public ModuleGraphVisualObserver(Transform parent, bool useInGameObjectPool) : this(parent,useInGameObjectPool,new ModuleVisualObjectPreset(visible:true))
+        {
+            
+        }
+        
+        public ModuleGraphVisualObserver(Transform parent, bool useInGameObjectPool, ModuleVisualObjectPreset preset)
         {
             _parent = parent;
             _useInGameObjectPool = useInGameObjectPool;
@@ -28,6 +34,8 @@ namespace IM.Visuals
                 OnModuleRemoved = HandleModuleRemoved,
                 OnConnected = HandleConnected,
             };
+
+            _preset = preset;
         }
 
         public void Update()
@@ -68,7 +76,7 @@ namespace IM.Visuals
             
             _moduleVisuals.Add(extensibleModule, visualObject);
             visualObject.Transform.Transform.SetParent(_parent, false);
-            visualObject.Visible = true;
+            _preset.ApplyTo(visualObject);
         }
 
         private void HandleModuleRemoved(IModule module)
@@ -117,18 +125,14 @@ namespace IM.Visuals
 
                 IPort otherPort = ownerPort.Connection.GetOtherPort(ownerPort);
 
-                if (otherPort?.Module is not IExtensibleModule otherModule)
-                    continue;
-                if (!_moduleVisuals.TryGetValue(module, out IModuleVisualObject fromModuleVisual))
-                    continue;
-                if (!_moduleVisuals.TryGetValue(otherModule, out IModuleVisualObject toModuleVisual))
-                    continue;
+                if (otherPort?.Module is not IExtensibleModule otherModule) continue;
+                if (!_moduleVisuals.TryGetValue(module, out IModuleVisualObject fromModuleVisual)) continue;
+                if (!_moduleVisuals.TryGetValue(otherModule, out IModuleVisualObject toModuleVisual)) continue;
 
                 IPortVisualObject fromVisual = fromModuleVisual.GetPortVisualObject(ownerPort);
                 IPortVisualObject toVisual = toModuleVisual.GetPortVisualObject(otherPort);
 
-                if (fromVisual == null || toVisual == null)
-                    continue;
+                if (fromVisual == null || toVisual == null) continue;
 
                 _portAligner.AlignPorts(fromVisual, toVisual);
             }

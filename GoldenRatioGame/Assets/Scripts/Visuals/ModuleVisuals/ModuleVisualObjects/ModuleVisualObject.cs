@@ -16,8 +16,9 @@ namespace IM.Visuals
         [SerializeField] private Renderer _renderer;
         private readonly List<IPortVisualObject> _portVisualObjects = new();
         private readonly List<IPoolObject> _poolObjects = new();
-        private Animator _animator;
         private IExtensibleModule _owner;
+        private Animator _animator;
+        private ModuleVisualObjectPreset _preset;
         
         public ITransform Transform { get; private set; }
         public IReadOnlyList<IPortVisualObject> PortsVisualObjects => _portVisualObjects;
@@ -70,6 +71,7 @@ namespace IM.Visuals
             Transform = GetComponent<ITransform>();
             GetComponents(_poolObjects);
             _poolObjects.Remove(this);
+            _preset = new ModuleVisualObjectPreset(Order,gameObject.layer);
         }
 
         private void Update()
@@ -105,12 +107,8 @@ namespace IM.Visuals
 
         public void OnRelease()
         {
-            Visible = false;
+            _preset.ApplyTo(this);
             transform.SetParent(DefaultParent);
-            Transform.LocalPosition = new Vector3(0, 0, 0);
-            Transform.LocalScale = new Vector3(1, 1, 1);
-            Transform.LocalRotation = Quaternion.identity;
-            Order = 0;
             
             foreach (IPoolObject poolObject in _poolObjects) poolObject.OnRelease();
             foreach (IPortVisualObject portVisualObject in _portVisualObjects) portVisualObject.Reset();

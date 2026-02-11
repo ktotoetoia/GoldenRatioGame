@@ -6,11 +6,12 @@ namespace IM.Visuals
     public class ModuleGraphVisualObserverMono : MonoBehaviour, IModuleGraphSnapshotObserver
     {
         [SerializeField] private Transform _parent;
+        [SerializeField] private ModuleVisualObjectPreset _preset;
         private ModuleGraphVisualObserver _moduleGraphVisualObserver;
 
         private void Awake()
         {
-            _moduleGraphVisualObserver = new ModuleGraphVisualObserver(_parent,true); 
+            _moduleGraphVisualObserver = new ModuleGraphVisualObserver(_parent,true,_preset); 
         }
 
         private void Update()

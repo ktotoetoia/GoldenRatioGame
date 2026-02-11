@@ -24,5 +24,7 @@ namespace IM.Transforms
             target.LocalRotation = Rotation;
             target.LocalScale = LossyScale;
         }
+        
+        public static LocalTransformReadOnly Default = new (Vector3.zero, Quaternion.identity, Vector3.one);
     }
 }
