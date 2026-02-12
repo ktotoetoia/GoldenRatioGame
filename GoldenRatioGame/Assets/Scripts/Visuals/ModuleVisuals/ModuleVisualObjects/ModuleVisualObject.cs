@@ -17,8 +17,8 @@ namespace IM.Visuals
         private readonly List<IPortVisualObject> _portVisualObjects = new();
         private readonly List<IPoolObject> _poolObjects = new();
         private IExtensibleModule _owner;
+        private IModuleVisualObjectPreset _preset;
         private Animator _animator;
-        private ModuleVisualObjectPreset _preset;
         
         public ITransform Transform { get; private set; }
         public IReadOnlyList<IPortVisualObject> PortsVisualObjects => _portVisualObjects;

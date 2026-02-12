@@ -5,24 +5,24 @@ using UnityEngine;
 namespace IM.Visuals
 {
     [Serializable]
-    public class ModuleVisualObjectPreset
+    public class ModuleVisualObjectPreset : IModuleVisualObjectPreset
     {
         [SerializeField] private int _order;
         [SerializeField] private int _layer;
         [SerializeField] private bool _visible;
-        private LocalTransformReadOnly _defaultTransform;
+        [SerializeField] private LocalTransformPreset _defaultTransform = LocalTransformPreset.Default;
 
         public ModuleVisualObjectPreset()
         {
-            _defaultTransform = LocalTransformReadOnly.Default;
+            
         }
 
-        public ModuleVisualObjectPreset(int order = 0, int layer = 0, bool visible = false) : this(LocalTransformReadOnly.Default,order,layer,visible)
+        public ModuleVisualObjectPreset(int order = 0, int layer = 0, bool visible = false) : this(LocalTransformPreset.Default,order,layer,visible)
         {
             
         }
         
-        public ModuleVisualObjectPreset(LocalTransformReadOnly localTransform,int order = 0, int layer = 0, bool visible = false)
+        public ModuleVisualObjectPreset(LocalTransformPreset localTransform,int order = 0, int layer = 0, bool visible = false)
         {
             _defaultTransform = localTransform;
             _layer = layer;

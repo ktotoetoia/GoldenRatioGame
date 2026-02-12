@@ -24,11 +24,11 @@ namespace IM.Modules
                 
                 PortPositionRotation portInfo = _portPositionRotations[i];
                 
-                LocalTransformReadOnly defaultTransform = new LocalTransformReadOnly(portInfo.Position,
+                LocalTransformPreset defaultTransform = new LocalTransformPreset(portInfo.Position,
                     Quaternion.Euler(0f, 0f, portInfo.EulerZRotation), Vector3.one);
                 
                 portVisualObject.OutputOrderAdjustment = portInfo.OutputOrderAdjustment;
-                portVisualObject.LocalTransformReadOnly = defaultTransform;
+                portVisualObject.LocalTransformPreset = defaultTransform;
             }
         }
 

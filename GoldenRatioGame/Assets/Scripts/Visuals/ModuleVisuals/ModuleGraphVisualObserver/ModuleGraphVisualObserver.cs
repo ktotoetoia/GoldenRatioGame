@@ -16,14 +16,14 @@ namespace IM.Visuals
         private readonly ModuleGraphSnapshotDiffer _snapshotDiffer;
         private readonly bool _useInGameObjectPool;
         private readonly Transform _parent;
-        private readonly ModuleVisualObjectPreset _preset;
+        private readonly IModuleVisualObjectPreset _preset;
         
         public ModuleGraphVisualObserver(Transform parent, bool useInGameObjectPool) : this(parent,useInGameObjectPool,new ModuleVisualObjectPreset(visible:true))
         {
             
         }
         
-        public ModuleGraphVisualObserver(Transform parent, bool useInGameObjectPool, ModuleVisualObjectPreset preset)
+        public ModuleGraphVisualObserver(Transform parent, bool useInGameObjectPool, IModuleVisualObjectPreset preset)
         {
             _parent = parent;
             _useInGameObjectPool = useInGameObjectPool;

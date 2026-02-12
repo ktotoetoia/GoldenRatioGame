@@ -7,21 +7,22 @@ namespace IM.Visuals
 {
     public class PortVisualObjectMono : MonoBehaviour, IPortVisualObject
     {
-        private LocalTransformReadOnly _localTransformReadOnly;
-        
+        private LocalTransformPreset _localTransformPreset;
+
         public bool Visible { get; set; }
         public IModuleVisualObject OwnerVisualObject { get; private set; }
         public IPort Port { get; private set; }
         public ITransform Transform { get; private set; }
         public int OutputOrderAdjustment { get; set; }
+        public bool Highlighted { get; set; }
 
-        public LocalTransformReadOnly LocalTransformReadOnly
+        public LocalTransformPreset LocalTransformPreset
         {
-            get=> _localTransformReadOnly;
+            get=> _localTransformPreset;
             set
             {
-                _localTransformReadOnly = value;
-                _localTransformReadOnly.ApplyTo(Transform);
+                _localTransformPreset = value;
+                _localTransformPreset.ApplyTo(Transform);
             }
         }
 
@@ -40,7 +41,7 @@ namespace IM.Visuals
         
         public void Reset()
         {
-            _localTransformReadOnly.ApplyTo(Transform);
+            _localTransformPreset.ApplyTo(Transform);
         }
         
         public void Dispose()

@@ -7,17 +7,17 @@ namespace IM.Visuals.Graph
     public class ModulePreviewPlacer : IModulePreviewPlacer
     {
         private readonly Camera _camera;
-        private readonly Transform _toAdd;
-        private readonly ModuleVisualObjectPreset _preset;
+        private readonly Transform _parent;
+        private readonly IModuleVisualObjectPreset _preset;
         private IModuleVisual _currentModuleVisual;
         private IModuleVisualObject _previewObject;
         
         public bool IsPreviewing => _previewObject != null;
 
-        public ModulePreviewPlacer(Camera camera, Transform toAdd, ModuleVisualObjectPreset preset)
+        public ModulePreviewPlacer(Camera camera, Transform parent, IModuleVisualObjectPreset preset)
         {
             _camera = camera;
-            _toAdd = toAdd;
+            _parent = parent;
             _preset = preset;
         }
         
@@ -27,7 +27,7 @@ namespace IM.Visuals.Graph
             if (!module.Extensions.TryGetExtension(out _currentModuleVisual)) return;
             
             _previewObject = _currentModuleVisual.EditorPool.Get();
-            _previewObject.Transform.Transform.SetParent(_toAdd, false);
+            _previewObject.Transform.Transform.SetParent(_parent, false);
             _preset.ApplyTo(_previewObject);
             UpdatePreviewPosition();
         }

@@ -9,6 +9,7 @@ namespace IM.Visuals
         IPort Port { get; }
         ITransform Transform { get; }
         int OutputOrderAdjustment { get; }
+        bool Highlighted { get; set; }
         
         void Reset();
     }
