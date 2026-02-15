@@ -20,6 +20,11 @@ namespace IM.Graphs
             {
                 OnModuleAdded(module);
             }
+            
+            foreach (IConnection connection in _prevConnections.Except(graph.Connections))
+            {
+                OnDisconnected(connection);
+            }
 
             foreach (IModule module in _prevModules.Except(graph.Modules))
             {
@@ -29,11 +34,6 @@ namespace IM.Graphs
             foreach (IConnection connection in graph.Connections.Except(_prevConnections))
             {
                 OnConnected(connection);
-            }
-            
-            foreach (IConnection connection in _prevConnections.Except(graph.Connections))
-            {
-                OnDisconnected(connection);
             }
             
             _prevModules.Clear();

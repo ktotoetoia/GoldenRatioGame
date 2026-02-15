@@ -15,8 +15,12 @@ namespace IM.Visuals.Graph
         public void SetGraph(IModuleGraphReadOnly graph)
         {
             if (_visualObserver != null) throw new InvalidOperationException();
-            
-            _visualObserver = new ModuleGraphVisualObserver(transform,false,_preset);
+
+            _visualObserver = new ModuleGraphVisualObserver(transform, false, _preset)
+            {
+                ShowPortsOnConnected = false,
+                ShowPortsOnDisconnected = true
+            };
             _graph = graph;   
         }
 

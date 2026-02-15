@@ -157,6 +157,9 @@ MonoBehaviour:
   - {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
   - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
   - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+  - {fileID: 2802572859520272913, guid: ece0237ec3ed11f47af8bff30089ae37, type: 3}
+  - {fileID: 2802572859520272913, guid: ece0237ec3ed11f47af8bff30089ae37, type: 3}
+  - {fileID: 7210977406679086040, guid: ff84fabe4643c18408f0ed33248fa311, type: 3}
   - {fileID: 7210977406679086040, guid: ff84fabe4643c18408f0ed33248fa311, type: 3}
   _bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -572,7 +575,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

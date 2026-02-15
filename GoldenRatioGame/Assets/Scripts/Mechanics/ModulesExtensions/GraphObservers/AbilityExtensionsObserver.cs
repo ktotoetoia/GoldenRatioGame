@@ -6,18 +6,18 @@ namespace IM.Modules
 {
     public class AbilityExtensionsObserver : MonoBehaviour, IModuleGraphSnapshotObserver
     {
-        private ModuleExtensionsObserver<IAbility> _extensionsObserver;
-        private AbilityPool _abilityPool;
+        private ModuleExtensionsObserver<IAbilityExtension> _extensionsObserver;
+        private IAbilityPool _abilityPool;
         
         private void Awake()
         {
-            //_abilityPool = GetComponent<IModuleEntity>().AbilityPool as AbilityPool;
+            _abilityPool = GetComponent<IAbilityPool>();
 
-            _extensionsObserver = new ModuleExtensionsObserver<IAbility>(OnExtensionAdded, OnExtensionRemoved);
+            _extensionsObserver = new ModuleExtensionsObserver<IAbilityExtension>(OnExtensionAdded, OnExtensionRemoved);
         }
 
-        private void OnExtensionAdded(IExtensibleModule module,IAbility ability) => _abilityPool.AddAbility(ability);
-        private void OnExtensionRemoved(IExtensibleModule module,IAbility ability) => _abilityPool.RemoveAbility(ability);
+        private void OnExtensionAdded(IExtensibleModule module,IAbilityExtension abilityExtension) => _abilityPool.AddAbility(abilityExtension.Ability);
+        private void OnExtensionRemoved(IExtensibleModule module,IAbilityExtension abilityExtension) => _abilityPool.RemoveAbility(abilityExtension.Ability);
         public void OnGraphUpdated(IModuleGraphReadOnly graph) => _extensionsObserver.OnGraphUpdated(graph);
     }
 }

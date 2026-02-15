@@ -62,7 +62,7 @@ namespace IM.Visuals.Graph
 
             foreach (IPortVisualObject a in toAdd.PortsVisualObjects)
             {
-                foreach (IPortVisualObject otherPort in _moduleGraphView.VisualObserver.ModuleVisuals.SelectMany(x => x.PortsVisualObjects))
+                foreach (IPortVisualObject otherPort in _moduleGraphView.VisualObserver.ModuleToVisualObjects.SelectMany(x => x.Value.PortsVisualObjects))
                 {
                     float newDistance = Vector3.Distance(otherPort.Transform.Position, a.Transform.Position);
                     

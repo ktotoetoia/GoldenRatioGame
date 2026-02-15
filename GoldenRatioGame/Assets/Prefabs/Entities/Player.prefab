@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 8464196573471322888}
   - component: {fileID: 7688870645714508130}
   - component: {fileID: 3091458327309072607}
+  - component: {fileID: -2277010687601736371}
+  - component: {fileID: -1085195585362333072}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -272,3 +274,28 @@ MonoBehaviour:
       _rotation: {x: 0, y: 0, z: 0, w: 1}
       _scale: {x: 1, y: 1, z: 1}
     <PortsVisible>k__BackingField: 0
+--- !u!114 &-2277010687601736371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b6d75674201484eb9fdb7c721746ad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ReferenceModuleVisualObjectsObserver
+--- !u!114 &-1085195585362333072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b1313784124dd2b344c6300795330f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Abilities::IM.Abilities.AbilityKeyPoolMono
+  _keys: 7100000065000000720000007a00000078000000
