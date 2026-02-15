@@ -7,13 +7,44 @@ namespace IM.Visuals
 {
     public class PortVisualObjectMono : MonoBehaviour, IPortVisualObject
     {
+        [SerializeField] private Renderer _renderer;
         private LocalTransformPreset _localTransformPreset;
+        private int _sortingOrder;
+        private bool _visible;
+        
+        [field:SerializeField] public int OutputOrderAdjustment { get; set; }
+        public bool Visible
+        {
+            get => gameObject.activeInHierarchy;
+            set 
+            {
+                gameObject.SetActive(value);
+                _renderer?.gameObject.SetActive(value);
+            }
+        }
 
-        public bool Visible { get; set; }
+        public int Order
+        {
+            get => _sortingOrder;
+            set
+            {
+                _sortingOrder = value;
+                if (_renderer) _renderer.sortingOrder = value;
+            }
+        }
+
+        public int Layer
+        {
+            get => gameObject.layer;
+            set
+            {
+                if (gameObject.layer == value) return;
+                SetLayerRecursively(transform,value);
+            }
+        }
         public IModuleVisualObject OwnerVisualObject { get; private set; }
         public IPort Port { get; private set; }
         public ITransform Transform { get; private set; }
-        public int OutputOrderAdjustment { get; set; }
         public bool Highlighted { get; set; }
 
         public LocalTransformPreset LocalTransformPreset
@@ -29,6 +60,16 @@ namespace IM.Visuals
         private void Awake()
         {
             Transform = GetComponent<ITransform>();
+        }
+
+        private void SetLayerRecursively(Transform targetTransform, int layer)
+        {
+            targetTransform.gameObject.layer = layer;
+
+            for (int i = 0; i < targetTransform.childCount; i++)
+            {
+                SetLayerRecursively(targetTransform.GetChild(i), layer);
+            }
         }
 
         public void Initialize(IModuleVisualObject ownerVisualObject, IPort port)
@@ -48,5 +89,5 @@ namespace IM.Visuals
         {
             Destroy(gameObject);
         }
-    }
+    } 
 }

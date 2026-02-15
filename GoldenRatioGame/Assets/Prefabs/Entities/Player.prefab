@@ -267,3 +267,8 @@ MonoBehaviour:
     _order: 0
     _layer: 0
     _visible: 1
+    _defaultTransform:
+      _position: {x: 0, y: 0, z: 0}
+      _rotation: {x: 0, y: 0, z: 0, w: 1}
+      _scale: {x: 1, y: 1, z: 1}
+    <PortsVisible>k__BackingField: 0

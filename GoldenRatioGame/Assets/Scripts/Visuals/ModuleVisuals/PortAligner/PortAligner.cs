@@ -8,7 +8,7 @@ namespace IM.Visuals
         public void AlignPorts(IPortVisualObject portToMove, IPortVisualObject anchorPort)
         {
             ITransform owner = portToMove.OwnerVisualObject.Transform;
-
+            
             owner.Rotation = GetRotation(portToMove, anchorPort);
             owner.Position = GetPosition(portToMove, anchorPort, owner.Rotation);
         }

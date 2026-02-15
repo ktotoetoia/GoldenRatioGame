@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 3521067284498834333}
   - component: {fileID: 3187650734492596957}
   - component: {fileID: 3861873684401809517}
+  - component: {fileID: -2697889935885480222}
   - component: {fileID: 5469737783865499535}
   - component: {fileID: 4556875372869762170}
   - component: {fileID: 8535451133996336894}
-  - component: {fileID: -2697889935885480222}
   m_Layer: 0
   m_Name: Head Humanoid
   m_TagString: Untagged
@@ -40,6 +40,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3521067284498834333
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -85,16 +86,16 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6859097844572071575, guid: ba9b3dfaaaff42b4492aed0cbede6265, type: 3}
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: -1490497180914377676, guid: 44d41c887a9c2ff4db8e6ad59b873c87, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.8359375, y: 1.4296875}
+  m_Size: {x: 0.11, y: 0.13}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &3187650734492596957
 MonoBehaviour:
@@ -120,6 +121,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1493264ef8f44edbf48a2b6ead5db0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Modules::IM.Modules.AddModuleToStorageOnInteract
+--- !u!114 &-2697889935885480222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8119833187759213420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4701e6af742e47a8b36f25f229d05c20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules::TDS.Events.ValueStorageContainerMono
 --- !u!114 &5469737783865499535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,15 +178,3 @@ MonoBehaviour:
     _minValue: 0
     _maxValue: 100
     _value: 100
---- !u!114 &-2697889935885480222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8119833187759213420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4701e6af742e47a8b36f25f229d05c20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Modules::TDS.Events.ValueStorageContainerMono

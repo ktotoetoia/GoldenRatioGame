@@ -14,9 +14,11 @@ namespace IM.Visuals
         private readonly IPortAligner _portAligner = new PortAlignerOrder();
         private readonly Dictionary<IExtensibleModule, IModuleVisualObject> _moduleVisuals = new();
         private readonly ModuleGraphSnapshotDiffer _snapshotDiffer;
-        private readonly bool _useInGameObjectPool;
         private readonly Transform _parent;
         private readonly IModuleVisualObjectPreset _preset;
+        private readonly bool _useInGameObjectPool;
+        
+        public IEnumerable<IModuleVisualObject> ModuleVisuals => _moduleVisuals.Values;
         
         public ModuleGraphVisualObserver(Transform parent, bool useInGameObjectPool) : this(parent,useInGameObjectPool,new ModuleVisualObjectPreset(visible:true))
         {
@@ -33,6 +35,7 @@ namespace IM.Visuals
                 OnModuleAdded = HandleModuleAdded,
                 OnModuleRemoved = HandleModuleRemoved,
                 OnConnected = HandleConnected,
+                OnDisconnected = HandleDisconnected,
             };
 
             _preset = preset;
@@ -110,6 +113,11 @@ namespace IM.Visuals
         private void HandleConnected(IPortVisualObject portA, IPortVisualObject portB)
         {
             _portAligner.AlignPorts(portA,portB);
+        }
+
+        private void HandleDisconnected(IConnection connection)
+        {
+            
         }
 
         private void AlignAll()

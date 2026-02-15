@@ -11,7 +11,6 @@ namespace IM.Visuals
         ITransform Transform { get; }
         IReadOnlyList<IPortVisualObject> PortsVisualObjects { get; }
         IPortVisualObjectDirtyTracker DirtyTracker { get; }
-        int Order { get; set; }
 
         IPortVisualObject GetPortVisualObject(IPort port);
     }

@@ -11,7 +11,7 @@ namespace IM.Visuals
     [DisallowMultipleComponent]
     public class ModuleVisualObject : MonoBehaviour, IAnimatedModuleVisualObject
     {
-        [SerializeField] private PortVisualObjectFactory _portVisualObjectFactory;
+        [SerializeField] private PortVisualObjectFactoryBase _portVisualObjectFactory;
         [SerializeField] private PortBinderBase _portBinder;
         [SerializeField] private Renderer _renderer;
         private readonly List<IPortVisualObject> _portVisualObjects = new();
@@ -27,7 +27,36 @@ namespace IM.Visuals
         public int Order
         {
             get => _renderer.sortingOrder;
-            set => _renderer.sortingOrder = value;
+            set 
+            {
+                _renderer.sortingOrder = value;
+                
+                foreach (IPortVisualObject portVisualObject in _portVisualObjects)
+                {
+                    portVisualObject.Order = value + 1;
+                }
+            }
+        }
+
+        public int Layer
+        {
+            get => gameObject.layer;
+            set
+            {
+                if (gameObject.layer == value) return;
+
+                SetLayerRecursively(transform, value);
+            }
+        }
+
+        private void SetLayerRecursively(Transform targetTransform, int layer)
+        {
+            targetTransform.gameObject.layer = layer;
+
+            for (int i = 0; i < targetTransform.childCount; i++)
+            {
+                SetLayerRecursively(targetTransform.GetChild(i), layer);
+            }
         }
 
         public IExtensibleModule Owner
@@ -67,11 +96,14 @@ namespace IM.Visuals
         
         private void Awake()
         {
+            _preset = new ModuleVisualObjectPreset(Order, gameObject.layer)
+            {
+                PortsVisible = true
+            };
             _animator = GetComponent<Animator>();
             Transform = GetComponent<ITransform>();
             GetComponents(_poolObjects);
             _poolObjects.Remove(this);
-            _preset = new ModuleVisualObjectPreset(Order,gameObject.layer);
         }
 
         private void Update()

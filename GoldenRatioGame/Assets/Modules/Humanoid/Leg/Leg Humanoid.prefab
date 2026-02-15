@@ -121,9 +121,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3521067284498834333, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: m_Size.y
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3521067284498834333, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 4309042506995017036, guid: 2f7a8d99764e5614baa86273bf655edf, type: 3}
+      objectReference: {fileID: -1755458207589064583, guid: 18f92572924559d4080b69bf4e5666a7, type: 3}
+    - target: {fileID: 3521067284498834333, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4479085341360621510, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: _speedModifier.<Add>k__BackingField
       value: 4

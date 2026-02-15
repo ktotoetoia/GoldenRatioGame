@@ -10,6 +10,8 @@ namespace IM.Visuals.Graph
         private IModuleGraphReadOnly _graph;
         private ModuleGraphVisualObserver _visualObserver;
         
+        public ModuleGraphVisualObserver VisualObserver => _visualObserver;
+        
         public void SetGraph(IModuleGraphReadOnly graph)
         {
             if (_visualObserver != null) throw new InvalidOperationException();

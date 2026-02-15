@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 3521067284498834333}
   - component: {fileID: 3187650734492596957}
   - component: {fileID: 4039193998348598875}
+  - component: {fileID: 84801343705693524}
   - component: {fileID: 6758064773000630412}
   - component: {fileID: 1563791358509127018}
   - component: {fileID: 8535451133996336894}
   - component: {fileID: 4479085341360621510}
-  - component: {fileID: 84801343705693524}
   m_Layer: 0
   m_Name: Core Humanoid
   m_TagString: Untagged
@@ -88,12 +88,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -4124243804936795257, guid: 0c05a9dd7b4237a4eabe8ab881b7d9ab, type: 3}
+  m_Sprite: {fileID: 755226432850309792, guid: c95e2d4e9bf09f049abca6f9aa1ebbb2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.6484375, y: 0.8515625}
+  m_Size: {x: 0.15, y: 0.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -122,6 +122,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1493264ef8f44edbf48a2b6ead5db0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Modules::IM.Modules.AddModuleToStorageOnInteract
+--- !u!114 &84801343705693524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8119833187759213420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4701e6af742e47a8b36f25f229d05c20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules::TDS.Events.ValueStorageContainerMono
 --- !u!114 &6758064773000630412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,15 +194,3 @@ MonoBehaviour:
   _speedModifier:
     <Add>k__BackingField: 1
     <Multiplication>k__BackingField: 1
---- !u!114 &84801343705693524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8119833187759213420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4701e6af742e47a8b36f25f229d05c20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Modules::TDS.Events.ValueStorageContainerMono

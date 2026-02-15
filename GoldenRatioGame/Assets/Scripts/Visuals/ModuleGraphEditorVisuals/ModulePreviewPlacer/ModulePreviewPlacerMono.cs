@@ -5,18 +5,19 @@ namespace IM.Visuals.Graph
 {
     public class ModulePreviewPlacerMono : MonoBehaviour, IModulePreviewPlacer
     {
+        [SerializeField] private Transform _previewParent;
         [SerializeField] private Camera _camera;
         [SerializeField] private ModuleVisualObjectPreset _preset;
-        
         private IModulePreviewPlacer _modulePreviewPlacer;
 
+        public IModuleVisualObject PreviewObject => _modulePreviewPlacer.PreviewObject;
+        public bool IsPreviewing => _modulePreviewPlacer.IsPreviewing;
+        
         private void Awake()
         {
-            _modulePreviewPlacer = new ModulePreviewPlacer(_camera,transform,_preset);
+            _modulePreviewPlacer = new ModulePreviewPlacer(_camera,_previewParent,_preset);
         }
-
-        public bool IsPreviewing => _modulePreviewPlacer.IsPreviewing;
-
+        
         public void StartPreview(IExtensibleModule module)
         {
             _modulePreviewPlacer.StartPreview(module);

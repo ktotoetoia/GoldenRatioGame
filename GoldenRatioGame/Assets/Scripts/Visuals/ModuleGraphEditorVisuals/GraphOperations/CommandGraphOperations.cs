@@ -6,31 +6,32 @@ namespace IM.Visuals.Graph
 {
     public class CommandGraphOperations : IGraphOperations
     {
-        private readonly IConditionalCommandModuleGraph _graph;
+        public IConditionalCommandModuleGraph Graph { get; set; }
         
         public CommandGraphOperations(IConditionalCommandModuleGraph graph)
         {
-            _graph = graph;
+            Graph = graph;
         }
-        
+
+
         public bool QuickAddModule(IModule module)
         {
             if (module is ICoreExtensibleModule)
             {
-                if (!_graph.CanAddModule(module)) return false;
+                if (!Graph.CanAddModule(module)) return false;
                 
-                _graph.AddModule(module);
+                Graph.AddModule(module);
 
                 return true;
             }
             
             foreach (IPort port in module.Ports)
             {
-                foreach (IPort targetPort in _graph.Modules.SelectMany(x => x.Ports))
+                foreach (IPort targetPort in Graph.Modules.SelectMany(x => x.Ports))
                 {
-                    if (!_graph.CanAddAndConnect(module, port, targetPort)) continue;
+                    if (!Graph.CanAddAndConnect(module, port, targetPort)) continue;
                         
-                    _graph.AddAndConnect(module, port, targetPort);
+                    Graph.AddAndConnect(module, port, targetPort);
                             
                     return true;
                 }
@@ -41,21 +42,21 @@ namespace IM.Visuals.Graph
 
         public void QuickRemoveModule()
         {   
-            IModule module = _graph.Modules.LastOrDefault();
+            IModule module = Graph.Modules.LastOrDefault();
 
-            if (!_graph.CanRemoveModule(module)) return;
+            if (!Graph.CanRemoveModule(module)) return;
             
-            _graph.RemoveModule(module);
+            Graph.RemoveModule(module);
         }
 
         public void Undo(int count)
         {
-            if(_graph.CanUndo(count)) _graph.Undo(count);
+            if(Graph.CanUndo(count)) Graph.Undo(count);
         }
         
         public void Redo(int count)
         {
-            if(_graph.CanRedo(count)) _graph.Redo(count);
+            if(Graph.CanRedo(count)) Graph.Redo(count);
         }
     }
 }

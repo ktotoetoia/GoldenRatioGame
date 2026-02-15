@@ -9,6 +9,8 @@
             _aligner.AlignPorts(portToMove,anchorPort);
             
             portToMove.OwnerVisualObject.Order = anchorPort.OwnerVisualObject.Order + anchorPort.OutputOrderAdjustment;
+            portToMove.Visible = false;
+            anchorPort.Visible = false;
         }
     }
 }

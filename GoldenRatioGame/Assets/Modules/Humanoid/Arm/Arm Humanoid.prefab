@@ -109,9 +109,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3521067284498834333, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: m_Size.x
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 3521067284498834333, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: m_Size.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3521067284498834333, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -6696705774333872909, guid: 99a85b001a58d164695718abe96c09ac, type: 3}
+      objectReference: {fileID: -8939184660157099317, guid: 5f69ecb24f0c96241934926843fbe93b, type: 3}
+    - target: {fileID: 3521067284498834333, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4556875372869762170, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: _sprite
       value: 

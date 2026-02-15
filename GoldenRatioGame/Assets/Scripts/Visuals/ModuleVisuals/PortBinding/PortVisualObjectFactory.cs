@@ -6,11 +6,11 @@ using UnityEngine;
 namespace IM.Modules
 {
     [CreateAssetMenu(menuName = "Ports/Port Visual Object Factory")]
-    public class PortVisualObjectFactory : ScriptableObject
+    public class PortVisualObjectFactory : PortVisualObjectFactoryBase
     {
         [SerializeField] private GameObject _portVisualObjectMonoPrefab;
         
-        public void CreateVisualObjects(IEnumerable<IPort> ports, IList<IPortVisualObject> portVisualObjects, IModuleVisualObject moduleVisualObject)
+        public override void CreateVisualObjects(IEnumerable<IPort> ports, IList<IPortVisualObject> portVisualObjects, IModuleVisualObject moduleVisualObject)
         {
             foreach (IPort port in ports)
             {

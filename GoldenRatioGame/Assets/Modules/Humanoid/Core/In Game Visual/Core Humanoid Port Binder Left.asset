@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd48ae14d54cd5a45a639e978308b08a, type: 3}
-  m_Name: Core Humanoid Port Binder Right
+  m_Name: Core Humanoid Port Binder Left
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.DirectionalPortBinder
   _portPositionRotations:
-  - <Position>k__BackingField: {x: 0, y: 0.5, z: 0}
+  - <Position>k__BackingField: {x: -0.02, y: 0.44, z: 0}
     <EulerZRotation>k__BackingField: 90
     <OutputOrderAdjustment>k__BackingField: 1
-  - <Position>k__BackingField: {x: 0.1, y: 0.5, z: 0}
+  - <Position>k__BackingField: {x: 0.16, y: 0.26, z: 0}
     <EulerZRotation>k__BackingField: 0
-    <OutputOrderAdjustment>k__BackingField: -2
-  - <Position>k__BackingField: {x: -0.2, y: 0.5, z: 0}
+    <OutputOrderAdjustment>k__BackingField: 3
+  - <Position>k__BackingField: {x: -0.2, y: 0.26, z: 0}
     <EulerZRotation>k__BackingField: 180
+    <OutputOrderAdjustment>k__BackingField: -3
+  - <Position>k__BackingField: {x: 0.08, y: -0.46, z: 0}
+    <EulerZRotation>k__BackingField: -90
     <OutputOrderAdjustment>k__BackingField: 2
-  - <Position>k__BackingField: {x: 0.14, y: -0.3, z: 0}
+  - <Position>k__BackingField: {x: -0.08, y: -0.46, z: 0}
     <EulerZRotation>k__BackingField: -90
     <OutputOrderAdjustment>k__BackingField: -2
-  - <Position>k__BackingField: {x: -0.07, y: -0.3, z: 0}
-    <EulerZRotation>k__BackingField: -90
-    <OutputOrderAdjustment>k__BackingField: 2

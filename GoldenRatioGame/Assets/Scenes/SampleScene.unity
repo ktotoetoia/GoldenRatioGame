@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 197609164}
   - component: {fileID: 197609167}
   m_Layer: 0
-  m_Name: Initialization
+  m_Name: ----Initialization----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,15 +157,10 @@ MonoBehaviour:
   - {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
   - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
   - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
-  - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
-  - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
-  - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
-  - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
-  - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
-  - {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+  - {fileID: 7210977406679086040, guid: ff84fabe4643c18408f0ed33248fa311, type: 3}
   _bounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 5, y: 5, z: 5}
+    m_Extent: {x: 3, y: 3, z: 0}
 --- !u!114 &197609165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +187,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2057245054}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &197609167
 MonoBehaviour:
@@ -265,8 +260,8 @@ GameObject:
   - component: {fileID: 313381387}
   - component: {fileID: 313381391}
   - component: {fileID: 313381390}
-  - component: {fileID: 313381389}
   - component: {fileID: 313381388}
+  - component: {fileID: 313381392}
   m_Layer: 5
   m_Name: StorageView
   m_TagString: Untagged
@@ -301,28 +296,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf3615b508f4075929ee4905ba2a18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleGraphEditorVisuals::IM.Visuals.Graph.ModulePreviewPlacerMono
+  _previewParent: {fileID: 382819395}
   _camera: {fileID: 1204849133}
   _preset:
-    _order: 1
+    _order: 1000
     _layer: 5
     _visible: 1
     _defaultTransform:
       _position: {x: 0, y: 0, z: 0}
       _rotation: {x: 0, y: 0, z: 0, w: 1}
       _scale: {x: 1, y: 1, z: 1}
---- !u!114 &313381389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 313381386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cae3f25679b422586dff508bfde3d17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleGraphEditorVisuals::IM.Visuals.Graph.StorageVisualC
-  _document: {fileID: 313381391}
+    <PortsVisible>k__BackingField: 1
 --- !u!114 &313381390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,6 +353,19 @@ MonoBehaviour:
   m_PivotReferenceSize: 1
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &313381392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313381386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cae3f25679b422586dff508bfde3d17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.Visuals.Graph.StorageView
+  _document: {fileID: 313381391}
 --- !u!1 &382819394
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,7 +393,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 851632501}
@@ -421,6 +418,7 @@ MonoBehaviour:
       _position: {x: 0, y: 0, z: 0}
       _rotation: {x: 0, y: 0, z: 0, w: 1}
       _scale: {x: 1, y: 1, z: 1}
+    <PortsVisible>k__BackingField: 1
 --- !u!1 &509123151
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,7 +572,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -637,7 +635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5125ecdc42ea48eea15aef184131b6a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleGraphEditorVisuals::IM.Visuals.Graph.ModuleGraphEditorView
-  _storageView: {fileID: 313381389}
+  _storageView: {fileID: 313381392}
   _graphView: {fileID: 382819396}
 --- !u!114 &851632504
 MonoBehaviour:
@@ -651,8 +649,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca473781ca584c23bbe817c0a4b95262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.Visuals.Graph.ModuleContextInput
-  _storageView: {fileID: 313381389}
+  _moduleGraphView: {fileID: 382819396}
+  _storageView: {fileID: 313381392}
   _previewPlacer: {fileID: 313381388}
+  _addWorldDistance: 0.3
 --- !u!1 &1204849130
 GameObject:
   m_ObjectHideFlags: 0
@@ -775,7 +775,7 @@ Transform:
   m_GameObject: {fileID: 1204849130}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1008,7 +1008,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 519420032}
-  - {fileID: 197609166}
   - {fileID: 509123152}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1016,6 +1015,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 197609166}
   - {fileID: 2057245054}
   - {fileID: 1311731593}
   - {fileID: 1487119758}

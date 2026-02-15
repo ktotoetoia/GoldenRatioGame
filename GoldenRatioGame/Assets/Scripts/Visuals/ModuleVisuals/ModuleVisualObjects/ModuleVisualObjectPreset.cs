@@ -12,6 +12,8 @@ namespace IM.Visuals
         [SerializeField] private bool _visible;
         [SerializeField] private LocalTransformPreset _defaultTransform = LocalTransformPreset.Default;
 
+        [field: SerializeField] public bool PortsVisible { get; set; }
+        
         public ModuleVisualObjectPreset()
         {
             
@@ -29,12 +31,18 @@ namespace IM.Visuals
             _visible = visible;
             _order = order;
         }
+        
         public void ApplyTo(IModuleVisualObject moduleVisualObject)
         {
-            moduleVisualObject.Visible = _visible;
             _defaultTransform.ApplyTo(moduleVisualObject.Transform);
+            moduleVisualObject.Visible = _visible;
             moduleVisualObject.Order = _order;
-            moduleVisualObject.Transform.Transform.gameObject.layer = _layer;
+            moduleVisualObject.Layer = _layer;
+
+            foreach (IPortVisualObject portsVisualObject in moduleVisualObject.PortsVisualObjects)
+            {
+                portsVisualObject.Visible = PortsVisible;
+            }
         }
     }
 }
