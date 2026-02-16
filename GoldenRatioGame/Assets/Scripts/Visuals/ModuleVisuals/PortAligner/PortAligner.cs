@@ -20,9 +20,14 @@ namespace IM.Visuals
             Quaternion portLocal =
                 Quaternion.Inverse(owner.Rotation) *
                 portToMove.Transform.Rotation;
+            Quaternion result = anchorPort.Transform.Rotation * Quaternion.Inverse(portLocal);
 
-            return anchorPort.Transform.Rotation *
-                   Quaternion.Inverse(portLocal) * Quaternion.Euler(0,0,180);
+            if (Mathf.Sign(portToMove.Transform.LossyScale.x) == Mathf.Sign(anchorPort.Transform.LossyScale.x))
+            {
+                result *= Quaternion.Euler(0,0,180);
+            }
+
+            return result;
         }
         
         private Vector3 GetPosition(IPortVisualObject portToMove, IPortVisualObject anchorPort, Quaternion ownerRot)

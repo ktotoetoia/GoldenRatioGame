@@ -29,14 +29,14 @@ namespace IM.Visuals
         {
             IModuleVisualObject visualObject = GetObjectPool(moduleVisual).Get();
             
-            base.ModuleVisualObjects.Add(extensibleModule, visualObject);
+            ModuleVisualObjects.Add(extensibleModule, visualObject);
             visualObject.Transform.Transform.SetParent(_parent, false);
             _preset.ApplyTo(visualObject);
         }
 
         protected override  void HandleModuleRemoved(IExtensibleModule extensibleModule)
         {
-            base.ModuleVisualObjects.Remove(extensibleModule, out IModuleVisualObject visualObject);
+            ModuleVisualObjects.Remove(extensibleModule, out IModuleVisualObject visualObject);
             GetObjectPool(extensibleModule.Extensions.GetExtension<IModuleVisual>()).Release(visualObject);
         }
 

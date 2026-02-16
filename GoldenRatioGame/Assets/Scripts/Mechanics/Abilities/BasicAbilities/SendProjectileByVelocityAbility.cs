@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 
 namespace IM.Abilities
 {
-    public class SendProjectileByVelocityAbility : IAbility,IRequireAbilityUseContext
+    public class SendProjectileByVelocityAbility : IUseContextAbility
     {
         private readonly IObjectPool<GameObject> _projectileFactory;
         private readonly ICooldown _cooldown;
@@ -16,7 +16,9 @@ namespace IM.Abilities
         public bool CanUse => !Cooldown.IsOnCooldown;
         public ICooldownReadOnly Cooldown => _cooldown;
         public float Speed { get; set; } = 5f;
-        
+        public AbilityUseContext LastUsedContext => _context;
+        public event Action<AbilityUseContext> OnAbilityUsed;
+
         public SendProjectileByVelocityAbility(IObjectPool<GameObject> projectileFactory,IPositionProvider getPosition, float cooldown) : this(projectileFactory,getPosition, new FloatCooldown(cooldown))
         {
             
@@ -42,6 +44,8 @@ namespace IM.Abilities
             
             projectile.GetComponent<Rigidbody2D>().linearVelocity = dir * Speed;
             projectile.GetComponent<IProjectile>().Initialize(()=> _projectileFactory.Release(projectile.gameObject));
+            
+            OnAbilityUsed?.Invoke(_context);
             
             return true;
         }

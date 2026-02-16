@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -445026668575163568}
   - component: {fileID: 8589094120568950576}
   - component: {fileID: 8084296690069182958}
+  - component: {fileID: 1175997539913378157}
   m_Layer: 0
   m_Name: Arm Humanoid In Editor
   m_TagString: Untagged
@@ -84,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ReferenceModule
   _portVisualObjectFactory: {fileID: 11400000, guid: b50a20bb72fb9824e8befd705c4581c2, type: 2}
-  _portBinder: {fileID: 11400000, guid: 170692f6e97bcdb4aa61e6f9663c1f13, type: 2}
+  _portBinder: {fileID: 11400000, guid: 148a279e8d53d5242a175e873032c286, type: 2}
   _renderer: {fileID: 7523210880981555952}
 --- !u!114 &8084296690069182958
 MonoBehaviour:
@@ -99,26 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.DirectionFieldSetterMulti
   _entries:
-  - targetComponent: {fileID: 6793150815832932729}
+  - targetComponent: {fileID: 1175997539913378157}
     memberName: Flipped
-    left:
-      objectValue: {fileID: -6696705774333872909, guid: 99a85b001a58d164695718abe96c09ac, type: 3}
-      intValue: 0
-      floatValue: 0
-      doubleValue: 0
-      boolValue: 0
-      stringValue: 
-      enumIndex: 0
-    right:
-      objectValue: {fileID: -5711908598854653283, guid: 86cab99528ae4794fbd0765ef014b145, type: 3}
-      intValue: 0
-      floatValue: 0
-      doubleValue: 0
-      boolValue: 1
-      stringValue: 
-      enumIndex: 0
-  - targetComponent: {fileID: 8589094120568950576}
-    memberName: PortBinder
     left:
       objectValue: {fileID: 11400000, guid: 170692f6e97bcdb4aa61e6f9663c1f13, type: 2}
       intValue: 0
@@ -132,9 +115,24 @@ MonoBehaviour:
       intValue: 0
       floatValue: 0
       doubleValue: 0
-      boolValue: 0
+      boolValue: 1
       stringValue: 
       enumIndex: 0
+--- !u!114 &1175997539913378157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156244532669732079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac7e631045e54226afec6605a99fc793, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Visuals::IM.Visuals.ObjectFlipper
+  _flipX: 1
+  _flipY: 0
+  _flipZ: 0
 --- !u!1 &4238012973996105722
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,13 +159,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4238012973996105722}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: -0.1, y: 0.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6831950797100586301}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!114 &8972411175909366150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +292,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7082726234091625585}
-  - component: {fileID: 6793150815832932729}
   m_Layer: 0
   m_Name: Textures
   m_TagString: Untagged
@@ -319,21 +316,6 @@ Transform:
   - {fileID: 3879092793596057601}
   m_Father: {fileID: 6831950797100586301}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6793150815832932729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7787260147094038177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac7e631045e54226afec6605a99fc793, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Visuals::IM.Visuals.ObjectFlipper
-  _flipX: 1
-  _flipY: 0
-  _flipZ: 0
 --- !u!1 &9124132220745996698
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,9 @@ namespace IM.Transforms
     [Serializable]
     public struct LocalTransformPreset : ITransformReadOnly
     {
+        [SerializeField] private bool _changePosition;
+        [SerializeField] private bool _changeRotation;
+        [SerializeField] private bool _changeScale;
         [SerializeField] private Vector3 _position;
         [SerializeField] private Quaternion _rotation;
         [SerializeField] private Vector3 _scale;
@@ -24,13 +27,16 @@ namespace IM.Transforms
             _position = p;
             _scale = s;
             _rotation = r;
+            _changePosition = true;
+            _changeRotation = true;
+            _changeScale = true;
         }
 
         public void ApplyTo(ITransform target)
         {
-            target.LocalPosition = Position;
-            target.LocalRotation = Rotation;
-            target.LocalScale = LossyScale;
+            if(_changePosition) target.LocalPosition = Position;
+            if(_changeRotation) target.LocalRotation = Rotation;
+            if(_changeScale) target.LocalScale = LossyScale;
         }
     }
 }

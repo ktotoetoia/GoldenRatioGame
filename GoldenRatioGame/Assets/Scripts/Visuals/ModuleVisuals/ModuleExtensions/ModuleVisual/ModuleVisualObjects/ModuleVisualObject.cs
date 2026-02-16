@@ -139,8 +139,8 @@ namespace IM.Visuals
 
         public void OnRelease()
         {
-            _preset.ApplyTo(this);
             transform.SetParent(DefaultParent);
+            _preset.ApplyTo(this);
             
             foreach (IPoolObject poolObject in _poolObjects) poolObject.OnRelease();
             foreach (IPortVisualObject portVisualObject in _portVisualObjects) portVisualObject.Reset();

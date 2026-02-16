@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 8054565667691421690}
   - component: {fileID: -3288038171739958248}
   - component: {fileID: 8129487306391630074}
+  - component: {fileID: 9144802200236906512}
   m_Layer: 0
   m_Name: Leg Humanoid In Editor
   m_TagString: Untagged
@@ -122,7 +123,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 828341005048572854}
@@ -222,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ReferenceModule
   _portVisualObjectFactory: {fileID: 11400000, guid: b50a20bb72fb9824e8befd705c4581c2, type: 2}
-  _portBinder: {fileID: 11400000, guid: b5642a6b0be201e47ae33afc19afca7c, type: 2}
+  _portBinder: {fileID: 11400000, guid: 148a279e8d53d5242a175e873032c286, type: 2}
   _renderer: {fileID: -7644578825757335302}
 --- !u!114 &-3288038171739958248
 MonoBehaviour:
@@ -249,32 +250,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.PortDirectionFieldSetter
   _entries:
-  - targetComponent: {fileID: -7644578825757335302}
-    memberName: flipX
-    left:
-      objectValue: {fileID: 0}
-      intValue: 0
-      floatValue: 0
-      doubleValue: 0
-      boolValue: 0
-      stringValue: 
-      enumIndex: 0
-    right:
-      objectValue: {fileID: 0}
-      intValue: 0
-      floatValue: 0
-      doubleValue: 0
-      boolValue: 1
-      stringValue: 
-      enumIndex: 0
-  - targetComponent: {fileID: 8054565667691421690}
-    memberName: PortBinder
+  - targetComponent: {fileID: 9144802200236906512}
+    memberName: Flipped
     left:
       objectValue: {fileID: 11400000, guid: b5642a6b0be201e47ae33afc19afca7c, type: 2}
       intValue: 0
       floatValue: 0
       doubleValue: 0
-      boolValue: 1
+      boolValue: 0
       stringValue: 
       enumIndex: 0
     right:
@@ -282,9 +265,24 @@ MonoBehaviour:
       intValue: 0
       floatValue: 0
       doubleValue: 0
-      boolValue: 0
+      boolValue: 1
       stringValue: 
       enumIndex: 0
+--- !u!114 &9144802200236906512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156244532669732079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac7e631045e54226afec6605a99fc793, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Visuals::IM.Visuals.ObjectFlipper
+  _flipX: 1
+  _flipY: 0
+  _flipZ: 0
 --- !u!1 &3325484118007578250
 GameObject:
   m_ObjectHideFlags: 0

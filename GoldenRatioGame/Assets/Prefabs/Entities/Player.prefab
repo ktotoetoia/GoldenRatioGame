@@ -270,6 +270,9 @@ MonoBehaviour:
     _layer: 0
     _visible: 1
     _defaultTransform:
+      _changePosition: 0
+      _changeRotation: 0
+      _changeScale: 0
       _position: {x: 0, y: 0, z: 0}
       _rotation: {x: 0, y: 0, z: 0, w: 1}
       _scale: {x: 1, y: 1, z: 1}

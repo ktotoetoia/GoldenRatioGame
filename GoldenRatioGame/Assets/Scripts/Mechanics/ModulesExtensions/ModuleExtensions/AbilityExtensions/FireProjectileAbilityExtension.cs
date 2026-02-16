@@ -16,7 +16,7 @@ namespace IM.Modules
         {
             IObjectPool<GameObject> projectilePool = new ObjectPool<GameObject>(Create,OnGet, OnRelease,HandleDestroy);
 
-            Ability = new SendProjectileByVelocityAbility(projectilePool, GetComponent<IPositionProvider>(), _cooldown)
+            Ability =  new SendProjectileByVelocityAbility(projectilePool, GetComponent<IPositionProvider>(), _cooldown)
             {
                 Speed = _projectileSpeed,
             };

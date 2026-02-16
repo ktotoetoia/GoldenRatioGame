@@ -9,7 +9,35 @@ namespace IM.Visuals
         private void OnDrawGizmos()
         {
             if(!_draw) return;
-            GetComponent<ModuleVisualObject>()?.PortBinder?.GizmosPreview(transform);
+            GizmosPreview(GetComponent<ModuleVisualObject>());
+        }
+        
+        private void GizmosPreview(ModuleVisualObject target)
+        {
+            const float sphereSize = 0.05f;
+            const float smallSphereSize = 0.03f;
+            const float angleLength = 0.3f;
+
+            foreach (IPortVisualObject portInfo in target.PortsVisualObjects)
+            {
+                Vector3 position = portInfo.Transform.Position;
+                
+                Gizmos.color = Color.blue;
+                Gizmos.DrawSphere(position, sphereSize);
+            }
+            
+            foreach (IPortVisualObject portInfo in target.PortsVisualObjects)
+            {
+                Vector3 position = portInfo.Transform.Position;
+                Quaternion rotation =  Quaternion.Euler(0,0,portInfo.Transform.Rotation.eulerAngles.y);
+
+                Vector3 forward = rotation * Vector3.right;
+
+                Gizmos.color = Color.red;
+                
+                Gizmos.DrawLine(position, position + forward * angleLength);
+                Gizmos.DrawSphere(position + forward* angleLength, smallSphereSize);
+            }
         }
     }
 }

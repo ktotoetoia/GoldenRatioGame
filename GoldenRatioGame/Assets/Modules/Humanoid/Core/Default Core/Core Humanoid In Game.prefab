@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6034804467400656449}
   - component: {fileID: -7239767369713268034}
   - component: {fileID: -1733959713801920240}
-  - component: {fileID: 5342172262105887152}
+  - component: {fileID: 998457133526526282}
   m_Layer: 0
   m_Name: Core Humanoid In Game
   m_TagString: Untagged
@@ -158,24 +158,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.MovementDirectionFieldSetter
   _entries:
-  - targetComponent: {fileID: -7644578825757335302}
-    memberName: flipX
-    left:
-      objectValue: {fileID: 0}
-      intValue: 0
-      floatValue: 0
-      doubleValue: 0
-      boolValue: 1
-      stringValue: 
-      enumIndex: 0
-    right:
-      objectValue: {fileID: 0}
-      intValue: 0
-      floatValue: 0
-      doubleValue: 0
-      boolValue: 0
-      stringValue: 
-      enumIndex: 0
   - targetComponent: {fileID: -6034804467400656449}
     memberName: PortBinder
     left:
@@ -194,7 +176,25 @@ MonoBehaviour:
       boolValue: 0
       stringValue: 
       enumIndex: 0
---- !u!114 &5342172262105887152
+  - targetComponent: {fileID: 998457133526526282}
+    memberName: Flipped
+    left:
+      objectValue: {fileID: 11400000, guid: 13643a2c93cb000499bf64d91c758fff, type: 2}
+      intValue: 0
+      floatValue: 0
+      doubleValue: 0
+      boolValue: 1
+      stringValue: 
+      enumIndex: 0
+    right:
+      objectValue: {fileID: 11400000, guid: fbd3d9a8dcdbae9489b5798b5f2f7882, type: 2}
+      intValue: 0
+      floatValue: 0
+      doubleValue: 0
+      boolValue: 0
+      stringValue: 
+      enumIndex: 0
+--- !u!114 &998457133526526282
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -203,7 +203,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2156244532669732079}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b42ea681d9f4fcda96df2f659167136, type: 3}
+  m_Script: {fileID: 11500000, guid: ac7e631045e54226afec6605a99fc793, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::IM.Visuals.PortObjectDrawer
-  _portBinder: {fileID: 11400000, guid: fbd3d9a8dcdbae9489b5798b5f2f7882, type: 2}
+  m_EditorClassIdentifier: Visuals::IM.Visuals.ObjectFlipper
+  _flipX: 1
+  _flipY: 0
+  _flipZ: 0

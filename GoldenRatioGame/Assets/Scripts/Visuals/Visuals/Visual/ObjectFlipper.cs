@@ -4,22 +4,31 @@ namespace IM.Visuals
 {
     public class ObjectFlipper : MonoBehaviour
     {
-        [SerializeField] private bool _flipX;
+        [SerializeField] private bool _flipX = true;
         [SerializeField] private bool _flipY;
         [SerializeField] private bool _flipZ;
-        
+
         private bool _flipped;
-        
-        public bool Flipped 
+
+        public bool Flipped
         {
             get => _flipped;
             set
             {
-                if(_flipped == value) return;
-                
                 _flipped = value;
-                transform.localScale = new Vector3(transform.localScale.x * (_flipX ? -1:1), transform.localScale.y* (_flipY ? -1:1), transform.localScale.z* (_flipZ ? -1:1));
-                
+
+                var scale = transform.localScale;
+
+                if (_flipX)
+                    scale.x = Mathf.Abs(scale.x) * (_flipped ? -1f : 1f);
+
+                if (_flipY)
+                    scale.y = Mathf.Abs(scale.y) * (_flipped ? -1f : 1f);
+
+                if (_flipZ)
+                    scale.z = Mathf.Abs(scale.z) * (_flipped ? -1f : 1f);
+
+                transform.localScale = scale;
             }
         }
     }
