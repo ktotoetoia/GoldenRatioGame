@@ -1,7 +1,7 @@
-﻿using IM.Modules;
+﻿using IM.Events;
 using UnityEngine;
 
-namespace TDS.Events
+namespace IM.Modules
 {
     public class ValueStorageContainerMono : MonoBehaviour, IValueStorageContainer, IExtension
     {

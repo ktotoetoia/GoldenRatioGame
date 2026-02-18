@@ -8,14 +8,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2085694027768260616, guid: 418e4bf92402f7047a4c2dc3bcfa1083, type: 3}
-      propertyPath: _entries.Array.data[0].left.objectValue
-      value: 
-      objectReference: {fileID: 22100000, guid: 1bab073d49df5a946acbabed9bb5af8f, type: 2}
-    - target: {fileID: 2085694027768260616, guid: 418e4bf92402f7047a4c2dc3bcfa1083, type: 3}
-      propertyPath: _entries.Array.data[0].right.objectValue
-      value: 
-      objectReference: {fileID: 22100000, guid: 7f3fb15cfe7c05a49b0e308c700b27e6, type: 2}
     - target: {fileID: 2156244532669732079, guid: 418e4bf92402f7047a4c2dc3bcfa1083, type: 3}
       propertyPath: m_Name
       value: Passive Ability Leg Humanoid In Game

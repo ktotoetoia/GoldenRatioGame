@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using IM.Graphs;
 using IM.Transforms;
-using IM.Visuals;
 using UnityEngine;
 
-namespace IM.Modules
+namespace IM.Visuals
 {
     [CreateAssetMenu(menuName = "Ports/Directional Port Binder")]
     public class DirectionalPortBinder : PortBinderBase

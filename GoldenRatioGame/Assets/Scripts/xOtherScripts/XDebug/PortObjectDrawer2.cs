@@ -9,10 +9,10 @@ namespace IM.Visuals
         private void OnDrawGizmos()
         {
             if(!_draw) return;
-            GizmosPreview(GetComponent<ModuleVisualObject>());
+            GizmosPreview(GetComponent<AnimatedModuleVisualObject>());
         }
         
-        private void GizmosPreview(ModuleVisualObject target)
+        private void GizmosPreview(AnimatedModuleVisualObject target)
         {
             const float sphereSize = 0.05f;
             const float smallSphereSize = 0.03f;

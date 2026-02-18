@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TDS.Events
+namespace IM.Events
 {
     public class ValueStorage<T> : IValueStorage<T>
     {

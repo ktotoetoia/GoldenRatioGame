@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using IM.Graphs;
-using IM.Visuals;
 using UnityEngine;
 
-namespace IM.Modules
+namespace IM.Visuals
 {
     public abstract class PortVisualObjectFactoryBase :ScriptableObject
     {

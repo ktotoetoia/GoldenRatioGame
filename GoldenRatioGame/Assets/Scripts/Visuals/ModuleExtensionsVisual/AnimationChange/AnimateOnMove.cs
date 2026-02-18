@@ -1,5 +1,6 @@
 ﻿using IM.Modules;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace IM.Visuals
 {
@@ -7,7 +8,7 @@ namespace IM.Visuals
     {
         private Vector2 _velocity;
 
-        [field: SerializeField] public AnimationChangeType AnimationChangeType { get; private set; }
+        [field: FormerlySerializedAs("<AnimationChangeType>k__BackingField")] [field: SerializeField] public ParameterType ParameterType { get; private set; }
         [field: SerializeField] public string ParameterName { get; private set; }
 
         public void UpdateCurrentVelocity(Vector2 velocity)
@@ -19,22 +20,22 @@ namespace IM.Visuals
         {
             if (!animator.isActiveAndEnabled) return;
 
-            switch (AnimationChangeType)
+            switch (ParameterType)
             {
-                case AnimationChangeType.Bool:
+                case ParameterType.Bool:
                     animator.SetBool(ParameterName, _velocity.magnitude != 0);
                     break;
-                case AnimationChangeType.Int:
+                case ParameterType.Int:
                     animator.SetInteger(ParameterName, (int)_velocity.magnitude);
                     break;
-                case AnimationChangeType.Float:
+                case ParameterType.Float:
                     animator.SetFloat(ParameterName, _velocity.magnitude);
                     break;
-                case AnimationChangeType.Trigger:
+                case ParameterType.Trigger:
                     if (_velocity.magnitude != 0) animator.SetTrigger(ParameterName);
                     break;
                 default:
-                case AnimationChangeType.None:
+                case ParameterType.None:
                     break;
             }
         }

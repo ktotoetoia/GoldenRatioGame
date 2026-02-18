@@ -158,7 +158,7 @@ namespace IM.Visuals
         {
             foreach ((IExtensibleModule module, IModuleVisualObject visualObject) in ModuleVisualObjects)
             {
-                GetObjectPool(module.Extensions.GetExtension<IModuleVisual>()).Release(visualObject as IAnimatedModuleVisualObject);
+                GetObjectPool(module.Extensions.GetExtension<IModuleVisual>()).Release(visualObject);
             }
         }
     }

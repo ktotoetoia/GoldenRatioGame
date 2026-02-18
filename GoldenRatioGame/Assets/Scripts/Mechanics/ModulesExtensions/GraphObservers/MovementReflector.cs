@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
 using IM.Movement;
-using TDS.Events;
+using IM.Values;
+using IM.Events;
 using UnityEngine;
 
 namespace IM.Modules

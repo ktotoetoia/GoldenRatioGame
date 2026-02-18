@@ -4,7 +4,7 @@ namespace IM.Visuals
 {
     public interface IAnimationChange
     {
-        AnimationChangeType AnimationChangeType { get; }
+        ParameterType ParameterType { get; }
         public string ParameterName { get; }
         void ApplyToAnimator(Animator animator);
     }

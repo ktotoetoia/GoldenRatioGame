@@ -1,4 +1,4 @@
-﻿namespace IM.Visuals
+﻿namespace IM.Base
 {
     public interface IPoolObject
     {

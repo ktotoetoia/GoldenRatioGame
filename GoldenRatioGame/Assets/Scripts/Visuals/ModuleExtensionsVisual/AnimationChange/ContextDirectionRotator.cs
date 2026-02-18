@@ -25,7 +25,6 @@ namespace IM.Visuals
         {
             if (!_animate || _ability == null || !_target)
             {
-                
                 _target.rotation = Quaternion.identity;
                 return;
             }

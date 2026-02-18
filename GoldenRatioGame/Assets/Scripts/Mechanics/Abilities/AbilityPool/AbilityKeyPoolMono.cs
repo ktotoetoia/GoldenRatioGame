@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace IM.Abilities
@@ -15,14 +16,14 @@ namespace IM.Abilities
         };
 
         private readonly Dictionary<KeyCode, IAbility> _map = new();
-        private Queue<KeyCode> _freeKeys;
+        private Stack<KeyCode> _freeKeys;
 
         public IReadOnlyCollection<IAbility> Abilities => _map.Values;
         public IReadOnlyDictionary<KeyCode, IAbility> KeyMap => _map;
 
         private void Awake()
         {
-            _freeKeys = new Queue<KeyCode>(_keys);
+            _freeKeys = new Stack<KeyCode>(_keys.AsEnumerable().Reverse());
         }
 
         public void AddAbility(IAbility ability)
@@ -31,7 +32,7 @@ namespace IM.Abilities
                 return;
 
             var key = _freeKeys.Count > 0
-                ? _freeKeys.Dequeue()
+                ? _freeKeys.Pop()
                 : KeyCode.None;
 
             if (key == KeyCode.None)
@@ -53,7 +54,7 @@ namespace IM.Abilities
                 _map.Remove(kvp.Key);
 
                 if (kvp.Key != KeyCode.None)
-                    _freeKeys.Enqueue(kvp.Key);
+                    _freeKeys.Push(kvp.Key);
 
                 break;
             }

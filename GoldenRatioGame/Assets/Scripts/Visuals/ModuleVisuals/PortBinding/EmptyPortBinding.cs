@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
 using IM.Transforms;
-using IM.Visuals;
 using UnityEngine;
 
-namespace IM.Modules
+namespace IM.Visuals
 {
     [CreateAssetMenu(menuName = "Ports/Empty Port Binder")]
     public class EmptyPortBinding : PortBinderBase

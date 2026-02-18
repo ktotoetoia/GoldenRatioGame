@@ -12,18 +12,6 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 35ebdde4dab33da4aa5ba4d6b69900ca, type: 2}
-    - target: {fileID: 2120567519094471437, guid: 3740b105624c7f4459e38d8eae631f76, type: 3}
-      propertyPath: _entries.Array.data[0].targetComponent
-      value: 
-      objectReference: {fileID: 1173442886835017783}
-    - target: {fileID: 2120567519094471437, guid: 3740b105624c7f4459e38d8eae631f76, type: 3}
-      propertyPath: _entries.Array.data[0].left.objectValue
-      value: 
-      objectReference: {fileID: 9100000, guid: 35ebdde4dab33da4aa5ba4d6b69900ca, type: 2}
-    - target: {fileID: 2120567519094471437, guid: 3740b105624c7f4459e38d8eae631f76, type: 3}
-      propertyPath: _entries.Array.data[0].right.objectValue
-      value: 
-      objectReference: {fileID: 9100000, guid: 46ef225582e8ce9409206a9e38746d18, type: 2}
     - target: {fileID: 2156244532669732079, guid: 3740b105624c7f4459e38d8eae631f76, type: 3}
       propertyPath: m_Name
       value: Ability Arm Humanoid In Game
@@ -98,7 +86,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 341809917384193224}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf0b825afe9e43cb8630eef634f5ca88, type: 3}
+  m_Script: {fileID: 11500000, guid: b7c3c2c2fa77489f980a58f8b1fff33e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.TransformPositionProvider
 --- !u!114 &6293460801592932762
@@ -117,11 +105,6 @@ MonoBehaviour:
   _offsetAngle: 90
   _animate: 0
   _setToZero: 0
---- !u!95 &1173442886835017783 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 655896773114017808, guid: 3740b105624c7f4459e38d8eae631f76, type: 3}
-  m_PrefabInstance: {fileID: 1824765670035529767}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8842739076745953366 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7198272707218317425, guid: 3740b105624c7f4459e38d8eae631f76, type: 3}

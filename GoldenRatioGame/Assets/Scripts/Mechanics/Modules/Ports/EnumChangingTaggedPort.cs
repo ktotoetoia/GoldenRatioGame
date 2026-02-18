@@ -1,7 +1,7 @@
 ﻿using System;
 using IM.Graphs;
 using IM.Items;
-using TDS.Events;
+using IM.Events;
 
 namespace IM.Modules
 {

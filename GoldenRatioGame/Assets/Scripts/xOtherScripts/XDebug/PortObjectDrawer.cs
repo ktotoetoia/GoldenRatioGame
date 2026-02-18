@@ -1,5 +1,4 @@
-﻿using IM.Modules;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace IM.Visuals
 {

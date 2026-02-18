@@ -75,27 +75,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1138836270280852528}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
---- !u!1 &2802572859520272913 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
-  m_PrefabInstance: {fileID: 4825101862051133897}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1138836270280852528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2802572859520272913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 619b8cbe36944e11b575178ec8da65af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModulesExtensions::IM.Modules.DebugLogAbilityExtension
-  _textToLog: Humanoid Passive Ability Leg used
-  _cooldown: 2

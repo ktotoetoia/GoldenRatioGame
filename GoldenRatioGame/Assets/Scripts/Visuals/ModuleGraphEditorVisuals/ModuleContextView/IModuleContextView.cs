@@ -1,5 +1,4 @@
 ﻿using IM.Modules;
-using IM.UI;
 
 namespace IM.Visuals.Graph
 {

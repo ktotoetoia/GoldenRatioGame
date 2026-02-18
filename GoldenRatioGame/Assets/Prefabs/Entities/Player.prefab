@@ -190,7 +190,7 @@ MonoBehaviour:
     m_PreInfinity: 0
     m_PostInfinity: 0
     m_RotationOrder: 4
-  _rawSpeed: 0
+  _rawSpeed: -20
   _accelerationTime: 0.1
 --- !u!114 &1419353838767174824
 MonoBehaviour:

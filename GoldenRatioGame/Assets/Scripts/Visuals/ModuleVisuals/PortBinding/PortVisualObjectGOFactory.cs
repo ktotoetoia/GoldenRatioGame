@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
-using IM.Visuals;
 using UnityEngine;
 
-namespace IM.Modules
+namespace IM.Visuals
 {
     [CreateAssetMenu(menuName = "Ports/Port Visual Object GO Factory")]
     public class PortVisualObjectGOFactory : PortVisualObjectFactoryBase

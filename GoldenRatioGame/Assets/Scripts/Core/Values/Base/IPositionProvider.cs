@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace IM.Abilities
+namespace IM.Values
 {
     public interface IPositionProvider
     {

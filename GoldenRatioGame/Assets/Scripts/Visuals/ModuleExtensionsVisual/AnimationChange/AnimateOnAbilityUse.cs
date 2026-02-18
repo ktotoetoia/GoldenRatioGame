@@ -12,7 +12,7 @@ namespace IM.Visuals
         private IUseContextAbility _contextAbility;
 
         [field: SerializeField] public string ParameterName { get; private set; }
-        public AnimationChangeType AnimationChangeType => AnimationChangeType.Trigger;
+        public ParameterType ParameterType => ParameterType.Trigger;
         
         private void Awake()
         {

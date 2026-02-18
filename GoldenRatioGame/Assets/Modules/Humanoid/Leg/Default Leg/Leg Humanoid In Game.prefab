@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8054565667691421690}
   - component: {fileID: 7307849000960923032}
   - component: {fileID: 2085694027768260616}
+  - component: {fileID: 1896458146749716123}
   - component: {fileID: 5333593449026897718}
   - component: {fileID: 4374166876238312734}
   m_Layer: 0
@@ -101,12 +102,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.DirectionFieldSetterMulti
   _entries:
-  - targetComponent: {fileID: 9105580942014384913}
-    memberName: runtimeAnimatorController
+  - targetComponent: {fileID: 1896458146749716123}
+    memberName: Value
     left:
       objectValue: {fileID: 9100000, guid: fc134cfe61e5c6f4b9df283f6b07fad5, type: 2}
       intValue: 0
-      floatValue: 1
+      floatValue: 0.5
       doubleValue: 0
       boolValue: 0
       stringValue: 
@@ -119,6 +120,19 @@ MonoBehaviour:
       boolValue: 0
       stringValue: 
       enumIndex: 0
+--- !u!114 &1896458146749716123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156244532669732079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ed326c7a36b4db3bed0197946c1f91a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Visuals::IM.Visuals.AnimatorTimeOffsetChanger
+  _parameterName: CycleOffset
 --- !u!114 &5333593449026897718
 MonoBehaviour:
   m_ObjectHideFlags: 0

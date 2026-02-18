@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace IM.Modules
+namespace IM.Visuals
 {
     [Serializable]
     public class PortPositionRotation

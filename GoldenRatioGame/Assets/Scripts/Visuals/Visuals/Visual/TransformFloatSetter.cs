@@ -5,16 +5,13 @@ namespace IM.Visuals
     [DisallowMultipleComponent]
     public sealed class TransformFloatSetter : MonoBehaviour
     {
-        [SerializeField] private Transform _target;
-        private Transform Target => _target != null ? _target : transform;
-
         public float PositionX
         {
             set
             {
-                var p = Target.localPosition;
+                var p = transform.localPosition;
                 p.x = value;
-                Target.localPosition = p;
+                transform.localPosition = p;
             }
         }
 
@@ -22,9 +19,9 @@ namespace IM.Visuals
         {
             set
             {
-                var p = Target.localPosition;
+                var p = transform.localPosition;
                 p.y = value;
-                Target.localPosition = p;
+                transform.localPosition = p;
             }
         }
 
@@ -32,9 +29,9 @@ namespace IM.Visuals
         {
             set
             {
-                var p = Target.localPosition;
+                var p = transform.localPosition;
                 p.z = value;
-                Target.localPosition = p;
+                transform.localPosition = p;
             }
         }
 
@@ -42,9 +39,9 @@ namespace IM.Visuals
         {
             set
             {
-                var r = Target.localEulerAngles;
+                var r = transform.localEulerAngles;
                 r.x = value;
-                Target.localEulerAngles = r;
+                transform.localEulerAngles = r;
             }
         }
 
@@ -52,9 +49,9 @@ namespace IM.Visuals
         {
             set
             {
-                var r = Target.localEulerAngles;
+                var r = transform.localEulerAngles;
                 r.y = value;
-                Target.localEulerAngles = r;
+                transform.localEulerAngles = r;
             }
         }
 
@@ -62,9 +59,9 @@ namespace IM.Visuals
         {
             set
             {
-                var r = Target.localEulerAngles;
+                var r = transform.localEulerAngles;
                 r.z = value;
-                Target.localEulerAngles = r;
+                transform.localEulerAngles = r;
             }
         }
 
@@ -72,9 +69,9 @@ namespace IM.Visuals
         {
             set
             {
-                var s = Target.localScale;
+                var s = transform.localScale;
                 s.x = value;
-                Target.localScale = s;
+                transform.localScale = s;
             }
         }
 
@@ -82,9 +79,9 @@ namespace IM.Visuals
         {
             set
             {
-                var s = Target.localScale;
+                var s = transform.localScale;
                 s.y = value;
-                Target.localScale = s;
+                transform.localScale = s;
             }
         }
 
@@ -92,9 +89,9 @@ namespace IM.Visuals
         {
             set
             {
-                var s = Target.localScale;
+                var s = transform.localScale;
                 s.z = value;
-                Target.localScale = s;
+                transform.localScale = s;
             }
         }
     }

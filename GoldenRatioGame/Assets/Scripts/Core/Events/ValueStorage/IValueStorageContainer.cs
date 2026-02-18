@@ -1,4 +1,4 @@
-﻿namespace TDS.Events
+﻿namespace IM.Events
 {
     public interface IValueStorageContainer
     {

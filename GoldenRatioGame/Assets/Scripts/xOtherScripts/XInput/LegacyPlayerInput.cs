@@ -5,9 +5,7 @@ using IM.Entities;
 using IM.Modules;
 using IM.StateMachines;
 using IM.Movement;
-using IM.UI;
 using IM.Visuals.Graph;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 namespace Tests

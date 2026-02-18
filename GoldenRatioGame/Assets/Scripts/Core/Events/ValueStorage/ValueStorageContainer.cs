@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TDS.Events
+namespace IM.Events
 {
     public sealed class ValueStorageContainer : IValueStorageContainer
     {

@@ -1,41 +1,42 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace IM.Visuals
 {
     [Serializable]
     public class AnimationChange : IAnimationChange
     {
-        [SerializeField] private AnimationChangeType _animationChangeType;
+        [FormerlySerializedAs("_animationChangeType")] [SerializeField] private ParameterType parameterType;
         [SerializeField] private string _parameterName;
         [SerializeField] private bool _boolValue;
         [SerializeField] private int _intValue;
         [SerializeField] private float _floatValue;
 
-        public AnimationChangeType AnimationChangeType => _animationChangeType;
+        public ParameterType ParameterType => parameterType;
         public string ParameterName => _parameterName;
 
         public void ApplyToAnimator(Animator animator)
         {
-            switch (_animationChangeType)
+            switch (parameterType)
             {
-                case AnimationChangeType.Bool:
+                case ParameterType.Bool:
                     animator.SetBool(_parameterName, _boolValue);
                     break;
 
-                case AnimationChangeType.Int:
+                case ParameterType.Int:
                     animator.SetInteger(_parameterName, _intValue);
                     break;
 
-                case AnimationChangeType.Float:
+                case ParameterType.Float:
                     animator.SetFloat(_parameterName, _floatValue);
                     break;
 
-                case AnimationChangeType.Trigger:
+                case ParameterType.Trigger:
                     animator.SetTrigger(_parameterName);
                     break;
 
-                case AnimationChangeType.None:
+                case ParameterType.None:
                     break;
             }
         }

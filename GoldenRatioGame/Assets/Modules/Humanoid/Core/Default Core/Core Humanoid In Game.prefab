@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6831950797100586301}
   - component: {fileID: -7644578825757335302}
-  - component: {fileID: 6377991156395474928}
-  - component: {fileID: -6034804467400656449}
+  - component: {fileID: 2128649818120202721}
   - component: {fileID: -7239767369713268034}
   - component: {fileID: -1733959713801920240}
   - component: {fileID: 998457133526526282}
@@ -96,29 +95,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!95 &6377991156395474928
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2156244532669732079}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-6034804467400656449
+--- !u!114 &2128649818120202721
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,9 +104,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2156244532669732079}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77546388e06d497d92107f9a3da1fb07, type: 3}
+  m_Script: {fileID: 11500000, guid: c308d64446764c3981c6feb934dd9cc0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ReferenceModule
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ModuleVisualObject
   _portVisualObjectFactory: {fileID: 11400000, guid: b50a20bb72fb9824e8befd705c4581c2, type: 2}
   _portBinder: {fileID: 11400000, guid: 13643a2c93cb000499bf64d91c758fff, type: 2}
   _renderer: {fileID: -7644578825757335302}
@@ -158,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.MovementDirectionFieldSetter
   _entries:
-  - targetComponent: {fileID: -6034804467400656449}
+  - targetComponent: {fileID: 2128649818120202721}
     memberName: PortBinder
     left:
       objectValue: {fileID: 11400000, guid: 13643a2c93cb000499bf64d91c758fff, type: 2}
