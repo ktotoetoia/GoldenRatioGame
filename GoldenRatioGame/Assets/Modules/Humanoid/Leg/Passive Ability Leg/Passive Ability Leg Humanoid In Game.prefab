@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1346826524961860778, guid: 99d213db81b283744b0dd0310702d283, type: 3}
+    - target: {fileID: 5333593449026897718, guid: 418e4bf92402f7047a4c2dc3bcfa1083, type: 3}
+      propertyPath: _tag
+      value: Focus
+      objectReference: {fileID: 0}
     - target: {fileID: 6831950797100586301, guid: 418e4bf92402f7047a4c2dc3bcfa1083, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

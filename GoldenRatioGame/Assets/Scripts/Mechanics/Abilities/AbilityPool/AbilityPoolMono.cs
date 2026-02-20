@@ -7,6 +7,11 @@ namespace IM.Abilities
     {
         private readonly IAbilityPool _abilityPool = new  AbilityPool();
         public IReadOnlyCollection<IAbility> Abilities => _abilityPool.Abilities;
+        
+        public bool Contains(IAbility ability)
+        {
+            return _abilityPool.Contains(ability);
+        }
 
         public void AddAbility(IAbility ability)
         {

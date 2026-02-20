@@ -5,16 +5,19 @@ namespace IM.Events
 {
     public sealed class ValueStorageContainer : IValueStorageContainer
     {
-        private readonly Dictionary<Type, object> _map = new();
+        private readonly Dictionary<(Type, string), object> _map = new();
 
-        public IValueStorage<T> Get<T>()
+        private static (Type, string) Key<T>(string tag)
+            => (typeof(T), tag);
+
+        public IValueStorage<T> Get<T>(string tag = null)
         {
-            return (IValueStorage<T>)_map[typeof(T)];
+            return (IValueStorage<T>)_map[Key<T>(tag)];
         }
 
-        public bool TryGet<T>(out IValueStorage<T> storage)
+        public bool TryGet<T>(out IValueStorage<T> storage, string tag = null)
         {
-            if (_map.TryGetValue(typeof(T), out var obj))
+            if (_map.TryGetValue(Key<T>(tag), out var obj))
             {
                 storage = (IValueStorage<T>)obj;
                 return true;
@@ -24,19 +27,19 @@ namespace IM.Events
             return false;
         }
 
-        public IValueStorage<T> GetOrCreate<T>()
+        public IValueStorage<T> GetOrCreate<T>(string tag = null)
         {
-            if (TryGet<T>(out var storage))
+            if (TryGet<T>(out var storage, tag))
                 return storage;
 
             storage = new ValueStorage<T>();
-            _map[typeof(T)] = storage;
+            _map[Key<T>(tag)] = storage;
             return storage;
         }
 
-        public void Remove<T>()
+        public void Remove<T>(string tag = null)
         {
-            _map.Remove(typeof(T));
+            _map.Remove(Key<T>(tag));
         }
     }
 }

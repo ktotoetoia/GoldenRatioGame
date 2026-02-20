@@ -2,10 +2,10 @@
 {
     public interface IValueStorageContainer
     {
-        IValueStorage<T> Get<T>();
-        bool TryGet<T>(out IValueStorage<T> storage);
+        IValueStorage<T> Get<T>(string tag = null);
+        bool TryGet<T>(out IValueStorage<T> storage, string tag = null);
 
-        IValueStorage<T> GetOrCreate<T>();
-        void Remove<T>();
+        IValueStorage<T> GetOrCreate<T>(string tag = null);
+        void Remove<T>(string tag = null);
     }
 }

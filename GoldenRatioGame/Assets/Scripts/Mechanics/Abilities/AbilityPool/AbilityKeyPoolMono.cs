@@ -59,5 +59,7 @@ namespace IM.Abilities
                 break;
             }
         }
+        
+        public bool Contains(IAbility ability) => _map.ContainsValue(ability);
     }
 }

@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d842b18c4047f0985e1e563da6aa12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.MovementDirectionFieldSetter
+  _tag: Focus
   _entries:
   - targetComponent: {fileID: 4374166876238312734}
     memberName: Flipped
