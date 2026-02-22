@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8680733324569241950
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2621271969024498473, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 6976889670371017019, guid: 00c25822a1515c44185f9446809ba572, type: 3}
+    - target: {fileID: 3134715345525867726, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+      propertyPath: _editorPrefab
+      value: 
+      objectReference: {fileID: 1536272255110869706, guid: 8847c54ef85eb8149b9a229f8ccaba3c, type: 3}
+    - target: {fileID: 3134715345525867726, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+      propertyPath: _inGamePrefab
+      value: 
+      objectReference: {fileID: 106886509911555169, guid: f00bf80e4ba43644f88719c197bf9f22, type: 3}
+    - target: {fileID: 3625994651722585011, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625994651722585011, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625994651722585011, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625994651722585011, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625994651722585011, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625994651722585011, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625994651722585011, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625994651722585011, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625994651722585011, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625994651722585011, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6869556739838863163, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+      propertyPath: <Name>k__BackingField
+      value: Bolt Thrower Leg
+      objectReference: {fileID: 0}
+    - target: {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+      propertyPath: m_Name
+      value: Bolt Thrower Leg
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4174b200c638a2d459cb9784d4349438, type: 3}

@@ -21,8 +21,8 @@ namespace IM.Visuals
                 Quaternion.Inverse(owner.Rotation) *
                 portToMove.Transform.Rotation;
             Quaternion result = anchorPort.Transform.Rotation * Quaternion.Inverse(portLocal);
-
-            if (Mathf.Sign(portToMove.Transform.LossyScale.x) == Mathf.Sign(anchorPort.Transform.LossyScale.x))
+            
+            if (System.Math.Sign(portToMove.Transform.LossyScale.x) == System.Math.Sign(anchorPort.Transform.LossyScale.x))
             {
                 result *= Quaternion.Euler(0,0,180);
             }
