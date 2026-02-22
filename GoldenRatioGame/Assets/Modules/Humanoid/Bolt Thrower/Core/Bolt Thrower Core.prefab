@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7621817067830221698
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1563791358509127018, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
+      propertyPath: _editorPrefab
+      value: 
+      objectReference: {fileID: 2672318968316521843, guid: c2cff720e4779c24e8a9a7df33b3d066, type: 3}
+    - target: {fileID: 1563791358509127018, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
+      propertyPath: _inGamePrefab
+      value: 
+      objectReference: {fileID: 6583147819378668426, guid: ffbf2dceb5e11484fbb30fc64d1c07bb, type: 3}
+    - target: {fileID: 2805714054282062599, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2805714054282062599, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2805714054282062599, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2805714054282062599, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2805714054282062599, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2805714054282062599, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2805714054282062599, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2805714054282062599, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2805714054282062599, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2805714054282062599, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3521067284498834333, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 6646541999955039347, guid: 87f624e8d7ccc3a4f96313965c0c60a0, type: 3}
+    - target: {fileID: 6758064773000630412, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
+      propertyPath: <Name>k__BackingField
+      value: Bolt Thrower Core
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119833187759213420, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
+      propertyPath: m_Name
+      value: Bolt Thrower Core
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
