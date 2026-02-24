@@ -8,7 +8,6 @@ namespace IM.Movement
     {
         private readonly IMoveInVector _movement;
         private readonly Func<Vector2> _getDirection;  
-        private Vector2 _direction;
         
         public Func<bool> ShouldMove { get; set; } = () => true;
         
@@ -20,15 +19,11 @@ namespace IM.Movement
 
         public override void Update()
         {
-            _direction = _getDirection();
+            if(ShouldMove()) _movement.Move(_getDirection());
         }
-
-        public override void FixedUpdate()
+        public override void OnExit()
         {
-            if (ShouldMove())
-            {
-                _movement.Move(_direction);
-            }
+            _movement.Move(Vector2.zero);
         }
     }
 }

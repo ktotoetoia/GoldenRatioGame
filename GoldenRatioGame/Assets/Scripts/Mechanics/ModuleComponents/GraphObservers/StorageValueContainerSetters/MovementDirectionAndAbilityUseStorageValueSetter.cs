@@ -64,7 +64,7 @@ namespace IM.Visuals
             SetDirectionToContainers(Direction.Right);
         }
 
-        private void OnAbilityUsed(IAbility ability, AbilityUseContext context)
+        private void OnAbilityUsed(IAbilityReadOnly ability, AbilityUseContext context)
         {
             _lastUseTime = Time.time;
             _lastUseContext = context;

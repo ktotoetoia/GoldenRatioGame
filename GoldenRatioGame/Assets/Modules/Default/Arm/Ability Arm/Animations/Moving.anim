@@ -31,11 +31,11 @@ AnimationClip:
     - time: 0.8
       value: {fileID: 7398956401468298591, guid: 0fa4315f1b8f26746b740dc16367441b, type: 3}
     - time: 1
-      value: {fileID: 3209935928883282749, guid: 0fa4315f1b8f26746b740dc16367441b, type: 3}
+      value: {fileID: 801887640, guid: 0fa4315f1b8f26746b740dc16367441b, type: 3}
     - time: 1.1833333
       value: {fileID: 6515345850602506470, guid: 0fa4315f1b8f26746b740dc16367441b, type: 3}
     attribute: m_Sprite
-    path: Texture
+    path: Texture Holder/Texture
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -47,7 +47,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 1306211566
+      path: 1661984178
       attribute: 0
       script: {fileID: 0}
       typeID: 212
@@ -61,7 +61,7 @@ AnimationClip:
     - {fileID: 6964230542804682680, guid: 0fa4315f1b8f26746b740dc16367441b, type: 3}
     - {fileID: 2435390299282532850, guid: 0fa4315f1b8f26746b740dc16367441b, type: 3}
     - {fileID: 7398956401468298591, guid: 0fa4315f1b8f26746b740dc16367441b, type: 3}
-    - {fileID: 3209935928883282749, guid: 0fa4315f1b8f26746b740dc16367441b, type: 3}
+    - {fileID: 801887640, guid: 0fa4315f1b8f26746b740dc16367441b, type: 3}
     - {fileID: 6515345850602506470, guid: 0fa4315f1b8f26746b740dc16367441b, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2

@@ -21,7 +21,6 @@ namespace IM.Visuals
         public ITransform Transform { get; private set; }
         public IReadOnlyList<IPortVisualObject> PortsVisualObjects => _portVisualObjects;
         public IPortVisualObjectDirtyTracker DirtyTracker { get; } = new PortVisualObjectDirtyTracker();
-        public IPaletteSwapper PaletteSwapper { get; private set; }
         public IExtensibleModule Owner { get; private set; }
 
         public Transform DefaultParent { get; set; }
@@ -86,7 +85,6 @@ namespace IM.Visuals
                 PortsVisible = true
             };
             
-            PaletteSwapper = new PaletteSwapper(_renderer);
             Transform = GetComponent<ITransform>();
             GetComponentsInChildren(_poolObjects);
             _poolObjects.Remove(this);
@@ -122,7 +120,6 @@ namespace IM.Visuals
         {
             transform.SetParent(DefaultParent);
             _preset.ApplyTo(this);
-            PaletteSwapper.AppliedPalette = PaletteSwapper.SourcePalette;
             
             foreach (IPoolObject poolObject in _poolObjects) poolObject.OnRelease();
             foreach (IPortVisualObject portVisualObject in _portVisualObjects) portVisualObject.Reset();

@@ -5,6 +5,6 @@ namespace IM.Abilities
 {
     public interface IKeyAbilityPool : IAbilityPoolReadOnly
     {
-        public IReadOnlyDictionary<KeyCode, IAbility> KeyMap { get; }
+        public IReadOnlyDictionary<KeyCode, IAbilityReadOnly> KeyMap { get; }
     }
 }

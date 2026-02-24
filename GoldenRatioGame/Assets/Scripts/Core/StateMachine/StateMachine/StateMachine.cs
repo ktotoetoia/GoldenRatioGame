@@ -12,12 +12,14 @@ namespace IM.StateMachines
             
             private set
             {
-                _currentState.OnExit();
+                if(_currentState == value) return;
+                
+                _currentState?.OnExit();
                 _currentState = value;
                 value.OnEnter();
             }
         }
-
+        
         public StateMachine(IState startState)
         {
             _currentState = startState;
@@ -25,31 +27,28 @@ namespace IM.StateMachines
 
         public void Update()
         {
-            if (CurrentState is IUpdate update)
-            {
-                update.Update();
-            }
+            if (CurrentState is IUpdate update) update.Update();
             
             TryTransition();
         }
 
         public void FixedUpdate()
         {
-            if (CurrentState is IFixedUpdate fixedUpdate)
-            {
-                fixedUpdate.FixedUpdate();
-            }
-            
+            if (CurrentState is IFixedUpdate fixedUpdate) fixedUpdate.FixedUpdate();
+
             TryTransition();
         }
 
-        private void TryTransition()
+        private bool TryTransition()
         {
             ITransition transition = _currentState.GetAvailableTransitions().FirstOrDefault();
 
-            if (transition == null) return;
+            if (transition == null) return false;
             
+            transition.BeforeTransition();
             CurrentState = transition.To;
+            
+            return true;
         }
     }
 }

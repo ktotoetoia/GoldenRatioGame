@@ -5,9 +5,9 @@ namespace IM.StateMachines
     public class Transition : ITransition
     {
         private readonly Func<bool> _condition;
-
         public IState From { get; }
         public IState To { get; }
+        public Action BeforeTransitionAction { get; } = () => { };
 
         public Transition(IState from, IState to, Func<bool> condition)
         {
@@ -20,6 +20,11 @@ namespace IM.StateMachines
         public bool CanTransition()
         {
             return _condition();
+        }
+
+        public void BeforeTransition()
+        {
+            BeforeTransitionAction();
         }
     }
 }

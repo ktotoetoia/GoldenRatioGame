@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3134715345525867726}
   - component: {fileID: 7118497114025836106}
   - component: {fileID: 6827808895751591596}
+  - component: {fileID: -5003398493981668265}
   m_Layer: 0
   m_Name: Arm Humanoid
   m_TagString: Untagged
@@ -88,12 +89,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -7419648162453752251, guid: 553db5a9ee798194d9fcbdb4abad831f, type: 3}
+  m_Sprite: {fileID: -7419648162453752251, guid: 37337cadd153f004cb8c3f958f25474b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.28, y: 0.92}
+  m_Size: {x: 0.24, y: 0.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -193,3 +194,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModulesExtensions::IM.Visuals.AnimateOnMove
   <ParameterType>k__BackingField: 1
   <ParameterName>k__BackingField: IsMoving
+--- !u!114 &-5003398493981668265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210977406679086040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cefe76e33d442c6b64c8ae8d4649dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComponents::IM.Modules.DebugDrawLineAbilityExtensions
+  _cooldown: 1
+  _channelTime: 1

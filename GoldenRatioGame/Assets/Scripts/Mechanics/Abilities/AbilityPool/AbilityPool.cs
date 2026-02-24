@@ -4,16 +4,16 @@ namespace IM.Abilities
 {
     public class AbilityPool : IAbilityPool
     {
-        private readonly List<IAbility> _abilities = new();
+        private readonly List<IAbilityReadOnly> _abilities = new();
 
-        public IReadOnlyCollection<IAbility> Abilities => _abilities;
+        public IReadOnlyCollection<IAbilityReadOnly> Abilities => _abilities;
         
-        public bool Contains(IAbility ability)
+        public bool Contains(IAbilityReadOnly ability)
         {
             return _abilities.Contains(ability);
         }
 
-        public void AddAbility(IAbility ability)
+        public void AddAbility(IAbilityReadOnly ability)
         {
             if (!_abilities.Contains(ability))
             {
@@ -21,7 +21,7 @@ namespace IM.Abilities
             }
         }
 
-        public void RemoveAbility(IAbility ability)
+        public void RemoveAbility(IAbilityReadOnly ability)
         {
             _abilities.Remove(ability);
         }

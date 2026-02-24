@@ -15,18 +15,18 @@ namespace IM.Abilities
             KeyCode.X,
         };
 
-        private readonly Dictionary<KeyCode, IAbility> _map = new();
+        private readonly Dictionary<KeyCode, IAbilityReadOnly> _map = new();
         private Stack<KeyCode> _freeKeys;
 
-        public IReadOnlyCollection<IAbility> Abilities => _map.Values;
-        public IReadOnlyDictionary<KeyCode, IAbility> KeyMap => _map;
+        public IReadOnlyCollection<IAbilityReadOnly> Abilities => _map.Values;
+        public IReadOnlyDictionary<KeyCode, IAbilityReadOnly> KeyMap => _map;
 
         private void Awake()
         {
             _freeKeys = new Stack<KeyCode>(_keys.AsEnumerable().Reverse());
         }
 
-        public void AddAbility(IAbility ability)
+        public void AddAbility(IAbilityReadOnly ability)
         {
             if (ability == null || _map.ContainsValue(ability))
                 return;
@@ -41,7 +41,7 @@ namespace IM.Abilities
             _map[key] = ability;
         }
 
-        public void RemoveAbility(IAbility ability)
+        public void RemoveAbility(IAbilityReadOnly ability)
         {
             if (ability == null)
                 return;
@@ -60,6 +60,6 @@ namespace IM.Abilities
             }
         }
         
-        public bool Contains(IAbility ability) => _map.ContainsValue(ability);
+        public bool Contains(IAbilityReadOnly ability) => _map.ContainsValue(ability);
     }
 }

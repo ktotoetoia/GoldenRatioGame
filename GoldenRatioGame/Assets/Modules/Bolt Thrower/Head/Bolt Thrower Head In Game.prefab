@@ -12,10 +12,6 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 4974340384544848070, guid: d1a71f85f5d3cf54d86fbb1a3d30363f, type: 3}
-    - target: {fileID: -7644578825757335302, guid: e31406646bfbbfb4d96f36dea99f9cbf, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 30517d8bdb5192a4ab88af732a08b328, type: 2}
     - target: {fileID: 2156244532669732079, guid: e31406646bfbbfb4d96f36dea99f9cbf, type: 3}
       propertyPath: m_Name
       value: Bolt Thrower Head In Game

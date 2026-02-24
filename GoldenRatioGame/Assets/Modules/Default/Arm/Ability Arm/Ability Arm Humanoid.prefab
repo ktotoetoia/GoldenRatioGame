@@ -72,7 +72,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ability Arm Humanoid
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -5003398493981668265, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

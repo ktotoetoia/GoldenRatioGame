@@ -4,6 +4,6 @@ namespace IM.Modules
 {
     public interface IAbilityExtension : IExtension
     {
-        IAbility Ability { get; }
+        IAbilityReadOnly Ability { get; }
     }
 }

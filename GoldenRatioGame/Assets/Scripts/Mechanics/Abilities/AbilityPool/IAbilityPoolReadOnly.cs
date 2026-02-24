@@ -4,8 +4,8 @@ namespace IM.Abilities
 {
     public interface IAbilityPoolReadOnly
     {
-        IReadOnlyCollection<IAbility> Abilities { get; }
+        IReadOnlyCollection<IAbilityReadOnly> Abilities { get; }
         
-        bool Contains(IAbility ability);
+        bool Contains(IAbilityReadOnly ability);
     }
 }

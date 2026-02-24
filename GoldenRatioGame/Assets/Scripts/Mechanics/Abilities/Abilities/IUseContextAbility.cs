@@ -2,7 +2,7 @@
 
 namespace IM.Abilities
 {
-    public interface IUseContextAbility : IAbility, IRequireAbilityUseContext
+    public interface IUseContextAbility : IInstantAbility, IRequireAbilityUseContext
     {
         AbilityUseContext LastUsedContext { get; }
         event Action<AbilityUseContext> OnAbilityUsed;

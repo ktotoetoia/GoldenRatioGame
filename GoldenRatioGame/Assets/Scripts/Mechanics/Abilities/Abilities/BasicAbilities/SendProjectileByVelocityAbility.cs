@@ -9,15 +9,16 @@ namespace IM.Abilities
     {
         private readonly IObjectPool<GameObject> _projectileFactory;
         private readonly ICooldown _cooldown;
+        private readonly ICooldown _sCooldown;
         private readonly IPositionProvider _getPosition;
         private AbilityUseContext _context;
         
-        public bool IsBeingUsed => false;
         public bool CanUse => !Cooldown.IsOnCooldown;
         public ICooldownReadOnly Cooldown => _cooldown;
         public float Speed { get; set; } = 5f;
         public AbilityUseContext LastUsedContext => _context;
         public event Action<AbilityUseContext> OnAbilityUsed;
+        
         public SendProjectileByVelocityAbility(IObjectPool<GameObject> projectileFactory,IPositionProvider getPosition, float cooldown) : this(projectileFactory,getPosition, new FloatCooldown(cooldown))
         {
             
@@ -28,6 +29,7 @@ namespace IM.Abilities
             _projectileFactory = projectileFactory;
             _cooldown = cooldown;
             _getPosition = getPosition;
+            _sCooldown = new FloatCooldown(0);
         }
 
         public bool TryUse()
@@ -43,6 +45,7 @@ namespace IM.Abilities
             projectile.transform.position = _getPosition.GetPosition();
             projectile.transform.rotation = Quaternion.Euler(0, 0, angle);
             projectile.GetComponent<Rigidbody2D>().linearVelocity = dir * Speed;
+            _sCooldown.ForceReset();
             
             OnAbilityUsed?.Invoke(_context);
             

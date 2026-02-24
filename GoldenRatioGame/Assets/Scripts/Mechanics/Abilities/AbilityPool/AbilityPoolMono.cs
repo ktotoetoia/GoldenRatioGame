@@ -6,19 +6,19 @@ namespace IM.Abilities
     public class AbilityPoolMono : MonoBehaviour, IAbilityPool
     {
         private readonly IAbilityPool _abilityPool = new  AbilityPool();
-        public IReadOnlyCollection<IAbility> Abilities => _abilityPool.Abilities;
+        public IReadOnlyCollection<IAbilityReadOnly> Abilities => _abilityPool.Abilities;
         
-        public bool Contains(IAbility ability)
+        public bool Contains(IAbilityReadOnly ability)
         {
             return _abilityPool.Contains(ability);
         }
 
-        public void AddAbility(IAbility ability)
+        public void AddAbility(IAbilityReadOnly ability)
         {
             _abilityPool.AddAbility(ability);
         }
 
-        public void RemoveAbility(IAbility ability)
+        public void RemoveAbility(IAbilityReadOnly ability)
         {
             _abilityPool.RemoveAbility(ability);
         }

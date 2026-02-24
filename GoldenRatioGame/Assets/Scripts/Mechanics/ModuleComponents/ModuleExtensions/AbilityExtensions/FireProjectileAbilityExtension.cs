@@ -11,7 +11,7 @@ namespace IM.Modules
         [SerializeField] private float _cooldown = 3;
         [SerializeField] private float _projectileSpeed;
         
-        public IAbility Ability { get; private set; }
+        public IAbilityReadOnly Ability { get; private set; }
 
         private void Awake()
         {

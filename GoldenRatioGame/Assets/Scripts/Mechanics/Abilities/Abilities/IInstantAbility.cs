@@ -1,6 +1,6 @@
 ﻿namespace IM.Abilities
 {
-    public interface IAbility : IAbilityReadOnly
+    public interface IInstantAbility : IAbilityReadOnly
     {
         bool TryUse();
     }

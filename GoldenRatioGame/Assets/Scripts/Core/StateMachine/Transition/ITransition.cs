@@ -6,5 +6,6 @@
         IState To { get; }
 
         bool CanTransition();
+        void BeforeTransition();
     }
 }

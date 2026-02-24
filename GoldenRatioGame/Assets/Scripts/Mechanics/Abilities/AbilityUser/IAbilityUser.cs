@@ -1,9 +1,14 @@
-﻿namespace IM.Abilities
+﻿using System;
+
+namespace IM.Abilities
 {
     public interface IAbilityUser<out TAbilityPool> where TAbilityPool : IAbilityPoolReadOnly
     {
         TAbilityPool AbilityPool { get; }
+        Func<IAbilityReadOnly, AbilityUseContext>  GetAbilityUseContext { get; set; }
         
-        void UseAbility(IAbility ability, AbilityUseContext useContext);
+        bool CanUseAbility(IAbilityReadOnly ability);
+        void UseAbility(IAbilityReadOnly ability);
+        
     }
 }
