@@ -22,7 +22,7 @@ namespace IM.Visuals
 
         public void OnModuleVisualObjectInitialized(IModuleVisualObject moduleVisualObject)
         {
-            _container = moduleVisualObject.Owner.Extensions.GetExtension<IValueStorageContainer>();
+            _container = moduleVisualObject.Owner.Extensions.Get<IValueStorageContainer>();
         }
         
         public void OnRelease()

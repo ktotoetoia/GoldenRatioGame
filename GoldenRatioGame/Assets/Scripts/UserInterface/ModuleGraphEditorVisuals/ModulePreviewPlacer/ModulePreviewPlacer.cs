@@ -24,7 +24,7 @@ namespace IM.Visuals.Graph
         public void StartPreview(IExtensibleModule module)
         {
             if (PreviewObject != null) StopPreview();
-            if (!module.Extensions.TryGetExtension(out _currentModuleVisual)) return;
+            if (!module.Extensions.TryGet(out _currentModuleVisual)) return;
             
             PreviewObject = _currentModuleVisual.EditorPool.Get();
             PreviewObject.Transform.Transform.SetParent(_parent, false);

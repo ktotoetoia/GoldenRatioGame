@@ -63,7 +63,7 @@ namespace IM.Visuals
                 throw new InvalidOperationException("Module must implement IExtensibleModule.");
             if (ModuleVisualObjects.ContainsKey(extensibleModule))
                 throw new InvalidOperationException("Module visual already exists.");
-            if (!extensibleModule.Extensions.TryGetExtension(out IModuleVisual moduleVisual))
+            if (!extensibleModule.Extensions.TryGet(out IModuleVisual moduleVisual))
                 throw new InvalidOperationException("IModuleVisual extension is required.");
             
             HandleModuleAdded(extensibleModule, moduleVisual);
@@ -158,7 +158,7 @@ namespace IM.Visuals
         {
             foreach ((IExtensibleModule module, IModuleVisualObject visualObject) in ModuleVisualObjects)
             {
-                GetObjectPool(module.Extensions.GetExtension<IModuleVisual>()).Release(visualObject);
+                GetObjectPool(module.Extensions.Get<IModuleVisual>()).Release(visualObject);
             }
         }
     }

@@ -50,16 +50,16 @@ namespace IM.Visuals
 
         private void CheckMovement()
         {
-            if (_movement.MovementDirection == Vector2.zero || _containers == null) return;
+            if (_movement.Direction == Vector2.zero || _containers == null) return;
             
-            SetDirectionToContainers(DirectionUtils.GetEnumDirection(_movement.MovementDirection));
+            SetDirectionToContainers(DirectionUtils.GetEnumDirection(_movement.Direction));
         }
         
         public void OnGraphUpdated(IModuleGraphReadOnly graph)
         {
             if(graph == null) throw new ArgumentNullException(nameof(graph));
 
-            _containers = graph.Modules.OfType<IExtensibleModule>().SelectMany(x=> x.Extensions.GetExtensions<IValueStorageContainer>()).ToList();
+            _containers = graph.Modules.OfType<IExtensibleModule>().SelectMany(x=> x.Extensions.GetAll<IValueStorageContainer>()).ToList();
             
             SetDirectionToContainers(Direction.Right);
         }

@@ -19,11 +19,11 @@ namespace IM.Movement
 
         public override void Update()
         {
-            if(ShouldMove()) _movement.Move(_getDirection());
+            if(ShouldMove()) _movement.Direction = _getDirection();
         }
         public override void OnExit()
         {
-            _movement.Move(Vector2.zero);
+            _movement.Direction = Vector2.zero;
         }
     }
 }

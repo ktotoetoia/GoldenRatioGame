@@ -12,7 +12,7 @@ namespace IM.Modules
     {
         [SerializeField] private PortInitializationBase _portInitialization;
         private readonly List<IPort> _ports =  new();
-        private IExtensionProvider _extensions;
+        private ITypeRegistry<IExtension> _extensions;
         private IIconDrawer _iconDrawer;
         private ModuleState _state;
         
@@ -22,7 +22,7 @@ namespace IM.Modules
         public IStorageCell Cell { get; set; }
         public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection);
         public IEnumerable<IPort> Ports => _ports;
-        public IExtensionProvider Extensions => _extensions ??= new GameObjectExtensionProvider(gameObject);
+        public ITypeRegistry<IExtension> Extensions => _extensions ??= new TypeRegistry<IExtension>(gameObject.GetComponents<IExtension>());
 
         public ModuleState ModuleState
         {

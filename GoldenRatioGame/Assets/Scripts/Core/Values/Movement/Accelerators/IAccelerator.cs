@@ -8,5 +8,6 @@ namespace IM.Values
 
         public Vector2 Acceleration { get; }
         void Update(Vector2 direction, float deltaTime);
+        void Reset();
     }
 }

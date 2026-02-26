@@ -1,11 +1,12 @@
 ﻿using System;
+using IM.Modules;
 using IM.Values;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace IM.Abilities
 {
-    public class SendProjectileByVelocityAbility : IUseContextAbility
+    public class SendProjectileByVelocityAbility : ICastAbility, IUseContextAbility
     {
         private readonly IObjectPool<GameObject> _projectileFactory;
         private readonly ICooldown _cooldown;
@@ -18,7 +19,9 @@ namespace IM.Abilities
         public float Speed { get; set; } = 5f;
         public AbilityUseContext LastUsedContext => _context;
         public event Action<AbilityUseContext> OnAbilityUsed;
-        
+
+        public ITypeRegistry<IAbilityDescriptor> AbilityDescriptorsRegistry { get; set; } = new TypeRegistry<IAbilityDescriptor>();
+
         public SendProjectileByVelocityAbility(IObjectPool<GameObject> projectileFactory,IPositionProvider getPosition, float cooldown) : this(projectileFactory,getPosition, new FloatCooldown(cooldown))
         {
             
@@ -32,8 +35,10 @@ namespace IM.Abilities
             _sCooldown = new FloatCooldown(0);
         }
 
-        public bool TryUse()
+        public bool TryCast(out ICastInfo castInfo)
         {
+            castInfo = new CastInfo();
+            
             if (!CanUse || !_cooldown.TryReset()) return false;
             
             GameObject projectile = _projectileFactory.Get();

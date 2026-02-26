@@ -39,5 +39,11 @@ namespace IM.Values
 
             return current;
         }
+
+        public void Reset()
+        {
+            _x.Value = 0f;
+            _y.Value = 0f;
+        }
     }
 }

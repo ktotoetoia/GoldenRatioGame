@@ -4,10 +4,10 @@ namespace IM.Abilities
 {
     public interface IChannelInfo
     {
-        IChannelAbility Ability { get; }
-        
         event Action OnChannelFinished;
         event Action OnChannelInterrupted;
+        
+        IChannelAbility Ability { get; }
         
         public void UpdateAbilityUseContext(AbilityUseContext abilityUseContext);
     }

@@ -24,7 +24,7 @@ namespace IM.Modules
 
             foreach (IRequireMovement requireMovement in _requireMovement)
             {
-                requireMovement.UpdateCurrentVelocity(_movement.MovementDirection);
+                requireMovement.UpdateCurrentVelocity(_movement.Direction);
             }
         }
         
@@ -32,7 +32,7 @@ namespace IM.Modules
         {
             if(graph == null) throw new ArgumentNullException(nameof(graph));
 
-            _requireMovement = graph.Modules.OfType<IExtensibleModule>().SelectMany(x => x.Extensions.GetExtensions<IRequireMovement>()).ToList();
+            _requireMovement = graph.Modules.OfType<IExtensibleModule>().SelectMany(x => x.Extensions.GetAll<IRequireMovement>()).ToList();
         }
     }
 }

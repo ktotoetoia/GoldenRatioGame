@@ -17,7 +17,7 @@ namespace IM.Visuals
             _ability = moduleVisualObject
                 .Owner
                 .Extensions
-                .GetExtension<IAbilityExtension>()
+                .Get<IAbilityExtension>()
                 ?.Ability as IUseContextAbility;
         }
         

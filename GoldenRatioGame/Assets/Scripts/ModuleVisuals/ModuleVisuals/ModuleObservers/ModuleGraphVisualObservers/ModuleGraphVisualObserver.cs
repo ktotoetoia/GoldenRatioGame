@@ -35,7 +35,7 @@ namespace IM.Visuals
         protected override  void HandleModuleRemoved(IExtensibleModule extensibleModule)
         {
             ModuleVisualObjects.Remove(extensibleModule, out IModuleVisualObject visualObject);
-            GetObjectPool(extensibleModule.Extensions.GetExtension<IModuleVisual>()).Release(visualObject);
+            GetObjectPool(extensibleModule.Extensions.Get<IModuleVisual>()).Release(visualObject);
         }
 
         protected override void HandleConnected(IPortVisualObject portA, IPortVisualObject portB)

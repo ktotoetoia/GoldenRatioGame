@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using IM.Abilities;
+﻿using IM.Abilities;
 using IM.Base;
 using IM.Entities;
 using IM.Movement;
@@ -12,7 +11,7 @@ namespace Tests
     {
         private readonly IEntity _moduleEntity;
         private readonly IMoveInVector _movement;
-        private readonly KeyAbilityPoolUserMono  _abilityUser;
+        private readonly KeyAbilityPoolUserMono _abilityUser;
         private readonly Camera _gameCamera;
 
         public LegacyInputStateMachineFactory(IEntity moduleEntity, Camera gameCamera)
@@ -27,27 +26,12 @@ namespace Tests
         {
             IState movementState = new MovementState(_movement,
                 () => new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
-            
             _abilityUser.GetAbilityUseContext =x => GetAbilityUseContext();
             
             AbilityUseState abilityUseState = new AbilityUseState(_abilityUser);
-
-            ITransition movementToAbility = new ToAbilityUseTransition(movementState, abilityUseState, () =>
-            {
-                foreach (KeyValuePair<KeyCode, IAbilityReadOnly> pair in _abilityUser.AbilityPool.KeyMap)
-                {
-                    if(Input.GetKeyDown(pair.Key)) return pair.Value;
-                }
-
-                return null;
-            });
+            CompositeState compositeState = new CompositeState(new [] {movementState, abilityUseState});
             
-            Transition abilityToMovement = new Transition(abilityUseState, movementState, () => abilityUseState.Finished);
-            
-            movementState.AddTransition(movementToAbility);
-            abilityUseState.AddTransition(abilityToMovement);
-            
-            return new StateMachine(movementState);
+            return new StateMachine(compositeState);
         }
 
         private AbilityUseContext GetAbilityUseContext()

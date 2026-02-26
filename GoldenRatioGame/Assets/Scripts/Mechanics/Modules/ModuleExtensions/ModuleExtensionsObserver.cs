@@ -15,7 +15,7 @@ namespace IM.Modules
                 OnModuleAdded = x =>
                 {
                     if (x is not IExtensibleModule extensibleModule ||
-                        !extensibleModule.Extensions.TryGetExtensions(out IReadOnlyList<TExtension> extensions))
+                        !extensibleModule.Extensions.TryGetAll(out IEnumerable<TExtension> extensions))
                         return;
                     
                     foreach (TExtension extension in extensions)
@@ -27,7 +27,7 @@ namespace IM.Modules
                 OnModuleRemoved = x =>
                 {
                     if (x is not IExtensibleModule extensibleModule ||
-                        !extensibleModule.Extensions.TryGetExtensions(out IReadOnlyList<TExtension> extensions))
+                        !extensibleModule.Extensions.TryGetAll(out IEnumerable<TExtension> extensions))
                         return;
                     
                     foreach (TExtension extension in extensions)

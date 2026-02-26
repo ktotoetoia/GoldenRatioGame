@@ -1,5 +1,4 @@
-﻿using System;
-using IM.Abilities;
+﻿using IM.Abilities;
 using IM.Values;
 using UnityEngine;
 

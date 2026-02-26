@@ -8,15 +8,14 @@ namespace IM.Visuals.Graph
     {
         [SerializeField] private ModuleVisualObjectPreset _preset;
         private IModuleGraphReadOnly _graph;
-        private ModuleGraphVisualObserver _visualObserver;
-        
-        public ModuleGraphVisualObserver VisualObserver => _visualObserver;
-        
+
+        public ModuleGraphVisualObserver VisualObserver { get; private set; }
+
         public void SetGraph(IModuleGraphReadOnly graph)
         {
-            if (_visualObserver != null) throw new InvalidOperationException();
+            if (VisualObserver != null) throw new InvalidOperationException();
 
-            _visualObserver = new ModuleGraphVisualObserver(transform, false, _preset)
+            VisualObserver = new ModuleGraphVisualObserver(transform, false, _preset)
             {
                 ShowPortsOnConnected = false,
                 ShowPortsOnDisconnected = true
@@ -26,15 +25,15 @@ namespace IM.Visuals.Graph
 
         public void Update()
         {
-            if (_visualObserver == null || _graph == null) return;
+            if (VisualObserver == null || _graph == null) return;
             
-            _visualObserver.OnGraphUpdated(_graph);
+            VisualObserver.OnGraphUpdated(_graph);
         }
 
         public void ClearGraph()
         {
-            _visualObserver.Dispose();
-            _visualObserver = null;
+            VisualObserver.Dispose();
+            VisualObserver = null;
             _graph = null;
         }
     }

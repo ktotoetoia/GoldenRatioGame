@@ -26,7 +26,7 @@ namespace IM.Modules
             Connection = connection;
             
             if (connection.GetOtherPort(this).Module is IExtensibleModule module &&
-                module.Extensions.TryGetExtension(out IValueStorageContainer e))
+                module.Extensions.TryGet(out IValueStorageContainer e))
             {
                 e.GetOrCreate<TEnum>().Value = _value;
             }
@@ -35,7 +35,7 @@ namespace IM.Modules
         public void Disconnect()
         {
             if (Connection.GetOtherPort(this).Module is IExtensibleModule module &&
-                module.Extensions.TryGetExtension(out IValueStorageContainer e)) 
+                module.Extensions.TryGet(out IValueStorageContainer e)) 
             {
                 e.GetOrCreate<TEnum>().Value = default;
             }

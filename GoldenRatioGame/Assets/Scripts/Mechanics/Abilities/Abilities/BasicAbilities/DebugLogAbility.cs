@@ -1,14 +1,16 @@
-﻿using System;
+﻿using IM.Modules;
 using IM.Values;
 using UnityEngine;
 
 namespace IM.Abilities
 {
-    public class DebugLogAbility : IInstantAbility
+    public class DebugLogAbility : ICastAbility
     {
         private readonly string _textToLog;
         private readonly ICooldown _cooldown;
-        
+
+        public ITypeRegistry<IAbilityDescriptor> AbilityDescriptorsRegistry { get; set; } =
+            new TypeRegistry<IAbilityDescriptor>();
         public ICooldownReadOnly Cooldown=> _cooldown;
         public bool CanUse => !Cooldown.IsOnCooldown;
 
@@ -23,8 +25,10 @@ namespace IM.Abilities
             _cooldown = cooldown;
         }
         
-        public bool TryUse()
+        public bool TryCast(out ICastInfo castInfo)
         {
+            castInfo = new CastInfo();
+            
             if (!_cooldown.TryReset()) return false;
             
             Debug.Log(_textToLog);

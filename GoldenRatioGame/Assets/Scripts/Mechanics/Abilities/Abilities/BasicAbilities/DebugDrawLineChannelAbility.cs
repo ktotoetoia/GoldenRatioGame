@@ -1,4 +1,6 @@
-﻿using IM.Values;
+﻿using System.Collections.Generic;
+using IM.Modules;
+using IM.Values;
 using UnityEngine;
 
 namespace IM.Abilities
@@ -6,30 +8,32 @@ namespace IM.Abilities
     public class DebugDrawLineChannelAbility : IChannelAbility
     {
         private readonly ICooldown _cooldown;
-        private ChannelInfo _channelInfo;
         private readonly ICooldown _channelCooldown;
+        private ChannelInfo _channelInfo;
         
         public ICooldownReadOnly Cooldown=> _cooldown;
         public bool CanUse => !Cooldown.IsOnCooldown;
         public bool IsChanneling => _channelInfo != null;
 
-        public DebugDrawLineChannelAbility(float _cooldownTime, float _useTime )
+        public ITypeRegistry<IAbilityDescriptor> AbilityDescriptorsRegistry { get; set; } =
+            new TypeRegistry<IAbilityDescriptor>(new List<IAbilityDescriptor> { new BlockUserMovementAbility{BlockUserMovement = true} });
+        
+        public DebugDrawLineChannelAbility(float cooldownTime, float useTime)
         {
-            _cooldown = new FloatCooldown(_cooldownTime);
-            _channelCooldown =  new FloatCooldown(_useTime);
+            _cooldown = new FloatCooldown(cooldownTime);
+            _channelCooldown =  new FloatCooldown(useTime);
+            
         }
 
         public void Update()
         {
             if(!IsChanneling) return;
-            Debug.Log("channeling");
             
             Debug.DrawLine(_channelInfo.AbilityUseContext.EntityPosition,_channelInfo.AbilityUseContext.TargetWorldPosition);
             
-            
             if (!_channelCooldown.IsOnCooldown)
             {
-                Debug.Log("interrupted");
+                Debug.Log("cooldown finished");
                 _channelInfo.CallOnChannelFinished();
                 _channelInfo =  null;
             }
