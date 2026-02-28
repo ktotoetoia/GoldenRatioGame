@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class SpeedExtensionComponent : MonoBehaviour, ISpeedExtension
+    public class SpeedEffectModifier : MonoBehaviour, ISpeedEffectModifier
     {
         [SerializeField] private SpeedModifier _speedModifier;
         

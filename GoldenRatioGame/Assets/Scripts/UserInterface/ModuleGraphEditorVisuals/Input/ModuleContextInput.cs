@@ -2,7 +2,6 @@
 using IM.Graphs;
 using IM.Modules;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace IM.Visuals.Graph
 {

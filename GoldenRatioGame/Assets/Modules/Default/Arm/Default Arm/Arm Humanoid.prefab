@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3134715345525867726}
   - component: {fileID: 7118497114025836106}
   - component: {fileID: 6827808895751591596}
+  - component: {fileID: -7743140741346210048}
   - component: {fileID: -5003398493981668265}
   m_Layer: 0
   m_Name: Arm Humanoid
@@ -173,7 +174,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7210977406679086040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a36c3ac012174e0ba91a8d2034f63981, type: 3}
+  m_Script: {fileID: 11500000, guid: 9394598438a54e758dd5508185ff1cd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _health:
@@ -194,6 +195,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModulesExtensions::IM.Visuals.AnimateOnMove
   <ParameterType>k__BackingField: 1
   <ParameterName>k__BackingField: IsMoving
+--- !u!114 &-7743140741346210048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210977406679086040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9dd9b36686f4bfa8f63a95993a9e1c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComponents::IM.Modules.EffectGroupExtension
 --- !u!114 &-5003398493981668265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,5 +219,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cefe76e33d442c6b64c8ae8d4649dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleComponents::IM.Modules.DebugDrawLineAbilityExtensions
-  _cooldown: 1
+  _cooldown: 5
   _channelTime: 1

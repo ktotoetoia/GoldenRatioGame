@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 84801343705693524}
   - component: {fileID: 6758064773000630412}
   - component: {fileID: 1563791358509127018}
+  - component: {fileID: 8812685661605889554}
   - component: {fileID: 8535451133996336894}
   - component: {fileID: 4479085341360621510}
   m_Layer: 0
@@ -163,6 +164,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.ModuleLayout
   _inGamePrefab: {fileID: 2156244532669732079, guid: e6798843953581047a8089a584ebbad3, type: 3}
   _editorPrefab: {fileID: 2156244532669732079, guid: 52e97c3efc198d045a8ad39c8259d687, type: 3}
+--- !u!114 &8812685661605889554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8119833187759213420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9dd9b36686f4bfa8f63a95993a9e1c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComponents::IM.Modules.EffectGroupExtension
 --- !u!114 &8535451133996336894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +185,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8119833187759213420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a36c3ac012174e0ba91a8d2034f63981, type: 3}
+  m_Script: {fileID: 11500000, guid: 9394598438a54e758dd5508185ff1cd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _health:
@@ -188,7 +201,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8119833187759213420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46941821e1124b89839cb1143dfa3186, type: 3}
+  m_Script: {fileID: 11500000, guid: c1c83efa1f8e4b719c312b9c8ff8e31f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _speedModifier:

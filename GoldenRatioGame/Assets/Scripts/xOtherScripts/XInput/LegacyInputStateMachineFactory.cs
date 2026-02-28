@@ -26,9 +26,9 @@ namespace Tests
         {
             IState movementState = new MovementState(_movement,
                 () => new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
-            _abilityUser.GetAbilityUseContext =x => GetAbilityUseContext();
+            _abilityUser.GetAbilityUseContext = x => GetAbilityUseContext();
             
-            AbilityUseState abilityUseState = new AbilityUseState(_abilityUser);
+            AbilityUseState abilityUseState = new AbilityUseState(_abilityUser, GetAbilityUseContext);
             CompositeState compositeState = new CompositeState(new [] {movementState, abilityUseState});
             
             return new StateMachine(compositeState);

@@ -295,6 +295,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   _rawSpeed: 5
   _accelerationTime: 0.3
+  <Active>k__BackingField: 1
 --- !u!1 &8508053980751109502
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,12 +305,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2804227671461150752}
-  - component: {fileID: 1829363971244442834}
-  - component: {fileID: 4077811613558473429}
   - component: {fileID: 5323937255072575917}
   - component: {fileID: 2676012618694106098}
   - component: {fileID: 8837569621488464822}
   - component: {fileID: 8543606873535386348}
+  - component: {fileID: 6996862176923965098}
+  - component: {fileID: 4593071890531234201}
+  - component: {fileID: 221324642721564809}
+  - component: {fileID: 5450061724011499058}
   m_Layer: 0
   m_Name: Observers
   m_TagString: Untagged
@@ -332,32 +335,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2365714068825351273}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1829363971244442834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8508053980751109502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcaa15f1f2d20d84ba18b2704c2161a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModulesExt::IM.Modules.SpeedExtensionsObserver
-  _speedSource: {fileID: 4342869459289063407}
---- !u!114 &4077811613558473429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8508053980751109502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79e36a2f07e04c2c815f729f7f9ea415, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModulesExt::IM.Modules.HealthExtensionsObserver
-  _floatHealthValuesGroupSource: {fileID: 4342869459289063407}
 --- !u!114 &5323937255072575917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,4 +388,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModuleExtensionsVisual::IM.Visuals.MovementDirectionAndAbilityUseStorageValueSetter
   _movementAndAbilityEventsSource: {fileID: 4342869459289063407}
   _valueStorageTag: Focus
-  _abilityFocusTime: 1
+--- !u!114 &6996862176923965098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508053980751109502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00623bd5f0fe4ad8bda9939de7375fa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComponents::IM.Modules.EffectExtensionObserver
+  _effectContainerSource: {fileID: 8508053980751109502}
+--- !u!114 &4593071890531234201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508053980751109502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2646a5caa32a4fd6a422467b45fa231d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Effects::IM.Effects.EffectContainerMono
+--- !u!114 &221324642721564809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508053980751109502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f73e5829b54221981b86f6826082dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComponents::IM.Modules.SpeedEffectObserver
+  _speedSource: {fileID: 4342869459289063407}
+--- !u!114 &5450061724011499058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508053980751109502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24c8a57df9cc4b4db10d1e8c2c39d475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComponents::IM.Modules.HealthEffectObserver
+  _floatHealthValuesGroupSource: {fileID: 4342869459289063407}

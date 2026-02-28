@@ -11,6 +11,7 @@ namespace IM.Abilities
         
         public IChannelAbility Ability { get; }
         public AbilityUseContext AbilityUseContext { get; private set; }
+        public bool Completed =>  _finishedOrInterrupted;
         
         public ChannelInfo(IChannelAbility ability)
         {

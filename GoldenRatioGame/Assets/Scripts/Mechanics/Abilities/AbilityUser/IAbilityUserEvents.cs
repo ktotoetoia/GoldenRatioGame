@@ -4,6 +4,7 @@ namespace IM.Abilities
 {
     public interface IAbilityUserEvents
     {
-        event Action<IAbilityReadOnly, AbilityUseContext> OnAbilityUsed;
+        event Action<IAbilityReadOnly> OnAbilityStarted;
+        event Action<IAbilityReadOnly> OnAbilityFinished;
     }
 }

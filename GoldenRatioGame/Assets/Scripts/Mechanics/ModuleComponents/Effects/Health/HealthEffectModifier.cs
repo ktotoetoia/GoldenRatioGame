@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class HealthExtensionComponent : MonoBehaviour, IHealthExtension
+    public class HealthEffectModifier : MonoBehaviour, IHealthEffectModifier
     {
         [SerializeField] private CappedValue<float> _health;
         

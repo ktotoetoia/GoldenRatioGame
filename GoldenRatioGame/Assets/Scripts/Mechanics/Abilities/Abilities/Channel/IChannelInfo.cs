@@ -2,7 +2,7 @@
 
 namespace IM.Abilities
 {
-    public interface IChannelInfo
+    public interface IChannelInfo : IAbilityUseInfo
     {
         event Action OnChannelFinished;
         event Action OnChannelInterrupted;

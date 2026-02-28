@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace IM.Abilities
 {
-    public class DebugDrawLineChannelAbility : IChannelAbility
+    public class DebugDrawLineChannelAbility : IChannelAbility, IInterruptable
     {
         private readonly ICooldown _cooldown;
         private readonly ICooldown _channelCooldown;
@@ -14,6 +14,7 @@ namespace IM.Abilities
         public ICooldownReadOnly Cooldown=> _cooldown;
         public bool CanUse => !Cooldown.IsOnCooldown;
         public bool IsChanneling => _channelInfo != null;
+        public bool CanInterrupt => true;
 
         public ITypeRegistry<IAbilityDescriptor> AbilityDescriptorsRegistry { get; set; } =
             new TypeRegistry<IAbilityDescriptor>(new List<IAbilityDescriptor> { new BlockUserMovementAbility{BlockUserMovement = true} });
@@ -22,7 +23,6 @@ namespace IM.Abilities
         {
             _cooldown = new FloatCooldown(cooldownTime);
             _channelCooldown =  new FloatCooldown(useTime);
-            
         }
 
         public void Update()
@@ -31,17 +31,12 @@ namespace IM.Abilities
             
             Debug.DrawLine(_channelInfo.AbilityUseContext.EntityPosition,_channelInfo.AbilityUseContext.TargetWorldPosition);
             
-            if (!_channelCooldown.IsOnCooldown)
-            {
-                Debug.Log("cooldown finished");
-                _channelInfo.CallOnChannelFinished();
-                _channelInfo =  null;
-            }
+            if (!_channelCooldown.IsOnCooldown) Interrupt();    
         }
 
         public bool TryChannel(out IChannelInfo channelInfo)
         {
-            if (IsChanneling)
+            if (IsChanneling || _cooldown.IsOnCooldown)
             {
                 channelInfo = null;
                 return false;
@@ -50,8 +45,21 @@ namespace IM.Abilities
             _channelInfo = new ChannelInfo(this);
             channelInfo = _channelInfo;
             _channelCooldown.ForceReset();
+            _cooldown.ForceReset();
             
             return true;
+        }
+
+
+        public bool TryInterrupt()
+        {
+            if (CanInterrupt)
+            {
+                Interrupt();
+                return true;
+            }
+
+            return false;
         }
 
         public void Interrupt()

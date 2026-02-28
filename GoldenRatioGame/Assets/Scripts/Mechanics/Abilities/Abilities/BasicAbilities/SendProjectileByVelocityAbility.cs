@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using IM.Modules;
 using IM.Values;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace IM.Abilities
         private readonly IObjectPool<GameObject> _projectileFactory;
         private readonly ICooldown _cooldown;
         private readonly ICooldown _sCooldown;
-        private readonly IPositionProvider _getPosition;
+        private readonly IPositionProvider _positionProvider;
         private AbilityUseContext _context;
         
         public bool CanUse => !Cooldown.IsOnCooldown;
@@ -20,18 +21,21 @@ namespace IM.Abilities
         public AbilityUseContext LastUsedContext => _context;
         public event Action<AbilityUseContext> OnAbilityUsed;
 
-        public ITypeRegistry<IAbilityDescriptor> AbilityDescriptorsRegistry { get; set; } = new TypeRegistry<IAbilityDescriptor>();
-
-        public SendProjectileByVelocityAbility(IObjectPool<GameObject> projectileFactory,IPositionProvider getPosition, float cooldown) : this(projectileFactory,getPosition, new FloatCooldown(cooldown))
+        public ITypeRegistry<IAbilityDescriptor> AbilityDescriptorsRegistry { get; set; } = new TypeRegistry<IAbilityDescriptor>(new List<IAbilityDescriptor>()
+        {
+            new AbilityFocusTimeDescriptor(),
+        });
+        
+        public SendProjectileByVelocityAbility(IObjectPool<GameObject> projectileFactory,IPositionProvider positionProvider, float cooldown) : this(projectileFactory,positionProvider, new FloatCooldown(cooldown))
         {
             
         }
         
-        public SendProjectileByVelocityAbility(IObjectPool<GameObject> projectileFactory,IPositionProvider getPosition, ICooldown cooldown)
+        public SendProjectileByVelocityAbility(IObjectPool<GameObject> projectileFactory,IPositionProvider positionProvider, ICooldown cooldown)
         {
             _projectileFactory = projectileFactory;
             _cooldown = cooldown;
-            _getPosition = getPosition;
+            _positionProvider = positionProvider;
             _sCooldown = new FloatCooldown(0);
         }
 
@@ -47,7 +51,7 @@ namespace IM.Abilities
             
             projectile.GetComponent<ITemporary>().Initialize(()=> _projectileFactory.Release(projectile.gameObject));
             
-            projectile.transform.position = _getPosition.GetPosition();
+            projectile.transform.position = _positionProvider.GetPosition();
             projectile.transform.rotation = Quaternion.Euler(0, 0, angle);
             projectile.GetComponent<Rigidbody2D>().linearVelocity = dir * Speed;
             _sCooldown.ForceReset();

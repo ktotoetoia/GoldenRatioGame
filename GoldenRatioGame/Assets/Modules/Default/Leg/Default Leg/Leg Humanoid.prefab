@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 5634798734519334486}
   - component: {fileID: 6869556739838863163}
   - component: {fileID: 3134715345525867726}
+  - component: {fileID: -8069501828437842105}
+  - component: {fileID: -8354513230407654295}
   - component: {fileID: 7118497114025836106}
   - component: {fileID: -122121014652897532}
-  - component: {fileID: -8069501828437842105}
   m_Layer: 0
   m_Name: Leg Humanoid
   m_TagString: Untagged
@@ -164,6 +165,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.ModuleLayout
   _inGamePrefab: {fileID: 2156244532669732079, guid: 418e4bf92402f7047a4c2dc3bcfa1083, type: 3}
   _editorPrefab: {fileID: 2156244532669732079, guid: bfdc73e9d0b5a3d4b9ca081fff0b4756, type: 3}
+--- !u!114 &-8069501828437842105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210977406679086040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e75fde05024d4b73894a5c43830fc917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModulesExtensions::IM.Visuals.AnimateOnMove
+  <ParameterType>k__BackingField: 1
+  <ParameterName>k__BackingField: IsMoving
+--- !u!114 &-8354513230407654295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210977406679086040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9dd9b36686f4bfa8f63a95993a9e1c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComponents::IM.Modules.EffectGroupExtension
 --- !u!114 &7118497114025836106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,7 +200,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7210977406679086040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a36c3ac012174e0ba91a8d2034f63981, type: 3}
+  m_Script: {fileID: 11500000, guid: 9394598438a54e758dd5508185ff1cd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _health:
@@ -189,23 +216,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7210977406679086040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46941821e1124b89839cb1143dfa3186, type: 3}
+  m_Script: {fileID: 11500000, guid: c1c83efa1f8e4b719c312b9c8ff8e31f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Modules::IM.Modules.SpeedExtensionComponent
   _speedModifier:
-    <Add>k__BackingField: 2
+    <Add>k__BackingField: 1
     <Multiplication>k__BackingField: 1
---- !u!114 &-8069501828437842105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7210977406679086040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e75fde05024d4b73894a5c43830fc917, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModulesExtensions::IM.Visuals.AnimateOnMove
-  <ParameterType>k__BackingField: 1
-  <ParameterName>k__BackingField: IsMoving

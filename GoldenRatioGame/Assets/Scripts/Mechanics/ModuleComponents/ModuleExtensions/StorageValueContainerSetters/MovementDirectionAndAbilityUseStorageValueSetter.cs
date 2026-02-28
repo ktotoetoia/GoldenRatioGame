@@ -15,18 +15,18 @@ namespace IM.Visuals
     {
         [SerializeField] private GameObject _movementAndAbilityEventsSource;
         [SerializeField] private string _valueStorageTag = DirectionConstants.Focus;
-        [SerializeField] private float _abilityFocusTime;
         private List<IValueStorageContainer> _containers;
         private IVectorMovement _movement;
         private IAbilityUserEvents _abilityUserEvents;
         private AbilityUseContext _lastUseContext;
         private float _lastUseTime = int.MinValue;
+        private float _abilityFocusTime;
         
         private void Awake()
         {
             _movement = _movementAndAbilityEventsSource.GetComponent<IVectorMovement>();
             _abilityUserEvents = _movementAndAbilityEventsSource.GetComponent<IAbilityUserEvents>();
-            _abilityUserEvents.OnAbilityUsed += OnAbilityUsed;
+            _abilityUserEvents.OnAbilityStarted += OnAbilityStarted;
         }
 
         private void Update()
@@ -64,10 +64,15 @@ namespace IM.Visuals
             SetDirectionToContainers(Direction.Right);
         }
 
-        private void OnAbilityUsed(IAbilityReadOnly ability, AbilityUseContext context)
+        private void OnAbilityStarted(IAbilityReadOnly ability)
         {
-            _lastUseTime = Time.time;
-            _lastUseContext = context;
+            if (ability.AbilityDescriptorsRegistry.TryGet(
+                    out IAbilityFocusTimeDescriptor desc))
+            {
+                _abilityFocusTime = desc.FocusTime;
+                _lastUseTime = Time.time;
+                _lastUseContext = (ability as IUseContextAbility)?.LastUsedContext ?? default;
+            }
         }
 
         private void SetDirectionToContainers(Direction direction) =>

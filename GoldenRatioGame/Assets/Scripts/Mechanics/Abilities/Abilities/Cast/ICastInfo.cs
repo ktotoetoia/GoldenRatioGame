@@ -1,14 +1,7 @@
 ﻿namespace IM.Abilities
 {
-    public interface ICastInfo
+    public interface ICastInfo : IAbilityUseInfo
     {
-        bool Completed { get; }
-    }
-
-    public class CastInfo : ICastInfo
-    {
-        public bool Completed { get; }
-        
         
     }
 }

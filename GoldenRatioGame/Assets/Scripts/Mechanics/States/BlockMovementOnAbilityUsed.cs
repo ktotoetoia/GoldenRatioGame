@@ -1,10 +1,9 @@
 ﻿using IM.Abilities;
-using IM.Values;
 using UnityEngine;
 
 namespace IM.Movement
 {
-    public class CurveMovementAbilityMono : MonoBehaviour
+    public class BlockMovementOnAbilityUsed : MonoBehaviour
     {
         private IControllableMovement _movement;
         private IAbilityUserEvents _events;
@@ -14,7 +13,7 @@ namespace IM.Movement
         {
             _movement = GetComponent<IControllableMovement>();
             _events = GetComponent<IAbilityUserEvents>();
-            _events.OnAbilityUsed += (x,y) =>
+            _events.OnAbilityStarted += x =>
             {
                 x.AbilityDescriptorsRegistry.TryGet(out _blockMovement);
 
@@ -26,6 +25,11 @@ namespace IM.Movement
                 }
                 
                 _movement.Activate();
+            };
+
+            _events.OnAbilityFinished += x =>
+            {
+                if(!_movement.Active) _movement.Activate();
             };
         }
     }

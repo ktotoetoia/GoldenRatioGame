@@ -15,7 +15,7 @@ namespace IM.Modules
         
         private void Awake()
         {
-            _movement =  _vectorMovementSource.GetComponent<IVectorMovement>();
+            _movement = _vectorMovementSource.GetComponent<IVectorMovement>();
         }
 
         private void FixedUpdate()
