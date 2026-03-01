@@ -10,16 +10,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -122121014652897532, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
       propertyPath: _speedModifier.<Add>k__BackingField
-      value: 2.3
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 2621271969024498473, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
       propertyPath: m_Size.x
-      value: 0.52
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2621271969024498473, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+      propertyPath: m_Size.y
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: 2621271969024498473, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -5661188705341949991, guid: a2c9a9fd856c86141b5fff4abb8a9578, type: 3}
+      objectReference: {fileID: -8822414406500087648, guid: a2c9a9fd856c86141b5fff4abb8a9578, type: 3}
     - target: {fileID: 2621271969024498473, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1

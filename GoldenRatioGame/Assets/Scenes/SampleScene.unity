@@ -161,12 +161,8 @@ MonoBehaviour:
   - {fileID: 2802572859520272913, guid: ece0237ec3ed11f47af8bff30089ae37, type: 3}
   - {fileID: 991209621830917388, guid: 9dd7b1f69d38b81489b903d2f7b7266e, type: 3}
   - {fileID: 991209621830917388, guid: 9dd7b1f69d38b81489b903d2f7b7266e, type: 3}
-  - {fileID: 9154606070248935614, guid: acb799a4d4e278d4eb6f46a855de523b, type: 3}
-  - {fileID: 9154606070248935614, guid: acb799a4d4e278d4eb6f46a855de523b, type: 3}
   - {fileID: 1831086527369138414, guid: f518952fb52b4af42b95ad416b950be5, type: 3}
   - {fileID: 6808322469448240976, guid: e4f1b720a6441804081b668b4a76a96e, type: 3}
-  - {fileID: 2047626318192908934, guid: 120cd70ac3f52c045b9c42cc3fa06d5d, type: 3}
-  - {fileID: 2047626318192908934, guid: 120cd70ac3f52c045b9c42cc3fa06d5d, type: 3}
   _bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 3, y: 3, z: 0}

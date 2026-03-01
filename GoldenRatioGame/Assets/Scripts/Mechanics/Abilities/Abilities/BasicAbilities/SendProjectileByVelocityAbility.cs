@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using IM.Modules;
 using IM.Values;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace IM.Abilities
 {
-    public class SendProjectileByVelocityAbility : ICastAbility, IUseContextAbility
+    public class SendProjectileByVelocityAbility : ICastAbility, IRequireAbilityUseContext, IFocusPointProvider, IAbilityEvents
     {
         private readonly IObjectPool<GameObject> _projectileFactory;
         private readonly ICooldown _cooldown;
@@ -19,13 +17,11 @@ namespace IM.Abilities
         public ICooldownReadOnly Cooldown => _cooldown;
         public float Speed { get; set; } = 5f;
         public AbilityUseContext LastUsedContext => _context;
-        public event Action<AbilityUseContext> OnAbilityUsed;
-
-        public ITypeRegistry<IAbilityDescriptor> AbilityDescriptorsRegistry { get; set; } = new TypeRegistry<IAbilityDescriptor>(new List<IAbilityDescriptor>()
-        {
-            new AbilityFocusTimeDescriptor(),
-        });
+        public float FocusTime { get; set; } = 0.5f;
         
+        public event Action<AbilityUseContext> AbilityStarted;
+        public event Action<AbilityUseContext> AbilityFinished;
+
         public SendProjectileByVelocityAbility(IObjectPool<GameObject> projectileFactory,IPositionProvider positionProvider, float cooldown) : this(projectileFactory,positionProvider, new FloatCooldown(cooldown))
         {
             
@@ -56,11 +52,14 @@ namespace IM.Abilities
             projectile.GetComponent<Rigidbody2D>().linearVelocity = dir * Speed;
             _sCooldown.ForceReset();
             
-            OnAbilityUsed?.Invoke(_context);
+            AbilityStarted?.Invoke(_context);
+            AbilityFinished?.Invoke(_context);
             
             return true;
         }
         
+        Vector3 IFocusPointProvider.GetFocusPoint() => _context.TargetWorldPosition;
+        public Vector3 GetFocusDirection() => (_context.TargetWorldPosition - _context.EntityPosition).normalized;
         public void UpdateAbilityUseContext(AbilityUseContext context) => _context = context;
     }
 }

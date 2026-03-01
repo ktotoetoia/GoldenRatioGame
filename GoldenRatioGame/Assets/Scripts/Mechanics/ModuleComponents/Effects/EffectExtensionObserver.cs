@@ -17,11 +17,7 @@ namespace IM.Modules
             _extensionsObserver = new ModuleExtensionsObserver<IEffectGroupExtension>(OnExtensionAdded, OnExtensionRemoved);
         }
 
-        private void OnExtensionAdded(IExtensibleModule module, IEffectGroupExtension abilityExtension)
-        {
-            Debug.Log($"Added extension {abilityExtension as MonoBehaviour}");
-            _effectContainer.AddGroup(abilityExtension.EffectGroup);
-        }
+        private void OnExtensionAdded(IExtensibleModule module, IEffectGroupExtension abilityExtension) => _effectContainer.AddGroup(abilityExtension.EffectGroup);
         private void OnExtensionRemoved(IExtensibleModule module,IEffectGroupExtension abilityExtension) => _effectContainer.RemoveGroup(abilityExtension.EffectGroup);
         public void OnGraphUpdated(IModuleGraphReadOnly graph) => _extensionsObserver.OnGraphUpdated(graph);
     }

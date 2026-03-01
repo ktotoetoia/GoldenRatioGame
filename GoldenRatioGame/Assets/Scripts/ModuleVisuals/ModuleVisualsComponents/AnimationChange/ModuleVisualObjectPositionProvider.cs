@@ -10,11 +10,11 @@ namespace IM.Visuals
         [SerializeField] private float _range;
         private IModuleVisualObject _moduleVisualObject;
         private IPositionProvider _source;
-        private IUseContextAbility _useContextAbility;
+        private IFocusPointProvider _useContextAbility;
         
         private void Awake()
         {
-            _useContextAbility = GetComponent<IAbilityExtension>().Ability as IUseContextAbility;
+            _useContextAbility = GetComponent<IAbilityExtension>().Ability as IFocusPointProvider;
         }
 
         public void SetReferenceModuleVisualObject(IModuleVisualObject moduleVisualObject)
@@ -32,7 +32,7 @@ namespace IM.Visuals
 
             if (_useContextAbility != null)
             {
-                offset = _useContextAbility.LastUsedContext.GetDirection().normalized*_range;
+                offset = _useContextAbility.GetFocusDirection()*_range;
             }
             
             return GetSourcePosition() + offset;

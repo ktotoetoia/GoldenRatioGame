@@ -9,21 +9,29 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -7644578825757335302, guid: e6798843953581047a8089a584ebbad3, type: 3}
+      propertyPath: m_Size.x
+      value: 0.44
+      objectReference: {fileID: 0}
+    - target: {fileID: -7644578825757335302, guid: e6798843953581047a8089a584ebbad3, type: 3}
+      propertyPath: m_Size.y
+      value: 0.52
+      objectReference: {fileID: 0}
+    - target: {fileID: -7644578825757335302, guid: e6798843953581047a8089a584ebbad3, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 6646541999955039347, guid: 87f624e8d7ccc3a4f96313965c0c60a0, type: 3}
     - target: {fileID: -1733959713801920240, guid: e6798843953581047a8089a584ebbad3, type: 3}
       propertyPath: _entries.Array.data[0].left.objectValue
       value: 
-      objectReference: {fileID: 11400000, guid: 691f3da7c0cf003489dcc94d2c682079, type: 2}
+      objectReference: {fileID: 11400000, guid: 13643a2c93cb000499bf64d91c758fff, type: 2}
     - target: {fileID: -1733959713801920240, guid: e6798843953581047a8089a584ebbad3, type: 3}
       propertyPath: _entries.Array.data[0].right.objectValue
       value: 
-      objectReference: {fileID: 11400000, guid: d5e1fbe99eaf25443a16408d994eee73, type: 2}
+      objectReference: {fileID: 11400000, guid: fbd3d9a8dcdbae9489b5798b5f2f7882, type: 2}
     - target: {fileID: 2128649818120202721, guid: e6798843953581047a8089a584ebbad3, type: 3}
       propertyPath: _portBinder
       value: 
-      objectReference: {fileID: 11400000, guid: 691f3da7c0cf003489dcc94d2c682079, type: 2}
+      objectReference: {fileID: 11400000, guid: 13643a2c93cb000499bf64d91c758fff, type: 2}
     - target: {fileID: 2156244532669732079, guid: e6798843953581047a8089a584ebbad3, type: 3}
       propertyPath: m_Name
       value: Bolt Thrower Core In Game
@@ -68,7 +76,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6656148021360616737, guid: e6798843953581047a8089a584ebbad3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

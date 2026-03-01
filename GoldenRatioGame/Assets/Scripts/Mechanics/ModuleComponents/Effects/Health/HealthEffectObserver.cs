@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using IM.Effects;
+﻿using IM.Effects;
 using IM.Health;
 using UnityEngine;
 
@@ -17,12 +16,12 @@ namespace IM.Modules
         
         public void OnEffectGroupAdded(IEffectGroup group)
         {
-            foreach (IHealthEffectModifier modifier in group.Modifiers.OfType<IHealthEffectModifier>()) _floatHealthValuesGroup.AddHealth(modifier.Health);
+            foreach (IHealthEffectModifier modifier in group.Modifiers.GetAll<IHealthEffectModifier>()) _floatHealthValuesGroup.AddHealth(modifier.Health);
         }
 
         public void OnEffectGroupRemoved(IEffectGroup group)
         {
-            foreach (IHealthEffectModifier modifier in group.Modifiers.OfType<IHealthEffectModifier>()) _floatHealthValuesGroup.RemoveHealth(modifier.Health);
+            foreach (IHealthEffectModifier modifier in group.Modifiers.GetAll<IHealthEffectModifier>()) _floatHealthValuesGroup.RemoveHealth(modifier.Health);
         }
     }
 }

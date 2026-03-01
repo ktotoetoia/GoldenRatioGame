@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using IM.Effects;
+﻿using IM.Effects;
 using IM.Values;
 using UnityEngine;
 
@@ -17,11 +16,11 @@ namespace IM.Modules
         
         public void OnEffectGroupAdded(IEffectGroup group)
         {
-            foreach (ISpeedEffectModifier modifier in group.Modifiers.OfType<ISpeedEffectModifier>()) _speed.Speed.AddModifier(modifier.SpeedModifier);
+            foreach (ISpeedEffectModifier modifier in group.Modifiers.GetAll<ISpeedEffectModifier>()) _speed.Speed.AddModifier(modifier.SpeedModifier);
         }
         public void OnEffectGroupRemoved(IEffectGroup group)
         {
-            foreach (ISpeedEffectModifier modifier in group.Modifiers.OfType<ISpeedEffectModifier>()) _speed.Speed.RemoveModifier(modifier.SpeedModifier);
+            foreach (ISpeedEffectModifier modifier in group.Modifiers.GetAll<ISpeedEffectModifier>()) _speed.Speed.RemoveModifier(modifier.SpeedModifier);
         }
     }
 }

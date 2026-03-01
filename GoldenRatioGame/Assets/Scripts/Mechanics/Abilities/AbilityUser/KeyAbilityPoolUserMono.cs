@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using IM.Effects;
 using UnityEngine;
 
 namespace IM.Abilities
 {
     public class KeyAbilityPoolUserMono : MonoBehaviour, IAbilityUser<IKeyAbilityPool>, IAbilityUserEvents
     {
+        private IEffectContainer _effectContainer;
         private IAbilityUseInfo _abilityUseInfo;
         private IAbilityReadOnly _currentAbility;
+        private IEffectGroup _appliedEffectGroup;
         
         public event Action<IAbilityReadOnly> OnAbilityStarted;
         public event Action<IAbilityReadOnly> OnAbilityFinished;
@@ -23,13 +26,25 @@ namespace IM.Abilities
             {
                 IAbilityReadOnly previous = _currentAbility;
                 _currentAbility = value;
-                if(_currentAbility != null) OnAbilityStarted?.Invoke(_currentAbility);
-                if(previous != null) OnAbilityFinished?.Invoke(previous);
+                
+                if (previous != null)
+                {
+                    if(previous is IApplyEffectGroupOnUse) _effectContainer.RemoveGroup(_appliedEffectGroup);
+                    
+                    OnAbilityFinished?.Invoke(previous);
+                }
+                if (_currentAbility != null)
+                {
+                    if(_currentAbility is IApplyEffectGroupOnUse effectGroupOnUse) _effectContainer.AddGroup(_appliedEffectGroup = effectGroupOnUse.GetEffectGroup());
+                    
+                    OnAbilityStarted?.Invoke(_currentAbility);
+                }
             }
         }
         
         private void Awake()
         {
+            _effectContainer = GetComponent<IEffectContainer>();
             AbilityPool = GetComponent<IKeyAbilityPool>();
         }
         
@@ -82,7 +97,7 @@ namespace IM.Abilities
         {
             if (ability == null || !AbilityPool.Contains(ability) || !ability.CanUse) return false;
 
-            if (ability is IUseContextAbility contextual) contextual.UpdateAbilityUseContext(ctx);
+            if (ability is IRequireAbilityUseContext contextual) contextual.UpdateAbilityUseContext(ctx);
 
             if (ability is ICastAbility cast && cast.TryCast(out var castInfo))
             {

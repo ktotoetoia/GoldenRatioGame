@@ -1,5 +1,4 @@
-﻿using IM.Modules;
-using IM.Values;
+﻿using IM.Values;
 using UnityEngine;
 
 namespace IM.Abilities
@@ -9,8 +8,6 @@ namespace IM.Abilities
         private readonly string _textToLog;
         private readonly ICooldown _cooldown;
 
-        public ITypeRegistry<IAbilityDescriptor> AbilityDescriptorsRegistry { get; set; } =
-            new TypeRegistry<IAbilityDescriptor>();
         public ICooldownReadOnly Cooldown=> _cooldown;
         public bool CanUse => !Cooldown.IsOnCooldown;
 

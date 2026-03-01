@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using IM.Modules;
+using IM.Effects;
 using IM.Values;
 using UnityEngine;
 
 namespace IM.Abilities
 {
-    public class DebugDrawLineChannelAbility : IChannelAbility, IInterruptable
+    public class DebugDrawLineChannelAbility : IChannelAbility, IInterruptable, IApplyEffectGroupOnUse
     {
         private readonly ICooldown _cooldown;
         private readonly ICooldown _channelCooldown;
@@ -15,9 +15,6 @@ namespace IM.Abilities
         public bool CanUse => !Cooldown.IsOnCooldown;
         public bool IsChanneling => _channelInfo != null;
         public bool CanInterrupt => true;
-
-        public ITypeRegistry<IAbilityDescriptor> AbilityDescriptorsRegistry { get; set; } =
-            new TypeRegistry<IAbilityDescriptor>(new List<IAbilityDescriptor> { new BlockUserMovementAbility{BlockUserMovement = true} });
         
         public DebugDrawLineChannelAbility(float cooldownTime, float useTime)
         {
@@ -66,6 +63,11 @@ namespace IM.Abilities
         {
             _channelInfo.CallOnChannelInterrupt();
             _channelInfo = null;
+        }
+
+        public IEffectGroup GetEffectGroup()
+        {
+            return new EffectGroup(new List<IEffectModifier> { new BlockUserMovementEffect() });
         }
     }
 }

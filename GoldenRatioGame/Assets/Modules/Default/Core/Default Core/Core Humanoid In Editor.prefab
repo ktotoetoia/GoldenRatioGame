@@ -594,7 +594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.PortVisualObjectMono
   _renderer: {fileID: 2983825109466481903}
-  <OutputOrderAdjustment>k__BackingField: 0
+  <OutputOrderAdjustment>k__BackingField: 1
 --- !u!114 &997228026938600669
 MonoBehaviour:
   m_ObjectHideFlags: 0

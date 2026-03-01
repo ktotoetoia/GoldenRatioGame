@@ -18,9 +18,9 @@ namespace IM.Visuals
         private List<IValueStorageContainer> _containers;
         private IVectorMovement _movement;
         private IAbilityUserEvents _abilityUserEvents;
-        private AbilityUseContext _lastUseContext;
         private float _lastUseTime = int.MinValue;
         private float _abilityFocusTime;
+        private IFocusPointProvider _focusPointProvider;
         
         private void Awake()
         {
@@ -40,7 +40,7 @@ namespace IM.Visuals
         {
             if (Time.time < _abilityFocusTime + _lastUseTime)
             {
-                SetDirectionToContainers(DirectionUtils.GetEnumDirection(_lastUseContext.GetDirection()));
+                SetDirectionToContainers(DirectionUtils.GetEnumDirection(_focusPointProvider.GetFocusDirection()));
 
                 return true;
             }
@@ -66,12 +66,11 @@ namespace IM.Visuals
 
         private void OnAbilityStarted(IAbilityReadOnly ability)
         {
-            if (ability.AbilityDescriptorsRegistry.TryGet(
-                    out IAbilityFocusTimeDescriptor desc))
+            if (ability is IFocusPointProvider focusPoint)
             {
-                _abilityFocusTime = desc.FocusTime;
+                _abilityFocusTime = focusPoint.FocusTime;
                 _lastUseTime = Time.time;
-                _lastUseContext = (ability as IUseContextAbility)?.LastUsedContext ?? default;
+                _focusPointProvider = focusPoint;
             }
         }
 

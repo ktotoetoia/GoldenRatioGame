@@ -5,6 +5,7 @@ namespace IM.Effects
 {
     public class EffectContainerMono : MonoBehaviour, IEffectContainer
     {
+        [SerializeField] private GameObject _effectObserverSource;
         private readonly IEffectContainer _effectContainer = new EffectContainer();
         private readonly List<IEffectObserver> _effectObservers = new();
         
@@ -12,7 +13,7 @@ namespace IM.Effects
 
         private void Awake()
         {
-            GetComponents(_effectObservers);
+            _effectObserverSource.GetComponents(_effectObservers);
         }
 
         public void AddGroup(IEffectGroup group)

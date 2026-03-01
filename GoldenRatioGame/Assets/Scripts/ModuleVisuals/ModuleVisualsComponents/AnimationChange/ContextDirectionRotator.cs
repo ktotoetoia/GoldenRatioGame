@@ -9,21 +9,19 @@ namespace IM.Visuals
         [SerializeField] private Transform _target;
         [SerializeField] private float _offsetAngle;
         [SerializeField] private bool _animate;
-        [SerializeField] private bool _setToZero;
-        private IUseContextAbility _ability;
-
+        private IFocusPointProvider _focusPointProvider;
+        
         public void OnModuleVisualObjectInitialized(IModuleVisualObject moduleVisualObject)
         {
-            _ability = moduleVisualObject
-                .Owner
-                .Extensions
-                .Get<IAbilityExtension>()
-                ?.Ability as IUseContextAbility;
+            IAbilityReadOnly ability = moduleVisualObject.Owner.Extensions.Get<IAbilityExtension>()?.Ability;
+            
+            _focusPointProvider = ability as IFocusPointProvider;
+            
         }
         
         private void Update()
         {
-            if (!_animate || _ability == null || !_target)
+            if (!_animate || _focusPointProvider == null || !_target)
             {
                 _target.rotation = Quaternion.identity;
                 return;
@@ -34,9 +32,7 @@ namespace IM.Visuals
 
         private void RotateTowardsContext()
         {
-            var ctx = _ability.LastUsedContext;
-
-            Vector3 direction = ctx.GetDirection().normalized;
+            Vector3 direction = _focusPointProvider.GetFocusDirection().normalized;
 
             if (direction.sqrMagnitude < 0.0001f)
                 return;

@@ -21,7 +21,7 @@ namespace IM.Effects
 
         public IEnumerable<T> GetModifiers<T>()
         {
-            return _groups.SelectMany(x => x.Modifiers.OfType<T>());
+            return _groups.SelectMany(x => x.Modifiers.GetAll<T>());
         }
     }
 }

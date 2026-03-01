@@ -1,74 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4216850783879006483
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2293831157223198716}
-  - component: {fileID: 7489658190075506374}
-  - component: {fileID: 1217740711010262202}
-  m_Layer: 0
-  m_Name: VisualObservers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2293831157223198716
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4216850783879006483}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2365714068825351273}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7489658190075506374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4216850783879006483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f84fcd05b82d47a4a6d3f13f4491f01e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ModuleGraphVisualObserver
-  _preset:
-    _order: 0
-    _layer: 0
-    _visible: 1
-    _defaultTransform:
-      _changePosition: 0
-      _changeRotation: 0
-      _changeScale: 0
-      _position: {x: 0, y: 0, z: 0}
-      _rotation: {x: 0, y: 0, z: 0, w: 1}
-      _scale: {x: 1, y: 1, z: 1}
-    <PortsVisible>k__BackingField: 0
---- !u!114 &1217740711010262202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4216850783879006483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b6d75674201484eb9fdb7c721746ad6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ReferenceModuleVisualObjectsObserver
 --- !u!1 &4342869459289063407
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,11 +12,11 @@ GameObject:
   - component: {fileID: 4855950522832043137}
   - component: {fileID: 5563122138591822399}
   - component: {fileID: 2104419640333263632}
+  - component: {fileID: 6843561717665806918}
   - component: {fileID: 883802630339849986}
   - component: {fileID: 8559118447764604619}
   - component: {fileID: -3054874307105079444}
   - component: {fileID: -1085195585362333072}
-  - component: {fileID: 4305315887992603462}
   - component: {fileID: 7544895549371979933}
   m_Layer: 0
   m_Name: Player
@@ -107,8 +38,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2293831157223198716}
   - {fileID: 2804227671461150752}
+  - {fileID: 6392533986653558255}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &4855950522832043137
@@ -196,6 +127,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb3915c5594416bb7e9853c684013f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _observersSource: {fileID: 8508053980751109502}
+--- !u!114 &6843561717665806918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2646a5caa32a4fd6a422467b45fa231d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Effects::IM.Effects.EffectContainerMono
+  _effectObserverSource: {fileID: 4348573349406529255}
 --- !u!114 &883802630339849986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,18 +190,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Abilities::IM.Abilities.AbilityKeyPoolMono
   _keys: 7100000065000000720000007a00000078000000
---- !u!114 &4305315887992603462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4342869459289063407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa8f931bc3ee4755a8a6991e83b7886b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: States::IM.Movement.CurveMovementAbilityMono
 --- !u!114 &7544895549371979933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,9 +226,82 @@ MonoBehaviour:
     m_PreInfinity: 0
     m_PostInfinity: 0
     m_RotationOrder: 4
-  _rawSpeed: 5
-  _accelerationTime: 0.3
+  _rawSpeed: 2
+  _accelerationTime: 0.1
   <Active>k__BackingField: 1
+--- !u!1 &4348573349406529255
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6392533986653558255}
+  - component: {fileID: 4012490907714536398}
+  - component: {fileID: 1255343954178377713}
+  - component: {fileID: 5185768673414569569}
+  m_Layer: 0
+  m_Name: EffectObservers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6392533986653558255
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4348573349406529255}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2365714068825351273}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4012490907714536398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4348573349406529255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 764b2a864d6a4a288cb16e1800dd22de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: States::IM.Movement.BlockMovementOnEffectUsed
+  _movementSource: {fileID: 4342869459289063407}
+--- !u!114 &1255343954178377713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4348573349406529255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f73e5829b54221981b86f6826082dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComponents::IM.Modules.SpeedEffectObserver
+  _speedSource: {fileID: 4342869459289063407}
+--- !u!114 &5185768673414569569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4348573349406529255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24c8a57df9cc4b4db10d1e8c2c39d475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComponents::IM.Modules.HealthEffectObserver
+  _floatHealthValuesGroupSource: {fileID: 4342869459289063407}
 --- !u!1 &8508053980751109502
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,12 +315,11 @@ GameObject:
   - component: {fileID: 2676012618694106098}
   - component: {fileID: 8837569621488464822}
   - component: {fileID: 8543606873535386348}
-  - component: {fileID: 6996862176923965098}
-  - component: {fileID: 4593071890531234201}
-  - component: {fileID: 221324642721564809}
-  - component: {fileID: 5450061724011499058}
+  - component: {fileID: 4737303748126444302}
+  - component: {fileID: 6135420331760039005}
+  - component: {fileID: 5912145747460428046}
   m_Layer: 0
-  m_Name: Observers
+  m_Name: ModuleObservers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -388,7 +393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModuleExtensionsVisual::IM.Visuals.MovementDirectionAndAbilityUseStorageValueSetter
   _movementAndAbilityEventsSource: {fileID: 4342869459289063407}
   _valueStorageTag: Focus
---- !u!114 &6996862176923965098
+--- !u!114 &4737303748126444302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -400,8 +405,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00623bd5f0fe4ad8bda9939de7375fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleComponents::IM.Modules.EffectExtensionObserver
-  _effectContainerSource: {fileID: 8508053980751109502}
---- !u!114 &4593071890531234201
+  _effectContainerSource: {fileID: 4342869459289063407}
+--- !u!114 &6135420331760039005
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -410,10 +415,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 8508053980751109502}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2646a5caa32a4fd6a422467b45fa231d, type: 3}
+  m_Script: {fileID: 11500000, guid: f84fcd05b82d47a4a6d3f13f4491f01e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Effects::IM.Effects.EffectContainerMono
---- !u!114 &221324642721564809
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ModuleGraphVisualObserver
+  _preset:
+    _order: 0
+    _layer: 0
+    _visible: 1
+    _defaultTransform:
+      _changePosition: 0
+      _changeRotation: 0
+      _changeScale: 0
+      _position: {x: 0, y: 0, z: 0}
+      _rotation: {x: 0, y: 0, z: 0, w: 1}
+      _scale: {x: 1, y: 1, z: 1}
+    <PortsVisible>k__BackingField: 0
+--- !u!114 &5912145747460428046
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -422,20 +439,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8508053980751109502}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30f73e5829b54221981b86f6826082dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b6d75674201484eb9fdb7c721746ad6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: ModuleComponents::IM.Modules.SpeedEffectObserver
-  _speedSource: {fileID: 4342869459289063407}
---- !u!114 &5450061724011499058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8508053980751109502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24c8a57df9cc4b4db10d1e8c2c39d475, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleComponents::IM.Modules.HealthEffectObserver
-  _floatHealthValuesGroupSource: {fileID: 4342869459289063407}
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ReferenceModuleVisualObjectsObserver

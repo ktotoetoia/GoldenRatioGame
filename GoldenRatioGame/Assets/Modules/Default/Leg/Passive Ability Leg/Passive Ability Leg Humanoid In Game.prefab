@@ -12,14 +12,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Passive Ability Leg Humanoid In Game
       objectReference: {fileID: 0}
+    - target: {fileID: 2253417137893231055, guid: 418e4bf92402f7047a4c2dc3bcfa1083, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253417137893231055, guid: 418e4bf92402f7047a4c2dc3bcfa1083, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4749500029243602080, guid: 418e4bf92402f7047a4c2dc3bcfa1083, type: 3}
       propertyPath: m_Size.x
-      value: 0.52
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749500029243602080, guid: 418e4bf92402f7047a4c2dc3bcfa1083, type: 3}
+      propertyPath: m_Size.y
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: 4749500029243602080, guid: 418e4bf92402f7047a4c2dc3bcfa1083, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -5661188705341949991, guid: a2c9a9fd856c86141b5fff4abb8a9578, type: 3}
+      objectReference: {fileID: -8822414406500087648, guid: a2c9a9fd856c86141b5fff4abb8a9578, type: 3}
     - target: {fileID: 4749500029243602080, guid: 418e4bf92402f7047a4c2dc3bcfa1083, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -27,6 +39,14 @@ PrefabInstance:
     - target: {fileID: 5333593449026897718, guid: 418e4bf92402f7047a4c2dc3bcfa1083, type: 3}
       propertyPath: _tag
       value: Focus
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718297625566412116, guid: 418e4bf92402f7047a4c2dc3bcfa1083, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718297625566412116, guid: 418e4bf92402f7047a4c2dc3bcfa1083, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6831950797100586301, guid: 418e4bf92402f7047a4c2dc3bcfa1083, type: 3}
       propertyPath: m_LocalPosition.x

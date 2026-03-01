@@ -192,4 +192,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd593569476747fe9b419eaa1e34f21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Abilities::IM.Abilities.Projectile
-  _toFinishTime: 0.5
+  _toFinishTime: 2

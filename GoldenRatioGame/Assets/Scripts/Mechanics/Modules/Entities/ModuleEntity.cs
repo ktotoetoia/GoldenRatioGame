@@ -9,17 +9,20 @@ namespace IM.Modules
     [DisallowMultipleComponent]
     public class ModuleEntity : DefaultEntity, IModuleEntity, IRequireInteractionProvider
     {
+        [SerializeField] private GameObject _observersSource;
         private IModuleEditingContext _moduleEditingContext;
         
         public IModuleEditingContext ModuleEditingContext
         {
             get
             {
-                if (_moduleEditingContext == null)
+                if (_moduleEditingContext != null) return _moduleEditingContext;
+                
+                _moduleEditingContext = new ModuleEditingContext(new CellFactoryStorage());
+                
+                foreach (IModuleGraphSnapshotObserver observer in _observersSource.GetComponents<IModuleGraphSnapshotObserver>())
                 {
-                    _moduleEditingContext = new ModuleEditingContext(new CellFactoryStorage());
-                    foreach (IModuleGraphSnapshotObserver observer in GetComponentsInChildren<IModuleGraphSnapshotObserver>())
-                        ModuleEditingContext.GraphEditor.Observers.Add(observer);
+                    ModuleEditingContext.GraphEditor.Observers.Add(observer);
                 }
 
                 return _moduleEditingContext;
