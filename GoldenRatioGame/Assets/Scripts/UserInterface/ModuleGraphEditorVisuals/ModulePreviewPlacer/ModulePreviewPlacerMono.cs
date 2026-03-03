@@ -1,4 +1,5 @@
 ﻿using IM.Modules;
+using Unity.Plastic.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 namespace IM.Visuals.Graph
@@ -12,10 +13,12 @@ namespace IM.Visuals.Graph
 
         public IModuleVisualObject PreviewObject => _modulePreviewPlacer.PreviewObject;
         public bool IsPreviewing => _modulePreviewPlacer.IsPreviewing;
+
+        public Func<IModuleVisualObject, Vector3> HoverPositionSource { get; set; } = x => (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
         private void Awake()
         {
-            _modulePreviewPlacer = new ModulePreviewPlacer(_camera,_previewParent,_preset);
+            _modulePreviewPlacer = new ModulePreviewPlacer(_previewParent, _preset, GetHoverPosition);
         }
         
         public void StartPreview(IExtensibleModule module)
@@ -36,6 +39,11 @@ namespace IM.Visuals.Graph
         public void StopPreview()
         {
             _modulePreviewPlacer.StopPreview();
+        }
+
+        private Vector3  GetHoverPosition(IModuleVisualObject obj)
+        {
+            return HoverPositionSource(obj);
         }
     }
 }

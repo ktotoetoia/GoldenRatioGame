@@ -11,9 +11,9 @@ namespace IM.Visuals
 {
     public class ModuleVisualObject : MonoBehaviour, IModuleVisualObject
     {
-        [SerializeField] private PortVisualObjectFactoryBase _portVisualObjectFactory;
-        [SerializeField] private PortBinderBase _portBinder;
-        [SerializeField] private Renderer _renderer;
+        [SerializeField] protected PortVisualObjectFactoryBase _portVisualObjectFactory;
+        [SerializeField] protected PortBinderBase _portBinder;
+        [SerializeField] protected Renderer _renderer;
         private readonly List<IPortVisualObject> _portVisualObjects = new();
         private readonly List<IPoolObject> _poolObjects = new();
         private IModuleVisualObjectPreset _preset;

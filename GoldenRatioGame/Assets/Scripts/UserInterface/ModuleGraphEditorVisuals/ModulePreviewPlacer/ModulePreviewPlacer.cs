@@ -6,19 +6,19 @@ namespace IM.Visuals.Graph
 {
     public class ModulePreviewPlacer : IModulePreviewPlacer
     {
-        private readonly Camera _camera;
         private readonly Transform _parent;
         private readonly IModuleVisualObjectPreset _preset;
+        private readonly Func<IModuleVisualObject, Vector3> _getPreviewPosition;
         private IModuleVisual _currentModuleVisual;
-        
+
         public IModuleVisualObject PreviewObject { get; private set; }
         public bool IsPreviewing => PreviewObject != null;
 
-        public ModulePreviewPlacer(Camera camera, Transform parent, IModuleVisualObjectPreset preset)
+        public ModulePreviewPlacer(Transform parent, IModuleVisualObjectPreset preset,Func<IModuleVisualObject, Vector3> getPreviewPosition)
         {
-            _camera = camera;
             _parent = parent;
             _preset = preset;
+            _getPreviewPosition = getPreviewPosition;
         }
         
         public void StartPreview(IExtensibleModule module)
@@ -35,9 +35,9 @@ namespace IM.Visuals.Graph
         public void UpdatePreviewPosition()
         {
             if (PreviewObject == null) return;
-            Vector3 p = _camera.ScreenToWorldPoint(Input.mousePosition);
-            p.Scale(new Vector3(1, 1, 0));
-            PreviewObject.Transform.Position = p;
+            
+            Vector3 offset = (PreviewObject as IEditorModuleVisualObject)?.DefaultEditorLocalBounds.center ?? default; 
+            PreviewObject.Transform.Position = _getPreviewPosition(PreviewObject) - offset;
         }
 
         public IExtensibleModule FinalizePreview()

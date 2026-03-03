@@ -14,7 +14,7 @@ namespace IM.Visuals.Graph
         }
 
 
-        public bool QuickAddModule(IModule module)
+        public bool TryQuickAddModule(IModule module)
         {
             if (module is ICoreExtensibleModule)
             {
@@ -40,13 +40,18 @@ namespace IM.Visuals.Graph
             return false;
         }
 
-        public void QuickRemoveModule()
-        {   
-            IModule module = Graph.Modules.LastOrDefault();
+        public bool TryQuickRemoveModule()
+        {
+            return TryQuickRemoveModule(Graph.Modules.LastOrDefault());
+        }
 
-            if (!Graph.CanRemoveModule(module)) return;
+        public bool TryQuickRemoveModule(IModule module)
+        {
+            if (!Graph.CanRemoveModule(module)) return false;
             
             Graph.RemoveModule(module);
+
+            return true;
         }
 
         public void Undo(int count)

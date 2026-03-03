@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6831950797100586301}
   - component: {fileID: -445026668575163568}
-  - component: {fileID: 3992375779782490861}
+  - component: {fileID: 1110950534328089952}
   - component: {fileID: 8084296690069182958}
   - component: {fileID: 1175997539913378157}
   m_Layer: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3d71c28bc042a597ff6ab715823292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Transform::IM.Transforms.TransformMono
---- !u!114 &3992375779782490861
+--- !u!114 &1110950534328089952
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,12 +58,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2156244532669732079}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c308d64446764c3981c6feb934dd9cc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 84c78427f7c046a799a7de051d0323e8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ModuleVisualObject
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.EditorModuleVisualObject
   _portVisualObjectFactory: {fileID: 11400000, guid: b50a20bb72fb9824e8befd705c4581c2, type: 2}
   _portBinder: {fileID: 11400000, guid: 148a279e8d53d5242a175e873032c286, type: 2}
   _renderer: {fileID: 7523210880981555952}
+  _boundsSource: 1
 --- !u!114 &8084296690069182958
 MonoBehaviour:
   m_ObjectHideFlags: 0

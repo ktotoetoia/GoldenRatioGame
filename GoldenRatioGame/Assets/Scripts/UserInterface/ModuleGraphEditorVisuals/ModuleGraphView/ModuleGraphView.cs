@@ -10,6 +10,7 @@ namespace IM.Visuals.Graph
         private IModuleGraphReadOnly _graph;
 
         public ModuleGraphVisualObserver VisualObserver { get; private set; }
+        public Bounds Bounds => new(transform.position, Vector3.zero);
 
         public void SetGraph(IModuleGraphReadOnly graph)
         {

@@ -10,6 +10,7 @@ namespace IM.Visuals.Graph
         [SerializeField] private ModuleGraphView _moduleGraphView;
         [SerializeField] private StorageView _storageView;
         [SerializeField] private ModulePreviewPlacerMono _previewPlacer;
+        [SerializeField] private Camera _uiCamera;
         [SerializeField] private float _addWorldDistance = 0.3f;
         private IGraphOperations _graphOperations;
         
@@ -19,6 +20,8 @@ namespace IM.Visuals.Graph
             _storageView.StorageVisual.ObjectHovered += OnHold;
             _storageView.StorageVisual.ObjectSelected += OnSelected;
             _storageView.StorageVisual.ObjectReleased += OnRelease;
+
+            _previewPlacer.HoverPositionSource = x => GetMousePosition();
         }
 
         private void Update()
@@ -28,7 +31,17 @@ namespace IM.Visuals.Graph
 
         private void GraphInput()
         {
-            if (Input.GetKeyDown(KeyCode.P)) _graphOperations.QuickRemoveModule();
+            if (Input.GetMouseButtonDown(1))
+            {
+                Vector2 mousePosition = GetMousePosition();
+
+                IExtensibleModule module = _moduleGraphView.VisualObserver.ModuleToVisualObjects.FirstOrDefault(x =>
+                    x.Value is IEditorModuleVisualObject e && e.EditorBounds.Contains(mousePosition)).Key;
+                    
+                if (module != null) _graphOperations.TryQuickRemoveModule(module);
+            }
+            
+            if (Input.GetKeyDown(KeyCode.P)) _graphOperations.TryQuickRemoveModule();
             if (Input.GetKeyDown(KeyCode.Z)) _graphOperations.Undo(1);
             if (Input.GetKeyDown(KeyCode.X)) _graphOperations.Redo(1);
         }
@@ -59,6 +72,8 @@ namespace IM.Visuals.Graph
             IPortVisualObject toAddPort = null;
             IPortVisualObject onGraphPort = null;
             float distance = float.MaxValue;
+            
+            if(toAdd.Owner is ICoreExtensibleModule c && _graphOperations.TryQuickAddModule(c)) return; 
 
             foreach (IPortVisualObject a in toAdd.PortsVisualObjects)
             {
@@ -81,7 +96,7 @@ namespace IM.Visuals.Graph
 
         private void ObjectInteracted(object obj)
         {
-            _graphOperations?.QuickAddModule(obj as IModule);
+            _graphOperations?.TryQuickAddModule(obj as IModule);
         }
         
         public void SetGraph(IConditionalCommandModuleGraph graph)
@@ -92,6 +107,11 @@ namespace IM.Visuals.Graph
         public void ClearGraph()
         {
             _graphOperations = null;
+        }
+
+        private Vector3 GetMousePosition()
+        {
+            return (Vector2)_uiCamera.ScreenToWorldPoint(Input.mousePosition);
         }
 
         private void OnDestroy()

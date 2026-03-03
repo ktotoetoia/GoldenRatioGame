@@ -1,0 +1,21 @@
+:root {
+    --new-var-1: 20%;
+    --new-var-2: 30%;
+    --new-var-3: 50%;
+}
+
+.abilityContainer {
+    width: var(--new-var-1);
+}
+
+.graphEditorContainer {
+    width: var(--new-var-3);
+}
+
+.storageContainer {
+    width: var(--new-var-2);
+    margin-right: 30px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    margin-top: 30px;
+}
