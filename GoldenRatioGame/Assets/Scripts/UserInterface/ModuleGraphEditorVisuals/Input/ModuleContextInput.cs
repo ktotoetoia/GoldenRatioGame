@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using IM.Graphs;
 using IM.Modules;
 using UnityEngine;
@@ -16,10 +17,10 @@ namespace IM.Visuals.Graph
         
         private void Awake()
         {
-            _storageView.StorageVisual.ObjectInteracted += ObjectInteracted;
-            _storageView.StorageVisual.ObjectHovered += OnHold;
-            _storageView.StorageVisual.ObjectSelected += OnSelected;
-            _storageView.StorageVisual.ObjectReleased += OnRelease;
+            _storageView.StorageElement.ObjectInteracted += ObjectInteracted;
+            _storageView.StorageElement.ObjectHovered += OnHold;
+            _storageView.StorageElement.ObjectSelected += OnSelected;
+            _storageView.StorageElement.ObjectReleased += OnRelease;
 
             _previewPlacer.HoverPositionSource = x => GetMousePosition();
         }
@@ -35,10 +36,10 @@ namespace IM.Visuals.Graph
             {
                 Vector2 mousePosition = GetMousePosition();
 
-                IExtensibleModule module = _moduleGraphView.VisualObserver.ModuleToVisualObjects.FirstOrDefault(x =>
-                    x.Value is IEditorModuleVisualObject e && e.EditorBounds.Contains(mousePosition)).Key;
-                    
-                if (module != null) _graphOperations.TryQuickRemoveModule(module);
+                foreach (KeyValuePair<IExtensibleModule, IModuleVisualObject> pair in _moduleGraphView.VisualObserver.ModuleToVisualObjects.Where(x => x.Value is IEditorModuleVisualObject e && e.EditorBounds.Contains(mousePosition)))
+                {
+                    if(_graphOperations.TryQuickRemoveModule(pair.Key)) return;
+                }
             }
             
             if (Input.GetKeyDown(KeyCode.P)) _graphOperations.TryQuickRemoveModule();
@@ -116,12 +117,12 @@ namespace IM.Visuals.Graph
 
         private void OnDestroy()
         {
-            if (_storageView?.StorageVisual == null) return;
+            if (_storageView?.StorageElement == null) return;
             
-            _storageView.StorageVisual.ObjectInteracted -= ObjectInteracted;
-            _storageView.StorageVisual.ObjectHovered -= OnHold;
-            _storageView.StorageVisual.ObjectSelected -= OnSelected;
-            _storageView.StorageVisual.ObjectReleased -= OnRelease;
+            _storageView.StorageElement.ObjectInteracted -= ObjectInteracted;
+            _storageView.StorageElement.ObjectHovered -= OnHold;
+            _storageView.StorageElement.ObjectSelected -= OnSelected;
+            _storageView.StorageElement.ObjectReleased -= OnRelease;
         }
     }
 }

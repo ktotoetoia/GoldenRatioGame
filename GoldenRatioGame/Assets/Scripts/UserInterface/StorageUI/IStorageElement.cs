@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace IM.UI
 {
-    public interface IStorageVisual
+    public interface IStorageElement
     {
         public event Action<IStorableReadOnly> ObjectSelected;
         public event Action<IStorableReadOnly> ObjectHovered;
@@ -13,7 +13,7 @@ namespace IM.UI
         public ListView ListView { get;  }
         public IReadOnlyStorage Storage { get; }
         
-        void SetStorage(IReadOnlyStorage storage);
+        void SetStorage(IReadOnlyStorage storage, IStorageEvents events);
         void ClearStorage();
     }
 }

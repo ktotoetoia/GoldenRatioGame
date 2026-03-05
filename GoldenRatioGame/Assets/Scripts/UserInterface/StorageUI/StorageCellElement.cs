@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 namespace IM.UI
 {
     [UxmlElement]
-    public partial class StorageCellVisual : VisualElement
+    public partial class StorageCellElement : VisualElement
     {
         private readonly Label _label;
         private readonly VisualElement _iconDisplay;
@@ -26,7 +26,7 @@ namespace IM.UI
             }
         }
 
-        public StorageCellVisual()
+        public StorageCellElement()
         {
             _iconDisplay = new VisualElement();
             _label = new Label();
@@ -48,4 +48,6 @@ namespace IM.UI
             }
         }
     }
+    
+    
 }

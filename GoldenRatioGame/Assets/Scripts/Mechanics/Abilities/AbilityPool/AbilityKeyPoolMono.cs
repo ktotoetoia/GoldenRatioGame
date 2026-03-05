@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace IM.Abilities
 {
-    public class AbilityKeyPoolMono : MonoBehaviour, IKeyAbilityPool, IAbilityPool
+    public class AbilityKeyPoolMono : MonoBehaviour, IKeyAbilityPool, IAbilityPool, IAbilityPoolEvents
     {
         [SerializeField] private List<KeyCode> _keys = new()
         {
@@ -20,6 +21,8 @@ namespace IM.Abilities
 
         public IReadOnlyCollection<IAbilityReadOnly> Abilities => _map.Values;
         public IReadOnlyDictionary<KeyCode, IAbilityReadOnly> KeyMap => _map;
+        public event Action<IAbilityReadOnly> AbilityAdded;
+        public event Action<IAbilityReadOnly> AbilityRemoved;
 
         private void Awake()
         {
@@ -37,8 +40,9 @@ namespace IM.Abilities
 
             if (key == KeyCode.None)
                 Debug.LogWarning($"No free keys left for ability {ability}. Assigned KeyCode.None.");
-
+            
             _map[key] = ability;
+            AbilityAdded?.Invoke(ability);
         }
 
         public void RemoveAbility(IAbilityReadOnly ability)
@@ -55,7 +59,9 @@ namespace IM.Abilities
 
                 if (kvp.Key != KeyCode.None)
                     _freeKeys.Push(kvp.Key);
-
+                
+                AbilityRemoved?.Invoke(kvp.Value);
+                
                 break;
             }
         }

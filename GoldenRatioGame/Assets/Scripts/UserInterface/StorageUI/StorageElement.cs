@@ -5,8 +5,9 @@ using UnityEngine.UIElements;
 namespace IM.UI
 {
     [UxmlElement]
-    public partial class ItemMutableStorageVisual : VisualElement, IStorageVisual
+    public partial class StorageElement : VisualElement, IStorageElement
     {
+        private IStorageEvents _events;
         public ListView ListView { get; private set; }
         public IReadOnlyStorage Storage { get; private set; }
 
@@ -15,7 +16,7 @@ namespace IM.UI
         public event Action<IStorableReadOnly> ObjectHovered;
         public event Action<IStorableReadOnly> ObjectReleased;
         
-        public ItemMutableStorageVisual()
+        public StorageElement()
         {
             ListView = new ListView
             {
@@ -31,15 +32,15 @@ namespace IM.UI
 
             ListView.makeItem = () =>
             {
-                StorageCellVisual storageCellVisual = new StorageCellVisual();
+                StorageCellElement storageCellElement = new StorageCellElement();
                 
-                storageCellVisual.AddManipulator(new ListEntryManipulator(CheckDoubleClick,OnSelected,OnHovered,OnReleased));
+                storageCellElement.AddManipulator(new ListEntryManipulator(CheckDoubleClick,OnSelected,OnHovered,OnReleased));
                 
-                return storageCellVisual;
+                return storageCellElement;
             };
             ListView.bindItem = (element, index) =>
             {
-                if (element is not StorageCellVisual cellUI) throw new InvalidOperationException();
+                if (element is not StorageCellElement cellUI) throw new InvalidOperationException();
                 
                 cellUI.Cell = Storage[index];
             };
@@ -47,30 +48,30 @@ namespace IM.UI
 
         private void OnSelected(VisualElement el)
         {
-            if (el is not StorageCellVisual cellVisual || cellVisual.Cell?.Item == null) return;
+            if (el is not StorageCellElement cellVisual || cellVisual.Cell?.Item == null) return;
             
             ObjectSelected?.Invoke(cellVisual.Cell.Item);
         }
         
         private void OnHovered(VisualElement el)
         {
-            if (el is not StorageCellVisual cellVisual || cellVisual.Cell?.Item == null) return;
+            if (el is not StorageCellElement cellVisual || cellVisual.Cell?.Item == null) return;
             
             ObjectHovered?.Invoke(cellVisual.Cell.Item);
         }
         private void OnReleased(VisualElement el)
         {
-            if (el is not StorageCellVisual cellVisual || cellVisual.Cell?.Item == null) return;
+            if (el is not StorageCellElement cellVisual || cellVisual.Cell?.Item == null) return;
             ObjectReleased?.Invoke(cellVisual.Cell.Item);
         }
         private void CheckDoubleClick(VisualElement el)
         {
-            if (el is not StorageCellVisual cellVisual || cellVisual.Cell?.Item == null) return;
+            if (el is not StorageCellElement cellVisual || cellVisual.Cell?.Item == null) return;
             
             ObjectInteracted?.Invoke(cellVisual.Cell.Item);
         }
 
-        public void SetStorage(IReadOnlyStorage storage)
+        public void SetStorage(IReadOnlyStorage storage, IStorageEvents events)
         {
             if (storage == null)
             {
@@ -80,22 +81,24 @@ namespace IM.UI
             }
 
             Storage = storage;
+            _events = events;
             ListView.itemsSource = Storage.GetListForUI();
-
-            storage.ItemAdded += Rebuild;
-            storage.ItemRemoved += Rebuild;
-            storage.CellsCountChanged += Rebuild;
+            
+            events.ItemAdded += Rebuild;
+            events.ItemRemoved += Rebuild;
+            events.CellsCountChanged += Rebuild;
         }
 
         public void ClearStorage()
         {
             if(Storage == null) return;
             
-            Storage.ItemAdded -= Rebuild;
-            Storage.ItemRemoved -= Rebuild;
-            Storage.CellsCountChanged -= Rebuild;
+            _events.ItemAdded -= Rebuild;
+            _events.ItemRemoved -= Rebuild;
+            _events.CellsCountChanged -= Rebuild;
             
             Storage = null;
+            _events = null;
             
             ListView.itemsSource = null;
             ListView.Rebuild();

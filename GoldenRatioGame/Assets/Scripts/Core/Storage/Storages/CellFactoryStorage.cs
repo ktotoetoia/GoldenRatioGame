@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace IM.Storages
 {
-    public class CellFactoryStorage : ICellFactoryStorage
+    public class CellFactoryStorage : ICellFactoryStorage, IStorageEvents
     {
         private readonly List<IStorageCell> _cells = new();
         public int Count => _cells.Count;

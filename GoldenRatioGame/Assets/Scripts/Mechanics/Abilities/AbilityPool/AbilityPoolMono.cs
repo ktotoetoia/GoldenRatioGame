@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace IM.Abilities
 {
-    public class AbilityPoolMono : MonoBehaviour, IAbilityPool
+    public class AbilityPoolMono : MonoBehaviour, IAbilityPool, IAbilityPoolEvents
     {
         private readonly IAbilityPool _abilityPool = new  AbilityPool();
         public IReadOnlyCollection<IAbilityReadOnly> Abilities => _abilityPool.Abilities;
+        public event Action<IAbilityReadOnly> AbilityAdded;
+        public event Action<IAbilityReadOnly> AbilityRemoved;
         
         public bool Contains(IAbilityReadOnly ability)
         {
@@ -16,11 +19,13 @@ namespace IM.Abilities
         public void AddAbility(IAbilityReadOnly ability)
         {
             _abilityPool.AddAbility(ability);
+            AbilityAdded?.Invoke(ability);
         }
 
         public void RemoveAbility(IAbilityReadOnly ability)
         {
             _abilityPool.RemoveAbility(ability);
+            AbilityRemoved?.Invoke(ability);
         }
     }
 }

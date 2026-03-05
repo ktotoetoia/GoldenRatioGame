@@ -1,7 +1,7 @@
 :root {
-    --new-var-1: 20%;
+    --new-var-1: 30%;
     --new-var-2: 30%;
-    --new-var-3: 50%;
+    --new-var-3: 40%;
 }
 
 .abilityContainer {

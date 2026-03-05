@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using IM.Storages;
 using IM.UI;
 using UnityEngine;
@@ -9,13 +10,13 @@ namespace IM.Visuals.Graph
     public class StorageView : MonoBehaviour
     {
         [SerializeField] private UIDocument _document;
-        private IStorageVisual _storageVisual;
+        private IStorageElement _storageElement;
 
-        public IStorageVisual StorageVisual
+        public IStorageElement StorageElement
         {
             get
             {
-                return _storageVisual ??= _document.rootVisualElement.Query().ToList().FirstOrDefault(x => x is IStorageVisual) as IStorageVisual;
+                return _storageElement ??= _document.rootVisualElement.Query().ToList().FirstOrDefault(x => x is IStorageElement) as IStorageElement;
             }
         }
 
@@ -26,13 +27,18 @@ namespace IM.Visuals.Graph
 
         public void SetStorage(IReadOnlyStorage storage)
         {
-            StorageVisual.SetStorage(storage);
+            if (storage is not IStorageEvents events)
+            {
+                throw new ArgumentException("storage must implement IStorageEvents to be used in storage view");
+            }
+            
+            StorageElement.SetStorage(storage,events);
             _document.rootVisualElement.visible = true;
         }
 
         public void ClearStorage()
         {
-            StorageVisual.ClearStorage();
+            StorageElement.ClearStorage();
             _document.rootVisualElement.visible = false;
         }
     }
