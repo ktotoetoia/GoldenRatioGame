@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using IM.Base;
+using IM.Common;
 
 namespace IM.Graphs
 {
@@ -10,14 +10,14 @@ namespace IM.Graphs
         private readonly TGraph _graph;
         private readonly IModuleGraphValidator _validator;
         private readonly IFactory<IModuleGraphAccess, TGraph> _accessGraphFactory;
-        private readonly List<IModuleGraphSnapshotObserver> _observers = new();
+        private readonly List<IEditorObserver<IModuleGraphReadOnly>> _observers = new();
         private IModuleGraphAccess _accessModuleGraph;
         private int _undoIndexAtEditStart;
 
         public bool IsEditing => _accessModuleGraph != null;
-        public bool CanSaveChanges => IsEditing && _validator.IsValid(Graph);
-        public IModuleGraphReadOnly Graph { get; }
-        public ICollection<IModuleGraphSnapshotObserver> Observers => _observers;
+        public bool CanSaveChanges => IsEditing && _validator.IsValid(Snapshot);
+        public IModuleGraphReadOnly Snapshot { get; }
+        public ICollection<IEditorObserver<IModuleGraphReadOnly>> Observers => _observers;
         
         public CommandModuleGraphEditor(TGraph graph, IFactory<IModuleGraphAccess, TGraph> accessGraphFactory)
             : this(graph, accessGraphFactory, new TrueModuleGraphValidator())
@@ -35,10 +35,10 @@ namespace IM.Graphs
             _validator = validator ?? throw new ArgumentNullException(nameof(validator));
             _accessGraphFactory = accessGraphFactory ?? throw new ArgumentNullException(nameof(accessGraphFactory));
 
-            Graph = new ModuleGraphReadOnlyWrapper(_graph);
+            Snapshot = new ModuleGraphReadOnlyWrapper(_graph);
         }
 
-        public TGraph StartEditing()
+        public TGraph BeginEdit()
         {
             if (IsEditing)
                 throw new InvalidOperationException("Graph is already being edited.");
@@ -49,7 +49,7 @@ namespace IM.Graphs
             return (TGraph)_accessModuleGraph;
         }
 
-        public void CancelChanges()
+        public void DiscardChanges()
         {
             if (!IsEditing)
                 throw new InvalidOperationException("Graph is not being edited.");
@@ -58,7 +58,7 @@ namespace IM.Graphs
             EndEditing();
         }
 
-        public bool TrySaveChanges()
+        public bool TryApplyChanges()
         {
             if (!IsEditing)
                 throw new InvalidOperationException("Graph is not being edited.");
@@ -66,7 +66,7 @@ namespace IM.Graphs
             if (!CanSaveChanges && !_validator.TryFix(_graph)) return false;
 
             EndEditing();
-            _observers.ForEach(x => x.OnGraphUpdated(Graph));
+            _observers.ForEach(x => x.OnSnapshotChanged(Snapshot));
             return true;
         }
         

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using IM.Values;
+using IM.Common;
 
 namespace IM.Health
 {

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using IM.Base;
+using IM.Common;
 
 namespace IM.Graphs
 {

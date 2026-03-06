@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class AbilityExtensionsObserver : MonoBehaviour, IModuleGraphSnapshotObserver
+    public class AbilityExtensionsObserver : MonoBehaviour, IEditorObserver<IModuleGraphReadOnly>
     {
         [SerializeField] private GameObject _abilityPoolSource;
         private ModuleExtensionsObserver<IAbilityExtension> _extensionsObserver;
@@ -19,6 +19,6 @@ namespace IM.Modules
 
         private void OnExtensionAdded(IExtensibleModule module,IAbilityExtension abilityExtension) => _abilityPool.AddAbility(abilityExtension.Ability);
         private void OnExtensionRemoved(IExtensibleModule module,IAbilityExtension abilityExtension) => _abilityPool.RemoveAbility(abilityExtension.Ability);
-        public void OnGraphUpdated(IModuleGraphReadOnly graph) => _extensionsObserver.OnGraphUpdated(graph);
+        public void OnSnapshotChanged(IModuleGraphReadOnly graph) => _extensionsObserver.OnSnapshotChanged(graph);
     }
 }

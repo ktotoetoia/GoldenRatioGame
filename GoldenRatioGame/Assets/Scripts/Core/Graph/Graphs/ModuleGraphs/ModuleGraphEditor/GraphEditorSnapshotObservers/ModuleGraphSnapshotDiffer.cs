@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace IM.Graphs
 {
-    public class ModuleGraphSnapshotDiffer : IModuleGraphSnapshotObserver
+    public class ModuleGraphSnapshotDiffer : IEditorObserver<IModuleGraphReadOnly>
     {
         private readonly List<IModule> _prevModules = new();
         private readonly List<IConnection> _prevConnections = new();
@@ -14,7 +14,7 @@ namespace IM.Graphs
         public Action<IConnection> OnConnected { get; set; } = x => { };
         public Action<IConnection> OnDisconnected { get; set; } = x => { };
         
-        public void OnGraphUpdated(IModuleGraphReadOnly graph)
+        public void OnSnapshotChanged(IModuleGraphReadOnly graph)
         {
             foreach (IModule module in graph.Modules.Except(_prevModules))
             {

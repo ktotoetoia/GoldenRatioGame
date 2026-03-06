@@ -1,6 +1,6 @@
 ﻿using IM.Abilities;
 using IM.Modules;
-using IM.Values;
+using IM.Common;
 using UnityEngine;
 
 namespace IM.Visuals

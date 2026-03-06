@@ -2,30 +2,30 @@
 
 namespace IM.Graphs
 {
-    public class CompositeObserver : IModuleGraphSnapshotObserver
+    public class CompositeObserver : IEditorObserver<IModuleGraphReadOnly>
     {
-        private readonly List<IModuleGraphSnapshotObserver> _observers;
+        private readonly List<IEditorObserver<IModuleGraphReadOnly>> _observers;
 
-        public CompositeObserver(IEnumerable<IModuleGraphSnapshotObserver> observers)
+        public CompositeObserver(IEnumerable<IEditorObserver<IModuleGraphReadOnly>> observers)
         {
             _observers = new(observers);
         }
 
-        public void AddObserver(IModuleGraphSnapshotObserver observer)
+        public void AddObserver(IEditorObserver<IModuleGraphReadOnly> observer)
         {
             _observers.Add(observer);
         }
 
-        public void RemoveObserver(IModuleGraphSnapshotObserver observer)
+        public void RemoveObserver(IEditorObserver<IModuleGraphReadOnly> observer)
         {
             _observers.Remove(observer);
         }
 
-        public void OnGraphUpdated(IModuleGraphReadOnly graph)
+        public void OnSnapshotChanged(IModuleGraphReadOnly graph)
         {
-            foreach(IModuleGraphSnapshotObserver observer in _observers)
+            foreach(IEditorObserver<IModuleGraphReadOnly> observer in _observers)
             {
-                observer.OnGraphUpdated(graph);
+                observer.OnSnapshotChanged(graph);
             }
         }
     }

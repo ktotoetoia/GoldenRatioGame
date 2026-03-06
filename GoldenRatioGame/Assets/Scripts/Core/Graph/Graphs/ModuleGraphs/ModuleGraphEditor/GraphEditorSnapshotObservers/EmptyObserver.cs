@@ -1,8 +1,8 @@
 ﻿namespace IM.Graphs
 {
-    public class EmptyObserver : IModuleGraphSnapshotObserver
+    public class EmptyObserver : IEditorObserver<IModuleGraphReadOnly>
     {
-        public void OnGraphUpdated(IModuleGraphReadOnly graph)
+        public void OnSnapshotChanged(IModuleGraphReadOnly graph)
         {
 
         }

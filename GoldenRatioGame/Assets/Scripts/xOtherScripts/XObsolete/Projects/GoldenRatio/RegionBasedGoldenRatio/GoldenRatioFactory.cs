@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using IM.Base;
+using IM.Common;
 using UnityEngine;
 
 namespace IM.GoldenRatio

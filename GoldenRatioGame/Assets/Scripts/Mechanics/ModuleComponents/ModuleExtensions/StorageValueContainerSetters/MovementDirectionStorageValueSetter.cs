@@ -6,11 +6,11 @@ using IM.Events;
 using IM.Graphs;
 using IM.Modules;
 using IM.Movement;
-using IM.Values;
+using IM.Common;
 
 namespace IM.Visuals
 {
-    public class MovementDirectionStorageValueSetter : MonoBehaviour, IModuleGraphSnapshotObserver
+    public class MovementDirectionStorageValueSetter : MonoBehaviour, IEditorObserver<IModuleGraphReadOnly>
     {
         [SerializeField] private string _valueStorageTag = DirectionConstants.Focus;
         private List<IValueStorageContainer> _containers;
@@ -28,7 +28,7 @@ namespace IM.Visuals
             SetDirectionToContainers(DirectionUtils.GetEnumDirection(_movement.Direction));
         }
         
-        public void OnGraphUpdated(IModuleGraphReadOnly graph)
+        public void OnSnapshotChanged(IModuleGraphReadOnly graph)
         {
             if(graph == null) throw new ArgumentNullException(nameof(graph));
 

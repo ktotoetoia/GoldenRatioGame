@@ -6,6 +6,10 @@
 
 .abilityContainer {
     width: var(--new-var-1);
+    margin-top: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    margin-left: 30px;
 }
 
 .graphEditorContainer {

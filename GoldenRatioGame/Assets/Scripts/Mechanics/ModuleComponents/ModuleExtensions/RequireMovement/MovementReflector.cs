@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class MovementReflector : MonoBehaviour, IModuleGraphSnapshotObserver
+    public class MovementReflector : MonoBehaviour, IEditorObserver<IModuleGraphReadOnly>
     {
         [SerializeField] private GameObject _vectorMovementSource;
         private IVectorMovement _movement;
@@ -28,7 +28,7 @@ namespace IM.Modules
             }
         }
         
-        public void OnGraphUpdated(IModuleGraphReadOnly graph)
+        public void OnSnapshotChanged(IModuleGraphReadOnly graph)
         {
             if(graph == null) throw new ArgumentNullException(nameof(graph));
 

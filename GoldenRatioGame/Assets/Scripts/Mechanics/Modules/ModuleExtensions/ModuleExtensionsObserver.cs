@@ -4,7 +4,7 @@ using IM.Graphs;
 
 namespace IM.Modules
 {
-    public class ModuleExtensionsObserver<TExtension> : IModuleGraphSnapshotObserver
+    public class ModuleExtensionsObserver<TExtension> : IEditorObserver<IModuleGraphReadOnly>
     {
         private readonly ModuleGraphSnapshotDiffer _differ;
 
@@ -38,6 +38,6 @@ namespace IM.Modules
             };
         }
         
-        public void OnGraphUpdated(IModuleGraphReadOnly graph) => _differ.OnGraphUpdated(graph);
+        public void OnSnapshotChanged(IModuleGraphReadOnly graph) => _differ.OnSnapshotChanged(graph);
     }
 }

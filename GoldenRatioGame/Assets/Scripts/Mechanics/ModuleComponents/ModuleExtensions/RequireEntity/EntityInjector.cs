@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class EntityInjector : MonoBehaviour, IModuleGraphSnapshotObserver
+    public class EntityInjector : MonoBehaviour, IEditorObserver<IModuleGraphReadOnly>
     {
         [SerializeField] private GameObject _entitySource;
         private ModuleExtensionsObserver<IRequireEntity> _extensionsObserver;
@@ -29,6 +29,6 @@ namespace IM.Modules
             requireEntity.Entity = null;
         }
 
-        public void OnGraphUpdated(IModuleGraphReadOnly graph) => _extensionsObserver.OnGraphUpdated(graph);
+        public void OnSnapshotChanged(IModuleGraphReadOnly graph) => _extensionsObserver.OnSnapshotChanged(graph);
     }
 }

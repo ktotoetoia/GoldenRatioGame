@@ -1,4 +1,4 @@
-﻿using IM.Values;
+﻿using IM.Common;
 
 namespace IM.Health
 {

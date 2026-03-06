@@ -1,5 +1,5 @@
 ﻿using System;
-using IM.Values;
+using IM.Common;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -18,6 +18,8 @@ namespace IM.Abilities
         public float Speed { get; set; } = 5f;
         public AbilityUseContext LastUsedContext => _context;
         public float FocusTime { get; set; } = 0.5f;
+        public string Name { get; set; } = "Projectile thrower";
+        public string Description { get; set; } = "Throws projectile in the direction of pointer";
         
         public event Action<AbilityUseContext> AbilityStarted;
         public event Action<AbilityUseContext> AbilityFinished;

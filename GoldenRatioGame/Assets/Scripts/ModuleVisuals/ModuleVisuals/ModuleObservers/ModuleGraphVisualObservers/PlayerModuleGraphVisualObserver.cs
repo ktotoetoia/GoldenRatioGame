@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class PlayerModuleGraphVisualObserver : MonoBehaviour, IModuleGraphSnapshotObserver, IModuleVisualMap
+    public class PlayerModuleGraphVisualObserver : MonoBehaviour, IModuleVisualMap, IEditorObserver<IModuleGraphReadOnly>
     {
         [SerializeField] private ModuleVisualObjectPreset _preset;
         private ModuleGraphVisualObserver _moduleGraphVisualObserver;
@@ -25,9 +25,9 @@ namespace IM.Visuals
             _moduleGraphVisualObserver.Update();    
         }
 
-        public void OnGraphUpdated(IModuleGraphReadOnly graph) 
+        public void OnSnapshotChanged(IModuleGraphReadOnly graph) 
         {
-            _moduleGraphVisualObserver.OnGraphUpdated(graph);
+            _moduleGraphVisualObserver.OnSnapshotChanged(graph);
             _moduleGraphVisualObserver.Update();    
         }
     }

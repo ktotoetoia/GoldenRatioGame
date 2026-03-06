@@ -1,0 +1,62 @@
+:root {
+    --ability-padding: 6px;
+    --ability-gap: 6px;
+    --ability-bg: rgb(30, 30, 30);
+    --ability-border: rgb(58, 58, 58);
+    --ability-radius: 6px;
+    --ability-name-color: rgb(255, 255, 255);
+    --ability-description-color: rgb(192, 192, 192);
+    --ability-icon-size: 32px;
+    --ability-width: 24%;
+}
+
+.abilityContainer {
+    flex-direction: row;
+    padding: var(--ability-padding);
+    background-color: transparent;
+    flex-wrap: wrap;
+    align-self: auto;
+    justify-content: space-evenly;
+    flex-grow: 1;
+}
+
+.ability {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: var(--ability-padding);
+    background-color: var(--ability-bg);
+    border-radius: var(--ability-radius);
+    transition: background-color 0.12s ease;
+    width: var(--ability-width);
+    margin-bottom: 3px;
+    margin-top: 3px;
+    height: var(--ability-height);
+    align-self: stretch;
+    aspect-ratio: 1;
+    flex-wrap: wrap;
+}
+
+.ability:hover {
+    background-color: rgb(42, 42, 42);
+}
+
+.abilityIcon {
+    width: var(--ability-icon-size);
+    height: var(--ability-icon-size);
+    background-position: center;
+    border-radius: 4px;
+    flex-shrink: 0;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.abilityName {
+    font-size: 14px;
+    color: var(--ability-name-color);
+    margin-bottom: 2px;
+}
+
+.abilityDescription {
+    font-size: 12px;
+    color: var(--ability-description-color);
+}

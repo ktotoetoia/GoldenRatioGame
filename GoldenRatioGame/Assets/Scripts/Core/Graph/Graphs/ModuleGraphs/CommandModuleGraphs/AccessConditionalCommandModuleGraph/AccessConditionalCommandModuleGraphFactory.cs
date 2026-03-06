@@ -1,4 +1,4 @@
-﻿using IM.Base;
+﻿using IM.Common;
 
 namespace IM.Graphs
 {

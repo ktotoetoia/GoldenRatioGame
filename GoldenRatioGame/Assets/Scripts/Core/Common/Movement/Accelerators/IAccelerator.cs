@@ -1,0 +1,13 @@
+﻿using UnityEngine;
+
+namespace IM.Common
+{
+    public interface IAccelerator
+    {
+        public float AccelerationTime { get; set; }
+
+        public Vector2 Acceleration { get; }
+        void Update(Vector2 direction, float deltaTime);
+        void Reset();
+    }
+}

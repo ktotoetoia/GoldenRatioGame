@@ -6,12 +6,12 @@ using IM.Events;
 using IM.Graphs;
 using IM.Modules;
 using IM.Movement;
-using IM.Values;
+using IM.Common;
 using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class MovementDirectionAndAbilityUseStorageValueSetter : MonoBehaviour, IModuleGraphSnapshotObserver
+    public class MovementDirectionAndAbilityUseStorageValueSetter : MonoBehaviour, IEditorObserver<IModuleGraphReadOnly>
     {
         [SerializeField] private GameObject _movementAndAbilityEventsSource;
         [SerializeField] private string _valueStorageTag = DirectionConstants.Focus;
@@ -55,7 +55,7 @@ namespace IM.Visuals
             SetDirectionToContainers(DirectionUtils.GetEnumDirection(_movement.Direction));
         }
         
-        public void OnGraphUpdated(IModuleGraphReadOnly graph)
+        public void OnSnapshotChanged(IModuleGraphReadOnly graph)
         {
             if(graph == null) throw new ArgumentNullException(nameof(graph));
 

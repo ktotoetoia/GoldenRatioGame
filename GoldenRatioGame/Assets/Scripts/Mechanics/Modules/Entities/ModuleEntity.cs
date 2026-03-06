@@ -20,7 +20,7 @@ namespace IM.Modules
                 
                 _moduleEditingContext = new ModuleEditingContext(new CellFactoryStorage());
                 
-                foreach (IModuleGraphSnapshotObserver observer in _observersSource.GetComponents<IModuleGraphSnapshotObserver>())
+                foreach (IEditorObserver<IModuleGraphReadOnly> observer in _observersSource.GetComponents<IEditorObserver<IModuleGraphReadOnly>>())
                 {
                     ModuleEditingContext.GraphEditor.Observers.Add(observer);
                 }

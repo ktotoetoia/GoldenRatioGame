@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using IM.Base;
+using IM.Common;
 using IM.Graphs;
 using IM.Modules;
 using IM.Transforms;

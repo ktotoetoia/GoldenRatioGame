@@ -1,9 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Visuals/UI/Storage/EditorViewRatios.uss?fileID=7433441132597879392&amp;guid=5bab9398e3e32ba4793994d6ba435ffc&amp;type=3#EditorViewRatios"/>
+    <Style src="project://database/Assets/Visuals/UI/ModuleEditor/EditorViewRatios.uss?fileID=7433441132597879392&amp;guid=5bab9398e3e32ba4793994d6ba435ffc&amp;type=3#EditorViewRatios"/>
     <ui:VisualElement name="AllContainer" style="flex-grow: 1; flex-direction: row;">
-        <ui:VisualElement name="AbilityContainer" class="abilityContainer">
-            <ui:Label text="Ability Manager" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-text-align: middle-center; flex-grow: 1; flex-shrink: 1; font-size: 40px; -unity-font-definition: url(&quot;project://database/Assets/Visuals/Fonts/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf?fileID=12800000&amp;guid=585188cdc4600544eb408bee749e4b3a&amp;type=3#ThaleahFat_TTF&quot;); color: rgb(0, 0, 0); letter-spacing: 0; -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(255, 236, 210); white-space: normal; -unity-text-generator: standard;"/>
-        </ui:VisualElement>
+        <ui:VisualElement name="AbilityContainer" class="abilityContainer"/>
         <ui:VisualElement name="GraphEditorContainer" class="graphEditorContainer"/>
         <ui:VisualElement name="StorageContainer" class="storageContainer"/>
     </ui:VisualElement>

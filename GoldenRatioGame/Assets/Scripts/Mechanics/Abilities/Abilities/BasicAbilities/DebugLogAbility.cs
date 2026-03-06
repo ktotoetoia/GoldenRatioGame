@@ -1,4 +1,4 @@
-﻿using IM.Values;
+﻿using IM.Common;
 using UnityEngine;
 
 namespace IM.Abilities
@@ -10,6 +10,9 @@ namespace IM.Abilities
 
         public ICooldownReadOnly Cooldown=> _cooldown;
         public bool CanUse => !Cooldown.IsOnCooldown;
+
+        public string Name { get; set; } = "Debug Log";
+        public string Description { get; set; } = "Logs when ability is used";
 
         public DebugLogAbility() : this("ability has been used", new FloatCooldown(0))
         {

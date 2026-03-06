@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using IM.Effects;
-using IM.Values;
+using IM.Common;
 using UnityEngine;
 
 namespace IM.Abilities
@@ -15,7 +15,10 @@ namespace IM.Abilities
         public bool CanUse => !Cooldown.IsOnCooldown;
         public bool IsChanneling => _channelInfo != null;
         public bool CanInterrupt => true;
-        
+
+        public string Name { get; set; } = "Line Drawer";
+        public string Description { get; set; } = "Draws line from the position of an entity to the pointer position";
+
         public DebugDrawLineChannelAbility(float cooldownTime, float useTime)
         {
             _cooldown = new FloatCooldown(cooldownTime);

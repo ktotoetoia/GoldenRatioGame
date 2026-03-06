@@ -7,7 +7,7 @@ using UnityEngine.Pool;
 
 namespace IM.Visuals
 {
-    public class ModuleGraphVisualObserverBase : IModuleVisualMap, IModuleGraphSnapshotObserver, IDisposable
+    public class ModuleGraphVisualObserverBase : IModuleVisualMap, IDisposable, IEditorObserver<IModuleGraphReadOnly>
     {
         private readonly ModuleGraphSnapshotDiffer _snapshotDiffer;
         protected readonly Dictionary<IExtensibleModule, IModuleVisualObject> ModuleVisualObjects = new();
@@ -49,12 +49,12 @@ namespace IM.Visuals
             }
         }
 
-        public void OnGraphUpdated(IModuleGraphReadOnly graph)
+        public void OnSnapshotChanged(IModuleGraphReadOnly graph)
         {
             if (graph == null)
                 throw new ArgumentNullException(nameof(graph));
 
-            _snapshotDiffer.OnGraphUpdated(graph);
+            _snapshotDiffer.OnSnapshotChanged(graph);
         }
 
         private void HandleModuleAdded(IModule module)

@@ -38,7 +38,7 @@ namespace IM.Modules
             
             if (_entity is { ModuleEditingContext: not null })
             {
-                Graph = _entity.ModuleEditingContext.GraphEditor.Graph;
+                Graph = _entity.ModuleEditingContext.GraphEditor.Snapshot;
             }
             
             if (Graph == null || Graph.Nodes == null || Graph.Edges == null) return;

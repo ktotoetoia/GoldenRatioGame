@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class ReferenceModuleSetter : MonoBehaviour, IModuleGraphSnapshotObserver
+    public class ReferenceModuleSetter : MonoBehaviour, IEditorObserver<IModuleGraphReadOnly>
     {
         private IModuleVisualMap _moduleVisualMap;
         private ModuleExtensionsObserver<IRequireReferenceModuleVisualObject> _extensionsObserver;
@@ -17,6 +17,6 @@ namespace IM.Visuals
 
         private void OnExtensionAdded(IExtensibleModule module,IRequireReferenceModuleVisualObject require) => require.SetReferenceModuleVisualObject(_moduleVisualMap.ModuleToVisualObjects[module]);
         private void OnExtensionRemoved(IExtensibleModule module,IRequireReferenceModuleVisualObject require) => require.SetReferenceModuleVisualObject(null);
-        public void OnGraphUpdated(IModuleGraphReadOnly graph) => _extensionsObserver.OnGraphUpdated(graph);
+        public void OnSnapshotChanged(IModuleGraphReadOnly graph) => _extensionsObserver.OnSnapshotChanged(graph);
     }
 }

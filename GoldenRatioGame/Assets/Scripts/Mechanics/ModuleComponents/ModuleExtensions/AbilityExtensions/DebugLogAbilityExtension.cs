@@ -1,5 +1,5 @@
 ﻿using IM.Abilities;
-using IM.Values;
+using IM.Common;
 using UnityEngine;
 
 namespace IM.Modules

@@ -28,7 +28,7 @@ namespace IM.Visuals.Graph
         {
             if (VisualObserver == null || _graph == null) return;
             
-            VisualObserver.OnGraphUpdated(_graph);
+            VisualObserver.OnSnapshotChanged(_graph);
         }
 
         public void ClearGraph()
