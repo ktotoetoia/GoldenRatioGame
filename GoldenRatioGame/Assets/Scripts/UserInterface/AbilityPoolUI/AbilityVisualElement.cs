@@ -8,7 +8,7 @@ namespace IM.UI
     [UxmlElement]
     public partial class AbilityVisualElement : VisualElement
     {
-        private readonly MarqueeContainer _nameLabel;
+        private readonly MarqueeContainerBase _nameLabel;
         private readonly VisualElement _iconElement;
         
         public IAbilityReadOnly Ability { get; set; }
@@ -20,7 +20,11 @@ namespace IM.UI
             _iconElement = new VisualElement();
             _iconElement.AddToClassList(AbilityClassLists.AbilityIcon);
 
-            _nameLabel = new MarqueeContainer() {DurationMs = 1000};
+            _nameLabel = new FadingMarqueeContainer()
+            {
+                DurationSec = 2f,
+                FadeDurationSec = 0.5f,
+            };
             _nameLabel.AddToClassList(AbilityClassLists.AbilityName);
 
             Add(_nameLabel);
