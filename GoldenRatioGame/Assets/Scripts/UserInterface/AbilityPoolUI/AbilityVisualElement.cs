@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using IM.Abilities;
+﻿using IM.Abilities;
 using IM.Items;
+using IM.Visuals;
 using UnityEngine.UIElements;
 
 namespace IM.UI
@@ -8,10 +8,11 @@ namespace IM.UI
     [UxmlElement]
     public partial class AbilityVisualElement : VisualElement
     {
-        private readonly Label _nameLabel;
-        private readonly Label _descriptionLabel;
+        private readonly MarqueeContainer _nameLabel;
         private readonly VisualElement _iconElement;
-
+        
+        public IAbilityReadOnly Ability { get; set; }
+        
         public AbilityVisualElement()
         {
             AddToClassList(AbilityClassLists.Ability);
@@ -19,24 +20,27 @@ namespace IM.UI
             _iconElement = new VisualElement();
             _iconElement.AddToClassList(AbilityClassLists.AbilityIcon);
 
-            _nameLabel = new Label();
+            _nameLabel = new MarqueeContainer() {DurationMs = 1000};
             _nameLabel.AddToClassList(AbilityClassLists.AbilityName);
 
-            _descriptionLabel = new Label();
-            _descriptionLabel.AddToClassList(AbilityClassLists.AbilityDescription);
-
-            Add(_iconElement);
             Add(_nameLabel);
-            Add(_descriptionLabel);
         }
 
         public void SetAbility(IAbilityReadOnly ability)
         {
-            _nameLabel.text = ability.Name;
-            _descriptionLabel.text = ability.Description;
+            _nameLabel.Text = ability.Name;
 
-            if (ability is IHaveIcon icon)
+            if (ability is IHaveIcon { Icon: not null } icon)
+            {
+                if (_iconElement.parent == null)
+                    Insert(0, _iconElement);
+
                 _iconElement.style.backgroundImage = new StyleBackground(icon.Icon.Sprite);
+            }
+            else
+            {
+                _iconElement.RemoveFromHierarchy();
+            }
         }
     }
 }

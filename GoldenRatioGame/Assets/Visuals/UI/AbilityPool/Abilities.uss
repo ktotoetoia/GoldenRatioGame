@@ -6,7 +6,7 @@
     --ability-radius: 6px;
     --ability-name-color: rgb(255, 255, 255);
     --ability-description-color: rgb(192, 192, 192);
-    --ability-icon-size: 32px;
+    --ability-icon-size: 80%;
     --ability-width: 24%;
 }
 
@@ -23,7 +23,6 @@
 .ability {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
     padding: var(--ability-padding);
     background-color: var(--ability-bg);
     border-radius: var(--ability-radius);
