@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using IM.Graphs;
 
-namespace IM.Graphs
+namespace IM.Common
 {
     public interface IEditor<out TEditor, TSnapshot>
         where TEditor : TSnapshot

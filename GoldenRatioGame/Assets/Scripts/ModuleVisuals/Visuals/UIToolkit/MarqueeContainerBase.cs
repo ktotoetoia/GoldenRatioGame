@@ -46,6 +46,7 @@ namespace IM.Visuals
 
             TargetLabel = CreateLabel();
             Add(TargetLabel);
+            TargetLabel.AddToClassList("marquee-container-label");
 
             RegisterCallback<GeometryChangedEvent>(OnGeometryChanged);
             RegisterCallback<DetachFromPanelEvent>(_ => StopEverything());
@@ -98,9 +99,15 @@ namespace IM.Visuals
 
             if (!CalculateScrollRange(out float scrollRange))
             {
+                TargetLabel.style.position = Position.Relative;
+
+                TargetLabel.style.width = StyleKeyword.Auto; 
+        
                 OnMovementNotRequired();
                 return;
             }
+
+            TargetLabel.style.position = Position.Absolute;
 
             ScheduledTask = schedule.Execute(() => StartAnimation(scrollRange)).StartingIn(ToMs(WaitBeforeSec));
         }
@@ -117,7 +124,6 @@ namespace IM.Visuals
             CurrentAnim.KeepAlive();
             CurrentAnim.onAnimationCompleted = () => {
                 OnAnimationEnd();
-                Debug.Log("completed");
                 if (Loop) RequestReset(MarqueeResetReason.CycleEnd);
             };
         }
@@ -126,7 +132,7 @@ namespace IM.Visuals
         {
             range = 0;
             float containerWidth = contentRect.width;
-            float textWidth = TargetLabel.MeasureTextSize(TargetLabel.text ?? "", 0, MeasureMode.Undefined, 0, MeasureMode.Undefined).x;
+            float textWidth = TargetLabel.MeasureTextSize(TargetLabel.text, 0, MeasureMode.Undefined, 0, MeasureMode.Undefined).x;
             float totalWidth = textWidth + TargetLabel.resolvedStyle.marginLeft + TargetLabel.resolvedStyle.marginRight;
 
             if (containerWidth <= 0 || totalWidth <= containerWidth) return false;

@@ -1,11 +1,12 @@
 ﻿using System;
 using IM.Common;
+using IM.Items;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace IM.Abilities
 {
-    public class SendProjectileByVelocityAbility : ICastAbility, IRequireAbilityUseContext, IFocusPointProvider, IAbilityEvents
+    public class SendProjectileByVelocityAbility : ICastAbility, IRequireAbilityUseContext, IFocusPointProvider, IAbilityEvents, IHaveIcon
     {
         private readonly IObjectPool<GameObject> _projectileFactory;
         private readonly ICooldown _cooldown;
@@ -20,7 +21,8 @@ namespace IM.Abilities
         public float FocusTime { get; set; } = 0.5f;
         public string Name { get; set; } = "Projectile thrower";
         public string Description { get; set; } = "Throws projectile in the direction of pointer";
-        
+        public IIcon Icon { get; set; }
+
         public event Action<AbilityUseContext> AbilityStarted;
         public event Action<AbilityUseContext> AbilityFinished;
 

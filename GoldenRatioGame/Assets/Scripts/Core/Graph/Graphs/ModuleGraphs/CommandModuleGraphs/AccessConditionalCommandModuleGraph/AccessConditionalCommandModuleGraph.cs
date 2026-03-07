@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using IM.Common;
 
 namespace IM.Graphs
 {
-    public class AccessConditionalCommandModuleGraph : IConditionalCommandModuleGraph, IModuleGraphAccess
+    public class AccessConditionalCommandModuleGraph : IConditionalCommandModuleGraph, IAccess
     {
         private readonly IConditionalCommandModuleGraph _graph;
 

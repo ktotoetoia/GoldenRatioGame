@@ -21,7 +21,6 @@ namespace IM.Visuals
         
         protected override void OnMarqueeReset(MarqueeResetReason reason)
         {
-            Debug.Log(reason.ToString());
             if (reason == MarqueeResetReason.CycleEnd)
             {
                 schedule.Execute(() => StartFade(1f, 0f)).StartingIn((long)((WaitAfterSec - FadeDurationSec-.2) * 1000));

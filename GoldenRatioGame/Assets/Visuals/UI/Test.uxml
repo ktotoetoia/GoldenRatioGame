@@ -1,6 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Visuals/UI/test.uss?fileID=7433441132597879392&amp;guid=d38adb08e3dae7042b774fd70453aeda&amp;type=3#test"/>
-    <ui:VisualElement style="flex-grow: 1;">
-        <IM.Visuals.MarqueeContainerBase text="asdffffffffd dddddddddddddddddddddddddddddddddd fffffff " duration-ms="5000" wait-after="1" wait-before="1" style="align-items: stretch; flex-grow: 1;"/>
+    <ui:VisualElement style="flex-grow: 1; justify-content: center;">
+        <IM.Visuals.FadingMarqueeContainer text="hhhhhhhhhhhhhhhhhhhhhhhhhhgffgggg" style="align-self: flex-start; align-items: center; flex-direction: column; justify-content: center;"/>
     </ui:VisualElement>
 </ui:UXML>

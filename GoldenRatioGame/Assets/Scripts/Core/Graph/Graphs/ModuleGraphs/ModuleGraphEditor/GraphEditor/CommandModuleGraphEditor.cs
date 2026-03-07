@@ -9,17 +9,17 @@ namespace IM.Graphs
     {
         private readonly TGraph _graph;
         private readonly IModuleGraphValidator _validator;
-        private readonly IFactory<IModuleGraphAccess, TGraph> _accessGraphFactory;
+        private readonly IFactory<IAccess, TGraph> _accessGraphFactory;
         private readonly List<IEditorObserver<IModuleGraphReadOnly>> _observers = new();
-        private IModuleGraphAccess _accessModuleGraph;
+        private IAccess _access;
         private int _undoIndexAtEditStart;
 
-        public bool IsEditing => _accessModuleGraph != null;
+        public bool IsEditing => _access != null;
         public bool CanSaveChanges => IsEditing && _validator.IsValid(Snapshot);
         public IModuleGraphReadOnly Snapshot { get; }
         public ICollection<IEditorObserver<IModuleGraphReadOnly>> Observers => _observers;
         
-        public CommandModuleGraphEditor(TGraph graph, IFactory<IModuleGraphAccess, TGraph> accessGraphFactory)
+        public CommandModuleGraphEditor(TGraph graph, IFactory<IAccess, TGraph> accessGraphFactory)
             : this(graph, accessGraphFactory, new TrueModuleGraphValidator())
         {
             
@@ -27,7 +27,7 @@ namespace IM.Graphs
 
         public CommandModuleGraphEditor(
             TGraph graph,
-            IFactory<IModuleGraphAccess, TGraph> accessGraphFactory,
+            IFactory<IAccess, TGraph> accessGraphFactory,
             IModuleGraphValidator validator
             )
         {
@@ -44,9 +44,9 @@ namespace IM.Graphs
                 throw new InvalidOperationException("Graph is already being edited.");
 
             _undoIndexAtEditStart = _graph.CommandsToUndoCount;
-            _accessModuleGraph = _accessGraphFactory.Create(_graph);
+            _access = _accessGraphFactory.Create(_graph);
             
-            return (TGraph)_accessModuleGraph;
+            return (TGraph)_access;
         }
 
         public void DiscardChanges()
@@ -72,8 +72,8 @@ namespace IM.Graphs
         
         private void EndEditing()
         {
-            _accessModuleGraph.CanUse = false;
-            _accessModuleGraph = null;
+            _access.CanUse = false;
+            _access = null;
 
             if (_graph is INotifyOnEditingEnded ntf)
             {

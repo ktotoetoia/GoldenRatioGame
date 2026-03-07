@@ -1,5 +1,6 @@
 ﻿using IM.Abilities;
 using IM.Common;
+using IM.Items;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -10,6 +11,7 @@ namespace IM.Modules
         [SerializeField] private GameObject _projectilePrefab;
         [SerializeField] private float _cooldown = 3;
         [SerializeField] private float _projectileSpeed;
+        [SerializeField] private Sprite _iconSprite;
         
         public IAbilityReadOnly Ability { get; private set; }
 
@@ -20,6 +22,7 @@ namespace IM.Modules
             Ability =  new SendProjectileByVelocityAbility(projectilePool, GetComponent<IPositionProvider>(), _cooldown)
             {
                 Speed = _projectileSpeed,
+                Icon = new Icon(_iconSprite)
             };
         }
 

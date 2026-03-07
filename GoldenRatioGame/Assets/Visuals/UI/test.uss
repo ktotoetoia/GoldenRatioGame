@@ -5,10 +5,4 @@
 }
 
 .marquee-container-label {
-    font-size: 17px;
-    -unity-text-align: middle-center;
-    margin-top: 0;
-    margin-right: 0;
-    margin-bottom: 0;
-    margin-left: 0;
 }

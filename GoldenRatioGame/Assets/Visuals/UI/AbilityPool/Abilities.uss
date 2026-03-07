@@ -6,8 +6,8 @@
     --ability-radius: 6px;
     --ability-name-color: rgb(255, 255, 255);
     --ability-description-color: rgb(192, 192, 192);
-    --ability-icon-size: 80%;
-    --ability-width: 24%;
+    --ability-icon-size: 64px;
+    --ability-width: 49%;
 }
 
 .abilityContainer {
@@ -22,7 +22,7 @@
 
 .ability {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     padding: var(--ability-padding);
     background-color: var(--ability-bg);
     border-radius: var(--ability-radius);
@@ -34,6 +34,7 @@
     align-self: stretch;
     aspect-ratio: 1;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .ability:hover {
@@ -46,13 +47,17 @@
     background-position: center;
     border-radius: 4px;
     flex-shrink: 0;
-    -unity-background-scale-mode: scale-to-fit;
+    -unity-background-scale-mode: scale-and-crop;
+    align-self: center;
 }
 
 .abilityName {
     font-size: 14px;
     color: var(--ability-name-color);
     margin-bottom: 2px;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
 }
 
 .abilityDescription {

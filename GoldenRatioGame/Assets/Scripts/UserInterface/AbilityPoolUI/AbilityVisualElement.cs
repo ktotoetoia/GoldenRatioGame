@@ -1,6 +1,7 @@
 ﻿using IM.Abilities;
 using IM.Items;
 using IM.Visuals;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace IM.UI
@@ -9,7 +10,7 @@ namespace IM.UI
     public partial class AbilityVisualElement : VisualElement
     {
         private readonly MarqueeContainerBase _nameLabel;
-        private readonly VisualElement _iconElement;
+        private readonly Image _iconElement;
         
         public IAbilityReadOnly Ability { get; set; }
         
@@ -17,9 +18,9 @@ namespace IM.UI
         {
             AddToClassList(AbilityClassLists.Ability);
 
-            _iconElement = new VisualElement();
-            _iconElement.AddToClassList(AbilityClassLists.AbilityIcon);
-
+            _iconElement = new Image();
+            _iconElement.scaleMode = ScaleMode.ScaleToFit;
+            
             _nameLabel = new FadingMarqueeContainer()
             {
                 DurationSec = 2f,
@@ -39,7 +40,7 @@ namespace IM.UI
                 if (_iconElement.parent == null)
                     Insert(0, _iconElement);
 
-                _iconElement.style.backgroundImage = new StyleBackground(icon.Icon.Sprite);
+                _iconElement.sprite = icon.Icon.Sprite;
             }
             else
             {
