@@ -13,26 +13,10 @@ namespace IM.Modules
         public IModuleGraphEditor<IConditionalCommandModuleGraph> GraphEditor { get; }
         public IReadOnlyStorage Storage => _storage;
 
-        public ModuleEditingContext(ICellFactoryStorage storage)
+        public ModuleEditingContext(ICellFactoryStorage storage, IModuleGraphEditor<IConditionalCommandModuleGraph> graphEditor)
         {
             _storage = storage;
-            
-            CommandModuleGraph graph = new(
-                new AddModuleToGraphAndRemoveItFromStorageCommandFactory(),
-                new RemoveModuleFromGraphAndAddItToStorageCommandFactory(x =>
-                    Storage.FirstOrDefault(y => y.Item == null)),
-                new ConnectCommandFactory(),
-                new DisconnectCommandFactory());
-            
-            ConditionalCommandModuleGraph conditionalCommandModuleGraph = new(graph, 
-                new CompositeModuleGraphConditions(new List<IModuleGraphConditions>
-                {
-                    new DefaultModuleGraphConditions(graph),
-                    new AllowSingleFirstCoreModule(graph),
-                    new AllowConnectionIfPortsMatch(),
-                }));
-            
-            GraphEditor = new CommandModuleGraphEditor<IConditionalCommandModuleGraph>(conditionalCommandModuleGraph,new AccessConditionalCommandModuleGraphFactory());
+            GraphEditor = graphEditor;
         }
 
         public void AddToContext(IExtensibleModule module)

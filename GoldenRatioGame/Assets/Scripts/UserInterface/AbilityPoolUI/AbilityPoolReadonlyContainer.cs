@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using IM.Abilities;
 using UnityEngine.UIElements;
 
@@ -11,30 +12,28 @@ namespace IM.UI
         private readonly Dictionary<IAbilityReadOnly, AbilityVisualElement> _abilityElements 
             = new();
         
-        private IAbilityPoolDraft _abilityPoolDraft;
+        private IAbilityPoolReadOnly _abilityPool;
         
         public AbilityPoolReadonlyContainer()
         {
             AddToClassList(AbilityClassLists.AbilityContainer);
         }
         
-        public void SetAbilityPool(IAbilityPoolDraft abilityPoolDraft)
+        public void SetAbilityPool(IAbilityPoolReadOnly abilityPool)
         {
-            if (_abilityPoolDraft != null) throw new ArgumentException("events is already set");
+            if (_abilityPool != null) throw new ArgumentException("events is already set");
             
-            _abilityPoolDraft = abilityPoolDraft ?? throw new ArgumentNullException(nameof(abilityPoolDraft));
-            foreach (IAbilityReadOnly ability in abilityPoolDraft.Abilities)
+            _abilityPool = abilityPool ?? throw new ArgumentNullException(nameof(abilityPool));
+            
+            foreach (IAbilityReadOnly ability in abilityPool.Abilities)
             {
                 OnAbilityAdded(ability);
             }
-            
-            abilityPoolDraft.AbilityAdded += OnAbilityAdded;
-            abilityPoolDraft.AbilityRemoved += OnAbilityRemoved;
         }
         
         public void ClearAbilityPool()
         {
-            if(_abilityPoolDraft ==  null) return;
+            if(_abilityPool ==  null) return;
 
             foreach (AbilityVisualElement element in _abilityElements.Values)
             {
@@ -42,9 +41,7 @@ namespace IM.UI
             }
             
             _abilityElements.Clear();
-            _abilityPoolDraft.AbilityAdded -= OnAbilityAdded;
-            _abilityPoolDraft.AbilityRemoved -= OnAbilityRemoved;
-            _abilityPoolDraft = null;
+            _abilityPool = null;
         }
         
         private void OnAbilityAdded(IAbilityReadOnly ability)
@@ -61,6 +58,21 @@ namespace IM.UI
             {
                 Remove(ve);
                 _abilityElements.Remove(ability);
+            }
+        }
+
+        public void Update()
+        {
+            if(_abilityPool == null) return;
+            
+            foreach (IAbilityReadOnly ability in _abilityPool.Abilities.Except(_abilityElements.Keys).ToList())
+            {
+                OnAbilityAdded(ability);
+            }
+            
+            foreach (IAbilityReadOnly ability in _abilityElements.Keys.Except(_abilityPool.Abilities).ToList())
+            {
+                OnAbilityRemoved(ability);
             }
         }
     }

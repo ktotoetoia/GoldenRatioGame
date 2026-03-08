@@ -16,7 +16,7 @@ namespace IM.Entities
             if (created.TryGetComponent(out IRequireInteractionProvider interactor))
                 interactor.InteractionProvider = InteractionManager;
             if(created.TryGetComponent(out IInteractable interactable))
-                InteractionManager.AddInteractable(interactable);
+                InteractionManager.Add(interactable);
 
             return created;
         }

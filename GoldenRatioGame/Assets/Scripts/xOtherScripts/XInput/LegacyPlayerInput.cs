@@ -9,7 +9,7 @@ namespace Tests
 {
     public class LegacyPlayerInput : MonoBehaviour, IRequirePlayerEntity
     {
-        [SerializeField] private EntityContextEditor _entityContextEditor;
+        [SerializeField] private EntityModuleAbilityContextEditingViewer entityModuleAbilityContextEditingViewer;
         [SerializeField] private Camera _gameCamera;
         private IModuleEntity _moduleEntity;
         private IStateMachine _stateMachine;
@@ -27,8 +27,8 @@ namespace Tests
 
         private void EditorInput()
         {
-            if (Input.GetKeyDown(KeyCode.I)) _entityContextEditor.SetEntity(_moduleEntity);
-            if (Input.GetKeyDown(KeyCode.O)) _entityContextEditor.ClearEntity();
+            if (Input.GetKeyDown(KeyCode.I)) entityModuleAbilityContextEditingViewer.SetEntity(_moduleEntity);
+            if (Input.GetKeyDown(KeyCode.O)) entityModuleAbilityContextEditingViewer.ClearEntity();
         }
 
         public void SetPlayerEntity(IEntity playerEntity)

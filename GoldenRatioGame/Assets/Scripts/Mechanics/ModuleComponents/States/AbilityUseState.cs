@@ -9,10 +9,10 @@ namespace Tests
 {
     public class AbilityUseState : State
     {
-        private readonly IAbilityUser<IKeyAbilityPool> _abilityUser;
+        private readonly AbilityKeyPoolMonoUser _abilityUser;
         private readonly Func<AbilityUseContext> _getUseContext;
 
-        public AbilityUseState(IAbilityUser<IKeyAbilityPool> abilityUser, Func<AbilityUseContext> getUseContext)
+        public AbilityUseState(AbilityKeyPoolMonoUser abilityUser, Func<AbilityUseContext> getUseContext)
         {
             _abilityUser = abilityUser;
             _getUseContext = getUseContext;

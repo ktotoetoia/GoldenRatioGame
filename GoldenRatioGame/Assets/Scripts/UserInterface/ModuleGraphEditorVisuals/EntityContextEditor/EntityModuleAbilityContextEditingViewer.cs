@@ -1,4 +1,5 @@
 ﻿using System;
+using IM.Abilities;
 using IM.Modules;
 using IM.UI;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine;
 namespace IM.Visuals.Graph
 {
     [DefaultExecutionOrder(EntityContextEditorExecutionOrder)]
-    public class EntityContextEditor : MonoBehaviour, IEntityEditor
+    public class EntityModuleAbilityContextEditingViewer : MonoBehaviour, IEntityEditor
     {
         [SerializeField] private StorageView _storageView;
         [SerializeField] private ModuleGraphView _graphView;
@@ -30,20 +31,25 @@ namespace IM.Visuals.Graph
 
         public void SetEntity(IModuleEntity entity)
         {
-            if(_entity != null) throw new Exception("Module entity has already been set");
+            if(_entity != null) 
+                throw new InvalidOperationException("Module entity has already been set");
+            if(entity.ModuleEditingContext.GraphEditor.IsEditing) 
+                throw new InvalidOperationException($"Other object edits entity: {entity.GameObject}");
             
             _entity = entity;
             _input.SetGraph(_entity.ModuleEditingContext.GraphEditor.BeginEdit());
             _graphView.SetGraph(_entity.ModuleEditingContext.GraphEditor.Snapshot);
             _storageView.SetStorage(_entity.ModuleEditingContext.Storage);
-            _abilityPoolView.SetEntity(_entity);
+            _abilityPoolView.SetAbilityPool(_entity.GameObject.GetComponent<IAbilityPool>());
         }
 
         public void ClearEntity()
         {
             if(_entity == null) return;
-            if(!_entity.ModuleEditingContext.GraphEditor.TryApplyChanges()) _entity.ModuleEditingContext.GraphEditor.DiscardChanges();
-            
+
+            if (_entity.ModuleEditingContext.GraphEditor.CanSaveChanges) _entity.ModuleEditingContext.GraphEditor.TryApplyChanges();
+            else _entity.ModuleEditingContext.GraphEditor.DiscardChanges();
+
             _entity = null;
             _input.ClearGraph();
             _graphView.ClearGraph();

@@ -6,7 +6,7 @@ namespace IM.Entities
     {
         IEnumerable<IInteractable> AllInteractable { get; }
         
-        void AddInteractable(IInteractable interactable);
-        bool RemoveInteractable(IInteractable interactable);
+        void Add(IInteractable interactable);
+        bool Remove(IInteractable interactable);
     }
 }

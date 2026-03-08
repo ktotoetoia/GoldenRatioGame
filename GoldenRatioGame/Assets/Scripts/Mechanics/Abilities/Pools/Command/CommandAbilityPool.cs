@@ -13,12 +13,17 @@ namespace IM.Abilities
 
         public int CommandsToUndoCount => _commands.CommandsToUndoCount;
         public int CommandsToRedoCount => _commands.CommandsToRedoCount;
-        public IReadOnlyCollection<IAbilityReadOnly> Abilities=> _abilities; 
+        public IReadOnlyCollection<IAbilityReadOnly> Abilities=> _abilities;
 
-        public CommandAbilityPool(IRemoveAbilityCommandFactory removeFactory, IAddAbilityCommandFactory addFactory)
+        public CommandAbilityPool() : this( new AddAbilityCommandFactory(), new RemoveAbilityCommandFactory())
         {
-            _removeFactory = removeFactory;
+            
+        }
+        
+        public CommandAbilityPool(IAddAbilityCommandFactory addFactory, IRemoveAbilityCommandFactory removeFactory)
+        {
             _addFactory = addFactory;
+            _removeFactory = removeFactory;
         }
 
         public void AddAbility(IAbilityReadOnly ability)

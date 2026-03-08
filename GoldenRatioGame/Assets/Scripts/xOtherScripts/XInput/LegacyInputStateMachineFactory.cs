@@ -11,7 +11,7 @@ namespace Tests
     {
         private readonly IEntity _moduleEntity;
         private readonly IMoveInVector _movement;
-        private readonly KeyAbilityPoolUserMono _abilityUser;
+        private readonly AbilityKeyPoolMonoUser _abilityUser;
         private readonly Camera _gameCamera;
 
         public LegacyInputStateMachineFactory(IEntity moduleEntity, Camera gameCamera)
@@ -19,7 +19,7 @@ namespace Tests
             _moduleEntity = moduleEntity;
             _gameCamera = gameCamera;
             _movement = _moduleEntity.GameObject.GetComponent<IMoveInVector>();
-            _abilityUser = _moduleEntity.GameObject.GetComponent<KeyAbilityPoolUserMono>();
+            _abilityUser = _moduleEntity.GameObject.GetComponent<AbilityKeyPoolMonoUser>();
         }
         
         public IStateMachine Create()

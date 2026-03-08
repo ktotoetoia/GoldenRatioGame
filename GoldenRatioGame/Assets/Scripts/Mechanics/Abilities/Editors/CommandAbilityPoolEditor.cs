@@ -5,27 +5,23 @@ using IM.Graphs;
 
 namespace IM.Abilities
 {
-    public class CommandAbilityPoolEditor : IAbilityPoolEditor
+    public class CommandAbilityPoolEditor<TCommandAbilityPool> : IAbilityPoolEditor<TCommandAbilityPool> where TCommandAbilityPool : ICommandAbilityPool
     {
-        private readonly ICommandAbilityPool _pool;
+        private readonly TCommandAbilityPool _pool;
         private readonly List<IEditorObserver<IAbilityPoolReadOnly>> _observers = new();
+        private readonly IFactory<IAccess, TCommandAbilityPool> _accessFactory;
 
-        private readonly IFactory<IAccessAbilityPool, ICommandAbilityPool> _accessFactory;
-
-        private IAccessAbilityPool _accessPool;
+        private IAccess _accessPool;
         private int _undoIndexAtEditStart;
 
         public bool IsEditing => _accessPool != null;
-
         public bool CanSaveChanges => IsEditing;
-
         public IAbilityPoolReadOnly Snapshot { get; }
-
         public ICollection<IEditorObserver<IAbilityPoolReadOnly>> Observers => _observers;
 
         public CommandAbilityPoolEditor(
-            ICommandAbilityPool pool,
-            IFactory<IAccessAbilityPool, ICommandAbilityPool> accessFactory)
+            TCommandAbilityPool pool,
+            IFactory<IAccess, TCommandAbilityPool> accessFactory)
         {
             _pool = pool ?? throw new ArgumentNullException(nameof(pool));
             _accessFactory = accessFactory ?? throw new ArgumentNullException(nameof(accessFactory));
@@ -33,16 +29,15 @@ namespace IM.Abilities
             Snapshot = new AbilityPoolReadOnlyWrapper(_pool);
         }
 
-        public IAbilityPool BeginEdit()
+        public TCommandAbilityPool BeginEdit()
         {
             if (IsEditing)
                 throw new InvalidOperationException("Ability pool is already being edited.");
 
             _undoIndexAtEditStart = _pool.CommandsToUndoCount;
-
             _accessPool = _accessFactory.Create(_pool);
-
-            return _accessPool;
+            
+            return (TCommandAbilityPool)_accessPool;
         }
 
         public void DiscardChanges()

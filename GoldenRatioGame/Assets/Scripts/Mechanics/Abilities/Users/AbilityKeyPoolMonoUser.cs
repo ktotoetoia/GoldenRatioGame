@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace IM.Abilities
 {
-    public class KeyAbilityPoolUserMono : MonoBehaviour, IAbilityUser<IKeyAbilityPool>, IAbilityUserEvents
+    public class AbilityKeyPoolMonoUser : MonoBehaviour, IAbilityUser<IKeyAbilityPool>, IAbilityUserEvents
     {
         private IEffectContainer _effectContainer;
         private IAbilityUseInfo _abilityUseInfo;

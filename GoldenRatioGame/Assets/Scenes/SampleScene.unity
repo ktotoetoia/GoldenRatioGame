@@ -1101,7 +1101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11bf42e72995449b9daf53473e1c8162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entityContextEditor: {fileID: 851632503}
+  entityModuleAbilityContextEditingViewer: {fileID: 851632503}
   _gameCamera: {fileID: 519420034}
 --- !u!1 &2049271415
 GameObject:

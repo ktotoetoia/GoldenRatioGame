@@ -37,13 +37,16 @@ namespace IM.UI
 
             if (ability is IHaveIcon { Icon: not null } icon)
             {
+                _nameLabel.RemoveFromHierarchy();
+                
                 if (_iconElement.parent == null)
-                    Insert(0, _iconElement);
+                    Add(_iconElement);
 
                 _iconElement.sprite = icon.Icon.Sprite;
             }
             else
             {
+                Add(_nameLabel);
                 _iconElement.RemoveFromHierarchy();
             }
         }

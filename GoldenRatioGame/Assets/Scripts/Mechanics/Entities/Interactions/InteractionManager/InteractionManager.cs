@@ -15,7 +15,7 @@ namespace IM.Entities
             return _interactable.Where(x => x.CanInteract(entity));
         }
 
-        public void AddInteractable(IInteractable interactable)
+        public void Add(IInteractable interactable)
         {
             if (!_interactable.Add(interactable))
             {
@@ -24,7 +24,7 @@ namespace IM.Entities
             }
         }
 
-        public bool RemoveInteractable(IInteractable interactable)
+        public bool Remove(IInteractable interactable)
         {
             return _interactable.Remove(interactable);
         }

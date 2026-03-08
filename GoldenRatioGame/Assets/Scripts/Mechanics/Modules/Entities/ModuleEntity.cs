@@ -1,7 +1,5 @@
 ﻿using System.Linq;
 using IM.Entities;
-using IM.Graphs;
-using IM.Storages;
 using UnityEngine;
 
 namespace IM.Modules
@@ -9,27 +7,14 @@ namespace IM.Modules
     [DisallowMultipleComponent]
     public class ModuleEntity : DefaultEntity, IModuleEntity, IRequireInteractionProvider
     {
-        [SerializeField] private GameObject _observersSource;
-        private IModuleEditingContext _moduleEditingContext;
-        
-        public IModuleEditingContext ModuleEditingContext
-        {
-            get
-            {
-                if (_moduleEditingContext != null) return _moduleEditingContext;
-                
-                _moduleEditingContext = new ModuleEditingContext(new CellFactoryStorage());
-                
-                foreach (IEditorObserver<IModuleGraphReadOnly> observer in _observersSource.GetComponents<IEditorObserver<IModuleGraphReadOnly>>())
-                {
-                    ModuleEditingContext.GraphEditor.Observers.Add(observer);
-                }
-
-                return _moduleEditingContext;
-            }
-        }
 
         public IInteractionProvider InteractionProvider { get; set; }
+        public IModuleEditingContext ModuleEditingContext { get; private set; }
+
+        private void Awake()
+        {
+            ModuleEditingContext = GetComponent<IModuleEditingContext>();
+        }
 
         private void Update()
         {
