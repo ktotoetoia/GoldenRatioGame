@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4556875372869762170}
   - component: {fileID: 8535451133996336894}
   - component: {fileID: -594624590486653856}
+  - component: {fileID: 5650288060688483888}
   m_Layer: 0
   m_Name: Head Humanoid
   m_TagString: Untagged
@@ -191,3 +192,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9dd9b36686f4bfa8f63a95993a9e1c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleComponents::IM.Modules.EffectGroupExtension
+--- !u!114 &5650288060688483888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8119833187759213420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0427d49d3d07469ca4801d9e7a42447d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SaveSystem::IM.SaveSystem.GameObjectSerializer
+  _assetReference:
+    m_AssetGUID: 201b37bc89a9a3641b2466ee9ad534a0
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0

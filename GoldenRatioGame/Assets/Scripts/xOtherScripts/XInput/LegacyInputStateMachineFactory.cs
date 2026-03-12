@@ -2,6 +2,7 @@
 using IM.Common;
 using IM.Entities;
 using IM.Movement;
+using IM.OdinSerializer;
 using IM.StateMachines;
 using UnityEngine;
 
@@ -27,7 +28,6 @@ namespace Tests
             IState movementState = new MovementState(_movement,
                 () => new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
             _abilityUser.GetAbilityUseContext = x => GetAbilityUseContext();
-            
             AbilityUseState abilityUseState = new AbilityUseState(_abilityUser, GetAbilityUseContext);
             CompositeState compositeState = new CompositeState(new [] {movementState, abilityUseState});
             

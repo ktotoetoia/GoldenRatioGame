@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Default Local Group
+  m_GUID: 0825de345d44b8a4c9d403b60f91e1a2
+  m_SerializeEntries:
+  - m_GUID: 201b37bc89a9a3641b2466ee9ad534a0
+    m_Address: Assets/Modules/Default/Head/Default Head/Head Humanoid.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4174b200c638a2d459cb9784d4349438
+    m_Address: Assets/Modules/Default/Leg/Default Leg/Leg Humanoid.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7245ca3eed7971c49b9c2c812086eabb
+    m_Address: Assets/Modules/Default/Arm/Default Arm/Arm Humanoid.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 74e8aa92c41572a4a9fc5cfe27d8b8d8
+    m_Address: Assets/Modules/Default/Core/Default Core/Core Humanoid.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c4a07373649bf7b4cb940360a0c15927
+    m_Address: Assets/Prefabs/Triangle.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 26ddb8c8f56068e428f29cf5ec692df2, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 6abbcaafe4b71d940a6c8badda978b8d, type: 2}
+    - {fileID: 11400000, guid: f064f9f50de8ae44a9ddd7337e9f0b47, type: 2}

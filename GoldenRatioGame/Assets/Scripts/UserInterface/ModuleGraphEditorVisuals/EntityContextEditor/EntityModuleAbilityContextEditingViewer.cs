@@ -40,7 +40,7 @@ namespace IM.Visuals.Graph
             _input.SetGraph(_entity.ModuleEditingContext.GraphEditor.BeginEdit());
             _graphView.SetGraph(_entity.ModuleEditingContext.GraphEditor.Snapshot);
             _storageView.SetStorage(_entity.ModuleEditingContext.Storage);
-            _abilityPoolView.SetAbilityPool(_entity.GameObject.GetComponent<IAbilityPool>());
+            _abilityPoolView.SetAbilityPool((_entity.ModuleEditingContext as IKeyAbilityPoolModuleEditingContext)?.KeyAbilityPool);
         }
 
         public void ClearEntity()

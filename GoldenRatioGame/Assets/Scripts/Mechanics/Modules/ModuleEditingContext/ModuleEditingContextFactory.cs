@@ -10,7 +10,7 @@ namespace IM.Modules
     public class ModuleEditingContextFactory : IFactory<ModuleEditingContext,ICellFactoryStorage>
     {
         public Func<IReadOnlyStorage, AddModuleDirectObserversCommandFactory> CreateAddFactory { get; set; } = storage =>
-            new AddModuleDirectObserversCommandFactory(new List<ICommandObserverAddFactory>
+            new AddModuleDirectObserversCommandFactory(new List<ICommandObserverAddFactory> 
             {
                 new StorageCommandObserverAddFactory()
             });

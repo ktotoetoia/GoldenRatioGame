@@ -1,71 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace IM.Abilities
 {
-    public class AbilityKeyPoolMono : MonoBehaviour, IKeyAbilityPool, IAbilityPool, IAbilityPoolEvents
+    public class KeyAbilityPoolMono : MonoBehaviour, IKeyAbilityPool, IAbilityPoolEvents
     {
         [SerializeField] private List<KeyCode> _keys = new()
         {
+            KeyCode.Alpha1,
+            KeyCode.Alpha2,
+            KeyCode.Alpha3,
             KeyCode.Q,
-            KeyCode.E,
-            KeyCode.R,
-            KeyCode.Z,
-            KeyCode.X,
+            KeyCode.E
         };
+        private KeyAbilityPool _keyAbilityPool;
+        
+        public IReadOnlyDictionary<KeyCode, IAbilityReadOnly> KeyMap => _keyAbilityPool.KeyMap;
+        public IReadOnlyCollection<IAbilityReadOnly> Abilities => _keyAbilityPool.Abilities;
+        
+        public event Action<IAbilityReadOnly> AbilityAdded
+        {
+            add => _keyAbilityPool.AbilityAdded += value;
+            remove => _keyAbilityPool.AbilityAdded -= value;
+        }
 
-        private readonly Dictionary<KeyCode, IAbilityReadOnly> _map = new();
-        private Stack<KeyCode> _freeKeys;
-
-        public IReadOnlyCollection<IAbilityReadOnly> Abilities => _map.Values;
-        public IReadOnlyDictionary<KeyCode, IAbilityReadOnly> KeyMap => _map;
-        public event Action<IAbilityReadOnly> AbilityAdded;
-        public event Action<IAbilityReadOnly> AbilityRemoved;
+        public event Action<IAbilityReadOnly> AbilityRemoved 
+        {
+            add => _keyAbilityPool.AbilityRemoved += value;
+            remove => _keyAbilityPool.AbilityRemoved -= value;
+        }
 
         private void Awake()
         {
-            _freeKeys = new Stack<KeyCode>(_keys.AsEnumerable().Reverse());
+            _keyAbilityPool = new KeyAbilityPool(_keys);
         }
 
-        public void AddAbility(IAbilityReadOnly ability)
-        {
-            if (ability == null || _map.ContainsValue(ability))
-                return;
-
-            var key = _freeKeys.Count > 0
-                ? _freeKeys.Pop()
-                : KeyCode.None;
-
-            if (key == KeyCode.None)
-                Debug.LogWarning($"No free keys left for ability {ability}. Assigned KeyCode.None.");
-            
-            _map[key] = ability;
-            AbilityAdded?.Invoke(ability);
-        }
-
-        public void RemoveAbility(IAbilityReadOnly ability)
-        {
-            if (ability == null)
-                return;
-
-            foreach (var kvp in _map)
-            {
-                if (kvp.Value != ability)
-                    continue;
-
-                _map.Remove(kvp.Key);
-
-                if (kvp.Key != KeyCode.None)
-                    _freeKeys.Push(kvp.Key);
-                
-                AbilityRemoved?.Invoke(kvp.Value);
-                
-                break;
-            }
-        }
-        
-        public bool Contains(IAbilityReadOnly ability) => _map.ContainsValue(ability);
+        public bool Contains(IAbilityReadOnly ability) => _keyAbilityPool.Contains(ability);
+        public void AddAbility(IAbilityReadOnly ability) => _keyAbilityPool.AddAbility(ability);
+        public void RemoveAbility(IAbilityReadOnly ability) => _keyAbilityPool.RemoveAbility(ability);
     }
 }

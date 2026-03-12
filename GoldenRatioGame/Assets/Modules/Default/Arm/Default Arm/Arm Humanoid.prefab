@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3625994651722585011}
   - component: {fileID: 2621271969024498473}
+  - component: {fileID: -3808709638150430868}
   - component: {fileID: 4071596603139949161}
   - component: {fileID: 2388554158658244825}
   - component: {fileID: 5634798734519334486}
@@ -100,6 +101,24 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &-3808709638150430868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210977406679086040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0427d49d3d07469ca4801d9e7a42447d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SaveSystem::IM.SaveSystem.GameObjectSerializer
+  _assetReference:
+    m_AssetGUID: 7245ca3eed7971c49b9c2c812086eabb
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
 --- !u!114 &4071596603139949161
 MonoBehaviour:
   m_ObjectHideFlags: 0

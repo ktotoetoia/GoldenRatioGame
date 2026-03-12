@@ -13,7 +13,8 @@ namespace IM.Modules
 
         private void Awake()
         {
-            if(!_abilityPoolSource.TryGetComponent(out _abilityPool)) throw new NullReferenceException();
+            if(!_abilityPoolSource.TryGetComponent(out IKeyAbilityPoolModuleEditingContext a)) throw new NullReferenceException();
+            _abilityPool = a.KeyAbilityPool;
         }
 
         public ICommandObserver Create(IModule param1, ICollection<IModule> param2)

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace IM.Abilities
 {
-    public class AbilityKeyPoolMonoUser : MonoBehaviour, IAbilityUser<IKeyAbilityPool>, IAbilityUserEvents
+    public class AbilityKeyPoolMonoUser : MonoBehaviour, IAbilityUser<IKeyAbilityPoolReadOnly>, IAbilityUserEvents
     {
         private IEffectContainer _effectContainer;
         private IAbilityUseInfo _abilityUseInfo;
@@ -15,7 +15,7 @@ namespace IM.Abilities
         public event Action<IAbilityReadOnly> OnAbilityStarted;
         public event Action<IAbilityReadOnly> OnAbilityFinished;
         
-        public IKeyAbilityPool AbilityPool { get; private set; }
+        public IKeyAbilityPoolReadOnly AbilityPool { get; private set; }
         public Func<IAbilityReadOnly, AbilityUseContext> GetAbilityUseContext { get; set; } =
             x => new AbilityUseContext();
         
@@ -45,7 +45,7 @@ namespace IM.Abilities
         private void Awake()
         {
             _effectContainer = GetComponent<IEffectContainer>();
-            AbilityPool = GetComponent<IKeyAbilityPool>();
+            AbilityPool = GetComponent<IKeyAbilityPoolReadOnly>();
         }
         
         private void Update()

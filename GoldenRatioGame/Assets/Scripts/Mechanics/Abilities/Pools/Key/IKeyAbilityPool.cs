@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-
-namespace IM.Abilities
+﻿namespace IM.Abilities
 {
-    public interface IKeyAbilityPool : IAbilityPoolReadOnly
+    public interface IKeyAbilityPool : IKeyAbilityPoolReadOnly, IAbilityPool
     {
-        public IReadOnlyDictionary<KeyCode, IAbilityReadOnly> KeyMap { get; }
+        
     }
 }
