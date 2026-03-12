@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3950009248158461450, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+      propertyPath: _assetReference.m_AssetGUID
+      value: ece0237ec3ed11f47af8bff30089ae37
+      objectReference: {fileID: 0}
     - target: {fileID: 6869556739838863163, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
       propertyPath: <Name>k__BackingField
       value: Humanoid Passive Leg
@@ -84,7 +88,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Passive Ability Leg Humanoid
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -8069501828437842105, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

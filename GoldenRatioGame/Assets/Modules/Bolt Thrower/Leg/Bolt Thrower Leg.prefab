@@ -72,6 +72,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3950009248158461450, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+      propertyPath: _assetReference.m_AssetGUID
+      value: 120cd70ac3f52c045b9c42cc3fa06d5d
+      objectReference: {fileID: 0}
     - target: {fileID: 6869556739838863163, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
       propertyPath: <Name>k__BackingField
       value: Bolt Thrower Leg

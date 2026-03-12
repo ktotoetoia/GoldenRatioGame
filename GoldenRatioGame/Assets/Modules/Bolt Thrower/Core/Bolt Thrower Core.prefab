@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7730524420974198917, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
+      propertyPath: _assetReference.m_AssetGUID
+      value: f518952fb52b4af42b95ad416b950be5
+      objectReference: {fileID: 0}
     - target: {fileID: 1563791358509127018, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
       propertyPath: _editorPrefab
       value: 

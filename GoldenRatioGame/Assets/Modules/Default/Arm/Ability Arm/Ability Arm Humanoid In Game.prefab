@@ -75,6 +75,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2156244532669732079, guid: 3740b105624c7f4459e38d8eae631f76, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6293460801592932762}
+    - targetCorrespondingSourceObject: {fileID: 2156244532669732079, guid: 3740b105624c7f4459e38d8eae631f76, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7790756480855862600}
   m_SourcePrefab: {fileID: 100100000, guid: 3740b105624c7f4459e38d8eae631f76, type: 3}
 --- !u!1 &341809917384193224 stripped
 GameObject:
@@ -108,7 +111,21 @@ MonoBehaviour:
   _target: {fileID: 8842739076745953366}
   _offsetAngle: 90
   _animate: 0
-  _setToZero: 0
+--- !u!114 &7790756480855862600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341809917384193224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff436b00d26a43baa164084fbf98108b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisualsComponents::IM.Visuals.AnimateIfStorageValueTrue
+  _tag: UsingAbility
+  _parameterName: Ability Used
+  _isTrigger: 1
 --- !u!4 &8842739076745953366 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7198272707218317425, guid: 3740b105624c7f4459e38d8eae631f76, type: 3}

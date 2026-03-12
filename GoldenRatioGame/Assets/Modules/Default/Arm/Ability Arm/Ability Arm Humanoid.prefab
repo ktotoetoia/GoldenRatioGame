@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3808709638150430868, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
+      propertyPath: _assetReference.m_AssetGUID
+      value: 9dd7b1f69d38b81489b903d2f7b7266e
+      objectReference: {fileID: 0}
     - target: {fileID: 2621271969024498473, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -82,10 +86,10 @@ PrefabInstance:
       addedObject: {fileID: -6274676798850143365}
     - targetCorrespondingSourceObject: {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3496685885907293022}
+      addedObject: {fileID: -6268778776344034009}
     - targetCorrespondingSourceObject: {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -6268778776344034009}
+      addedObject: {fileID: 5707228436977368573}
   m_SourcePrefab: {fileID: 100100000, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
 --- !u!1 &991209621830917388 stripped
 GameObject:
@@ -108,19 +112,6 @@ MonoBehaviour:
   _cooldown: 0.5
   _projectileSpeed: 10
   _iconSprite: {fileID: 2449836824585923721, guid: 12a419f8e9de1884395b465bd7f9588d, type: 3}
---- !u!114 &3496685885907293022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 991209621830917388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff436b00d26a43baa164084fbf98108b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleExtensionsVisual::IM.Visuals.AnimateOnAbilityUse
-  <ParameterName>k__BackingField: Ability Used
 --- !u!114 &-6268778776344034009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,3 +125,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleExtensionsVisual::IM.Visuals.ModuleVisualObjectPositionProvider
   _range: 0.8
+--- !u!114 &5707228436977368573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991209621830917388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc8df6c0598c45f5b676458f07541cdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisualsComponents::IM.Visuals.SetBoolOnAbilityUsed
+  _boolName: UsingAbility

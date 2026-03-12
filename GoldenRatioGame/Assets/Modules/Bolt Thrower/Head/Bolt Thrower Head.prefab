@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: <Name>k__BackingField
       value: Bolt Thrower Head
       objectReference: {fileID: 0}
+    - target: {fileID: 5650288060688483888, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+      propertyPath: _assetReference.m_AssetGUID
+      value: e4f1b720a6441804081b668b4a76a96e
+      objectReference: {fileID: 0}
     - target: {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
       propertyPath: m_Name
       value: Bolt Thrower Head

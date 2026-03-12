@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 0825de345d44b8a4c9d403b60f91e1a2
   m_SerializeEntries:
+  - m_GUID: 120cd70ac3f52c045b9c42cc3fa06d5d
+    m_Address: Assets/Modules/Bolt Thrower/Leg/Bolt Thrower Leg.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 201b37bc89a9a3641b2466ee9ad534a0
     m_Address: Assets/Modules/Default/Head/Default Head/Head Humanoid.prefab
     m_ReadOnly: 0
@@ -35,8 +40,34 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9dd7b1f69d38b81489b903d2f7b7266e
+    m_Address: Assets/Modules/Default/Arm/Ability Arm/Ability Arm Humanoid.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: acb799a4d4e278d4eb6f46a855de523b
+    m_Address: Assets/Modules/Bolt Thrower/Arm/Bolt Thrower Arm.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c4a07373649bf7b4cb940360a0c15927
     m_Address: Assets/Prefabs/Triangle.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e4f1b720a6441804081b668b4a76a96e
+    m_Address: Assets/Modules/Bolt Thrower/Head/Bolt Thrower Head.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ece0237ec3ed11f47af8bff30089ae37
+    m_Address: Assets/Modules/Default/Leg/Passive Ability Leg/Passive Ability Leg
+      Humanoid.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f518952fb52b4af42b95ad416b950be5
+    m_Address: Assets/Modules/Bolt Thrower/Core/Bolt Thrower Core.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

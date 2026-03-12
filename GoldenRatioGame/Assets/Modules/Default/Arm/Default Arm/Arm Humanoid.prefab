@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 6869556739838863163}
   - component: {fileID: 3134715345525867726}
   - component: {fileID: 7118497114025836106}
-  - component: {fileID: 6827808895751591596}
   - component: {fileID: -7743140741346210048}
   - component: {fileID: -5003398493981668265}
   m_Layer: 0
@@ -200,20 +199,6 @@ MonoBehaviour:
     _minValue: 0
     _maxValue: 100
     _value: 100
---- !u!114 &6827808895751591596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7210977406679086040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e75fde05024d4b73894a5c43830fc917, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModulesExtensions::IM.Visuals.AnimateOnMove
-  <ParameterType>k__BackingField: 1
-  <ParameterName>k__BackingField: IsMoving
 --- !u!114 &-7743140741346210048
 MonoBehaviour:
   m_ObjectHideFlags: 0
