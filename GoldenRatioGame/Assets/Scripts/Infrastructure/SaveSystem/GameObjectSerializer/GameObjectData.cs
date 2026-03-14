@@ -10,5 +10,6 @@ namespace IM.SaveSystem
         public string PrefabId;
         public string ScenePath;
         public List<ComponentData> Components = new();
+        public List<string> DependenciesIDS = new();
     }
 }

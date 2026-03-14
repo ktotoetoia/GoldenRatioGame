@@ -102,11 +102,6 @@ namespace IM.Visuals
             
             HandleDisconnected(visualA.GetPortVisualObject(connection.Port1), visualB.GetPortVisualObject(connection.Port2));
         }
-
-        protected virtual void HandleModuleAdded(IExtensibleModule extensibleModule,IModuleVisual moduleVisual)
-        {
-            
-        }
         
         private void AlignAll()
         {
@@ -137,6 +132,11 @@ namespace IM.Visuals
         protected virtual IObjectPool<IModuleVisualObject> GetObjectPool(IModuleVisual moduleVisual)
         {
             return UseInGameObjectPool ? moduleVisual.GamePool : moduleVisual.EditorPool;
+        }
+
+        protected virtual void HandleModuleAdded(IExtensibleModule extensibleModule,IModuleVisual moduleVisual)
+        {
+            
         }
         
         protected virtual void HandleModuleRemoved(IExtensibleModule extensibleModule)

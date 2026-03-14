@@ -16,5 +16,8 @@ namespace IM.Graphs
         public IEnumerable<(TModule, TPort )> EnumerateModulesAlongConnection<TModule, TPort>(TPort start)
             where TModule : class, IModule
             where TPort : class, IPort;
+
+        IReadOnlyList<TNode> FindPath<TNode>(TNode start, TNode target)
+            where TNode : INode;
     }
 } 

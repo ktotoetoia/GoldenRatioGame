@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace IM.SaveSystem
 {
@@ -14,7 +15,7 @@ namespace IM.SaveSystem
             };
         }
 
-        public override void RestoreState(Transform t, object state)
+        public override void RestoreState(Transform t, object state, Func<string, GameObject> resolveDependency)
         {
             var s = (TransformState)state;
             t.position = s.Position;

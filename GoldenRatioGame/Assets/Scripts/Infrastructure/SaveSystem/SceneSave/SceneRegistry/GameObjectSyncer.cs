@@ -23,11 +23,7 @@ namespace IM.SaveSystem
             resolver ??= _defaultResolver;
 
             SyncGameObjects(savedObjects, resolver, instantiateMissing);
-
-            Dictionary<string, IStateSerializable> serializers = _store.GetActiveSerializers();
-            InjectDependencies(savedObjects, serializers);
-
-            RestoreStates(savedObjects, serializers);
+            RestoreStates(savedObjects, _store.GetActiveSerializers());
         }
 
         private void SyncGameObjects(IReadOnlyList<GameObjectData> dataList, IPrefabResolver resolver, bool instantiateMissing)
@@ -56,34 +52,29 @@ namespace IM.SaveSystem
             _store.AddEntry(ident.Id, instance, instance.GetComponent<IStateSerializable>());
         }
 
-        private void InjectDependencies(IReadOnlyList<GameObjectData> dataList, Dictionary<string, IStateSerializable> serializers)
-        {
-            foreach (GameObjectData data in dataList)
-            {
-                if (serializers.TryGetValue(data.Id, out IStateSerializable s) && s is IDependencyProvider prov and IDependencyReceiver receiver)
-                {
-                    Dictionary<string, GameObject> deps = new Dictionary<string, GameObject>();
-                    foreach (string id in prov.GetDependencyIds())
-                    {
-                        if (!deps.ContainsKey(id))
-                        {
-                            GameObject depGo = serializers.TryGetValue(id, out IStateSerializable ds) ? (ds as MonoBehaviour)?.gameObject : null;
-                            deps.Add(id, depGo);
-                        }
-                    }
-                    receiver.InjectDependencies(deps);
-                }
-            }
-        }
-
         private void RestoreStates(IReadOnlyList<GameObjectData> dataList, Dictionary<string, IStateSerializable> serializers)
         {
             foreach (GameObjectData data in dataList)
             {
                 if (serializers.TryGetValue(data.Id, out IStateSerializable s) && s != null)
                 {
-                    try { s.Restore(data); }
-                    catch (Exception ex) { Debug.LogError($"Restore failed for {data.Id}: {ex}"); }
+                    try
+                    {
+                        s.Restore(data, x =>
+                        {
+                            if (_store.TryGetLiveGameObject(x, out GameObject go))
+                            {
+                                return go;
+                            }
+
+                            return null;
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogError($"Restore failed for {data.Id}");
+                        Debug.LogException(ex);
+                    }
                 }
             }
         }

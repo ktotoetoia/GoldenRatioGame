@@ -128,6 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 197609166}
+  - component: {fileID: 197609171}
   - component: {fileID: 197609165}
   - component: {fileID: 197609164}
   - component: {fileID: 197609167}
@@ -148,7 +149,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 197609163}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74654659739348aaacc2aeb0b4927115, type: 3}
   m_Name: 
@@ -163,6 +164,7 @@ MonoBehaviour:
   - {fileID: 9154606070248935614, guid: acb799a4d4e278d4eb6f46a855de523b, type: 3}
   - {fileID: 9154606070248935614, guid: acb799a4d4e278d4eb6f46a855de523b, type: 3}
   - {fileID: 6808322469448240976, guid: e4f1b720a6441804081b668b4a76a96e, type: 3}
+  - {fileID: 4342869459289063407, guid: b306b21a4a622aa4b8658ed929bb7632, type: 3}
   _bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 3, y: 3, z: 0}
@@ -207,10 +209,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acd743fc5d3d40219e054bc2cd393d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Entities::IM.Entities.InitializeSingleEntity
-  _playerPrefab: {fileID: 4342869459289063407, guid: b306b21a4a622aa4b8658ed929bb7632, type: 3}
   _startingPosition: {x: 0, y: 0, z: 0}
   _requirePlayer:
   - {fileID: 1886279916}
+  _tag: Player
 --- !u!114 &197609168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,7 +237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb0835b68fa4eebb76002982bc07087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SaveSystem::IM.SaveSystem.SerializationGameObjectObserver
-  fileName: scene_save.json
 --- !u!114 &197609170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +249,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 529bc8e1e11a4a3fa0aa1318607b23a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SaveSystem::IM.SaveSystem.IDInjector
+--- !u!114 &197609171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197609163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d30d63313ab34b76974f76635f962d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SaveSystem::IM.SaveSystem.SceneBootstrapper
+  _sceneLoadContext: {fileID: 11400000, guid: e14624f0e951a054dbd79e170576b8ef, type: 2}
 --- !u!1 &269530788
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,7 +518,7 @@ GameObject:
   - component: {fileID: 519420034}
   - component: {fileID: 519420033}
   m_Layer: 0
-  m_Name: PlayerCamera
+  m_Name: GameCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -641,7 +655,7 @@ GameObject:
   - component: {fileID: 851632503}
   - component: {fileID: 851632504}
   m_Layer: 5
-  m_Name: PlayerModuleEditor
+  m_Name: ModuleEditor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -824,39 +838,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1311731593}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1311731592
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1311731593}
-  m_Layer: 0
-  m_Name: ----UI----
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1311731593
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1311731592}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1204849134}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1315967220}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1315967219
 GameObject:
@@ -890,6 +872,7 @@ Transform:
   - {fileID: 1886279917}
   - {fileID: 851632501}
   - {fileID: 519420032}
+  - {fileID: 1204849134}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1546399629
@@ -1058,7 +1041,7 @@ GameObject:
   - component: {fileID: 1886279917}
   - component: {fileID: 1886279918}
   m_Layer: 0
-  m_Name: Player Input
+  m_Name: Input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1230,6 +1213,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 197609166}
   - {fileID: 2057245054}
-  - {fileID: 1311731593}
-  - {fileID: 2049271416}
   - {fileID: 1315967220}
+  - {fileID: 2049271416}

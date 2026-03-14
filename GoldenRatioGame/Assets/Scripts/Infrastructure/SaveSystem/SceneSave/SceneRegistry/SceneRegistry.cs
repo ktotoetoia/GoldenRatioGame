@@ -24,20 +24,11 @@ namespace IM.SaveSystem
             _store.OnUnregistered += id => OnUnregistered?.Invoke(id);
         }
 
-        public static SceneRegistry Deserialize(string json, IGameObjectFactory factory)
+        public void Deserialize(string json)
         {
-            try
-            {
-                SceneSaveFile save = ScenePersistence.DeserializeToSaveFile(json);
-                SceneRegistry registry = new SceneRegistry(factory);
-                foreach (GameObjectData obj in save.Objects) registry._store.AddEntry(obj.Id, null, null);
-                return registry;
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"Failed to deserialize SceneSaveFile: {ex}");
-                return new SceneRegistry(factory);
-            }
+            SceneSaveFile save = ScenePersistence.DeserializeToSaveFile(json);
+            foreach (GameObjectData obj in save.Objects) _store.AddEntry(obj.Id, null, null);
+            ApplySavedObjects(save.Objects);
         }
 
         public string Serialize() => _persistence.Serialize();
@@ -73,10 +64,5 @@ namespace IM.SaveSystem
         public bool Contains(string id) => _store.Contains(id);
         public bool Contains(GameObject go) => _store.TryGetIdByObject(go, out _);
         public Dictionary<string, IStateSerializable> GetActiveSerializers() => _store.GetActiveSerializers();
-    }
-
-    public class IIdInjector
-    {
-        
     }
 }

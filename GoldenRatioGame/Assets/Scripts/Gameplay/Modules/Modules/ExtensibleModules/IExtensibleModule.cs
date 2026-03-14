@@ -8,5 +8,8 @@ namespace IM.Modules
     {
         ITypeRegistry<IExtension> Extensions { get; }
         ModuleState ModuleState { get; set; }
+        
+        int GetPortId(IPort port);
+        IPort GetPort(int id);
     }
 }

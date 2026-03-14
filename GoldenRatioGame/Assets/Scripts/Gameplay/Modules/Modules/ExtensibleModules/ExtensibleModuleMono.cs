@@ -30,6 +30,9 @@ namespace IM.Modules
             set => _iconDrawer.IsDrawing = (_state = value) == ModuleState.Show;
         }
 
+        public int GetPortId(IPort port) => _ports.IndexOf(port);
+        public IPort GetPort(int id) => _ports[id];
+
         private void Awake()
         {
             _iconDrawer = GetComponent<IIconDrawer>();

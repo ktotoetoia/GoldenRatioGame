@@ -11,8 +11,11 @@ namespace IM.Modules
         [SerializeField] private GameObject _moduleObserversSource;
         [SerializeField] private GameObject _factoriesSource;
         private KeyAbilityPool _keyAbilityPool;
+        private ModuleEditingContext _moduleEditingContext;
         
-        private IModuleEditingContext _moduleEditingContext;
+        public bool IsUnsafe => _moduleEditingContext.IsUnsafe;
+        public void SetUnsafe(bool value) => _moduleEditingContext.SetUnsafe(value);
+
         public IModuleGraphEditor<IConditionalCommandModuleGraph> GraphEditor => _moduleEditingContext.GraphEditor;
         public IReadOnlyStorage Storage => _moduleEditingContext.Storage;
         public IKeyAbilityPool KeyAbilityPool => _keyAbilityPool??= new KeyAbilityPool();

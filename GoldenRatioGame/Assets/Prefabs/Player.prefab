@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2365714068825351273}
   - component: {fileID: 4855950522832043137}
   - component: {fileID: 5563122138591822399}
+  - component: {fileID: -7872073379672071743}
   - component: {fileID: 2104419640333263632}
   - component: {fileID: 883802630339849986}
   - component: {fileID: 8559118447764604619}
@@ -21,7 +22,7 @@ GameObject:
   - component: {fileID: 7544895549371979933}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,6 +118,24 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-7872073379672071743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14147f3b323b450f969e156f9faacbfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComposition::IM.Modules.ModuleEntitySerializer
+  _assetReference:
+    m_AssetGUID: b306b21a4a622aa4b8658ed929bb7632
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
 --- !u!114 &2104419640333263632
 MonoBehaviour:
   m_ObjectHideFlags: 0

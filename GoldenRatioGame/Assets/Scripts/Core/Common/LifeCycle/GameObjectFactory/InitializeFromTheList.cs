@@ -3,15 +3,14 @@ using UnityEngine;
 
 namespace IM.Common
 {
-    [DefaultExecutionOrder(10000)]
-    public class InitializeFromTheList : MonoBehaviour
+    public class InitializeFromTheList : MonoBehaviour, INewSceneInitializer
     {
         [SerializeField] private List<GameObject> _toInitialize = new();
         [SerializeField] private Bounds _bounds = new (Vector3.zero, Vector3.one * 5);
         [SerializeField] private bool _initialize;
         private IGameObjectFactory _gameObjectFactory;
-        
-        private void Awake()
+
+        public void OnNewSceneInitialized()
         {
             if(!_initialize) return;
             _gameObjectFactory = GetComponent<IGameObjectFactory>();

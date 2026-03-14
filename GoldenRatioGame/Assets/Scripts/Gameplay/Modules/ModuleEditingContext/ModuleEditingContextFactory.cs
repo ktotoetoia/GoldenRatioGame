@@ -19,7 +19,7 @@ namespace IM.Modules
             new RemoveModuleDirectObserversCommandFactory(new List<ICommandObserverRemoveFactory>
             {
                 new StorageCommandObserverRemoveFactory(
-                    x => storage.FirstOrDefault(y => y.Item == null))
+                    x => storage.FirstOrDefault(y => y.Item == null)??(storage as ICellFactoryStorage).CreateCell())
             });
         
         public Func<ConnectCommandFactory> CreateConnectFactory { get; set; } = () => new ConnectCommandFactory();
@@ -43,11 +43,10 @@ namespace IM.Modules
             
             CompositeModuleGraphConditions conditions = CreateConditions(graph);
             ConditionalCommandModuleGraph conditionalGraph = new ConditionalCommandModuleGraph(graph, conditions);
-
-
+            
             CommandModuleGraphEditor<IConditionalCommandModuleGraph> commandModuleGraphEditor = new CommandModuleGraphEditor<IConditionalCommandModuleGraph>(conditionalGraph, new AccessConditionalCommandModuleGraphFactory());
             
-            return new ModuleEditingContext(storage, commandModuleGraphEditor);
+            return new ModuleEditingContext(storage, commandModuleGraphEditor, conditions);
         }
     }
 }

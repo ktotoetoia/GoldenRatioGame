@@ -2,7 +2,7 @@
 
 namespace IM.SaveSystem
 {
-    public interface IComponentSerializerRegistry
+    public interface IComponentSerializerContainer
     {
         IComponentSerializer GetSerializerFor(Type type);
     }

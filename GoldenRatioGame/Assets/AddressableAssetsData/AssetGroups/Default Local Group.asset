@@ -50,8 +50,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c4a07373649bf7b4cb940360a0c15927
-    m_Address: Assets/Prefabs/Triangle.prefab
+  - m_GUID: b306b21a4a622aa4b8658ed929bb7632
+    m_Address: Assets/Prefabs/Player.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -37,7 +37,8 @@ namespace IM.SaveSystem
                     }
                     catch (Exception ex)
                     {
-                        Debug.LogError($"Capture failed for {e.Id}: {ex}");
+                        Debug.LogError($"Capture failed for {e.Id}");
+                        Debug.LogException(ex);
                     }
                 }
             }

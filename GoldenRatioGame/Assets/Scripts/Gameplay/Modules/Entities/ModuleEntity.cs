@@ -7,7 +7,6 @@ namespace IM.Modules
     [DisallowMultipleComponent]
     public class ModuleEntity : DefaultEntity, IModuleEntity, IRequireInteractionProvider
     {
-
         public IInteractionProvider InteractionProvider { get; set; }
         public IModuleEditingContext ModuleEditingContext { get; private set; }
 

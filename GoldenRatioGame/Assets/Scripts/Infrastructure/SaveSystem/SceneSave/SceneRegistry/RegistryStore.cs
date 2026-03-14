@@ -9,14 +9,14 @@ namespace IM.SaveSystem
     internal class RegistryStore
     {
         private readonly ConcurrentDictionary<string, RegistryEntry> _entries = new();
-
+        
         public event Action<string> OnRegistered;
         public event Action<string> OnUnregistered;
 
         public bool AddEntry(string id, GameObject go, IStateSerializable serializer)
         {
             if (string.IsNullOrEmpty(id)) return false;
-
+            
             _entries.AddOrUpdate(id,
                 key => new RegistryEntry
                 {

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 
 namespace IM.SaveSystem
 {
-    public class ComponentSerializerRegistry : IComponentSerializerRegistry
+    public class ComponentSerializerContainer : IComponentSerializerContainer
     {
-
         private readonly Dictionary<Type, IComponentSerializer> _map = new();
 
-        public ComponentSerializerRegistry()
+        public ComponentSerializerContainer()
         {
             RegisterAll();
         }

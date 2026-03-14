@@ -27,11 +27,11 @@ namespace IM.Visuals
         protected override void HandleModuleAdded(IExtensibleModule extensibleModule,IModuleVisual moduleVisual)
         {
             IModuleVisualObject visualObject = GetObjectPool(moduleVisual).Get();
-            
             ModuleVisualObjects.Add(extensibleModule, visualObject);
             visualObject.Transform.Transform.SetParent(_parent, false);
             _preset.ApplyTo(visualObject);
         }
+        
         protected override  void HandleModuleRemoved(IExtensibleModule extensibleModule)
         {
             ModuleVisualObjects.Remove(extensibleModule, out IModuleVisualObject visualObject);
@@ -40,9 +40,25 @@ namespace IM.Visuals
 
         protected override void HandleConnected(IPortVisualObject portA, IPortVisualObject portB)
         {
+            (portA,portB) = ResolvePorts(portA, portB);
+            
             PortAligner.AlignPorts(portA,portB);
             portA.Visible = ShowPortsOnConnected;
             portB.Visible = ShowPortsOnConnected;
+        }
+
+        private (IPortVisualObject, IPortVisualObject) ResolvePorts(IPortVisualObject portA, IPortVisualObject portB)
+        {
+            IExtensibleModule moduleA = portA.OwnerVisualObject.Owner;
+            IExtensibleModule moduleB = portB.OwnerVisualObject.Owner;
+
+            foreach ((IExtensibleModule module, IModuleVisualObject obj) in ModuleVisualObjects)
+            {
+                if (module == moduleA) return (portB, portA);
+                if (module == moduleB) return (portA, portB);
+            }
+            
+            return (portA, portB);
         }
 
         protected override  void HandleDisconnected(IPortVisualObject portA, IPortVisualObject portB)

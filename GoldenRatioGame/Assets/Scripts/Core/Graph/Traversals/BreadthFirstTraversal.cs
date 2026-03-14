@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace IM.Graphs
@@ -118,6 +119,63 @@ namespace IM.Graphs
             }
             
             return false;
+        }
+        
+        public IReadOnlyList<TNode> FindPath<TNode>(TNode start, TNode target)
+            where TNode : INode
+        {
+            if (Equals(start, target))
+                return new[] { start };
+
+            Queue<TNode> queue = new();
+            HashSet<TNode> visited = new();
+            Dictionary<TNode, TNode> parent = new();
+
+            queue.Enqueue(start);
+            visited.Add(start);
+
+            while (queue.Count > 0)
+            {
+                TNode current = queue.Dequeue();
+
+                foreach (IEdge edge in current.Edges)
+                {
+                    if (edge.GetOther(current) is not TNode next)
+                        continue;
+
+                    if (!visited.Add(next))
+                        continue;
+
+                    parent[next] = current;
+
+                    if (Equals(next, target))
+                        return ReconstructPath(start, target, parent);
+
+                    queue.Enqueue(next);
+                }
+            }
+
+            return Array.Empty<TNode>();
+        }
+
+        private static IReadOnlyList<TNode> ReconstructPath<TNode>(
+            TNode start,
+            TNode target,
+            Dictionary<TNode, TNode> parent)
+        {
+            List<TNode> path = new();
+
+            TNode current = target;
+            path.Add(current);
+
+            while (!Equals(current, start))
+            {
+                current = parent[current];
+                path.Add(current);
+            }
+
+            path.Reverse();
+            return path;
         }
     }
 } 

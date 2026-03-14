@@ -2,7 +2,7 @@
 
 namespace IM.Modules
 {
-    public class ModuleSerializer : GameObjectSerializer
+    public class ModuleSerializer : GameObjectSerializer, IExtension
     {
     }
 }

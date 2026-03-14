@@ -8,13 +8,24 @@ namespace IM.Modules
     public class ModuleEditingContext : IModuleEditingContext
     {
         private readonly ICellFactoryStorage _storage;
+        private readonly CompositeModuleGraphConditions _conditions;
+
+        public bool IsUnsafe { get; private set; }
         
+        public void SetUnsafe(bool value)
+        {
+            IsUnsafe = value;
+            
+            _conditions.Disable =  IsUnsafe;
+        }
+
         public IModuleGraphEditor<IConditionalCommandModuleGraph> GraphEditor { get; }
         public IReadOnlyStorage Storage => _storage;
 
-        public ModuleEditingContext(ICellFactoryStorage storage, IModuleGraphEditor<IConditionalCommandModuleGraph> graphEditor)
+        public ModuleEditingContext(ICellFactoryStorage storage, IModuleGraphEditor<IConditionalCommandModuleGraph> graphEditor, CompositeModuleGraphConditions conditions)
         {
             _storage = storage;
+            _conditions = conditions;
             GraphEditor = graphEditor;
         }
 

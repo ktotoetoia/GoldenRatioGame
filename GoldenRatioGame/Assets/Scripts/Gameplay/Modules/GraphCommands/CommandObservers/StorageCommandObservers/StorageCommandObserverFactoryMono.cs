@@ -26,7 +26,7 @@ namespace IM.Modules
         public ICommandObserver Create(IModule param1, ICollection<IModule> param2, ICollection<IConnection> param3)
         {
             IStorableReadOnly storable = param1 as IStorableReadOnly ?? throw new ArgumentException();
-            return new StorageCommandObserver(_context.Storage.FirstOrDefault(x => x.Item == null), storable);
+            return new StorageCommandObserver(_context.Storage.FirstOrDefault(x => x.Item == null)??(_context.Storage as ICellFactoryStorage).CreateCell(), storable);
         }
     }
 }

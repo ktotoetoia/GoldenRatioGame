@@ -7,6 +7,6 @@ namespace IM.SaveSystem
     {
         Type TargetType { get; }
         object CaptureState(Component component);
-        void RestoreState(Component component, object state);
+        void RestoreState(Component component, object state,Func<string,GameObject> resolveDependency);
     }
 }

@@ -16,5 +16,6 @@ namespace IM.SaveSystem
         GameObject GetById(string id);
         bool Contains(string id);
         bool Contains(GameObject go);
+        void Deserialize(string json);
     }
 }

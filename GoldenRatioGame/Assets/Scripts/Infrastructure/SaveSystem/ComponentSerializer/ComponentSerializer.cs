@@ -7,9 +7,9 @@ namespace IM.SaveSystem
     {
         public Type TargetType => typeof(T);
         public abstract object CaptureState(T component);
-        public abstract void RestoreState(T component, object state);
+        public abstract void RestoreState(T component, object state,Func<string,GameObject> resolveDependency);
 
         object IComponentSerializer.CaptureState(Component component) => CaptureState((T)component);
-        void IComponentSerializer.RestoreState(Component component, object state) => RestoreState((T)component, state);
+        void IComponentSerializer.RestoreState(Component component, object state, Func<string, GameObject> resolveDependency) => RestoreState((T)component, state,resolveDependency);
     }
 }

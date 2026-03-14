@@ -27,16 +27,11 @@ namespace IM.Modules
         [SerializeField] private Color _edgeColor  = Color.white;
         [SerializeField] private bool _drawLabels = true;
 
-        private void Awake()
-        {
-            if(_origin) _entity = _origin.GetComponent<IModuleEntity>();
-        }
-
         private void OnDrawGizmos()
         {
             if(!_isOn) return;
             
-            if (_entity is { ModuleEditingContext: not null })
+            if ((_entity??= _origin.GetComponent<IModuleEntity>()) is { ModuleEditingContext: not null })
             {
                 Graph = _entity.ModuleEditingContext.GraphEditor.Snapshot;
             }

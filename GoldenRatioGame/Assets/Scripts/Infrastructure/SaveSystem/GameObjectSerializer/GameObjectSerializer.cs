@@ -6,19 +6,18 @@ using UnityEngine.AddressableAssets;
 namespace IM.SaveSystem
 {
     [DisallowMultipleComponent]
-    public class GameObjectSerializer : MonoBehaviour, IIdentifiable, IStateSerializable, IHaveComponentRegistry
+    public class GameObjectSerializer : MonoBehaviour, IIdentifiable, IStateSerializable, IRequireComponentSerializerContainer
     {
         [SerializeField] protected AssetReferenceGameObject _assetReference;
-        
-        private IComponentSerializerRegistry _registry;
+        private IComponentSerializerContainer _container;
         
         public string Id { get; private set; }
         public void InjectId(string id) => Id = id;
 
-        public IComponentSerializerRegistry Registry
+        public IComponentSerializerContainer Container
         {
-            get => _registry ??= new ComponentSerializerRegistry();
-            set => _registry = value;
+            get => _container ??= new ComponentSerializerContainer();
+            set => _container = value;
         }
 
         public virtual GameObjectData Capture()
@@ -29,25 +28,25 @@ namespace IM.SaveSystem
                 PrefabId = _assetReference?.AssetGUID,
                 ScenePath = gameObject.scene.path
             };
-
-            var components = GetComponentsToSerialize();
+            
+            IList<Component> components = GetComponentsToSerialize();
             
             for (int i = 0; i < components.Count; i++)
             {
                 TryCaptureComponent(components[i], i, data);
             }
-
+            
             return data;
         }
 
-        public virtual void Restore(GameObjectData data)
+        public virtual void Restore(GameObjectData data, Func<string, GameObject> resolveDependency)
         {
             Id = data.Id;
-            var components = GetComponentsToSerialize();
+            IList<Component> components = GetComponentsToSerialize();
 
             foreach (ComponentData compData in data.Components)
             {
-                TryRestoreComponent(compData, components);
+                TryRestoreComponent(compData, components,resolveDependency);
             }
         }
 
@@ -60,7 +59,7 @@ namespace IM.SaveSystem
         {
             if (!comp) return;
 
-            object state = Registry.GetSerializerFor(comp.GetType())?.CaptureState(comp);
+            object state = Container.GetSerializerFor(comp.GetType())?.CaptureState(comp);
             if (state == null) return;
 
             data.Components.Add(new ComponentData
@@ -71,7 +70,7 @@ namespace IM.SaveSystem
             });
         }
 
-        protected virtual void TryRestoreComponent(ComponentData compData, IList<Component> components)
+        protected virtual void TryRestoreComponent(ComponentData compData, IList<Component> components, Func<string, GameObject> resolveDependency)
         {
             Type compType = TypeCache.GetType(compData.TypeAlias);
             if (compType == null) return;
@@ -81,11 +80,11 @@ namespace IM.SaveSystem
             Component comp = components[compData.ComponentIndex];
             if (!comp || comp.GetType() != compType) return;
 
-            IComponentSerializer serializer = Registry.GetSerializerFor(compType);
+            IComponentSerializer serializer = Container.GetSerializerFor(compType);
             if (serializer == null) return;
 
             if (compData.SerializedState != null) 
-                serializer.RestoreState(comp, compData.SerializedState);
+                serializer.RestoreState(comp, compData.SerializedState,resolveDependency);
         }
     }
 }

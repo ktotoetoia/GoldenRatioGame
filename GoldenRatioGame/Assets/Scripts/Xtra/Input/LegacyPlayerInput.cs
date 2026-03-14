@@ -16,13 +16,15 @@ namespace Tests
         
         private void Update()
         {
+            if(_stateMachine == null) return;
+            
             _stateMachine.Update();
             EditorInput();
         }
 
         private void FixedUpdate()
         {
-            _stateMachine.FixedUpdate();
+            _stateMachine?.FixedUpdate();
         }
 
         private void EditorInput()
