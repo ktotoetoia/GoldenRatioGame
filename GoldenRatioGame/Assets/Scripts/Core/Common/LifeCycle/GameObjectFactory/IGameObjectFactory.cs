@@ -2,7 +2,7 @@
 
 namespace IM.Common
 {
-    public interface IGameObjectFactory : IFactory<GameObject,GameObject>
+    public interface IGameObjectFactory : IFactory<GameObject,GameObject,bool>
     {
     }
 }

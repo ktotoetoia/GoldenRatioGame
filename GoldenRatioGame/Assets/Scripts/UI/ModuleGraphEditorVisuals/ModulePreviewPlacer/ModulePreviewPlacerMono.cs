@@ -1,8 +1,9 @@
 ﻿using IM.Modules;
+using IM.Visuals;
 using Unity.Plastic.Antlr3.Runtime.Misc;
 using UnityEngine;
 
-namespace IM.Visuals.Graph
+namespace IM.UI
 {
     public class ModulePreviewPlacerMono : MonoBehaviour, IModulePreviewPlacer
     {

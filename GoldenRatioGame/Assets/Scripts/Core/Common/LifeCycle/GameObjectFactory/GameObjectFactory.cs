@@ -14,10 +14,10 @@ namespace IM.Common
             GetComponents(_observers);
         }
         
-        public GameObject Create(GameObject prefab)
+        public GameObject Create(GameObject prefab,bool deserialized)
         {
             GameObject created = Instantiate(prefab, _parent);
-            _observers.ForEach(x => x.OnCreate(created));
+            _observers.ForEach(x => x.OnCreate(created, deserialized));
             
             return created;
         }

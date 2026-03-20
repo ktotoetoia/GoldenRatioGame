@@ -1,8 +1,9 @@
 ﻿using System;
 using IM.Graphs;
+using IM.Visuals;
 using UnityEngine;
 
-namespace IM.Visuals.Graph
+namespace IM.UI
 {
     public class ModuleGraphView : MonoBehaviour
     {

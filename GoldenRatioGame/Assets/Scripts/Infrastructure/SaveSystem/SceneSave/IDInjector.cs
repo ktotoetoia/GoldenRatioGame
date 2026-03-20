@@ -9,8 +9,10 @@ namespace IM.SaveSystem
     {
         private readonly HashSet<string> _ids = new();
         
-        public void OnCreate(GameObject instance)
+        public void OnCreate(GameObject instance, bool deserialized)
         {
+            if(deserialized) return;
+            
             if (instance.TryGetComponent(out IIdentifiable identifiable))
             {
                 if (string.IsNullOrEmpty(identifiable.Id))

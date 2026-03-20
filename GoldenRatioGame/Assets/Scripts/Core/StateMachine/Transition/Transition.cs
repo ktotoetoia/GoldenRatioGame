@@ -8,7 +8,6 @@ namespace IM.StateMachines
         public IState From { get; }
         public IState To { get; }
         public Action BeforeTransitionAction { get; } = () => { };
-
         public Transition(IState from, IState to, Func<bool> condition)
         {
             From = from;

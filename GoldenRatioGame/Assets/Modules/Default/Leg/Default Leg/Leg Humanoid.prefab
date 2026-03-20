@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3625994651722585011}
   - component: {fileID: 2621271969024498473}
-  - component: {fileID: 3950009248158461450}
   - component: {fileID: 4071596603139949161}
-  - component: {fileID: 2388554158658244825}
   - component: {fileID: 5634798734519334486}
+  - component: {fileID: 3950009248158461450}
   - component: {fileID: 6869556739838863163}
+  - component: {fileID: -4267919387342837719}
   - component: {fileID: 3134715345525867726}
   - component: {fileID: -8354513230407654295}
   - component: {fileID: 7118497114025836106}
@@ -100,6 +100,30 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &4071596603139949161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210977406679086040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ace7e90e7f446959f9ceabaa968f4cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Items::IM.Items.SpriteRendererIconDrawer
+--- !u!114 &5634798734519334486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210977406679086040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4701e6af742e47a8b36f25f229d05c20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules::TDS.Events.ValueStorageContainerMono
 --- !u!114 &3950009248158461450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,42 +142,6 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
---- !u!114 &4071596603139949161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7210977406679086040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ace7e90e7f446959f9ceabaa968f4cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Items::IM.Items.SpriteRendererIconDrawer
---- !u!114 &2388554158658244825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7210977406679086040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1493264ef8f44edbf48a2b6ead5db0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Modules::IM.Modules.AddModuleToStorageOnInteract
---- !u!114 &5634798734519334486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7210977406679086040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4701e6af742e47a8b36f25f229d05c20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Modules::TDS.Events.ValueStorageContainerMono
 --- !u!114 &6869556739838863163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +157,18 @@ MonoBehaviour:
   _portInitialization: {fileID: 11400000, guid: d8a6636f007763f4d9ac5991545131c1, type: 2}
   <Name>k__BackingField: Humanoid Leg
   <Description>k__BackingField: 
+--- !u!114 &-4267919387342837719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210977406679086040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a87d78ef3b464425bf11f6b7639b7265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules::IM.Modules.InteractableModule
 --- !u!114 &3134715345525867726
 MonoBehaviour:
   m_ObjectHideFlags: 0

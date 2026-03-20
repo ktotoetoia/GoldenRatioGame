@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace IM.Modules
+namespace IM.Common
 {
     public class TypeRegistry<TType> : ITypeRegistry<TType> where TType : class
     {

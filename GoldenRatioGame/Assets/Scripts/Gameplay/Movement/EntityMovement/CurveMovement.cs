@@ -28,13 +28,16 @@ namespace IM.Movement
         
         public void Apply()
         {
-            Accelerator.Update(Direction,Time.fixedDeltaTime);
-            
-            Vector2 acceleration = Accelerator.Acceleration;
-            Vector2 value = new Vector2(_curve.Evaluate(acceleration.x), _curve.Evaluate(acceleration.y)) *
-                            new Vector2(acceleration.normalized.x, acceleration.normalized.y);
+            Accelerator.Update(Direction, Time.fixedDeltaTime);
+    
+            Vector2 accel = Accelerator.Acceleration;
+            float rawMagnitude = accel.magnitude;
+            Vector2 normalizedDir = accel.normalized;
 
-            MovementVelocity = value * Speed.FinalValue;
+            float curveStrength = _curve.Evaluate(rawMagnitude);
+
+            MovementVelocity = normalizedDir * (curveStrength * Speed.FinalValue) ;
+
             _modifier.ChangeVelocity(new VelocityInfo(VelocityAction.Add, MovementVelocity));
         }
     }

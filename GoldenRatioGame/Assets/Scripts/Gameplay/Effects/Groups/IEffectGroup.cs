@@ -1,4 +1,4 @@
-﻿using IM.Modules;
+﻿using IM.Common;
 
 namespace IM.Effects
 {

@@ -469,7 +469,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2156244532669732079}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84c78427f7c046a799a7de051d0323e8, type: 3}
+  m_Script: {fileID: 11500000, guid: c308d64446764c3981c6feb934dd9cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.EditorModuleVisualObject
   _portVisualObjectFactory: {fileID: 11400000, guid: b50a20bb72fb9824e8befd705c4581c2, type: 2}

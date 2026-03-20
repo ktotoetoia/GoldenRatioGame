@@ -13,7 +13,7 @@ namespace IM.StateMachines
         }
 
         public override void OnEnter() => _states.ForEach(x => x.OnEnter());
-        public override void OnExit() => _states.ForEach(x => x.OnEnter());
+        public override void OnExit() => _states.ForEach(x => x.OnExit());
 
         public override void Update()
         {

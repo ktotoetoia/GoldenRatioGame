@@ -1,6 +1,7 @@
 ﻿using IM.Modules;
+using IM.Visuals;
 
-namespace IM.Visuals.Graph
+namespace IM.UI
 {
     public interface IModulePreviewPlacer
     {

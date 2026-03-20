@@ -27,18 +27,22 @@ namespace IM.SaveSystem
         public void Deserialize(string json)
         {
             SceneSaveFile save = ScenePersistence.DeserializeToSaveFile(json);
+            
             foreach (GameObjectData obj in save.Objects) _store.AddEntry(obj.Id, null, null);
             ApplySavedObjects(save.Objects);
         }
 
-        public string Serialize() => _persistence.Serialize();
+        public string Serialize() 
+        {
+            return _persistence.Serialize();
+        }
 
         public void ApplySavedObjects(IReadOnlyList<GameObjectData> savedObjects, IPrefabResolver resolver = null, bool instantiateMissing = true)
             => _syncer.ApplySavedObjects(savedObjects, resolver, instantiateMissing);
 
         public bool Register(GameObject go)
         {
-            return go != null && go.TryGetComponent(out IIdentifiable ident) &&
+            return go && go.TryGetComponent(out IIdentifiable ident) &&
                    _store.AddEntry(ident.Id, go, go.GetComponent<IStateSerializable>());
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using IM.OdinSerializer;
 using UnityEngine;
@@ -16,19 +17,20 @@ namespace IM.SaveSystem
 
         public string Serialize()
         {
-            var saveFile = CreateSaveFileFromRegistry();
+            SceneSaveFile saveFile = CreateSaveFileFromRegistry();
             byte[] bytes = SerializationUtility.SerializeValue(saveFile, DataFormat.JSON);
+            
             return Encoding.UTF8.GetString(bytes);
         }
 
         private SceneSaveFile CreateSaveFileFromRegistry()
         {
-            var save = new SceneSaveFile();
-            var snapshot = _store.Snapshot();
-
-            foreach (var kv in snapshot)
+            SceneSaveFile save = new SceneSaveFile();
+            KeyValuePair<string, RegistryEntry>[] snapshot = _store.Snapshot();
+            
+            foreach (KeyValuePair<string, RegistryEntry> kv in snapshot)
             {
-                var e = kv.Value;
+                RegistryEntry e = kv.Value;
                 if (e.GetSerializer() is { } s)
                 {
                     try
@@ -48,7 +50,7 @@ namespace IM.SaveSystem
 
         public static SceneSaveFile DeserializeToSaveFile(string json)
         {
-            var bytes = Encoding.UTF8.GetBytes(json);
+            byte[] bytes = Encoding.UTF8.GetBytes(json);
             return SerializationUtility.DeserializeValue<SceneSaveFile>(bytes, DataFormat.JSON);
         }
     }

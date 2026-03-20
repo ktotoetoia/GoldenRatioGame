@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 427338b112e34f32848ff362452a8284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisualsComponents::IM.Visuals.AnimateOnMove2
-  _tag: Focus
+  _tag: Movement
   _parameterName: IsMoving
 --- !u!1 &4264971063537793248
 GameObject:

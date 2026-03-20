@@ -39,13 +39,11 @@ namespace IM.SaveSystem
         
         private void CreateNewScene()
         {
-            INewSceneInitializer[] sceneInitializers = GetComponents<INewSceneInitializer>();
-
-            foreach (INewSceneInitializer initializer in sceneInitializers) initializer.OnNewSceneInitialized();
+            _sceneLoadContext.OnSceneLoaded(gameObject);
         }
 
         [ContextMenu("Save")]
-        private void Save()
+        public void Save()
         {
             string json = SceneRegistry.Serialize();
             

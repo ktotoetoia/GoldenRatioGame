@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace IM.Modules
+namespace IM.Common
 {
     public interface ITypeRegistry<out TType> where TType : class
     {

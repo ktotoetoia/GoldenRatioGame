@@ -9,20 +9,49 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class ModuleVisualObject : MonoBehaviour, IModuleVisualObject
+    public class ModuleVisualObject : MonoBehaviour, IModuleVisualObject, IHaveDefaultParent
     {
         [SerializeField] protected PortVisualObjectFactoryBase _portVisualObjectFactory;
         [SerializeField] protected PortBinderBase _portBinder;
         [SerializeField] protected Renderer _renderer;
+        [SerializeField] private BoundsSource _boundsSource = BoundsSource.Renderer;
         private readonly List<IPortVisualObject> _portVisualObjects = new();
         private readonly List<IPoolObject> _poolObjects = new();
+        private readonly Bounds _defaultEditorLocalBounds = new (Vector3.zero, Vector3.one);
         private IModuleVisualObjectPreset _preset;
+
+        public Bounds LocalBounds
+        {
+            get
+            {
+                switch (_boundsSource)
+                {
+                    case BoundsSource.Renderer:
+                        return _renderer.localBounds;
+                    default:
+                        return _defaultEditorLocalBounds;
+                }
+            }
+        }
+
+        public Bounds Bounds
+        {
+            get
+            {
+                switch (_boundsSource)
+                {
+                    case BoundsSource.Renderer:
+                        return _renderer.bounds;
+                    default:
+                        return new(transform.position, _defaultEditorLocalBounds.size);
+                }
+            }
+        }
         
         public ITransform Transform { get; private set; }
         public IReadOnlyList<IPortVisualObject> PortsVisualObjects => _portVisualObjects;
         public IPortVisualObjectDirtyTracker DirtyTracker { get; } = new PortVisualObjectDirtyTracker();
         public IExtensibleModule Owner { get; private set; }
-
         public Transform DefaultParent { get; set; }
         
         public int Order
@@ -36,6 +65,17 @@ namespace IM.Visuals
                 {
                     portVisualObject.Order = value + 1;
                 }
+            }
+        }
+
+        public float ModuleLocalOrder
+        {
+            get => transform.position.z;
+            set
+            {
+                var vector3 = transform.position;
+                vector3.z = value;
+                transform.position = vector3;
             }
         }
 

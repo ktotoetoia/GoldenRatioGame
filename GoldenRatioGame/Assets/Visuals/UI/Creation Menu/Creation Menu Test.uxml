@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Visuals/UI/Creation%20Menu/Creation%20Menu.uss?fileID=7433441132597879392&amp;guid=3768554c44e0a944f9c17cd3213e4e27&amp;type=3#Creation Menu"/>
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement class="container" style="flex-grow: 1; flex-basis: 50%; align-self: center;">
+            <ui:Button text="Start New" name="CreateNewButton" style="flex-shrink: 1;"/>
+            <ui:Button text="Load Last Save" name="LoadLastButton" style="flex-shrink: 1;"/>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; flex-basis: 50%; align-self: center;"/>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace IM.Abilities
+namespace IM.Common
 {
     public class TimedTemporary : MonoBehaviour, ITemporary
     {

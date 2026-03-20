@@ -28,14 +28,15 @@ namespace IM.StateMachines
         public void Update()
         {
             if (CurrentState is IUpdate update) update.Update();
-            
-            TryTransition();
         }
 
         public void FixedUpdate()
         {
             if (CurrentState is IFixedUpdate fixedUpdate) fixedUpdate.FixedUpdate();
+        }
 
+        public void UpdateTransition()
+        {
             TryTransition();
         }
 

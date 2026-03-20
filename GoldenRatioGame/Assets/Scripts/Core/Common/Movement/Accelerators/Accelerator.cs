@@ -21,23 +21,7 @@ namespace IM.Common
         
         private float UpdateAxis(float current, float input, float step)
         {
-            if (input > 0)
-            {
-                current += step;
-            }
-            else if (input < 0)
-            {
-                current -= step;
-            }
-            else
-            {
-                if (current > 0)
-                    current = Mathf.Max(0, current - step);
-                else if (current < 0)
-                    current = Mathf.Min(0, current + step);
-            }
-
-            return current;
+            return Mathf.MoveTowards(current, input, step);
         }
 
         public void Reset()

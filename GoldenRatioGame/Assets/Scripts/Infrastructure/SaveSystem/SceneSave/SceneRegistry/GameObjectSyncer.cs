@@ -40,7 +40,7 @@ namespace IM.SaveSystem
         private void SetupNewObject(GameObjectData data, IPrefabResolver resolver)
         {
             GameObject prefab = !string.IsNullOrEmpty(data.PrefabId) ? resolver?.ResolvePrefab(data.PrefabId) : null;
-            GameObject instance = prefab != null ? _factory.Create(prefab) : new GameObject($"placeholder-{data.Id}");
+            GameObject instance = prefab != null ? _factory.Create(prefab,true) : new GameObject($"placeholder-{data.Id}");
 
             if (!instance.TryGetComponent(out IIdentifiable ident))
             {

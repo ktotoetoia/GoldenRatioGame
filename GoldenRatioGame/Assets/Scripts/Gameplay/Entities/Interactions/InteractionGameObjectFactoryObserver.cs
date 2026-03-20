@@ -8,7 +8,7 @@ namespace IM.Entities
         private IInteractionManager  _interactionManager;
         private IInteractionManager InteractionManager => _interactionManager ??= GetComponent<IInteractionManager>() ?? new InteractionManager();
         
-        public void OnCreate(GameObject instance)
+        public void OnCreate(GameObject instance, bool deserialized)
         {
             if (instance.TryGetComponent(out IRequireInteractionProvider interactor)) interactor.InteractionProvider = InteractionManager;
             if(instance.TryGetComponent(out IInteractable interactable)) InteractionManager.Add(interactable);

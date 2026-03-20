@@ -8,7 +8,7 @@ namespace IM.SaveSystem
         private readonly IComponentSerializerContainer _container = new ComponentSerializerContainer();
         private IHaveSceneRegistry _registrySource;
         
-        public void OnCreate(GameObject instance)
+        public void OnCreate(GameObject instance, bool deserialized)
         {
             if (instance.TryGetComponent(out IIdentifiable identifiable))
             {

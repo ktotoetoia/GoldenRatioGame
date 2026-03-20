@@ -4,7 +4,7 @@ using UnityEngine.UIElements.Experimental;
 
 namespace IM.Visuals
 {
-    public class EasingUtils
+    public static class EasingUtils
     {
         public static Func<float, float> GetEasing(EasingMode mode)
         {

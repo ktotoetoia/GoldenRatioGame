@@ -1,0 +1,94 @@
+:root {
+    margin-top: 3%;
+    margin-right: 3%;
+    margin-bottom: 3%;
+    margin-left: 3%;
+}
+
+.unity-tab__header {
+    width: 25%;
+    justify-content: center;
+    background-color: rgb(226, 229, 233);
+}
+
+.unity-tab-view__header-container {
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.unity-tab__header-label {
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+}
+
+.unity-tab__content-container {
+    flex-grow: 1;
+}
+
+.unity-tab-view__content-container {
+    flex-grow: 1;
+}
+
+.unity-tab-view {
+    flex-grow: 1;
+}
+
+.unity-tab {
+    flex-grow: 1;
+}
+
+.tab-item {
+    flex-grow: 1;
+    background-color: rgb(255, 255, 255);
+    padding-top: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
+    padding-left: 2%;
+    justify-content: space-around;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.tab-item Label {
+    padding-top: 1px;
+    padding-right: 1px;
+    padding-bottom: 1px;
+    padding-left: 1px;
+    -unity-text-align: middle-center;
+    -unity-text-auto-size: best-fit 10px 75px;
+    -unity-text-generator: advanced;
+    font-size: 30px;
+}
+
+.tab-item Button {
+    background-color: rgb(237, 251, 255);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-top-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    flex-grow: 0;
+    -unity-text-generator: advanced;
+    -unity-text-auto-size: best-fit 10px 75px;
+}
+
+VisualElement {
+    -unity-font-definition: url("project://database/Assets/Visuals/Fonts/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf?fileID=12800000&guid=585188cdc4600544eb408bee749e4b3a&type=3#ThaleahFat_TTF");
+    -unity-font-style: normal;
+    font-size: 21px;
+}
+
+.container {
+    font-size: 24px;
+}
+
+

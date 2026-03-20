@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IM.Abilities
+namespace IM.Common
 {
     public interface ITemporary
     {

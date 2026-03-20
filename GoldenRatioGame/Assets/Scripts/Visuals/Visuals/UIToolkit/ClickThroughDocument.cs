@@ -5,7 +5,7 @@ namespace IM.Visuals
 {
     public class ClickThroughDocument : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             UIDocument uiDoc = GetComponent<UIDocument>();
             VisualElement root = uiDoc.rootVisualElement;

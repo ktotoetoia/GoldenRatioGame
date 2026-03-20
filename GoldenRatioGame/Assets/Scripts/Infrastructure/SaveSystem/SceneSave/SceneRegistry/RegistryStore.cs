@@ -16,7 +16,15 @@ namespace IM.SaveSystem
         public bool AddEntry(string id, GameObject go, IStateSerializable serializer)
         {
             if (string.IsNullOrEmpty(id)) return false;
-            
+
+            if (go && TryGetIdByObject(go, out string existingId))
+            {
+                if (existingId != id)
+                {
+                    _entries.TryRemove(existingId, out _);
+                }
+            }
+
             _entries.AddOrUpdate(id,
                 key => new RegistryEntry
                 {
@@ -26,10 +34,8 @@ namespace IM.SaveSystem
                 },
                 (key, existing) =>
                 {
-                    if (existing.WeakGo != null && existing.WeakGo.TryGetTarget(out _))
-                        return existing;
-                    existing.WeakGo = go != null ? new WeakReference<GameObject>(go) : null;
-                    existing.StateSerializer = serializer;
+                    existing.WeakGo = go != null ? new WeakReference<GameObject>(go) : existing.WeakGo;
+                    existing.StateSerializer = serializer ?? existing.StateSerializer;
                     return existing;
                 });
 

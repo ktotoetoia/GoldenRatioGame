@@ -130,11 +130,11 @@ GameObject:
   - component: {fileID: 197609166}
   - component: {fileID: 197609171}
   - component: {fileID: 197609165}
-  - component: {fileID: 197609164}
   - component: {fileID: 197609167}
   - component: {fileID: 197609168}
   - component: {fileID: 197609170}
   - component: {fileID: 197609169}
+  - component: {fileID: 197609172}
   m_Layer: 0
   m_Name: ----Initialization----
   m_TagString: Untagged
@@ -142,33 +142,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &197609164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 197609163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74654659739348aaacc2aeb0b4927115, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Entities::IM.Entities.InitializeFromTheList
-  _toInitialize:
-  - {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
-  - {fileID: 8119833187759213420, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
-  - {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
-  - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
-  - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
-  - {fileID: 991209621830917388, guid: 9dd7b1f69d38b81489b903d2f7b7266e, type: 3}
-  - {fileID: 9154606070248935614, guid: acb799a4d4e278d4eb6f46a855de523b, type: 3}
-  - {fileID: 9154606070248935614, guid: acb799a4d4e278d4eb6f46a855de523b, type: 3}
-  - {fileID: 6808322469448240976, guid: e4f1b720a6441804081b668b4a76a96e, type: 3}
-  - {fileID: 4342869459289063407, guid: b306b21a4a622aa4b8658ed929bb7632, type: 3}
-  _bounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 3, y: 3, z: 0}
-  _initialize: 1
 --- !u!114 &197609165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,6 +235,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SaveSystem::IM.SaveSystem.SceneBootstrapper
   _sceneLoadContext: {fileID: 11400000, guid: e14624f0e951a054dbd79e170576b8ef, type: 2}
+--- !u!114 &197609172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197609163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1c583fa44dd4cec8a912ffa9e734672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisualsComponents::IM.VisualObjectOrderer
 --- !u!1 &269530788
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,6 +1015,89 @@ MonoBehaviour:
   _elementName: AbilityContainer
   _uiCamera: {fileID: 1204849133}
   _pixelsPerUnit: 100
+--- !u!1 &1592484094
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1592484096}
+  - component: {fileID: 1592484095}
+  - component: {fileID: 1592484097}
+  - component: {fileID: 1592484098}
+  m_Layer: 0
+  m_Name: Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1592484095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592484094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 26296ce5bac6104418fb111e33e3de6c, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: ced15c2fad03f214db09d6665d258274, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!4 &1592484096
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592484094}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1592484097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592484094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb57862a1cc4c20a6349a72d9638f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tests.TestSDS
+  _sceneIndex: 0
+  _sceneBootstrapper: {fileID: 197609171}
+--- !u!114 &1592484098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592484094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cb4559c8d144fac93c7f96b37c168e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Visuals::IM.Visuals.NoKeyboardInputOnDocument
 --- !u!1 &1886279916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,8 +1142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11bf42e72995449b9daf53473e1c8162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityModuleAbilityContextEditingViewer: {fileID: 851632503}
+  _entityModuleAbilityContextEditingViewer: {fileID: 851632503}
+  _graphViewInteraction: {fileID: 851632504}
   _gameCamera: {fileID: 519420034}
+  _uiCamera: {fileID: 1204849133}
+  _abilityKeys: 3100000032000000330000007100000065000000
 --- !u!1 &2049271415
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,3 +1286,4 @@ SceneRoots:
   - {fileID: 2057245054}
   - {fileID: 1315967220}
   - {fileID: 2049271416}
+  - {fileID: 1592484096}

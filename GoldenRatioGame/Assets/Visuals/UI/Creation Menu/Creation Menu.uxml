@@ -1,0 +1,19 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Visuals/UI/Creation%20Menu/Creation%20Menu.uss?fileID=7433441132597879392&amp;guid=3768554c44e0a944f9c17cd3213e4e27&amp;type=3#Creation Menu"/>
+    <ui:VisualElement name="Root" style="flex-grow: 1;">
+        <ui:TabView reorderable="false" name="TabView">
+            <ui:Tab label="New Game" closeable="false">
+                <ui:VisualElement name="CreateNewContainer" class="tab-item">
+                    <ui:Label text="Save To NewSave.json" name=""/>
+                    <ui:Button text="Start" name="CreateNewButton"/>
+                </ui:VisualElement>
+            </ui:Tab>
+            <ui:Tab label="Load">
+                <ui:VisualElement name="LoadContainer" class="tab-item">
+                    <ui:Label text="Load Last Save" name=""/>
+                    <ui:Button text="Load" name="LoadButton"/>
+                </ui:VisualElement>
+            </ui:Tab>
+        </ui:TabView>
+    </ui:VisualElement>
+</ui:UXML>
