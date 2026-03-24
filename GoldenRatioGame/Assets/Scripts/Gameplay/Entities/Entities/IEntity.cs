@@ -2,8 +2,9 @@
 
 namespace IM.Entities
 {
-    public interface IEntity : IPausable
+    public interface IEntity
     {
         GameObject GameObject { get; }
+        void Destroy();
     }
 }

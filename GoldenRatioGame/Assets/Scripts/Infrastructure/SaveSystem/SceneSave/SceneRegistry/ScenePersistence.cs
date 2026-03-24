@@ -31,6 +31,7 @@ namespace IM.SaveSystem
             foreach (KeyValuePair<string, RegistryEntry> kv in snapshot)
             {
                 RegistryEntry e = kv.Value;
+                
                 if (e.GetSerializer() is { } s)
                 {
                     try

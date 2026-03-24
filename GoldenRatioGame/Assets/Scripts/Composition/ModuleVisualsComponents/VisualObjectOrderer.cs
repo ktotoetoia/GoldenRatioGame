@@ -1,32 +1,27 @@
 ﻿using System.Collections.Generic;
-using IM.LifeCycle;
+using System.Linq;
 using IM.Visuals;
 using UnityEngine;
 
 namespace IM
 {
-    public class VisualObjectOrderer : MonoBehaviour, IGameObjectFactoryObserver
+    public class VisualObjectOrderer : MonoBehaviour
     {
-        private readonly List<IDepthOrderable> _toOrder = new();
+        private IReadOnlyCollection<GameObject> _gameObjectCollection;
 
+        private void Awake()
+        {
+            _gameObjectCollection = GetComponent<IReadOnlyCollection<GameObject>>();
+        }
+        
         private void Update()
         {
-            _toOrder.RemoveAll(x => x == null || !(x as MonoBehaviour));
-
-            _toOrder.Sort((a, b) => a.ReferencePoint.y.CompareTo(b.ReferencePoint.y));
-
-            int count = _toOrder.Count;
-            for (int i = 0; i < count; i++)
+            List<IDepthOrderable> d = _gameObjectCollection.Where(x => x.TryGetComponent(out IDepthOrderable depthOrderable)).Select(x => x.GetComponent<IDepthOrderable>()).ToList();
+            d.Sort((a, b) => a.ReferencePoint.y.CompareTo(b.ReferencePoint.y));
+            
+            for (int i = 0; i < d.Count; i++)
             {
-                _toOrder[i].Order = count - i;
-            }
-        }
-
-        public void OnCreate(GameObject instance, bool deserialized)
-        {
-            if (instance.TryGetComponent(out IDepthOrderable orderable))
-            {
-                _toOrder.Add(orderable);
+                d[i].Order = d.Count - i;
             }
         }
     }

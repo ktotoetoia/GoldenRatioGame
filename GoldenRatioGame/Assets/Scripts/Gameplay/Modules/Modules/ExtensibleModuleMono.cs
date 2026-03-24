@@ -18,6 +18,7 @@ namespace IM.Modules
         
         [field: SerializeField] public string Name { get; private set; }
         [field: SerializeField] public string Description { get; private set; }
+        public GameObject GameObject => gameObject;
         public IIcon Icon => _iconDrawer.Icon;
         public IStorageCell Cell { get; set; }
         public IEnumerable<IEdge> Edges => _ports.Where(x => x.IsConnected).Select(x => x.Connection);
@@ -39,6 +40,11 @@ namespace IM.Modules
             ModuleState = ModuleState.Show;
             
             _portInitialization.Initialize(_ports, this);
+        }
+        
+        public void Destroy()
+        {
+            Destroy(gameObject);
         }
     }
 }

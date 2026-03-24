@@ -9,6 +9,8 @@ namespace IM
         
         public void OnCreate(GameObject instance, bool deserialized)
         {
+            instance.transform.SetParent(_defaultParentTransform);
+
             if(instance.TryGetComponent(out IRequireDefaultParentTransform require))
             {
                 require.DefaultParentTransform = _defaultParentTransform;

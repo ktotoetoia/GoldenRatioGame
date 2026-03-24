@@ -3,12 +3,13 @@ using UnityEngine;
 
 namespace IM.Entities
 {
-    public class DefaultEntity : MonoBehaviour, IEntity
+    public class DefaultEntity : MonoBehaviour, IEntity, IPausable
     {
         protected bool _paused;
         protected IEnumerable<IPausable> _pausableList;
 
         public GameObject GameObject => gameObject;
+
         public bool Paused
         {
             get => _paused;
@@ -32,6 +33,11 @@ namespace IM.Entities
         protected virtual void PausedChanged()
         {
             
+        }
+        
+        public virtual void Destroy()
+        {
+            Destroy(gameObject);
         }
     }
 }

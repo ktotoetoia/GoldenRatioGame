@@ -1,11 +1,12 @@
-﻿using IM.LifeCycle;
+﻿using IM.Entities;
+using IM.LifeCycle;
 using IM.Graphs;
 using IM.Items;
 using IM.Storages;
 
 namespace IM.Modules
 {
-    public interface IExtensibleModule : IModule, IItem, IStorable
+    public interface IExtensibleModule : IModule, IItem, IStorable, IEntity
     {
         ITypeRegistry<IExtension> Extensions { get; }
         ModuleState ModuleState { get; set; }

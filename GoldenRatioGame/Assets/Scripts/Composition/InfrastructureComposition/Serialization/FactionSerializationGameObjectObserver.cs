@@ -5,17 +5,15 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    [DefaultExecutionOrder(-1000000)]
     public class FactionSerializationGameObjectObserver : MonoBehaviour, IGameObjectFactoryObserver
     {
         [SerializeField] private FactionDatabase _factionDatabase;
         private IComponentSerializerContainer _container;
         private IHaveSceneRegistry _registrySource;
 
-        private void Awake()
-        {
-            _container = new ComponentSerializerContainer(new IComponentSerializer[]{new FactionMemberSerializer(_factionDatabase)});
-        }
+        private IComponentSerializerContainer Container => _container ??=
+            new ComponentSerializerContainer(new IComponentSerializer[]
+                { new FactionMemberSerializer(_factionDatabase) }); 
 
         public void OnCreate(GameObject instance, bool deserialized)
         {
@@ -26,7 +24,7 @@ namespace IM.Modules
 
             if (instance.TryGetComponent(out IRequireComponentSerializerContainer componentRegistry))
             {
-                componentRegistry.Container = _container;
+                componentRegistry.Container = Container;
             }
         }
     }

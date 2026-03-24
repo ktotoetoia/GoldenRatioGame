@@ -1,19 +1,24 @@
 ﻿using System.Collections.Generic;
-using IM.LifeCycle;
+using System.Linq;
 using UnityEngine;
 
 namespace IM.Health
 {
-    public class FloatHealthValuesGroupDebug : MonoBehaviour, IGameObjectFactoryObserver
+    public class FloatHealthValuesGroupDebug : MonoBehaviour
     {
         [SerializeField] private bool _isOn = true;
-        private readonly List<GameObject> _targets = new();
+        private IReadOnlyCollection<GameObject> _gameObjectsCollection;
+
+        private void Awake()
+        {
+            _gameObjectsCollection = GetComponent<IReadOnlyCollection<GameObject>>();
+        }
 
         private void OnDrawGizmos()
         {
-            if(!_isOn) return;
+            if(!_isOn || !Application.isPlaying) return;
             
-            foreach (GameObject target in _targets)
+            foreach (GameObject target in _gameObjectsCollection.Where(x => x.TryGetComponent(out IFloatHealthValuesGroup h)))
             {
                 DrawFor(target);
             }
@@ -36,7 +41,7 @@ namespace IM.Health
             Vector3 filledPos = pos - new Vector3((size.x - filledSize.x) / 2f, 0f, 0f);
             Gizmos.DrawCube(filledPos, filledSize);
             
-            if (healthValuesGroup.Values != null && healthValuesGroup.Values.Count > 1)
+            if (healthValuesGroup.Values is { Count: > 1 })
             {
                 float totalMax = health.MaxValue;
                 float accumulated = 0f;
@@ -57,14 +62,6 @@ namespace IM.Health
                     Gizmos.color = Color.black;
                     Gizmos.DrawLine(lineStart, lineEnd);
                 }
-            }
-        }
-
-        public void OnCreate(GameObject instance, bool deserialized)
-        {
-            if (instance.TryGetComponent(out IFloatHealthValuesGroup health))
-            {
-                _targets.Add(instance);
             }
         }
     }

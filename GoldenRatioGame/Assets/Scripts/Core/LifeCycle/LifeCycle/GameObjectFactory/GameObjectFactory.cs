@@ -6,18 +6,22 @@ namespace IM.LifeCycle
     [DefaultExecutionOrder(-100000)]
     public class GameObjectFactory : MonoBehaviour, IGameObjectFactory
     {
-        [SerializeField] private Transform _parent;
         private readonly List<IGameObjectFactoryObserver> _observers = new();
-
+        private ICollection<GameObject> _gameObjectCollection;
+        
         private void Awake()
         {
+            _gameObjectCollection = GetComponent<ICollection<GameObject>>();
+            
             GetComponents(_observers);
         }
         
         public GameObject Create(GameObject prefab,bool deserialized)
         {
-            GameObject created = Instantiate(prefab, _parent);
+            GameObject created = Instantiate(prefab);
+            
             _observers.ForEach(x => x.OnCreate(created, deserialized));
+            _gameObjectCollection.Add(created);
             
             return created;
         }

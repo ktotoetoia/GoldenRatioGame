@@ -12,15 +12,14 @@ namespace IM.Entities
         
         public IEnumerable<IInteractable> GetAvailableInteractions(IEntity entity)
         {
-            return _interactable.Where(x => x.CanInteract(entity));
+            return _interactable.Where(x => (x is not MonoBehaviour m || m) && x.CanInteract(entity));
         }
 
         public void Add(IInteractable interactable)
         {
             if (!_interactable.Add(interactable))
             {
-                Debug.LogWarning(
-                    $"Interactable {interactable.GameObject.name} was attempted to add extra time");
+                Debug.LogWarning($"Interactable {interactable.GameObject.name} was attempted to add extra time");
             }
         }
 

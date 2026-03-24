@@ -48,7 +48,7 @@ namespace IM.SaveSystem
 
         public bool Unregister(GameObject go)
         {
-            if (go == null) return false;
+            if (!go) return false;
     
             if (go.TryGetComponent(out IIdentifiable ident)) return Unregister(ident.Id);
             if (_store.TryGetIdByObject(go, out string id)) return Unregister(id);
@@ -67,6 +67,5 @@ namespace IM.SaveSystem
         
         public bool Contains(string id) => _store.Contains(id);
         public bool Contains(GameObject go) => _store.TryGetIdByObject(go, out _);
-        public Dictionary<string, IStateSerializable> GetActiveSerializers() => _store.GetActiveSerializers();
     }
 }

@@ -48,8 +48,12 @@ namespace IM.Modules
         public void RemoveFromContext(IExtensibleModule module)
         { 
             _moduleEditingContext.RemoveFromContext(module);
-            
-            if(module is MonoBehaviour moduleMono) moduleMono.transform.SetParent(DefaultParentTransform); 
+
+            if (module is MonoBehaviour moduleMono)
+            {
+                moduleMono.transform.position = transform.position;
+                moduleMono.transform.SetParent(DefaultParentTransform);
+            } 
         }
     }
 }

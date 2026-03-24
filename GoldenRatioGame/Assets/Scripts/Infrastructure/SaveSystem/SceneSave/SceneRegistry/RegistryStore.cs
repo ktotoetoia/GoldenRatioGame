@@ -76,7 +76,7 @@ namespace IM.SaveSystem
         public bool TryGetIdByObject(GameObject go, out string id)
         {
             id = null;
-            if (go == null) return false;
+            if (!go) return false;
 
             foreach (var kvp in _entries)
             {
@@ -91,7 +91,7 @@ namespace IM.SaveSystem
             return false;
         }
 
-        public KeyValuePair<string, RegistryEntry>[] Snapshot() => _entries.ToArray();
+        public KeyValuePair<string, RegistryEntry>[] Snapshot() => _entries.Where(x=> x.Value.WeakGo.TryGetTarget(out GameObject go) && go).ToArray();
 
         public Dictionary<string, IStateSerializable> GetActiveSerializers()
         {

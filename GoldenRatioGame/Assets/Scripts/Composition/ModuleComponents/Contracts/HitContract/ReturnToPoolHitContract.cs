@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace IM
 {
-    public class FactionEnterTemporary : MonoBehaviour, ITemporary
+    public class ReturnToPoolHitContract : MonoBehaviour, ITemporary
     {
         [SerializeField] private float _toFinishTime = 2;
         [SerializeField] private bool _finishOnTriggerEnterAlly;

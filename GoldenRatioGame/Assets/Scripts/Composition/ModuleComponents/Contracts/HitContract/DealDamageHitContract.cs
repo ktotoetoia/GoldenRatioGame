@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace IM
 {
-    public class DealDamageOnTriggerEnter : MonoBehaviour
+    public class DealDamageHitContract : MonoBehaviour
     {
         [SerializeField] private float _toFinishTime = 2;
         [SerializeField] private bool _finishOnTriggerEnterAlly;

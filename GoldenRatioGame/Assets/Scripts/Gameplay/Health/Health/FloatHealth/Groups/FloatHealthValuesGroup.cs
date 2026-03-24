@@ -4,22 +4,20 @@ using IM.Values;
 
 namespace IM.Health
 {
-    public class FloatHealthValuesGroup : IFloatHealthValuesGroup
+    public class FloatHealthValuesGroup : IFloatHealthValuesGroup, IFloatHealthEvents
     {
         private readonly List<ICappedValue<float>> _healthValues = new();
-
+        
         public IReadOnlyList<ICappedValueReadOnly<float>> Values => _healthValues;
+        public event Action<float> OnHealthChanged;
+        
         public ICappedValueReadOnly<float> Health => GetCurrentHealth();
-
         public HealthChangeResult TakeDamage(float damage) => 
             ProcessHealthChange(damage, ApplyDamage);
-
         public HealthChangeResult PreviewDamage(float damage) => 
             ProcessHealthChange(damage, PreviewDamageInternal);
-
         public HealthChangeResult RestoreHealth(float healing) => 
             ProcessHealthChange(healing, ApplyHealing);
-
         public HealthChangeResult PreviewHealing(float healing) => 
             ProcessHealthChange(healing, PreviewHealingInternal);
 
@@ -51,7 +49,7 @@ namespace IM.Health
             float remaining = value;
             float applied = 0f;
 
-            foreach (var health in _healthValues)
+            foreach (ICappedValue<float> health in _healthValues)
             {
                 if (remaining <= 0) break;
 
@@ -59,6 +57,8 @@ namespace IM.Health
                 applied += used;
                 remaining -= used;
             }
+            
+            OnHealthChanged?.Invoke(Health.Value);
 
             return new HealthChangeResult(value, value, applied);
         }
@@ -86,6 +86,7 @@ namespace IM.Health
         {
             float used = PreviewHealingInternal(health, amount);
             health.Value += used;
+            
             return used;
         }
 

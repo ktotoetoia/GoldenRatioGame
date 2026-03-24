@@ -30,18 +30,17 @@ namespace IM.SaveSystem
             
             CreateNewScene();
         }
-
+        
         private void LoadScene(string loadPath)
         {
-            string json = File.ReadAllText(loadPath);
-            SceneRegistry.Deserialize(json);
+            SceneRegistry.Deserialize(File.ReadAllText(loadPath));
         }
         
         private void CreateNewScene()
         {
             _sceneLoadContext.OnSceneLoaded(gameObject);
         }
-
+        
         [ContextMenu("Save")]
         public void Save()
         {
@@ -49,7 +48,7 @@ namespace IM.SaveSystem
             
             File.WriteAllText(_sceneLoadContext.FullSceneLoadPath, json);
         }
-
+        
         [ContextMenu("Print Save Path")]
         private void PrintSavePath()
         {

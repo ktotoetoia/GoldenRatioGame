@@ -6,7 +6,7 @@ namespace IM.Health
 {
     public class FloatHealthComponentsGroupMono : MonoBehaviour, IFloatHealthComponentsGroup
     {
-        private readonly IFloatHealthComponentsGroup _floatHealth= new FloatHealthComponentsGroup();
+        private readonly FloatHealthComponentsGroup _floatHealth= new FloatHealthComponentsGroup();
 
         public ICappedValueReadOnly<float> Health => _floatHealth.Health;
         public IReadOnlyList<IFloatHealth> Components => _floatHealth.Components;
