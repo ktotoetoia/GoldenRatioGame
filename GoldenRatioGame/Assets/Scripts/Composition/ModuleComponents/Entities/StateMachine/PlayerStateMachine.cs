@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using IM.Abilities;
 using IM.Entities;
@@ -25,7 +26,7 @@ namespace IM
         public Func<Vector2> ProvideMovementDirection { get; set; } = () => default;
         public Func<AbilityUseContext>  ProvideAbilityUseContext { get; set; }= () => default;
         public Func<bool> ShouldTryInteract { get; set; }= () => false;
-        public Func<IAbilityReadOnly,int, KeyCode> ProvideKeyForAbility { get; set; } = (x,y) => default;
+        public Func<IEnumerable<IAbilityReadOnly>, IEnumerable<IAbilityReadOnly>> ProvideKeyForAbility { get; set; } = x => new IAbilityReadOnly[]{};
         
         public bool Paused { get; set; }
         
@@ -36,8 +37,7 @@ namespace IM
             _interactor = GetComponent<IInteractor>();
             
             _movementState = new MovementState(_movement, () => ProvideMovementDirection());
-            _abilityUseState = new AbilityUseState(_abilityUser,() => ProvideAbilityUseContext(),
-                x => ProvideKeyForAbility(x,_abilityUser.AbilityPool.Abilities.ToList().IndexOf(x)));
+            _abilityUseState = new AbilityUseState(_abilityUser,() => ProvideAbilityUseContext(), x => ProvideKeyForAbility(x));
             _generalState = new CompositeState(new [] {_movementState, _abilityUseState});
             _interactionState = new InteractionState(_interactor, ResolveInteraction);
             _generalToInteraction = new Transition(_generalState, _interactionState, CanInteract);

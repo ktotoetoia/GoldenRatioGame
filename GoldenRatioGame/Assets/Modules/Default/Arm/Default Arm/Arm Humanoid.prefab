@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2621271969024498473}
   - component: {fileID: -4724124268522441623}
   - component: {fileID: 5634798734519334486}
-  - component: {fileID: 4071596603139949161}
   - component: {fileID: -7743140741346210048}
+  - component: {fileID: 4071596603139949161}
   - component: {fileID: -3808709638150430868}
   - component: {fileID: 6869556739838863163}
   - component: {fileID: 3134715345525867726}
@@ -124,6 +124,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4701e6af742e47a8b36f25f229d05c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Modules::TDS.Events.ValueStorageContainerMono
+--- !u!114 &-7743140741346210048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210977406679086040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9dd9b36686f4bfa8f63a95993a9e1c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComponents::IM.Modules.EffectGroupExtension
 --- !u!114 &4071596603139949161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,18 +149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Items::IM.Items.SpriteRendererIconDrawer
   _referencePositionNormalized: {x: 0.5, y: 0.5}
---- !u!114 &-7743140741346210048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7210977406679086040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9dd9b36686f4bfa8f63a95993a9e1c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleComponents::IM.Modules.EffectGroupExtension
 --- !u!114 &-3808709638150430868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,5 +224,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cefe76e33d442c6b64c8ae8d4649dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleComponents::IM.Modules.DebugDrawLineAbilityExtensions
-  _cooldown: 1
+  _cooldown: 3
   _channelTime: 1

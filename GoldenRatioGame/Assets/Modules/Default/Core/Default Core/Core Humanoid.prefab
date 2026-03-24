@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2805714054282062599}
   - component: {fileID: 3521067284498834333}
-  - component: {fileID: 3187650734492596957}
+  - component: {fileID: 6952798845322174398}
   - component: {fileID: 84801343705693524}
   - component: {fileID: 8812685661605889554}
+  - component: {fileID: 3187650734492596957}
   - component: {fileID: -7730524420974198917}
   - component: {fileID: 6758064773000630412}
-  - component: {fileID: 6952798845322174398}
   - component: {fileID: 1563791358509127018}
   - component: {fileID: 8535451133996336894}
   - component: {fileID: 4479085341360621510}
@@ -100,7 +100,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &3187650734492596957
+--- !u!114 &6952798845322174398
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,9 +109,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8119833187759213420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ace7e90e7f446959f9ceabaa968f4cd, type: 3}
+  m_Script: {fileID: 11500000, guid: a87d78ef3b464425bf11f6b7639b7265, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Items::IM.Items.SpriteRendererIconDrawer
+  m_EditorClassIdentifier: Modules::IM.Modules.InteractableModule
 --- !u!114 &84801343705693524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +136,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9dd9b36686f4bfa8f63a95993a9e1c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleComponents::IM.Modules.EffectGroupExtension
+--- !u!114 &3187650734492596957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8119833187759213420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ace7e90e7f446959f9ceabaa968f4cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Items::IM.Items.SpriteRendererIconDrawer
+  _referencePositionNormalized: {x: 0.5, y: 0.5}
 --- !u!114 &-7730524420974198917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,18 +182,6 @@ MonoBehaviour:
   _portInitialization: {fileID: 11400000, guid: 26e5bdefabebc534397d29ad97ad96eb, type: 2}
   <Name>k__BackingField: Humanoid Core
   <Description>k__BackingField: 
---- !u!114 &6952798845322174398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8119833187759213420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a87d78ef3b464425bf11f6b7639b7265, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Modules::IM.Modules.InteractableModule
 --- !u!114 &1563791358509127018
 MonoBehaviour:
   m_ObjectHideFlags: 0

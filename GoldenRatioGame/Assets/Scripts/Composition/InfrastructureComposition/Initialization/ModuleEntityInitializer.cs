@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using IM.Common;
+using IM.LifeCycle;
+using IM.Factions;
 using IM.Modules;
 using IM.SaveSystem;
 using UnityEngine;
@@ -25,6 +26,9 @@ namespace IM
             created.transform.position = new Vector3(Random.Range(entry.Bounds.min.x, entry.Bounds.max.x),
                 Random.Range(entry.Bounds.min.y, entry.Bounds.max.y));
             IModuleEntity entity = created.GetComponent<IModuleEntity>();
+            
+            if (entry.Faction && created.TryGetComponent(out IFactionMember factionMember)) factionMember.Faction = entry.Faction;
+            
             IEnumerable<IExtensibleModule> modules = entry.ModulesGameObjects.Select(x => factory.Create(x,false).GetComponent<IExtensibleModule>());
             
             AddModulesToEntity(entity, modules);
@@ -55,6 +59,7 @@ namespace IM
             public Bounds Bounds;
             public GameObject EntityGameObject;
             public List<GameObject> ModulesGameObjects;
+            public Faction Faction;
         }
     }
 }

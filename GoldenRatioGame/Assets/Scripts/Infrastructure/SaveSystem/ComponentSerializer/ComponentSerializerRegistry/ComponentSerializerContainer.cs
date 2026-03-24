@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace IM.SaveSystem
 {
@@ -7,27 +9,54 @@ namespace IM.SaveSystem
     {
         private readonly Dictionary<Type, IComponentSerializer> _map = new();
 
-        public ComponentSerializerContainer()
+        public ComponentSerializerContainer(IEnumerable<IComponentSerializer> manualSerializers = null)
         {
-            RegisterAll();
+            var passedTypes = new HashSet<Type>();
+
+            if (manualSerializers != null)
+            {
+                foreach (var serializer in manualSerializers)
+                {
+                    _map[serializer.TargetType] = serializer;
+                    passedTypes.Add(serializer.GetType());
+                }
+            }
+
+            RegisterAll(passedTypes);
         }
 
-        private void RegisterAll()
+        private void RegisterAll(HashSet<Type> ignoredTypes)
         {
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            
             foreach (var asm in assemblies)
             {
+                if (asm.IsDynamic || asm.FullName.StartsWith("System") || asm.FullName.StartsWith("Microsoft")) 
+                    continue;
+
                 Type[] types;
                 try { types = asm.GetTypes(); } 
                 catch { continue; }
 
                 foreach (var t in types)
                 {
-                    if (typeof(IComponentSerializer).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract)
+                    if (typeof(IComponentSerializer).IsAssignableFrom(t) && 
+                        !t.IsInterface && 
+                        !t.IsAbstract && 
+                        !ignoredTypes.Contains(t))
                     {
-                        if (Activator.CreateInstance(t) is IComponentSerializer inst)
+                        var constructor = t.GetConstructor(
+                            BindingFlags.Instance | BindingFlags.Public, 
+                            null, 
+                            Type.EmptyTypes, 
+                            null);
+
+                        if (constructor != null)
                         {
-                            _map[inst.TargetType] = inst;
+                            if (Activator.CreateInstance(t) is IComponentSerializer inst)
+                            {
+                                _map.TryAdd(inst.TargetType, inst);
+                            }
                         }
                     }
                 }
@@ -38,13 +67,7 @@ namespace IM.SaveSystem
         {
             if (_map.TryGetValue(componentType, out var s)) return s;
 
-            foreach (var kv in _map)
-            {
-                if (kv.Key.IsAssignableFrom(componentType))
-                    return kv.Value;
-            }
-
-            return null;
+            return _map.FirstOrDefault(kv => kv.Key.IsAssignableFrom(componentType)).Value;
         }
     }
 }

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using IM.Abilities;
 using IM.StateMachines;
-using UnityEngine;
 
 namespace IM
 {
@@ -11,21 +9,18 @@ namespace IM
     {
         private readonly IAbilityUser<IAbilityPoolReadOnly> _abilityUser;
         private readonly Func<AbilityUseContext> _getUseContext;
-        private readonly Func<IAbilityReadOnly,KeyCode> _getKeyForAbility;
-
-        public AbilityUseState(IAbilityUser<IAbilityPoolReadOnly> abilityUser, Func<AbilityUseContext> getUseContext,Func<IAbilityReadOnly,KeyCode> getKeyForAbility)
+        private readonly Func<IEnumerable<IAbilityReadOnly>, IEnumerable<IAbilityReadOnly>> _getRequestedAbilities;
+        
+        public AbilityUseState(IAbilityUser<IAbilityPoolReadOnly> abilityUser, Func<AbilityUseContext> getUseContext,Func<IEnumerable<IAbilityReadOnly>, IEnumerable<IAbilityReadOnly>> getRequestedAbilities)
         {
             _abilityUser = abilityUser;
             _getUseContext = getUseContext;
-            _getKeyForAbility = getKeyForAbility;
+            _getRequestedAbilities = getRequestedAbilities;
         }
 
         public override void Update()
         {
-            IEnumerable<IAbilityReadOnly> abilities = _abilityUser.AbilityPool.Abilities
-                .Where(x => Input.GetKey(_getKeyForAbility(x)));
-            
-            _abilityUser.ResolveRequestedAbilities(abilities,_getUseContext());
+            _abilityUser.ResolveRequestedAbilities(_getRequestedAbilities(_abilityUser.AbilityPool.Abilities),_getUseContext());
         }
     }
 }

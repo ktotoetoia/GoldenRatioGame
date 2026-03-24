@@ -5,7 +5,7 @@ namespace IM.Factions
 {
     public class FactionCollisionDetector : MonoBehaviour, IFactionCollisionDetector, IRequireFactionMember
     {
-        public IFactionMember FactionMember { get; set; }
+        public IFactionMemberReadOnly FactionMemberReadOnly { get; set; }
 
         public event Action<GameObject> OnTriggerEnterEnemy; 
         public event Action<GameObject> OnTriggerEnterAlly; 
@@ -13,9 +13,9 @@ namespace IM.Factions
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent(out IFactionMember factionMember))
+            if (other.TryGetComponent(out IFactionMemberReadOnly factionMember) && factionMember.Faction != null)
             {
-                switch (FactionMember.Faction.Get(factionMember.Faction))
+                switch (FactionMemberReadOnly.Faction.GetRelationWith(factionMember.Faction))
                 {
                     case FactionRelation.None:
                         OnTriggerEnterNone?.Invoke(other.gameObject);

@@ -24,6 +24,7 @@ MonoBehaviour:
     - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
     - {fileID: 991209621830917388, guid: 9dd7b1f69d38b81489b903d2f7b7266e, type: 3}
     - {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
+    Faction: {fileID: 11400000, guid: 788bd211483850b42816f83e0cc2d97f, type: 2}
   - Bounds:
       m_Center: {x: 0, y: 0, z: 0}
       m_Extent: {x: 3, y: 3, z: 0}
@@ -35,3 +36,4 @@ MonoBehaviour:
     - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
     - {fileID: 991209621830917388, guid: 9dd7b1f69d38b81489b903d2f7b7266e, type: 3}
     - {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
+    Faction: {fileID: 11400000, guid: 6f84adb9e464b3a45a892ce320bf0a2d, type: 2}

@@ -2,7 +2,8 @@
     "name": "GoldenRatio",
     "rootNamespace": "",
     "references": [
-        "GUID:1dee8d5f378a1b541bcb58c14825461d"
+        "GUID:1dee8d5f378a1b541bcb58c14825461d",
+        "GUID:38be81a59a4146ab9a6165a5c84daa2c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -12,7 +12,7 @@ namespace IM.Modules
         {
             _differ = new ModuleGraphSnapshotDiffer()
             {
-                OnModuleAdded = x =>
+                ModuleAdded = x =>
                 {
                     if (x is not IExtensibleModule extensibleModule ||
                         !extensibleModule.Extensions.TryGetAll(out IEnumerable<TExtension> extensions))
@@ -24,7 +24,7 @@ namespace IM.Modules
                     }
                 },
                 
-                OnModuleRemoved = x =>
+                ModuleRemoved = x =>
                 {
                     if (x is not IExtensibleModule extensibleModule ||
                         !extensibleModule.Extensions.TryGetAll(out IEnumerable<TExtension> extensions))

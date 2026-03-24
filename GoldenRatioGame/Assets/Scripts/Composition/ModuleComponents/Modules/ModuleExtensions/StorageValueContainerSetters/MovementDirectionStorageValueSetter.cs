@@ -6,7 +6,7 @@ using IM.Events;
 using IM.Graphs;
 using IM.Modules;
 using IM.Movement;
-using IM.Common;
+using IM.Values;
 
 namespace IM.Visuals
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using IM.Effects;
-using IM.Common;
+using IM.Values;
 using UnityEngine;
 
 namespace IM.Abilities

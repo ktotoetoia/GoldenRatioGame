@@ -1,4 +1,4 @@
-﻿using IM.Common;
+﻿using IM.Values;
 using UnityEngine;
 
 namespace IM.Inputs

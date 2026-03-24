@@ -1,24 +1,33 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using IM.LifeCycle;
+using UnityEngine;
 
 namespace IM.Health
 {
-    public class FloatHealthValuesGroupDebug : MonoBehaviour
+    public class FloatHealthValuesGroupDebug : MonoBehaviour, IGameObjectFactoryObserver
     {
-        [SerializeField] private GameObject _target;
         [SerializeField] private bool _isOn = true;
-        private IFloatHealthValuesGroup _health;
+        private readonly List<GameObject> _targets = new();
 
         private void OnDrawGizmos()
         {
-            if (!_isOn || _target == null || _health == null && !_target.TryGetComponent(out _health))
-                return;
+            if(!_isOn) return;
+            
+            foreach (GameObject target in _targets)
+            {
+                DrawFor(target);
+            }
+        }
 
-            var health = _health.Health;
+        private void DrawFor(GameObject target)
+        {
+            IFloatHealthValuesGroup healthValuesGroup = target.GetComponent<IFloatHealthValuesGroup>();
+            var health = healthValuesGroup.Health;
             float ratio = Mathf.InverseLerp(health.MinValue, health.MaxValue, health.Value);
 
-            Vector3 pos = _target.transform.position + Vector3.up * 2.0f;
+            Vector3 pos = target.transform.position + Vector3.up * 2.0f;
             Vector3 size = new Vector3(2f, 0.2f, 0f);
-
+            
             Gizmos.color = Color.gray;
             Gizmos.DrawCube(pos, size);
 
@@ -27,12 +36,12 @@ namespace IM.Health
             Vector3 filledPos = pos - new Vector3((size.x - filledSize.x) / 2f, 0f, 0f);
             Gizmos.DrawCube(filledPos, filledSize);
             
-            if (_health.Values != null && _health.Values.Count > 1)
+            if (healthValuesGroup.Values != null && healthValuesGroup.Values.Count > 1)
             {
                 float totalMax = health.MaxValue;
                 float accumulated = 0f;
 
-                foreach (var comp in _health.Values)
+                foreach (var comp in healthValuesGroup.Values)
                 {
                     accumulated += comp.MaxValue;
 
@@ -48,6 +57,14 @@ namespace IM.Health
                     Gizmos.color = Color.black;
                     Gizmos.DrawLine(lineStart, lineEnd);
                 }
+            }
+        }
+
+        public void OnCreate(GameObject instance, bool deserialized)
+        {
+            if (instance.TryGetComponent(out IFloatHealthValuesGroup health))
+            {
+                _targets.Add(instance);
             }
         }
     }

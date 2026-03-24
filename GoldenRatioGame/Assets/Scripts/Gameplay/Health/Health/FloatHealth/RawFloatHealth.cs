@@ -1,5 +1,5 @@
 ﻿using System;
-using IM.Common;
+using IM.Values;
 
 namespace IM.Health
 {

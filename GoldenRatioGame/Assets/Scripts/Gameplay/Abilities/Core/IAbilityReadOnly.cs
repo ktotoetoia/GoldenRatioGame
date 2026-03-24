@@ -1,5 +1,5 @@
-﻿using IM.Common;
-using IM.Items;
+﻿using IM.Items;
+using IM.Values;
 
 namespace IM.Abilities
 {

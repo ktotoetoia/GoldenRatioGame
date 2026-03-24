@@ -11,16 +11,13 @@ namespace IM.Health
         private IFloatHealth _health;
         private HealthChangeResult _healthChangeResult;
         private bool _hasResult;
-
-        private void Awake()
-        {
-            if(_target) _target.TryGetComponent(out _health);
-        }
-
+        
         private void Update()
         {
             if(!_isOn) return;
             
+            _health ??= _target.GetComponent<IFloatHealth>();
+
             if (Input.GetKeyDown(KeyCode.K))
             {
                 _healthChangeResult = _health.TakeDamage(_value); 
@@ -44,8 +41,9 @@ namespace IM.Health
                 $"Applied: {_healthChangeResult.Applied}\n" +
                 $"Mitigated: {_healthChangeResult.Mitigated}\n" +
                 $"Overflow: {_healthChangeResult.Overflow}";
-
+#if UNITY_EDITOR
             Handles.Label(pos, text);
+#endif
         }
     }
 }

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef888a0c5864397a720b93a72ec9db5, type: 3}
+  m_Name: Default Faction Database
+  m_EditorClassIdentifier: Factions::IM.Factions.FactionDatabase
+  _factions:
+  - {fileID: 11400000, guid: 788bd211483850b42816f83e0cc2d97f, type: 2}
+  - {fileID: 11400000, guid: 6f84adb9e464b3a45a892ce320bf0a2d, type: 2}

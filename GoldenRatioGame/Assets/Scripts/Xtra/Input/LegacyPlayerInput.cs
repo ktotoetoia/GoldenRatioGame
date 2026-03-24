@@ -4,7 +4,6 @@ using IM.Entities;
 using IM.Modules;
 using IM.UI;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace IM.Inputs
 {
@@ -52,10 +51,23 @@ namespace IM.Inputs
             playerStateMachine.ShouldTryInteract = ShouldTryInteract;
             playerStateMachine.ProvideKeyForAbility = ProvideKeyForAbility;
         }
-        
-        private KeyCode ProvideKeyForAbility(IAbilityReadOnly ability, int index)
+
+        private IEnumerable<IAbilityReadOnly> ProvideKeyForAbility(IEnumerable<IAbilityReadOnly> arg)
         {
-            return _abilityKeys[index];
+            List<IAbilityReadOnly> requested = new();
+            int index = 0;
+            
+            foreach (IAbilityReadOnly ability in arg)
+            {
+                if (Input.GetKey(_abilityKeys[index]))
+                {
+                    requested.Add(ability);
+                }
+
+                index++;
+            }
+
+            return requested;
         }
 
         private bool ShouldTryInteract()

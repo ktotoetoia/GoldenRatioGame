@@ -131,10 +131,12 @@ GameObject:
   - component: {fileID: 197609171}
   - component: {fileID: 197609165}
   - component: {fileID: 197609167}
+  - component: {fileID: 197609173}
   - component: {fileID: 197609168}
   - component: {fileID: 197609170}
-  - component: {fileID: 197609169}
+  - component: {fileID: 197609175}
   - component: {fileID: 197609172}
+  - component: {fileID: 197609174}
   m_Layer: 0
   m_Name: ----Initialization----
   m_TagString: Untagged
@@ -198,18 +200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb7dc0b0fc24bb99adc60c4330386d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Entities::IM.Entities.InteractionGameObjectFactoryObserver
---- !u!114 &197609169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 197609163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edb0835b68fa4eebb76002982bc07087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SaveSystem::IM.SaveSystem.SerializationGameObjectObserver
 --- !u!114 &197609170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,6 +237,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c583fa44dd4cec8a912ffa9e734672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisualsComponents::IM.VisualObjectOrderer
+--- !u!114 &197609173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197609163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7f55b60ed584f0fa4f43373748ee807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComposition::IM.ParentTransformInjector
+  _defaultParentTransform: {fileID: 2057245054}
+--- !u!114 &197609174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197609163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d7f06687127479a99189087a8696ab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isOn: 1
+--- !u!114 &197609175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197609163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c223c1146c8475bb59090465bdee436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InfrastructureComposition::IM.Modules.FactionSerializationGameObjectObserver
+  _factionDatabase: {fileID: 11400000, guid: a3450e5be2f206241b64182d1c17baa3, type: 2}
 --- !u!1 &269530788
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,7 +823,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 6
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1158,7 +1187,6 @@ GameObject:
   - component: {fileID: 2049271416}
   - component: {fileID: 2049271420}
   - component: {fileID: 2049271419}
-  - component: {fileID: 2049271418}
   - component: {fileID: 2049271417}
   m_Layer: 0
   m_Name: ----Debug----
@@ -1204,20 +1232,6 @@ MonoBehaviour:
   _rootColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _edgeColor: {r: 1, g: 1, b: 1, a: 1}
   _drawLabels: 1
---- !u!114 &2049271418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2049271415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d7f06687127479a99189087a8696ab5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _target: {fileID: 0}
-  _isOn: 0
 --- !u!114 &2049271419
 MonoBehaviour:
   m_ObjectHideFlags: 0

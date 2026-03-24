@@ -13,7 +13,10 @@ GameObject:
   - component: {fileID: 8673752034997074132}
   - component: {fileID: 6883969683713625626}
   - component: {fileID: 9208995422943814170}
-  - component: {fileID: -2877195833105587114}
+  - component: {fileID: -5575505721796090178}
+  - component: {fileID: -9074599395007698247}
+  - component: {fileID: 1569317106877436456}
+  - component: {fileID: -1629860833933646921}
   m_Layer: 0
   m_Name: Ability Arm Projectile
   m_TagString: Untagged
@@ -180,7 +183,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.05, y: 0}
   m_Radius: 0.15
---- !u!114 &-2877195833105587114
+--- !u!114 &-5575505721796090178
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,7 +192,51 @@ MonoBehaviour:
   m_GameObject: {fileID: 4697464553835882009}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd593569476747fe9b419eaa1e34f21a, type: 3}
+  m_Script: {fileID: 11500000, guid: c64d79cf7ce94b2b951d480dfd95efd2, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Abilities::IM.Abilities.Projectile
+  m_EditorClassIdentifier: Factions::IM.Factions.FactionCollisionDetector
+--- !u!114 &-9074599395007698247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697464553835882009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e95261307443f2aec850deb5748ce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComposition::IM.DealDamageOnTriggerEnter
   _toFinishTime: 2
+  _finishOnTriggerEnterAlly: 0
+  _finishOnTriggerEnterEnemy: 1
+  _finishOnTriggerEnterNone: 0
+--- !u!114 &1569317106877436456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697464553835882009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05f6a3dbd8eb45849ecdb1f41816800b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComposition::IM.FactionEnterTemporary
+  _toFinishTime: 2
+  _finishOnTriggerEnterAlly: 0
+  _finishOnTriggerEnterEnemy: 1
+  _finishOnTriggerEnterNone: 1
+--- !u!114 &-1629860833933646921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697464553835882009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53bee81a7e3f4badbad03c7f1c76398a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Health::IM.Health.RawFloatDamageDealerMono
+  _damage: 60

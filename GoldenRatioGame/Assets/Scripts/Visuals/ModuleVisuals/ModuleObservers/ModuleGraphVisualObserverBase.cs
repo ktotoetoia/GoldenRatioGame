@@ -30,10 +30,10 @@ namespace IM.Visuals
 
             _snapshotDiffer = new ModuleGraphSnapshotDiffer
             {
-                OnModuleAdded = HandleModuleAdded,
-                OnModuleRemoved = HandleModuleRemoved,
-                OnConnected = HandleConnected,
-                OnDisconnected = HandleDisconnected,
+                ModuleAdded = HandleModuleAdded,
+                ModuleRemoved = HandleModuleRemoved,
+                Connected = HandleConnected,
+                Disconnected = HandleDisconnected,
             };
         }
 

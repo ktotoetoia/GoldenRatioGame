@@ -9,7 +9,7 @@ namespace IM.Items
         [SerializeField] private Vector2 _referencePositionNormalized = new Vector3(0.5f, 0.5f);
         private SpriteRenderer _renderer;
         private IIcon _icon;
-        private bool _isDrawing;
+
         private SpriteRenderer Renderer => _renderer ??= GetComponent<SpriteRenderer>();
         
         public Vector3 ReferencePoint
@@ -44,12 +44,8 @@ namespace IM.Items
 
         public bool IsDrawing
         {
-            get => _isDrawing;
-            set
-            {
-                Renderer.enabled = value;
-                _isDrawing = value;
-            }
+            get => Renderer.enabled;
+            set => Renderer.enabled = value;
         }
     }
 }

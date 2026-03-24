@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82ccb8ec1ae440dfbf8de01447505499, type: 3}
+  m_Name: EnemyFaction
+  m_EditorClassIdentifier: Factions::IM.Factions.Faction
+  _defaultRelation: 2
+  _customRelationships:
+  - <TargetFaction>k__BackingField: {fileID: 11400000, guid: 788bd211483850b42816f83e0cc2d97f, type: 2}
+    <Relation>k__BackingField: 2
