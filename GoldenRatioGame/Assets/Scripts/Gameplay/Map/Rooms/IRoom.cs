@@ -1,4 +1,6 @@
-﻿namespace IM.Map
+﻿using UnityEngine;
+
+namespace IM.Map
 {
     public interface IRoom
     {

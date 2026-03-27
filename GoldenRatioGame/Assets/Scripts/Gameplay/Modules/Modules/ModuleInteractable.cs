@@ -16,7 +16,7 @@ namespace IM.Modules
         
         public bool CanInteract(IEntity interactor)
         {
-            return interactor is IModuleEntity && _extensibleModule.ModuleState == ModuleState.Show;
+            return isActiveAndEnabled && interactor is IModuleEntity && _extensibleModule.ModuleState == ModuleState.Show;
         }
 
         public void OnInteract(IEntity interactor)

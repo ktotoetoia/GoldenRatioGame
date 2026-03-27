@@ -23,7 +23,7 @@ AnimationClip:
     - time: 0
       value: {fileID: -7419648162453752251, guid: 37337cadd153f004cb8c3f958f25474b, type: 3}
     attribute: m_Sprite
-    path: Texture
+    path: Texture Holder/Texture
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -35,7 +35,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 1306211566
+      path: 1661984178
       attribute: 0
       script: {fileID: 0}
       typeID: 212
@@ -55,7 +55,7 @@ AnimationClip:
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 1
+    m_LoopTime: 0
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0

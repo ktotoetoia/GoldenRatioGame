@@ -17,6 +17,16 @@ namespace IM.LifeCycle
                 return _objects.Count;
             }
         }
+
+        public SmartGameObjectCollection()
+        {
+            
+        }
+
+        public SmartGameObjectCollection(IEnumerable<GameObject>  source)
+        {
+            foreach (GameObject gameObject in source) Add(gameObject);
+        }
         
         public void Add(GameObject item)
         {
@@ -26,20 +36,9 @@ namespace IM.LifeCycle
             }
         }
 
-        public bool Remove(GameObject item)
-        {
-            return _objects.Remove(item);
-        }
-
-        public void Clear()
-        {
-            _objects.Clear();
-        }
-
-        public bool Contains(GameObject item)
-        {
-            return _objects.Contains(item);
-        }
+        public bool Remove(GameObject item) => _objects.Remove(item);
+        public void Clear() => _objects.Clear();
+        public bool Contains(GameObject item) => _objects.Contains(item);
 
         public void CopyTo(GameObject[] array, int arrayIndex)
         {
@@ -63,10 +62,7 @@ namespace IM.LifeCycle
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public GameObject Get(int index)
         {
@@ -81,12 +77,6 @@ namespace IM.LifeCycle
             }
 
             return go;
-        }
-
-        public List<GameObject> GetLiveObjects()
-        {
-            _objects.RemoveAll(item => !item);
-            return _objects;
         }
 
         public GameObject this[int index] => Get(index);

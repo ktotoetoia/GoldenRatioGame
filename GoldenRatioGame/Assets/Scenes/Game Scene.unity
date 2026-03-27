@@ -681,6 +681,7 @@ GameObject:
   - component: {fileID: 614053980}
   - component: {fileID: 614053979}
   - component: {fileID: 614053978}
+  - component: {fileID: 614053981}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -716,11 +717,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Map::IM.Map.TiledRoomTest
   _tilemap: {fileID: 614053980}
-  _fillTile: {fileID: 11400000, guid: 38d02bcb1769eb045a11feed5185c53e, type: 2}
-  _borderTile: {fileID: 11400000, guid: 38d02bcb1769eb045a11feed5185c53e, type: 2}
-  _bounds:
-    m_Position: {x: -5, y: -5, z: -5}
-    m_Size: {x: 10, y: 10, z: 10}
+  _fillTile: {fileID: 11400000, guid: 6b0e67839c1910541b6e67c461672edf, type: 2}
+  _borderTile: {fileID: 11400000, guid: 30fc3a3904afb8e41bfc30d0c8451120, type: 2}
 --- !u!483693784 &614053979
 TilemapRenderer:
   serializedVersion: 2
@@ -790,6 +788,8 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -812,30 +812,30 @@ Tilemap:
   m_TileMatrixArray:
   - m_RefCount: 0
     m_Data:
-      e00: 1.6744298e+17
+      e00: 1.7193263e-18
       e01: 0
-      e02: 1.6744463e+17
-      e03: 1.1754966e-38
-      e10: 4.3e-44
+      e02: 1.7193363e-18
+      e03: -1.7179902e+10
+      e10: 1.67e-43
       e11: 0
-      e12: 4.3e-44
-      e13: 5.76e-43
-      e20: 1.2238855e-23
+      e12: 1.67e-43
+      e13: 6.25e-43
+      e20: 0.0013407432
       e21: 0
-      e22: -1.8694678e+29
-      e23: -1.3698577e-27
+      e22: 1.6145718e+29
+      e23: 4.512911e-16
       e30: 4.5915e-41
       e31: 0
-      e32: 5.79e-43
-      e33: 5.76e-43
+      e32: 6.29e-43
+      e33: 6.26e-43
   m_TileColorArray:
   - m_RefCount: 0
     m_Data: {r: 1e-45, g: 1e-45, b: 1e-45, a: 1e-45}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 0, y: -2, z: 0}
-  m_Size: {x: 13, y: 7, z: 1}
+  m_Origin: {x: -3, y: -4, z: 0}
+  m_Size: {x: 16, y: 9, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -855,6 +855,44 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &614053981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614053976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc5507b1699d49cba9cef43016bdf77d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InfrastructureComposition::IM.RoomInitializer
+  _toInitialize:
+  - <Bounds>k__BackingField:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    <EntityGameObject>k__BackingField: {fileID: 3797983940954428562, guid: 5eecb838571f31948a81b32f27795908, type: 3}
+    <ModulesGameObjects>k__BackingField:
+    - {fileID: 1831086527369138414, guid: f518952fb52b4af42b95ad416b950be5, type: 3}
+    - {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+    - {fileID: 991209621830917388, guid: 9dd7b1f69d38b81489b903d2f7b7266e, type: 3}
+    - {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
+    - {fileID: 2047626318192908934, guid: 120cd70ac3f52c045b9c42cc3fa06d5d, type: 3}
+    - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+    <Faction>k__BackingField: {fileID: 11400000, guid: 6f84adb9e464b3a45a892ce320bf0a2d, type: 2}
+  - <Bounds>k__BackingField:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    <EntityGameObject>k__BackingField: {fileID: 3797983940954428562, guid: 5eecb838571f31948a81b32f27795908, type: 3}
+    <ModulesGameObjects>k__BackingField:
+    - {fileID: 1831086527369138414, guid: f518952fb52b4af42b95ad416b950be5, type: 3}
+    - {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
+    - {fileID: 991209621830917388, guid: 9dd7b1f69d38b81489b903d2f7b7266e, type: 3}
+    - {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
+    - {fileID: 2047626318192908934, guid: 120cd70ac3f52c045b9c42cc3fa06d5d, type: 3}
+    - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+    <Faction>k__BackingField: {fileID: 11400000, guid: 6f84adb9e464b3a45a892ce320bf0a2d, type: 2}
+  _factory: {fileID: 197609165}
 --- !u!1 &851632500
 GameObject:
   m_ObjectHideFlags: 0

@@ -194,6 +194,7 @@ MonoBehaviour:
   _portVisualObjectFactory: {fileID: 11400000, guid: b50a20bb72fb9824e8befd705c4581c2, type: 2}
   _portBinder: {fileID: 11400000, guid: 148a279e8d53d5242a175e873032c286, type: 2}
   _renderer: {fileID: 2660879371163632053}
+  _boundsSource: 1
 --- !u!114 &2120567519094471437
 MonoBehaviour:
   m_ObjectHideFlags: 0

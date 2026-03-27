@@ -15,7 +15,7 @@ namespace IM
         private float _initializationTime;
         private Action _onFinished;
         private bool _finished;
-
+        
         private void Awake()
         {
             _damageDealer = GetComponent<IDamageDealer>();

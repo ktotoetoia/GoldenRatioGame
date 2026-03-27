@@ -22,5 +22,10 @@ namespace IM.Visuals
         {
             if (!TryGetComponent(out _animator)) throw new MissingComponentException(nameof(Animator));
         }
+
+        private void OnEnable()
+        {
+            _animator.SetFloat(_parameterName, _value);
+        }
     }
 }

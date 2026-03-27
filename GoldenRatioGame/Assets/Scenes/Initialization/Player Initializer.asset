@@ -13,27 +13,15 @@ MonoBehaviour:
   m_Name: Player Initializer
   m_EditorClassIdentifier: ModuleComposition::IM.PlayerInitializer
   _toInitialize:
-  - Bounds:
+  - <Bounds>k__BackingField:
       m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 3, y: 3, z: 0}
-    EntityGameObject: {fileID: 5053906743805642865, guid: f21da8245e0ee1c4aaf857bbcd3cfed9, type: 3}
-    ModulesGameObjects:
-    - {fileID: 8119833187759213420, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
-    - {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
-    - {fileID: 2802572859520272913, guid: ece0237ec3ed11f47af8bff30089ae37, type: 3}
-    - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
-    - {fileID: 991209621830917388, guid: 9dd7b1f69d38b81489b903d2f7b7266e, type: 3}
-    - {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
-    Faction: {fileID: 11400000, guid: 788bd211483850b42816f83e0cc2d97f, type: 2}
-  - Bounds:
-      m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 3, y: 3, z: 0}
-    EntityGameObject: {fileID: 3797983940954428562, guid: 5eecb838571f31948a81b32f27795908, type: 3}
-    ModulesGameObjects:
-    - {fileID: 8119833187759213420, guid: 74e8aa92c41572a4a9fc5cfe27d8b8d8, type: 3}
+      m_Extent: {x: 0, y: 0, z: 0}
+    <EntityGameObject>k__BackingField: {fileID: 5053906743805642865, guid: f21da8245e0ee1c4aaf857bbcd3cfed9, type: 3}
+    <ModulesGameObjects>k__BackingField:
+    - {fileID: 1831086527369138414, guid: f518952fb52b4af42b95ad416b950be5, type: 3}
     - {fileID: 6808322469448240976, guid: e4f1b720a6441804081b668b4a76a96e, type: 3}
-    - {fileID: 2802572859520272913, guid: ece0237ec3ed11f47af8bff30089ae37, type: 3}
-    - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
     - {fileID: 991209621830917388, guid: 9dd7b1f69d38b81489b903d2f7b7266e, type: 3}
     - {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
-    Faction: {fileID: 11400000, guid: 6f84adb9e464b3a45a892ce320bf0a2d, type: 2}
+    - {fileID: 2047626318192908934, guid: 120cd70ac3f52c045b9c42cc3fa06d5d, type: 3}
+    - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+    <Faction>k__BackingField: {fileID: 11400000, guid: 788bd211483850b42816f83e0cc2d97f, type: 2}
