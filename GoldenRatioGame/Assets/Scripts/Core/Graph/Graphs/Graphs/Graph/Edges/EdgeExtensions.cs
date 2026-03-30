@@ -11,5 +11,13 @@ namespace IM.Graphs
 
             throw new SystemException("edge does not contains this node");
         }
+
+        public static IDataNode<T> GetOther<T>(this IDataEdge<T> edge, IDataNode<T> node)
+        {
+            if(edge.DataNode1 == node) return edge.DataNode2;
+            if(edge.DataNode2 == node) return edge.DataNode1;
+
+            throw new SystemException("edge does not contains this node");
+        }
     }
 }

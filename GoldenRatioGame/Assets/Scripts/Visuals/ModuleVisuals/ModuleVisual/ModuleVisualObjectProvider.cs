@@ -1,4 +1,5 @@
-﻿using IM.Modules;
+﻿using IM.LifeCycle;
+using IM.Modules;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -34,7 +35,7 @@ namespace IM.Visuals
             GameObject go = Instantiate(prefab, transform);
             IModuleVisualObject visual = go.GetComponent<IModuleVisualObject>();
             
-            if(visual is IHaveDefaultParent p) p.DefaultParent = transform;
+            if(visual is IParentRestorable p) p.DefaultParent = transform;
             
             visual.FinishInitialization(GetComponent<IExtensibleModule>());
             

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -4724124268522441623}
   - component: {fileID: 5634798734519334486}
   - component: {fileID: -7743140741346210048}
+  - component: {fileID: -4928454679861181320}
   - component: {fileID: 4071596603139949161}
   - component: {fileID: -3808709638150430868}
   - component: {fileID: 6869556739838863163}
@@ -136,6 +137,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9dd9b36686f4bfa8f63a95993a9e1c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleComponents::IM.Modules.EffectGroupExtension
+--- !u!114 &-4928454679861181320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210977406679086040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c5ce52b5b274357b32cdcb7bbf2ea83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Map::IM.Map.RoomVisitor
 --- !u!114 &4071596603139949161
 MonoBehaviour:
   m_ObjectHideFlags: 0

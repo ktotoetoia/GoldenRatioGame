@@ -55,6 +55,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c3488cf6c9d57b64eaa61001eec4d08d
+    m_Address: Assets/Prefabs/Rooms/Room.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e4f1b720a6441804081b668b4a76a96e
     m_Address: Assets/Modules/Bolt Thrower/Head/Bolt Thrower Head.prefab
     m_ReadOnly: 0

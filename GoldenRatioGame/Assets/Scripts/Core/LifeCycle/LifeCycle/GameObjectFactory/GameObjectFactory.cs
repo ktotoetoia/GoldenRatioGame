@@ -20,6 +20,7 @@ namespace IM.LifeCycle
         {
             GameObject created = Instantiate(prefab);
             
+            if(created.TryGetComponent(out IRequireGameObjectFactory r)) r.Factory = this;
             _observers.ForEach(x => x.OnCreate(created, deserialized));
             _gameObjectCollection.Add(created);
             

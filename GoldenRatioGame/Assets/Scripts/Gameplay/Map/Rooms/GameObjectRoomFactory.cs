@@ -1,13 +1,10 @@
-﻿using IM.LifeCycle;
-using UnityEngine;
-
-namespace IM.Map
+﻿namespace IM.Map
 {
-    public class RoomFactory : IRoomFactory
+    public class GameObjectRoomFactory : IRoomFactory
     {
         private readonly IRoomInitializer _roomInitializer;
 
-        public RoomFactory(IRoomInitializer roomInitializer)
+        public GameObjectRoomFactory(IRoomInitializer roomInitializer)
         {
             _roomInitializer = roomInitializer;
         }

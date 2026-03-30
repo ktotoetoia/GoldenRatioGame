@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class ModuleVisualObject : MonoBehaviour, IModuleVisualObject, IHaveDefaultParent
+    public class ModuleVisualObject : MonoBehaviour, IModuleVisualObject, IParentRestorable
     {
         [SerializeField] protected PortVisualObjectFactoryBase _portVisualObjectFactory;
         [SerializeField] protected PortBinderBase _portBinder;
@@ -53,7 +53,7 @@ namespace IM.Visuals
         public IPortVisualObjectDirtyTracker DirtyTracker { get; } = new PortVisualObjectDirtyTracker();
         public IExtensibleModule Owner { get; private set; }
         public Transform DefaultParent { get; set; }
-        
+
         public int Order
         {
             get => _renderer.sortingOrder;
@@ -158,7 +158,7 @@ namespace IM.Visuals
 
         public void OnRelease()
         {
-            transform.SetParent(DefaultParent);
+            ResetToDefaultParent();
             _preset.ApplyTo(this);
             
             foreach (IPoolObject poolObject in _poolObjects) poolObject.OnRelease();
@@ -170,6 +170,11 @@ namespace IM.Visuals
             Visible = true;
             
             foreach (IPoolObject poolObject in _poolObjects) poolObject.OnGet();
+        }
+
+        public void ResetToDefaultParent()
+        {
+            transform.SetParent(DefaultParent);
         }
     }
 }

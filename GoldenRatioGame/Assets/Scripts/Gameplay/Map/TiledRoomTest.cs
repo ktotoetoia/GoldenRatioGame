@@ -11,13 +11,15 @@ namespace IM.Map
         [SerializeField] private Tilemap _tilemap;
         [SerializeField] private TileBase _fillTile;
         [SerializeField] private TileBase _borderTile;
+        [SerializeField] private GameObject _prefab;
+        [SerializeField] private GameObjectFactory _gameObjectFactory;
         private IFloor _floor;
         private IRoomFactory _roomFactory;
         private IRoomWalker _roomWalker;
         
         private void Awake()
         {
-            _roomFactory = new RoomFactory(GetComponent<IRoomInitializer>());
+            _roomFactory = new GameObjectRoomMonoFactory(_gameObjectFactory, _prefab);
             IDataGraph<IRoom> floorGraph = new BiDirectionalDataGraph<IRoom>();
             IDataNode<IRoom> root = floorGraph.Create(_roomFactory.Create());
             C(floorGraph);

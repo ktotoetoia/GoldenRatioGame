@@ -10,13 +10,13 @@ namespace IM.Map
         private readonly IDataGraphReadOnly<IRoom> _roomGraph;
         private IDataNode<IRoom> _currentNode;
         
-        public IEnumerable<IRoom> Available => _currentNode.DataEdges.Select(x => (x.GetOther( _currentNode) as IDataNode<IRoom>).Value);
+        public IEnumerable<IRoom> Available => _currentNode.DataEdges.Select(x => x.GetOther( _currentNode).Value);
         public IRoom Current => _currentNode.Value;
         
         public RoomWalker(IDataNode<IRoom> startingNode)
         {
             _currentNode = startingNode;
-            _currentNode.Value.Enter();
+            _currentNode.Value.Enter(this);
         }
 
         public void GoTo(IRoom room)
@@ -27,14 +27,14 @@ namespace IM.Map
                 return;
             }
             
-            _currentNode.Value.Exit();
+            _currentNode.Value.Exit(this);
             _currentNode = node;
-            _currentNode.Value.Enter();
+            _currentNode.Value.Enter(this);
         }
 
         private bool TryGetNode(out IDataNode<IRoom> node, IRoom room)
         {
-            node = _currentNode.DataEdges.Select(x => x.GetOther(_currentNode) as IDataNode<IRoom>).FirstOrDefault(x => x.Value == room);
+            node = _currentNode.DataEdges.FirstOrDefault(x =>x.GetOther(_currentNode).Value == room).GetOther(_currentNode);
 
             return node != null;
         }

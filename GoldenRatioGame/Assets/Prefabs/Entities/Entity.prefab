@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 2365714068825351273}
   - component: {fileID: 4855950522832043137}
   - component: {fileID: 5563122138591822399}
+  - component: {fileID: 2047654248429728728}
   - component: {fileID: 8301073097183946184}
   - component: {fileID: -1727820582675450361}
   - component: {fileID: 883802630339849986}
@@ -156,6 +157,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.3, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2047654248429728728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c5ce52b5b274357b32cdcb7bbf2ea83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Map::IM.Map.RoomVisitor
 --- !u!114 &8301073097183946184
 MonoBehaviour:
   m_ObjectHideFlags: 0
