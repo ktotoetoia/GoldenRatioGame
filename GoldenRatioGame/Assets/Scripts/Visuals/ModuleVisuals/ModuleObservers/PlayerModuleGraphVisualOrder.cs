@@ -5,7 +5,7 @@ namespace IM.Visuals
 {
     public class PlayerModuleGraphVisualOrder : MonoBehaviour, IDepthOrderable
     {
-        [SerializeField] private PlayerModuleGraphVisualObserver _moduleGraphVisualObserver;
+        [SerializeField] private EntityModuleGraphVisualObserver _moduleGraphVisualObserver;
         private int _order;
 
         public Vector3 ReferencePoint

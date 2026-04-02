@@ -1,7 +1,7 @@
 using System.Collections.Generic;
+using IM.Events;
 using IM.LifeCycle;
 using IM.Modules;
-using IM.Events;
 using UnityEngine;
 
 namespace IM.Visuals

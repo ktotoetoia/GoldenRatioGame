@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using IM.LifeCycle;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -26,7 +27,6 @@ namespace IM.SaveSystem
             {
                 Id = Id,
                 PrefabId = _assetReference?.AssetGUID,
-                ScenePath = gameObject.scene.path
             };
             
             IList<Component> components = GetComponentsToSerialize();

@@ -6,14 +6,13 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class AbilityModuleEditingContextMono : MonoBehaviour, IAbilityPoolModuleEditingContext,IRequireDefaultParentTransform
+    public class AbilityModuleEditingContextMono : MonoBehaviour, IAbilityPoolModuleEditingContext
     {
         [SerializeField] private GameObject _moduleObserversSource;
         [SerializeField] private GameObject _factoriesSource;
         [SerializeField] private Transform _defaultModulesTransform;
         private AbilityPool _abilityPool;
         private ModuleEditingContext _moduleEditingContext;
-        public Transform DefaultParentTransform { get; set; }
         
         public bool IsUnsafe => _moduleEditingContext.IsUnsafe;
         public void SetUnsafe(bool value) => _moduleEditingContext.SetUnsafe(value);
@@ -52,7 +51,7 @@ namespace IM.Modules
             if (module is MonoBehaviour moduleMono)
             {
                 moduleMono.transform.position = transform.position;
-                moduleMono.transform.SetParent(DefaultParentTransform);
+                moduleMono.transform.SetParent(transform.parent);
             } 
         }
     }

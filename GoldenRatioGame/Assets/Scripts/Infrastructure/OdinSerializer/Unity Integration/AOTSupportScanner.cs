@@ -20,17 +20,17 @@
 
 namespace IM.OdinSerializer.Editor
 {
-    using Utilities;
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     using UnityEditor;
     using UnityEditor.SceneManagement;
-    using UnityEngine;
-    using System.Reflection;
-    using UnityEngine.SceneManagement;
-    using System.Collections;
     using UnityEditorInternal;
+    using UnityEngine;
+    using UnityEngine.SceneManagement;
+    using Utilities;
 
     public sealed class AOTSupportScanner : IDisposable
     {

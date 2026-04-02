@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using IM.LifeCycle;
 using IM.Graphs;
+using IM.LifeCycle;
 using IM.Modules;
 using IM.Transforms;
 using UnityEngine;
@@ -47,8 +47,9 @@ namespace IM.Visuals
                 }
             }
         }
-        
-        public ITransform Transform { get; private set; }
+
+        private ITransform _transform;
+        public ITransform Transform => _transform ??= GetComponent<ITransform>();
         public IReadOnlyList<IPortVisualObject> PortsVisualObjects => _portVisualObjects;
         public IPortVisualObjectDirtyTracker DirtyTracker { get; } = new PortVisualObjectDirtyTracker();
         public IExtensibleModule Owner { get; private set; }
@@ -125,7 +126,6 @@ namespace IM.Visuals
                 PortsVisible = true
             };
             
-            Transform = GetComponent<ITransform>();
             GetComponentsInChildren(_poolObjects);
             _poolObjects.Remove(this);
         }

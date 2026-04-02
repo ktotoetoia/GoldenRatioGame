@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using IM.Events;
 using IM.Graphs;
 using IM.Modules;
 using IM.Movement;
 using IM.Values;
+using UnityEngine;
 
 namespace IM.Visuals
 {

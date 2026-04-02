@@ -18,9 +18,9 @@
 
 namespace IM.OdinSerializer
 {
-    using Utilities;
     using System;
     using System.Reflection;
+    using Utilities;
 
     /// <summary>
     /// Final fallback formatter for all types which have no other formatters. This formatter relies on reflection to work, and is thus comparatively slow and creates more garbage than a custom formatter.

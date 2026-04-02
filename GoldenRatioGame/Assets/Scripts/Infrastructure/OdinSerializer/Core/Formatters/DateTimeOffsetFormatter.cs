@@ -22,8 +22,8 @@ using IM.OdinSerializer;
 
 namespace IM.OdinSerializer
 {
-    using System.Globalization;
     using System;
+    using System.Globalization;
 
     /// <summary>
     /// Custom formatter for the <see cref="DateTimeOffset"/> type.

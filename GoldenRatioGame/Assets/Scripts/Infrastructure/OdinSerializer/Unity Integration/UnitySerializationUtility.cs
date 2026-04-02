@@ -20,19 +20,19 @@
 
 namespace IM.OdinSerializer
 {
-    using System.Globalization;
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Reflection;
-    using System.Text;
-    using Utilities;
-    using UnityEngine;
-    using UnityEngine.Events;
     using System.Runtime.CompilerServices;
-    using UnityEngine.Assertions;
     using System.Runtime.Serialization;
+    using System.Text;
+    using UnityEngine;
+    using UnityEngine.Assertions;
+    using UnityEngine.Events;
+    using Utilities;
 
 #if PREFAB_DEBUG && !SIRENIX_INTERNAL
 #warning "Prefab serialization debugging is enabled outside of Sirenix internal. Are you sure this is right?"

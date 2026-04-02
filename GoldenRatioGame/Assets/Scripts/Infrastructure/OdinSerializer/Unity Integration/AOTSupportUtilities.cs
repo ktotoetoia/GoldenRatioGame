@@ -20,13 +20,13 @@
 
 namespace IM.OdinSerializer.Editor
 {
-    using IM.OdinSerializer.Utilities;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Reflection.Emit;
+    using IM.OdinSerializer.Utilities;
     using UnityEditor;
     using UnityEngine;
     using UnityEngine.Scripting;

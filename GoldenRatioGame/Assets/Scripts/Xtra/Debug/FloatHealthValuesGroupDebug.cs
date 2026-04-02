@@ -18,7 +18,7 @@ namespace IM.Health
         {
             if(!_isOn || !Application.isPlaying) return;
             
-            foreach (GameObject target in _gameObjectsCollection.Where(x => x.TryGetComponent(out IFloatHealthValuesGroup h)))
+            foreach (GameObject target in _gameObjectsCollection.Where(x => x.activeInHierarchy && x.TryGetComponent(out IFloatHealthValuesGroup h)))
             {
                 DrawFor(target);
             }

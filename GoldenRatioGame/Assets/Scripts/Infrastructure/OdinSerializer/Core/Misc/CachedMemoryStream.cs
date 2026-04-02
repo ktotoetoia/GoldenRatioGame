@@ -18,8 +18,8 @@
 
 namespace IM.OdinSerializer
 {
-    using IM.OdinSerializer.Utilities;
     using System.IO;
+    using IM.OdinSerializer.Utilities;
 
     internal sealed class CachedMemoryStream : ICacheNotificationReceiver
     {

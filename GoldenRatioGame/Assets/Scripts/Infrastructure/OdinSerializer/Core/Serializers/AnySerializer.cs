@@ -18,9 +18,9 @@
 
 namespace IM.OdinSerializer
 {
-    using Utilities;
     using System;
     using System.Collections.Generic;
+    using Utilities;
 
     public sealed class AnySerializer : Serializer
     {

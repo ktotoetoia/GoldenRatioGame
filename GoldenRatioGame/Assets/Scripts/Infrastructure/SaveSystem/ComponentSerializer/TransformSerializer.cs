@@ -22,5 +22,13 @@ namespace IM.SaveSystem
             t.rotation = s.Rotation;
             t.localScale = s.Scale;
         }
+        
+        [Serializable]
+        public class TransformState
+        {
+            public Vector3 Position;
+            public Quaternion Rotation;
+            public Vector3 Scale;
+        }
     }
 }

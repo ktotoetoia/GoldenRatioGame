@@ -571,7 +571,6 @@ GameObject:
   - component: {fileID: 8543606873535386348}
   - component: {fileID: 4737303748126444302}
   - component: {fileID: 6135420331760039005}
-  - component: {fileID: 5912145747460428046}
   - component: {fileID: 3204459152934989102}
   m_Layer: 0
   m_Name: ModuleObservers
@@ -673,18 +672,6 @@ MonoBehaviour:
       _rotation: {x: 0, y: 0, z: 0, w: 1}
       _scale: {x: 1, y: 1, z: 1}
     <PortsVisible>k__BackingField: 0
---- !u!114 &5912145747460428046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8508053980751109502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b6d75674201484eb9fdb7c721746ad6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ReferenceModuleVisualObjectsObserver
 --- !u!114 &3204459152934989102
 MonoBehaviour:
   m_ObjectHideFlags: 0

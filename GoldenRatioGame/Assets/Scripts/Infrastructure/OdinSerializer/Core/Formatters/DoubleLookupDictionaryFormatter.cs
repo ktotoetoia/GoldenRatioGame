@@ -22,10 +22,10 @@ using IM.OdinSerializer;
 
 namespace IM.OdinSerializer
 {
-    using IM.OdinSerializer.Utilities;
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using IM.OdinSerializer.Utilities;
 
     /// <summary>
     /// Custom Odin serialization formatter for <see cref="DoubleLookupDictionary{TFirstKey, TSecondKey, TValue}"/>.

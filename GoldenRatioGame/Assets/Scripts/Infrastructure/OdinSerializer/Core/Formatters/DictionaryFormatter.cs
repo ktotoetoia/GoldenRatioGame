@@ -22,11 +22,11 @@ using IM.OdinSerializer;
 
 namespace IM.OdinSerializer
 {
-    using Utilities;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Reflection;
+    using Utilities;
 
     /// <summary>
     /// Custom generic formatter for the generic type definition <see cref="Dictionary{TKey, TValue}"/>.

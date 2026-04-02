@@ -18,12 +18,12 @@
 
 namespace IM.OdinSerializer
 {
-    using IM.OdinSerializer.Utilities;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+    using IM.OdinSerializer.Utilities;
 
     /// <summary>
     /// An attribute that lets you help the DefaultSerializationBinder bind type names to types. This is useful if you're renaming a type,

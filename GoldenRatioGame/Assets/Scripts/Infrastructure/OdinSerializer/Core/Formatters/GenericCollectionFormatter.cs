@@ -17,11 +17,11 @@
 //-----------------------------------------------------------------------
 namespace IM.OdinSerializer
 {
-    using IM.OdinSerializer.Utilities;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Reflection;
+    using IM.OdinSerializer.Utilities;
 
     /// <summary>
     /// Utility class for the <see cref="GenericCollectionFormatter{TCollection, TElement}"/> class.

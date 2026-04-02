@@ -28,9 +28,19 @@ namespace IM.Visuals
                 }
                 else
                 {
-                    portVisualObject = Instantiate(_portVisualObjectMonoPrefab).GetComponent<PortVisualObjectMono>();
-                    portVisualObject.Transform.Transform.SetParent(moduleVisualObject.Transform.Transform,false);
-                }
+                    portVisualObject = Instantiate(_portVisualObjectMonoPrefab)
+                            .GetComponent<PortVisualObjectMono>();
+                    try
+                    {
+                        portVisualObject.Transform.Transform.SetParent(moduleVisualObject.Transform.Transform, false);
+                    }
+                    catch
+                    {
+                        Debug.Log(portVisualObject);
+                        Debug.Log(portVisualObject.transform);
+                        Debug.Log(portVisualObject);
+                    }
+                }   
                 
                 portVisualObjects.Add(portVisualObject);
                 portVisualObject.Initialize(moduleVisualObject, portsList[i]);

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using IM.LifeCycle;
 using IM.Commands;
+using IM.LifeCycle;
 
 namespace IM.Graphs
 {

@@ -22,10 +22,10 @@ using IM.OdinSerializer;
 
 namespace IM.OdinSerializer
 {
-    using Utilities;
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using Utilities;
 
     /// <summary>
     /// Custom generic formatter for the generic type definition <see cref="List{T}"/>.

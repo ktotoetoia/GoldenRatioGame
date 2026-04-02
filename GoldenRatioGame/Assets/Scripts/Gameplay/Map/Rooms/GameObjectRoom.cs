@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using IM.LifeCycle;
 using UnityEngine;
 
@@ -8,88 +7,97 @@ namespace IM.Map
 {
     public class GameObjectRoom : IRoom
     {
-        private readonly IRoomInitializer _roomInitializer;
-        private readonly Dictionary<GameObject, IPausable> _toPause = new();
-        private SmartGameObjectCollection _gameObjectCollection;
-        private bool _firstTimeEnter = true;
-        
-        public IReadOnlyCollection<GameObject> GameObjects => _gameObjectCollection;
-        
-        public event Action<GameObject> GameObjectAdded;
-        public event Action<GameObject> GameObjectRemoved;
+        private readonly SmartCollection<IRoomVisitor> _roomVisitors = new();
+        private readonly SmartCollection<IRoomWalker> _roomWalkers = new();
+        private bool _isActive;
 
-        public GameObjectRoom() : this(new GameObject[] {})
-        {
-            
-        }
-        
-        public GameObjectRoom(IEnumerable<GameObject> gameObjects)
-        {
-            TryInitialize(gameObjects);
-        }
-        
-        public GameObjectRoom(IRoomInitializer roomInitializer)
-        {
-            _roomInitializer = roomInitializer;
-        }
+        public IEnumerable<IRoomVisitor> RoomVisitors => _roomVisitors;
+        public IEnumerable<IRoomWalker> RoomWalkers => _roomWalkers;
 
-        public void Add(IRoomVisitor roomVisitor)
+        public bool IsActive
         {
-            if(roomVisitor is not MonoBehaviour mo || _gameObjectCollection.Contains(mo.gameObject)) return;
-            
-            foreach (IRoomVisitor rv in mo.gameObject.GetComponentsInChildren<IRoomVisitor>()
-                         .Where(x=> !_gameObjectCollection.Contains(((MonoBehaviour)x).gameObject)))
+            get => _isActive;
+            private set
             {
-                _gameObjectCollection.Add(((MonoBehaviour)rv).gameObject);
-                GameObjectAdded?.Invoke(((MonoBehaviour)rv).gameObject);
+                if (_isActive == value) return;
+                _isActive = value;
+                SetActives(_isActive);
             }
         }
 
-        public void Remove(IRoomVisitor roomVisitor)
+        public bool Add(IRoomVisitor roomVisitor)
         {
-            if(roomVisitor is not MonoBehaviour mo || !_gameObjectCollection.Contains(mo.gameObject)) return;
-            
-            foreach (IRoomVisitor rv in mo.gameObject.GetComponentsInChildren<IRoomVisitor>()
-                         .Where(x=> _gameObjectCollection.Contains(((MonoBehaviour)x).gameObject)))
+            if (roomVisitor.CurrentRoom != null) 
+                throw new ArgumentException($"Visitor ({roomVisitor}) must be removed from the other room before adding.");
+
+            if (roomVisitor is not MonoBehaviour mb)
             {
-                _gameObjectCollection.Remove(((MonoBehaviour)rv).gameObject);
-                GameObjectRemoved?.Invoke(((MonoBehaviour)rv).gameObject);
+                return AddSingle(roomVisitor);
             }
+
+            var nestedVisitors = mb.GetComponentsInChildren<IRoomVisitor>(true);
+            bool anyAdded = false;
+            
+            foreach (var visitor in nestedVisitors)
+            {
+                if (AddSingle(visitor)) anyAdded = true;
+            }
+
+            return anyAdded;
+        }
+
+        public bool Remove(IRoomVisitor roomVisitor)
+        {
+            if (roomVisitor is not MonoBehaviour mb)
+            {
+                return RemoveSingle(roomVisitor);
+            }
+
+            var nestedVisitors = mb.GetComponentsInChildren<IRoomVisitor>(true);
+            bool anyRemoved = false;
+
+            foreach (var visitor in nestedVisitors)
+            {
+                if (RemoveSingle(visitor)) anyRemoved = true;
+            }
+
+            return anyRemoved;
+        }
+
+        private bool AddSingle(IRoomVisitor visitor)
+        {
+            if (_roomVisitors.Contains(visitor)) return false;
+
+            _roomVisitors.Add(visitor);
+            visitor.ActiveInRoom = _isActive;
+            visitor.CurrentRoom = this;
+            return true;
+        }
+
+        private bool RemoveSingle(IRoomVisitor visitor)
+        {
+            if (!_roomVisitors.Remove(visitor)) return false;
+
+            visitor.CurrentRoom = null;
+            return true;
         }
 
         public void Enter(IRoomWalker roomWalker)
         {
-            TryInitialize(_roomInitializer?.Initialize(this) ?? new GameObject[]{});
-            PauseRoom(false);
+            _roomWalkers.Add(roomWalker);
+            IsActive = true;
         }
 
         public void Exit(IRoomWalker roomWalker)
         {
-            PauseRoom(true);
+            _roomWalkers.Remove(roomWalker);
+            if (_roomWalkers.Count == 0) IsActive = false;
         }
 
-        private void TryInitialize(IEnumerable<GameObject> gameObjects)
+        private void SetActives(bool value)
         {
-            if (!_firstTimeEnter) return;
-            
-            _gameObjectCollection = new SmartGameObjectCollection(gameObjects);
-                
-            foreach (GameObject gameObject in _gameObjectCollection)
-            {
-                if (gameObject.TryGetComponent(out IPausable pausable)) _toPause[gameObject] = pausable;
-            }
-            
-            _firstTimeEnter = false;
-        }
-        
-        private void PauseRoom(bool value)
-        {
-            foreach (GameObject gameObject in _gameObjectCollection)
-            {
-                if (_toPause.TryGetValue(gameObject, out IPausable pausable)) pausable.Paused = value;
-                
-                gameObject.SetActive(!value);
-            }   
+            foreach (IRoomVisitor roomVisitor in _roomVisitors) 
+                roomVisitor.ActiveInRoom = value;
         }
     }
 }

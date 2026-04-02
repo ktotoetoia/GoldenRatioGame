@@ -15,5 +15,5 @@ MonoBehaviour:
   _relativePath: Test.json
   <SceneLoadType>k__BackingField: 1
   _initializers:
-  - {fileID: 11400000, guid: 9105797192c202a4db85f91e5b96bb08, type: 2}
   - {fileID: 11400000, guid: 7bea5e7a2d8a43c41a2243ba1130b1b0, type: 2}
+  - {fileID: 11400000, guid: 92ef9d1a6111c1040bf7f5b105ab4be3, type: 2}

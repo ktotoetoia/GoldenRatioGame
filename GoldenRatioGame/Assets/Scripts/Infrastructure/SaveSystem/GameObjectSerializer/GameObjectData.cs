@@ -8,7 +8,6 @@ namespace IM.SaveSystem
     {
         public string Id;
         public string PrefabId;
-        public string ScenePath;
         public List<ComponentData> Components = new();
     }
 }

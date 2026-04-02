@@ -18,13 +18,13 @@
 
 namespace IM.OdinSerializer
 {
-    using System.Globalization;
     using System;
     using System.Collections.Generic;
-    using Utilities;
+    using System.Globalization;
     using System.Linq;
-    using UnityEngine;
     using System.Reflection;
+    using UnityEngine;
+    using Utilities;
 
     /// <summary>
     /// Provides utility methods for handling dictionary keys in the prefab modification system.

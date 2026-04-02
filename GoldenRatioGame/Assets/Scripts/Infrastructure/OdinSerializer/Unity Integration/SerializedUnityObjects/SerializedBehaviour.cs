@@ -18,8 +18,8 @@
 
 namespace IM.OdinSerializer
 {
-    using Utilities;
     using UnityEngine;
+    using Utilities;
 
     /// <summary>
     /// A Unity Behaviour which is serialized by the Sirenix serialization system.

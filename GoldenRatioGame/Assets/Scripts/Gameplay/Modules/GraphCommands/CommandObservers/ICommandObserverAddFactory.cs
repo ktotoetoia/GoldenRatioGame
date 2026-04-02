@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using IM.LifeCycle;
 using IM.Graphs;
+using IM.LifeCycle;
 
 namespace IM.Modules
 {

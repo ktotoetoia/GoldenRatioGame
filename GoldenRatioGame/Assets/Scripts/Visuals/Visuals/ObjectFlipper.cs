@@ -7,7 +7,6 @@ namespace IM.Visuals
         [SerializeField] private bool _flipX = true;
         [SerializeField] private bool _flipY;
         [SerializeField] private bool _flipZ;
-
         private bool _flipped;
 
         public bool Flipped

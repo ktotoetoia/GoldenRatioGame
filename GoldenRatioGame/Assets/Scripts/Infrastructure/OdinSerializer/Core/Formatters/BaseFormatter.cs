@@ -24,11 +24,11 @@
 using UnityEngine;
 namespace IM.OdinSerializer
 {
-    using IM.OdinSerializer.Utilities;
     using System;
     using System.Collections.Generic;
     using System.Reflection;
     using System.Runtime.Serialization;
+    using IM.OdinSerializer.Utilities;
 
     /// <summary>
     /// Provides common functionality for serializing and deserializing values of type <see cref="T"/>, and provides automatic support for the following common serialization conventions:

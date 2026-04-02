@@ -1,5 +1,5 @@
-﻿using IM.LifeCycle;
-using IM.Events;
+﻿using IM.Events;
+using IM.LifeCycle;
 using UnityEngine;
 
 namespace IM.Visuals

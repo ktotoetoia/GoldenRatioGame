@@ -18,7 +18,6 @@ namespace IM.Modules
             ModuleEditingContext = GetComponent<IModuleEditingContext>();
         }
         
-        [ContextMenu("Destroy")]
         public override void Destroy()
         {
             List<IExtensibleModule> modules = Disassemble();

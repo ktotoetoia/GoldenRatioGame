@@ -64,8 +64,29 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2047654248429728728, guid: fe00d3ca423cbb04092c1edd892db3a4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4342869459289063407, guid: fe00d3ca423cbb04092c1edd892db3a4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5915818444453268322}
   m_SourcePrefab: {fileID: 100100000, guid: fe00d3ca423cbb04092c1edd892db3a4, type: 3}
+--- !u!1 &5053906743805642865 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4342869459289063407, guid: fe00d3ca423cbb04092c1edd892db3a4, type: 3}
+  m_PrefabInstance: {fileID: 8820279716652890014}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-5915818444453268322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5053906743805642865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eebce5d53f5f406aa9377b21df4cfabd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Map::IM.Map.RoomWalkerMono

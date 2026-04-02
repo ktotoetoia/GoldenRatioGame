@@ -17,11 +17,11 @@
 //-----------------------------------------------------------------------
 namespace IM.OdinSerializer
 {
-    using Utilities;
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using UnityEngine;
+    using Utilities;
 
     /// <summary>
     /// Contains a set of default implementations of the <see cref="ISerializationPolicy"/> interface.

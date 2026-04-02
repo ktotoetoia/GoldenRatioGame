@@ -18,11 +18,11 @@
 
 namespace IM.OdinSerializer
 {
-    using IM.OdinSerializer.Utilities;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Reflection;
+    using IM.OdinSerializer.Utilities;
 
 
 // System.ExecutionEngineException is marked obsolete in .NET 4.6

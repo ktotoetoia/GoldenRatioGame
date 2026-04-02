@@ -45,7 +45,7 @@ namespace IM.Visuals
         }
         public IModuleVisualObject OwnerVisualObject { get; private set; }
         public IPort Port { get; private set; }
-        public ITransform Transform => _transform;
+        public ITransform Transform => _transform ??= GetComponent<ITransform>();
         public bool Highlighted { get; set; }
 
         public LocalTransformPreset LocalTransformPreset
@@ -56,11 +56,6 @@ namespace IM.Visuals
                 _localTransformPreset = value;
                 _localTransformPreset.ApplyTo(Transform);
             }
-        }
-
-        private void Awake()
-        {
-            if (!TryGetComponent(out _transform)) throw new MissingComponentException(nameof(ITransform));
         }
 
         private void SetLayerRecursively(Transform targetTransform, int layer)

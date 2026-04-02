@@ -1,6 +1,6 @@
 ﻿using System;
-using IM.LifeCycle;
 using IM.Factions;
+using IM.LifeCycle;
 using UnityEngine;
 
 namespace IM

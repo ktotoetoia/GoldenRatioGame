@@ -19,9 +19,9 @@
 
 namespace IM.OdinSerializer
 {
-    using Utilities;
     using System;
     using System.Collections.Generic;
+    using Utilities;
 
     /// <summary>
     /// Formatter for all primitive one-dimensional arrays.

@@ -18,13 +18,13 @@
 
 namespace IM.OdinSerializer
 {
-    using IM.OdinSerializer.Utilities;
-    using IM.OdinSerializer.Utilities.Unsafe;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using IM.OdinSerializer.Utilities;
+    using IM.OdinSerializer.Utilities.Unsafe;
 
     /// <summary>
     /// Writes data to a stream that can be read by a <see cref="BinaryDataReader"/>.
