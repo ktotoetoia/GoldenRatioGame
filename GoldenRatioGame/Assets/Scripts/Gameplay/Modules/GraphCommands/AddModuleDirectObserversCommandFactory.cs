@@ -7,9 +7,9 @@ namespace IM.Modules
 {
     public class AddModuleDirectObserversCommandFactory : IAddModuleCommandFactory
     {
-        private readonly List<ICommandObserverAddFactory> _directObserverFactories;
+        private readonly IEnumerable<ICommandObserverAddFactory> _directObserverFactories;
 
-        public AddModuleDirectObserversCommandFactory(List<ICommandObserverAddFactory> directObserverFactories)
+        public AddModuleDirectObserversCommandFactory(IEnumerable<ICommandObserverAddFactory> directObserverFactories)
         {
             _directObserverFactories = directObserverFactories;
         }

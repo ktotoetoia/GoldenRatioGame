@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4054245826693385729
+--- !u!1 &3031017149369251266
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,27 +8,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6054549284471274203}
-  - component: {fileID: 10051488610975741}
-  - component: {fileID: 2447027755732917793}
-  - component: {fileID: 6432282395797782341}
-  - component: {fileID: 999588743564167469}
-  - component: {fileID: 6124583892585538369}
-  - component: {fileID: 1289599897053231877}
+  - component: {fileID: 5110460682599161}
+  - component: {fileID: 8185116252885737288}
+  - component: {fileID: 1393543158944610205}
+  - component: {fileID: 1962369493419541764}
+  - component: {fileID: 8441552538776195505}
   m_Layer: 0
-  m_Name: Room
+  m_Name: RoomPort
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6054549284471274203
+--- !u!4 &5110460682599161
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4054245826693385729}
+  m_GameObject: {fileID: 3031017149369251266}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -37,72 +35,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!156049354 &10051488610975741
-Grid:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4054245826693385729}
-  m_Enabled: 1
-  m_CellSize: {x: 1, y: 1, z: 1}
-  m_CellGap: {x: 0, y: 0, z: 0}
-  m_CellLayout: 0
-  m_CellSwizzle: 0
---- !u!1839735485 &2447027755732917793
-Tilemap:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4054245826693385729}
-  m_Enabled: 1
-  m_Tiles: {}
-  m_AnimatedTiles: {}
-  m_TileAssetArray: []
-  m_TileSpriteArray: []
-  m_TileMatrixArray: []
-  m_TileColorArray: []
-  m_TileObjectToInstantiateArray: []
-  m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 0, y: 0, z: 1}
-  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
-  m_TileOrientation: 0
-  m_TileOrientationMatrix:
-    e00: 1
-    e01: 0
-    e02: 0
-    e03: 0
-    e10: 0
-    e11: 1
-    e12: 0
-    e13: 0
-    e20: 0
-    e21: 0
-    e22: 1
-    e23: 0
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
---- !u!483693784 &6432282395797782341
-TilemapRenderer:
+--- !u!212 &8185116252885737288
+SpriteRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4054245826693385729}
+  m_GameObject: {fileID: 3031017149369251266}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
@@ -136,56 +84,55 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
-  m_MaxChunkCount: 16
-  m_MaxFrameAge: 16
-  m_SortOrder: 0
-  m_Mode: 0
-  m_DetectChunkCullingBounds: 0
---- !u!114 &999588743564167469
+  m_Sprite: {fileID: 7040801201457967705, guid: 89289baf08e8cc548a9d93b41864fd3e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+--- !u!114 &1393543158944610205
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4054245826693385729}
+  m_GameObject: {fileID: 3031017149369251266}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61fb8a09bb0248b783469ddc8dbf413b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SaveSystem::IM.SaveSystem.GameObjectSerializer
   _assetReference:
-    m_AssetGUID: c3488cf6c9d57b64eaa61001eec4d08d
+    m_AssetGUID: 502dd60d80db5504f994382f78ec18c4
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
---- !u!114 &6124583892585538369
+--- !u!114 &1962369493419541764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4054245826693385729}
+  m_GameObject: {fileID: 3031017149369251266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 348a295bd64341d391d9bddb0cdcf6c6, type: 3}
+  m_Script: {fileID: 11500000, guid: f6979cece1b94a14b0b971e7678b9173, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Map::IM.Map.GameObjectRoomMono
---- !u!114 &1289599897053231877
+  m_EditorClassIdentifier: Map::IM.Map.RoomPort
+--- !u!114 &8441552538776195505
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4054245826693385729}
+  m_GameObject: {fileID: 3031017149369251266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adc852e6d6ca4f02aae631d21554cc9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c5ce52b5b274357b32cdcb7bbf2ea83, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::IM.Visuals.RoomGenerator
-  tilemap: {fileID: 2447027755732917793}
-  floorTile: {fileID: 11400000, guid: 67bc9e66cc42dc840835c2ebe3f69bf4, type: 2}
-  minBounds: {x: 7, y: 5}
-  maxBounds: {x: 9, y: 7}
+  m_EditorClassIdentifier: Map::IM.Map.RoomVisitor

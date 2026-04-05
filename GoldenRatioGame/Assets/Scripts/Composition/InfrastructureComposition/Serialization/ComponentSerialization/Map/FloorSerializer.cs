@@ -23,7 +23,7 @@ namespace IM
                 {
                     RoomId = GetId(node),
                     RoomVisitors = node.RoomVisitors.Select(GetId).Where(id => id != null).ToList(),
-                    RoomWalkers = node.RoomWalkers.Select(GetId).Where(id => id != null).ToList()
+                    RoomPorts = node.RoomPorts.Select(GetId).Where(id => id != null).ToList(),
                 });
             }
 
@@ -61,10 +61,19 @@ namespace IM
                 IRoom room = resolveDependency(roomInfo.RoomId).GetComponent<IRoom>();
 
                 foreach (string id in roomInfo.RoomVisitors)
-                    room.Add(resolveDependency(id).GetComponent<IRoomVisitor>());
+                {
+                    GameObject go = resolveDependency(id);
 
-                foreach (string id in roomInfo.RoomWalkers)
-                    resolveDependency(id).GetComponent<RoomWalkerMono>().Initialize(component.GetNode(room));
+                    if (go.TryGetComponent(out IRoomWalker roomWalker))
+                    {
+                        roomWalker.GoTo(room);
+                        
+                        continue;
+                    }
+                    
+                    room.Add(go.GetComponent<IRoomVisitor>());
+                }
+                foreach (string id in roomInfo.RoomPorts) room.Add(resolveDependency(id).GetComponent<IRoomPort>());
             }
         }
 
@@ -82,8 +91,8 @@ namespace IM
         private class RoomInfo
         {
             public string RoomId;
-            public List<string> RoomWalkers;
             public List<string> RoomVisitors;
+            public List<string> RoomPorts;
         }
     }
 }

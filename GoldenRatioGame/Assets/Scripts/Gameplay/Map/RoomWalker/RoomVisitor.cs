@@ -3,8 +3,9 @@
 namespace IM.Map
 {
     [DisallowMultipleComponent]
-    public class RoomVisitor : MonoBehaviour, IRoomVisitor
+    public class RoomVisitor : MonoBehaviour, IRoomVisitor, IRoomActivator
     {
+        [field: SerializeField] public bool ShouldActivate { get;private set; }
         public IRoom CurrentRoom { get; set; }
 
         public bool ActiveInRoom

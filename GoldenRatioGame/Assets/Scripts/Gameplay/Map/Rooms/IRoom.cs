@@ -1,15 +1,17 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace IM.Map
 {
     public interface IRoom
     {
         IEnumerable<IRoomVisitor> RoomVisitors { get; }
-        IEnumerable<IRoomWalker> RoomWalkers { get; }
+        IEnumerable<IRoomPort> RoomPorts { get; }
+        
         bool IsActive { get; }
         bool Add(IRoomVisitor roomVisitor);
         bool Remove(IRoomVisitor roomVisitor);
-        void Enter(IRoomWalker roomWalker);
-        void Exit(IRoomWalker roomWalker);
+        bool Add(IRoomPort roomPort);
+        bool Remove(IRoomPort roomPort);
     }
 }

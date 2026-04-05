@@ -1,54 +1,52 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using IM.Graphs;
 using UnityEngine;
 
 namespace IM.Map
 {
     public class RoomWalkerMono : MonoBehaviour, IRoomWalker
     {
-        private readonly IDataGraphReadOnly<IRoom> _roomGraph;
-        private IDataNode<IRoom> _currentNode;
-        
-        public IEnumerable<IRoom> Available => _currentNode.DataEdges.Select(x => x.GetOther( _currentNode).Value);
-        public IRoom Current => _currentNode.Value;
-        
-        private void Update()
+        [SerializeField] private float _roomMovingCooldown = 1f;
+        private float _lastDoorMoved = float.MinValue;
+        private IRoomVisitor _roomVisitor;
+
+        public IRoom Current { get; private set; }
+
+        public IEnumerable<IRoomPort> AvailablePorts
         {
-            if (Input.GetKeyDown(KeyCode.M))
+            get
             {
-                GoTo(Available.FirstOrDefault());
-            }
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                GoTo(Available.LastOrDefault());
+                if (Current == null || !CooldownFinished()) 
+                    return Enumerable.Empty<IRoomPort>();
+
+                return Current.RoomPorts.Where(port => port.IsOpen);
             }
         }
-        
-        public void Initialize(IDataNode<IRoom> roomNode)
-        {
-            _currentNode = roomNode;
-            _currentNode.Value.Enter(this);
-        }
+
+        public IEnumerable<IRoom> Available => AvailablePorts.Select(p => p.Connection.Origin);
+
+        private void Awake() => _roomVisitor = GetComponent<IRoomVisitor>();
 
         public void GoTo(IRoom room)
         {
-            if (!TryGetNode(out IDataNode<IRoom> node, room))
-            {
-                Debug.LogWarning("cannot go to requested room");
-                return;
-            }
+            if (Current != null && !CanMoveTo(room)) return;
+
+            _lastDoorMoved = Time.time;
             
-            _currentNode.Value.Exit(this);
-            _currentNode = node;
-            _currentNode.Value.Enter(this);
+            Current?.Remove(_roomVisitor);
+            Current = room;
+            Current.Add(_roomVisitor);
         }
 
-        private bool TryGetNode(out IDataNode<IRoom> node, IRoom room)
+        private bool CanMoveTo(IRoom room)
         {
-            node = _currentNode.DataEdges.FirstOrDefault(x =>x.GetOther(_currentNode).Value == room).GetOther(_currentNode);
+            return Available.Any(r => r == room);
+        }
 
-            return node != null;
+        private bool CooldownFinished()
+        {
+            return Time.time >= _lastDoorMoved + _roomMovingCooldown;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using IM.Abilities;
+﻿using IM.Abilities;
 using IM.Graphs;
 using IM.Storages;
 using UnityEngine;
@@ -26,9 +25,9 @@ namespace IM.Modules
             _moduleEditingContext = new ModuleEditingContextFactory
             {
                 CreateAddFactory = storage => 
-                    new AddModuleDirectObserversCommandFactory( _factoriesSource.GetComponents<ICommandObserverAddFactory>().ToList()),
+                    new AddModuleDirectObserversCommandFactory( _factoriesSource.GetComponents<ICommandObserverAddFactory>()),
                 CreateRemoveFactory = storage => 
-                    new RemoveModuleDirectObserversCommandFactory(_factoriesSource.GetComponents<ICommandObserverRemoveFactory>().ToList())
+                    new RemoveModuleDirectObserversCommandFactory(_factoriesSource.GetComponents<ICommandObserverRemoveFactory>())
             }.Create(new CellFactoryStorage());
             
             foreach (IEditorObserver<IModuleGraphReadOnly> observer in _moduleObserversSource.GetComponents<IEditorObserver<IModuleGraphReadOnly>>())
@@ -40,8 +39,12 @@ namespace IM.Modules
         public void AddToContext(IExtensibleModule module)
         {
             _moduleEditingContext.AddToContext(module);
-            
-            if(module is MonoBehaviour moduleMono) moduleMono.transform.SetParent(_defaultModulesTransform); 
+
+            if (module is MonoBehaviour moduleMono)
+            {
+                moduleMono.transform.SetParent(_defaultModulesTransform,false);
+                moduleMono.transform.position = _defaultModulesTransform.position;
+            } 
         }
 
         public void RemoveFromContext(IExtensibleModule module)

@@ -27,4 +27,4 @@ MonoBehaviour:
     <Faction>k__BackingField: {fileID: 11400000, guid: 6f84adb9e464b3a45a892ce320bf0a2d, type: 2}
   _roomPrefab: {fileID: 4054245826693385729, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
   _floorPrefab: {fileID: 3678140963209637273, guid: 419cc5101d20e2147aa465fdc58e2963, type: 3}
-  _tileToPlace: {fileID: 11400000, guid: 67bc9e66cc42dc840835c2ebe3f69bf4, type: 2}
+  _roomPortPrefab: {fileID: 3031017149369251266, guid: 502dd60d80db5504f994382f78ec18c4, type: 3}

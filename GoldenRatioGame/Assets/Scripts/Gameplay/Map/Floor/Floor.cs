@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
-using IM.LifeCycle;
 using UnityEngine;
 
 namespace IM.Map
 {
-    public class Floor : MonoBehaviour
+    public class Floor : MonoBehaviour, IFloor
     {
         public IDataGraph<IRoom> FloorGraph { get; private set; }
         

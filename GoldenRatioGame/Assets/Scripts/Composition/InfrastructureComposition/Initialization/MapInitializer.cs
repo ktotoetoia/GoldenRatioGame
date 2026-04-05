@@ -6,7 +6,6 @@ using IM.Map;
 using IM.Modules;
 using IM.SaveSystem;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace IM
 {
@@ -16,14 +15,11 @@ namespace IM
         [SerializeField] private List<ModuleEntityEntry> _moduleEntityEntries = new ();
         [SerializeField] private GameObject _roomPrefab;
         [SerializeField] private GameObject _floorPrefab;
-        [SerializeField] private TileBase _tileToPlace;
-        private int _instanceCount = 0;
+        [SerializeField] private GameObject _roomPortPrefab;
         private IRoomFactory _roomFactory;
         
         public override void OnSceneLoaded(GameObject initializerGO, IGameObjectFactory factory)
         {
-            _instanceCount = 0;
-            
             Floor floor = factory.Create(_floorPrefab,false).GetComponent<Floor>();
             _roomFactory = new GameObjectRoomMonoFactory(factory, _roomPrefab);
             IDataGraph<IRoom> floorGraph = new BiDirectionalDataGraph<IRoom>();
@@ -35,7 +31,7 @@ namespace IM
 
             foreach (RoomWalkerMono roomWalker in FindObjectsByType<RoomWalkerMono>(FindObjectsSortMode.None))
             {
-                roomWalker.Initialize(floorGraph.DataNodes.FirstOrDefault());
+                roomWalker.GoTo(floorGraph.DataNodes.FirstOrDefault().Value);
             }
         }
 
@@ -47,17 +43,27 @@ namespace IM
             {
                 node.Value.Add(entity.GameObject.GetComponent<IRoomVisitor>());
             }
-            _instanceCount++;
-            
-            for (int i = 0; i < _instanceCount; i++)
-            {
-                Vector3Int tilePosition = new Vector3Int(i, _instanceCount, 0);
-                (node.Value as MonoBehaviour).GetComponent<Tilemap>().SetTile(tilePosition, _tileToPlace);
-            }
 
             if (graph.DataNodes.Count() > 1)
             {
-                graph.Connect(graph.DataNodes.ElementAt(graph.DataNodes.Count()-2),node);
+                IDataNode<IRoom> previous = graph.DataNodes.ElementAt(graph.DataNodes.Count()-2);
+                
+                graph.Connect(previous,node);
+                
+                GameObject from = factory.Create(_roomPortPrefab, false);
+                GameObject to = factory.Create(_roomPortPrefab, false);
+                
+                RoomPort fromPort = from.GetComponent<RoomPort>();
+                RoomPort toPort = to.GetComponent<RoomPort>();
+                
+                from.transform.localPosition = new Vector3(4,0,0);
+                to.transform.localPosition = new Vector3(-4,0,0);
+                
+                fromPort.Initialize(previous.Value,toPort);
+                toPort.Initialize(node.Value,fromPort);
+
+                previous.Value.Add(fromPort);
+                node.Value.Add(toPort);
             }
         }
     }

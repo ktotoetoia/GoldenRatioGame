@@ -6,6 +6,7 @@ namespace IM.Map
     {
         IEnumerable<IRoom> Available { get; }   
         IRoom Current { get; }
+        
         void GoTo(IRoom room);
     }
 }

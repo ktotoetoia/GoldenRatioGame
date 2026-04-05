@@ -35,6 +35,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 502dd60d80db5504f994382f78ec18c4
+    m_Address: Assets/Prefabs/Rooms/RoomPort.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5eecb838571f31948a81b32f27795908
     m_Address: Assets/Prefabs/Enemy.prefab
     m_ReadOnly: 0

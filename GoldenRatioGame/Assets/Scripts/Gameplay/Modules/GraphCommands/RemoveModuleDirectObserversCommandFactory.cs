@@ -7,9 +7,9 @@ namespace IM.Modules
 {
     public class RemoveModuleDirectObserversCommandFactory : IRemoveModuleCommandFactory
     {
-        private readonly List<ICommandObserverRemoveFactory> _directObserverFactories;
+        private readonly IEnumerable<ICommandObserverRemoveFactory> _directObserverFactories;
 
-        public RemoveModuleDirectObserversCommandFactory(List<ICommandObserverRemoveFactory> directObserverFactories)
+        public RemoveModuleDirectObserversCommandFactory(IEnumerable<ICommandObserverRemoveFactory> directObserverFactories)
         {
             _directObserverFactories = directObserverFactories;
         }
