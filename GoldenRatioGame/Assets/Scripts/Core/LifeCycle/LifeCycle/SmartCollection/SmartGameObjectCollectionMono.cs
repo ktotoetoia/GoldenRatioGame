@@ -17,6 +17,5 @@ namespace IM.LifeCycle
         public bool Contains(GameObject item) => _smartCollection.Contains(item);
         public void CopyTo(GameObject[] array, int arrayIndex) => _smartCollection.CopyTo(array, arrayIndex);
         public bool Remove(GameObject item) => _smartCollection.Remove(item);
-
     }
 }

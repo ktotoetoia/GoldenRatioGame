@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using IM.Entities;
 using IM.Graphs;
+using IM.LifeCycle;
 using UnityEngine;
 
 namespace IM.Modules
@@ -9,54 +10,77 @@ namespace IM.Modules
     [DisallowMultipleComponent]
     public class ModuleEntity : DefaultEntity, IModuleEntity
     {
-        [SerializeField] private int _dropCount = 2;
-        
         public IModuleEditingContext ModuleEditingContext { get; private set; }
+        public event Action<IEnumerable<IExtensibleModule>> Disassembled;
 
         private void Awake()
         {
             ModuleEditingContext = GetComponent<IModuleEditingContext>();
         }
-        
+
         public override void Destroy()
         {
-            List<IExtensibleModule> modules = Disassemble();
+            List<IExtensibleModule> modules = ExtractExtensibleModules();
             
-            foreach (IExtensibleModule module in ModuleEditingContext.Storage.Select(x=> x.Item).OfType<IExtensibleModule>())
+            try
             {
-                ModuleEditingContext.RemoveFromContext(module);
+                Disassembled?.Invoke(modules);
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
             }
 
-            for (int i = 0; i < _dropCount && modules.Count > 0; i++)
-            {
-                IExtensibleModule module = modules[Random.Range(0, modules.Count)];
-                modules.Remove(module);
-            }
-            
-            foreach (IExtensibleModule module in modules)
-            {
-                module.Destroy();
-            }
-            
             base.Destroy();
         }
 
-        private List<IExtensibleModule> Disassemble()
+        private List<IExtensibleModule> ExtractExtensibleModules()
         {
-            ModuleEditingContext.SetUnsafe(true);
-            List<IExtensibleModule> result = new();
+            IModuleGraphEditor<IConditionalCommandModuleGraph> editor = ModuleEditingContext.GraphEditor;
             
-            IConditionalCommandModuleGraph graph = ModuleEditingContext.GraphEditor.BeginEdit();
-
-            foreach (IModule module in graph.Modules.ToList())
+            IConditionalCommandModuleGraph graph = editor.BeginEdit();
+            int removedCount = 0;
+            
+            do
             {
-                graph.RemoveModule(module);
-                result.Add(module as IExtensibleModule);
+                removedCount = 0;
+
+                foreach (IModule module in graph.Modules.ToList())
+                {
+                    if (graph.CanRemoveModule(module))
+                    {
+                        graph.RemoveModule(module);
+                        removedCount++;
+                    }
+                }
             }
+            while(removedCount > 0);
 
-            ModuleEditingContext.GraphEditor.TryApplyChanges();
+            if(!editor.TryApplyChanges()) editor.DiscardChanges();
 
-            return result;
+            if (graph.Modules.Count > 0)
+            {
+                ModuleEditingContext.SetUnsafe(true);
+            
+                graph = editor.BeginEdit();
+
+                List<IModule> allModules = graph.Modules.ToList();
+            
+                foreach (IModule m in allModules) graph.RemoveModule(m);
+
+                editor.TryApplyChanges();
+                ModuleEditingContext.SetUnsafe(false);
+            }
+            
+            List<IExtensibleModule> modules = new List<IExtensibleModule>();
+            
+            foreach (IExtensibleModule module in ModuleEditingContext.Storage.Select(x => x.Item as IExtensibleModule))
+            {
+                ModuleEditingContext.RemoveFromContext(module);
+                modules.Add(module);
+            }
+            
+            return modules;
         }
     }
 }

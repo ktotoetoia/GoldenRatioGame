@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace IM.Entities
+namespace IM.LifeCycle
 {
     public class DefaultEntity : MonoBehaviour, IEntity, IPausable
     {
         protected bool _paused;
         protected IEnumerable<IPausable> _pausableList;
+        
+        public event Action<IEntity> Destroyed;
 
         public GameObject GameObject => gameObject;
 
@@ -38,6 +41,12 @@ namespace IM.Entities
         public virtual void Destroy()
         {
             Destroy(gameObject);
+        }
+        
+        private void OnDestroy()
+        {
+            Destroyed?.Invoke(this);
+            Destroyed = null;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace IM.Entities
+﻿namespace IM.Interactions
 {
     public enum InteractionProgress
     {

@@ -11,6 +11,7 @@ namespace IM
         [SerializeField] private bool _finishOnTriggerEnterAlly;
         [SerializeField] private bool _finishOnTriggerEnterEnemy;
         [SerializeField] private bool _finishOnTriggerEnterNone;
+        [SerializeField] private bool _finishOnDisable = true;
         private float _initializationTime;
         private Action _onFinished;
         private bool _finished;
@@ -42,7 +43,7 @@ namespace IM
 
         private void Finish()
         {
-            if(_finished) return;;
+            if(_finished) return;
             
             _finished = true;
             _onFinished?.Invoke();
@@ -53,6 +54,11 @@ namespace IM
             _initializationTime = Time.time;
             _onFinished = onFinished;
             _finished = false;
+        }
+
+        private void OnDisable()
+        {
+            if(_finishOnDisable) Finish();
         }
     }
 }

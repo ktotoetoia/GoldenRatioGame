@@ -227,6 +227,7 @@ MonoBehaviour:
   _finishOnTriggerEnterAlly: 0
   _finishOnTriggerEnterEnemy: 1
   _finishOnTriggerEnterNone: 1
+  _finishOnDisable: 1
 --- !u!114 &-1629860833933646921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,4 +240,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53bee81a7e3f4badbad03c7f1c76398a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Health::IM.Health.RawFloatDamageDealerMono
-  _damage: 60
+  _damage: 120

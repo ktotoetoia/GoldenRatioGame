@@ -16,7 +16,6 @@ namespace IM.Visuals
             IAbilityReadOnly ability = moduleVisualObject.Owner.Extensions.Get<IAbilityExtension>()?.Ability;
             
             _focusPointProvider = ability as IFocusPointProvider;
-            
         }
         
         private void Update()
@@ -40,6 +39,11 @@ namespace IM.Visuals
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + _offsetAngle;
 
             _target.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+
+        private void OnDisable()
+        {
+            _animate = false;
         }
     }
 }

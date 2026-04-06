@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
 using IM.Items;
@@ -18,6 +19,7 @@ namespace IM.Modules
         
         [field: SerializeField] public string Name { get; private set; }
         [field: SerializeField] public string Description { get; private set; }
+        public event Action<IEntity> Destroyed;
         public GameObject GameObject => gameObject;
         public IIcon Icon => _iconDrawer.Icon;
         public IStorageCell Cell { get; set; }
@@ -45,6 +47,12 @@ namespace IM.Modules
         public void Destroy()
         {
             Destroy(gameObject);
+        }
+        
+        private void OnDestroy()
+        {
+            Destroyed?.Invoke(this);
+            Destroyed = null;
         }
     }
 }

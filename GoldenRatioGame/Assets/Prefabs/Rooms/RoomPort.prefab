@@ -124,6 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6979cece1b94a14b0b971e7678b9173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Map::IM.Map.RoomPort
+  _spriteRenderer: {fileID: 8185116252885737288}
+  _closedSprite: {fileID: 7040801201457967705, guid: 89289baf08e8cc548a9d93b41864fd3e, type: 3}
+  _openSprite: {fileID: 8288426215254106694, guid: c57efa21a665cde4eb9b09328d35c035, type: 3}
 --- !u!114 &8441552538776195505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,3 +139,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c5ce52b5b274357b32cdcb7bbf2ea83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Map::IM.Map.RoomVisitor
+  <ShouldActivate>k__BackingField: 0

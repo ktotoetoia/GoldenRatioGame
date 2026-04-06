@@ -70,8 +70,14 @@ namespace IM.Visuals
                 _focusPointProvider = focusPoint;
             }
         }
-
+        
         private void SetDirectionToContainers(Direction direction,string tag) =>
             _containers.ForEach(x => x.GetOrCreate<Direction>(tag).Value = direction);
+
+        private void OnDisable()
+        {
+            SetDirectionToContainers(Direction.None,_valueStorageFocusTag);
+            SetDirectionToContainers(Direction.None,_valueStorageMovementTag);
+        }
     }
 }

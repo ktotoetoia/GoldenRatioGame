@@ -11,10 +11,10 @@ namespace IM.Map
         {
             foreach (IRoomPort port in AvailablePorts)
             {
-                if (Vector3.Distance(port.Position, transform.position) < _proximityDistance)
+                if (Vector3.Distance(port.EnterPosition, transform.position) < _proximityDistance)
                 {
                     GoTo(port.Connection.Origin);
-                    transform.position = port.Connection.Position;
+                    transform.position = port.Connection.EnterPosition;
                 }
             }
         }

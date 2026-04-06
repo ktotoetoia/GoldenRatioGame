@@ -1,4 +1,5 @@
-﻿using IM.Entities;
+﻿using IM.Interactions;
+using IM.LifeCycle;
 using UnityEngine;
 
 namespace IM.Modules

@@ -1,5 +1,6 @@
 ﻿using System;
 using IM.Entities;
+using IM.Interactions;
 using IM.StateMachines;
 using UnityEngine;
 

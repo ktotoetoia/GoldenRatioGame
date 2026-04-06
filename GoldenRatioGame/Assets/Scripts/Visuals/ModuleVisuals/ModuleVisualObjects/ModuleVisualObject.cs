@@ -119,17 +119,6 @@ namespace IM.Visuals
             set => gameObject.SetActive(value);
         }
         
-        protected virtual void Awake()
-        {
-            _preset = new ModuleVisualObjectPreset(Order, gameObject.layer)
-            {
-                PortsVisible = true
-            };
-            
-            GetComponentsInChildren(_poolObjects);
-            _poolObjects.Remove(this);
-        }
-
         public IPortVisualObject GetPortVisualObject(IPort port)
         {
             return _portVisualObjects.FirstOrDefault(x => x.Port == port);
@@ -138,6 +127,14 @@ namespace IM.Visuals
         public void FinishInitialization(IExtensibleModule owner)
         {
             if(Owner != null) throw new InvalidOperationException("Owner can only be set once");
+            
+            _preset = new ModuleVisualObjectPreset(Order, gameObject.layer)
+            {
+                PortsVisible = true
+            };
+            
+            GetComponentsInChildren(_poolObjects);
+            _poolObjects.Remove(this);
             
             Owner = owner;
             _portVisualObjectFactory.CreateVisualObjects(Owner.Ports,_portVisualObjects,this);

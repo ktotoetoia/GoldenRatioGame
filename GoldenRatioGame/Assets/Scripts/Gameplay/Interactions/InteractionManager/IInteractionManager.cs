@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace IM.Entities
+namespace IM.Interactions
 {
     public interface IInteractionManager : IInteractionProvider
     {

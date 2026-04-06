@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IM.Abilities;
 using IM.Entities;
+using IM.Interactions;
 using IM.Movement;
 using IM.StateMachines;
 using UnityEngine;

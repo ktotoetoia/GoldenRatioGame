@@ -42,7 +42,8 @@ GameObject:
   - component: {fileID: 2365714068825351273}
   - component: {fileID: 4855950522832043137}
   - component: {fileID: 5563122138591822399}
-  - component: {fileID: 2047654248429728728}
+  - component: {fileID: 7604007037720004241}
+  - component: {fileID: -373149715067717167}
   - component: {fileID: 8301073097183946184}
   - component: {fileID: -1727820582675450361}
   - component: {fileID: 883802630339849986}
@@ -157,7 +158,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.3, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2047654248429728728
+--- !u!114 &7604007037720004241
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,9 +167,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 4342869459289063407}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c5ce52b5b274357b32cdcb7bbf2ea83, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d1058cf990742c0aa770f7ad97decd1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Map::IM.Map.RoomVisitor
+  m_EditorClassIdentifier: ModuleComposition::IM.Map.ModuleEntityRoomVisitor
+  <ShouldActivate>k__BackingField: 0
+--- !u!114 &-373149715067717167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b5141a08bd467c8c470ac171c432c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules::IM.Modules.ModuleEntityRandomItemDrop
+  _dropCount: 2
 --- !u!114 &8301073097183946184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,7 +268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb3915c5594416bb7e9853c684013f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dropCount: 2
 --- !u!114 &3656589500703403265
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using IM.LifeCycle;
+using UnityEngine;
 
-namespace IM.Entities
+namespace IM.Interactions
 {
     public class Interactable : MonoBehaviour, IInteractable
     {

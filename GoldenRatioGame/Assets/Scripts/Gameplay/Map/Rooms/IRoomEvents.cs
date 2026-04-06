@@ -8,7 +8,5 @@ namespace IM.Map
         event Action<IRoomVisitor> RoomVisitorRemoved;
         event Action<IRoomPort> RoomPortAdded;
         event Action<IRoomPort> RoomPortRemoved;
-        event Action<IRoomWalker> RoomWalkerEnter;
-        event Action<IRoomWalker> RoomWalkerExit;
     }
 }

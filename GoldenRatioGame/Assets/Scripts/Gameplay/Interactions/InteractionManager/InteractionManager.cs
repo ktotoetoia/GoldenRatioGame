@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using IM.LifeCycle;
 using UnityEngine;
 
-namespace IM.Entities
+namespace IM.Interactions
 {
     public class InteractionManager : IInteractionManager
     {

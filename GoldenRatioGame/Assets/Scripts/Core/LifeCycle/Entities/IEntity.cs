@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-namespace IM.Entities
+namespace IM.LifeCycle
 {
     public interface IEntity
     {
         GameObject GameObject { get; }
         void Destroy();
+        event Action<IEntity> Destroyed;
     }
 }

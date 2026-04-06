@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IM.Entities
+namespace IM.Interactions
 {
     public class InteractionProcess : IInteractionProcess
     {

@@ -2,6 +2,6 @@
 {
     public interface IFactionMember : IFactionMemberReadOnly
     {
-        new IFaction Faction { set; }
+        new IFaction Faction { get; set; }
     }
 }

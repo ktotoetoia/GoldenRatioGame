@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using IM.LifeCycle;
 
-namespace IM.Entities
+namespace IM.Interactions
 {
     public interface IInteractionProvider
     {
