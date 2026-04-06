@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using IM.Factions;
 using IM.LifeCycle;
@@ -11,7 +12,6 @@ namespace IM.Map
     {
         private readonly IEntityCollection _entities = new EntityCollection();
         private readonly Dictionary<IEntity, IFactionMember> _factionMembers = new();
-
         private IRoom _room;
         private IRoomEvents _roomEvents;
 
@@ -19,7 +19,6 @@ namespace IM.Map
         {
             _room = GetComponent<IRoom>();
             _roomEvents = GetComponent<IRoomEvents>();
-
             _roomEvents.RoomVisitorAdded += OnVisitorAdded;
             _roomEvents.RoomVisitorRemoved += OnVisitorRemoved;
             _roomEvents.RoomPortAdded += x => RefreshPortsState();
@@ -29,6 +28,11 @@ namespace IM.Map
             _entities.EntityRemoved += OnEntityChanged;
             _entities.EntityDestroyed += OnEntityDestroyed;
 
+            RefreshPortsState();
+        }
+
+        private void Update()
+        {
             RefreshPortsState();
         }
 
@@ -53,7 +57,11 @@ namespace IM.Map
 
         private void OnEntityChanged(IEntity entity)
         {
-            SyncFactionMembers();
+            if (!_entities.Contains(entity))
+            {
+                _factionMembers.Remove(entity);
+            }
+    
             RefreshPortsState();
         }
 
@@ -61,18 +69,6 @@ namespace IM.Map
         {
             _factionMembers.Remove(entity);
             RefreshPortsState();
-        }
-
-        private void SyncFactionMembers()
-        {
-            List<IEntity> toRemove = new List<IEntity>();
-
-            foreach (IEntity entity in _factionMembers.Keys)
-            {
-                if (!_entities.Contains(entity)) toRemove.Add(entity);
-            }
-
-            foreach (IEntity entity in toRemove) _factionMembers.Remove(entity);
         }
 
         private void RefreshPortsState()

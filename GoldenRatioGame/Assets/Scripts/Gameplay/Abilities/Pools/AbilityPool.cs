@@ -7,6 +7,16 @@ namespace IM.Abilities
         private readonly List<IAbilityReadOnly> _abilities = new();
 
         public IReadOnlyCollection<IAbilityReadOnly> Abilities => _abilities;
+
+        public AbilityPool()
+        {
+            
+        }
+        
+        public AbilityPool(IEnumerable<IAbilityReadOnly> abilities)
+        {
+            foreach (IAbilityReadOnly abilityReadOnly in abilities) AddAbility(abilityReadOnly);
+        }
         
         public bool Contains(IAbilityReadOnly ability)
         {

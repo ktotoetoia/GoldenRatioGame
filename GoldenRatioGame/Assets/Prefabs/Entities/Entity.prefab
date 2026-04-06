@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3866329637884553479}
+  - component: {fileID: 8774390430498035701}
+  - component: {fileID: 958044413090791759}
   m_Layer: 0
   m_Name: Modules
   m_TagString: Untagged
@@ -31,6 +33,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2365714068825351273}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8774390430498035701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129132209649223493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c46d50190e1c4d33acf48a36abecb281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules::IM.Modules.ContextItemsParentSetter
+  _moduleEditingContextEventsSource: {fileID: 4342869459289063407}
+  _defaultModulesTransformParent: {fileID: 3866329637884553479}
+  _parentOfOnRemoved: {fileID: 2365714068825351273}
+--- !u!114 &958044413090791759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129132209649223493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e487158f99c46e188d7bc22f38f5d6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComposition::IM.Map.ContextC
+  _moduleEditingContextEventsAndRoomVisitorSource: {fileID: 4342869459289063407}
 --- !u!1 &4342869459289063407
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,22 +72,22 @@ GameObject:
   - component: {fileID: 2365714068825351273}
   - component: {fileID: 4855950522832043137}
   - component: {fileID: 5563122138591822399}
-  - component: {fileID: 7604007037720004241}
-  - component: {fileID: -373149715067717167}
   - component: {fileID: 8301073097183946184}
+  - component: {fileID: 2104419640333263632}
   - component: {fileID: -1727820582675450361}
-  - component: {fileID: 883802630339849986}
-  - component: {fileID: 8559118447764604619}
   - component: {fileID: -1085195585362333072}
   - component: {fileID: -3054874307105079444}
-  - component: {fileID: 2104419640333263632}
-  - component: {fileID: 3656589500703403265}
+  - component: {fileID: 883802630339849986}
+  - component: {fileID: 8559118447764604619}
   - component: {fileID: -7872073379672071743}
-  - component: {fileID: 6843561717665806918}
-  - component: {fileID: -4496632896880603262}
-  - component: {fileID: 8276686902423911944}
-  - component: {fileID: 7544895549371979933}
+  - component: {fileID: 3656589500703403265}
+  - component: {fileID: 7604007037720004241}
+  - component: {fileID: -373149715067717167}
   - component: {fileID: 1446412263225707318}
+  - component: {fileID: 6843561717665806918}
+  - component: {fileID: 8276686902423911944}
+  - component: {fileID: -4496632896880603262}
+  - component: {fileID: 7544895549371979933}
   m_Layer: 0
   m_Name: Entity
   m_TagString: Untagged
@@ -158,6 +188,121 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.3, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &8301073097183946184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e3242a8c561488a8c1aec390eddde77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComposition::IM.PlayerStateMachine
+--- !u!114 &2104419640333263632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb3915c5594416bb7e9853c684013f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1727820582675450361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04328a298a5949a1bd131e110c4ba81f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Factions::IM.Factions.FactionMember
+--- !u!114 &-1085195585362333072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae9930d2b5dc4324b8f09cb7f554353e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Abilities::IM.Abilities.AbilityKeyPoolMono
+--- !u!114 &-3054874307105079444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 594dff4d4c4d4fe4a51e203cbe352b22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Abilities::IM.Abilities.KeyAbilityPoolUserMono
+--- !u!114 &883802630339849986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f6fd89a0df145f597ef1e8338203728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8559118447764604619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ae7318fc8935740991e7ec4d84074d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-7872073379672071743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14147f3b323b450f969e156f9faacbfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComposition::IM.Modules.ModuleEntitySerializer
+  _assetReference:
+    m_AssetGUID: fe00d3ca423cbb04092c1edd892db3a4
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+--- !u!114 &3656589500703403265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 720994693057492695cf2effa3472e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.PlayerModuleGraphVisualOrder
+  _moduleGraphVisualObserver: {fileID: 6135420331760039005}
 --- !u!114 &7604007037720004241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,7 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Modules::IM.Modules.ModuleEntityRandomItemDrop
   _dropCount: 2
---- !u!114 &8301073097183946184
+--- !u!114 &1446412263225707318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,112 +338,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4342869459289063407}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e3242a8c561488a8c1aec390eddde77, type: 3}
+  m_Script: {fileID: 11500000, guid: 50348c75dbfc4a5eac9260972d52489a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: ModuleComposition::IM.PlayerStateMachine
---- !u!114 &-1727820582675450361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4342869459289063407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04328a298a5949a1bd131e110c4ba81f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Factions::IM.Factions.FactionMember
---- !u!114 &883802630339849986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4342869459289063407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f6fd89a0df145f597ef1e8338203728, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8559118447764604619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4342869459289063407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94ae7318fc8935740991e7ec4d84074d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-1085195585362333072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4342869459289063407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae9930d2b5dc4324b8f09cb7f554353e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Abilities::IM.Abilities.AbilityKeyPoolMono
---- !u!114 &-3054874307105079444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4342869459289063407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 594dff4d4c4d4fe4a51e203cbe352b22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Abilities::IM.Abilities.KeyAbilityPoolUserMono
---- !u!114 &2104419640333263632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4342869459289063407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eb3915c5594416bb7e9853c684013f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3656589500703403265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4342869459289063407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 720994693057492695cf2effa3472e16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.PlayerModuleGraphVisualOrder
-  _moduleGraphVisualObserver: {fileID: 6135420331760039005}
---- !u!114 &-7872073379672071743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4342869459289063407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14147f3b323b450f969e156f9faacbfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleComposition::IM.Modules.ModuleEntitySerializer
-  _assetReference:
-    m_AssetGUID: fe00d3ca423cbb04092c1edd892db3a4
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
+  m_EditorClassIdentifier: ModuleComposition::IM.DestroyEntityHealthContract
+  _minHealth: 0
 --- !u!114 &6843561717665806918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,6 +355,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Effects::IM.Effects.EffectContainerMono
   _effectObserverSource: {fileID: 4348573349406529255}
+--- !u!114 &8276686902423911944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac2449b76e84afcb145dbffa1867f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComponents::IM.Modules.KeyAbilityModuleEditingContextMono
+  _moduleObserversSource: {fileID: 8508053980751109502}
+  _factoriesSource: {fileID: 8012123049854353900}
+  _defaultModulesTransform: {fileID: 3866329637884553479}
 --- !u!114 &-4496632896880603262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,21 +385,6 @@ MonoBehaviour:
   _subInteractorSource: {fileID: 5255341128824037194}
   _maxInteractionRange: 5
   _interactionTime: 0.3
---- !u!114 &8276686902423911944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4342869459289063407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e4ecb6a692948e3be8ea5fc7f62e208, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleComponents::IM.Modules.KeyAbilityModuleEditingContextMono
-  _moduleObserversSource: {fileID: 8508053980751109502}
-  _factoriesSource: {fileID: 8012123049854353900}
-  _defaultModulesTransform: {fileID: 3866329637884553479}
 --- !u!114 &7544895549371979933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,19 +424,6 @@ MonoBehaviour:
   _rawSpeed: 1
   _accelerationTime: 0.1
   <Active>k__BackingField: 1
---- !u!114 &1446412263225707318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4342869459289063407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50348c75dbfc4a5eac9260972d52489a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleComposition::IM.DestroyEntityHealthContract
-  _minHealth: 0
 --- !u!1 &4348573349406529255
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,7 +508,7 @@ GameObject:
   - component: {fileID: 8839589395240690778}
   - component: {fileID: 4561900822149936034}
   m_Layer: 0
-  m_Name: SubIneractors
+  m_Name: SubInteractors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -522,7 +552,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8037612589558391539}
   - component: {fileID: 960244281240826977}
-  - component: {fileID: 6406173721635180505}
+  - component: {fileID: 2433622216432306825}
   m_Layer: 0
   m_Name: Factories
   m_TagString: Untagged
@@ -558,7 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Modules::IM.Modules.StorageDirectObserverAddFactoryMono
   _contextSource: {fileID: 4342869459289063407}
---- !u!114 &6406173721635180505
+--- !u!114 &2433622216432306825
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -567,9 +597,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8012123049854353900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f2a571a346845c3ad3c86bd463ce7b7, type: 3}
+  m_Script: {fileID: 11500000, guid: f3cd22495d8a4b03bdcbfebe64242d97, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: ModuleComponents::IM.Modules.AbilityCommandObserverFactoryMono
+  m_EditorClassIdentifier: ModuleComposition::IM.Modules.AbilityCommandObserverFactoryMono
   _abilityPoolSource: {fileID: 4342869459289063407}
 --- !u!1 &8508053980751109502
 GameObject:
@@ -585,7 +615,7 @@ GameObject:
   - component: {fileID: 8543606873535386348}
   - component: {fileID: 4737303748126444302}
   - component: {fileID: 6135420331760039005}
-  - component: {fileID: 3204459152934989102}
+  - component: {fileID: 8109252429396907108}
   m_Layer: 0
   m_Name: ModuleObservers
   m_TagString: Untagged
@@ -686,7 +716,7 @@ MonoBehaviour:
       _rotation: {x: 0, y: 0, z: 0, w: 1}
       _scale: {x: 1, y: 1, z: 1}
     <PortsVisible>k__BackingField: 0
---- !u!114 &3204459152934989102
+--- !u!114 &8109252429396907108
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -695,8 +725,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8508053980751109502}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ff4c4177aee442a9abc8fb41742e820, type: 3}
+  m_Script: {fileID: 11500000, guid: 3955dec8e0ff46b08a547bc348998f24, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: ModuleComponents::IM.Modules.KeyAbilityPoolModuleEditingContextObserver
-  _abilityModuleEditingContext: {fileID: 8276686902423911944}
+  m_EditorClassIdentifier: ModuleComposition::IM.Modules.ApplyDraftChangesEditorObserver
   _abilityPool: {fileID: -1085195585362333072}

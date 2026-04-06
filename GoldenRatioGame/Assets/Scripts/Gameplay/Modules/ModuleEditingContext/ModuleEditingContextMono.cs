@@ -1,16 +1,21 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using IM.Graphs;
 using IM.Storages;
 using UnityEngine;
 
 namespace IM.Modules
 {
-    public class ModuleEditingContextMono : MonoBehaviour, IModuleEditingContext
+    public class ModuleEditingContextMono : MonoBehaviour, IModuleEditingContext, IModuleEditingContextEvents
     {
         [SerializeField] private GameObject _moduleObserversSource;
         [SerializeField] private GameObject _factoriesSource;
-        
+        [SerializeField] private Transform _defaultModulesTransform;
         private IModuleEditingContext _moduleEditingContext;
+        
+        public event Action<IExtensibleModule> AddedToContext;
+        public event Action<IExtensibleModule> RemovedFromContext;
+        
         public bool IsUnsafe => _moduleEditingContext.IsUnsafe;
         public void SetUnsafe(bool value) => _moduleEditingContext.SetUnsafe(value);
 
@@ -31,8 +36,19 @@ namespace IM.Modules
                 GraphEditor.Observers.Add(observer);
             }
         }
+
+        public void AddToContext(IExtensibleModule module)
+        {
+            _moduleEditingContext.AddToContext(module);
+            
+            AddedToContext?.Invoke(module);
+        }         
         
-        public void AddToContext(IExtensibleModule module) => _moduleEditingContext.AddToContext(module);
-        public void RemoveFromContext(IExtensibleModule module) => _moduleEditingContext.RemoveFromContext(module);
+        public void RemoveFromContext(IExtensibleModule module)
+        { 
+            _moduleEditingContext.RemoveFromContext(module);
+            
+            RemovedFromContext?.Invoke(module);
+        }
     }
 }

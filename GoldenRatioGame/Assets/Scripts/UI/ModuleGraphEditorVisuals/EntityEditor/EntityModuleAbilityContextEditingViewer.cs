@@ -1,4 +1,5 @@
 ﻿using System;
+using IM.Abilities;
 using IM.Modules;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace IM.UI
         [SerializeField] private ModuleGraphView _graphView;
         [SerializeField] private AbilityPoolView _abilityPoolView;
         private IGraphViewInteraction _interaction;
+        private IAbilityPoolDraftContainer _abilityPoolDraftContainer;
         private IModuleEntity _entity;
 
         private const int EntityContextEditorExecutionOrder = 10000;
@@ -38,7 +40,9 @@ namespace IM.UI
             _interaction.SetGraph(_entity.ModuleEditingContext.GraphEditor.BeginEdit());
             _graphView.SetGraph(_entity.ModuleEditingContext.GraphEditor.Snapshot);
             _storageView.SetStorage(_entity.ModuleEditingContext.Storage);
-            _abilityPoolView.SetAbilityPool((_entity.ModuleEditingContext as IAbilityPoolModuleEditingContext)?.KeyAbilityPool);
+
+            _abilityPoolDraftContainer = _entity.GameObject.GetComponent<IAbilityPoolDraftContainer>(); 
+            _abilityPoolView.SetAbilityPool(_abilityPoolDraftContainer.Draft);
         }
 
         public void ForceClearEntity()

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using IM.Abilities;
 using IM.Graphs;
 using UnityEngine;
@@ -9,12 +8,11 @@ namespace IM.Modules
     public class AbilityCommandObserverFactoryMono : MonoBehaviour, ICommandObserverAddFactory, ICommandObserverRemoveFactory
     {
         [SerializeField] private GameObject _abilityPoolSource;
-        private IAbilityPool _abilityPool;
+        private IAbilityPoolDraftContainer _abilityPool;
 
         private void Awake()
         {
-            if(!_abilityPoolSource.TryGetComponent(out IAbilityPoolModuleEditingContext a)) throw new NullReferenceException();
-            _abilityPool = a.KeyAbilityPool;
+            _abilityPool = _abilityPoolSource.GetComponent<IAbilityPoolDraftContainer>();
         }
 
         public ICommandObserver Create(IModule param1, ICollection<IModule> param2)
@@ -25,7 +23,7 @@ namespace IM.Modules
                 return new EmptyCommandObserver();
             }
             
-            return new AbilityCommandObserver(_abilityPool,abilityExtension.Ability);
+            return new AbilityCommandObserver(_abilityPool.EditDraft(),abilityExtension.Ability);
         }
 
         public ICommandObserver Create(IModule param1, ICollection<IModule> param2, ICollection<IConnection> param3)
@@ -36,7 +34,7 @@ namespace IM.Modules
                 return new EmptyCommandObserver();
             }
             
-            return new AbilityCommandObserver(_abilityPool,abilityExtension.Ability);
+            return new AbilityCommandObserver(_abilityPool.EditDraft(),abilityExtension.Ability);
         }
     }
 }

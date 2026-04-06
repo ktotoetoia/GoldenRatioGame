@@ -31,8 +31,8 @@ namespace IM.Map
         public void GoTo(IRoom room)
         {
             if (Current != null && !CanMoveTo(room)) return;
-
-            _lastDoorMoved = Time.time;
+            
+            if(Current != null) _lastDoorMoved = Time.time;
             
             Current?.Remove(_roomVisitor);
             Current = room;

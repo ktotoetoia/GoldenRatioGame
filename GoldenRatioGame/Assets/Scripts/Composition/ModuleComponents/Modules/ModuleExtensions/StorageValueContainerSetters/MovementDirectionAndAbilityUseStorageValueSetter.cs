@@ -76,6 +76,8 @@ namespace IM.Visuals
 
         private void OnDisable()
         {
+            if(_containers == null) return;
+            
             SetDirectionToContainers(Direction.None,_valueStorageFocusTag);
             SetDirectionToContainers(Direction.None,_valueStorageMovementTag);
         }

@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c5ce52b5b274357b32cdcb7bbf2ea83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Map::IM.Map.RoomVisitor
+  <ShouldActivate>k__BackingField: 0
 --- !u!114 &-5268866995824273465
 MonoBehaviour:
   m_ObjectHideFlags: 0

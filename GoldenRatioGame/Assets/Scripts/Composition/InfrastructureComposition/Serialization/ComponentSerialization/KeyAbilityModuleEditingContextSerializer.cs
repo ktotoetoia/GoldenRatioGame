@@ -8,9 +8,9 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class AbilityModuleEditingContextSerializer : ComponentSerializer<AbilityModuleEditingContextMono>
+    public class AbilityModuleEditingContextSerializer : ComponentSerializer<ModuleEditingContextMono>
     {
-        public override object CaptureState(AbilityModuleEditingContextMono component)
+        public override object CaptureState(ModuleEditingContextMono component)
         {
             ModuleEditingContextState state = new ModuleEditingContextState();
 
@@ -55,7 +55,7 @@ namespace IM.Modules
             return state;
         }
 
-        public override void RestoreState(AbilityModuleEditingContextMono component, object state, Func<string, GameObject> resolveDependency)
+        public override void RestoreState(ModuleEditingContextMono component, object state, Func<string, GameObject> resolveDependency)
         {
             if (component.GraphEditor.IsEditing) 
                 throw new InvalidOperationException("Cannot restore state while the graph editor is currently in edit mode.");
