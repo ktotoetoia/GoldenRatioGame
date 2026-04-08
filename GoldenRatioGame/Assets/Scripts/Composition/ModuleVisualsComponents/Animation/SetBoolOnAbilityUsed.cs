@@ -2,6 +2,7 @@
 using IM.Abilities;
 using IM.Events;
 using IM.Modules;
+using IM.Values;
 using UnityEngine;
 
 namespace IM.Visuals
@@ -35,7 +36,7 @@ namespace IM.Visuals
             _used = false;
         }
 
-        private void AbilityStarted(AbilityUseContext context)
+        private void AbilityStarted(UseContext context)
         {
             _used = true;
         }

@@ -1,54 +1,37 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace IM.Abilities
 {
-    public class AbilityPoolMono : MonoBehaviour, IAbilityPool, IAbilityPoolEvents, IAbilityPoolDraftContainer
+    public class AbilityPoolMono : MonoBehaviour, IAbilityPool, IAbilityPoolDraftContainer
     {
         private readonly IAbilityPool _abilityPool = new  AbilityPool();
         private readonly IAbilityPool _draft = new AbilityPool();
-        public event Action<IAbilityReadOnly> AbilityAdded;
-        public event Action<IAbilityReadOnly> AbilityRemoved;
         
-        public IReadOnlyCollection<IAbilityReadOnly> Abilities => _abilityPool.Abilities;
-        public IAbilityPoolReadOnly Draft=> _draft;
+        public IAbilityPoolReadOnly Source => this;
+        public IAbilityPoolReadOnly Draft => _draft;
+        public int Count => ((IReadOnlyCollection<IAbilityReadOnly>)_abilityPool).Count;
+        public bool IsReadOnly => _abilityPool.IsReadOnly;
         
-        public bool Contains(IAbilityReadOnly ability)
+        public IAbilityPool GetEditableDraft() => _draft;
+        public void CommitDraft()
         {
-            return _abilityPool.Contains(ability);
+            List<IAbilityReadOnly> toRemove = _abilityPool.Where(a => !Draft.Contains(a)).ToList();
+            List<IAbilityReadOnly> toAdd = Draft.Where(a => !_abilityPool.Contains(a)).ToList();
+
+            foreach (IAbilityReadOnly ability in toRemove) Remove(ability);
+            foreach (IAbilityReadOnly ability in toAdd) Add(ability);
         }
 
-        public void AddAbility(IAbilityReadOnly ability)
-        {
-            _abilityPool.AddAbility(ability);
-            AbilityAdded?.Invoke(ability);
-        }
-
-        public void RemoveAbility(IAbilityReadOnly ability)
-        {
-            _abilityPool.RemoveAbility(ability);
-            AbilityRemoved?.Invoke(ability);
-        }
-
-        public IAbilityPool EditDraft() => _draft;
-        
-        public void Commit()
-        {
-            var toRemove = _abilityPool.Abilities
-                .Where(a => !Draft.Contains(a))
-                .ToList();
-
-            foreach (var ability in toRemove)
-                RemoveAbility(ability);
-
-            var toAdd = Draft.Abilities
-                .Where(a => !_abilityPool.Contains(a))
-                .ToList();
-
-            foreach (var ability in toAdd)
-                AddAbility(ability);
-        }
+        public IEnumerator<IAbilityReadOnly> GetEnumerator() => _abilityPool.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_abilityPool).GetEnumerator();
+        public void Add(IAbilityReadOnly item) => _abilityPool.Add(item);
+        public void Clear() => _abilityPool.Clear();
+        public bool Contains(IAbilityReadOnly item) => _abilityPool.Contains(item);
+        public void CopyTo(IAbilityReadOnly[] array, int arrayIndex) => _abilityPool.CopyTo(array, arrayIndex);
+        public bool Remove(IAbilityReadOnly item) => _abilityPool.Remove(item);
     }
 }

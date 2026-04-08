@@ -1,8 +1,8 @@
 {
-    "name": "Abilities",
+    "name": "WeaponSystem",
     "rootNamespace": "",
     "references": [
-        "GUID:3163ebdd909b4978ab2afeedcd2719bd",
+        "GUID:c6e432bc1fc910f4c9efc7b9b4f32719",
         "GUID:bff61e4977a14e65b7c6aff666825c5a",
         "GUID:38be81a59a4146ab9a6165a5c84daa2c",
         "GUID:47909fb9677d4ae5acd4f8123c31950f"

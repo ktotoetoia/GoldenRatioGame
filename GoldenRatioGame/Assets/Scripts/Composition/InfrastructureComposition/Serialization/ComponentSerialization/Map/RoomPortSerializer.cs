@@ -33,7 +33,7 @@ namespace IM
                 return;
             }
             
-            IRoom origin = resolveDependency(s[0]).GetComponent<IRoom>();
+            IGameObjectRoom origin = resolveDependency(s[0]).GetComponent<IGameObjectRoom>();
             IRoomPort destination = resolveDependency(s[1]).GetComponent<IRoomPort>();
             
             component.Initialize(origin,destination);

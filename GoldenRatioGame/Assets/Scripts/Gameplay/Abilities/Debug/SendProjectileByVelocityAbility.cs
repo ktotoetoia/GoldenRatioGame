@@ -13,19 +13,18 @@ namespace IM.Abilities
         private readonly ICooldown _cooldown;
         private readonly ICooldown _sCooldown;
         private readonly IPositionProvider _positionProvider;
-        private AbilityUseContext _context;
+        private UseContext _context;
         
         public bool CanUse => !Cooldown.IsOnCooldown;
         public ICooldownReadOnly Cooldown => _cooldown;
         public float Speed { get; set; } = 5f;
-        public AbilityUseContext LastUsedContext => _context;
         public float FocusTime { get; set; } = 0.5f;
         public string Name { get; set; } = "Projectile thrower";
         public string Description { get; set; } = "Throws projectile in the direction of pointer";
         public IIcon Icon { get; set; }
 
-        public event Action<AbilityUseContext> AbilityStarted;
-        public event Action<AbilityUseContext> AbilityFinished;
+        public event Action<UseContext> AbilityStarted;
+        public event Action<UseContext> AbilityFinished;
 
         public SendProjectileByVelocityAbility(IObjectPool<GameObject> projectileFactory,IPositionProvider positionProvider, float cooldown) : this(projectileFactory,positionProvider, new FloatCooldown(cooldown))
         {
@@ -63,8 +62,8 @@ namespace IM.Abilities
             return true;
         }
         
-        Vector3 IFocusPointProvider.GetFocusPoint() => _context.TargetWorldPosition;
+        public Vector3 GetFocusPoint() => _context.TargetWorldPosition;
         public Vector3 GetFocusDirection() => (_context.TargetWorldPosition - _context.EntityPosition).normalized;
-        public void UpdateAbilityUseContext(AbilityUseContext context) => _context = context;
+        public void UpdateAbilityUseContext(UseContext context) => _context = context;
     }
 }

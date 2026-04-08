@@ -22,7 +22,7 @@ namespace IM
         {
             Floor floor = factory.Create(_floorPrefab,false).GetComponent<Floor>();
             _roomFactory = new GameObjectRoomMonoFactory(factory, _roomPrefab);
-            IDataGraph<IRoom> floorGraph = new BiDirectionalDataGraph<IRoom>();
+            IDataGraph<IGameObjectRoom> floorGraph = new BiDirectionalDataGraph<IGameObjectRoom>();
 
             C(floorGraph,factory);
             C(floorGraph,factory);
@@ -35,18 +35,18 @@ namespace IM
             }
         }
 
-        private void C(IDataGraph<IRoom> graph, IGameObjectFactory factory)
+        private void C(IDataGraph<IGameObjectRoom> graph, IGameObjectFactory factory)
         {
-            IDataNode<IRoom> node = graph.Create(_roomFactory.Create());
+            IDataNode<IGameObjectRoom> node = graph.Create(_roomFactory.Create());
             
             foreach (IModuleEntity entity in _moduleEntityEntries.Select(x => new ModuleEntityFactory().Create(x,factory)))
             {
-                node.Value.Add(entity.GameObject.GetComponent<IRoomVisitor>());
+                node.Value.Add(entity.GameObject);
             }
 
             if (graph.DataNodes.Count() > 1)
             {
-                IDataNode<IRoom> previous = graph.DataNodes.ElementAt(graph.DataNodes.Count()-2);
+                IDataNode<IGameObjectRoom> previous = graph.DataNodes.ElementAt(graph.DataNodes.Count()-2);
                 
                 graph.Connect(previous,node);
                 

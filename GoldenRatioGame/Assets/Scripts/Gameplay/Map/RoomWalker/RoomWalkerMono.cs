@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -9,9 +8,8 @@ namespace IM.Map
     {
         [SerializeField] private float _roomMovingCooldown = 1f;
         private float _lastDoorMoved = float.MinValue;
-        private IRoomVisitor _roomVisitor;
 
-        public IRoom Current { get; private set; }
+        public IGameObjectRoom Current { get; private set; }
 
         public IEnumerable<IRoomPort> AvailablePorts
         {
@@ -24,22 +22,20 @@ namespace IM.Map
             }
         }
 
-        public IEnumerable<IRoom> Available => AvailablePorts.Select(p => p.Connection.Origin);
+        public IEnumerable<IGameObjectRoom> Available => AvailablePorts.Select(p => p.Connection.Origin);
 
-        private void Awake() => _roomVisitor = GetComponent<IRoomVisitor>();
-
-        public void GoTo(IRoom room)
+        public void GoTo(IGameObjectRoom room)
         {
             if (Current != null && !CanMoveTo(room)) return;
             
             if(Current != null) _lastDoorMoved = Time.time;
             
-            Current?.Remove(_roomVisitor);
+            Current?.Remove(gameObject);
             Current = room;
-            Current.Add(_roomVisitor);
+            Current.Add(gameObject);
         }
 
-        private bool CanMoveTo(IRoom room)
+        private bool CanMoveTo(IGameObjectRoom room)
         {
             return Available.Any(r => r == room);
         }

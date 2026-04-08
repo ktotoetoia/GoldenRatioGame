@@ -1,4 +1,5 @@
 ﻿using System;
+using IM.Values;
 
 namespace IM.Abilities
 {
@@ -10,7 +11,7 @@ namespace IM.Abilities
         private bool _finishedOrInterrupted;
         
         public IChannelAbility Ability { get; }
-        public AbilityUseContext AbilityUseContext { get; private set; }
+        public UseContext UseContext { get; private set; }
         public bool Completed =>  _finishedOrInterrupted;
         
         public ChannelInfo(IChannelAbility ability)
@@ -34,9 +35,9 @@ namespace IM.Abilities
             _finishedOrInterrupted = true;
         }
 
-        public void UpdateAbilityUseContext(AbilityUseContext abilityUseContext)
+        public void UpdateAbilityUseContext(UseContext useContext)
         {
-            AbilityUseContext = abilityUseContext;
+            UseContext = useContext;
         }
     }
 }

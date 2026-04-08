@@ -14,11 +14,11 @@ namespace IM.Map
             _prefab = prefab;
         }
         
-        public IRoom Create()
+        public IGameObjectRoom Create()
         {
             GameObject created = _factory.Create(_prefab,false);
 
-            return created.GetComponent<IRoom>();
+            return created.GetComponent<IGameObjectRoom>();
         }
     }
 }

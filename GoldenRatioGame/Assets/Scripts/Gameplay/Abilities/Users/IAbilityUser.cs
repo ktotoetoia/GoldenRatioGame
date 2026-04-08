@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using IM.Values;
 
 namespace IM.Abilities
 {
@@ -7,6 +8,6 @@ namespace IM.Abilities
         TAbilityPool AbilityPool { get; }
         
         void ResolveRequestedAbilities(IEnumerable<IAbilityReadOnly> requestedAbilities,
-            AbilityUseContext abilityUseContext);
+            UseContext useContext);
     }
 }

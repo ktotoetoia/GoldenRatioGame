@@ -1,10 +1,9 @@
-﻿namespace IM.Abilities
+﻿using IM.Graphs;
+
+namespace IM.Abilities
 {
-    public interface IAbilityPoolDraftContainer
+    public interface IAbilityPoolDraftContainer : ISingleDraftContainer<IAbilityPool,IAbilityPoolReadOnly>
     {
-        IAbilityPoolReadOnly Draft { get; }
         
-        IAbilityPool EditDraft();
-        void Commit();
     }
 }

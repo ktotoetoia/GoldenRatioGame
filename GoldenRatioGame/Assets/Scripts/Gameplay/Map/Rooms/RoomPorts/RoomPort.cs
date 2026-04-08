@@ -10,7 +10,7 @@ namespace IM.Map
         private bool _isInitialized;
         private bool _isOpen;
             
-        public IRoom Origin { get; private set; }
+        public IGameObjectRoom Origin { get; private set; }
         public IRoomPort Connection { get; private set; }
     
         public Vector3 EnterPosition => transform.position;
@@ -34,7 +34,7 @@ namespace IM.Map
             } 
         }
 
-        public void Initialize(IRoom origin, IRoomPort destination)
+        public void Initialize(IGameObjectRoom origin, IRoomPort destination)
         {
             if (_isInitialized) 
             {

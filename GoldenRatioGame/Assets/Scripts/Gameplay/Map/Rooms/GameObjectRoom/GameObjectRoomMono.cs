@@ -6,57 +6,31 @@ using UnityEngine;
 
 namespace IM.Map
 {
-    public class GameObjectRoomMono : MonoBehaviour, IRoom, IRoomEvents
+    [SelectionBase]
+    public class GameObjectRoomMono : MonoBehaviour, IGameObjectRoom, IGameObjectRoomEvents
     {
-        private readonly SmartCollection<IRoomVisitor> _roomVisitors = new();
         private readonly SmartCollection<IRoomPort> _roomPorts = new();
-
+        private readonly SmartCollection<GameObject> _gameObjects = new();
+        
+        public IEnumerable<GameObject> GameObjects => _gameObjects;
+        public IEnumerable<IRoomPort> RoomPorts => _roomPorts;
         public bool IsActive { get; private set; }
 
-        public IEnumerable<IRoomVisitor> RoomVisitors => _roomVisitors;
-        public IEnumerable<IRoomPort> RoomPorts => _roomPorts;
-
-        public event Action<IRoomVisitor> RoomVisitorAdded;
-        public event Action<IRoomVisitor> RoomVisitorRemoved;
+        public event Action<GameObject> GameObjectAdded;
+        public event Action<GameObject> GameObjectRemoved;
         public event Action<IRoomPort> RoomPortAdded;
         public event Action<IRoomPort> RoomPortRemoved;
 
         private void Awake()
         {
+            IsActive = gameObject.activeInHierarchy;
             UpdateRoomActivation();
-        }
-        
-        public bool Add(IRoomVisitor roomVisitor)
-        {
-            if (roomVisitor.CurrentRoom != null || _roomVisitors.Contains(roomVisitor)) return false;
-            
-            _roomVisitors.Add(roomVisitor);
-            roomVisitor.CurrentRoom = this;
-
-            UpdateRoomActivation();
-            AttachToRoom(roomVisitor);
-            
-            RoomVisitorAdded?.Invoke(roomVisitor);
-            return true;
-        }
-
-        public bool Remove(IRoomVisitor roomVisitor)
-        {
-            if (!_roomVisitors.Remove(roomVisitor)) return false;
-
-            roomVisitor.CurrentRoom = null;
-
-            UpdateRoomActivation();
-            DetachFromRoom(roomVisitor);
-            
-            RoomVisitorRemoved?.Invoke(roomVisitor);
-            return true;
         }
         
         public bool Add(IRoomPort roomPort)
         {
             if (_roomPorts.Contains(roomPort)) return false;
-            
+
             _roomPorts.Add(roomPort);
             AttachToRoom(roomPort);
             RoomPortAdded?.Invoke(roomPort);
@@ -72,39 +46,74 @@ namespace IM.Map
             return true;
         }
 
+        public bool Add(GameObject toAdd)
+        {
+            if (!toAdd || _gameObjects.Contains(toAdd)) return false;
+
+            _gameObjects.Add(toAdd);
+            if (toAdd.TryGetComponent(out IRoomVisitor visitor))
+                visitor.CurrentRoom = this;
+
+            if (toAdd.transform.parent != transform)
+                toAdd.transform.SetParent(transform);
+
+            GameObjectAdded?.Invoke(toAdd);
+            UpdateRoomActivation();
+
+            return true;
+        }
+
+        public bool Remove(GameObject toRemove)
+        {
+            if (!_gameObjects.Remove(toRemove)) return false;
+
+            if (toRemove.TryGetComponent(out IRoomVisitor visitor) && visitor.CurrentRoom.Equals(this))
+                visitor.CurrentRoom = null;
+
+            GameObjectRemoved?.Invoke(toRemove);
+            UpdateRoomActivation();
+
+            return true;
+        }
+
         private void UpdateRoomActivation()
         {
-            bool shouldBeActive = _roomVisitors.Any(v => v is IRoomActivator { ShouldActivate: true });
+            bool shouldBeActive = _gameObjects.Any(x =>
+                x.TryGetComponent(out IRoomActivator activator) && activator.ShouldActivate);
+
+            if (IsActive == shouldBeActive) return;
             
             IsActive = shouldBeActive;
-
             gameObject.SetActive(IsActive);
-
-            foreach (IRoomVisitor visitor in _roomVisitors)
-            {
-                visitor.ActiveInRoom = IsActive;
-            }
         }
 
         private void AttachToRoom(object roomObject)
         {
-            if (roomObject is MonoBehaviour monoBehaviour)
-            {
-                monoBehaviour.transform.SetParent(transform, true);
-            }
+            if (roomObject is MonoBehaviour mono && mono.transform.parent != transform)
+                mono.transform.SetParent(transform, true);
         }
 
-        private static void DetachFromRoom(object roomObject)
+        private void DetachFromRoom(object roomObject)
         {
-            if (roomObject is not MonoBehaviour monoBehaviour) return;
+            if (roomObject is not MonoBehaviour mono) return;
 
-            if (monoBehaviour.TryGetComponent(out IParentRestorable restorable))
-            {
-                restorable.ResetToDefaultParent();
-                return;
-            }
+            if (mono.TryGetComponent(out IParentRestorable restorable)) restorable.ResetToDefaultParent();
+            else if (mono.transform.parent == transform) mono.transform.SetParent(null, true);
+        }
+
+        private void OnTransformChildrenChanged()
+        {
+            HashSet<GameObject> currentChildren = new HashSet<GameObject>();
+            for (int i = 0; i < transform.childCount; i++) currentChildren.Add(transform.GetChild(i).gameObject);
+
+            List<GameObject> toRemove = _gameObjects.Where(go => !currentChildren.Contains(go)).ToList();
             
-            monoBehaviour.transform.SetParent(null, true);
+            foreach (GameObject go in toRemove) Remove(go);
+
+            foreach (GameObject child in currentChildren)
+            {
+                if (!_gameObjects.Contains(child)) Add(child);
+            }
         }
     }
 }

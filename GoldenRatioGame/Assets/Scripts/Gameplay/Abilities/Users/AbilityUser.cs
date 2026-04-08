@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using IM.Effects;
-using UnityEngine;
+using IM.Values;
 
 namespace IM.Abilities
 {
-    public class AbilityPoolMonoUser : MonoBehaviour, IAbilityUser<IAbilityPoolReadOnly>, IAbilityUserEvents
+    public class AbilityUser : IAbilityUser<IAbilityPoolReadOnly>, IAbilityUserEvents
     {
-        private IEffectContainer _effectContainer;
+        private readonly IEffectContainer _effectContainer;
         private IAbilityUseInfo _abilityUseInfo;
         private IAbilityReadOnly _currentAbility;
         private IEffectGroup _appliedEffectGroup;
@@ -15,7 +15,7 @@ namespace IM.Abilities
         public event Action<IAbilityReadOnly> OnAbilityStarted;
         public event Action<IAbilityReadOnly> OnAbilityFinished;
         
-        public IAbilityPoolReadOnly AbilityPool { get; private set; }
+        public IAbilityPoolReadOnly AbilityPool { get; }
         
         private IAbilityReadOnly CurrentAbility
         {
@@ -33,20 +33,21 @@ namespace IM.Abilities
                 }
                 if (_currentAbility != null)
                 {
-                    if(_currentAbility is IApplyEffectGroupOnUse effectGroupOnUse) _effectContainer.AddGroup(_appliedEffectGroup = effectGroupOnUse.GetEffectGroup());
+                    if(_currentAbility is IApplyEffectGroupOnUse effectGroupOnUse) 
+                        _effectContainer.AddGroup(_appliedEffectGroup = effectGroupOnUse.GetEffectGroup());
                     
                     OnAbilityStarted?.Invoke(_currentAbility);
                 }
             }
         }
         
-        private void Awake()
+        public AbilityUser(IAbilityPoolReadOnly abilityPool, IEffectContainer effectContainer)
         {
-            _effectContainer = GetComponent<IEffectContainer>();
-            AbilityPool = GetComponent<IAbilityPoolReadOnly>();
+            AbilityPool = abilityPool;
+            _effectContainer = effectContainer;
         }
         
-        public void ResolveRequestedAbilities(IEnumerable<IAbilityReadOnly> requestedAbilities, AbilityUseContext abilityUseContext)
+        public void ResolveRequestedAbilities(IEnumerable<IAbilityReadOnly> requestedAbilities, UseContext useContext)
         {
             HashSet<IAbilityReadOnly> requested = requestedAbilities as HashSet<IAbilityReadOnly> 
                                                   ?? new HashSet<IAbilityReadOnly>(requestedAbilities);
@@ -67,7 +68,7 @@ namespace IM.Abilities
                     }
                     else if (CurrentAbility is IChannelAbility && _abilityUseInfo is IChannelInfo channelInfo)
                     {
-                        channelInfo.UpdateAbilityUseContext(abilityUseContext);
+                        channelInfo.UpdateAbilityUseContext(useContext);
                     }
                 }
             }
@@ -76,11 +77,11 @@ namespace IM.Abilities
             
             foreach (var ability in requested)
             {
-                if (TryStartAbility(ability, abilityUseContext)) break;
+                if (TryStartAbility(ability, useContext)) break;
             }
         }
         
-        private bool TryStartAbility(IAbilityReadOnly ability, AbilityUseContext ctx)
+        private bool TryStartAbility(IAbilityReadOnly ability, UseContext ctx)
         {
             if (ability == null || !AbilityPool.Contains(ability) || !ability.CanUse) return false;
 
@@ -92,14 +93,12 @@ namespace IM.Abilities
                 CurrentAbility = cast;
                 return true;
             }
-            if (ability is IChannelAbility channel && channel.TryChannel(out var channelInfo))
-            {
-                _abilityUseInfo = channelInfo;
-                CurrentAbility = channel;
-                return true;
-            }
 
-            return false;
-        }
+            if (ability is not IChannelAbility channel || !channel.TryChannel(out var channelInfo)) return false;
+            
+            _abilityUseInfo = channelInfo;
+            CurrentAbility = channel;
+            return true;
+        }   
     }
 }

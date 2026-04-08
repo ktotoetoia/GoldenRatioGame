@@ -1,4 +1,5 @@
 ﻿using System;
+using IM.Values;
 
 namespace IM.Abilities
 {
@@ -9,6 +10,6 @@ namespace IM.Abilities
         
         IChannelAbility Ability { get; }
         
-        public void UpdateAbilityUseContext(AbilityUseContext abilityUseContext);
+        public void UpdateAbilityUseContext(UseContext useContext);
     }
 }

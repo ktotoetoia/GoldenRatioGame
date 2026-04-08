@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using IM.Factions;
 using IM.LifeCycle;
@@ -12,15 +11,15 @@ namespace IM.Map
     {
         private readonly IEntityCollection _entities = new EntityCollection();
         private readonly Dictionary<IEntity, IFactionMember> _factionMembers = new();
-        private IRoom _room;
-        private IRoomEvents _roomEvents;
+        private IGameObjectRoom _room;
+        private IGameObjectRoomEvents _roomEvents;
 
         private void Awake()
         {
-            _room = GetComponent<IRoom>();
-            _roomEvents = GetComponent<IRoomEvents>();
-            _roomEvents.RoomVisitorAdded += OnVisitorAdded;
-            _roomEvents.RoomVisitorRemoved += OnVisitorRemoved;
+            _room = GetComponent<IGameObjectRoom>();
+            _roomEvents = GetComponent<IGameObjectRoomEvents>();
+            _roomEvents.GameObjectAdded += OnVisitorAdded;
+            _roomEvents.GameObjectRemoved += OnVisitorRemoved;
             _roomEvents.RoomPortAdded += x => RefreshPortsState();
             _roomEvents.RoomPortRemoved += x => RefreshPortsState();
             
@@ -36,23 +35,23 @@ namespace IM.Map
             RefreshPortsState();
         }
 
-        private void OnVisitorAdded(IRoomVisitor visitor)
+        private void OnVisitorAdded(GameObject go)
         {
-            if (visitor?.Entity is not IModuleEntity) return;
+            if (!go.TryGetComponent(out IModuleEntity entity)) return;
+            
+            if (!entity.GameObject.TryGetComponent(out IFactionMember factionMember)) return;
 
-            if (!visitor.Entity.GameObject.TryGetComponent(out IFactionMember factionMember)) return;
+            if (!_factionMembers.TryAdd(entity, factionMember)) return;
 
-            if (!_factionMembers.TryAdd(visitor.Entity, factionMember)) return;
-
-            _entities.Add(visitor.Entity);
+            _entities.Add(entity);
         }
 
-        private void OnVisitorRemoved(IRoomVisitor visitor)
+        private void OnVisitorRemoved(GameObject go)
         {
-            if (visitor?.Entity == null) return;
-
-            _factionMembers.Remove(visitor.Entity);
-            _entities.Remove(visitor.Entity);
+            if (!go.TryGetComponent(out IModuleEntity entity)) return;
+            
+            _factionMembers.Remove(entity);
+            _entities.Remove(entity);
         }
 
         private void OnEntityChanged(IEntity entity)
@@ -89,8 +88,8 @@ namespace IM.Map
         {
             if (_roomEvents != null)
             {
-                _roomEvents.RoomVisitorAdded -= OnVisitorAdded;
-                _roomEvents.RoomVisitorRemoved -= OnVisitorRemoved;
+                _roomEvents.GameObjectAdded -= OnVisitorAdded;
+                _roomEvents.GameObjectRemoved -= OnVisitorRemoved;
             }
 
             _entities.EntityAdded -= OnEntityChanged;

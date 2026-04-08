@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using IM.Abilities;
-using IM.Entities;
 using IM.Interactions;
 using IM.Movement;
 using IM.StateMachines;
+using IM.Values;
 using UnityEngine;
 
 namespace IM
@@ -14,7 +14,7 @@ namespace IM
     {
         private IMoveInVector _movement;
         private IInteractor _interactor;
-        private AbilityPoolMonoUser _abilityUser;
+        private AbilityUserMono _abilityUser;
         
         private IState _movementState;
         private IState _abilityUseState;
@@ -25,7 +25,7 @@ namespace IM
         private IStateMachine _stateMachine;
 
         public Func<Vector2> ProvideMovementDirection { get; set; } = () => default;
-        public Func<AbilityUseContext>  ProvideAbilityUseContext { get; set; }= () => default;
+        public Func<UseContext>  ProvideAbilityUseContext { get; set; }= () => default;
         public Func<bool> ShouldTryInteract { get; set; }= () => false;
         public Func<IEnumerable<IAbilityReadOnly>, IEnumerable<IAbilityReadOnly>> ProvideKeyForAbility { get; set; } = x => new IAbilityReadOnly[]{};
         
@@ -34,7 +34,7 @@ namespace IM
         private void Awake()
         {
             _movement = GetComponent<IMoveInVector>();
-            _abilityUser = GetComponent<AbilityPoolMonoUser>();
+            _abilityUser = GetComponent<AbilityUserMono>();
             _interactor = GetComponent<IInteractor>();
             
             _movementState = new MovementState(_movement, () => ProvideMovementDirection());

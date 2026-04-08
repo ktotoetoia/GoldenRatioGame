@@ -4,9 +4,9 @@ namespace IM.Map
 {
     public interface IRoomWalker
     {
-        IEnumerable<IRoom> Available { get; }   
-        IRoom Current { get; }
+        IEnumerable<IGameObjectRoom> Available { get; }   
+        IGameObjectRoom Current { get; }
         
-        void GoTo(IRoom room);
+        void GoTo(IGameObjectRoom room);
     }
 }

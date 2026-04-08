@@ -1,7 +1,9 @@
-﻿namespace IM.Abilities
+﻿using IM.Values;
+
+namespace IM.Abilities
 {
     public interface IRequireAbilityUseContext
     {
-        void UpdateAbilityUseContext(AbilityUseContext context);
+        void UpdateAbilityUseContext(UseContext context);
     }
 }

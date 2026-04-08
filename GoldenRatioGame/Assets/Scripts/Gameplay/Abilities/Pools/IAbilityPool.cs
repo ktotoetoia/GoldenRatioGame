@@ -1,8 +1,9 @@
-﻿namespace IM.Abilities
+﻿using System.Collections.Generic;
+
+namespace IM.Abilities
 {
-    public interface IAbilityPool : IAbilityPoolReadOnly
+    public interface IAbilityPool : ICollection<IAbilityReadOnly>, IAbilityPoolReadOnly
     {
-        void AddAbility(IAbilityReadOnly ability);
-        void RemoveAbility(IAbilityReadOnly ability);
+        
     }
 }

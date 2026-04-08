@@ -9,32 +9,16 @@ namespace IM.Modules
     {
         [SerializeField] private GameObject _abilityPoolSource;
         private IAbilityPoolDraftContainer _abilityPool;
+        private CollectionCommandObserverFactory<IAbilityReadOnly>  _commandObserverFactory;
 
         private void Awake()
         {
             _abilityPool = _abilityPoolSource.GetComponent<IAbilityPoolDraftContainer>();
+            _commandObserverFactory = new CollectionCommandObserverFactory<IAbilityReadOnly>((x,y) => GetModule(x), (x,y,z) => GetModule(x), _abilityPool.GetEditableDraft());
         }
 
-        public ICommandObserver Create(IModule param1, ICollection<IModule> param2)
-        {
-            if (param1 is not IExtensibleModule extensibleModule ||
-                !extensibleModule.Extensions.TryGet(out IAbilityExtension abilityExtension))
-            {
-                return new EmptyCommandObserver();
-            }
-            
-            return new AbilityCommandObserver(_abilityPool.EditDraft(),abilityExtension.Ability);
-        }
-
-        public ICommandObserver Create(IModule param1, ICollection<IModule> param2, ICollection<IConnection> param3)
-        {
-            if (param1 is not IExtensibleModule extensibleModule ||
-                !extensibleModule.Extensions.TryGet(out IAbilityExtension abilityExtension))
-            {
-                return new EmptyCommandObserver();
-            }
-            
-            return new AbilityCommandObserver(_abilityPool.EditDraft(),abilityExtension.Ability);
-        }
+        private IAbilityReadOnly GetModule(IModule module) => (module as IExtensibleModule)?.Extensions?.Get<IAbilityExtension>()?.Ability;
+        public ICommandObserver Create(IModule param1, ICollection<IModule> param2) => _commandObserverFactory.Create(param1, param2);
+        public ICommandObserver Create(IModule param1, ICollection<IModule> param2, ICollection<IConnection> param3) => _commandObserverFactory.Create(param1, param2, param3);
     }
 }

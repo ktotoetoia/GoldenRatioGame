@@ -9,8 +9,7 @@ namespace IM.UI
     [UxmlElement]
     public partial class AbilityPoolReadonlyContainer : VisualElement
     {
-        private readonly Dictionary<IAbilityReadOnly, AbilityVisualElement> _abilityElements 
-            = new();
+        private readonly Dictionary<IAbilityReadOnly, AbilityVisualElement> _abilityElements = new();
         
         private IAbilityPoolReadOnly _abilityPool;
         
@@ -25,7 +24,7 @@ namespace IM.UI
             
             _abilityPool = abilityPool ?? throw new ArgumentNullException(nameof(abilityPool));
             
-            foreach (IAbilityReadOnly ability in abilityPool.Abilities)
+            foreach (IAbilityReadOnly ability in abilityPool)
             {
                 OnAbilityAdded(ability);
             }
@@ -65,12 +64,12 @@ namespace IM.UI
         {
             if(_abilityPool == null) return;
             
-            foreach (IAbilityReadOnly ability in _abilityPool.Abilities.Except(_abilityElements.Keys).ToList())
+            foreach (IAbilityReadOnly ability in _abilityPool.Except(_abilityElements.Keys).ToList())
             {
                 OnAbilityAdded(ability);
             }
             
-            foreach (IAbilityReadOnly ability in _abilityElements.Keys.Except(_abilityPool.Abilities).ToList())
+            foreach (IAbilityReadOnly ability in _abilityElements.Keys.Except(_abilityPool).ToList())
             {
                 OnAbilityRemoved(ability);
             }

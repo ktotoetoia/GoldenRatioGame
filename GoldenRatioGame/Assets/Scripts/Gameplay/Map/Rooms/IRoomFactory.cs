@@ -2,7 +2,7 @@
 
 namespace IM.Map
 {
-    public interface IRoomFactory : IFactory<IRoom>
+    public interface IRoomFactory : IFactory<IGameObjectRoom>
     {
         
     }

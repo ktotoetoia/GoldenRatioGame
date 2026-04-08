@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using IM.Abilities;
-using IM.Entities;
 using IM.Factions;
 using IM.Items;
 using IM.LifeCycle;

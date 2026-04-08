@@ -17,8 +17,8 @@ namespace IM.Modules
             _extensionsObserver = new ModuleExtensionsObserver<IAbilityExtension>(OnExtensionAdded, OnExtensionRemoved);
         }
 
-        private void OnExtensionAdded(IExtensibleModule module,IAbilityExtension abilityExtension) => _abilityPool.AddAbility(abilityExtension.Ability);
-        private void OnExtensionRemoved(IExtensibleModule module,IAbilityExtension abilityExtension) => _abilityPool.RemoveAbility(abilityExtension.Ability);
+        private void OnExtensionAdded(IExtensibleModule module,IAbilityExtension abilityExtension) => _abilityPool.Add(abilityExtension.Ability);
+        private void OnExtensionRemoved(IExtensibleModule module,IAbilityExtension abilityExtension) => _abilityPool.Remove(abilityExtension.Ability);
         public void OnSnapshotChanged(IModuleGraphReadOnly graph) => _extensionsObserver.OnSnapshotChanged(graph);
     }
 }

@@ -4,6 +4,7 @@ using IM.Entities;
 using IM.LifeCycle;
 using IM.Modules;
 using IM.UI;
+using IM.Values;
 using UnityEngine;
 
 namespace IM.Inputs
@@ -81,10 +82,10 @@ namespace IM.Inputs
             return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         }
 
-        private AbilityUseContext GetAbilityUseContext()
+        private UseContext GetAbilityUseContext()
         {
             Vector3 mousePosition = _gameCamera.ScreenToWorldPoint(Input.mousePosition) * Vector2.one;
-            return new AbilityUseContext(mousePosition, _moduleEntity.GameObject.transform.position);
+            return new UseContext(mousePosition, _moduleEntity.GameObject.transform.position);
         }
     }
 }

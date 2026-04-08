@@ -1,10 +1,11 @@
 ﻿using System;
+using IM.Values;
 
 namespace IM.Abilities
 {
     public interface IAbilityEvents
     {
-        event Action<AbilityUseContext> AbilityStarted;
-        event Action<AbilityUseContext> AbilityFinished;
+        event Action<UseContext> AbilityStarted;
+        event Action<UseContext> AbilityFinished;
     }
 }

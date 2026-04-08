@@ -11,23 +11,23 @@ namespace IM
 {
     public class FloorSerializer : ComponentSerializer<Floor>
     {
-        private string GetId(object obj) => (obj as MonoBehaviour)?.GetComponent<IIdentifiable>()?.Id;
+        private static string GetId(object obj) => (obj as MonoBehaviour)?.GetComponent<IIdentifiable>()?.Id;
 
         public override object CaptureState(Floor component)
         {
             FloorInfo info = new FloorInfo();
 
-            foreach (IRoom node in component.FloorGraph.DataNodes.Select(x => x.Value))
+            foreach (IGameObjectRoom node in component.FloorGraph.DataNodes.Select(x => x.Value))
             {
                 info.RoomInfos.Add(new RoomInfo
                 {
                     RoomId = GetId(node),
-                    RoomVisitors = node.RoomVisitors.Select(GetId).Where(id => id != null).ToList(),
+                    GameObjects = node.GameObjects.Select(x => x.GetComponent<IIdentifiable>().Id).Where(id => id != null).ToList(),
                     RoomPorts = node.RoomPorts.Select(GetId).Where(id => id != null).ToList(),
                 });
             }
 
-            foreach (IDataEdge<IRoom> edge in component.FloorGraph.DataEdges)
+            foreach (IDataEdge<IGameObjectRoom> edge in component.FloorGraph.DataEdges)
             {
                 info.Connections.Add(new Connection { From = GetId(edge.DataNode1.Value), To = GetId(edge.DataNode2.Value) });
             }
@@ -39,15 +39,15 @@ namespace IM
         {
             if (state is not FloorInfo info) return;
 
-            BiDirectionalDataGraph<IRoom> graph = new BiDirectionalDataGraph<IRoom>();
-            Dictionary<string, IDataNode<IRoom>> nodeLookup = new Dictionary<string, IDataNode<IRoom>>();
+            BiDirectionalDataGraph<IGameObjectRoom> graph = new BiDirectionalDataGraph<IGameObjectRoom>();
+            Dictionary<string, IDataNode<IGameObjectRoom>> nodeLookup = new Dictionary<string, IDataNode<IGameObjectRoom>>();
 
             foreach (Connection conn in info.Connections)
             {
-                IDataNode<IRoom> GetOrCreateNode(string id)
+                IDataNode<IGameObjectRoom> GetOrCreateNode(string id)
                 {
-                    if (nodeLookup.TryGetValue(id, out IDataNode<IRoom> node)) return node;
-                    IRoom room = resolveDependency(id).GetComponent<IRoom>();
+                    if (nodeLookup.TryGetValue(id, out IDataNode<IGameObjectRoom> node)) return node;
+                    IGameObjectRoom room = resolveDependency(id).GetComponent<IGameObjectRoom>();
                     return nodeLookup[id] = graph.Create(room);
                 }
 
@@ -58,9 +58,9 @@ namespace IM
 
             foreach (RoomInfo roomInfo in info.RoomInfos)
             {
-                IRoom room = resolveDependency(roomInfo.RoomId).GetComponent<IRoom>();
+                IGameObjectRoom room = resolveDependency(roomInfo.RoomId).GetComponent<IGameObjectRoom>();
 
-                foreach (string id in roomInfo.RoomVisitors)
+                foreach (string id in roomInfo.GameObjects)
                 {
                     GameObject go = resolveDependency(id);
 
@@ -71,7 +71,7 @@ namespace IM
                         continue;
                     }
                     
-                    room.Add(go.GetComponent<IRoomVisitor>());
+                    room.Add(go);
                 }
                 foreach (string id in roomInfo.RoomPorts) room.Add(resolveDependency(id).GetComponent<IRoomPort>());
             }
@@ -91,7 +91,7 @@ namespace IM
         private class RoomInfo
         {
             public string RoomId;
-            public List<string> RoomVisitors;
+            public List<string> GameObjects;
             public List<string> RoomPorts;
         }
     }
