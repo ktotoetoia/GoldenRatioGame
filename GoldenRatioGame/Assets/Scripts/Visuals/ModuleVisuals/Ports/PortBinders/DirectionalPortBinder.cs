@@ -11,13 +11,9 @@ namespace IM.Visuals
     {
         [SerializeField] private List<PortPositionRotation>  _portPositionRotations;
         
-        public override void Bind(IEnumerable<IPort> ports, IList<IPortVisualObject> portVisualObjects)
+        public override void Bind(IList<IPortVisualObject> portVisualObjects)
         {
-            List<IPort> portList = new List<IPort>(ports);
-            if (portList.Count > _portPositionRotations.Count)
-                throw new InvalidOperationException("There is more ports than port infos");
-            
-            for (int i = 0; i < _portPositionRotations.Count; i++)
+            for (int i = 0; i < _portPositionRotations.Count && i < portVisualObjects.Count; i++)
             {
                 if(portVisualObjects[i] is not PortVisualObjectMono portVisualObject) continue;
                 

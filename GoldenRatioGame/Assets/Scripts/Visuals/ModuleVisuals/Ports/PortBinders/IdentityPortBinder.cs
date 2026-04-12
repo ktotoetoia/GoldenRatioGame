@@ -10,7 +10,7 @@ namespace IM.Visuals
     [CreateAssetMenu(menuName = "Ports/Identity Port Binder")]
     public class IdentityPortBinder : PortBinderBase
     {
-        public override void Bind(IEnumerable<IPort> ports, IList<IPortVisualObject> portVisualObjects)
+        public override void Bind(IList<IPortVisualObject> portVisualObjects)
         {
             foreach (PortVisualObjectMono portVisualObject in portVisualObjects.OfType<PortVisualObjectMono>())
             {

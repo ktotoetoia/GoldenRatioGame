@@ -1,5 +1,6 @@
 ﻿using System;
 using IM.Interactions;
+using IM.Items;
 using IM.Modules;
 using UnityEngine;
 
@@ -8,31 +9,31 @@ namespace IM.Entities
     public class ExtensibleModuleInteractor : MonoBehaviour, ISubInteractor
     {
         [SerializeField] private GameObject _moduleEditingContextSource;
-        private IModuleEditingContext _moduleEditingContext;
+        private IModuleEntity _moduleEntity;
 
         private void Awake()
         {
             if (!_moduleEditingContextSource) throw new MissingComponentException($"{nameof(_moduleEditingContextSource)} was not initialized");
             
-            _moduleEditingContext = _moduleEditingContextSource.GetComponent<IModuleEditingContext>();
+            _moduleEntity = _moduleEditingContextSource.GetComponent<IModuleEntity>();
         }
         
         public bool CanInteract(IInteractable target)
         {
-            return CanInteract(target, out IExtensibleModule module);
+            return CanInteract(target, out IExtensibleItem module);
         }
 
         public void Interact(IInteractable target)
         {
-            if (!CanInteract(target, out IExtensibleModule module))
+            if (!CanInteract(target, out IExtensibleItem module))
                 throw new ArgumentException($"Cannot interact with this argument: {target.GameObject}");
             
-            _moduleEditingContext.AddToContext(module);
+            _moduleEntity.AddToContext(module);
         }
 
-        private bool CanInteract(IInteractable target, out IExtensibleModule module)
+        private bool CanInteract(IInteractable target, out IExtensibleItem module)
         {
-            return target.GameObject.TryGetComponent(out  module) && module.ModuleState == ModuleState.Show;
+            return target.GameObject.TryGetComponent(out  module)&&!_moduleEntity.ModuleEditingContextEditor.IsEditing && module.ItemState == ItemState.Show;
         }
     }
 }

@@ -4,6 +4,9 @@ namespace IM.Modules
 {
     public interface IModuleEntity : IEntity
     {
-        IModuleEditingContext ModuleEditingContext { get; }
+        IModuleEditingContextEditor ModuleEditingContextEditor { get; }
+
+        bool AddToContext(IExtensibleItem item);
+        bool RemoveFromContext(IExtensibleItem item);
     }
 }

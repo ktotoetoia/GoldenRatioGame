@@ -7,9 +7,9 @@ namespace IM.UI
     {
         IModuleVisualObject PreviewObject { get; }
         bool IsPreviewing { get; }
-        void StartPreview(IExtensibleModule module);
+        void StartPreview(IExtensibleItem module);
         void UpdatePreviewPosition();
-        IExtensibleModule FinalizePreview();
+        IExtensibleItem FinalizePreview();
         void StopPreview();
     }
 }

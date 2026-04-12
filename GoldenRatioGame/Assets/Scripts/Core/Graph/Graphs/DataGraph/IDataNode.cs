@@ -2,9 +2,8 @@
 
 namespace IM.Graphs
 {
-    public interface IDataNode<T>  :INode
+    public interface IDataNode<T>  :INode, IHaveNodeValue<T>
     {
-        public T Value { get; set; }
         IEnumerable<IDataEdge<T>> DataEdges { get; }
     }
 }

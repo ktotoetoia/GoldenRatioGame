@@ -8,20 +8,20 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class AbilityModuleEditingContextSerializer : ComponentSerializer<ModuleEditingContextMono>
+    public class AbilityModuleEditingContextSerializer : ComponentSerializer<ModuleEditingContextEditorMono>
     {
-        public override object CaptureState(ModuleEditingContextMono component)
+        public override object CaptureState(ModuleEditingContextEditorMono component)
         {
-            ModuleEditingContextState state = new ModuleEditingContextState();
+            // ModuleEditingContextState state = new ModuleEditingContextState();
+            //
+            // state.StorageItemsIds.AddRange(component.Storage
+            //     .Select(cell => cell.Item as IExtensibleItem)
+            //     .Select(TryGetModuleId)
+            //     .Where(id => id != null));
+            //
+            // HashSet<(string moduleId, int portId)> processedPorts = new HashSet<(string moduleId, int portId)>();
 
-            state.StorageItemsIds.AddRange(component.Storage
-                .Select(cell => cell.Item as IExtensibleModule)
-                .Select(TryGetModuleId)
-                .Where(id => id != null));
-
-            HashSet<(string moduleId, int portId)> processedPorts = new HashSet<(string moduleId, int portId)>();
-
-            foreach (IExtensibleModule module in component.GraphEditor.Snapshot.Modules.OfType<IExtensibleModule>())
+            /*foreach (IExtensibleModule module in component.GraphEditor.Snapshot.Modules.OfType<IExtensibleModule>())
             {
                 string currentId = TryGetModuleId(module);
                 if (currentId == null) continue;
@@ -50,14 +50,14 @@ namespace IM.Modules
 
                     processedPorts.Add((targetId, targetPortId));
                 }
-            }
+            }*/
 
-            return state;
+            return null; //state;
         }
 
-        public override void RestoreState(ModuleEditingContextMono component, object state, Func<string, GameObject> resolveDependency)
+        public override void RestoreState(ModuleEditingContextEditorMono component, object state, Func<string, GameObject> resolveDependency)
         {
-            if (component.GraphEditor.IsEditing) 
+            /*if (component.GraphEditor.IsEditing) 
                 throw new InvalidOperationException("Cannot restore state while the graph editor is currently in edit mode.");
 
             ModuleEditingContextState savedState = (ModuleEditingContextState)state;
@@ -68,11 +68,11 @@ namespace IM.Modules
                 requiredModuleIds.Add(link.ModuleA_Id);
                 requiredModuleIds.Add(link.ModuleB_Id);
             }
-
+            
             foreach (string id in requiredModuleIds)
             {
                 GameObject go = resolveDependency(id);
-                if (go != null && go.TryGetComponent(out IExtensibleModule module) && !component.Storage.ContainsItem(module))
+                if (go != null && go.TryGetComponent(out IExtensibleItem module) && !component.Storage.ContainsItem(module))
                 {
                     component.AddToContext(module);
                 }
@@ -81,7 +81,7 @@ namespace IM.Modules
             component.SetUnsafe(true);
             try
             {
-                IModuleGraph graph = component.GraphEditor.BeginEdit();
+                var graph = component.GraphEditor.BeginEdit();
                 RebuildGraphLinks(graph, savedState.Links, resolveDependency);
             }
             catch (Exception e)
@@ -95,10 +95,10 @@ namespace IM.Modules
                     component.GraphEditor.DiscardChanges();
                 }
                 component.SetUnsafe(false);
-            }
+            }*/
         }
 
-        private void RebuildGraphLinks(IModuleGraph graph, IEnumerable<GraphLinkData> links, Func<string, GameObject> resolveDependency)
+        private void RebuildGraphLinks(IDataModuleGraph<IExtensibleItem> graph, IEnumerable<GraphLinkData> links, Func<string, GameObject> resolveDependency)
         {
             foreach (GraphLinkData link in links)
             {
@@ -107,23 +107,23 @@ namespace IM.Modules
 
                 if (goA == null || goB == null) continue;
 
-                if (goA.TryGetComponent(out IExtensibleModule modA) && goB.TryGetComponent(out IExtensibleModule modB))
+                if (goA.TryGetComponent(out IExtensibleItem it1) && goB.TryGetComponent(out IExtensibleItem it2))
                 {
-                    if (!graph.Contains(modA)) graph.AddModule(modA);
-                    if (!graph.Contains(modB)) graph.AddModule(modB);
+                    if (!graph.Contains(default(IModule))) graph.Add(null);
+                    if (!graph.Contains(default(IModule))) graph.Add(null);
                     
-                    IPort portA = modA.GetPort(link.PortA_Id);
-                    IPort portB = modB.GetPort(link.PortB_Id);
+                    //IPort portA = modA.GetPort(link.PortA_Id);
+                    //IPort portB = modB.GetPort(link.PortB_Id);
 
-                    if (portA != null && portB != null)
+                    //if (portA != null && portB != null)
                     {
-                        graph.Connect(portA, portB);
+                   //     graph.Connect(portA, portB);
                     }
                 }
             }
         }
 
-        private string TryGetModuleId(IExtensibleModule module)
+        private string TryGetModuleId(IExtensibleItem module)
         {
             return module?.Extensions.TryGet(out IIdentifiable identifiable) == true ? identifiable.Id : null;
         }

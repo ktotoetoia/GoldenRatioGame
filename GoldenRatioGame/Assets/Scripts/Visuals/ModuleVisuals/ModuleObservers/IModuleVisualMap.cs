@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using IM.Graphs;
 using IM.Modules;
 
 namespace IM.Visuals
 {
     public interface IModuleVisualMap
     {
-        IReadOnlyDictionary<IExtensibleModule, IModuleVisualObject> ModuleToVisualObjects { get; }
+        IReadOnlyDictionary<IDataModule<IExtensibleItem>, IModuleVisualObject> ModuleToVisualObjects { get; }
+        IReadOnlyDictionary<IDataPort<IExtensibleItem>, IPortVisualObject> PortToVisualObjects { get; }
     }
 }

@@ -16,6 +16,19 @@ namespace IM.Storages
         
         public IStorageCellReadonly this[int index] => _cells[index];
 
+        public CellFactoryStorage()
+        {
+            
+        }
+        
+        public CellFactoryStorage(IReadOnlyStorage storage)
+        {
+            foreach (IStorageCellReadonly cellReadonly in storage)
+            {
+                SetItem(CreateCell(), cellReadonly.Item);
+            }
+        }
+
         public IStorageCellReadonly CreateCell()
         {
             return CreateCellAt(_cells.Count);

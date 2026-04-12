@@ -1,36 +1,38 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using IM.Graphs;
+using UnityEngine;
 
 namespace IM.Modules
 {
-    public class CommandGraphOperations : IGraphOperations
+    public class CommandGraphOperations<T> : IGraphOperations<T>
     {
-        public IConditionalCommandModuleGraph Graph { get; set; }
+        public IConditionalCommandDataModuleGraph<T> Graph { get; set; }
         
-        public CommandGraphOperations(IConditionalCommandModuleGraph graph)
+        public CommandGraphOperations(IConditionalCommandDataModuleGraph<T> graph)
         {
             Graph = graph;
         }
 
-        public bool TryQuickAddModule(IModule module)
+        public bool TryQuickAddModule(IDataModule<T> module)
         {
-            if (module is ICoreExtensibleModule)
+            if (module.Value is ICoreExtensibleItem)
             {
-                if (!Graph.CanAddModule(module)) return false;
+                if (!Graph.CanAdd(module)) return false;
                 
-                Graph.AddModule(module);
+                Graph.Add(module);
 
                 return true;
             }
             
-            foreach (IPort port in module.Ports)
+            foreach (IDataPort<T> port in module.DataPorts)
             {
-                foreach (IPort targetPort in Graph.Modules.SelectMany(x => x.Ports))
+                foreach (IDataPort<T> targetPort in Graph.DataModules.SelectMany(x => x.DataPorts))
                 {
                     if (!Graph.CanAddAndConnect(module, port, targetPort)) continue;
-                        
+                    
                     Graph.AddAndConnect(module, port, targetPort);
-                            
+                    
                     return true;
                 }
             }
@@ -40,14 +42,14 @@ namespace IM.Modules
 
         public bool TryQuickRemoveModule()
         {
-            return TryQuickRemoveModule(Graph.Modules.LastOrDefault());
+            return TryQuickRemoveModule(Graph.DataModules.LastOrDefault());
         }
 
-        public bool TryQuickRemoveModule(IModule module)
+        public bool TryQuickRemoveModule(IDataModule<T> module)
         {
-            if (!Graph.CanRemoveModule(module)) return false;
+            if (!Graph.CanRemove(module)) return false;
             
-            Graph.RemoveModule(module);
+            Graph.Remove(module);
 
             return true;
         }

@@ -4,7 +4,7 @@ namespace IM.Modules
 {
     public interface IModuleEditingContextEvents
     {
-        public event Action<IExtensibleModule> AddedToContext;
-        public event Action<IExtensibleModule> RemovedFromContext;
+        public event Action<IExtensibleItem> AddedToContext;
+        public event Action<IExtensibleItem> RemovedFromContext;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace IM.Modules
 {
-    public class CoreExtensibleModuleMono : ExtensibleModuleMono, ICoreExtensibleModule
+    public class CoreExtensibleModuleMono : ExtensibleModuleMono, ICoreExtensibleItem
     {
         
     }

@@ -31,9 +31,9 @@ namespace IM.Modules
         {
             if(!_isOn) return;
             
-            if ((_entity??= _origin.GetComponent<IModuleEntity>()) is { ModuleEditingContext: not null })
+            if ((_entity??= _origin.GetComponent<IModuleEntity>()) is { ModuleEditingContextEditor: not null })
             {
-                Graph = _entity.ModuleEditingContext.GraphEditor.Snapshot;
+                Graph = _entity.ModuleEditingContextEditor.Snapshot.Graph;
             }
             
             if (Graph == null || Graph.Nodes == null || Graph.Edges == null) return;

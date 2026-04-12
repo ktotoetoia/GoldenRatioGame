@@ -2,13 +2,13 @@
 
 namespace IM.Modules
 {
-    public interface IGraphOperations
+    public interface IGraphOperations<T>
     {
-        IConditionalCommandModuleGraph Graph { get; }
+        IConditionalCommandDataModuleGraph<T> Graph { get; }
         
-        bool TryQuickAddModule(IModule module);
+        bool TryQuickAddModule(IDataModule<T> module);
         bool TryQuickRemoveModule();
-        bool TryQuickRemoveModule(IModule module);
+        bool TryQuickRemoveModule(IDataModule<T> module);
         void Undo(int count);
         void Redo(int count);
     }

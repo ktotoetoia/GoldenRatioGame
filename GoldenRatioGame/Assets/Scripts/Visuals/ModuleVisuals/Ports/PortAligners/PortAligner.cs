@@ -35,7 +35,7 @@ namespace IM.Visuals
             Vector3 portLocalPos = portToMove.Transform.LocalPosition;
             Vector3 ownerScale = portToMove.OwnerVisualObject.Transform.LossyScale;
             Vector3 offset = ownerRot * Vector3.Scale(ownerScale, portLocalPos);
-
+            
             return anchorPort.Transform.Position - offset;
         }
     }

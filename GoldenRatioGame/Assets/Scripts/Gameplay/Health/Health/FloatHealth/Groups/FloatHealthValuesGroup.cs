@@ -23,8 +23,7 @@ namespace IM.Health
 
         public void AddHealth(ICappedValue<float> healthBar)
         {
-            if (_healthValues.Contains(healthBar))
-                throw new Exception("Health bar already exists");
+            if (_healthValues.Contains(healthBar)) throw new Exception("Health bar already exists");
 
             _healthValues.Add(healthBar);
         }
@@ -43,8 +42,7 @@ namespace IM.Health
             float value,
             Func<ICappedValue<float>, float, float> apply)
         {
-            if (value < 0)
-                throw new ArgumentException("Value cannot be negative.");
+            if (value < 0) throw new ArgumentException("Value cannot be negative.");
 
             float remaining = value;
             float applied = 0f;

@@ -12,12 +12,12 @@ namespace IM.Modules
         private void Awake()
         {
             _moduleEditingContext = _moduleEditingContextEventsSource.GetComponent<IModuleEditingContextEvents>();
-            
+            return;
             _moduleEditingContext.AddedToContext += OnAdded;
             _moduleEditingContext.RemovedFromContext += OnRemoved;
         }
 
-        private void OnAdded(IExtensibleModule module)
+        private void OnAdded(IExtensibleItem module)
         {
             if (module is not MonoBehaviour moduleMono) return;
             
@@ -25,7 +25,7 @@ namespace IM.Modules
             moduleMono.transform.position = _defaultModulesTransformParent.position;
         }
 
-        private void OnRemoved(IExtensibleModule module)
+        private void OnRemoved(IExtensibleItem module)
         {
             if (module is not MonoBehaviour moduleMono) return;
             

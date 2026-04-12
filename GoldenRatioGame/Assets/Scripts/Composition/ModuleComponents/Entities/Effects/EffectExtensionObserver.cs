@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class EffectExtensionObserver : MonoBehaviour, IEditorObserver<IModuleGraphReadOnly>
+    public class EffectExtensionObserver : MonoBehaviour, IEditorObserver<IModuleEditingContextReadOnly>
     {
         [SerializeField] private GameObject _effectContainerSource;
         private ModuleExtensionsObserver<IEffectGroupExtension> _extensionsObserver;
@@ -17,8 +17,8 @@ namespace IM.Modules
             _extensionsObserver = new ModuleExtensionsObserver<IEffectGroupExtension>(OnExtensionAdded, OnExtensionRemoved);
         }
 
-        private void OnExtensionAdded(IExtensibleModule module, IEffectGroupExtension abilityExtension) => _effectContainer.AddGroup(abilityExtension.EffectGroup);
-        private void OnExtensionRemoved(IExtensibleModule module,IEffectGroupExtension abilityExtension) => _effectContainer.RemoveGroup(abilityExtension.EffectGroup);
-        public void OnSnapshotChanged(IModuleGraphReadOnly graph) => _extensionsObserver.OnSnapshotChanged(graph);
+        private void OnExtensionAdded(IExtensibleItem module, IEffectGroupExtension abilityExtension) => _effectContainer.AddGroup(abilityExtension.EffectGroup);
+        private void OnExtensionRemoved(IExtensibleItem module,IEffectGroupExtension abilityExtension) => _effectContainer.RemoveGroup(abilityExtension.EffectGroup);
+        public void OnSnapshotChanged(IModuleEditingContextReadOnly snapshot) => _extensionsObserver.OnSnapshotChanged(snapshot.Graph);
     }
 }

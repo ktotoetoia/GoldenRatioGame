@@ -28,8 +28,8 @@ namespace IM.UI
         public void Update()
         {
             if (VisualObserver == null || _graph == null) return;
-            
-            VisualObserver.OnSnapshotChanged(_graph);
+
+            // VisualObserver.OnSnapshotChanged(_graph);
         }
 
         public void ClearGraph()

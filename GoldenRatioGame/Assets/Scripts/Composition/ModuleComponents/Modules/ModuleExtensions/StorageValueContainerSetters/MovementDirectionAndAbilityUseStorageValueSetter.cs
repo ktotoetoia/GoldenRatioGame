@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class MovementDirectionAndAbilityUseStorageValueSetter : MonoBehaviour, IEditorObserver<IModuleGraphReadOnly>
+    public class MovementDirectionAndAbilityUseStorageValueSetter : MonoBehaviour, IEditorObserver<IModuleEditingContextReadOnly>
     {
         [SerializeField] private GameObject _movementAndAbilityEventsSource;
         [SerializeField] private string _valueStorageFocusTag = DirectionConstants.Focus;
@@ -51,15 +51,14 @@ namespace IM.Visuals
             
             return false;
         }
-        
-        public void OnSnapshotChanged(IModuleGraphReadOnly graph)
-        {
-            if(graph == null) throw new ArgumentNullException(nameof(graph));
 
-            _containers = graph.Modules.OfType<IExtensibleModule>().SelectMany(x=> x.Extensions.GetAll<IValueStorageContainer>()).ToList();
+        public void OnSnapshotChanged(IModuleEditingContextReadOnly snapshot)
+        {
+            _containers = snapshot.Graph.Modules.OfType<IDataModule<IExtensibleItem>>().SelectMany(x=> x.Value.Extensions.GetAll<IValueStorageContainer>()).ToList();
             
             SetDirectionToContainers(Direction.Right,_valueStorageFocusTag);
         }
+        
 
         private void OnAbilityStarted(IAbilityReadOnly ability)
         {

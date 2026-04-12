@@ -25,10 +25,10 @@ namespace IM.Modules
                 _moduleEntity.Disassembled -= OnDisassembled;
         }
 
-        private void OnDisassembled(IEnumerable<IExtensibleModule> modules)
+        private void OnDisassembled(IEnumerable<IExtensibleItem> modules)
         {
             var moduleList = modules.ToList();
-            var remainList = new List<IExtensibleModule>();
+            var remainList = new List<IExtensibleItem>();
             int itemsToKeep = Mathf.Min(_dropCount, moduleList.Count);
         
             for (int i = 0; i < itemsToKeep; i++)
@@ -45,7 +45,7 @@ namespace IM.Modules
             
             foreach (IItemDropObserver dropObserver in _itemDropObservers)
             {
-                foreach (IExtensibleModule module in remainList)
+                foreach (IExtensibleItem module in remainList)
                 {
                     dropObserver.OnItemDropped(module);
                 }

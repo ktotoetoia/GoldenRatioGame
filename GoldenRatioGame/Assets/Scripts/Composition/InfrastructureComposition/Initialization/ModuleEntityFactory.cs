@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using IM.Factions;
 using IM.LifeCycle;
 using IM.Modules;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace IM
 {
@@ -17,29 +19,35 @@ namespace IM
             IModuleEntity entity = created.GetComponent<IModuleEntity>();
             
             if (entry.Faction&& created.TryGetComponent(out IFactionMember factionMember)) factionMember.Faction = entry.Faction;
-            IEnumerable<IExtensibleModule> modules = entry.ModulesGameObjects.Select(x => factory.Create(x, false).GetComponent<IExtensibleModule>());
+            IEnumerable<IExtensibleItem> modules = entry.ModulesGameObjects.Select(x => factory.Create(x, false).GetComponent<IExtensibleItem>()).ToList();
             
             AddModulesToEntity(entity, modules);
 
             return entity;
         }
         
-        private void AddModulesToEntity(IModuleEntity entity, IEnumerable<IExtensibleModule> modules)
+        private void AddModulesToEntity(IModuleEntity entity, IEnumerable<IExtensibleItem> items)
         {
             try
             {
-                IGraphOperations graphOperations = 
-                    new CommandGraphOperations(entity.ModuleEditingContext.GraphEditor.BeginEdit());
-                
-                foreach (IExtensibleModule toAdd in modules)
+                foreach (IExtensibleItem toAdd in items)
                 {
-                    entity.ModuleEditingContext.AddToContext(toAdd);
-                    graphOperations.TryQuickAddModule(toAdd);
+                    entity.AddToContext(toAdd);
+                }
+                
+                IModuleEditingContext moduleEditingContext = entity.ModuleEditingContextEditor.BeginEdit();
+
+                IGraphOperations<IExtensibleItem> graphOperations =
+                    new CommandGraphOperations<IExtensibleItem>(moduleEditingContext.ModuleGraph);
+
+                foreach (IExtensibleItem toAdd in items)
+                {
+                    graphOperations.TryQuickAddModule(moduleEditingContext.CreateModule(toAdd));
                 }
             }
             finally
             {
-                if(!entity.ModuleEditingContext.GraphEditor.TryApplyChanges()) entity.ModuleEditingContext.GraphEditor.DiscardChanges();
+                if(!entity.ModuleEditingContextEditor.TryApplyChanges()) entity.ModuleEditingContextEditor.DiscardChanges();
             }
         }
     }

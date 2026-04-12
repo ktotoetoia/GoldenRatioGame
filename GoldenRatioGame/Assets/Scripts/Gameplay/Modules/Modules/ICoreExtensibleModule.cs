@@ -1,6 +1,6 @@
 ﻿namespace IM.Modules
 {
-    public interface ICoreExtensibleModule : IExtensibleModule
+    public interface ICoreExtensibleItem : IExtensibleItem
     {
         
     }

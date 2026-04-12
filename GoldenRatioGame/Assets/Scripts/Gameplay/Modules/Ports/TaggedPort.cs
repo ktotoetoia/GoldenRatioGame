@@ -3,33 +3,39 @@ using IM.Items;
 
 namespace IM.Modules
 {
-    public class TaggedPort : IConditionalPort, IHaveTag
+    public class TaggedPort<T> : IConditionalPort, IHaveTag, IDataPort<T>
     {
-        public IModule Module { get; }
-        public IConnection Connection { get; private set; }
+        public IDataModule<T> DataModule { get; }
+        public IModule Module => DataModule;
+        public IDataConnection<T> DataConnection { get; private set; }
+        public IConnection Connection => DataConnection;
         public bool IsConnected => Connection != null;
-        
         public ITag Tag { get; }
         
-        public TaggedPort(IModule module, ITag tag)
+        public TaggedPort(IDataModule<T> module, ITag tag)
         {
-            Module = module;
+            DataModule = module;
             Tag = tag;
+        }
+        
+        public void Connect(IDataConnection<T> connection)
+        {
+            DataConnection = connection;
         }
 
         public void Connect(IConnection connection)
         {
-            Connection = connection;
+            DataConnection = (IDataConnection<T>)connection;
         }
 
         public void Disconnect()
         {
-            Connection = null;
+            DataConnection = null;
         }
 
         public bool CanConnect(IPort other)
         {
-            return other is not IHaveTag otherTag || Tag.Matches(otherTag.Tag);
+            return other is IDataPort<T> && (other is not IHaveTag otherTag || Tag.Matches(otherTag.Tag));
         }
 
         public bool CanDisconnect()

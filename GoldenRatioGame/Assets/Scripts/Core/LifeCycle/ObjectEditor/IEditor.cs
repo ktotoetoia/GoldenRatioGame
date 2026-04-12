@@ -11,7 +11,7 @@ namespace IM.LifeCycle
         ICollection<IEditorObserver<TSnapshot>> Observers { get; }
 
         bool IsEditing { get; }
-        bool CanSaveChanges { get; }
+        bool CanApplyChanges { get; }
 
         TEditor BeginEdit();
         void DiscardChanges();

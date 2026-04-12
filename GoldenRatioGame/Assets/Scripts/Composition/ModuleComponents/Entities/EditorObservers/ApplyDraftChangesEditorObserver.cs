@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class ApplyDraftChangesEditorObserver : MonoBehaviour, IEditorObserver<IModuleGraphReadOnly>
+    public class ApplyDraftChangesEditorObserver : MonoBehaviour, IEditorObserver<IModuleEditingContextReadOnly>
     {
         [SerializeField] private GameObject _source;
         private IAbilityPoolDraftContainer _abilityPoolDraftContainer;
@@ -17,7 +17,7 @@ namespace IM.Modules
             _weaponPoolDraftContainer = _source.GetComponent<IWeaponPoolDraftContainer>();
         }
         
-        public void OnSnapshotChanged(IModuleGraphReadOnly snapshot)
+        public void OnSnapshotChanged(IModuleEditingContextReadOnly snapshot)
         {
             _abilityPoolDraftContainer?.CommitDraft();
             _weaponPoolDraftContainer?.CommitDraft();

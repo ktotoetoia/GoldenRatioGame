@@ -44,7 +44,6 @@ namespace IM.Visuals
             }
         }
         public IModuleVisualObject OwnerVisualObject { get; private set; }
-        public IPort Port { get; private set; }
         public ITransform Transform => _transform ??= GetComponent<ITransform>();
         public bool Highlighted { get; set; }
 
@@ -68,12 +67,11 @@ namespace IM.Visuals
             }
         }
 
-        public void Initialize(IModuleVisualObject ownerVisualObject, IPort port)
+        public void Initialize(IModuleVisualObject ownerVisualObject)
         {
-            if (OwnerVisualObject != null && Port != null) throw new InvalidOperationException("PortVisualObject is already initialized");
+            if (OwnerVisualObject != null) throw new InvalidOperationException("PortVisualObject is already initialized");
             
             OwnerVisualObject = ownerVisualObject ?? throw new ArgumentNullException(nameof(ownerVisualObject));
-            Port = port ??  throw new ArgumentNullException(nameof(port));
         }
         
         public void Reset()

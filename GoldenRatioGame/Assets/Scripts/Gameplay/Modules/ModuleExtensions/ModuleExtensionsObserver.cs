@@ -8,31 +8,31 @@ namespace IM.Modules
     {
         private readonly ModuleGraphSnapshotDiffer _differ;
 
-        public ModuleExtensionsObserver(Action<IExtensibleModule, TExtension> onExtensionAdded, Action<IExtensibleModule, TExtension> onExtensionRemoved)
+        public ModuleExtensionsObserver(Action<IExtensibleItem, TExtension> onExtensionAdded, Action<IExtensibleItem, TExtension> onExtensionRemoved)
         {
             _differ = new ModuleGraphSnapshotDiffer()
             {
                 ModuleAdded = x =>
                 {
-                    if (x is not IExtensibleModule extensibleModule ||
-                        !extensibleModule.Extensions.TryGetAll(out IEnumerable<TExtension> extensions))
+                    if (x is not IDataModule<IExtensibleItem> extensibleModule ||
+                        !extensibleModule.Value.Extensions.TryGetAll(out IEnumerable<TExtension> extensions))
                         return;
                     
                     foreach (TExtension extension in extensions)
                     {
-                        onExtensionAdded(extensibleModule, extension);
+                        onExtensionAdded(extensibleModule.Value, extension);
                     }
                 },
                 
                 ModuleRemoved = x =>
                 {
-                    if (x is not IExtensibleModule extensibleModule ||
-                        !extensibleModule.Extensions.TryGetAll(out IEnumerable<TExtension> extensions))
+                    if (x is not IDataModule<IExtensibleItem> extensibleModule ||
+                        !extensibleModule.Value.Extensions.TryGetAll(out IEnumerable<TExtension> extensions))
                         return;
                     
                     foreach (TExtension extension in extensions)
                     {
-                        onExtensionRemoved(extensibleModule, extension);
+                        onExtensionRemoved(extensibleModule.Value, extension);
                     }
                 },
             };

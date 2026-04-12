@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
+using IM.Items;
 using IM.LifeCycle;
+using IM.Storages;
 using UnityEngine;
 
 namespace IM.Modules
@@ -10,17 +12,17 @@ namespace IM.Modules
     [DisallowMultipleComponent]
     public class ModuleEntity : DefaultEntity, IModuleEntity
     {
-        public IModuleEditingContext ModuleEditingContext { get; private set; }
-        public event Action<IEnumerable<IExtensibleModule>> Disassembled;
+        public IModuleEditingContextEditor ModuleEditingContextEditor { get; private set; }
+        public event Action<IEnumerable<IExtensibleItem>> Disassembled;
 
         private void Awake()
         {
-            ModuleEditingContext = GetComponent<IModuleEditingContext>();
+            ModuleEditingContextEditor = GetComponent<IModuleEditingContextEditor>();
         }
 
         public override void Destroy()
         {
-            List<IExtensibleModule> modules = ExtractExtensibleModules();
+            List<IExtensibleItem> modules = ExtractExtensibleItems();
             
             try
             {
@@ -34,53 +36,82 @@ namespace IM.Modules
             base.Destroy();
         }
 
-        private List<IExtensibleModule> ExtractExtensibleModules()
+        private List<IExtensibleItem> ExtractExtensibleItems()
         {
-            IModuleGraphEditor<IConditionalCommandModuleGraph> editor = ModuleEditingContext.GraphEditor;
+            IModuleEditingContext moduleEditingContext = ModuleEditingContextEditor.BeginEdit();
             
-            IConditionalCommandModuleGraph graph = editor.BeginEdit();
+            SafeClearGraph(moduleEditingContext.ModuleGraph);
+            moduleEditingContext.SetUnsafe(true);
+            UnsafeClearGraph(moduleEditingContext.ModuleGraph);
+            moduleEditingContext.SetUnsafe(false);
+            
+            List<IExtensibleItem> modules = new List<IExtensibleItem>();
+            
+            foreach (IStorageCellReadonly storageCell in moduleEditingContext.MutableStorage.Where(x => x.Item is IExtensibleItem).ToList())
+            {
+                moduleEditingContext.MutableStorage.ClearAndRemoveCell(storageCell);
+                modules.Add(storageCell.Item as IExtensibleItem);
+            }
+            
+            if(!ModuleEditingContextEditor.TryApplyChanges()) ModuleEditingContextEditor.DiscardChanges();
+            
+            return modules;
+        }
+
+        private void SafeClearGraph(IConditionalCommandDataModuleGraph<IExtensibleItem> graph)
+        {
             int removedCount = 0;
-            
+
             do
             {
                 removedCount = 0;
 
-                foreach (IModule module in graph.Modules.ToList())
+                foreach (IDataModule<IExtensibleItem> module in graph.DataModules.ToList())
                 {
-                    if (graph.CanRemoveModule(module))
+                    if (graph.CanRemove(module))
                     {
-                        graph.RemoveModule(module);
+                        graph.Remove(module);
                         removedCount++;
                     }
                 }
             }
             while(removedCount > 0);
+        }
 
-            if(!editor.TryApplyChanges()) editor.DiscardChanges();
+        private void UnsafeClearGraph(IConditionalCommandDataModuleGraph<IExtensibleItem> graph)
+        {
+            if (graph.Modules.Count <= 0) return;
 
-            if (graph.Modules.Count > 0)
-            {
-                ModuleEditingContext.SetUnsafe(true);
-            
-                graph = editor.BeginEdit();
+            foreach (IDataModule<IExtensibleItem> module in graph.DataModules.ToList()) graph.Remove(module);
+        }
 
-                List<IModule> allModules = graph.Modules.ToList();
-            
-                foreach (IModule m in allModules) graph.RemoveModule(m);
+        public bool AddToContext(IExtensibleItem module)
+        {
+            if (module.ItemState == ItemState.Hide || ModuleEditingContextEditor.Snapshot.Storage.ContainsItem(module) || ModuleEditingContextEditor.IsEditing) return false;
 
-                editor.TryApplyChanges();
-                ModuleEditingContext.SetUnsafe(false);
-            }
+            ICellFactoryStorage storage = ModuleEditingContextEditor.BeginEdit().MutableStorage;
             
-            List<IExtensibleModule> modules = new List<IExtensibleModule>();
+            storage.SetItem(storage.FirstOrDefault(x => x.Item == null) ?? storage.CreateCell(), module);
+            module.ItemState = ItemState.Hide;
+            if (ModuleEditingContextEditor.TryApplyChanges()) return true;
+            ModuleEditingContextEditor.DiscardChanges();
             
-            foreach (IExtensibleModule module in ModuleEditingContext.Storage.Select(x => x.Item as IExtensibleModule))
-            {
-                ModuleEditingContext.RemoveFromContext(module);
-                modules.Add(module);
-            }
+            return true;
+        }
+
+        public bool RemoveFromContext(IExtensibleItem module)
+        {
+            if ( !ModuleEditingContextEditor.Snapshot.Storage.ContainsItem(module) || ModuleEditingContextEditor.IsEditing) return false;
             
-            return modules;
+            ICellFactoryStorage storage = ModuleEditingContextEditor.BeginEdit().MutableStorage;
+            
+            storage.ClearCell(storage.GetCell(module));
+            module.ItemState = ItemState.Show;
+            
+            if (ModuleEditingContextEditor.TryApplyChanges()) return true;
+            ModuleEditingContextEditor.DiscardChanges();
+            
+            return true;
         }
     }
 }

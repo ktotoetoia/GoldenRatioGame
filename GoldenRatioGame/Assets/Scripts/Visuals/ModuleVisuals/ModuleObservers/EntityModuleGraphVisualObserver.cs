@@ -5,11 +5,14 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class EntityModuleGraphVisualObserver : MonoBehaviour, IModuleVisualMap, IEditorObserver<IModuleGraphReadOnly>
+    public class EntityModuleGraphVisualObserver : MonoBehaviour, IModuleVisualMap, IEditorObserver<IModuleEditingContextReadOnly>
     {
         [SerializeField] private ModuleVisualObjectPreset _preset;
         private ModuleGraphVisualObserver _moduleGraphVisualObserver;
-        public IReadOnlyDictionary<IExtensibleModule, IModuleVisualObject> ModuleToVisualObjects => _moduleGraphVisualObserver.ModuleToVisualObjects;
+        public IReadOnlyDictionary<IDataModule<IExtensibleItem>, IModuleVisualObject> ModuleToVisualObjects => _moduleGraphVisualObserver.ModuleToVisualObjects;
+
+        public IReadOnlyDictionary<IDataPort<IExtensibleItem>, IPortVisualObject> PortToVisualObjects =>
+            _moduleGraphVisualObserver.PortToVisualObjects;
 
         private void Awake()
         {
@@ -25,23 +28,16 @@ namespace IM.Visuals
             _moduleGraphVisualObserver.Update();    
         }
         
-        private IModuleGraphReadOnly _graph;
-        
-        public void OnSnapshotChanged(IModuleGraphReadOnly graph) 
+        public void OnSnapshotChanged(IModuleEditingContextReadOnly snapshot) 
         {
-            _graph = graph;
-            
             if(!isActiveAndEnabled) return;
             
-            _moduleGraphVisualObserver.OnSnapshotChanged(graph);
+            _moduleGraphVisualObserver.OnSnapshotChanged(snapshot);
             _moduleGraphVisualObserver.Update();    
         }
 
         private void OnEnable()
         {
-            if(_graph == null) return;
-            
-            _moduleGraphVisualObserver.OnSnapshotChanged(_graph);
             _moduleGraphVisualObserver.Update();    
         }
     }

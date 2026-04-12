@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using IM.Commands;
+
+namespace IM.Graphs
+{
+    public class DisconnectDataModulesCommand<T> : Command
+    {
+        private readonly IDataConnection<T> _connection;
+        private readonly ICollection<IDataConnection<T>> _removeFrom;
+
+        public DisconnectDataModulesCommand(IDataConnection<T> connection, ICollection<IDataConnection<T>> removeFrom)
+        {
+            _connection = connection ?? throw new ArgumentNullException(nameof(connection));
+            _removeFrom = removeFrom ?? throw new ArgumentNullException(nameof(removeFrom));
+        }
+
+        protected override void InternalExecute()
+        {
+            if (!_connection.Port1.IsConnected || !_connection.Port2.IsConnected)
+                throw new InvalidOperationException("Other command disconnected this connection");
+
+            _connection.Port1.Disconnect();
+            _connection.Port2.Disconnect();
+            _removeFrom.Remove(_connection);
+        }
+
+        protected override void InternalUndo()
+        {
+            if (_connection.Port1.IsConnected || _connection.Port2.IsConnected)
+                throw new InvalidOperationException("Other command connected this port");
+
+            _connection.Port1.Connect(_connection);
+            _connection.Port2.Connect(_connection);
+            _removeFrom.Add(_connection);
+        }
+    }
+}

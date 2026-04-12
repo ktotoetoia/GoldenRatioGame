@@ -22,7 +22,7 @@ namespace IM.UI
             _modulePreviewPlacer = new ModulePreviewPlacer(_previewParent, _preset, GetHoverPosition);
         }
         
-        public void StartPreview(IExtensibleModule module)
+        public void StartPreview(IExtensibleItem module)
         {
             _modulePreviewPlacer.StartPreview(module);
         }
@@ -32,7 +32,7 @@ namespace IM.UI
             _modulePreviewPlacer.UpdatePreviewPosition();
         }
 
-        public IExtensibleModule FinalizePreview()
+        public IExtensibleItem FinalizePreview()
         {
             return _modulePreviewPlacer.FinalizePreview();
         }

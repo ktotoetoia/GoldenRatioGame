@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class MovementDirectionStorageValueSetter : MonoBehaviour, IEditorObserver<IModuleGraphReadOnly>
+    public class MovementDirectionStorageValueSetter : MonoBehaviour, IEditorObserver<IModuleEditingContextReadOnly>
     {
         [SerializeField] private string _valueStorageTag = DirectionConstants.Focus;
         private List<IValueStorageContainer> _containers;
@@ -28,12 +28,9 @@ namespace IM.Visuals
             SetDirectionToContainers(DirectionUtils.GetEnumDirection(_movement.Direction));
         }
         
-        public void OnSnapshotChanged(IModuleGraphReadOnly graph)
+        public void OnSnapshotChanged(IModuleEditingContextReadOnly snapshot)
         {
-            if(graph == null) throw new ArgumentNullException(nameof(graph));
-
-            _containers = graph.Modules.OfType<IExtensibleModule>().SelectMany(x=> x.Extensions.GetAll<IValueStorageContainer>()).ToList();
-            
+            _containers = snapshot.Graph.DataModules.SelectMany(x=> x.Value.Extensions.GetAll<IValueStorageContainer>()).ToList();
             SetDirectionToContainers(Direction.Right);
         }
 

@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910832e40fd14d2c9074a9542d5149e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Modules::IM.Modules.CoreExtensibleModule
-  _portInitialization: {fileID: 11400000, guid: 26e5bdefabebc534397d29ad97ad96eb, type: 2}
+  portFactory: {fileID: 11400000, guid: 26e5bdefabebc534397d29ad97ad96eb, type: 2}
   <Name>k__BackingField: Humanoid Core
   <Description>k__BackingField: 
 --- !u!114 &1563791358509127018

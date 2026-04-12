@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b2da4ff9bc41a5ab268251bf7c2e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _portInitialization: {fileID: 11400000, guid: 6ae7c0df07a6bde4c96cdb7b900d9b4c, type: 2}
+  portFactory: {fileID: 11400000, guid: 6ae7c0df07a6bde4c96cdb7b900d9b4c, type: 2}
   <Name>k__BackingField: Humanoid Arm
   <Description>k__BackingField: 
 --- !u!114 &3134715345525867726

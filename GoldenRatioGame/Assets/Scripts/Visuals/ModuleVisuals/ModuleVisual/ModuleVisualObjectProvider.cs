@@ -37,7 +37,7 @@ namespace IM.Visuals
             
             if(visual is IParentRestorable p) p.DefaultParent = transform;
             
-            visual.FinishInitialization(GetComponent<IExtensibleModule>());
+            visual.FinishInitialization(GetComponent<IExtensibleItem>());
             
             return visual;
         }

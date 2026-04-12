@@ -3,9 +3,9 @@ using IM.Graphs;
 
 namespace IM.Modules
 {
-    public class AllowConnectionIfPortsMatch : IModuleGraphConditions
+    public class AllowConnectionIfPortsMatch<T> :  IDataModuleGraphConditions<T>
     {
-        public bool CanConnect(IPort output, IPort input)
+        public bool CanConnect(IDataPort<T> output, IDataPort<T> input)
         {
             if (output is IConditionalPort outputC && input is IConditionalPort inputC)
             {
@@ -14,12 +14,13 @@ namespace IM.Modules
             
             return true;
         }
-        public bool CanAddAndConnect(IModule module, IPort ownerPort, IPort targetPort)
+        
+        public bool CanAddAndConnect(IDataModule<T> module, IDataPort<T> ownerPort, IDataPort<T> targetPort)
         {
             return CanConnect(ownerPort, targetPort);
         }
 
-        public bool CanDisconnect(IConnection connection)
+        public bool CanDisconnect(IDataConnection<T> connection)
         {
             if (connection.Port1 is not IConditionalPort p1 || connection.Port2 is not IConditionalPort p2)
                 return true;
@@ -27,9 +28,9 @@ namespace IM.Modules
             return p1.CanDisconnect() && p2.CanDisconnect();
         }
 
-        public bool CanRemoveModule(IModule module)
+        public bool CanRemove(IDataModule<T> module)
         {
-            return module.Ports.All(port => !port.IsConnected || CanDisconnect(port.Connection));
+            return module.DataPorts.All(port => !port.IsConnected || CanDisconnect(port.DataConnection));
         }
     }
 }

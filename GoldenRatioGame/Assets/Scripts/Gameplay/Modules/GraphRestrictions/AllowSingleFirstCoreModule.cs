@@ -3,29 +3,29 @@ using IM.Graphs;
 
 namespace IM.Modules
 {
-    public class AllowSingleFirstCoreModule : IModuleGraphConditions
+    public class AllowSingleFirstCoreModule<T> : IDataModuleGraphConditions<T>
     {
-        private readonly IModuleGraph _graph;
+        private readonly IDataModuleGraphReadOnly<T> _graph;
         
-        public AllowSingleFirstCoreModule(IModuleGraph graph)
+        public AllowSingleFirstCoreModule(IDataModuleGraphReadOnly<T> graph)
         {
             _graph = graph;
         }
 
-        public bool CanAddModule(IModule module)
+        public bool CanAdd(IDataModule<T> module)
         {
-            return module is not ICoreExtensibleModule && _graph.Modules.Any(x => x is ICoreExtensibleModule) ||
-                   module is ICoreExtensibleModule && !_graph.Modules.Any();
+            return module.Value is not ICoreExtensibleItem && _graph.DataModules.Any(x => x.Value is ICoreExtensibleItem) ||
+                   module.Value is ICoreExtensibleItem && !_graph.Modules.Any();
         }
 
-        public bool CanRemoveModule(IModule module)
+        public bool CanRemove(IDataModule<T> module)
         {
-            return module is not ICoreExtensibleModule || _graph.Modules.Count == 1;
+            return module.Value is not ICoreExtensibleItem || _graph.Modules.Count == 1;
         }
 
-        public bool CanAddAndConnect(IModule module, IPort ownerPort, IPort targetPort)
+        public bool CanAddAndConnect(IDataModule<T> module, IDataPort<T> ownerPort, IDataPort<T> targetPort)
         {
-            return CanAddModule(module);
+            return CanAdd(module);
         }
     }
 }

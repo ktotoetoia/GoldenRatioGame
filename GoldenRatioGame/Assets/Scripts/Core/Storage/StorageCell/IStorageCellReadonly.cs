@@ -5,7 +5,7 @@ namespace IM.Storages
     public interface IStorageCellReadonly
     {
         IStorableReadOnly Item { get;  }
-        IStorage Owner { get; }
+        IReadOnlyStorage Owner { get; }
         
         event Action<IStorableReadOnly, IStorableReadOnly> ItemChanged;
     }

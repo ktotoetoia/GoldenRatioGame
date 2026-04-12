@@ -107,9 +107,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c308d64446764c3981c6feb934dd9cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ModuleVisualObject
-  _portVisualObjectFactory: {fileID: 11400000, guid: b50a20bb72fb9824e8befd705c4581c2, type: 2}
+  _portVisualObjectFactory: {fileID: 11400000, guid: d79bcb9de376b194887744a931b29e18, type: 2}
   _portBinder: {fileID: 11400000, guid: 13643a2c93cb000499bf64d91c758fff, type: 2}
   _renderer: {fileID: -7644578825757335302}
+  _boundsSource: 1
 --- !u!114 &-7239767369713268034
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using System;
 using IM.Graphs;
+using IM.Modules;
 using UnityEngine;
 
 namespace IM.UI
@@ -12,7 +13,7 @@ namespace IM.UI
         Func<bool> ShouldUndo { get; set; }
         Func<bool> ShouldRedo { get; set; }
         
-        void SetGraph(IConditionalCommandModuleGraph graph);
+        void SetModuleEditingContext(IModuleEditingContext moduleEditingContext);
         void ClearGraph();
     }
 }

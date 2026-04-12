@@ -31,15 +31,15 @@ namespace IM.UI
 
         public void SetEntity(IModuleEntity entity)
         {
-            if(_entity != null) 
-                throw new InvalidOperationException("Module entity has already been set");
-            if(entity.ModuleEditingContext.GraphEditor.IsEditing) 
-                throw new InvalidOperationException($"Other object edits entity: {entity.GameObject}");
+            if(_entity != null) throw new InvalidOperationException("Module entity has already been set");
+            if(entity.ModuleEditingContextEditor.IsEditing) throw new InvalidOperationException($"Other object edits entity: {entity.GameObject}");
+            
+            IModuleEditingContext moduleEditingContext = entity.ModuleEditingContextEditor.BeginEdit();
             
             _entity = entity;
-            _interaction.SetGraph(_entity.ModuleEditingContext.GraphEditor.BeginEdit());
-            _graphView.SetGraph(_entity.ModuleEditingContext.GraphEditor.Snapshot);
-            _storageView.SetStorage(_entity.ModuleEditingContext.Storage);
+            _interaction.SetModuleEditingContext(moduleEditingContext);
+            _graphView.SetGraph(moduleEditingContext.Graph);
+            _storageView.SetStorage(moduleEditingContext.Storage);
 
             _abilityPoolDraftContainer = _entity.GameObject.GetComponent<IAbilityPoolDraftContainer>(); 
             _abilityPoolView.SetAbilityPool(_abilityPoolDraftContainer.Draft);
@@ -49,8 +49,8 @@ namespace IM.UI
         {
             if(_entity == null) return;
 
-            if (_entity.ModuleEditingContext.GraphEditor.CanSaveChanges) _entity.ModuleEditingContext.GraphEditor.TryApplyChanges();
-            else _entity.ModuleEditingContext.GraphEditor.DiscardChanges();
+            if (_entity.ModuleEditingContextEditor.CanApplyChanges) _entity.ModuleEditingContextEditor.TryApplyChanges();
+            else _entity.ModuleEditingContextEditor.DiscardChanges();
 
             _entity = null;
             _interaction.ClearGraph();

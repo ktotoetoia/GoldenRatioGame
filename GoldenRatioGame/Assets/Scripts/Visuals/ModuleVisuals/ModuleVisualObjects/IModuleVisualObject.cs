@@ -12,12 +12,10 @@ namespace IM.Visuals
         Bounds LocalBounds { get; }
         Bounds Bounds { get; }
         float ModuleLocalOrder { get; set; }
-        IExtensibleModule Owner { get; }
+        IExtensibleItem Owner { get; }
         ITransform Transform { get; }
         IReadOnlyList<IPortVisualObject> PortsVisualObjects { get; }
         IPortVisualObjectDirtyTracker DirtyTracker { get; }
-
-        IPortVisualObject GetPortVisualObject(IPort port);
-        void FinishInitialization(IExtensibleModule owner);
+        void FinishInitialization(IExtensibleItem owner);
     }
 }

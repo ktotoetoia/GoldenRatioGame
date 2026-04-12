@@ -52,7 +52,7 @@ namespace IM.Visuals
         public ITransform Transform => _transform ??= GetComponent<ITransform>();
         public IReadOnlyList<IPortVisualObject> PortsVisualObjects => _portVisualObjects;
         public IPortVisualObjectDirtyTracker DirtyTracker { get; } = new PortVisualObjectDirtyTracker();
-        public IExtensibleModule Owner { get; private set; }
+        public IExtensibleItem Owner { get; private set; }
         public Transform DefaultParent { get; set; }
 
         public int Order
@@ -107,7 +107,7 @@ namespace IM.Visuals
             set 
             { 
                 _portBinder = value;
-                _portBinder.Bind(Owner.Ports, _portVisualObjects);
+                _portBinder.Bind(_portVisualObjects);
 
                 foreach (IPortVisualObject portVisualObject in _portVisualObjects) DirtyTracker.MarkDirty(portVisualObject);
             }
@@ -118,13 +118,8 @@ namespace IM.Visuals
             get => gameObject.activeSelf;
             set => gameObject.SetActive(value);
         }
-        
-        public IPortVisualObject GetPortVisualObject(IPort port)
-        {
-            return _portVisualObjects.FirstOrDefault(x => x.Port == port);
-        }
 
-        public void FinishInitialization(IExtensibleModule owner)
+        public void FinishInitialization(IExtensibleItem owner)
         {
             if(Owner != null) throw new InvalidOperationException("Owner can only be set once");
             
@@ -137,7 +132,7 @@ namespace IM.Visuals
             _poolObjects.Remove(this);
             
             Owner = owner;
-            _portVisualObjectFactory.CreateVisualObjects(Owner.Ports,_portVisualObjects,this);
+            _portVisualObjectFactory.CreateVisualObjects(_portVisualObjects,this);
             PortBinder = _portBinder;
             
             foreach (IRequireModuleVisualObjectInitialization initialization in

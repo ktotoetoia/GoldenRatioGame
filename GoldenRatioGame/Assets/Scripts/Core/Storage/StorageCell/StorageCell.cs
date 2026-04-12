@@ -7,10 +7,10 @@ namespace IM.Storages
         private IStorable _item;
 
         public event Action<IStorableReadOnly, IStorableReadOnly> ItemChanged;
-        public IStorage Owner { get; private set; }
+        public IReadOnlyStorage Owner { get;}
         public IStorableReadOnly Item => _item;
 
-        public StorageCell(IStorage owner)
+        public StorageCell(IReadOnlyStorage owner)
         {
             Owner = owner;
         }

@@ -22,7 +22,7 @@ namespace IM.UI
             _getPreviewPosition = getPreviewPosition;
         }
         
-        public void StartPreview(IExtensibleModule module)
+        public void StartPreview(IExtensibleItem module)
         {
             if (PreviewObject != null) StopPreview();
             if (!module.Extensions.TryGet(out _currentModuleVisualObjectProvider)) return;
@@ -41,11 +41,11 @@ namespace IM.UI
             PreviewObject.Transform.Position = _getPreviewPosition(PreviewObject) - offset;
         }
 
-        public IExtensibleModule FinalizePreview()
+        public IExtensibleItem FinalizePreview()
         {
             if (PreviewObject == null) throw new InvalidOperationException();
             
-            IExtensibleModule result = PreviewObject.Owner;
+            IExtensibleItem result = PreviewObject.Owner;
             StopPreview();
             return result;
         }

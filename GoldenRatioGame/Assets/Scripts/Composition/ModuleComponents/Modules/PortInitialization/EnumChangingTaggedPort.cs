@@ -5,52 +5,56 @@ using IM.Items;
 
 namespace IM.Modules
 {
-    public class EnumChangingTaggedPort<TEnum> : IConditionalPort, IHaveTag where TEnum : struct, Enum
+    public class EnumChangingTaggedPort<TEnum,T> : IConditionalPort, IHaveTag, IDataPort<T> where TEnum : struct, Enum
     {
         private readonly TEnum _value;
-        
-        public IModule Module { get; }
-        public IConnection Connection { get; private set; }
+
+        public IDataModule<T> DataModule { get;  }
+        public IDataConnection<T> DataConnection { get; private set;}
+        public IModule Module => DataModule;
+        public IConnection Connection => DataConnection;
         public bool IsConnected => Connection != null;
         public ITag Tag { get; }
         
-        public EnumChangingTaggedPort(IModule module, ITag tag, TEnum value)
+        public EnumChangingTaggedPort(IDataModule<T> module, ITag tag, TEnum value)
         {
-            Module = module;
+            DataModule = module;
             Tag = tag;
             _value = value;
         }
-
-        public void Connect(IConnection connection)
+        
+        public void Connect(IDataConnection<T> connection)
         {
-            Connection = connection;
+            DataConnection = connection;
             
-            if (connection.GetOtherPort(this).Module is IExtensibleModule module &&
-                module.Extensions.TryGet(out IValueStorageContainer e))
+            if (connection.GetOtherPort(this).Module is IDataModule<IExtensibleItem> module &&
+                module.Value.Extensions.TryGet(out IValueStorageContainer e))
             {
                 e.GetOrCreate<TEnum>().Value = _value;
             }
         }
 
+        public void Connect(IConnection connection)
+        {
+            Connect((IDataConnection<T>)connection);
+        }
+
         public void Disconnect()
         {
-            if (Connection.GetOtherPort(this).Module is IExtensibleModule module &&
-                module.Extensions.TryGet(out IValueStorageContainer e)) 
+            if (Connection.GetOtherPort(this).Module is IDataModule<IExtensibleItem> module &&
+                module.Value.Extensions.TryGet(out IValueStorageContainer e))
             {
                 e.GetOrCreate<TEnum>().Value = default;
             }
-            
-            Connection = null;
+
+            DataConnection = null;
         }
 
         public bool CanConnect(IPort other)
         {
-            return other is not IHaveTag otherTag || Tag.Matches(otherTag.Tag);
+            return other is IDataPort<T> && (other is not IHaveTag otherTag || Tag.Matches(otherTag.Tag));
         }
 
-        public bool CanDisconnect()
-        {
-            return IsConnected;
-        }
+        public bool CanDisconnect() => IsConnected;
     }
 }

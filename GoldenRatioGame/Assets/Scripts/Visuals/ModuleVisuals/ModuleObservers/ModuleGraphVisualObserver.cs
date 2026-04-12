@@ -1,4 +1,5 @@
-﻿using IM.Graphs;
+﻿using System.Linq;
+using IM.Graphs;
 using IM.Modules;
 using UnityEngine;
 
@@ -24,18 +25,33 @@ namespace IM.Visuals
             _preset = preset;
         }
         
-        protected override void HandleModuleAdded(IExtensibleModule extensibleModule,IModuleVisualObjectProvider moduleVisualObjectProvider)
+        protected override void HandleModuleAdded(IDataModule<IExtensibleItem> extensibleModule,IModuleVisualObjectProvider moduleVisualObjectProvider)
         {
             IModuleVisualObject visualObject = GetObjectPool(moduleVisualObjectProvider).Get();
             ModuleVisualObjects.Add(extensibleModule, visualObject);
             visualObject.Transform.Transform.SetParent(_parent, false);
+
+            int i = 0;
+            
+            foreach (IDataPort<IExtensibleItem> port in extensibleModule.DataPorts)
+            {
+                PortsVisualObjects.Add(port, visualObject.PortsVisualObjects[i]);
+                i++;
+            }
+            
             _preset.ApplyTo(visualObject);
         }
         
-        protected override void HandleModuleRemoved(IExtensibleModule extensibleModule)
+        protected override void HandleModuleRemoved(IDataModule<IExtensibleItem>  extensibleModule)
         {
             ModuleVisualObjects.Remove(extensibleModule, out IModuleVisualObject visualObject);
-            GetObjectPool(extensibleModule.Extensions.Get<IModuleVisualObjectProvider>()).Release(visualObject);
+            
+            foreach (IDataPort<IExtensibleItem> port in extensibleModule.DataPorts)
+            {
+                PortsVisualObjects.Remove(port);
+            }
+            
+            GetObjectPool(extensibleModule.Value.Extensions.Get<IModuleVisualObjectProvider>()).Release(visualObject);
         }
 
         protected override void HandleConnected(IPortVisualObject portA, IPortVisualObject portB)
@@ -49,13 +65,13 @@ namespace IM.Visuals
 
         private (IPortVisualObject, IPortVisualObject) ResolvePorts(IPortVisualObject portA, IPortVisualObject portB)
         {
-            IExtensibleModule moduleA = portA.OwnerVisualObject.Owner;
-            IExtensibleModule moduleB = portB.OwnerVisualObject.Owner;
+            IExtensibleItem moduleA = portA.OwnerVisualObject.Owner;
+            IExtensibleItem moduleB = portB.OwnerVisualObject.Owner;
 
-            foreach ((IExtensibleModule module, IModuleVisualObject obj) in ModuleVisualObjects)
+            foreach ((IDataModule<IExtensibleItem>  module, IModuleVisualObject obj) in ModuleVisualObjects)
             {
-                if (module == moduleA) return (portB, portA);
-                if (module == moduleB) return (portA, portB);
+                if (module.Value == moduleA) return (portB, portA);
+                if (module.Value == moduleB) return (portA, portB);
             }
             
             return (portA, portB);

@@ -6,7 +6,6 @@ namespace IM.Visuals
     public interface IPortVisualObject : IVisualObject
     {
         IModuleVisualObject OwnerVisualObject { get; }
-        IPort Port { get; }
         ITransform Transform { get; }
         int OutputOrderAdjustment { get; }
         bool Highlighted { get; set; }

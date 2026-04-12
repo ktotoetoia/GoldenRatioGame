@@ -6,7 +6,7 @@ namespace IM.Visuals
 {
     public abstract class PortVisualObjectFactoryBase :ScriptableObject
     {
-        public abstract void CreateVisualObjects(IEnumerable<IPort> ports, IList<IPortVisualObject> portVisualObjects,
+        public abstract void CreateVisualObjects(IList<IPortVisualObject> portVisualObjects,
             IModuleVisualObject moduleVisualObject);
     }
 }

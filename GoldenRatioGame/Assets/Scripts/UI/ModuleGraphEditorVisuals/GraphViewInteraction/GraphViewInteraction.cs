@@ -14,7 +14,8 @@ namespace IM.UI
         [SerializeField] private ModulePreviewPlacerMono _previewPlacer;
         [SerializeField] private Camera _uiCamera;
         [SerializeField] private float _addWorldDistance = 0.3f;
-        private IGraphOperations _graphOperations;
+        private IModuleEditingContext _moduleEditingContext;
+        private IGraphOperations<IExtensibleItem> _graphOperations;
 
         public Func<Vector3> GetPointerPosition { get; set; } = ()  => Vector3.zero;
         public Func<bool> ShouldTryQuickRemoveAtPointer { get; set; } =() => false;
@@ -59,7 +60,7 @@ namespace IM.UI
         
         private void OnSelected(object obj)
         {
-            if (_previewPlacer.IsPreviewing || obj is not IExtensibleModule module || _graphOperations == null) return;
+            if (_previewPlacer.IsPreviewing || obj is not IExtensibleItem module || _graphOperations == null) return;
             
             _previewPlacer.StartPreview(module);
         }
@@ -80,39 +81,44 @@ namespace IM.UI
 
         private void TryAdd(IModuleVisualObject toAdd)
         {
-            IPortVisualObject toAddPort = null;
-            IPortVisualObject onGraphPort = null;
+            IDataPort<IExtensibleItem> toAddPort = null;
+            IDataPort<IExtensibleItem> onGraphPort = null;
             float distance = float.MaxValue;
             
-            if(toAdd.Owner is ICoreExtensibleModule c && _graphOperations.TryQuickAddModule(c)) return; 
+            if(toAdd.Owner is ICoreExtensibleItem c && _graphOperations.TryQuickAddModule(_moduleGraphView.VisualObserver.ModuleToVisualObjects.FirstOrDefault(x => x.Value == toAdd).Key)) return; 
 
             foreach (IPortVisualObject a in toAdd.PortsVisualObjects)
             {
                 foreach (IPortVisualObject otherPort in _moduleGraphView.VisualObserver.ModuleToVisualObjects.SelectMany(x => x.Value.PortsVisualObjects))
                 {
                     float newDistance = Vector3.Distance(otherPort.Transform.Position, a.Transform.Position);
+                    IExtensibleItem item = toAdd.Owner;
+                    var gh = _moduleEditingContext.CreateModule(item);
                     
-                    if (newDistance < distance && _graphOperations.Graph.CanAddAndConnect(toAdd.Owner, a.Port,otherPort.Port))
+                    if (newDistance < distance && _graphOperations.Graph
+                            .CanAddAndConnect(gh, gh.DataPorts.ElementAtOrDefault(toAdd.PortsVisualObjects.ToList().IndexOf(a)),
+                                _moduleGraphView.VisualObserver.PortToVisualObjects.FirstOrDefault(x => x.Value == otherPort).Key))
                     {
                         distance = newDistance;
-                        toAddPort = a;
-                        onGraphPort = otherPort;
+                        toAddPort = gh.DataPorts.ElementAtOrDefault(toAdd.PortsVisualObjects.ToList().IndexOf(a));
+                        onGraphPort =  _moduleGraphView.VisualObserver.PortToVisualObjects.FirstOrDefault(x => x.Value == otherPort).Key;
                     }
                 }
             }
             
             if (distance > _addWorldDistance || toAddPort == null) return;
-            _graphOperations.Graph.AddAndConnect(toAdd.Owner,toAddPort.Port,onGraphPort.Port);
+            _graphOperations.Graph.AddAndConnect(toAddPort.DataModule,toAddPort,onGraphPort);
         }
 
         private void ObjectInteracted(object obj)
         {
-            _graphOperations?.TryQuickAddModule(obj as IModule);
+            _graphOperations?.TryQuickAddModule(_moduleEditingContext.CreateModule((IExtensibleItem)obj));
         }
         
-        public void SetGraph(IConditionalCommandModuleGraph graph)
+        public void SetModuleEditingContext(IModuleEditingContext moduleEditingContext)
         {
-            _graphOperations = new CommandGraphOperations(graph);
+            _moduleEditingContext = moduleEditingContext;
+            _graphOperations = new CommandGraphOperations<IExtensibleItem>(moduleEditingContext.ModuleGraph);
         }
 
         public void ClearGraph()

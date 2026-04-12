@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class MovementReflector : MonoBehaviour, IEditorObserver<IModuleGraphReadOnly>
+    public class MovementReflector : MonoBehaviour, IEditorObserver<IModuleEditingContextReadOnly>
     {
         [SerializeField] private GameObject _vectorMovementSource;
         private IVectorMovement _movement;
@@ -28,11 +28,11 @@ namespace IM.Modules
             }
         }
         
-        public void OnSnapshotChanged(IModuleGraphReadOnly graph)
+        public void OnSnapshotChanged(IModuleEditingContextReadOnly snapshot)
         {
-            if(graph == null) throw new ArgumentNullException(nameof(graph));
+            if(snapshot == null) throw new ArgumentNullException(nameof(snapshot));
 
-            _requireMovement = graph.Modules.OfType<IExtensibleModule>().SelectMany(x => x.Extensions.GetAll<IRequireMovement>()).ToList();
+            _requireMovement = snapshot.Graph.DataModules.SelectMany(x => x.Value.Extensions.GetAll<IRequireMovement>()).ToList();
         }
     }
 }
