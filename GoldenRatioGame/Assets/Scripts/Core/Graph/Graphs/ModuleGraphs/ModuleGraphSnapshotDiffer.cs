@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace IM.Graphs
 {
@@ -22,7 +21,7 @@ namespace IM.Graphs
                 Disconnected(connection);
             }
             
-            foreach (IModule module in _prevModules.Except(graph.Modules))
+            foreach (IModule module in _prevModules.Except(graph.Modules).Reverse())
             {
                 ModuleRemoved(module);
             }

@@ -31,14 +31,14 @@ namespace IM.UI
 
         public void SetEntity(IModuleEntity entity)
         {
-            if(_entity != null) throw new InvalidOperationException("Module entity has already been set");
+            if (_entity != null) return;
             if(entity.ModuleEditingContextEditor.IsEditing) throw new InvalidOperationException($"Other object edits entity: {entity.GameObject}");
             
             IModuleEditingContext moduleEditingContext = entity.ModuleEditingContextEditor.BeginEdit();
-            
+
             _entity = entity;
-            _interaction.SetModuleEditingContext(moduleEditingContext);
-            _graphView.SetGraph(moduleEditingContext.Graph);
+            _interaction.SetContext(moduleEditingContext);
+            _graphView.SetContext(moduleEditingContext);
             _storageView.SetStorage(moduleEditingContext.Storage);
 
             _abilityPoolDraftContainer = _entity.GameObject.GetComponent<IAbilityPoolDraftContainer>(); 
@@ -53,8 +53,8 @@ namespace IM.UI
             else _entity.ModuleEditingContextEditor.DiscardChanges();
 
             _entity = null;
-            _interaction.ClearGraph();
-            _graphView.ClearGraph();
+            _interaction.ClearContext();
+            _graphView.ClearContext();
             _storageView.ClearStorage();
             _abilityPoolView.ClearEntity();
         }

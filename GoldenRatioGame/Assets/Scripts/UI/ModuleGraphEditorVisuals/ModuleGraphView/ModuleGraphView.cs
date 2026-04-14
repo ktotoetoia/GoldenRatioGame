@@ -1,5 +1,5 @@
 ﻿using System;
-using IM.Graphs;
+using IM.Modules;
 using IM.Visuals;
 using UnityEngine;
 
@@ -8,12 +8,12 @@ namespace IM.UI
     public class ModuleGraphView : MonoBehaviour
     {
         [SerializeField] private ModuleVisualObjectPreset _preset;
-        private IModuleGraphReadOnly _graph;
+        private IModuleEditingContext _context;
 
         public ModuleGraphVisualObserver VisualObserver { get; private set; }
         public Bounds Bounds => new(transform.position, Vector3.zero);
 
-        public void SetGraph(IModuleGraphReadOnly graph)
+        public void SetContext(IModuleEditingContext context)
         {
             if (VisualObserver != null) throw new InvalidOperationException();
 
@@ -22,21 +22,22 @@ namespace IM.UI
                 ShowPortsOnConnected = false,
                 ShowPortsOnDisconnected = true
             };
-            _graph = graph;   
+
+            _context = context;
         }
 
         public void Update()
         {
-            if (VisualObserver == null || _graph == null) return;
+            if (VisualObserver == null || _context == null) return;
 
-            // VisualObserver.OnSnapshotChanged(_graph);
+            VisualObserver.OnSnapshotChanged(_context);
         }
 
-        public void ClearGraph()
+        public void ClearContext()
         {
             VisualObserver.Dispose();
             VisualObserver = null;
-            _graph = null;
+            _context = null;
         }
     }
 }

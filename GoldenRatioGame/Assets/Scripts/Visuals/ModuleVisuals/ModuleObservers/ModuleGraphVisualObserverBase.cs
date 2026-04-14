@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
 using IM.Modules;
-using UnityEngine;
 using UnityEngine.Pool;
 
 namespace IM.Visuals

@@ -4,7 +4,7 @@ using IM.LifeCycle;
 
 namespace IM.Modules
 {
-    public class ConditionsFactory : IFactory<IEnumerable<IDataModuleGraphConditions<IExtensibleItem>>,
+    public class DataModuleGraphConditionsFactory : IFactory<IEnumerable<IDataModuleGraphConditions<IExtensibleItem>>,
         IDataModuleGraphReadOnly<IExtensibleItem>>
     {
         public IEnumerable<IDataModuleGraphConditions<IExtensibleItem>> Create(IDataModuleGraphReadOnly<IExtensibleItem> graph)

@@ -60,11 +60,8 @@ namespace IM.Storages
         }
 
         public IStorableReadOnly ClearCell(IStorageCellReadonly cell)
-        {            
-            if (cell is not IStorageCell c || !_cells.Contains(c))
-            {
-                throw new ArgumentException($"This storage does not contains cell: {cell}" );
-            }
+        {
+            if (cell is not IStorageCell c || !_cells.Contains(c)) return null;
 
             IStorableReadOnly item = cell.Item;
             

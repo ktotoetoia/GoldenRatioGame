@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using IM.Factions;
 using IM.LifeCycle;
@@ -30,7 +29,9 @@ namespace IM
         {
             try
             {
-                foreach (IExtensibleItem toAdd in items)
+                List<IExtensibleItem> itemsList = items.ToList();
+                
+                foreach (IExtensibleItem toAdd in itemsList)
                 {
                     entity.AddToContext(toAdd);
                 }
@@ -40,7 +41,7 @@ namespace IM
                 IGraphOperations<IExtensibleItem> graphOperations =
                     new CommandGraphOperations<IExtensibleItem>(moduleEditingContext.ModuleGraph);
 
-                foreach (IExtensibleItem toAdd in items)
+                foreach (IExtensibleItem toAdd in itemsList)
                 {
                     graphOperations.TryQuickAddModule(moduleEditingContext.CreateModule(toAdd));
                 }

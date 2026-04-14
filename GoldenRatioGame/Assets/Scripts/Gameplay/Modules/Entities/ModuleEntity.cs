@@ -93,10 +93,11 @@ namespace IM.Modules
             
             storage.SetItem(storage.FirstOrDefault(x => x.Item == null) ?? storage.CreateCell(), module);
             module.ItemState = ItemState.Hide;
+
             if (ModuleEditingContextEditor.TryApplyChanges()) return true;
             ModuleEditingContextEditor.DiscardChanges();
-            
-            return true;
+
+            return false;
         }
 
         public bool RemoveFromContext(IExtensibleItem module)
@@ -109,9 +110,10 @@ namespace IM.Modules
             module.ItemState = ItemState.Show;
             
             if (ModuleEditingContextEditor.TryApplyChanges()) return true;
+            
             ModuleEditingContextEditor.DiscardChanges();
             
-            return true;
+            return false;
         }
     }
 }

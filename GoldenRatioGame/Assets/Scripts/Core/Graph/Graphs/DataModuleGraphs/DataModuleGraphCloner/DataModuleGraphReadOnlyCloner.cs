@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Analytics;
 
 namespace IM.Graphs
 {
@@ -22,7 +23,7 @@ namespace IM.Graphs
                     connections.Add(targetConn);
                 }
             }
-
+            
             return CreateGraph(modules, connections);
         }
 
@@ -49,12 +50,12 @@ namespace IM.Graphs
             foreach (IDataModule<TSource> sourceModule in source.DataModules)
             {
                 DataModule<TTarget> targetModule = CreateModule(mapper(sourceModule.Value));
+                IDictionary<IDataPort<TSource>, IDataPort<TTarget>> ports = CreatePorts(targetModule, sourceModule);
                 
-                foreach (IDataPort<TSource> sourcePort in sourceModule.DataPorts)
+                foreach (KeyValuePair<IDataPort<TSource>, IDataPort<TTarget>> targetPort in ports)
                 {
-                    IDataPort<TTarget> targetPort = CreatePort(targetModule);
-                    targetModule.AddPort(targetPort);
-                    portsMap[sourcePort] = targetPort;
+                    targetModule.AddPort(targetPort.Value);
+                    portsMap[targetPort.Key] = targetPort.Value;
                 }
                 
                 onModuleCreated(targetModule);
@@ -79,12 +80,20 @@ namespace IM.Graphs
             return false;
         }
 
-        protected virtual DataModule<TTarget> CreateModule(TTarget value) 
-            => new(value);
+        protected virtual DataModule<TTarget> CreateModule(TTarget value) => new(value);
 
-        protected virtual IDataPort<TTarget> CreatePort(IDataModule<TTarget> parent) 
-            => new DataPort<TTarget>(parent);
+        protected virtual IDictionary<IDataPort<TSource>,IDataPort<TTarget>> CreatePorts<TSource>(IDataModule<TTarget> targetModule,IDataModule<TSource> sourceModule)
+        {
+            Dictionary<IDataPort<TSource>,IDataPort<TTarget>> dictionary = new ();
+            
+            foreach (IDataPort<TSource> dataPort in sourceModule.DataPorts)
+            {
+                dictionary[dataPort] =new DataPort<TTarget>(targetModule);
+            }
 
+            return dictionary;
+        }
+        
         protected virtual IDataConnection<TTarget> CreateConnection(IDataPort<TTarget> p1, IDataPort<TTarget> p2)
         {
             DataConnection<TTarget> conn = new DataConnection<TTarget>(p1, p2);

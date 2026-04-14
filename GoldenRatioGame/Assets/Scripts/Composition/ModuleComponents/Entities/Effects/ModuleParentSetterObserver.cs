@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class ParentSetter : MonoBehaviour, IEditorObserver<IModuleEditingContextReadOnly>
+    public class ModuleParentSetterObserver : MonoBehaviour, IEditorObserver<IModuleEditingContextReadOnly>
     {
         [SerializeField] private Transform _parentTransform;
         
@@ -13,7 +13,6 @@ namespace IM.Modules
         {
             foreach (IDataModule<IExtensibleItem> module in snapshot.Graph.DataModules)
             {
-                
                 module.Value.GameObject.transform.SetParent(_parentTransform);
             }
             foreach (IEntity entity in snapshot.Storage.Where(x => x.Item is IEntity).Select(x => x.Item as IEntity))

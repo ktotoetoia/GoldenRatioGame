@@ -4,40 +4,36 @@ using IM.Graphs;
 
 namespace IM.Modules
 {
-    public class ModuleExtensionsObserver<TExtension> : IEditorObserver<IModuleGraphReadOnly>
+    public class ModuleExtensionsObserver<TExtension> : IEditorObserver<IDataModuleGraphReadOnly<IExtensibleItem>>
     {
-        private readonly ModuleGraphSnapshotDiffer _differ;
+        private readonly ModuleGraphSnapshotValueDiffer<IExtensibleItem> _differ;
 
         public ModuleExtensionsObserver(Action<IExtensibleItem, TExtension> onExtensionAdded, Action<IExtensibleItem, TExtension> onExtensionRemoved)
         {
-            _differ = new ModuleGraphSnapshotDiffer()
+            _differ = new ModuleGraphSnapshotValueDiffer<IExtensibleItem>()
             {
-                ModuleAdded = x =>
+                ValueAdded= x =>
                 {
-                    if (x is not IDataModule<IExtensibleItem> extensibleModule ||
-                        !extensibleModule.Value.Extensions.TryGetAll(out IEnumerable<TExtension> extensions))
-                        return;
+                    if (!x.Extensions.TryGetAll(out IEnumerable<TExtension> extensions)) return;
                     
                     foreach (TExtension extension in extensions)
                     {
-                        onExtensionAdded(extensibleModule.Value, extension);
+                        onExtensionAdded(x, extension);
                     }
                 },
                 
-                ModuleRemoved = x =>
+                ValueRemoved = x =>
                 {
-                    if (x is not IDataModule<IExtensibleItem> extensibleModule ||
-                        !extensibleModule.Value.Extensions.TryGetAll(out IEnumerable<TExtension> extensions))
-                        return;
+                    if (!x.Extensions.TryGetAll(out IEnumerable<TExtension> extensions)) return;
                     
                     foreach (TExtension extension in extensions)
                     {
-                        onExtensionRemoved(extensibleModule.Value, extension);
+                        onExtensionRemoved(x, extension);
                     }
                 },
             };
         }
         
-        public void OnSnapshotChanged(IModuleGraphReadOnly graph) => _differ.OnSnapshotChanged(graph);
+        public void OnSnapshotChanged(IDataModuleGraphReadOnly<IExtensibleItem> graph) => _differ.OnSnapshotChanged(graph);
     }
 }

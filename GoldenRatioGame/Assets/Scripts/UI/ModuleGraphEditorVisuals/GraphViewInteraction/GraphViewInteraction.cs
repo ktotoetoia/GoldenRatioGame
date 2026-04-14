@@ -115,13 +115,13 @@ namespace IM.UI
             _graphOperations?.TryQuickAddModule(_moduleEditingContext.CreateModule((IExtensibleItem)obj));
         }
         
-        public void SetModuleEditingContext(IModuleEditingContext moduleEditingContext)
+        public void SetContext(IModuleEditingContext moduleEditingContext)
         {
             _moduleEditingContext = moduleEditingContext;
             _graphOperations = new CommandGraphOperations<IExtensibleItem>(moduleEditingContext.ModuleGraph);
         }
 
-        public void ClearGraph()
+        public void ClearContext()
         {
             _graphOperations = null;
         }

@@ -7,7 +7,6 @@ namespace IM
 {
     public class DealDamageHitContract : MonoBehaviour
     {
-        [SerializeField] private float _toFinishTime = 2;
         [SerializeField] private bool _finishOnTriggerEnterAlly;
         [SerializeField] private bool _finishOnTriggerEnterEnemy;
         [SerializeField] private bool _finishOnTriggerEnterNone;
