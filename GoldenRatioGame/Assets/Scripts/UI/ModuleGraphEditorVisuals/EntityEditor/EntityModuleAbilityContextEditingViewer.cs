@@ -12,7 +12,7 @@ namespace IM.UI
         [SerializeField] private ModuleGraphView _graphView;
         [SerializeField] private AbilityPoolView _abilityPoolView;
         private IGraphViewInteraction _interaction;
-        private IAbilityPoolDraftContainer _abilityPoolDraftContainer;
+        private IAbilityPoolReadOnly _abilityPool;
         private IModuleEntity _entity;
 
         private const int EntityContextEditorExecutionOrder = 10000;
@@ -41,8 +41,8 @@ namespace IM.UI
             _graphView.SetContext(moduleEditingContext);
             _storageView.SetStorage(moduleEditingContext.Storage);
 
-            _abilityPoolDraftContainer = _entity.GameObject.GetComponent<IAbilityPoolDraftContainer>(); 
-            _abilityPoolView.SetAbilityPool(_abilityPoolDraftContainer.Draft);
+            _abilityPool = moduleEditingContext.ConvertableObjects.Get<IAbilityPoolReadOnly>(); 
+            _abilityPoolView.SetAbilityPool(_abilityPool);
         }
 
         public void ForceClearEntity()

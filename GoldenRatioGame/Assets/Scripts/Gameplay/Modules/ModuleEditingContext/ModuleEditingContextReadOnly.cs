@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using IM.Graphs;
+using IM.LifeCycle;
 using IM.Storages;
 
 namespace IM.Modules
@@ -8,17 +9,15 @@ namespace IM.Modules
     {
         public IDataModuleGraphReadOnly<IExtensibleItem> Graph { get; }
         public IReadOnlyStorage Storage { get; }
-        
-        public ModuleEditingContextReadOnly()
+        public ITypeRegistry<object> ConvertableObjects { get; }
+
+        public ModuleEditingContextReadOnly(IDataModuleGraphReadOnly<IExtensibleItem> moduleGraph = null, IReadOnlyStorage storage= null, IEnumerable<object> convertableObjects= null)
         {
-            Graph = new DataModuleGraphReadOnly<IExtensibleItem>(new List<IDataModule<IExtensibleItem>>(),new List<IDataConnection<IExtensibleItem>>());
-            Storage = new ReadOnlyStorage();
-        }
-        
-        public ModuleEditingContextReadOnly(IDataModuleGraphReadOnly<IExtensibleItem> moduleGraph, IReadOnlyStorage storage)
-        {
-            Graph = moduleGraph;
-            Storage = storage;
+            
+            
+            Graph = moduleGraph ?? new DataModuleGraphReadOnly<IExtensibleItem>();
+            Storage = storage ?? new ReadOnlyStorage();
+            ConvertableObjects = new TypeRegistry<object>(convertableObjects ?? new List<object>());
         }
     }
 }

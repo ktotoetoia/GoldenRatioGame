@@ -42,6 +42,11 @@ namespace IM.Modules
             {
                 module.Destroy();
             }
+
+            foreach (IExtensibleItem item in remainList)
+            {
+                item.GameObject.transform.SetParent(transform.parent);
+            }
             
             foreach (IItemDropObserver dropObserver in _itemDropObservers)
             {

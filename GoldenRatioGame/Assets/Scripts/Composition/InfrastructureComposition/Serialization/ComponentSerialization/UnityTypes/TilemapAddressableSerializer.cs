@@ -27,7 +27,7 @@ namespace IM
             return state;
         }
 
-        public override void RestoreState(Tilemap component, object state, System.Func<string, GameObject> resolveDependency)
+        public override void RestoreState(Tilemap component, object state, Func<string, GameObject> resolveDependency)
         {
             if (state is not TilemapState tilemapState) return;
 

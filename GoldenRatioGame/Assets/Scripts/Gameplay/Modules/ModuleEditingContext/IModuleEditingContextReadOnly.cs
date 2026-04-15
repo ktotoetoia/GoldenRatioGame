@@ -1,4 +1,5 @@
 ﻿using IM.Graphs;
+using IM.LifeCycle;
 using IM.Storages;
 
 namespace IM.Modules
@@ -7,5 +8,6 @@ namespace IM.Modules
     {
         IDataModuleGraphReadOnly<IExtensibleItem> Graph { get; }
         IReadOnlyStorage Storage { get; }
+        ITypeRegistry<object> ConvertableObjects { get; }
     }
 }

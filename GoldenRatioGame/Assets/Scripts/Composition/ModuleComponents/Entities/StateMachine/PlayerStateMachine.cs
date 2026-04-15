@@ -14,7 +14,7 @@ namespace IM
     {
         private IMoveInVector _movement;
         private IInteractor _interactor;
-        private AbilityUserMono _abilityUser;
+        private IAbilityUser<IAbilityPoolReadOnly> _abilityUser;
         
         private IState _movementState;
         private IState _abilityUseState;
@@ -34,7 +34,7 @@ namespace IM
         private void Awake()
         {
             _movement = GetComponent<IMoveInVector>();
-            _abilityUser = GetComponent<AbilityUserMono>();
+            _abilityUser = GetComponent<IAbilityUser<IAbilityPoolReadOnly>>();
             _interactor = GetComponent<IInteractor>();
             
             _movementState = new MovementState(_movement, () => ProvideMovementDirection());

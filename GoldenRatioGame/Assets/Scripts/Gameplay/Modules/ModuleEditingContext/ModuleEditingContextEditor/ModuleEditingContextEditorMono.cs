@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using IM.Graphs;
 using IM.LifeCycle;
 using IM.Storages;
@@ -9,10 +8,13 @@ namespace IM.Modules
 {
     public class ModuleEditingContextEditorMono : MonoBehaviour, IModuleEditingContextEditor
     {
+        [SerializeField] private GameObject _subConvertorsSource;
+        [SerializeField] private GameObject _directObserversSource;
+        
         private IModuleEditingContextEditor _moduleEditingContextEditor;
 
-        private IFactory<IEnumerable<IDataModuleGraphConditions<IExtensibleItem>>,
-            IDataModuleGraphReadOnly<IExtensibleItem>> _conditionsFactory;
+        private IFactory<IEnumerable<IDataModuleGraphConditions<IExtensibleItem>>, 
+            IDataModuleGraphReadOnly<IExtensibleItem>,IReadOnlyStorage> _conditionsFactory;
         public IModuleEditingContextReadOnly Snapshot => _moduleEditingContextEditor.Snapshot;
         public ICollection<IEditorObserver<IModuleEditingContextReadOnly>> Observers => _moduleEditingContextEditor.Observers;
         public bool IsEditing => _moduleEditingContextEditor.IsEditing;
@@ -21,9 +23,18 @@ namespace IM.Modules
         private void Awake()
         {
             _conditionsFactory = new DataModuleGraphConditionsFactory();
-            
-            _moduleEditingContextEditor = new ModuleEditingContextEditor(new ModuleEditingContextConverter(_conditionsFactory, new ModuleStorageControllerFactory() ), new ModuleEditingContextReadOnly());
 
+            ModuleEditingContextConverter moduleEditingContextConverter = new ModuleEditingContextConverter(
+                _conditionsFactory, 
+                new CompositeObserverFactory<IModuleEditingContext>(_directObserversSource.GetComponents<IFactory<IEditorObserver<IModuleEditingContext>>>()) );
+            
+            foreach (IComponentConverter componentConverter in _subConvertorsSource.GetComponents<IComponentConverter>())
+            {
+                moduleEditingContextConverter.SubConverters.Add(componentConverter);
+            }
+            
+            _moduleEditingContextEditor = new ModuleEditingContextEditor(moduleEditingContextConverter);
+            
             foreach (var editorObserver in GetComponentsInChildren<IEditorObserver<IModuleEditingContextReadOnly>>())
             {
                 _moduleEditingContextEditor.Observers.Add(editorObserver);
@@ -33,45 +44,5 @@ namespace IM.Modules
         public IModuleEditingContext BeginEdit() => _moduleEditingContextEditor.BeginEdit();
         public void DiscardChanges() => _moduleEditingContextEditor.DiscardChanges();
         public bool TryApplyChanges() => _moduleEditingContextEditor.TryApplyChanges();
-    }
-
-    public class ModuleStorageControllerFactory : IFactory<IEditorObserver<IModuleEditingContext>>
-    {
-        public IEditorObserver<IModuleEditingContext> Create()
-        {
-            return new ModuleStorageController();
-        }
-    }
-
-    public class ModuleStorageController : IEditorObserver<IModuleEditingContext>
-    {
-        private readonly ModuleGraphSnapshotValueDiffer<IExtensibleItem> _differ = new();
-        private IModuleEditingContext _context;
-
-        public ModuleStorageController()
-        {
-            _differ.ValueAdded += added =>
-            {
-                if(_context == null) return;
-                
-                _context.MutableStorage.ClearCell(_context.MutableStorage.FirstOrDefault(y => y.Item == added));
-            };
-            
-            _differ.ValueRemoved += removed =>
-            {
-                if(_context == null) return;
-
-                IStorageCellReadonly cell = _context.MutableStorage.FirstOrDefault(x => x.Item == null) ??
-                                            _context.MutableStorage.CreateCell();
-                
-                _context.MutableStorage.SetItem(cell,removed);
-            };
-        }
-        
-        public void OnSnapshotChanged(IModuleEditingContext snapshot)
-        {
-            _context = snapshot;
-            _differ.OnSnapshotChanged(snapshot.Graph);
-        }
     }
 }

@@ -49,8 +49,11 @@ namespace IM.Modules
             
             foreach (IStorageCellReadonly storageCell in moduleEditingContext.MutableStorage.Where(x => x.Item is IExtensibleItem).ToList())
             {
-                moduleEditingContext.MutableStorage.ClearAndRemoveCell(storageCell);
-                modules.Add(storageCell.Item as IExtensibleItem);
+                if (storageCell.Item is IExtensibleItem item)
+                {
+                    moduleEditingContext.RemoveFromContext(item);
+                    modules.Add(item);
+                }
             }
             
             if(!ModuleEditingContextEditor.TryApplyChanges()) ModuleEditingContextEditor.DiscardChanges();
@@ -89,10 +92,7 @@ namespace IM.Modules
         {
             if (module.ItemState == ItemState.Hide || ModuleEditingContextEditor.Snapshot.Storage.ContainsItem(module) || ModuleEditingContextEditor.IsEditing) return false;
 
-            ICellFactoryStorage storage = ModuleEditingContextEditor.BeginEdit().MutableStorage;
-            
-            storage.SetItem(storage.FirstOrDefault(x => x.Item == null) ?? storage.CreateCell(), module);
-            module.ItemState = ItemState.Hide;
+            ModuleEditingContextEditor.BeginEdit().AddToContext(module);
 
             if (ModuleEditingContextEditor.TryApplyChanges()) return true;
             ModuleEditingContextEditor.DiscardChanges();
@@ -104,13 +104,9 @@ namespace IM.Modules
         {
             if ( !ModuleEditingContextEditor.Snapshot.Storage.ContainsItem(module) || ModuleEditingContextEditor.IsEditing) return false;
             
-            ICellFactoryStorage storage = ModuleEditingContextEditor.BeginEdit().MutableStorage;
-            
-            storage.ClearCell(storage.GetCell(module));
-            module.ItemState = ItemState.Show;
+            ModuleEditingContextEditor.BeginEdit().RemoveFromContext(module);
             
             if (ModuleEditingContextEditor.TryApplyChanges()) return true;
-            
             ModuleEditingContextEditor.DiscardChanges();
             
             return false;

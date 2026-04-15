@@ -10,5 +10,7 @@ namespace IM.Modules
         IConditionalCommandDataModuleGraph<IExtensibleItem> ModuleGraph { get; }
         IDataModule<IExtensibleItem> CreateModule(IExtensibleItem item);
         void SetUnsafe(bool value);
+        void AddToContext(IExtensibleItem item);
+        void RemoveFromContext(IExtensibleItem item);
     }
 }

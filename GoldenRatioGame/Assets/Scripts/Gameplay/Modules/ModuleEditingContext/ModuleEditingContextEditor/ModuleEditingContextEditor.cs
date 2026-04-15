@@ -6,32 +6,33 @@ namespace IM.Modules
 {
     public class ModuleEditingContextEditor : IModuleEditingContextEditor
     {
-        private readonly IModuleEditingContextConverter _convertor;
+        private readonly IComponentConverter _convertor;
         private readonly IValidator<IModuleEditingContext> _validator;
         private IModuleEditingContext _moduleEditingContext;
+            
         public IModuleEditingContextReadOnly Snapshot { get; private set; }
         public ICollection<IEditorObserver<IModuleEditingContextReadOnly>> Observers { get; } =
             new List<IEditorObserver<IModuleEditingContextReadOnly>>();
         public bool IsEditing => _moduleEditingContext != null;
         public bool CanApplyChanges => IsEditing && _validator.IsValid(_moduleEditingContext);
 
-        public ModuleEditingContextEditor(IModuleEditingContextConverter convertor, IModuleEditingContextReadOnly snapshot) : this(convertor, snapshot, new DefaultValidator<IModuleEditingContext>())
+        public ModuleEditingContextEditor(IComponentConverter convertor) : this(convertor, new DefaultValidator<IModuleEditingContext>())
         {
             
         }
         
-        public ModuleEditingContextEditor(IModuleEditingContextConverter convertor, IModuleEditingContextReadOnly snapshot, IValidator<IModuleEditingContext> validator)
+        public ModuleEditingContextEditor(IComponentConverter convertor,IValidator<IModuleEditingContext> validator)
         {
             _convertor = convertor;
             _validator = validator;
-            Snapshot = snapshot;
+            Snapshot = convertor.CreateReadOnly() as IModuleEditingContextReadOnly;
         }
         
         public IModuleEditingContext BeginEdit()
         {
             if (IsEditing) return null;
 
-            _moduleEditingContext = _convertor.ToMutable(Snapshot);
+            _moduleEditingContext = _convertor.ToMutable(Snapshot)  as IModuleEditingContext;
             
             return _moduleEditingContext;
         }
@@ -45,7 +46,7 @@ namespace IM.Modules
         {
             if (!IsEditing || !_validator.IsValid(_moduleEditingContext) || !_validator.TryFix(_moduleEditingContext)) return false;
             
-            Snapshot = _convertor.ToReadOnly(_moduleEditingContext);
+            Snapshot = _convertor.ToReadOnly(_moduleEditingContext) as IModuleEditingContextReadOnly;
             
             _moduleEditingContext = null;
             

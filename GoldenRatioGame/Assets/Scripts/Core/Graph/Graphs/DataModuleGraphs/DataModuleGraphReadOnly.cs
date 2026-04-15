@@ -15,15 +15,20 @@ namespace IM.Graphs
         public IEnumerable<IDataModule<T>> DataModules => _dataModules;
         public IEnumerable<IDataConnection<T>> DataConnections => _dataConnections;
 
+        public DataModuleGraphReadOnly() : this(new List<IDataModule<T>>(), new List<IDataConnection<T>>())
+        {
+            
+        }
+        
+        public DataModuleGraphReadOnly(IEnumerable<IDataModule<T>> dataModules, IEnumerable<IDataConnection<T>> dataConnections) : this(dataModules.ToList(),dataConnections.ToList())
+        {
+            
+        }
+        
         public DataModuleGraphReadOnly(List<IDataModule<T>> dataModules, List<IDataConnection<T>> dataConnections)
         {
             _dataModules = dataModules;
             _dataConnections = dataConnections;
-        }
-
-        public DataModuleGraphReadOnly(IEnumerable<IDataModule<T>> dataModules, IEnumerable<IDataConnection<T>> dataConnections) : this(dataModules.ToList(),dataConnections.ToList())
-        {
-            
         }
 
         public bool Contains(IModule module) => module is IDataModule<T> dataModule &&  _dataModules.Contains(dataModule);

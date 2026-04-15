@@ -1,5 +1,75 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &229302278261792903
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2204359964471984114}
+  - component: {fileID: 3378116016666264131}
+  - component: {fileID: 7146658131245080645}
+  - component: {fileID: 3904459295389596761}
+  m_Layer: 0
+  m_Name: ModuleEditingContextItems
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2204359964471984114
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229302278261792903}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2365714068825351273}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3378116016666264131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229302278261792903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf9f8f68cb5457e9ca262b72588cc12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules::IM.Modules.ModuleStorageControllerFactory
+--- !u!114 &7146658131245080645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229302278261792903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11719e9e5cbc4299830e39b01534b87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComposition::IM.Modules.AbilityPoolModuleControllerFactory
+--- !u!114 &3904459295389596761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229302278261792903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c531addedf4d139cb9c31ac38ddffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComposition::IM.Modules.AbilityPoolConverter2
 --- !u!1 &1129132209649223493
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,8 +115,7 @@ GameObject:
   - component: {fileID: 8301073097183946184}
   - component: {fileID: 2104419640333263632}
   - component: {fileID: -1727820582675450361}
-  - component: {fileID: -1085195585362333072}
-  - component: {fileID: -3054874307105079444}
+  - component: {fileID: 2255762064259638516}
   - component: {fileID: 883802630339849986}
   - component: {fileID: 8559118447764604619}
   - component: {fileID: -7872073379672071743}
@@ -81,6 +150,7 @@ Transform:
   - {fileID: 2804227671461150752}
   - {fileID: 6392533986653558255}
   - {fileID: 8839589395240690778}
+  - {fileID: 2204359964471984114}
   - {fileID: 3866329637884553479}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -193,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04328a298a5949a1bd131e110c4ba81f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Factions::IM.Factions.FactionMember
---- !u!114 &-1085195585362333072
+--- !u!114 &2255762064259638516
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -202,21 +272,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4342869459289063407}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae9930d2b5dc4324b8f09cb7f554353e, type: 3}
+  m_Script: {fileID: 11500000, guid: ea863d17873942288d0ff9fe88610f49, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Abilities::IM.Abilities.AbilityKeyPoolMono
---- !u!114 &-3054874307105079444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4342869459289063407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 594dff4d4c4d4fe4a51e203cbe352b22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Abilities::IM.Abilities.KeyAbilityPoolUserMono
+  m_EditorClassIdentifier: ModuleComposition::IM.Modules.AbilityUserMono2
 --- !u!114 &883802630339849986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,6 +329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5392561544644d2bb39d48e7e9691a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Modules::IM.Modules.ModuleEditingContextEditorMono
+  _subConvertorsSource: {fileID: 229302278261792903}
+  _directObserversSource: {fileID: 229302278261792903}
 --- !u!114 &3656589500703403265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,7 +582,6 @@ GameObject:
   - component: {fileID: 8543606873535386348}
   - component: {fileID: 4737303748126444302}
   - component: {fileID: 6135420331760039005}
-  - component: {fileID: 8109252429396907108}
   - component: {fileID: 1996564249185061140}
   m_Layer: 0
   m_Name: ModuleObservers
@@ -624,19 +683,6 @@ MonoBehaviour:
       _rotation: {x: 0, y: 0, z: 0, w: 1}
       _scale: {x: 1, y: 1, z: 1}
     <PortsVisible>k__BackingField: 0
---- !u!114 &8109252429396907108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8508053980751109502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3955dec8e0ff46b08a547bc348998f24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleComposition::IM.Modules.ApplyDraftChangesEditorObserver
-  _source: {fileID: 4342869459289063407}
 --- !u!114 &1996564249185061140
 MonoBehaviour:
   m_ObjectHideFlags: 0

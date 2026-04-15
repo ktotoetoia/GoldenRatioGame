@@ -29,6 +29,7 @@ namespace IM.Entities
                 throw new ArgumentException($"Cannot interact with this argument: {target.GameObject}");
             
             _moduleEntity.AddToContext(module);
+            module.GameObject.transform.position = transform.position;
         }
 
         private bool CanInteract(IInteractable target, out IExtensibleItem module)
