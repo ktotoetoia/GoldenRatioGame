@@ -13,20 +13,21 @@ namespace IM.Factions
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent(out IFactionMemberReadOnly factionMember) && factionMember.Faction != null)
+            if (FactionMemberReadOnly?.Faction == null ||
+                !other.TryGetComponent(out IFactionMemberReadOnly factionMember) ||
+                factionMember?.Faction == null) return;
+            
+            switch (FactionMemberReadOnly.Faction.GetRelationWith(factionMember.Faction))
             {
-                switch (FactionMemberReadOnly.Faction.GetRelationWith(factionMember.Faction))
-                {
-                    case FactionRelation.None:
-                        OnTriggerEnterNone?.Invoke(other.gameObject);
-                        break;
-                    case FactionRelation.Ally:
-                        OnTriggerEnterAlly?.Invoke(other.gameObject);
-                        break;
-                    case FactionRelation.Enemy:
-                        OnTriggerEnterEnemy?.Invoke(other.gameObject);
-                        break;
-                }
+                case FactionRelation.None:
+                    OnTriggerEnterNone?.Invoke(other.gameObject);
+                    break;
+                case FactionRelation.Ally:
+                    OnTriggerEnterAlly?.Invoke(other.gameObject);
+                    break;
+                case FactionRelation.Enemy:
+                    OnTriggerEnterEnemy?.Invoke(other.gameObject);
+                    break;
             }
         }
     }

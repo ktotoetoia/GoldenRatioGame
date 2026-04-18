@@ -28,10 +28,7 @@ namespace IM.Visuals
 
         private void Update()
         {
-            if (_storage != null)
-            {
-                _storage.Value = _used;
-            }
+            if (_storage != null) _storage.Value = _used;
             
             _used = false;
         }

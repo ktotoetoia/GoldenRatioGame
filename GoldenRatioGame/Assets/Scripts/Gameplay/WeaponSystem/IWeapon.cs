@@ -1,9 +1,10 @@
 ﻿using IM.Abilities;
+using IM.LifeCycle;
 
 namespace IM.WeaponSystem
 {
-    public interface IWeapon
+    public interface IWeapon : IAbilityReadOnly, IRequireEntity
     {
-        IAbilityReadOnly Ability { get; }
+        IWeaponVisualsProvider WeaponVisualsProvider { get; }
     }
 }

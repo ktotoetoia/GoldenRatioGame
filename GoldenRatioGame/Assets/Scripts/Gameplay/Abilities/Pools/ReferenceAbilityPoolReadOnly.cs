@@ -8,26 +8,15 @@ namespace IM.Abilities
     {
         private readonly Func<IAbilityPoolReadOnly> _getAbilityPool;
 
+        public int Count => _getAbilityPool().Count;
+        
         public ReferenceAbilityPoolReadOnly(Func<IAbilityPoolReadOnly> getAbilityPool)
         {
             _getAbilityPool = getAbilityPool;
         }
 
-        public int Count => _getAbilityPool().Count;
-        
-        public IEnumerator<IAbilityReadOnly> GetEnumerator()
-        {
-            return _getAbilityPool().GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return ((IEnumerable)_getAbilityPool()).GetEnumerator();
-        }
-        
-        public bool Contains(IAbilityReadOnly item)
-        {
-            return _getAbilityPool().Contains(item);
-        }
+        public IEnumerator<IAbilityReadOnly> GetEnumerator() => _getAbilityPool().GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_getAbilityPool()).GetEnumerator();
+        public bool Contains(IAbilityReadOnly item) => _getAbilityPool().Contains(item);
     }
 }

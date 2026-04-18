@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 6869556739838863163}
   - component: {fileID: 3134715345525867726}
   - component: {fileID: 7118497114025836106}
-  - component: {fileID: -5003398493981668265}
+  - component: {fileID: 7934457957892961360}
   m_Layer: 0
   m_Name: Arm Humanoid
   m_TagString: Untagged
@@ -226,7 +226,7 @@ MonoBehaviour:
     _minValue: 0
     _maxValue: 100
     _value: 100
---- !u!114 &-5003398493981668265
+--- !u!114 &7934457957892961360
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,8 +235,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7210977406679086040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cefe76e33d442c6b64c8ae8d4649dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: af69718ad9434cb6bf8be3962d30ad2b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: ModuleComponents::IM.Modules.DebugDrawLineAbilityExtensions
-  _cooldown: 3
-  _channelTime: 1
+  m_EditorClassIdentifier: ModuleComposition::IM.Modules.WeaponExtension
+  _defaultWeaponGameObject: {fileID: 1834165590337563234, guid: 522550655dfe66c45a1a8edbc8512b30, type: 3}

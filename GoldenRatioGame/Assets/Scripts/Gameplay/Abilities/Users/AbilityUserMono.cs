@@ -25,7 +25,7 @@ namespace IM.Abilities
 
         private void Awake()
         {
-            _abilityUser = new AbilityUser(new CompositionAbilityPool(GetComponents<IAbilityPoolReadOnly>()), GetComponent<IEffectContainer>());
+            _abilityUser = new AbilityUser(GetComponent<IAbilityPoolReadOnly>(), GetComponent<IEffectContainer>());
         }
         
         public void ResolveRequestedAbilities(IEnumerable<IAbilityReadOnly> requestedAbilities, UseContext useContext)
