@@ -1,6 +1,6 @@
 ﻿namespace IM.Items
 {
-    public interface IItem : IHaveName, IHaveDescription, IHaveIcon
+    public interface IItem : IHaveName, IHaveDescription, IHaveIcon, IHaveItemState
     {
         
     }

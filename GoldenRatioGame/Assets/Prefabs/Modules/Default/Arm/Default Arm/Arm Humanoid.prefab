@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 3134715345525867726}
   - component: {fileID: 7118497114025836106}
   - component: {fileID: 7934457957892961360}
+  - component: {fileID: -1796868246183028789}
   m_Layer: 0
   m_Name: Arm Humanoid
   m_TagString: Untagged
@@ -238,4 +239,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af69718ad9434cb6bf8be3962d30ad2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleComposition::IM.Modules.WeaponExtension
-  _defaultWeaponGameObject: {fileID: 1834165590337563234, guid: 522550655dfe66c45a1a8edbc8512b30, type: 3}
+  _defaultWeaponPrefab: {fileID: 1834165590337563234, guid: 522550655dfe66c45a1a8edbc8512b30, type: 3}
+--- !u!114 &-1796868246183028789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210977406679086040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc8df6c0598c45f5b676458f07541cdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VisualsComposition::IM.Visuals.SetBoolOnAbilityUsed
+  _boolName: WeaponUsed

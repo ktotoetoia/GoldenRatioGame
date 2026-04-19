@@ -16,7 +16,7 @@ namespace IM.WeaponSystem
 
         private IWeaponVisual Create()
         {
-            GameObject created = Instantiate(_weaponVisualPrefab);
+            GameObject created = Instantiate(_weaponVisualPrefab,transform);
             
             return created.GetComponent<IWeaponVisual>();
         }

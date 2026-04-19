@@ -88,27 +88,33 @@ namespace IM.Modules
             foreach (IDataModule<IExtensibleItem> module in graph.DataModules.ToList()) graph.Remove(module);
         }
 
-        public bool AddToContext(IExtensibleItem module)
+        public bool AddToContext(IItem module)
         {
-            if (module.ItemState == ItemState.Hide || ModuleEditingContextEditor.Snapshot.Storage.ContainsItem(module) || ModuleEditingContextEditor.IsEditing) return false;
+            if (module.ItemState == ItemState.Hide || ModuleEditingContextEditor.IsEditing) return false;
 
-            ModuleEditingContextEditor.BeginEdit().AddToContext(module);
-
-            if (ModuleEditingContextEditor.TryApplyChanges()) return true;
+            if (ModuleEditingContextEditor.BeginEdit().AddToContext(module) &&
+                ModuleEditingContextEditor.TryApplyChanges())
+            {
+                return true;
+            }
+            
             ModuleEditingContextEditor.DiscardChanges();
 
             return false;
         }
 
-        public bool RemoveFromContext(IExtensibleItem module)
+        public bool RemoveFromContext(IItem module)
         {
-            if ( !ModuleEditingContextEditor.Snapshot.Storage.ContainsItem(module) || ModuleEditingContextEditor.IsEditing) return false;
+            if (ModuleEditingContextEditor.IsEditing) return false;
             
-            ModuleEditingContextEditor.BeginEdit().RemoveFromContext(module);
+            if (ModuleEditingContextEditor.BeginEdit().RemoveFromContext(module) &&
+                ModuleEditingContextEditor.TryApplyChanges())
+            {
+                return true;
+            }
             
-            if (ModuleEditingContextEditor.TryApplyChanges()) return true;
             ModuleEditingContextEditor.DiscardChanges();
-            
+
             return false;
         }
     }

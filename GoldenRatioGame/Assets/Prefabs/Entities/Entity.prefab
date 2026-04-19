@@ -533,6 +533,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8839589395240690778}
   - component: {fileID: 4561900822149936034}
+  - component: {fileID: 4338404269155062247}
   m_Layer: 0
   m_Name: SubInteractors
   m_TagString: Untagged
@@ -567,6 +568,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8681f00690484106874a78500699fb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleComposition::IM.Entities.ExtensibleModuleInteractor
+  _moduleEditingContextSource: {fileID: 4342869459289063407}
+--- !u!114 &4338404269155062247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5255341128824037194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcc2fd1aa5c247e09124019cf08b1494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameplayComposition::IM.Entities.TestInteractor
   _moduleEditingContextSource: {fileID: 4342869459289063407}
 --- !u!1 &8508053980751109502
 GameObject:

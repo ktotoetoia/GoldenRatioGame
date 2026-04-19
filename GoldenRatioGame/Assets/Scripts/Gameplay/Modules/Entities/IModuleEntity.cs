@@ -1,4 +1,5 @@
-﻿using IM.LifeCycle;
+﻿using IM.Items;
+using IM.LifeCycle;
 
 namespace IM.Modules
 {
@@ -6,7 +7,7 @@ namespace IM.Modules
     {
         IModuleEditingContextEditor ModuleEditingContextEditor { get; }
 
-        bool AddToContext(IExtensibleItem item);
-        bool RemoveFromContext(IExtensibleItem item);
+        bool AddToContext(IItem item);
+        bool RemoveFromContext(IItem item);
     }
 }

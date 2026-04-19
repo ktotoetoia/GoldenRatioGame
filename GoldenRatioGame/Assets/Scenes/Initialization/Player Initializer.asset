@@ -21,7 +21,7 @@ MonoBehaviour:
     - {fileID: 1831086527369138414, guid: f518952fb52b4af42b95ad416b950be5, type: 3}
     - {fileID: 6808322469448240976, guid: e4f1b720a6441804081b668b4a76a96e, type: 3}
     - {fileID: 991209621830917388, guid: 9dd7b1f69d38b81489b903d2f7b7266e, type: 3}
-    - {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
+    - {fileID: 9154606070248935614, guid: acb799a4d4e278d4eb6f46a855de523b, type: 3}
     - {fileID: 2047626318192908934, guid: 120cd70ac3f52c045b9c42cc3fa06d5d, type: 3}
     - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
     <Faction>k__BackingField: {fileID: 11400000, guid: 788bd211483850b42816f83e0cc2d97f, type: 2}

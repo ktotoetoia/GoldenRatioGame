@@ -4,10 +4,9 @@ using IM.Storages;
 
 namespace IM.Modules
 {
-    public interface IExtensibleItem : IItem, IStorable, IEntity
+    public interface IExtensibleItem : IItem, IStorable, IEntity, IHaveItemState
     {
         ITypeRegistry<IExtension> Extensions { get; }
-        ItemState ItemState { get; set; }
         IPortFactory PortFactory { get; }
     }
 }

@@ -45,20 +45,23 @@ namespace IM.Modules
             _conditions.Disable = IsUnsafe;
         }
 
-        public void AddToContext(IExtensibleItem item)
+        public bool AddToContext(IItem item)
         {
-            if (item.ItemState == ItemState.Hide || Storage.ContainsItem(item)) return;
+            if (item.ItemState == ItemState.Hide|| item is not IStorable storable || Storage.ContainsItem(storable)) return false;
             
-            MutableStorage.SetItem(MutableStorage.FirstOrDefault(x => x.Item == null) ?? MutableStorage.CreateCell(), item);
+            MutableStorage.SetItem(MutableStorage.FirstOrDefault(x => x.Item == null) ?? MutableStorage.CreateCell(), storable);
             item.ItemState = ItemState.Hide;
+
+            return true;
         }
 
-        public void RemoveFromContext(IExtensibleItem item)
+        public bool RemoveFromContext(IItem item)
         {
-            if ( !Storage.ContainsItem(item)) return;
+            if (  item is not IStorable storable || !Storage.ContainsItem(storable)) return false;
             
-            MutableStorage.ClearCell(MutableStorage.GetCell(item));
+            MutableStorage.ClearCell(MutableStorage.GetCell(storable));
             item.ItemState = ItemState.Show;
+            return true;
         }
     }
 }

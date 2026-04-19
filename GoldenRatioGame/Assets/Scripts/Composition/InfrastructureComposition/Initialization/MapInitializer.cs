@@ -12,7 +12,8 @@ namespace IM
     [CreateAssetMenu(fileName = "MapInitializer", menuName = "MapInitializer")]
     public class MapInitializer : SceneInitializer
     {
-        [SerializeField] private List<ModuleEntityEntry> _moduleEntityEntries = new ();
+        [SerializeField] private List<ModuleEntityEntry> _moduleEntityEntries;
+        [SerializeField] private List<GameObject> _gameObjects;
         [SerializeField] private GameObject _roomPrefab;
         [SerializeField] private GameObject _floorPrefab;
         [SerializeField] private GameObject _roomPortPrefab;
@@ -42,6 +43,11 @@ namespace IM
             foreach (IModuleEntity entity in _moduleEntityEntries.Select(x => new ModuleEntityFactory().Create(x,factory)))
             {
                 node.Value.Add(entity.GameObject);
+            }
+
+            foreach (GameObject gameObject in _gameObjects)
+            {
+                node.Value.Add(factory.Create(gameObject, false));
             }
 
             if (graph.DataNodes.Count() > 1)

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace IM.Entities
 {
-    public class ExtensibleModuleInteractor : MonoBehaviour, ISubInteractor
+    public class ExtensibleItemInteractor : MonoBehaviour, ISubInteractor
     {
         [SerializeField] private GameObject _moduleEditingContextSource;
         private IModuleEntity _moduleEntity;

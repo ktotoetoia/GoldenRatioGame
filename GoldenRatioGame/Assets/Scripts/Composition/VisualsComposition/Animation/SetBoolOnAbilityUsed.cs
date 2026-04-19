@@ -10,10 +10,10 @@ namespace IM.Visuals
     public class SetBoolOnAbilityUsed : MonoBehaviour
     {
         [SerializeField] private string _boolName;
-        private bool _used;
         private IAbilityEvents _contextAbility;
         private IValueStorageContainer _container;
         private IValueStorage<bool> _storage;
+        private bool _used;
         
         private void Awake()
         {

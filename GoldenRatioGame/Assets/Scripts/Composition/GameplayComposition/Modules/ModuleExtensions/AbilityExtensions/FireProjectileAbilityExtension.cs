@@ -15,13 +15,13 @@ namespace IM.Modules
         [SerializeField] private float _cooldown = 3;
         [SerializeField] private float _projectileSpeed;
         [SerializeField] private Sprite _iconSprite;
+        private readonly HashSet<GameObject> _instantiatedProjectiles = new();
         private IEntity _entity;
         private IFactionMemberReadOnly _factionMember;
-        
-        private readonly HashSet<GameObject> _instantiatedProjectiles = new();
-        
-        public IAbilityReadOnly Ability { get; private set; }
-        
+        private IAbilityReadOnly _ability;
+
+        public IAbilityReadOnly Ability => _ability ??= CreateAbility();
+
         public IEntity Entity
         {
             get => _entity;
@@ -36,17 +36,17 @@ namespace IM.Modules
             }
         }
 
-        private void Awake()
+        private IAbilityReadOnly CreateAbility()
         {
             IObjectPool<GameObject> pool = new ObjectPool<GameObject>(Create, OnGet, OnRelease, HandleDestroy);
             
-            Ability = new SendProjectileByVelocityAbility(pool, GetComponent<IPositionProvider>(), _cooldown)
+            return new SendProjectileByVelocityAbility(pool, GetComponent<IPositionProvider>(), _cooldown)
             {
                 Speed = _projectileSpeed,
                 Icon = new Icon(_iconSprite)
             };
         }
-
+        
         private void UpdateProjectilesFaction()
         {
             if (_factionMember == null) return;

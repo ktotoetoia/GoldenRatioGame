@@ -5,15 +5,15 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class ModuleInteractable : MonoBehaviour, IInteractable
+    public class ItemInteractable : MonoBehaviour, IInteractable
     {
-        private IExtensibleItem _extensibleItem;
+        private IHaveItemState _extensibleItem;
         
         public GameObject GameObject => gameObject;
         
         private void Awake()
         {
-            _extensibleItem = GetComponent<IExtensibleItem>();
+            _extensibleItem = GetComponent<IHaveItemState>();
         }
         
         public bool CanInteract(IEntity interactor)

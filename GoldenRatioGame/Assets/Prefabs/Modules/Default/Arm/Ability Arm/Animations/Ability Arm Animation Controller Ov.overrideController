@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Ability Arm Animation Controller Ov
+  m_Controller: {fileID: 9100000, guid: ee161a670eb66224eb9640c8dd849178, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: a272f143a03863b4abe7bbdf5c98fba7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 78d4cb3df91bf934080eee6fd44dfac3, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 380911e212a39ff4bb904f008291edc6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2b52d79ba668e2d40b4f2a6934ac0250, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: dde67916f35e78e468fb2ecbb60dc427, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b22ee8a8c6b3a5c4eb4c3859d1a8ff5f, type: 2}

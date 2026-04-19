@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using IM.Items;
+using IM.LifeCycle;
 using IM.SaveSystem;
+using IM.Storages;
 using UnityEngine;
 
 namespace IM.Modules
@@ -28,8 +31,7 @@ namespace IM.Modules
 
             state.StorageModuleIds.AddRange(
                 snapshot.Storage
-                    .Select(cell => cell.Item as IExtensibleItem)
-                    .Select(item => item.GetModuleId())
+                    .Select(cell => (cell.Item as IEntity).GetModuleId())
                     .Where(id => !string.IsNullOrEmpty(id)));
 
             return state;
@@ -59,7 +61,7 @@ namespace IM.Modules
                         continue;
 
                     var prefab = resolveDependency(id);
-                    if (prefab != null && prefab.TryGetComponent(out IExtensibleItem item))
+                    if (prefab != null && prefab.TryGetComponent(out IItem item))
                     {
                         context.AddToContext(item);
                     }

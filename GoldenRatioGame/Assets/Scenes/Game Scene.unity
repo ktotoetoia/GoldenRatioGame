@@ -1174,7 +1174,7 @@ MonoBehaviour:
   _graphViewInteraction: {fileID: 851632504}
   _gameCamera: {fileID: 519420034}
   _uiCamera: {fileID: 1204849133}
-  _abilityKeys: 3100000032000000330000007100000065000000
+  _abilityKeys: 43010000440100003100000032000000330000007100000065000000
 --- !u!1 &2049271415
 GameObject:
   m_ObjectHideFlags: 0

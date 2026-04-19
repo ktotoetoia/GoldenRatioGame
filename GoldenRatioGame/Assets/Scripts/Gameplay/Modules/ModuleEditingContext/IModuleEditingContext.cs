@@ -1,4 +1,5 @@
 ﻿using IM.Graphs;
+using IM.Items;
 using IM.Storages;
 
 namespace IM.Modules
@@ -10,7 +11,7 @@ namespace IM.Modules
         IConditionalCommandDataModuleGraph<IExtensibleItem> ModuleGraph { get; }
         IDataModule<IExtensibleItem> CreateModule(IExtensibleItem item);
         void SetUnsafe(bool value);
-        void AddToContext(IExtensibleItem item);
-        void RemoveFromContext(IExtensibleItem item);
+        bool AddToContext(IItem item);
+        bool RemoveFromContext(IItem item);
     }
 }

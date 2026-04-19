@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: _assetReference.m_AssetGUID
       value: 9dd7b1f69d38b81489b903d2f7b7266e
       objectReference: {fileID: 0}
+    - target: {fileID: -1796868246183028789, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
+      propertyPath: _boolName
+      value: AbilityUsed
+      objectReference: {fileID: 0}
     - target: {fileID: 2621271969024498473, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -77,7 +81,7 @@ PrefabInstance:
       value: Ability Arm Humanoid
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: -5003398493981668265, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
+    - {fileID: 0}
     - {fileID: 7934457957892961360, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -88,9 +92,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
       insertIndex: -1
       addedObject: {fileID: -907160284628163146}
-    - targetCorrespondingSourceObject: {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5707228436977368573}
   m_SourcePrefab: {fileID: 100100000, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
 --- !u!1 &991209621830917388 stripped
 GameObject:
@@ -125,16 +126,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c3c2c2fa77489f980a58f8b1fff33e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Values::IM.Values.TransformPositionProvider
---- !u!114 &5707228436977368573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 991209621830917388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc8df6c0598c45f5b676458f07541cdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleVisualsComponents::IM.Visuals.SetBoolOnAbilityUsed
-  _boolName: UsingAbility

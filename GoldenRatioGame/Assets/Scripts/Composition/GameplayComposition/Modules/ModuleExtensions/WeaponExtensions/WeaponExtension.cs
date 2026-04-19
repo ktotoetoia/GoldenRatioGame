@@ -1,57 +1,61 @@
-﻿using IM.Abilities;
+﻿using System;
+using IM.Abilities;
 using IM.LifeCycle;
 using IM.WeaponSystem;
 using UnityEngine;
 
 namespace IM.Modules
 {
-    public class WeaponExtension : MonoBehaviour, IWeaponExtension,IAbilityExtension, IRequireEntityExtension
+    public class WeaponExtension : MonoBehaviour, IWeaponExtension, IAbilityExtension, IRequireEntityExtension
     {
-        [SerializeField] private GameObject _defaultWeaponGameObject;
+        [SerializeField] private GameObject _defaultWeaponPrefab;
         private IWeapon _defaultWeapon;
-        private IWeapon _weapon;
+        private IWeapon _equippedWeapon;
         private IEntity _entity;
 
-        public IAbilityReadOnly Ability => Weapon ?? _defaultWeapon;
+        public event Action<IWeapon> WeaponChanged;
+
+        public IAbilityReadOnly Ability => Weapon;
 
         public IEntity Entity
         {
             get => _entity;
-            set
+            set 
             {
                 _entity = value;
-                UpdateWeaponEntity();
-            } 
+                SyncWeaponEntity();
+            }
         }
 
         public IWeapon Weapon
         {
-            get => _weapon;
+            get => _equippedWeapon ?? _defaultWeapon;
             set
             {
-                _weapon = value;
-                UpdateWeaponEntity();
+                if (_equippedWeapon == value) return;
+
+                _equippedWeapon = value;
+                SyncWeaponEntity();
+                WeaponChanged?.Invoke(Weapon);
             }
         }
-        
+
         private void Awake()
         {
-            _defaultWeapon = Instantiate(_defaultWeaponGameObject,transform).GetComponent<IWeapon>();
+            InitializeDefaultWeapon();
         }
 
-        private void UpdateWeaponEntity()
+        private void InitializeDefaultWeapon()
         {
-            if (_weapon is not null)
-            {
-                _weapon.Entity = _entity;
-                    
-                return;
-            }
+            if (!_defaultWeaponPrefab || !Instantiate(_defaultWeaponPrefab, transform).TryGetComponent(out _defaultWeapon)) return;
 
-            if (_defaultWeapon is not null)
-            {
-                _defaultWeapon.Entity = _entity;
-            }
+            SyncWeaponEntity();
+            WeaponChanged?.Invoke(Weapon);
+        }
+
+        private void SyncWeaponEntity()
+        {
+            if (Weapon != null) Weapon.Entity = _entity;
         }
     }
 }

@@ -112,7 +112,7 @@ namespace IM.UI
 
         private void ObjectInteracted(object obj)
         {
-            _graphOperations?.TryQuickAddModule(_moduleEditingContext.CreateModule((IExtensibleItem)obj));
+            if(obj is IExtensibleItem item) _graphOperations?.TryQuickAddModule(_moduleEditingContext.CreateModule(item));
         }
         
         public void SetContext(IModuleEditingContext moduleEditingContext)

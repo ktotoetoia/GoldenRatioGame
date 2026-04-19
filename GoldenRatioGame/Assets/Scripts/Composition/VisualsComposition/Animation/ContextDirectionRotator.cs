@@ -1,5 +1,4 @@
 ﻿using IM.Abilities;
-using IM.Modules;
 using UnityEngine;
 
 namespace IM.Visuals
@@ -9,29 +8,27 @@ namespace IM.Visuals
         [SerializeField] private Transform _target;
         [SerializeField] private float _offsetAngle;
         [SerializeField] private bool _animate;
-        private IFocusPointProvider _focusPointProvider;
+        private IAbilityContainer _abilityContainer;
         
         public void OnModuleVisualObjectInitialized(IModuleVisualObject moduleVisualObject)
         {
-            IAbilityReadOnly ability = moduleVisualObject.Owner.Extensions.Get<IAbilityExtension>()?.Ability;
-            
-            _focusPointProvider = ability as IFocusPointProvider;
+            _abilityContainer = moduleVisualObject.Owner.Extensions.Get<IAbilityContainer>();
         }
         
         private void Update()
         {
-            if (!_animate || _focusPointProvider == null || !_target)
+            if (!_animate || _abilityContainer?.Ability is not IFocusPointProvider focusPointProvider || !_target)
             {
                 _target.rotation = Quaternion.identity;
                 return;
             }
 
-            RotateTowardsContext();
+            RotateTowardsContext(focusPointProvider);
         }
 
-        private void RotateTowardsContext()
+        private void RotateTowardsContext( IFocusPointProvider focusPointProvider )
         {
-            Vector3 direction = _focusPointProvider.GetFocusDirection().normalized;
+            Vector3 direction = focusPointProvider.GetFocusDirection().normalized;
 
             if (direction.sqrMagnitude < 0.0001f)
                 return;
