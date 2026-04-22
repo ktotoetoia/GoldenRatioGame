@@ -12,7 +12,6 @@ namespace IM.Abilities
         private readonly IObjectPool<GameObject> _projectileFactory;
         private readonly ICooldown _cooldown;
         private readonly ICooldown _sCooldown;
-        private readonly IPositionProvider _positionProvider;
         private UseContext _context;
         
         public bool CanUse => !Cooldown.IsOnCooldown;
@@ -22,20 +21,20 @@ namespace IM.Abilities
         public string Name { get; set; } = "Projectile thrower";
         public string Description { get; set; } = "Throws projectile in the direction of pointer";
         public IIcon Icon { get; set; }
-
+        public float SpawnProjectileOffsetMagnitude { get; set; } = .5f;
+        
         public event Action<UseContext> AbilityStarted;
         public event Action<UseContext> AbilityFinished;
-
-        public SendProjectileByVelocityAbility(IObjectPool<GameObject> projectileFactory,IPositionProvider positionProvider, float cooldown) : this(projectileFactory,positionProvider, new FloatCooldown(cooldown))
+        
+        public SendProjectileByVelocityAbility(IObjectPool<GameObject> projectileFactory, float cooldown) : this(projectileFactory, new FloatCooldown(cooldown))
         {
             
         }
         
-        public SendProjectileByVelocityAbility(IObjectPool<GameObject> projectileFactory,IPositionProvider positionProvider, ICooldown cooldown)
+        public SendProjectileByVelocityAbility(IObjectPool<GameObject> projectileFactory, ICooldown cooldown)
         {
             _projectileFactory = projectileFactory;
             _cooldown = cooldown;
-            _positionProvider = positionProvider;
             _sCooldown = new FloatCooldown(0);
         }
 
@@ -51,7 +50,7 @@ namespace IM.Abilities
             
             projectile.GetComponent<ITemporary>().Initialize(()=> _projectileFactory.Release(projectile.gameObject));
             
-            projectile.transform.position = _positionProvider.GetPosition();
+            projectile.transform.position = _context.AnchorPosition + dir * SpawnProjectileOffsetMagnitude;
             projectile.transform.rotation = Quaternion.Euler(0, 0, angle);
             projectile.GetComponent<Rigidbody2D>().linearVelocity = dir * Speed;
             _sCooldown.ForceReset();

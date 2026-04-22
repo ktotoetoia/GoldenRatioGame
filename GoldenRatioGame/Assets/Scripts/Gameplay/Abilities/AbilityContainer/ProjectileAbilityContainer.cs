@@ -15,7 +15,6 @@ namespace IM.Abilities
 
         public IAbilityReadOnly Ability { get; private set; }
         
-
         public event Action<GameObject> ProjectileGet;
         public event Action<GameObject> ProjectileRelease;
         
@@ -23,7 +22,7 @@ namespace IM.Abilities
         {
             IObjectPool<GameObject> pool = new ObjectPool<GameObject>(Create, OnGet, OnRelease, HandleDestroy);
             
-            Ability = new SendProjectileByVelocityAbility(pool, GetComponent<IPositionProvider>(), _cooldown)
+            Ability = new SendProjectileByVelocityAbility(pool, _cooldown)
             {
                 Speed = _projectileSpeed,
                 Icon = new Icon(_iconSprite)

@@ -6,10 +6,11 @@ namespace IM.Visuals
     public class SetWorldUIScaleToElement : MonoBehaviour
     {
         [SerializeField] private UIDocument _screenDoc;
-        [SerializeField] private UIDocument _worldDoc;
+        [SerializeField] private UIDocument _worldDoc; 
         [SerializeField] private string _elementName = "MyElement";
         [SerializeField] private Camera _uiCamera;
-        [SerializeField] private float _pixelsPerUnit;
+        [SerializeField] private float _scaleMultiplier = 100.0f; 
+
         private VisualElement _target;
 
         private void Start()
@@ -22,22 +23,27 @@ namespace IM.Visuals
             }
 
             _target = _screenDoc.rootVisualElement.Q<VisualElement>(_elementName);
-            if (_target == null)
-            {
-                Debug.LogError($"Element '{_elementName}' not found!");
-                enabled = false;
-            }
         }
-        
+
         private void LateUpdate()
         {
             if (_target == null) return;
+
+            float ppp = _target.panel.scaledPixelsPerPoint;
+
+            Rect content = _target.contentRect;
             
-            Vector2 worldSize =
-                _uiCamera.ScreenToWorldPoint(_target.worldBound.max * _target.panel.scaledPixelsPerPoint)
-                - _uiCamera.ScreenToWorldPoint(_target.worldBound.min * _target.panel.scaledPixelsPerPoint);
-            
-            _worldDoc.worldSpaceSize = worldSize * _pixelsPerUnit;
+            float pixelWidth = content.width * ppp;
+            float pixelHeight = content.height * ppp;
+
+            float unitsPerPixel = _uiCamera.orthographicSize * 2 / Screen.height;
+
+            Vector2 worldSize = new Vector2(
+                pixelWidth * unitsPerPixel,
+                pixelHeight * unitsPerPixel
+            );
+
+            _worldDoc.worldSpaceSize = worldSize * _scaleMultiplier;
         }
     }
 }

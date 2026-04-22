@@ -15,7 +15,6 @@ namespace IM
         private IMoveInVector _movement;
         private IInteractor _interactor;
         private IAbilityUser<IAbilityPoolReadOnly> _abilityUser;
-        
         private IState _movementState;
         private IState _abilityUseState;
         private IState _generalState;
@@ -25,9 +24,10 @@ namespace IM
         private IStateMachine _stateMachine;
 
         public Func<Vector2> ProvideMovementDirection { get; set; } = () => default;
-        public Func<UseContext>  ProvideAbilityUseContext { get; set; }= () => default;
         public Func<bool> ShouldTryInteract { get; set; }= () => false;
-        public Func<IEnumerable<IAbilityReadOnly>, IEnumerable<IAbilityReadOnly>> ProvideKeyForAbility { get; set; } = x => new IAbilityReadOnly[]{};
+
+        public Func<IEnumerable<IAbilityReadOnly>, IEnumerable<KeyValuePair<IAbilityReadOnly, UseContext>>>
+            ResolveRequestedAbilities { get; set; } = x => new KeyValuePair<IAbilityReadOnly, UseContext>[] { };
         
         public bool Paused { get; set; }
         
@@ -37,8 +37,8 @@ namespace IM
             _abilityUser = GetComponent<IAbilityUser<IAbilityPoolReadOnly>>();
             _interactor = GetComponent<IInteractor>();
             
-            _movementState = new MovementState(_movement, () => ProvideMovementDirection());
-            _abilityUseState = new AbilityUseState(_abilityUser,() => ProvideAbilityUseContext(), x => ProvideKeyForAbility(x));
+            _movementState = new MovementState(_movement,() => ProvideMovementDirection());
+            _abilityUseState = new AbilityUseState(_abilityUser, x => ResolveRequestedAbilities(x));
             _generalState = new CompositeState(new [] {_movementState, _abilityUseState});
             _interactionState = new InteractionState(_interactor, ResolveInteraction);
             _generalToInteraction = new Transition(_generalState, _interactionState, CanInteract);
@@ -53,7 +53,7 @@ namespace IM
         private void Update()
         {
             if (Paused) return;
-            
+
             _stateMachine.Update();
             _stateMachine.UpdateTransition();
         }
@@ -71,14 +71,12 @@ namespace IM
 
         private bool CanInteract()
         {
-            if (ShouldTryInteract())
-            {
-                _lastInteractable = _interactor.GetAvailableInteractions().FirstOrDefault();
+            if (!ShouldTryInteract()) return false;
+            
+            _lastInteractable = _interactor.GetAvailableInteractions().FirstOrDefault();
                 
-                return _lastInteractable != null;
-            }
+            return _lastInteractable != null;
 
-            return false;
         }
         
         private bool CanExitInteraction()

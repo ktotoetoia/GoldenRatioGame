@@ -13,7 +13,7 @@ namespace IM.Modules
         private IModuleEditingContextEditor _moduleEditingContextEditor;
         
         public IAbilityPoolReadOnly AbilityPool => _abilityUser.AbilityPool;
-        
+
         public event Action<IAbilityReadOnly> OnAbilityStarted
         {
             add => _abilityUser.OnAbilityStarted += value;
@@ -32,9 +32,9 @@ namespace IM.Modules
             _abilityUser = new AbilityUser(new ReferenceAbilityPoolReadOnly(() => _moduleEditingContextEditor.Snapshot.ConvertableObjects.Get<IAbilityPoolReadOnly>()), GetComponent<IEffectContainer>());
         }
         
-        public void ResolveRequestedAbilities(IEnumerable<IAbilityReadOnly> requestedAbilities, UseContext useContext)
+        public void ResolveRequestedAbilities(IEnumerable<KeyValuePair<IAbilityReadOnly, UseContext>> requestedAbilities)
         {
-            _abilityUser.ResolveRequestedAbilities(requestedAbilities, useContext);
+            _abilityUser.ResolveRequestedAbilities(requestedAbilities);
         }
     }
 }

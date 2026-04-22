@@ -39,8 +39,8 @@ namespace IM.Modules
         private IAbilityReadOnly CreateAbility()
         {
             IObjectPool<GameObject> pool = new ObjectPool<GameObject>(Create, OnGet, OnRelease, HandleDestroy);
-            
-            return new SendProjectileByVelocityAbility(pool, GetComponent<IPositionProvider>(), _cooldown)
+
+            return new SendProjectileByVelocityAbility(pool, _cooldown)
             {
                 Speed = _projectileSpeed,
                 Icon = new Icon(_iconSprite)

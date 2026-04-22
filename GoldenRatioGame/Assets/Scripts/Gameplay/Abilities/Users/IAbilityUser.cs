@@ -7,7 +7,6 @@ namespace IM.Abilities
     {
         TAbilityPool AbilityPool { get; }
         
-        void ResolveRequestedAbilities(IEnumerable<IAbilityReadOnly> requestedAbilities,
-            UseContext useContext);
+        void ResolveRequestedAbilities(IEnumerable<KeyValuePair<IAbilityReadOnly, UseContext>> requestedAbilities);
     }
 }

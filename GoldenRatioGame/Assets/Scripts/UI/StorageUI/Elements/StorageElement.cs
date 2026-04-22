@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using IM.Storages;
 using UnityEngine.UIElements;
 
@@ -8,6 +11,19 @@ namespace IM.UI
     public partial class StorageElement : VisualElement, IStorageElement
     {
         private IStorageEvents _events;
+        private bool _showEmptyCells = false;
+
+        [UxmlAttribute]
+        public bool ShowEmptyCells
+        {
+            get => _showEmptyCells;
+            set
+            {
+                if (_showEmptyCells == value) return;
+                _showEmptyCells = value;
+                RefreshListViewSource();
+            }
+        }
 
         public ListView ListView { get; private set; }
         public IReadOnlyStorage Storage { get; private set; }
@@ -16,7 +32,7 @@ namespace IM.UI
         public event Action<IStorableReadOnly> ObjectSelected;
         public event Action<IStorableReadOnly> ObjectHovered;
         public event Action<IStorableReadOnly> ObjectReleased;
-        
+
         public StorageElement()
         {
             ListView = new ListView
@@ -27,49 +43,61 @@ namespace IM.UI
                 allowAdd = false,
                 allowRemove = false,
             };
-            
+
             Add(ListView);
             AddToClassList(StorageClassLists.Storage);
 
             ListView.makeItem = () =>
             {
-                StorageCellElement storageCellElement = new StorageCellElement();
-                
-                storageCellElement.AddManipulator(new ListEntryManipulator(CheckDoubleClick,OnSelected,OnHovered,OnReleased));
-                
-                return storageCellElement;
+                var cellUI = new StorageCellElement();
+                cellUI.AddManipulator(new ListEntryManipulator(CheckDoubleClick, OnSelected, OnHovered, OnReleased));
+                return cellUI;
             };
+
             ListView.bindItem = (element, index) =>
             {
                 if (element is not StorageCellElement cellUI) throw new InvalidOperationException();
-                
-                cellUI.Cell = Storage[index];
+
+                if (ListView.itemsSource[index] is IStorageCellReadonly cell)
+                {
+                    cellUI.Cell = cell;
+                }
             };
         }
 
-        private void OnSelected(VisualElement el)
+        protected virtual IEnumerable<IStorageCellReadonly> GetFilteredItems()
         {
-            if (el is not StorageCellElement cellVisual || cellVisual.Cell?.Item == null) return;
-            
-            ObjectSelected?.Invoke(cellVisual.Cell.Item);
+            if (Storage == null) return Enumerable.Empty<IStorageCellReadonly>();
+
+            return ShowEmptyCells 
+                ? Storage 
+                : Storage.Where(cell => cell.Item != null);
         }
-        
-        private void OnHovered(VisualElement el)
+
+        public void RefreshListViewSource()
         {
-            if (el is not StorageCellElement cellVisual || cellVisual.Cell?.Item == null) return;
-            
-            ObjectHovered?.Invoke(cellVisual.Cell.Item);
+            if (Storage == null)
+            {
+                ListView.itemsSource = null;
+            }
+            else
+            {
+                ListView.itemsSource = GetFilteredItems().ToList();
+            }
+            ListView.Rebuild();
         }
-        private void OnReleased(VisualElement el)
+
+        private void OnSelected(VisualElement el) => InvokeIfValid(el, ObjectSelected);
+        private void OnHovered(VisualElement el) => InvokeIfValid(el, ObjectHovered);
+        private void OnReleased(VisualElement el) => InvokeIfValid(el, ObjectReleased);
+        private void CheckDoubleClick(VisualElement el) => InvokeIfValid(el, ObjectInteracted);
+
+        private void InvokeIfValid(VisualElement el, Action<IStorableReadOnly> action)
         {
-            if (el is not StorageCellElement cellVisual || cellVisual.Cell?.Item == null) return;
-            ObjectReleased?.Invoke(cellVisual.Cell.Item);
-        }
-        private void CheckDoubleClick(VisualElement el)
-        {
-            if (el is not StorageCellElement cellVisual || cellVisual.Cell?.Item == null) return;
-            
-            ObjectInteracted?.Invoke(cellVisual.Cell.Item);
+            if (el is StorageCellElement c && c.Cell.Item != null)
+            {
+                action?.Invoke(c.Cell.Item);
+            }
         }
 
         public void SetStorage(IReadOnlyStorage storage, IStorageEvents events)
@@ -77,35 +105,35 @@ namespace IM.UI
             if (storage == null)
             {
                 ClearStorage();
-                
                 return;
             }
 
             Storage = storage;
             _events = events;
-            ListView.itemsSource = Storage.GetListForUI();
-            
-            events.ItemAdded += Rebuild;
-            events.ItemRemoved += Rebuild;
-            events.CellsCountChanged += Rebuild;
+
+            _events.ItemAdded += Rebuild;
+            _events.ItemRemoved += Rebuild;
+            _events.CellsCountChanged += Rebuild;
+
+            RefreshListViewSource();
         }
 
         public void ClearStorage()
         {
-            if(Storage == null) return;
-            
+            if (Storage == null) return;
+
             _events.ItemAdded -= Rebuild;
             _events.ItemRemoved -= Rebuild;
             _events.CellsCountChanged -= Rebuild;
-            
+
             Storage = null;
             _events = null;
-            
+
             ListView.itemsSource = null;
             ListView.Rebuild();
         }
-        
-        private void Rebuild(int i, int i1) => ListView.Rebuild();
-        private void Rebuild(IStorageCellReadonly storageCellReadonly, IStorableReadOnly storableReadOnly) => ListView.Rebuild();
+
+        private void Rebuild(int i, int i1) => RefreshListViewSource();
+        private void Rebuild(IStorageCellReadonly cell, IStorableReadOnly item) => RefreshListViewSource();
     }
 }

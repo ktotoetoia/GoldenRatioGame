@@ -29,7 +29,7 @@ namespace IM.Abilities
         {
             if(!IsChanneling) return;
             
-            Debug.DrawLine(_channelInfo.UseContext.EntityPosition,_channelInfo.UseContext.TargetWorldPosition);
+            Debug.DrawLine(_channelInfo.UseContext.AnchorPosition,_channelInfo.UseContext.TargetWorldPosition);
             
             if (!_channelCooldown.IsOnCooldown) Interrupt();    
         }

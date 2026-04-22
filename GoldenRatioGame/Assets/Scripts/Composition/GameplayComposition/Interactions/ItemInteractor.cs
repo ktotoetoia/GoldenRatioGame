@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace IM.Entities
 {
-    public class ExtensibleItemInteractor : MonoBehaviour, ISubInteractor
+    public class ItemInteractor : MonoBehaviour, ISubInteractor
     {
         [SerializeField] private GameObject _moduleEditingContextSource;
         private IModuleEntity _moduleEntity;
@@ -20,21 +20,23 @@ namespace IM.Entities
         
         public bool CanInteract(IInteractable target)
         {
-            return CanInteract(target, out IExtensibleItem module);
+            return CanInteract(target, out IItem item);
         }
 
         public void Interact(IInteractable target)
         {
-            if (!CanInteract(target, out IExtensibleItem module))
+            if (!CanInteract(target, out IItem item))
                 throw new ArgumentException($"Cannot interact with this argument: {target.GameObject}");
             
-            _moduleEntity.AddToContext(module);
-            module.GameObject.transform.position = transform.position;
+            _moduleEntity.AddToContext(item);
+            target.GameObject.transform.position = transform.position;
         }
 
-        private bool CanInteract(IInteractable target, out IExtensibleItem module)
+        private bool CanInteract(IInteractable target, out IItem module)
         {
-            return target.GameObject.TryGetComponent(out  module)&&!_moduleEntity.ModuleEditingContextEditor.IsEditing && module.ItemState == ItemState.Show;
+            module = null;
+            
+            return target.GameObject.TryGetComponent(out module) && !_moduleEntity.ModuleEditingContextEditor.IsEditing && module.ItemState == ItemState.Show;
         }
     }
 }

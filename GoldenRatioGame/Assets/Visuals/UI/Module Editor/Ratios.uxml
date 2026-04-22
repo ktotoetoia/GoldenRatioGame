@@ -1,8 +1,0 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Visuals/UI/ModuleEditor/EditorViewRatios.uss?fileID=7433441132597879392&amp;guid=5bab9398e3e32ba4793994d6ba435ffc&amp;type=3#EditorViewRatios"/>
-    <ui:VisualElement name="AllContainer" style="flex-grow: 1; flex-direction: row;">
-        <ui:VisualElement name="AbilityContainer" class="abilityContainer"/>
-        <ui:VisualElement name="GraphEditorContainer" class="graphEditorContainer"/>
-        <ui:VisualElement name="StorageContainer" class="storageContainer"/>
-    </ui:VisualElement>
-</ui:UXML>

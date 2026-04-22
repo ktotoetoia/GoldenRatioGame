@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace IM.UI
 {
-    public class GraphViewInteraction : MonoBehaviour, IGraphViewInteraction
+    public class GraphViewInteraction : ContextVisualizer, IGraphViewInteraction
     {
         [SerializeField] private ModuleGraphView _moduleGraphView;
         [SerializeField] private StorageView _storageView;
@@ -85,7 +85,7 @@ namespace IM.UI
             IDataPort<IExtensibleItem> onGraphPort = null;
             float distance = float.MaxValue;
             
-            if(toAdd.Owner is ICoreExtensibleItem c && _graphOperations.TryQuickAddModule(_moduleGraphView.VisualObserver.ModuleToVisualObjects.FirstOrDefault(x => x.Value == toAdd).Key)) return; 
+            if(toAdd.Owner is ICoreExtensibleItem c && _graphOperations.TryQuickAddModule(_moduleEditingContext.CreateModule(c))) return; 
 
             foreach (IPortVisualObject a in toAdd.PortsVisualObjects)
             {
@@ -115,13 +115,13 @@ namespace IM.UI
             if(obj is IExtensibleItem item) _graphOperations?.TryQuickAddModule(_moduleEditingContext.CreateModule(item));
         }
         
-        public void SetContext(IModuleEditingContext moduleEditingContext)
+        public override void SetContext(IModuleEditingContext moduleEditingContext)
         {
             _moduleEditingContext = moduleEditingContext;
             _graphOperations = new CommandGraphOperations<IExtensibleItem>(moduleEditingContext.ModuleGraph);
         }
-
-        public void ClearContext()
+        
+        public override void ClearContext()
         {
             _graphOperations = null;
         }

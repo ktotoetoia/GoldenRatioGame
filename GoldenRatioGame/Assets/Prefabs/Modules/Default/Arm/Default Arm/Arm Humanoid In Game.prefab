@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: -6457062096782359215}
   - component: {fileID: 8870840805718991726}
   - component: {fileID: 3087099579782472648}
+  - component: {fileID: 2713048808948768909}
   - component: {fileID: 8006431717222902861}
   - component: {fileID: -2736702102852895745}
   m_Layer: 0
@@ -351,6 +352,85 @@ MonoBehaviour:
   _target: {fileID: 3147110585784755777}
   _offsetAngle: 90
   _animate: 0
+  _rotationSpeed: 2880
+  _rotationSpeedCurveOnTarget:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.102208115
+      value: 0.86345404
+      inSlope: 0.5506476
+      outSlope: 0.5506476
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.1743331
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _rotationSpeedCurveOnDefault:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.25
+      inSlope: 0
+      outSlope: 0.75
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.75
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _shakeOnTarget: 1
+  _shakeOnDefault: 0
+  _shakeFrequency: 15
+  _shakeMagnitude: 5
+--- !u!114 &2713048808948768909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156244532669732079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0dc1ea881364c4897fba4836ee3dae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VisualsComposition::IM.Visuals.ShakeMovementTrigger
+  _target: {fileID: 3147110585784755777}
+  _triggerShake: 0
+  _shakeDuration: 0.1
+  _frequency: 4
+  _magnitude: {x: 0.05, y: 0.05}
 --- !u!114 &8006431717222902861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,8 +559,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7876104814308221695}
+  - component: {fileID: 4111016174662454635}
   m_Layer: 0
-  m_Name: target
+  m_Name: WeaponAnchorPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -501,3 +582,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3147110585784755777}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &4111016174662454635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6403912124307324515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c3c2c2fa77489f980a58f8b1fff33e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Values::IM.Values.TransformPositionProvider

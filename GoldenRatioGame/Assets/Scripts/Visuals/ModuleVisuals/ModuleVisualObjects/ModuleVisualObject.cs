@@ -16,7 +16,7 @@ namespace IM.Visuals
         private readonly List<IPortVisualObject> _portVisualObjects = new();
         private readonly List<IPoolObject> _poolObjects = new();
         private readonly Bounds _defaultEditorLocalBounds = new (Vector3.zero, Vector3.one);
-        private IModuleVisualObjectPreset _preset;
+        private IVisualObjectPreset _preset;
 
         public Bounds LocalBounds
         {

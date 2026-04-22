@@ -25,7 +25,7 @@ namespace IM.Inputs
         };
         
         private IModuleEntity _moduleEntity;
-        
+        private IAbilityAnchorPositionProvider _abilityAnchorPositionProvider;
         private void Update()
         {
             EditorInput();
@@ -40,6 +40,7 @@ namespace IM.Inputs
         public void SetPlayerEntity(IEntity playerEntity)
         {
             _moduleEntity = playerEntity as IModuleEntity;
+            _abilityAnchorPositionProvider = playerEntity.GameObject.GetComponent<IAbilityAnchorPositionProvider>();
             PlayerStateMachine playerStateMachine = playerEntity.GameObject.GetComponent<PlayerStateMachine>();
             
             _graphViewInteraction.ShouldRedo = () => Input.GetKeyDown(KeyCode.X);
@@ -48,22 +49,21 @@ namespace IM.Inputs
             _graphViewInteraction.ShouldTryQuickRemove = () =>Input.GetKeyDown(KeyCode.P);
             _graphViewInteraction.GetPointerPosition = () =>(Vector2)_uiCamera.ScreenToWorldPoint(Input.mousePosition);
             
-            playerStateMachine.ProvideAbilityUseContext = GetAbilityUseContext;
             playerStateMachine.ProvideMovementDirection = GetMovementDirection;
             playerStateMachine.ShouldTryInteract = ShouldTryInteract;
-            playerStateMachine.ProvideKeyForAbility = ProvideKeyForAbility;
+            playerStateMachine.ResolveRequestedAbilities = ProvideKeyForAbility;
         }
 
-        private IEnumerable<IAbilityReadOnly> ProvideKeyForAbility(IEnumerable<IAbilityReadOnly> arg)
+        private IEnumerable<KeyValuePair<IAbilityReadOnly,UseContext>> ProvideKeyForAbility(IEnumerable<IAbilityReadOnly> arg)
         {
-            List<IAbilityReadOnly> requested = new();
+            Dictionary<IAbilityReadOnly, UseContext> requested = new();
             int index = 0;
             
             foreach (IAbilityReadOnly ability in arg)
             {
                 if (Input.GetKey(_abilityKeys[index]))
                 {
-                    requested.Add(ability);
+                    requested.Add(ability,GetAbilityUseContext(ability));
                 }
 
                 index++;
@@ -82,10 +82,11 @@ namespace IM.Inputs
             return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         }
 
-        private UseContext GetAbilityUseContext()
+        private UseContext GetAbilityUseContext(IAbilityReadOnly ability)
         {
             Vector3 mousePosition = _gameCamera.ScreenToWorldPoint(Input.mousePosition) * Vector2.one;
-            return new UseContext(mousePosition, _moduleEntity.GameObject.transform.position);
+            return new UseContext(mousePosition, _moduleEntity.GameObject.transform.position,
+                _abilityAnchorPositionProvider?.GetAnchorPosition(ability) ?? _moduleEntity.GameObject.transform.position);
         }
     }
 }

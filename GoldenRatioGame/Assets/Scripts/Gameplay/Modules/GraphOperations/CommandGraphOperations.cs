@@ -14,6 +14,8 @@ namespace IM.Modules
 
         public bool TryQuickAddModule(IDataModule<T> module)
         {
+            if (module == null) return false;
+            
             if (module.Value is ICoreExtensibleItem)
             {
                 if (!Graph.CanAdd(module)) return false;

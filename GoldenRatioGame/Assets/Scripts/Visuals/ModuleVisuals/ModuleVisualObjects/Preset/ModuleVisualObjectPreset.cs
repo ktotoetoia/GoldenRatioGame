@@ -5,7 +5,7 @@ using UnityEngine;
 namespace IM.Visuals
 {
     [Serializable]
-    public class ModuleVisualObjectPreset : IModuleVisualObjectPreset
+    public class ModuleVisualObjectPreset : IVisualObjectPreset
     {
         [SerializeField] private int _order;
         [SerializeField] private int _layer;

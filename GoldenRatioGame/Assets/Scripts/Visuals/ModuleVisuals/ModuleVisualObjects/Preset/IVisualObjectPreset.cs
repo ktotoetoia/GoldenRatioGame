@@ -1,6 +1,6 @@
 ﻿namespace IM.Visuals
 {
-    public interface IModuleVisualObjectPreset
+    public interface IVisualObjectPreset
     {
         void ApplyTo(IModuleVisualObject moduleVisualObject);
     }

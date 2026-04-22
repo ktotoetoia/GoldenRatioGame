@@ -80,8 +80,7 @@ namespace IM
         {
             _visible = true;
 
-            if (_weaponExtension != null)
-                ApplyWeapon(_weaponExtension.Weapon);
+            if (_weaponExtension != null) ApplyWeapon(_weaponExtension.Weapon);
         }
     }
 }

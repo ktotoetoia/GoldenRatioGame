@@ -11,8 +11,5 @@ namespace IM.UI
         Func<bool> ShouldTryQuickRemove { get; set; }
         Func<bool> ShouldUndo { get; set; }
         Func<bool> ShouldRedo { get; set; }
-        
-        void SetContext(IModuleEditingContext moduleEditingContext);
-        void ClearContext();
     }
 }

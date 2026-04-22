@@ -5,15 +5,21 @@ using UnityEngine;
 
 namespace IM.UI
 {
-    public class ModuleGraphView : MonoBehaviour
+    public class ModuleGraphView : ContextVisualizer
     {
         [SerializeField] private ModuleVisualObjectPreset _preset;
         private IModuleEditingContext _context;
 
         public ModuleGraphVisualObserver VisualObserver { get; private set; }
-        public Bounds Bounds => new(transform.position, Vector3.zero);
 
-        public void SetContext(IModuleEditingContext context)
+        private void Update()
+        {
+            if (VisualObserver == null || _context == null) return;
+
+            VisualObserver.OnSnapshotChanged(_context);
+        }
+
+        public override void SetContext(IModuleEditingContext context)
         {
             if (VisualObserver != null) throw new InvalidOperationException();
 
@@ -26,14 +32,7 @@ namespace IM.UI
             _context = context;
         }
 
-        public void Update()
-        {
-            if (VisualObserver == null || _context == null) return;
-
-            VisualObserver.OnSnapshotChanged(_context);
-        }
-
-        public void ClearContext()
+        public override void ClearContext()
         {
             VisualObserver.Dispose();
             VisualObserver = null;

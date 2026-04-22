@@ -6,13 +6,12 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public interface IModuleVisualObject : IVisualObject, IPoolObject
+    public interface IModuleVisualObject : IVisualObject, IPoolObject, IHaveTransform
     {
         Bounds LocalBounds { get; }
         Bounds Bounds { get; }
         float ModuleLocalOrder { get; set; }
         IExtensibleItem Owner { get; }
-        ITransform Transform { get; }
         IReadOnlyList<IPortVisualObject> PortsVisualObjects { get; }
         IPortVisualObjectDirtyTracker DirtyTracker { get; }
         void FinishInitialization(IExtensibleItem owner);

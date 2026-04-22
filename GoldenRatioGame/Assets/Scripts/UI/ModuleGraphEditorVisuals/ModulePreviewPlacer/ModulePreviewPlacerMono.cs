@@ -5,46 +5,43 @@ using UnityEngine;
 
 namespace IM.UI
 {
-    public class ModulePreviewPlacerMono : MonoBehaviour, IModulePreviewPlacer
+    public class ModulePreviewPlacerMono : MonoBehaviour, IPreviewPlacer<IExtensibleItem,IModuleVisualObject>
     {
         [SerializeField] private Transform _previewParent;
         [SerializeField] private Camera _camera;
         [SerializeField] private ModuleVisualObjectPreset _preset;
-        private IModulePreviewPlacer _modulePreviewPlacer;
+        private  IPreviewPlacer<IExtensibleItem,IModuleVisualObject> _previewPlacer;
 
-        public IModuleVisualObject PreviewObject => _modulePreviewPlacer.PreviewObject;
-        public bool IsPreviewing => _modulePreviewPlacer.IsPreviewing;
+        public IModuleVisualObject PreviewObject => _previewPlacer.PreviewObject;
+        public bool IsPreviewing => _previewPlacer.IsPreviewing;
 
         public Func<IModuleVisualObject, Vector3> HoverPositionSource { get; set; } = x => (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
         private void Awake()
         {
-            _modulePreviewPlacer = new ModulePreviewPlacer(_previewParent, _preset, GetHoverPosition);
-        }
-        
-        public void StartPreview(IExtensibleItem module)
-        {
-            _modulePreviewPlacer.StartPreview(module);
-        }
-
-        public void UpdatePreviewPosition()
-        {
-            _modulePreviewPlacer.UpdatePreviewPosition();
+            _previewPlacer = new PreviewPlacer<IExtensibleItem,IModuleVisualObject>(
+                GetHoverPosition,
+                GetVisual,
+                (x,y) =>
+                {
+                    x.Extensions.Get<IModuleVisualObjectProvider>().EditorPool.Release(y);
+                });
         }
 
-        public IExtensibleItem FinalizePreview()
+        private IModuleVisualObject GetVisual(IExtensibleItem x)
         {
-            return _modulePreviewPlacer.FinalizePreview();
+            var y =x.Extensions.Get<IModuleVisualObjectProvider>().EditorPool.Get();
+            
+            _preset.ApplyTo(y);
+            y.Transform.Transform.SetParent(_previewParent,false);
+            
+            return y;
         }
 
-        public void StopPreview()
-        {
-            _modulePreviewPlacer.StopPreview();
-        }
-
-        private Vector3  GetHoverPosition(IModuleVisualObject obj)
-        {
-            return HoverPositionSource(obj);
-        }
+        public void StartPreview(IExtensibleItem module) => _previewPlacer.StartPreview(module);
+        public void UpdatePreviewPosition() => _previewPlacer.UpdatePreviewPosition();
+        public IExtensibleItem FinalizePreview() => _previewPlacer.FinalizePreview();
+        public void StopPreview() => _previewPlacer.StopPreview();
+        private Vector3  GetHoverPosition(IModuleVisualObject obj) => HoverPositionSource(obj);
     }
 }

@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 6843561717665806918}
   - component: {fileID: -4496632896880603262}
   - component: {fileID: 7544895549371979933}
+  - component: {fileID: 7112604761653458629}
   m_Layer: 0
   m_Name: Entity
   m_TagString: Untagged
@@ -450,6 +451,19 @@ MonoBehaviour:
   _rawSpeed: 1
   _accelerationTime: 0.1
   <Active>k__BackingField: 1
+--- !u!114 &7112604761653458629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7f1cc984324c38bdd85bacaf598a56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VisualsComposition::IM.ViewAnchorPositionProvider
+  _moduleVisualMapSource: {fileID: 8508053980751109502}
 --- !u!1 &4348573349406529255
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +546,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8839589395240690778}
-  - component: {fileID: 4561900822149936034}
   - component: {fileID: 4338404269155062247}
   m_Layer: 0
   m_Name: SubInteractors
@@ -556,19 +569,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2365714068825351273}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4561900822149936034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5255341128824037194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8681f00690484106874a78500699fb29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleComposition::IM.Entities.ExtensibleModuleInteractor
-  _moduleEditingContextSource: {fileID: 4342869459289063407}
 --- !u!114 &4338404269155062247
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ namespace IM.Visuals
     {
         private readonly ModuleGraphSnapshotDiffer _snapshotDiffer;
         private readonly Transform _parent;
-        private readonly IModuleVisualObjectPreset _preset;
+        private readonly IVisualObjectPreset _preset;
         
         public bool ShowPortsOnConnected { get; set; } = false;
         public bool ShowPortsOnDisconnected { get; set; } = true;
@@ -18,7 +18,7 @@ namespace IM.Visuals
             
         }
         
-        public ModuleGraphVisualObserver(Transform parent, bool useInGameObjectPool, IModuleVisualObjectPreset preset) : base(useInGameObjectPool)
+        public ModuleGraphVisualObserver(Transform parent, bool useInGameObjectPool, IVisualObjectPreset preset) : base(useInGameObjectPool)
         {
             _parent = parent;
             _preset = preset;

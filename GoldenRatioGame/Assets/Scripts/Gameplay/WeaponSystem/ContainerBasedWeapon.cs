@@ -28,6 +28,7 @@ namespace IM.WeaponSystem
             get => _itemState;
             set => _iconDrawer.IsDrawing = (_itemState = value) == ItemState.Show;
         }
+
         public IWeaponVisualsProvider WeaponVisualsProvider { get; private set; }
         
         public event Action<UseContext> AbilityStarted;
@@ -43,15 +44,12 @@ namespace IM.WeaponSystem
 
         public bool TryCast(out ICastInfo info)
         {
-            if (_castAbility.TryCast(out info))
-            {
-                AbilityStarted?.Invoke(_context);
-                AbilityFinished?.Invoke(_context);
+            if (!_castAbility.TryCast(out info)) return false;
+            
+            AbilityStarted?.Invoke(_context);
+            AbilityFinished?.Invoke(_context);
                 
-                return true;
-            }
-
-            return false;
+            return true;
         }
         public void UpdateAbilityUseContext(UseContext context)
         {

@@ -10,7 +10,7 @@ namespace IM.Abilities
     {
         private AbilityUser _abilityUser;
         public IAbilityPoolReadOnly AbilityPool => _abilityUser.AbilityPool;
-        
+
         public event Action<IAbilityReadOnly> OnAbilityStarted
         {
             add => _abilityUser.OnAbilityStarted += value;
@@ -28,9 +28,9 @@ namespace IM.Abilities
             _abilityUser = new AbilityUser(GetComponent<IAbilityPoolReadOnly>(), GetComponent<IEffectContainer>());
         }
         
-        public void ResolveRequestedAbilities(IEnumerable<IAbilityReadOnly> requestedAbilities, UseContext useContext)
+        public void ResolveRequestedAbilities(IEnumerable<KeyValuePair<IAbilityReadOnly, UseContext>> requestedAbilities)
         {
-            _abilityUser.ResolveRequestedAbilities(requestedAbilities, useContext);
+            _abilityUser.ResolveRequestedAbilities(requestedAbilities);
         }
     }
 }

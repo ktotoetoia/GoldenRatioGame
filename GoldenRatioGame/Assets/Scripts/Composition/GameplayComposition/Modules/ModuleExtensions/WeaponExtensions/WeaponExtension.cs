@@ -1,5 +1,6 @@
 ﻿using System;
 using IM.Abilities;
+using IM.Items;
 using IM.LifeCycle;
 using IM.WeaponSystem;
 using UnityEngine;
@@ -47,8 +48,13 @@ namespace IM.Modules
 
         private void InitializeDefaultWeapon()
         {
-            if (!_defaultWeaponPrefab || !Instantiate(_defaultWeaponPrefab, transform).TryGetComponent(out _defaultWeapon)) return;
-
+            if (!_defaultWeaponPrefab) return;
+            
+            GameObject defaultWeapon = Instantiate(_defaultWeaponPrefab, transform);
+            
+            if(!defaultWeapon.TryGetComponent(out _defaultWeapon)) return;
+            if (defaultWeapon.TryGetComponent(out IHaveItemState itemState)) itemState.ItemState = ItemState.Hide;
+            
             SyncWeaponEntity();
             WeaponChanged?.Invoke(Weapon);
         }

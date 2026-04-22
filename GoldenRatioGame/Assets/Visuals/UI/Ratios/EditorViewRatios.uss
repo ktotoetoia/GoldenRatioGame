@@ -1,0 +1,42 @@
+:root {
+    --left-panel: 30%;
+    --right-panel: 30%;
+    --center-panel: 40%;
+    --ability-container-height: 50%;
+    --storage-height: 50%;
+    --graph-editor-container-height: 100%;
+}
+
+.abilityContainer {
+    height: var(--ability-container-height);
+    max-height: var(--ability-container-height);
+    min-height: var(--ability-container-height);
+}
+
+.graphEditorContainer {
+    height: var(--graph-editor-container-height);
+}
+
+.storageContainer {
+    height: var(--storage-height);
+    min-height: var(--storage-height);
+}
+
+.leftPanel {
+    width: var(--left-panel);
+}
+
+.rightPanel {
+    width: var(--right-panel);
+}
+
+.middlePanel {
+    width: var(--center-panel);
+}
+
+.container {
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+}

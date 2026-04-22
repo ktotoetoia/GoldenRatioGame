@@ -18,6 +18,7 @@
     align-self: auto;
     justify-content: space-evenly;
     flex-grow: 1;
+    aspect-ratio: 1;
 }
 
 .ability {

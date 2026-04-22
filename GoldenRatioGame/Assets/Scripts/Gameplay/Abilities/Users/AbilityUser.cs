@@ -47,10 +47,9 @@ namespace IM.Abilities
             _effectContainer = effectContainer;
         }
         
-        public void ResolveRequestedAbilities(IEnumerable<IAbilityReadOnly> requestedAbilities, UseContext useContext)
+        public void ResolveRequestedAbilities(IEnumerable<KeyValuePair<IAbilityReadOnly,UseContext>> requestedAbilities)
         {
-            HashSet<IAbilityReadOnly> requested = requestedAbilities as HashSet<IAbilityReadOnly> 
-                                                  ?? new HashSet<IAbilityReadOnly>(requestedAbilities);
+            Dictionary<IAbilityReadOnly, UseContext> requested = new(requestedAbilities);
             
             if (CurrentAbility != null)
             {
@@ -60,7 +59,8 @@ namespace IM.Abilities
                 }
                 else
                 {
-                    bool stillRequested = requested.Contains(CurrentAbility);
+                    
+                    bool stillRequested = requested.TryGetValue(CurrentAbility,out UseContext context);
 
                     if (!stillRequested && CurrentAbility is IInterruptable interruptable && interruptable.TryInterrupt())
                     {
@@ -68,16 +68,16 @@ namespace IM.Abilities
                     }
                     else if (CurrentAbility is IChannelAbility && _abilityUseInfo is IChannelInfo channelInfo)
                     {
-                        channelInfo.UpdateAbilityUseContext(useContext);
+                        channelInfo.UpdateAbilityUseContext(context);
                     }
                 }
             }
             
             if (CurrentAbility != null) return;
             
-            foreach (var ability in requested)
+            foreach ((IAbilityReadOnly ability, UseContext context) in requested)
             {
-                if (TryStartAbility(ability, useContext)) break;
+                if (TryStartAbility(ability, context)) break;
             }
         }
         
