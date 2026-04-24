@@ -3,9 +3,7 @@ using IM.WeaponSystem;
 
 namespace IM.Modules
 {
-    public interface IWeaponExtension
+    public interface IWeaponExtension : IWeaponContainer, IExtension
     {
-        IWeapon Weapon { get; set; }
-        event Action<IWeapon> WeaponChanged;
     }
 }

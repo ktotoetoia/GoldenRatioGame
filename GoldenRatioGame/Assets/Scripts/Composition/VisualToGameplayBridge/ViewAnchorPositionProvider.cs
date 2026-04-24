@@ -23,6 +23,7 @@ namespace IM
 
         private static Vector3 GetPosition(IModuleVisualObject moduleVisualObject)
         {
+            
             return moduleVisualObject.Transform.Position;
         }
     }

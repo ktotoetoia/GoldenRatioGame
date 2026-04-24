@@ -6,7 +6,6 @@
     --ability-radius: 6px;
     --ability-name-color: rgb(255, 255, 255);
     --ability-description-color: rgb(192, 192, 192);
-    --ability-icon-size: 64px;
     --ability-width: 49%;
 }
 
@@ -15,7 +14,7 @@
     padding: var(--ability-padding);
     background-color: transparent;
     flex-wrap: wrap;
-    align-self: auto;
+    align-self: center;
     justify-content: space-evenly;
     flex-grow: 1;
     aspect-ratio: 1;
@@ -43,13 +42,12 @@
 }
 
 .abilityIcon {
-    width: var(--ability-icon-size);
-    height: var(--ability-icon-size);
     background-position: center;
     border-radius: 4px;
     flex-shrink: 0;
     -unity-background-scale-mode: scale-and-crop;
     align-self: center;
+    aspect-ratio: 1;
 }
 
 .abilityName {

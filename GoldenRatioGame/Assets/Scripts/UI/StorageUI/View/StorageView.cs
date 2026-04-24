@@ -10,14 +10,14 @@ namespace IM.UI
     {
         private UIDocument _document;
         private IStorageElement _storageElement;
-
+        
+        private UIDocument Document => _document ??= GetComponent<UIDocument>();
         public IStorageElement StorageElement => _storageElement ??=
-            _document.rootVisualElement.Query().ToList().FirstOrDefault(x => x is IStorageElement) as IStorageElement;
+            Document.rootVisualElement.Query().ToList().FirstOrDefault(x => x is IStorageElement) as IStorageElement;
 
         private void Awake()
         {
-            _document = GetComponent<UIDocument>();
-            _document.rootVisualElement.visible = false;
+            Document.rootVisualElement.visible = false;
         }
 
         public void SetStorage(IReadOnlyStorage storage)
@@ -26,13 +26,13 @@ namespace IM.UI
                 throw new ArgumentException("storage must implement IStorageEvents to be used in storage view");
             
             StorageElement.SetStorage(storage,events);
-            _document.rootVisualElement.visible = true;
+            Document.rootVisualElement.visible = true;
         }
 
         public void ClearStorage()
         {
             StorageElement.ClearStorage();
-            _document.rootVisualElement.visible = false;
+            Document.rootVisualElement.visible = false;
         }
     }
 }

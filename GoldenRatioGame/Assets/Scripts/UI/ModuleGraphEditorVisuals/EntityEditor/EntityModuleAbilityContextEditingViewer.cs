@@ -9,10 +9,10 @@ namespace IM.UI
     [DefaultExecutionOrder(EntityContextEditorExecutionOrder)]
     public class EntityModuleAbilityContextEditingViewer : MonoBehaviour, IEntityEditor
     {
-        [SerializeField] private List<ContextVisualizer> _contextVisualizers;
+        [SerializeField] private List<ContextViewer> _contextViewers;
         [SerializeField] private List<StorageView> _storageViews;
         [SerializeField] private AbilityPoolView _abilityPoolView;
-        private IAbilityPoolReadOnly _abilityPool;
+        [SerializeField] private WeaponVisualView _weaponVisualView;
         private IModuleEntity _entity;
 
         private const int EntityContextEditorExecutionOrder = 10000;
@@ -24,12 +24,12 @@ namespace IM.UI
             
             IModuleEditingContext moduleEditingContext = entity.ModuleEditingContextEditor.BeginEdit();
             _entity = entity;
-            _abilityPool = moduleEditingContext.ConvertableObjects.Get<IAbilityPoolReadOnly>();
 
-            foreach (ContextVisualizer visualizer in _contextVisualizers) visualizer.SetContext(moduleEditingContext);
+            foreach (ContextViewer visualizer in _contextViewers) visualizer.SetContext(moduleEditingContext);
             foreach (StorageView storageView in _storageViews) storageView.SetStorage(moduleEditingContext.Storage);
             
-            _abilityPoolView.SetAbilityPool(_abilityPool);
+            _abilityPoolView?.SetAbilityPool(moduleEditingContext.ConvertableObjects.Get<IAbilityPoolReadOnly>());
+            _weaponVisualView?.SetAbilityPool(moduleEditingContext.ConvertableObjects.Get<IContainerAbilityPool>());
         }
 
         public void ForceClearEntity()
@@ -41,10 +41,11 @@ namespace IM.UI
             
             _entity = null;
             
-            foreach (ContextVisualizer visualizer in _contextVisualizers) visualizer.ClearContext();
+            foreach (ContextViewer visualizer in _contextViewers) visualizer.ClearContext();
             foreach (StorageView storageView in _storageViews) storageView.ClearStorage();
             
-            _abilityPoolView.ClearEntity();
+            _abilityPoolView?.ClearEntity();
+            _weaponVisualView?.ClearEntity();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace IM.Modules
         public Type ReadOnlyType => typeof(ContainerAbilityPool);
 
         public object CreateReadOnly() => new ContainerAbilityPool();
-        public object ToReadOnly(object mutable) => new ContainerAbilityPool((mutable as IContainerAbilityPool).AbilityContainers);
-        public object ToMutable(object readOnly) => new ContainerAbilityPool((readOnly as IContainerAbilityPool).AbilityContainers);
+        public object ToReadOnly(object mutable) => new ContainerAbilityPool(((IContainerAbilityPool)mutable).AbilityContainers);
+        public object ToMutable(object readOnly) => new ContainerAbilityPool(((IContainerAbilityPool)readOnly).AbilityContainers);
     }
 }

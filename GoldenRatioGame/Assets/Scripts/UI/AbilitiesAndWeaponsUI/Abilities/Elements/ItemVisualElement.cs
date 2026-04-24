@@ -7,20 +7,20 @@ using UnityEngine.UIElements;
 namespace IM.UI
 {
     [UxmlElement]
-    public partial class AbilityVisualElement : VisualElement
+    public partial class ItemVisualElement : VisualElement
     {
         private readonly MarqueeContainerBase _nameLabel;
         private readonly Image _iconElement;
         
-        public IAbilityReadOnly Ability { get; set; }
-        
-        public AbilityVisualElement()
+        public ItemVisualElement()
         {
             AddToClassList(AbilityClassLists.Ability);
 
-            _iconElement = new Image();
-            _iconElement.scaleMode = ScaleMode.ScaleToFit;
-            
+            _iconElement = new Image
+            {
+                scaleMode = ScaleMode.ScaleToFit
+            };
+
             _nameLabel = new FadingMarqueeContainer()
             {
                 DurationSec = 2f,
@@ -31,11 +31,11 @@ namespace IM.UI
             Add(_nameLabel);
         }
 
-        public void SetAbility(IAbilityReadOnly ability)
+        public void SetItem(object item)
         {
-            _nameLabel.Text = ability.Name;
+            if(item is IHaveName named) _nameLabel.Text = named.Name;
 
-            if (ability is IHaveIcon { Icon: not null } icon)
+            if (item is IHaveIcon { Icon: not null } icon)
             {
                 _nameLabel.RemoveFromHierarchy();
                 

@@ -284,8 +284,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 269530789}
-  - component: {fileID: 269530791}
   - component: {fileID: 269530790}
+  - component: {fileID: 269530791}
   m_Layer: 5
   m_Name: AbilityView
   m_TagString: Untagged
@@ -392,18 +392,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleGraphEditorVisuals::IM.Visuals.Graph.ModulePreviewPlacerMono
   _previewParent: {fileID: 382819395}
-  _camera: {fileID: 1204849133}
   _preset:
-    _order: 1000
-    _layer: 5
-    _visible: 1
-    _defaultTransform:
-      _changePosition: 1
-      _changeRotation: 1
-      _changeScale: 1
-      _position: {x: 0, y: 0, z: 0}
-      _rotation: {x: 0, y: 0, z: 0, w: 1}
-      _scale: {x: 1, y: 1, z: 1}
+    _preset:
+      <Order>k__BackingField: 1000
+      <Layer>k__BackingField: 5
+      <Visible>k__BackingField: 1
+      <DefaultTransform>k__BackingField:
+        _changePosition: 1
+        _changeRotation: 1
+        _changeScale: 1
+        _position: {x: 0, y: 0, z: 0}
+        _rotation: {x: 0, y: 0, z: 0, w: 1}
+        _scale: {x: 1, y: 1, z: 1}
     <PortsVisible>k__BackingField: 1
 --- !u!114 &313381391
 MonoBehaviour:
@@ -521,17 +521,86 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleGraphEditorVisuals::IM.Visuals.Graph.ModuleGraphView
   _preset:
-    _order: 0
-    _layer: 5
-    _visible: 1
-    _defaultTransform:
-      _changePosition: 0
-      _changeRotation: 0
-      _changeScale: 0
-      _position: {x: 0, y: 0, z: 0}
-      _rotation: {x: 0, y: 0, z: 0, w: 1}
-      _scale: {x: 1, y: 1, z: 1}
+    _preset:
+      <Order>k__BackingField: 0
+      <Layer>k__BackingField: 5
+      <Visible>k__BackingField: 1
+      <DefaultTransform>k__BackingField:
+        _changePosition: 0
+        _changeRotation: 0
+        _changeScale: 0
+        _position: {x: 0, y: 0, z: 0}
+        _rotation: {x: 0, y: 0, z: 0, w: 1}
+        _scale: {x: 1, y: 1, z: 1}
     <PortsVisible>k__BackingField: 1
+--- !u!1 &439736649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 439736650}
+  - component: {fileID: 439736651}
+  - component: {fileID: 439736652}
+  m_Layer: 5
+  m_Name: WeaponView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &439736650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439736649}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 851632501}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &439736651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439736649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: eda9c9fc481388c47846da0379501e78, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 8f4fb41a374acca4d9e5046a41056875, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &439736652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439736649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464f0de09e0a4e1199a9069a27e3a60a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: WeaponUI::IM.UI.WeaponVisualView
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,6 +751,7 @@ GameObject:
   - component: {fileID: 686767810}
   - component: {fileID: 686767809}
   - component: {fileID: 686767808}
+  - component: {fileID: 686767811}
   m_Layer: 5
   m_Name: WeaponStorageView
   m_TagString: Untagged
@@ -752,6 +822,30 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &686767811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686767806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 684feb00cc8e43c0910cecc244739dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.UI.WeaponPreviewPlacer
+  _previewParent: {fileID: 382819395}
+  _preset:
+    <Order>k__BackingField: 1000
+    <Layer>k__BackingField: 5
+    <Visible>k__BackingField: 1
+    <DefaultTransform>k__BackingField:
+      _changePosition: 1
+      _changeRotation: 1
+      _changeScale: 1
+      _position: {x: 0, y: 0, z: 0}
+      _rotation: {x: 0, y: 0, z: 0, w: 1}
+      _scale: {x: 1, y: 1, z: 1}
 --- !u!1 &851632500
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,6 +857,7 @@ GameObject:
   - component: {fileID: 851632501}
   - component: {fileID: 851632503}
   - component: {fileID: 851632504}
+  - component: {fileID: 851632505}
   m_Layer: 5
   m_Name: ModuleEditor
   m_TagString: Untagged
@@ -788,6 +883,7 @@ Transform:
   - {fileID: 382819395}
   - {fileID: 313381387}
   - {fileID: 686767807}
+  - {fileID: 439736650}
   m_Father: {fileID: 1315967220}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &851632503
@@ -802,13 +898,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5125ecdc42ea48eea15aef184131b6a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleGraphEditorVisuals::IM.Visuals.Graph.ModuleGraphEditorView
-  _contextVisualizers:
+  _contextViewers:
   - {fileID: 851632504}
   - {fileID: 382819396}
   _storageViews:
   - {fileID: 313381392}
   - {fileID: 686767809}
   _abilityPoolView: {fileID: 269530791}
+  _weaponVisualView: {fileID: 439736652}
 --- !u!114 &851632504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -822,10 +919,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.Visuals.Graph.ModuleContextInput
   _moduleGraphView: {fileID: 382819396}
-  _storageView: {fileID: 313381392}
-  _previewPlacer: {fileID: 313381388}
+  _moduleStorageView: {fileID: 313381392}
+  _modulePreviewPlacer: {fileID: 313381388}
   _uiCamera: {fileID: 1204849133}
   _addWorldDistance: 0.6
+--- !u!114 &851632505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851632500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 823551ee68cf4b8386d87ba964131e0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.UI.WeaponViewInteraction
+  _weaponStorage: {fileID: 686767809}
+  _weaponView: {fileID: 439736652}
+  _weaponPreviewPlacer: {fileID: 686767811}
 --- !u!1 &1204849130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1007,6 +1119,8 @@ GameObject:
   - component: {fileID: 1546399637}
   - component: {fileID: 1546399640}
   - component: {fileID: 1546399639}
+  - component: {fileID: 1546399642}
+  - component: {fileID: 1546399641}
   m_Layer: 6
   m_Name: Aligner
   m_TagString: Untagged
@@ -1179,6 +1293,39 @@ MonoBehaviour:
   _elementSource: {fileID: 1546399632}
   _elementName: WeaponStorageContainer
   _uiCamera: {fileID: 1204849133}
+--- !u!114 &1546399641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546399629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdb78eb2db8496588c12def4af63c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Visuals::IM.Visuals.SetWorldUIScaleToElement
+  _screenDoc: {fileID: 1546399632}
+  _worldDoc: {fileID: 439736651}
+  _elementName: WeaponContainer
+  _uiCamera: {fileID: 1204849133}
+  _scaleMultiplier: 100
+--- !u!114 &1546399642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546399629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb20a2578aba4d5eae26b61327103251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Visuals::IM.Visuals.SetPositionToElement
+  _transformToSet: {fileID: 439736650}
+  _elementSource: {fileID: 1546399632}
+  _elementName: WeaponContainer
+  _uiCamera: {fileID: 1204849133}
 --- !u!1 &1592484094
 GameObject:
   m_ObjectHideFlags: 0
@@ -1308,6 +1455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entityModuleAbilityContextEditingViewer: {fileID: 851632503}
   _graphViewInteraction: {fileID: 851632504}
+  _weaponViewInteraction: {fileID: 851632505}
   _gameCamera: {fileID: 519420034}
   _uiCamera: {fileID: 1204849133}
   _abilityKeys: 43010000440100003100000032000000330000007100000065000000

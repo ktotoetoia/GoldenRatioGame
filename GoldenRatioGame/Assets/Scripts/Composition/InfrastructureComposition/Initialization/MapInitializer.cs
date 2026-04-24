@@ -27,6 +27,10 @@ namespace IM
 
             C(floorGraph,factory);
             C(floorGraph,factory);
+            C(floorGraph,factory);
+            C(floorGraph,factory);
+            C(floorGraph,factory);
+            C(floorGraph,factory);
             
             floor.SetFloorGraph(floorGraph);
 

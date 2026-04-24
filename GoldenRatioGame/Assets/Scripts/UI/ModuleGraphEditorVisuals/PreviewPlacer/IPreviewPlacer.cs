@@ -1,7 +1,4 @@
-﻿using IM.Modules;
-using IM.Visuals;
-
-namespace IM.UI
+﻿namespace IM.UI
 {
     public interface IPreviewPlacer<TObject, out TVisual>
     {

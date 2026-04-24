@@ -1,8 +1,8 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Visuals/UI/Module%20Editor/EditorViewRatios.uss?fileID=7433441132597879392&amp;guid=5bab9398e3e32ba4793994d6ba435ffc&amp;type=3#EditorViewRatios"/>
-    <ui:VisualElement name="AllContainer" style="flex-grow: 1; flex-direction: row;">
+    <Style src="project://database/Assets/Visuals/UI/Ratios/EditorViewRatios.uss?fileID=7433441132597879392&amp;guid=5bab9398e3e32ba4793994d6ba435ffc&amp;type=3#EditorViewRatios"/>
+    <ui:VisualElement name="AllContainer" style="flex-grow: 1; flex-direction: row; aspect-ratio: 1.777778; align-self: center;">
         <ui:VisualElement name="LeftPanel" class="leftPanel" style="flex-grow: 1;">
-            <ui:VisualElement name="AbilityContainer" class="abilityContainer container"/>
+            <ui:VisualElement name="WeaponStorageContainer" class="storageContainer container" style="flex-grow: 1;"/>
             <ui:VisualElement name="WeaponContainer" class="abilityContainer container" style="flex-grow: 1;"/>
         </ui:VisualElement>
         <ui:VisualElement name="MiddlePanel" class="middlePanel" style="flex-grow: 1;">
@@ -10,7 +10,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="RightPanel" class="rightPanel" style="flex-grow: 1;">
             <ui:VisualElement name="StorageContainer" class="storageContainer container"/>
-            <ui:VisualElement name="WeaponStorageContainer" class="storageContainer container" style="flex-grow: 1;"/>
+            <ui:VisualElement name="AbilityContainer" class="abilityContainer container"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

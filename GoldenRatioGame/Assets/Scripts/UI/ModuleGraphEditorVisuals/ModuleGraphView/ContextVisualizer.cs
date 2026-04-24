@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace IM.UI
 {
-    public class ContextVisualizer : MonoBehaviour
+    public class ContextViewer : MonoBehaviour
     {
         public virtual void SetContext(IModuleEditingContext context) { }
         public virtual void ClearContext() { }

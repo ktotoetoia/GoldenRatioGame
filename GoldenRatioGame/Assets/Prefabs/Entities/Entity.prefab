@@ -410,7 +410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Entities::IM.Entities.RangeBasedInteractor
   _subInteractorSource: {fileID: 5255341128824037194}
-  _maxInteractionRange: 5
+  _maxInteractionRange: 1
   _interactionTime: 0.3
 --- !u!114 &7544895549371979933
 MonoBehaviour:
@@ -686,16 +686,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ModuleGraphVisualObserver
   _preset:
-    _order: 0
-    _layer: 0
-    _visible: 1
-    _defaultTransform:
-      _changePosition: 0
-      _changeRotation: 0
-      _changeScale: 0
-      _position: {x: 0, y: 0, z: 0}
-      _rotation: {x: 0, y: 0, z: 0, w: 1}
-      _scale: {x: 1, y: 1, z: 1}
+    _preset:
+      <Order>k__BackingField: 0
+      <Layer>k__BackingField: 0
+      <Visible>k__BackingField: 1
+      <DefaultTransform>k__BackingField:
+        _changePosition: 0
+        _changeRotation: 0
+        _changeScale: 0
+        _position: {x: 0, y: 0, z: 0}
+        _rotation: {x: 0, y: 0, z: 0, w: 1}
+        _scale: {x: 1, y: 1, z: 1}
     <PortsVisible>k__BackingField: 0
 --- !u!114 &1996564249185061140
 MonoBehaviour:

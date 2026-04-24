@@ -1,5 +1,4 @@
 ﻿using System;
-using IM.Modules;
 using IM.Transforms;
 using IM.Visuals;
 using UnityEngine;
@@ -15,7 +14,6 @@ namespace IM.UI
         
         public TVisual PreviewObject { get; private set; }
         public bool IsPreviewing => PreviewObject != null;
-
         public Func<TVisual, Vector3> GetOffset { get; set; } = x =>  Vector3.zero;
         
         public PreviewPlacer(Func<TVisual, Vector3> getPreviewPosition,Func<TObject, TVisual> getVisual,Action<TObject,TVisual> releaseVisual)
@@ -50,7 +48,7 @@ namespace IM.UI
         {
             if (PreviewObject == null) return default;
             
-            var result = _result;
+            TObject result = _result;
             
             StopPreview();
             
