@@ -23,14 +23,14 @@ namespace IM
             if (!moduleVisualObject.Owner.Extensions.TryGet(out _weaponExtension))
                 return;
 
-            _weaponExtension.WeaponChanged += OnWeaponChanged;
-            ApplyWeapon(_weaponExtension.Weapon);
+            _weaponExtension.PreferredWeaponChanged += OnPreferredWeaponChanged;
+            ApplyWeapon(_weaponExtension.PreferredWeapon);
         }
 
         private void OnDestroy()
         {
             if (_weaponExtension != null)
-                _weaponExtension.WeaponChanged -= OnWeaponChanged;
+                _weaponExtension.PreferredWeaponChanged -= OnPreferredWeaponChanged;
         }
 
         private void Update()
@@ -44,7 +44,7 @@ namespace IM
             _weaponVisual.Order = _moduleVisualObject.Order;
         }
 
-        private void OnWeaponChanged(IWeapon weapon)
+        private void OnPreferredWeaponChanged(IWeapon weapon)
         {
             ApplyWeapon(weapon);
         }
@@ -55,16 +55,14 @@ namespace IM
 
             _currentWeapon = weapon;
 
-            if (!_visible || weapon == null)
-                return;
+            if (!_visible || weapon == null) return;
 
             _weaponVisual = weapon.WeaponVisualsProvider.WeaponVisualsPool.Get();
         }
 
         private void ReleaseCurrentVisual()
         {
-            if (_currentWeapon == null || _weaponVisual == null)
-                return;
+            if (_currentWeapon == null || _weaponVisual == null) return;
 
             _currentWeapon.WeaponVisualsProvider.WeaponVisualsPool.Release(_weaponVisual);
             _weaponVisual = null;
@@ -80,7 +78,7 @@ namespace IM
         {
             _visible = true;
 
-            if (_weaponExtension != null) ApplyWeapon(_weaponExtension.Weapon);
+            if (_weaponExtension != null) ApplyWeapon(_weaponExtension.PreferredWeapon);
         }
     }
 }

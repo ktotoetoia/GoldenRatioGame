@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af69718ad9434cb6bf8be3962d30ad2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleComposition::IM.Modules.WeaponExtension
-  _defaultWeaponPrefab: {fileID: 1834165590337563234, guid: 522550655dfe66c45a1a8edbc8512b30, type: 3}
+  _defaultWeaponPrefab: {fileID: 5090932878195986776, guid: f3462c44849415747862387dbb549387, type: 3}
 --- !u!114 &-1796868246183028789
 MonoBehaviour:
   m_ObjectHideFlags: 0

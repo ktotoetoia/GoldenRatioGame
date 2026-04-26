@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7065357081480322325
+--- !u!1001 &981149162836713793
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,26 +11,26 @@ PrefabInstance:
     - target: {fileID: -8943979639717683162, guid: 59ca93a25dd437541aa2d703651541bd, type: 3}
       propertyPath: _weaponVisualPrefab
       value: 
-      objectReference: {fileID: 2781509857549455693, guid: d89a12f8d3156844daf60aaa0ff57de4, type: 3}
+      objectReference: {fileID: 2781509857549455693, guid: fc442f33938281540b6459281ac46195, type: 3}
     - target: {fileID: -3593514902449251487, guid: 59ca93a25dd437541aa2d703651541bd, type: 3}
       propertyPath: m_Size.x
-      value: 0.52
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: -3593514902449251487, guid: 59ca93a25dd437541aa2d703651541bd, type: 3}
       propertyPath: m_Size.y
-      value: 0.24
+      value: 0.32
       objectReference: {fileID: 0}
     - target: {fileID: -3593514902449251487, guid: 59ca93a25dd437541aa2d703651541bd, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -6313286699832280763, guid: 7113e858f7caa1642b5e302fe3c3c98e, type: 3}
+      objectReference: {fileID: 7091213522169619590, guid: b28f93700d64ad048abe12dfa01f5637, type: 3}
     - target: {fileID: -3593514902449251487, guid: 59ca93a25dd437541aa2d703651541bd, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -555889277035671066, guid: 59ca93a25dd437541aa2d703651541bd, type: 3}
       propertyPath: _assetReference.m_AssetGUID
-      value: 72b35961a9a5cd342ba0ed456ba27ac6
+      value: f3462c44849415747862387dbb549387
       objectReference: {fileID: 0}
     - target: {fileID: 5162407088676444183, guid: 59ca93a25dd437541aa2d703651541bd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5420959071366246425, guid: 59ca93a25dd437541aa2d703651541bd, type: 3}
       propertyPath: m_Name
-      value: Clank Piercer 20th
+      value: Default Fist
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -82,39 +82,39 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5420959071366246425, guid: 59ca93a25dd437541aa2d703651541bd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 798688996735613557}
+      addedObject: {fileID: -2399243352298076412}
     - targetCorrespondingSourceObject: {fileID: 5420959071366246425, guid: 59ca93a25dd437541aa2d703651541bd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7304155804314499994}
+      addedObject: {fileID: -1757960654996738958}
   m_SourcePrefab: {fileID: 100100000, guid: 59ca93a25dd437541aa2d703651541bd, type: 3}
---- !u!1 &2969610865149193484 stripped
+--- !u!1 &5090932878195986776 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5420959071366246425, guid: 59ca93a25dd437541aa2d703651541bd, type: 3}
-  m_PrefabInstance: {fileID: 7065357081480322325}
+  m_PrefabInstance: {fileID: 981149162836713793}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &798688996735613557
+--- !u!114 &-2399243352298076412
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2969610865149193484}
+  m_GameObject: {fileID: 5090932878195986776}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5966f126503b42a6a54c4ad86f594a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Abilities::IM.Abilities.ProjectileAbilityContainer
-  _projectilePrefab: {fileID: 5650377586138757497, guid: d41488b76feacdf4eafb2d6bcc318acc, type: 3}
+  _projectilePrefab: {fileID: 6940537037438603345, guid: 9da5f54910a377c40879b25afaa0dc06, type: 3}
   _cooldown: 0.2
   _projectileSpeed: 20
-  _iconSprite: {fileID: 2449836824585923721, guid: cbc9f7259cc242946999c282d5a979fa, type: 3}
---- !u!114 &7304155804314499994
+  _iconSprite: {fileID: 7091213522169619590, guid: b28f93700d64ad048abe12dfa01f5637, type: 3}
+--- !u!114 &-1757960654996738958
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2969610865149193484}
+  m_GameObject: {fileID: 5090932878195986776}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc1fb55de320430d9552337381a26716, type: 3}

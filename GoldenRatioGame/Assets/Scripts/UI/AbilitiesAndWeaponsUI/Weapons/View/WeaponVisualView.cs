@@ -1,5 +1,6 @@
 ﻿using System;
 using IM.Abilities;
+using IM.WeaponSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,6 +8,7 @@ namespace IM.UI
 {
     public class WeaponVisualView : MonoBehaviour
     {
+        [SerializeField] private Camera _uiCamera;
         private UIDocument _document;
         private WeaponVisualContainer _container;
         private IAbilityPoolReadOnly _abilityPool;
@@ -41,6 +43,15 @@ namespace IM.UI
             
             _abilityPool = null;
             _document.rootVisualElement.visible = false;
+        }
+        public IWeaponContainer GetWeaponContainerAtPosition(Vector3 worldPosition)
+        {
+            foreach (var (weaponContainer, visualElement) in _container.WeaponContainers)
+            {
+                if (visualElement?.panel != null) return weaponContainer;
+            }
+            
+            return null;
         }
     }
 }

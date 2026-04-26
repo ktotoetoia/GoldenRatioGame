@@ -10,8 +10,9 @@ namespace IM.UI
     [UxmlElement]
     public partial class WeaponVisualContainer : VisualElement
     {
-        private readonly Dictionary<IWeaponContainer, VisualElement> _weaponContainers = new();
         private IContainerAbilityPool _containerAbilityPool;
+        
+        public Dictionary<IWeaponContainer, ItemVisualElement> WeaponContainers { get; } = new();
 
         public void SetContainerAbilityPool(IContainerAbilityPool containerAbilityPool)
         {
@@ -22,10 +23,9 @@ namespace IM.UI
 
         public void ClearContainerAbilityPool()
         {
-            foreach (VisualElement visual in _weaponContainers.Values)
-                Remove(visual);
-
-            _weaponContainers.Clear();
+            foreach (VisualElement visual in WeaponContainers.Values) Remove(visual);
+            
+            WeaponContainers.Clear();
             _containerAbilityPool = null;
         }
 
@@ -37,27 +37,28 @@ namespace IM.UI
 
             List<IWeaponContainer> currentData = _containerAbilityPool.AbilityContainers.OfType<IWeaponContainer>().ToList();
 
-            List<IWeaponContainer> toRemove = _weaponContainers.Keys.Except(currentData).ToList();
+            List<IWeaponContainer> toRemove = WeaponContainers.Keys.Except(currentData).ToList();
             foreach (IWeaponContainer container in toRemove) RemoveWeaponContainer(container);
 
-            List<IWeaponContainer> toAdd = currentData.Except(_weaponContainers.Keys).ToList();
+            List<IWeaponContainer> toAdd = currentData.Except(WeaponContainers.Keys).ToList();
             foreach (IWeaponContainer container in toAdd) AddWeaponContainer(container);
         }
 
         private void AddWeaponContainer(IWeaponContainer weaponContainer)
         {
             ItemVisualElement itemVisualElement = new ItemVisualElement();
-            itemVisualElement.SetItem(weaponContainer.Weapon);
-            _weaponContainers[weaponContainer] = itemVisualElement;
+            weaponContainer.PreferredWeaponChanged += x => itemVisualElement.SetItem(x);
+            itemVisualElement.SetItem(weaponContainer.PreferredWeapon);
+            WeaponContainers[weaponContainer] = itemVisualElement;
             Add(itemVisualElement);
         }
 
         private void RemoveWeaponContainer(IWeaponContainer weaponContainer)
         {
-            if (!_weaponContainers.TryGetValue(weaponContainer, out VisualElement visual)) return;
+            if (!WeaponContainers.TryGetValue(weaponContainer, out ItemVisualElement visual)) return;
 
             Remove(visual);
-            _weaponContainers.Remove(weaponContainer);
+            WeaponContainers.Remove(weaponContainer);
         }
     }
 }

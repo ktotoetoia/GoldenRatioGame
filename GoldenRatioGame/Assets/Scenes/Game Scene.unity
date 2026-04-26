@@ -601,6 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464f0de09e0a4e1199a9069a27e3a60a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: WeaponUI::IM.UI.WeaponVisualView
+  _uiCamera: {fileID: 1204849133}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

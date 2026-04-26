@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 6758064773000630412}
   - component: {fileID: 1563791358509127018}
   - component: {fileID: 8535451133996336894}
-  - component: {fileID: 4479085341360621510}
   m_Layer: 0
   m_Name: Core Humanoid
   m_TagString: Untagged
@@ -226,18 +225,3 @@ MonoBehaviour:
     _minValue: 0
     _maxValue: 100
     _value: 100
---- !u!114 &4479085341360621510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8119833187759213420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1c83efa1f8e4b719c312b9c8ff8e31f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speedModifier:
-    <Add>k__BackingField: 1
-    <Multiplication>k__BackingField: 1

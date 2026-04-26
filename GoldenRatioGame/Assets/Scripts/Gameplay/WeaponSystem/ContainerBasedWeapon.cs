@@ -10,18 +10,20 @@ namespace IM.WeaponSystem
 {
     public class ContainerBasedWeapon : DefaultEntity, IWeapon, ICastAbility,IRequireAbilityUseContext, IFocusPointProvider, IAbilityEvents, IStorable, IItem
     {
-        private ICastAbility _castAbility;
+        private IAbilityContainer _abilityContainer;
         private IIcon _icon;
         private ItemState _itemState;
         private IIconDrawer _iconDrawer;
         private UseContext _context;
 
-        public ICooldownReadOnly Cooldown => _castAbility.Cooldown;
-        public bool CanUse => _castAbility.CanUse;
+        private ICastAbility CastAbility => _abilityContainer.Ability as ICastAbility;
+        
+        public ICooldownReadOnly Cooldown => CastAbility.Cooldown;
+        public bool CanUse => CastAbility.CanUse;
         public IEntity Entity { get; set; }
         public IStorageCell Cell { get; set; }
-        public string Name => _castAbility.Name;
-        public string Description => _castAbility.Description;
+        public string Name => CastAbility.Name;
+        public string Description => CastAbility.Description;
         public IIcon Icon => _icon ??= new Icon(GetComponent<SpriteRenderer>().sprite);
         public ItemState ItemState
         {
@@ -38,13 +40,13 @@ namespace IM.WeaponSystem
         {
             WeaponVisualsProvider = GetComponent<IWeaponVisualsProvider>();
             _iconDrawer = GetComponent<IIconDrawer>();
-            _castAbility = GetComponent<IAbilityContainer>().Ability as ICastAbility;
+            _abilityContainer = GetComponent<IAbilityContainer>();
             ItemState = ItemState.Show;
         }
 
         public bool TryCast(out ICastInfo info)
         {
-            if (!_castAbility.TryCast(out info)) return false;
+            if (!CastAbility.TryCast(out info)) return false;
             
             AbilityStarted?.Invoke(_context);
             AbilityFinished?.Invoke(_context);
@@ -54,11 +56,11 @@ namespace IM.WeaponSystem
         public void UpdateAbilityUseContext(UseContext context)
         {
             _context = context;
-            (_castAbility as IRequireAbilityUseContext)?.UpdateAbilityUseContext(context);
+            (CastAbility as IRequireAbilityUseContext)?.UpdateAbilityUseContext(context);
         }
 
-        public float FocusTime => (_castAbility as IFocusPointProvider)?.FocusTime ?? 0;
-        public Vector3 GetFocusPoint() => (_castAbility as IFocusPointProvider)?.GetFocusPoint() ?? default;
-        public Vector3 GetFocusDirection() => (_castAbility as IFocusPointProvider)?.GetFocusDirection() ?? default;
+        public float FocusTime => (CastAbility as IFocusPointProvider)?.FocusTime ?? 0;
+        public Vector3 GetFocusPoint() => (CastAbility as IFocusPointProvider)?.GetFocusPoint() ?? default;
+        public Vector3 GetFocusDirection() => (CastAbility as IFocusPointProvider)?.GetFocusDirection() ?? default;
     }
 }

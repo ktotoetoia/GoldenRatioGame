@@ -13,10 +13,9 @@ namespace IM.Modules
         private IWeapon _defaultWeapon;
         private IWeapon _equippedWeapon;
         private IEntity _entity;
+        public event Action<IWeapon> PreferredWeaponChanged;
 
-        public event Action<IWeapon> WeaponChanged;
-
-        public IAbilityReadOnly Ability => Weapon;
+        public IAbilityReadOnly Ability => PreferredWeapon;
 
         public IEntity Entity
         {
@@ -28,18 +27,22 @@ namespace IM.Modules
             }
         }
 
+        public IWeapon DefaultWeapon => _defaultWeapon;
+
         public IWeapon Weapon
         {
-            get => _equippedWeapon ?? _defaultWeapon;
+            get => _equippedWeapon;
             set
             {
                 if (_equippedWeapon == value) return;
 
                 _equippedWeapon = value;
                 SyncWeaponEntity();
-                WeaponChanged?.Invoke(Weapon);
+                PreferredWeaponChanged?.Invoke(Weapon);
             }
         }
+
+        public IWeapon PreferredWeapon => _equippedWeapon ?? _defaultWeapon;
 
         private void Awake()
         {
@@ -56,12 +59,12 @@ namespace IM.Modules
             if (defaultWeapon.TryGetComponent(out IHaveItemState itemState)) itemState.ItemState = ItemState.Hide;
             
             SyncWeaponEntity();
-            WeaponChanged?.Invoke(Weapon);
+            PreferredWeaponChanged?.Invoke(PreferredWeapon);
         }
 
         private void SyncWeaponEntity()
         {
-            if (Weapon != null) Weapon.Entity = _entity;
+            if (PreferredWeapon != null) PreferredWeapon.Entity = _entity;
         }
     }
 }

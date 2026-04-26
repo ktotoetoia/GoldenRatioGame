@@ -43,7 +43,11 @@ namespace IM.UI
         {
             if (_weaponPreviewPlacer.IsPreviewing)
             {
-                _weaponPreviewPlacer.FinalizePreview();
+                IWeapon w = _weaponPreviewPlacer.FinalizePreview();
+                if (_weaponView.GetWeaponContainerAtPosition(GetPointerPosition()) is { } weaponContainer && w != null)
+                {
+                    weaponContainer.Weapon = w;
+                }
             }
         }
         

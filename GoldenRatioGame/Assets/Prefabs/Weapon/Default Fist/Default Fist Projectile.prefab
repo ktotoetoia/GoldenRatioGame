@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1106358724110409568
+--- !u!1001 &2405206657347368520
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,13 +8,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -1629860833933646921, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
-      propertyPath: _damage
-      value: 120
+    - target: {fileID: 1569317106877436456, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      propertyPath: _toFinishTime
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4697464553835882009, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
       propertyPath: m_Name
-      value: Default Projectile Variant
+      value: Default Fist Projectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722860652342995485, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722860652342995485, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722860652342995485, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4722860652342995485, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -59,7 +71,7 @@ PrefabInstance:
     - target: {fileID: 6241557077627601779, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1719117009991353168, guid: 7113e858f7caa1642b5e302fe3c3c98e, type: 3}
+      objectReference: {fileID: 7091213522169619590, guid: b28f93700d64ad048abe12dfa01f5637, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -10,27 +10,38 @@ namespace IM.Visuals
     public class SetBoolOnAbilityUsed : MonoBehaviour
     {
         [SerializeField] private string _boolName;
-        private IAbilityEvents _contextAbility;
-        private IValueStorageContainer _container;
-        private IValueStorage<bool> _storage;
+        private IAbilityExtension _abilityExtension;
+        private IAbilityEvents _lastEvents;
+        private IValueStorage<bool> _valueStorage;
         private bool _used;
         
         private void Awake()
         {
-            if (GetComponent<IAbilityExtension>().Ability is not IAbilityEvents useContextAbility)
-                throw new Exception($"To use {nameof(SetBoolOnAbilityUsed)}, ability must implement IAbilityEvents");
-            
-            useContextAbility.AbilityStarted += AbilityStarted;
-            _contextAbility = useContextAbility;
-            _container = GetComponent<IValueStorageContainer>();
-            _storage = _container.GetOrCreate<bool>(_boolName);
+            _abilityExtension = GetComponent<IAbilityExtension>();
+            _valueStorage =  GetComponent<IValueStorageContainer>().GetOrCreate<bool>(_boolName);
         }
 
         private void Update()
         {
-            if (_storage != null) _storage.Value = _used;
+            UpdateAbility();
+            
+            if (_valueStorage != null) _valueStorage.Value = _used;
             
             _used = false;
+        }
+        
+        private void UpdateAbility()
+        {
+            if (_abilityExtension.Ability != _lastEvents && _lastEvents != null)
+            {
+                _lastEvents.AbilityStarted -= AbilityStarted;
+                _lastEvents = null;
+            }
+            if (_abilityExtension.Ability is IAbilityEvents events && _lastEvents == null)
+            {
+                _lastEvents = events;
+                _lastEvents.AbilityStarted += AbilityStarted;
+            }
         }
 
         private void AbilityStarted(UseContext context)
@@ -40,7 +51,7 @@ namespace IM.Visuals
 
         private void OnDestroy()
         {
-            if (_contextAbility != null) _contextAbility.AbilityStarted -= AbilityStarted;
+            if (_lastEvents != null) _lastEvents.AbilityStarted -= AbilityStarted;
         }
     }
 }

@@ -40,11 +40,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 522550655dfe66c45a1a8edbc8512b30
-    m_Address: Assets/Prefabs/Weapon/TestWeapon/TestWeapon.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5eecb838571f31948a81b32f27795908
     m_Address: Assets/Prefabs/Enemy.prefab
     m_ReadOnly: 0
@@ -57,6 +52,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7245ca3eed7971c49b9c2c812086eabb
     m_Address: Assets/Modules/Default/Arm/Default Arm/Arm Humanoid.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72b35961a9a5cd342ba0ed456ba27ac6
+    m_Address: Assets/Prefabs/Weapon/Clank Piercer 20th/Default Weapon Variant.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -93,6 +93,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f21da8245e0ee1c4aaf857bbcd3cfed9
     m_Address: Assets/Prefabs/Player.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f3462c44849415747862387dbb549387
+    m_Address: Assets/Prefabs/Weapon/Default Fist/Default Fist.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
