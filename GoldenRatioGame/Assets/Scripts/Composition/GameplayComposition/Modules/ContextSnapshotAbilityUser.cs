@@ -29,7 +29,7 @@ namespace IM.Modules
         private void Awake()
         {
             _moduleEditingContextEditor = GetComponent<IModuleEditingContextEditor>();
-            _abilityUser = new AbilityUser(new ReferenceAbilityPoolReadOnly(() => _moduleEditingContextEditor.Snapshot.ConvertableObjects.Get<IAbilityPoolReadOnly>()), GetComponent<IEffectContainer>());
+            _abilityUser = new AbilityUser(new ReferenceAbilityPoolReadOnly(() => _moduleEditingContextEditor.Snapshot.Capabilities.Get<IAbilityPoolReadOnly>()), GetComponent<IEffectContainer>());
         }
         
         public void ResolveRequestedAbilities(IEnumerable<KeyValuePair<IAbilityReadOnly, UseContext>> requestedAbilities)

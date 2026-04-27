@@ -41,8 +41,6 @@ namespace IM.UI
         private void GraphInput()
         {
             if (ShouldTryQuickRemove()) _operations.TryQuickRemoveModule();
-            if (ShouldUndo()) _operations.Undo(1);
-            if (ShouldRedo()) _operations.Redo(1);
             if (!ShouldTryQuickRemoveAtPointer()) return;
             
             Vector3 mousePosition = GetPointerPosition();
@@ -96,7 +94,7 @@ namespace IM.UI
                     var modulePort = module.DataPorts.ElementAtOrDefault(toAdd.PortsVisualObjects.ToList().IndexOf(a));
                     var targetPort = _moduleGraphView.VisualObserver.PortToVisualObjects.FirstOrDefault(x => x.Value == otherPort).Key;
                     
-                    if (newDistance < distance && _operations.Graph.CanAddAndConnect(module, modulePort, targetPort))
+                    if (newDistance < distance && _operations.GraphEditingService.CanAddAndConnect(module, modulePort, targetPort))
                     {
                         distance = newDistance;
                         toAddPort = modulePort;
@@ -107,7 +105,7 @@ namespace IM.UI
             
             if (distance > _addWorldDistance || toAddPort == null) return;
             
-            _operations.Graph.AddAndConnect(toAddPort.DataModule,toAddPort,onGraphPort);
+            _operations.GraphEditingService.AddAndConnect(toAddPort.DataModule,toAddPort,onGraphPort);
         }
 
         private void ObjectInteracted(object obj)
@@ -118,7 +116,8 @@ namespace IM.UI
         public override void SetContext(IModuleEditingContext moduleEditingContext)
         {
             _context = moduleEditingContext;
-            _operations = new CommandGraphOperations<IExtensibleItem>(moduleEditingContext.ModuleGraph);
+            _operations = new CommandGraphOperations<IExtensibleItem>(moduleEditingContext.Graph,
+                moduleEditingContext.Services.Get<GraphEditingService<IExtensibleItem>>());
         }
         
         public override void ClearContext()

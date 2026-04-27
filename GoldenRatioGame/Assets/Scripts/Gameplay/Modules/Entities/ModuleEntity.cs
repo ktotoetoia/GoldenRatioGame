@@ -40,20 +40,17 @@ namespace IM.Modules
         {
             IModuleEditingContext moduleEditingContext = ModuleEditingContextEditor.BeginEdit();
             
-            SafeClearGraph(moduleEditingContext.ModuleGraph);
-            moduleEditingContext.SetUnsafe(true);
-            UnsafeClearGraph(moduleEditingContext.ModuleGraph);
-            moduleEditingContext.SetUnsafe(false);
+            SafeClearGraph(moduleEditingContext.Services.Get<IGraphEditingService<IExtensibleItem>>());
+            UnsafeClearGraph(moduleEditingContext.Services.Get<UnsafeGraphEditingService<IExtensibleItem>>());
             
             List<IExtensibleItem> modules = new List<IExtensibleItem>();
             
-            foreach (IStorageCellReadonly storageCell in moduleEditingContext.MutableStorage.Where(x => x.Item is IExtensibleItem).ToList())
+            foreach (IStorageCellReadonly storageCell in moduleEditingContext.Storage.Where(x => x.Item is IExtensibleItem).ToList())
             {
-                if (storageCell.Item is IExtensibleItem item)
-                {
-                    moduleEditingContext.RemoveFromContext(item);
-                    modules.Add(item);
-                }
+                if (storageCell.Item is not IExtensibleItem item) continue;
+                
+                moduleEditingContext.RemoveFromContext(item);
+                modules.Add(item);
             }
             
             if(!ModuleEditingContextEditor.TryApplyChanges()) ModuleEditingContextEditor.DiscardChanges();
@@ -61,7 +58,7 @@ namespace IM.Modules
             return modules;
         }
 
-        private void SafeClearGraph(IConditionalCommandDataModuleGraph<IExtensibleItem> graph)
+        private void SafeClearGraph(IGraphEditingService<IExtensibleItem> graphEditingService)
         {
             int removedCount = 0;
 
@@ -69,23 +66,20 @@ namespace IM.Modules
             {
                 removedCount = 0;
 
-                foreach (IDataModule<IExtensibleItem> module in graph.DataModules.ToList())
+                foreach (var module in graphEditingService.GraphReadOnly.DataModules.ToList().Where(graphEditingService.CanRemove))
                 {
-                    if (graph.CanRemove(module))
-                    {
-                        graph.Remove(module);
-                        removedCount++;
-                    }
+                    graphEditingService.Remove(module);
+                    removedCount++;
                 }
             }
             while(removedCount > 0);
         }
 
-        private void UnsafeClearGraph(IConditionalCommandDataModuleGraph<IExtensibleItem> graph)
+        private void UnsafeClearGraph(IGraphEditingService<IExtensibleItem> graphEditingService)
         {
-            if (graph.Modules.Count <= 0) return;
+            if (graphEditingService.GraphReadOnly.Modules.Count <= 0) return;
 
-            foreach (IDataModule<IExtensibleItem> module in graph.DataModules.ToList()) graph.Remove(module);
+            foreach (IDataModule<IExtensibleItem> module in graphEditingService.GraphReadOnly.DataModules.ToList()) graphEditingService.Remove(module);
         }
 
         public bool AddToContext(IItem module)

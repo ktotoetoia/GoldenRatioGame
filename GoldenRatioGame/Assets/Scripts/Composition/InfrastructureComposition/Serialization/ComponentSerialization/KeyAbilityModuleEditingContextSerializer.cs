@@ -36,17 +36,12 @@ namespace IM.Modules
             return state;
         }
 
-        public override void RestoreState(
-            ModuleEditingContextEditorMono component,
-            object state,
-            Func<string, GameObject> resolveDependency)
+        public override void RestoreState(ModuleEditingContextEditorMono component, object state, Func<string, GameObject> resolveDependency)
         {
-            if (state is not ModuleContextData savedState)
-                return;
+            if (state is not ModuleContextData savedState) return;
 
             var context = component.BeginEdit();
-            context.SetUnsafe(true);
-
+            
             try
             {
                 var graphIds = savedState.GraphData.ModuleInfos
@@ -54,26 +49,18 @@ namespace IM.Modules
                     .Where(id => !string.IsNullOrEmpty(id))
                     .ToHashSet();
 
-                foreach (var id in savedState.StorageModuleIds)
+                foreach (GameObject prefab in savedState.StorageModuleIds.Where(id => !string.IsNullOrEmpty(id) && !graphIds.Contains(id)).Select(resolveDependency))
                 {
-                    if (string.IsNullOrEmpty(id) || graphIds.Contains(id))
-                        continue;
-
-                    var prefab = resolveDependency(id);
-                    if (prefab != null && prefab.TryGetComponent(out IItem item))
-                    {
-                        context.AddToContext(item);
-                    }
+                    if (!prefab || !prefab.TryGetComponent(out IItem item)) continue;
+                    
+                    context.AddToContext(item);
                 }
 
-                _graphSerializer.Deserialize(savedState.GraphData, context.ModuleGraph, context, resolveDependency);
+                _graphSerializer.Deserialize(savedState.GraphData, context.Services.Get<UnsafeGraphEditingService<IExtensibleItem>>(), context, resolveDependency);
             }
             finally
             {
-                context.SetUnsafe(false);
-
-                if (!component.TryApplyChanges())
-                    component.DiscardChanges();
+                if (!component.TryApplyChanges()) component.DiscardChanges();
             }
         }
     }

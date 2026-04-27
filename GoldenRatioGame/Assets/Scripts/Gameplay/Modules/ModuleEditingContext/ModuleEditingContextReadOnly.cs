@@ -9,7 +9,7 @@ namespace IM.Modules
     {
         public IDataModuleGraphReadOnly<IExtensibleItem> Graph { get; }
         public IReadOnlyStorage Storage { get; }
-        public ITypeRegistry<object> ConvertableObjects { get; }
+        public ITypeRegistry<object> Capabilities { get; }
 
         public ModuleEditingContextReadOnly(IDataModuleGraphReadOnly<IExtensibleItem> moduleGraph = null, IReadOnlyStorage storage= null, IEnumerable<object> convertableObjects= null)
         {
@@ -17,7 +17,7 @@ namespace IM.Modules
             
             Graph = moduleGraph ?? new DataModuleGraphReadOnly<IExtensibleItem>();
             Storage = storage ?? new ReadOnlyStorage();
-            ConvertableObjects = new TypeRegistry<object>(convertableObjects ?? new List<object>());
+            Capabilities = new TypeRegistry<object>(convertableObjects ?? new List<object>());
         }
     }
 }

@@ -1,16 +1,14 @@
-﻿using IM.Graphs;
+﻿using System;
+using IM.Graphs;
 using IM.Items;
-using IM.Storages;
+using IM.LifeCycle;
 
 namespace IM.Modules
 {
     public interface IModuleEditingContext : IModuleEditingContextReadOnly
     {
-        bool IsUnsafe { get; }
-        ICellFactoryStorage MutableStorage { get; }
-        IConditionalCommandDataModuleGraph<IExtensibleItem> ModuleGraph { get; }
+        ITypeRegistry<object> Services { get; } 
         IDataModule<IExtensibleItem> CreateModule(IExtensibleItem item);
-        void SetUnsafe(bool value);
         bool AddToContext(IItem item);
         bool RemoveFromContext(IItem item);
     }

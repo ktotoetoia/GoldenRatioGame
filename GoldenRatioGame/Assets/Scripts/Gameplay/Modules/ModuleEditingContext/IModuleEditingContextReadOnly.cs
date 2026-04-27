@@ -8,6 +8,6 @@ namespace IM.Modules
     {
         IDataModuleGraphReadOnly<IExtensibleItem> Graph { get; }
         IReadOnlyStorage Storage { get; }
-        ITypeRegistry<object> ConvertableObjects { get; }
+        ITypeRegistry<object> Capabilities { get; }
     }
 }

@@ -61,7 +61,7 @@ namespace IM.Modules
 
         public void Deserialize(
             GraphInfo info,
-            IDataModuleGraph<IExtensibleItem> graph,
+            IDataModuleGraphOperations<IExtensibleItem> graph,
             IModuleEditingContext context,
             Func<string, GameObject> resolve)
         {

@@ -8,7 +8,8 @@ namespace IM.Modules
     {
         public IEditorObserver<IModuleEditingContext> Create()
         {
-            return new ModuleStorageController();
+            return null;
+            //return new ModuleStorageController();
         }
     }
 }

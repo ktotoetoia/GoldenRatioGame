@@ -9,21 +9,17 @@ namespace IM.Modules
 {
     public class ModuleEditingContext : IModuleEditingContext
     {
-        private readonly  CompositeDataModuleGraphConditions<IExtensibleItem> _conditions;
+        public ITypeRegistry<object> Services { get; }
+        public IReadOnlyStorage Storage { get; }
+        public ITypeRegistry<object> Capabilities { get; }
+        public IDataModuleGraphReadOnly<IExtensibleItem> Graph { get; }
 
-        public bool IsUnsafe { get; private set; }
-        public ICellFactoryStorage MutableStorage { get; }
-        public IConditionalCommandDataModuleGraph<IExtensibleItem> ModuleGraph { get; }
-        public IReadOnlyStorage Storage => MutableStorage;
-        public ITypeRegistry<object> ConvertableObjects { get; }
-        public IDataModuleGraphReadOnly<IExtensibleItem> Graph => ModuleGraph;
-
-        public ModuleEditingContext(ICellFactoryStorage storage,IConditionalCommandDataModuleGraph<IExtensibleItem> moduleGraph, CompositeDataModuleGraphConditions<IExtensibleItem> conditions, IEnumerable<object> convertableObjects)
+        public ModuleEditingContext(IReadOnlyStorage storage,IDataModuleGraphReadOnly<IExtensibleItem> graph, IEnumerable<object> convertableObjects, IEnumerable<object> services)
         {
-            _conditions = conditions;
-            MutableStorage = storage;
-            ModuleGraph = moduleGraph;
-            ConvertableObjects = new TypeRegistry<object>(convertableObjects);
+            Storage = storage;
+            Graph = graph;
+            Capabilities = new TypeRegistry<object>(convertableObjects);
+            Services = new TypeRegistry<object>(services);
         }
 
         public IDataModule<IExtensibleItem> CreateModule(IExtensibleItem item)
@@ -38,20 +34,10 @@ namespace IM.Modules
             return dataModule;
         }
         
-        public void SetUnsafe(bool value)
-        {
-            IsUnsafe = value;
-            
-            _conditions.Disable = IsUnsafe;
-        }
-
         public bool AddToContext(IItem item)
         {
             if (item.ItemState == ItemState.Hide|| item is not IStorable storable || Storage.ContainsItem(storable)) return false;
             
-            MutableStorage.SetItem(MutableStorage.FirstOrDefault(x => x.Item == null) ?? MutableStorage.CreateCell(), storable);
-            item.ItemState = ItemState.Hide;
-
             return true;
         }
 
@@ -59,8 +45,7 @@ namespace IM.Modules
         {
             if (  item is not IStorable storable || !Storage.ContainsItem(storable)) return false;
             
-            MutableStorage.ClearCell(MutableStorage.GetCell(storable));
-            item.ItemState = ItemState.Show;
+            
             return true;
         }
     }

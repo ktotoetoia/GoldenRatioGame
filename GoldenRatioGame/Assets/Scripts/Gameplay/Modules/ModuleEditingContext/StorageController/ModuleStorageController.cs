@@ -3,7 +3,7 @@ using IM.Graphs;
 using IM.Storages;
 
 namespace IM.Modules
-{
+{/*
     public class ModuleStorageController : IEditorObserver<IModuleEditingContext>
     {
         private readonly ModuleGraphSnapshotValueDiffer<IExtensibleItem> _differ = new();
@@ -34,5 +34,5 @@ namespace IM.Modules
             _context = snapshot;
             _differ.OnSnapshotChanged(snapshot.Graph);
         }
-    }
+    }*/
 }

@@ -1,26 +1,27 @@
 ﻿using System.Linq;
 using IM.Graphs;
+using IM.Storages;
 
 namespace IM.Modules
 {
-    public class CommandGraphOperations<T> : IGraphOperations<T>
+    public class CommandGraphOperations<T> : IGraphOperations<T> where T : class,IStorableReadOnly
     {
-        public IConditionalCommandDataModuleGraph<T> Graph { get; set; }
+        public IDataModuleGraphReadOnly<T> Graph { get; }
+        public GraphEditingService<T> GraphEditingService { get; }
         
-        public CommandGraphOperations(IConditionalCommandDataModuleGraph<T> graph)
+        public CommandGraphOperations(IDataModuleGraphReadOnly<T> graph, GraphEditingService<T> graphEditingService)
         {
+            GraphEditingService = graphEditingService;
             Graph = graph;
         }
 
         public bool TryQuickAddModule(IDataModule<T> module)
         {
-            if (module == null) return false;
-            
             if (module.Value is ICoreExtensibleItem)
             {
-                if (!Graph.CanAdd(module)) return false;
+                if (!GraphEditingService.CanAdd(module)) return false;
                 
-                Graph.Add(module);
+                GraphEditingService.Add(module);
 
                 return true;
             }
@@ -29,9 +30,9 @@ namespace IM.Modules
             {
                 foreach (IDataPort<T> targetPort in Graph.DataModules.SelectMany(x => x.DataPorts))
                 {
-                    if (!Graph.CanAddAndConnect(module, port, targetPort)) continue;
+                    if (!GraphEditingService.CanAddAndConnect(module, port, targetPort)) continue;
                     
-                    Graph.AddAndConnect(module, port, targetPort);
+                    GraphEditingService.AddAndConnect(module, port, targetPort);
                     
                     return true;
                 }
@@ -47,21 +48,11 @@ namespace IM.Modules
 
         public bool TryQuickRemoveModule(IDataModule<T> module)
         {
-            if (!Graph.CanRemove(module)) return false;
+            if (!GraphEditingService.CanRemove(module)) return false;
             
-            Graph.Remove(module);
+            GraphEditingService.Remove(module);
 
             return true;
-        }
-
-        public void Undo(int count)
-        {
-            if(Graph.CanUndo(count)) Graph.Undo(count);
-        }
-        
-        public void Redo(int count)
-        {
-            if(Graph.CanRedo(count)) Graph.Redo(count);
         }
     }
 }

@@ -35,9 +35,9 @@ namespace IM.Modules
 
         protected override IModuleEditingContextReadOnly ConvertToReadOnly(IModuleEditingContext mutable)
         {
-            var storage = new ReadOnlyStorage(mutable.MutableStorage);
-            var graphSnapshot = _graphCloner.Copy(mutable.ModuleGraph, x => x);
-            var convertedObjects = ConvertRegistry(mutable.ConvertableObjects.Collection, toReadOnly: true);
+            var storage = new ReadOnlyStorage(mutable.Storage);
+            var graphSnapshot = _graphCloner.Copy(mutable.Graph, x => x);
+            var convertedObjects = ConvertRegistry(mutable.Capabilities.Collection, toReadOnly: true);
 
             return new ModuleEditingContextReadOnly(graphSnapshot, storage, convertedObjects);
         }
@@ -49,9 +49,9 @@ namespace IM.Modules
             var conditions = new CompositeDataModuleGraphConditions<IExtensibleItem>(_conditionsFactory.Create(innerGraph,mutableStorage));
             var conditionalGraph = new ConditionalCommandDataModuleGraph<IExtensibleItem>(innerGraph, conditions);
 
-            var convertedObjects = ConvertRegistry(readOnly.ConvertableObjects.Collection, toReadOnly: false);
+            var capabilities = ConvertRegistry(readOnly.Capabilities.Collection, toReadOnly: false);
 
-            var context = new ModuleEditingContext(mutableStorage, conditionalGraph, conditions, convertedObjects);
+            var context = new ModuleEditingContext(mutableStorage, conditionalGraph,capabilities, null);
 
             var editorObserver = _directObservers.Create();
             innerGraph.OnGraphChanged += () => editorObserver.OnSnapshotChanged(context);

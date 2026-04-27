@@ -28,8 +28,8 @@ namespace IM.UI
             foreach (ContextViewer visualizer in _contextViewers) visualizer.SetContext(moduleEditingContext);
             foreach (StorageView storageView in _storageViews) storageView.SetStorage(moduleEditingContext.Storage);
             
-            _abilityPoolView?.SetAbilityPool(moduleEditingContext.ConvertableObjects.Get<IAbilityPoolReadOnly>());
-            _weaponVisualView?.SetAbilityPool(moduleEditingContext.ConvertableObjects.Get<IContainerAbilityPool>());
+            _abilityPoolView?.SetAbilityPool(moduleEditingContext.Capabilities.Get<IAbilityPoolReadOnly>());
+            _weaponVisualView?.SetAbilityPool(moduleEditingContext.Capabilities.Get<IContainerAbilityPool>());
         }
 
         public void ForceClearEntity()

@@ -39,7 +39,7 @@ namespace IM
                 IModuleEditingContext moduleEditingContext = entity.ModuleEditingContextEditor.BeginEdit();
 
                 IGraphOperations<IExtensibleItem> graphOperations =
-                    new CommandGraphOperations<IExtensibleItem>(moduleEditingContext.ModuleGraph);
+                    new CommandGraphOperations<IExtensibleItem>(moduleEditingContext.Graph, moduleEditingContext.Services.Get<GraphEditingService<IExtensibleItem>>());
 
                 foreach (IExtensibleItem toAdd in itemsList)
                 {
