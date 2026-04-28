@@ -9,7 +9,6 @@ namespace IM.Modules
     public class ModuleEditingContextEditorMono : MonoBehaviour, IModuleEditingContextEditor
     {
         [SerializeField] private GameObject _subConvertorsSource;
-        [SerializeField] private GameObject _directObserversSource;
         
         private IModuleEditingContextEditor _moduleEditingContextEditor;
 
@@ -24,14 +23,11 @@ namespace IM.Modules
         {
             _conditionsFactory = new DataModuleGraphConditionsFactory();
 
-            ModuleEditingContextConverter moduleEditingContextConverter = new ModuleEditingContextConverter(
-                _conditionsFactory, 
-                new CompositeObserverFactory<IModuleEditingContext>(_directObserversSource.GetComponents<IFactory<IEditorObserver<IModuleEditingContext>>>()) );
+            var moduleEditingContextConverter = new ModuleEditingContextConverter(_conditionsFactory);
             
-            foreach (IComponentConverter componentConverter in _subConvertorsSource.GetComponents<IComponentConverter>())
-            {
-                moduleEditingContextConverter.SubConverters.Add(componentConverter);
-            }
+            _subConvertorsSource.GetComponents(moduleEditingContextConverter.ContextObservers);
+            _subConvertorsSource.GetComponents(moduleEditingContextConverter.CapabilitySnapshots);
+            _subConvertorsSource.GetComponents(moduleEditingContextConverter.CapabilityFactories);
             
             _moduleEditingContextEditor = new ModuleEditingContextEditor(moduleEditingContextConverter);
             

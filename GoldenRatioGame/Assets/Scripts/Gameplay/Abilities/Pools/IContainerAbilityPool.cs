@@ -2,8 +2,8 @@
 
 namespace IM.Abilities
 {
-    public interface IContainerAbilityPool : IAbilityPoolReadOnly
+    public interface IContainerAbilityPool : IContainerAbilityPoolReadOnly
     {
-        ICollection<IAbilityContainer> AbilityContainers { get; }
+        new ICollection<IAbilityContainer> AbilityContainers { get; }
     }
 }

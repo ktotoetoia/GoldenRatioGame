@@ -10,11 +10,11 @@ namespace IM.UI
     [UxmlElement]
     public partial class WeaponVisualContainer : VisualElement
     {
-        private IContainerAbilityPool _containerAbilityPool;
+        private IContainerAbilityPoolReadOnly _containerAbilityPool;
         
-        public Dictionary<IWeaponContainer, ItemVisualElement> WeaponContainers { get; } = new();
+        public Dictionary<IWeaponContainerReadOnly, ItemVisualElement> WeaponContainers { get; } = new();
 
-        public void SetContainerAbilityPool(IContainerAbilityPool containerAbilityPool)
+        public void SetContainerAbilityPool(IContainerAbilityPoolReadOnly containerAbilityPool)
         {
             ClearContainerAbilityPool();
             _containerAbilityPool = containerAbilityPool ?? throw new ArgumentNullException(nameof(containerAbilityPool));
@@ -23,7 +23,7 @@ namespace IM.UI
 
         public void ClearContainerAbilityPool()
         {
-            foreach (VisualElement visual in WeaponContainers.Values) Remove(visual);
+            foreach (ItemVisualElement visual in WeaponContainers.Values) Remove(visual);
             
             WeaponContainers.Clear();
             _containerAbilityPool = null;
@@ -35,16 +35,16 @@ namespace IM.UI
         {
             if (_containerAbilityPool == null) return;
 
-            List<IWeaponContainer> currentData = _containerAbilityPool.AbilityContainers.OfType<IWeaponContainer>().ToList();
+            List<IWeaponContainerReadOnly> currentData = _containerAbilityPool.AbilityContainers.OfType<IWeaponContainerReadOnly>().ToList();
 
-            List<IWeaponContainer> toRemove = WeaponContainers.Keys.Except(currentData).ToList();
-            foreach (IWeaponContainer container in toRemove) RemoveWeaponContainer(container);
+            List<IWeaponContainerReadOnly> toRemove = WeaponContainers.Keys.Except(currentData).ToList();
+            foreach (IWeaponContainerReadOnly container in toRemove) RemoveWeaponContainer(container);
 
-            List<IWeaponContainer> toAdd = currentData.Except(WeaponContainers.Keys).ToList();
-            foreach (IWeaponContainer container in toAdd) AddWeaponContainer(container);
+            List<IWeaponContainerReadOnly> toAdd = currentData.Except(WeaponContainers.Keys).ToList();
+            foreach (IWeaponContainerReadOnly container in toAdd) AddWeaponContainer(container);
         }
 
-        private void AddWeaponContainer(IWeaponContainer weaponContainer)
+        private void AddWeaponContainer(IWeaponContainerReadOnly weaponContainer)
         {
             ItemVisualElement itemVisualElement = new ItemVisualElement();
             weaponContainer.PreferredWeaponChanged += x => itemVisualElement.SetItem(x);
@@ -53,7 +53,7 @@ namespace IM.UI
             Add(itemVisualElement);
         }
 
-        private void RemoveWeaponContainer(IWeaponContainer weaponContainer)
+        private void RemoveWeaponContainer(IWeaponContainerReadOnly weaponContainer)
         {
             if (!WeaponContainers.TryGetValue(weaponContainer, out ItemVisualElement visual)) return;
 

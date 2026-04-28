@@ -1,14 +1,7 @@
-﻿using System;
-using IM.Abilities;
-
-namespace IM.WeaponSystem
+﻿namespace IM.WeaponSystem
 {
-    public interface IWeaponContainer : IAbilityContainer
+    public interface IWeaponContainer : IWeaponContainerReadOnly
     {
-        IWeapon DefaultWeapon { get; }
-        IWeapon Weapon { get; set; } 
-        IWeapon PreferredWeapon { get; }
-        
-        event Action<IWeapon> PreferredWeaponChanged; 
+        new IWeapon Weapon { get; set; } 
     }
 }

@@ -30,15 +30,15 @@ namespace IM.Visuals
         
         public void OnSnapshotChanged(IModuleEditingContextReadOnly snapshot) 
         {
-            if(!isActiveAndEnabled) return;
-            
             _moduleGraphVisualObserver.OnSnapshotChanged(snapshot);
+            
+            if(!isActiveAndEnabled) return;
             _moduleGraphVisualObserver.Update();    
         }
 
         private void OnEnable()
         {
-            _moduleGraphVisualObserver.Update();    
+            _moduleGraphVisualObserver.Update();
         }
     }
 }

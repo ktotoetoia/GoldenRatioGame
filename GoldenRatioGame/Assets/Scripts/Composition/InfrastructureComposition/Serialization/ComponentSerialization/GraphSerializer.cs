@@ -75,9 +75,9 @@ namespace IM.Modules
                 if (prefab == null || !prefab.TryGetComponent(out IExtensibleItem item))
                     continue;
 
-                context.AddToContext(item);
+                context.StorageEditing.AddToStorage(item);
 
-                var module = context.CreateModule(item);
+                var module = context.GraphEditing.CreateModule(item);
                 graph.Add(module);
 
                 modules[m.Index] = module;

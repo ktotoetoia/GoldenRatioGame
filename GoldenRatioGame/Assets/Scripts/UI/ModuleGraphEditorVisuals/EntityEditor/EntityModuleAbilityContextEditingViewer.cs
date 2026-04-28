@@ -29,7 +29,7 @@ namespace IM.UI
             foreach (StorageView storageView in _storageViews) storageView.SetStorage(moduleEditingContext.Storage);
             
             _abilityPoolView?.SetAbilityPool(moduleEditingContext.Capabilities.Get<IAbilityPoolReadOnly>());
-            _weaponVisualView?.SetAbilityPool(moduleEditingContext.Capabilities.Get<IContainerAbilityPool>());
+            _weaponVisualView?.SetAbilityPool(moduleEditingContext.Capabilities.Get<IContainerAbilityPoolReadOnly>());
         }
 
         public void ForceClearEntity()

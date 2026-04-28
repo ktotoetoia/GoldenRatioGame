@@ -53,10 +53,10 @@ namespace IM.Modules
                 {
                     if (!prefab || !prefab.TryGetComponent(out IItem item)) continue;
                     
-                    context.AddToContext(item);
+                    context.StorageEditing.AddToStorage(item);
                 }
 
-                _graphSerializer.Deserialize(savedState.GraphData, context.Services.Get<UnsafeGraphEditingService<IExtensibleItem>>(), context, resolveDependency);
+                _graphSerializer.Deserialize(savedState.GraphData, context.UnsafeGraphEditing, context, resolveDependency);
             }
             finally
             {

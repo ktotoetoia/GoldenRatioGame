@@ -1,11 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using IM.Abilities;
-using IM.Graphs;
-using IM.Items;
-using IM.Storages;
-
-namespace IM.Modules
+﻿namespace IM.Modules
 {/*
     public class AbilityPoolModuleController : IEditorObserver<IModuleEditingContext>
     {

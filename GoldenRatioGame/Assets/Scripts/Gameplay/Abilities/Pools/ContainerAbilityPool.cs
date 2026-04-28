@@ -7,8 +7,10 @@ namespace IM.Abilities
     public class ContainerAbilityPool : IContainerAbilityPool
     {
         private readonly HashSet<IAbilityContainer> _abilityContainers;
-        
+
         public int Count => _abilityContainers.Count;
+        
+        IReadOnlyCollection<IAbilityContainer> IContainerAbilityPoolReadOnly.AbilityContainers => _abilityContainers;
         public ICollection<IAbilityContainer> AbilityContainers => _abilityContainers;
 
         public ContainerAbilityPool() :this(new HashSet<IAbilityContainer>())

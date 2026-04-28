@@ -42,24 +42,9 @@ namespace IM.Modules
             using (Unsafe()) _inner.AddAndConnect(module, ownerPort, targetPort);
         }
 
-        public void Undo(int count)
+        public IDataModule<T> CreateModule(T item)
         {
-            using (Unsafe()) _inner.Undo(count);
-        }
-
-        public void Redo(int count)
-        {
-            using (Unsafe()) _inner.Redo(count);
-        }
-
-        public bool CanUndo(int count)
-        {
-            using (Unsafe()) return _inner.CanUndo(count);
-        }
-
-        public bool CanRedo(int count)
-        {
-            using (Unsafe()) return _inner.CanRedo(count);
+            using (Unsafe()) return _inner.CreateModule(item);
         }
 
         private UnsafeScope Unsafe() => new(_conditions);

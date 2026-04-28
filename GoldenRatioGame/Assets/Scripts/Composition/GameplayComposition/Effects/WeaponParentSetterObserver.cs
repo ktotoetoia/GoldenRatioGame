@@ -18,7 +18,7 @@ namespace IM.Modules
             
             foreach (var module in snapshot.Graph.DataModules)
             {
-                if (module.Value.Extensions.TryGet(out IWeaponContainer weaponContainer) && weaponContainer.Weapon is MonoBehaviour weaponMb)
+                if (module.Value.Extensions.TryGet(out IWeaponContainerReadOnly weaponContainer) && weaponContainer.Weapon is MonoBehaviour weaponMb)
                 {
                     weaponMb.transform.SetParent(_parentTransform);
                 }

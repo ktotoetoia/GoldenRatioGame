@@ -25,7 +25,7 @@ namespace IM.UI
             _container?.Update();
         }
 
-        public void SetAbilityPool(IContainerAbilityPool abilityPool)
+        public void SetAbilityPool(IContainerAbilityPoolReadOnly abilityPool)
         {
             if (_abilityPool != null) throw new ArgumentException("Module Entity is already set");
             
@@ -44,7 +44,7 @@ namespace IM.UI
             _abilityPool = null;
             _document.rootVisualElement.visible = false;
         }
-        public IWeaponContainer GetWeaponContainerAtPosition(Vector3 worldPosition)
+        public IWeaponContainerReadOnly GetWeaponContainerAtPosition(Vector3 worldPosition)
         {
             foreach (var (weaponContainer, visualElement) in _container.WeaponContainers)
             {

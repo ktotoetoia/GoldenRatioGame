@@ -7,14 +7,14 @@ namespace IM.UI
     public partial class WeaponContainerVisualElement : VisualElement
     {
         private readonly ItemVisualElement _itemVisualElement = new();
-        private IWeaponContainer _container;
+        private IWeaponContainerReadOnly _container;
 
         public WeaponContainerVisualElement()
         {
             Add(_itemVisualElement);
         }
 
-        public void SetContainer(IWeaponContainer container)
+        public void SetContainer(IWeaponContainerReadOnly container)
         {
             _container = container;
             container.PreferredWeaponChanged += UpdateItem;

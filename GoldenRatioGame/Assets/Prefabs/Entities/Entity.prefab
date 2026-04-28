@@ -9,9 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2204359964471984114}
-  - component: {fileID: 3378116016666264131}
-  - component: {fileID: 7146658131245080645}
-  - component: {fileID: 3904459295389596761}
+  - component: {fileID: 5900443521938554583}
+  - component: {fileID: 905032011966706704}
   m_Layer: 0
   m_Name: ModuleEditingContextItems
   m_TagString: Untagged
@@ -34,7 +33,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2365714068825351273}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3378116016666264131
+--- !u!114 &5900443521938554583
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,10 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 229302278261792903}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaf9f8f68cb5457e9ca262b72588cc12, type: 3}
+  m_Script: {fileID: 11500000, guid: 4cde138728a64c4eb53291088aa529c1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Modules::IM.Modules.ModuleStorageControllerFactory
---- !u!114 &7146658131245080645
+  m_EditorClassIdentifier: GameplayComposition::IM.Modules.AbilityPoolEditingServiceInjector
+--- !u!114 &905032011966706704
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,21 +54,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 229302278261792903}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11719e9e5cbc4299830e39b01534b87e, type: 3}
+  m_Script: {fileID: 11500000, guid: 152b3a5545dc43dcb9a9e9eb4997011d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: ModuleComposition::IM.Modules.AbilityPoolModuleControllerFactory
---- !u!114 &3904459295389596761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 229302278261792903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18c531addedf4d139cb9c31ac38ddffb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleComposition::IM.Modules.AbilityPoolConverter2
+  m_EditorClassIdentifier: GameplayComposition::IM.Modules.WeaponEditingServiceInjector
 --- !u!1 &1129132209649223493
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,7 +318,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Modules::IM.Modules.ModuleEditingContextEditorMono
   _subConvertorsSource: {fileID: 229302278261792903}
-  _directObserversSource: {fileID: 229302278261792903}
 --- !u!114 &3656589500703403265
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
-﻿using System;
-using IM.WeaponSystem;
+﻿using IM.WeaponSystem;
 
 namespace IM.Modules
 {

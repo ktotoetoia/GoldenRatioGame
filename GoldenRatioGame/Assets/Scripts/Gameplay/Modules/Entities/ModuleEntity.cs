@@ -40,8 +40,8 @@ namespace IM.Modules
         {
             IModuleEditingContext moduleEditingContext = ModuleEditingContextEditor.BeginEdit();
             
-            SafeClearGraph(moduleEditingContext.Services.Get<IGraphEditingService<IExtensibleItem>>());
-            UnsafeClearGraph(moduleEditingContext.Services.Get<UnsafeGraphEditingService<IExtensibleItem>>());
+            SafeClearGraph(moduleEditingContext.GraphEditing);
+            UnsafeClearGraph(moduleEditingContext.UnsafeGraphEditing);
             
             List<IExtensibleItem> modules = new List<IExtensibleItem>();
             
@@ -49,13 +49,23 @@ namespace IM.Modules
             {
                 if (storageCell.Item is not IExtensibleItem item) continue;
                 
-                moduleEditingContext.RemoveFromContext(item);
+                moduleEditingContext.StorageEditing.AddToStorage(item);
                 modules.Add(item);
+            }
+            
+            List<IExtensibleItem> finalModules = new List<IExtensibleItem>();
+            
+            foreach (IStorageCellReadonly storageCellReadonly in moduleEditingContext.Storage)
+            {
+                if (storageCellReadonly.Item is IExtensibleItem item && moduleEditingContext.StorageEditing.RemoveFromContext(item))
+                {
+                    finalModules.Add(item);
+                }
             }
             
             if(!ModuleEditingContextEditor.TryApplyChanges()) ModuleEditingContextEditor.DiscardChanges();
             
-            return modules;
+            return finalModules;
         }
 
         private void SafeClearGraph(IGraphEditingService<IExtensibleItem> graphEditingService)
@@ -86,7 +96,7 @@ namespace IM.Modules
         {
             if (module.ItemState == ItemState.Hide || ModuleEditingContextEditor.IsEditing) return false;
 
-            if (ModuleEditingContextEditor.BeginEdit().AddToContext(module) &&
+            if (ModuleEditingContextEditor.BeginEdit().StorageEditing.AddToStorage(module) &&
                 ModuleEditingContextEditor.TryApplyChanges())
             {
                 return true;
@@ -101,7 +111,7 @@ namespace IM.Modules
         {
             if (ModuleEditingContextEditor.IsEditing) return false;
             
-            if (ModuleEditingContextEditor.BeginEdit().RemoveFromContext(module) &&
+            if (ModuleEditingContextEditor.BeginEdit().StorageEditing.RemoveFromContext(module) &&
                 ModuleEditingContextEditor.TryApplyChanges())
             {
                 return true;

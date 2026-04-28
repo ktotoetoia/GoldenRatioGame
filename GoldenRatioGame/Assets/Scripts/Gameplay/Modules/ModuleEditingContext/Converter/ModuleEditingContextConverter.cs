@@ -7,70 +7,77 @@ using IM.Storages;
 
 namespace IM.Modules
 {
-   public sealed class ModuleEditingContextConverter : ComponentConverter<IModuleEditingContext, IModuleEditingContextReadOnly>
+    public sealed class ModuleEditingContextConverter : ComponentConverter<IModuleEditingContext, IModuleEditingContextReadOnly>
     {
-        private readonly IFactory<IEnumerable<IDataModuleGraphConditions<IExtensibleItem>>, IDataModuleGraphReadOnly<IExtensibleItem>, IReadOnlyStorage> _conditionsFactory;
+        private readonly IFactory<IEnumerable<IDataModuleGraphConditions<IExtensibleItem>>, 
+            IDataModuleGraphReadOnly<IExtensibleItem>, IReadOnlyStorage> _conditionsFactory;
         private readonly IDataModuleGraphCloner<IDataModuleGraphReadOnly<IExtensibleItem>, IExtensibleItem> _graphCloner;
-        private readonly IFactory<IEditorObserver<IModuleEditingContext>> _directObservers;
 
-        public List<IComponentConverter> SubConverters { get; } = new();
+        public List<IFactory<object>> CapabilityFactories { get; } = new();
+        public List<ICapabilitySnapshot> CapabilitySnapshots { get; } = new();
+        public List<IModuleEditingContextObserver> ContextObservers { get; } = new();
 
         public ModuleEditingContextConverter(
-            IFactory<IEnumerable<IDataModuleGraphConditions<IExtensibleItem>>, IDataModuleGraphReadOnly<IExtensibleItem>,IReadOnlyStorage> conditionsFactory,
-            IFactory<IEditorObserver<IModuleEditingContext>> directObservers)
+            IFactory<IEnumerable<IDataModuleGraphConditions<IExtensibleItem>>,
+                IDataModuleGraphReadOnly<IExtensibleItem>, IReadOnlyStorage> conditionsFactory)
         {
             _conditionsFactory = conditionsFactory ?? throw new ArgumentNullException(nameof(conditionsFactory));
-            _directObservers = directObservers ?? throw new ArgumentNullException(nameof(directObservers));
             _graphCloner = new ExtensibleItemDataModuleGraphCloner();
         }
 
         protected override IModuleEditingContextReadOnly CreateNewReadOnly()
         {
             return new ModuleEditingContextReadOnly(
-                new DataModuleGraphReadOnly<IExtensibleItem>(), 
+                new DataModuleGraphReadOnly<IExtensibleItem>(),
                 new ReadOnlyStorage(),
-                SubConverters.Select(x => x.CreateReadOnly())
+                CapabilityFactories.Select(x => x.Create())
             );
         }
 
         protected override IModuleEditingContextReadOnly ConvertToReadOnly(IModuleEditingContext mutable)
         {
+            foreach (INotifiableEditingService notifiableEditingService in mutable.Services.Collection.OfType<INotifiableEditingService>())
+                notifiableEditingService.FinishService();
+            
             var storage = new ReadOnlyStorage(mutable.Storage);
             var graphSnapshot = _graphCloner.Copy(mutable.Graph, x => x);
-            var convertedObjects = ConvertRegistry(mutable.Capabilities.Collection, toReadOnly: true);
+            var capabilities = CreateSnapshots(mutable.Capabilities.Collection);
 
-            return new ModuleEditingContextReadOnly(graphSnapshot, storage, convertedObjects);
+            return new ModuleEditingContextReadOnly(graphSnapshot, storage, capabilities);
         }
 
         protected override IModuleEditingContext ConvertToMutable(IModuleEditingContextReadOnly readOnly)
         {
             var mutableStorage = new CellFactoryStorage(readOnly.Storage);
-            var innerGraph = new NotifyingCommandDataModuleGraph<IExtensibleItem>();
-            var conditions = new CompositeDataModuleGraphConditions<IExtensibleItem>(_conditionsFactory.Create(innerGraph,mutableStorage));
+            var innerGraph = new CommandDataModuleGraph<IExtensibleItem>();
+            var conditions = new CompositeDataModuleGraphConditions<IExtensibleItem>(
+                _conditionsFactory.Create(innerGraph, mutableStorage));
             var conditionalGraph = new ConditionalCommandDataModuleGraph<IExtensibleItem>(innerGraph, conditions);
 
-            var capabilities = ConvertRegistry(readOnly.Capabilities.Collection, toReadOnly: false);
+            var graphEditing = new GraphEditingService(conditionalGraph, mutableStorage);
+            var unsafeGraphEditing = new UnsafeGraphEditingService<IExtensibleItem>(graphEditing, conditions);
+            var storageEditing = new StorageEditingService(mutableStorage);
 
-            var context = new ModuleEditingContext(mutableStorage, conditionalGraph,capabilities, null);
+            var context = new ModuleEditingContext(conditionalGraph, mutableStorage, graphEditing, unsafeGraphEditing, storageEditing);
 
-            var editorObserver = _directObservers.Create();
-            innerGraph.OnGraphChanged += () => editorObserver.OnSnapshotChanged(context);
-            
+            foreach (object capability in CreateSnapshots(readOnly.Capabilities.Collection)) 
+                context.AddCapability(capability);
+            foreach (var observer in ContextObservers)
+                observer.OnContextCreated(context);
+            foreach (INotifiableEditingService notifiableEditingService in context.Services.Collection.OfType<INotifiableEditingService>())
+                notifiableEditingService.BeginService();
+
             _graphCloner.Apply(readOnly.Graph, innerGraph, x => x);
 
             return context;
         }
-
-        private IEnumerable<object> ConvertRegistry(IEnumerable<object> source, bool toReadOnly)
+        
+        private IEnumerable<object> CreateSnapshots(IEnumerable<object> source)
         {
-            foreach (var obj in source)
+            foreach (object obj in source)
             {
-                var converter = toReadOnly 
-                    ? SubConverters.FirstOrDefault(c => c.MutableType.IsInstanceOfType(obj))
-                    : SubConverters.FirstOrDefault(c => c.ReadOnlyType.IsInstanceOfType(obj));
-
-                if (converter != null) yield return toReadOnly ? converter.ToReadOnly(obj) : converter.ToMutable(obj);
-                else yield return obj;
+                var snapshot = CapabilitySnapshots.FirstOrDefault(x => x.CapabilityType.IsInstanceOfType(obj));
+                yield return snapshot == null ? obj : snapshot.Snapshot(obj);
             }
         }
     }

@@ -1,15 +1,15 @@
-﻿using System;
-using IM.Graphs;
-using IM.Items;
-using IM.LifeCycle;
+﻿using IM.LifeCycle;
 
 namespace IM.Modules
 {
     public interface IModuleEditingContext : IModuleEditingContextReadOnly
     {
-        ITypeRegistry<object> Services { get; } 
-        IDataModule<IExtensibleItem> CreateModule(IExtensibleItem item);
-        bool AddToContext(IItem item);
-        bool RemoveFromContext(IItem item);
+        ITypeRegistry<IEditingService> Services { get; }
+        
+        IGraphEditingService<IExtensibleItem> GraphEditing { get; }
+        IGraphEditingService<IExtensibleItem> UnsafeGraphEditing { get; }
+        IStorageEditingService StorageEditing { get; }
+        bool AddService(IEditingService service);
+        bool AddCapability(object capability);
     }
 }

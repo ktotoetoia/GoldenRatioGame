@@ -13,8 +13,6 @@ namespace IM.Modules
 
         public ModuleEditingContextReadOnly(IDataModuleGraphReadOnly<IExtensibleItem> moduleGraph = null, IReadOnlyStorage storage= null, IEnumerable<object> convertableObjects= null)
         {
-            
-            
             Graph = moduleGraph ?? new DataModuleGraphReadOnly<IExtensibleItem>();
             Storage = storage ?? new ReadOnlyStorage();
             Capabilities = new TypeRegistry<object>(convertableObjects ?? new List<object>());

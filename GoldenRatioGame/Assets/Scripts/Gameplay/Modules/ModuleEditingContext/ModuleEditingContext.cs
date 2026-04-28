@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using IM.Graphs;
-using IM.Items;
 using IM.LifeCycle;
 using IM.Storages;
 
@@ -9,44 +7,51 @@ namespace IM.Modules
 {
     public class ModuleEditingContext : IModuleEditingContext
     {
-        public ITypeRegistry<object> Services { get; }
+        private readonly TypeRegistry<object> _capabilities = new();
+        private readonly TypeRegistry<IEditingService> _services = new();
+        
         public IReadOnlyStorage Storage { get; }
-        public ITypeRegistry<object> Capabilities { get; }
         public IDataModuleGraphReadOnly<IExtensibleItem> Graph { get; }
-
-        public ModuleEditingContext(IReadOnlyStorage storage,IDataModuleGraphReadOnly<IExtensibleItem> graph, IEnumerable<object> convertableObjects, IEnumerable<object> services)
+        public IGraphEditingService<IExtensibleItem> GraphEditing { get; }
+        public IGraphEditingService<IExtensibleItem> UnsafeGraphEditing { get; }
+        public IStorageEditingService StorageEditing { get; }
+        public ITypeRegistry<object> Capabilities => _capabilities;
+        public ITypeRegistry<IEditingService> Services => _services;
+        
+        public ModuleEditingContext(IConditionalCommandDataModuleGraph<IExtensibleItem> graph,
+            CompositeDataModuleGraphConditions<IExtensibleItem> conditions,
+            ICellFactoryStorage storage)
         {
             Storage = storage;
             Graph = graph;
-            Capabilities = new TypeRegistry<object>(convertableObjects);
-            Services = new TypeRegistry<object>(services);
-        }
-
-        public IDataModule<IExtensibleItem> CreateModule(IExtensibleItem item)
-        {
-            DataModule<IExtensibleItem> dataModule = new DataModule<IExtensibleItem>(item);
-
-            foreach (IDataPort<IExtensibleItem> port in item.PortFactory.Create(dataModule))
-            {
-                dataModule.AddPort(port);   
-            }
-            
-            return dataModule;
+            GraphEditing = new GraphEditingService(graph,storage);
+            UnsafeGraphEditing = new UnsafeGraphEditingService<IExtensibleItem>(GraphEditing,conditions);
+            StorageEditing = new StorageEditingService(storage);
         }
         
-        public bool AddToContext(IItem item)
+        public ModuleEditingContext(IConditionalCommandDataModuleGraph<IExtensibleItem> graph,
+            ICellFactoryStorage storage, 
+            IGraphEditingService<IExtensibleItem>  graphEditing,
+            IGraphEditingService<IExtensibleItem>  unsafeGraphEditing,
+            IStorageEditingService storageEditing)
         {
-            if (item.ItemState == ItemState.Hide|| item is not IStorable storable || Storage.ContainsItem(storable)) return false;
-            
-            return true;
+            Storage = storage;
+            Graph = graph;
+            GraphEditing = graphEditing;
+            UnsafeGraphEditing = unsafeGraphEditing;
+            StorageEditing = storageEditing;
         }
 
-        public bool RemoveFromContext(IItem item)
+        public bool AddCapability(object capability)
         {
-            if (  item is not IStorable storable || !Storage.ContainsItem(storable)) return false;
+            if (capability is IEditingService) throw new ArgumentException("Services cannot be added as capability");
             
-            
-            return true;
+            return _capabilities.Add(capability);
+        }
+        
+        public bool AddService(IEditingService service)
+        {
+            return _services.Add(service);
         }
     }
 }

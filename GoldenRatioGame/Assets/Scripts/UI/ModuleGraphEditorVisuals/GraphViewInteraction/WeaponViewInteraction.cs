@@ -10,6 +10,7 @@ namespace IM.UI
         [SerializeField] private StorageView _weaponStorage;
         [SerializeField] private WeaponVisualView _weaponView;
         [SerializeField] private WeaponPreviewPlacer _weaponPreviewPlacer;
+        private WeaponEditingService _weaponEditingService;
         
         public Func<Vector3> GetPointerPosition { get; set; } = ()  => Vector3.zero;
         
@@ -43,10 +44,11 @@ namespace IM.UI
         {
             if (_weaponPreviewPlacer.IsPreviewing)
             {
-                IWeapon w = _weaponPreviewPlacer.FinalizePreview();
-                if (_weaponView.GetWeaponContainerAtPosition(GetPointerPosition()) is { } weaponContainer && w != null)
+                IWeapon weapon = _weaponPreviewPlacer.FinalizePreview();
+                
+                if (_weaponView.GetWeaponContainerAtPosition(GetPointerPosition()) is { } weaponContainer && weapon != null)
                 {
-                    weaponContainer.Weapon = w;
+                    _weaponEditingService.SetWeapon(weaponContainer,weapon);
                 }
             }
         }
@@ -58,12 +60,13 @@ namespace IM.UI
 
         public override void SetContext(IModuleEditingContext moduleEditingContext)
         {
+            _weaponEditingService = moduleEditingContext.Services.Get<WeaponEditingService>();
             
         }
         
         public override void ClearContext()
         {
-            
+            _weaponEditingService =  null;
         }
     }
 }
