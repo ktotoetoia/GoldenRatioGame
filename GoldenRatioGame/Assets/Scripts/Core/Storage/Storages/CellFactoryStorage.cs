@@ -92,6 +92,20 @@ namespace IM.Storages
             }
         }
 
+        public IStorageCellReadonly FirstOrNew()
+        {
+            return _cells.FirstOrDefault(x => x.Item == null) ?? CreateCell();
+        }
+
+        public IStorageCellReadonly SetItemToFirstOrNew(IStorableReadOnly item)
+        {
+            IStorageCellReadonly cell = FirstOrNew();
+            
+            SetItem(cell,item);
+                
+            return cell;
+        }
+
         public bool Contains(IStorageCellReadonly cell)
         {
             return cell is IStorageCell c && _cells.Contains(c);

@@ -57,7 +57,7 @@ namespace IM.Modules
             
             foreach (IStorageCellReadonly storageCellReadonly in moduleEditingContext.Storage)
             {
-                if (storageCellReadonly.Item is IExtensibleItem item && moduleEditingContext.StorageEditing.RemoveFromContext(item))
+                if (storageCellReadonly.Item is IExtensibleItem item && moduleEditingContext.StorageEditing.RemoveFromStorage(item))
                 {
                     finalModules.Add(item);
                 }
@@ -94,7 +94,7 @@ namespace IM.Modules
 
         public bool AddToContext(IItem module)
         {
-            if (module.ItemState == ItemState.Hide || ModuleEditingContextEditor.IsEditing) return false;
+            if (module.Owner != null || ModuleEditingContextEditor.IsEditing) return false;
 
             if (ModuleEditingContextEditor.BeginEdit().StorageEditing.AddToStorage(module) &&
                 ModuleEditingContextEditor.TryApplyChanges())
@@ -111,7 +111,7 @@ namespace IM.Modules
         {
             if (ModuleEditingContextEditor.IsEditing) return false;
             
-            if (ModuleEditingContextEditor.BeginEdit().StorageEditing.RemoveFromContext(module) &&
+            if (ModuleEditingContextEditor.BeginEdit().StorageEditing.RemoveFromStorage(module) &&
                 ModuleEditingContextEditor.TryApplyChanges())
             {
                 return true;

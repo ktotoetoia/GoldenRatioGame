@@ -45,7 +45,7 @@ namespace IM.Modules
 
             foreach (IExtensibleItem item in remainList)
             {
-                item.GameObject.transform.SetParent(transform.parent);
+                item.GameObject.transform.SetParent(null);
             }
             
             foreach (IItemDropObserver dropObserver in _itemDropObservers)

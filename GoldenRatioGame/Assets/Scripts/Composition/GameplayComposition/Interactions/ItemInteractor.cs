@@ -36,7 +36,7 @@ namespace IM.Entities
         {
             module = null;
             
-            return target.GameObject.TryGetComponent(out module) && !_moduleEntity.ModuleEditingContextEditor.IsEditing && module.ItemState == ItemState.Show;
+            return target.GameObject.TryGetComponent(out module) && !_moduleEntity.ModuleEditingContextEditor.IsEditing && module.Owner == null;
         }
     }
 }

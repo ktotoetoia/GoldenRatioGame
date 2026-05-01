@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using IM.Items;
+﻿using IM.Items;
 using IM.Storages;
 
 namespace IM.Modules
@@ -8,27 +7,27 @@ namespace IM.Modules
     {
         private readonly ICellFactoryStorage _storage;
 
+        public IReadOnlyStorage Storage => _storage;
+        
         public StorageEditingService(ICellFactoryStorage storage)
         {
             _storage = storage;
         }
-
+        
         public bool AddToStorage(IItem item)
         {
-            if (item.ItemState == ItemState.Hide|| item is not IStorable storable || _storage.ContainsItem(storable)) return false;
+            if (item is not IStorable storable || _storage.ContainsItem(storable)) return false;
             
-            _storage.SetItem(_storage.FirstOrDefault(x => x.Item == null) ?? _storage.CreateCell(), storable);
-            item.ItemState = ItemState.Hide;
+            _storage.SetItemToFirstOrNew(storable);
 
             return true;
         }
 
-        public bool RemoveFromContext(IItem item)
+        public bool RemoveFromStorage(IItem item)
         {
-            if (  item is not IStorable storable || !_storage.ContainsItem(storable)) return false;
+            if (item is not IStorable storable || !_storage.ContainsItem(storable)) return false;
             
             _storage.ClearCell(_storage.GetCell(storable));
-            item.ItemState = ItemState.Show;
 
             return true;
         }

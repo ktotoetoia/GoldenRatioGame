@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
-using IM.Storages;
 
 namespace IM.Modules
 {
     public class GraphEditingService : IGraphEditingService<IExtensibleItem>, IGraphEditingEvents<IExtensibleItem>
     {
         private readonly IConditionalCommandDataModuleGraph<IExtensibleItem> _graph;
-        private readonly ICellFactoryStorage _storage;
+        private readonly IStorageEditingService _storageEditingService;
         private readonly List<IDataModuleGraphConditions<IExtensibleItem>> _conditions;
 
         public IDataModuleGraphReadOnly<IExtensibleItem> GraphReadOnly => _graph;
@@ -19,19 +18,19 @@ namespace IM.Modules
         public event Action<IDataConnection<IExtensibleItem>> Connected;
         public event Action<IDataPort<IExtensibleItem>, IDataPort<IExtensibleItem>> Disconnected;
 
-        public GraphEditingService(IConditionalCommandDataModuleGraph<IExtensibleItem> graph, ICellFactoryStorage storage,
+        public GraphEditingService(IConditionalCommandDataModuleGraph<IExtensibleItem> graph, IStorageEditingService storageEditingService,
             IEnumerable<IDataModuleGraphConditions<IExtensibleItem>> extraConditions = null)
         {
             var defaults = new List<IDataModuleGraphConditions<IExtensibleItem>>
             {
-                new AllowAddIfStorageContains<IExtensibleItem>(storage),
+                new AllowAddIfStorageContains<IExtensibleItem>(storageEditingService.Storage),
                 new DisallowSameItem<IExtensibleItem>(graph)
             };
             _conditions = extraConditions != null 
                 ? defaults.Concat(extraConditions).ToList() 
                 : defaults;
             _graph = graph;
-            _storage = storage;
+            _storageEditingService = storageEditingService;
         }
         
         public void Disconnect(IDataConnection<IExtensibleItem> connection)
@@ -47,7 +46,7 @@ namespace IM.Modules
             if (!CanAddAndConnect(module, modulePort, targetPort)) return;
             
             _graph.AddAndConnect(module, modulePort, targetPort);
-            _storage.ClearCell(_storage.FirstOrDefault(x => x.Item == module.Value));
+            _storageEditingService.RemoveFromStorage(module.Value);
             
             Added?.Invoke(module);
             Connected?.Invoke(modulePort.DataConnection);
@@ -58,7 +57,8 @@ namespace IM.Modules
             if (!CanAdd(module)) return;
                 
             _graph.Add(module);
-            _storage.ClearCell(_storage.FirstOrDefault(x => x.Item == module.Value));
+            _storageEditingService.RemoveFromStorage(module.Value);
+            
             Added?.Invoke(module);
         }
 
@@ -67,7 +67,8 @@ namespace IM.Modules
             if (!CanRemove(module)) return;
                 
             _graph.Remove(module);
-            _storage.SetItem(_storage.FirstOrDefault(x =>x.Item == null) ?? _storage.CreateCell(),module.Value);
+            _storageEditingService.AddToStorage(module.Value);
+            
             Removed?.Invoke(module);
         }
 

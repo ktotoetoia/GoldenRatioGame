@@ -1,4 +1,5 @@
-﻿using IM.LifeCycle;
+﻿using System;
+using IM.LifeCycle;
 using IM.Modules;
 using IM.Visuals;
 using IM.WeaponSystem;
@@ -42,6 +43,11 @@ namespace IM
             _weaponVisual.Transform.LocalScale = _anchor.lossyScale;
 
             _weaponVisual.Order = _moduleVisualObject.Order;
+        }
+
+        private void LateUpdate()
+        {
+            Update();
         }
 
         private void OnPreferredWeaponChanged(IWeapon weapon)

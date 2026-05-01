@@ -5,20 +5,19 @@ using UnityEngine;
 
 namespace IM.Modules
 {
-    public class ItemInteractable : MonoBehaviour, IInteractable
+    public class InteractableWhenNoOwner : MonoBehaviour, IInteractable
     {
-        private IHaveItemState _extensibleItem;
-        
+        private IHaveOwner _haveOwner;
         public GameObject GameObject => gameObject;
         
         private void Awake()
         {
-            _extensibleItem = GetComponent<IHaveItemState>();
+            _haveOwner = GetComponent<IHaveOwner>();
         }
         
         public bool CanInteract(IEntity interactor)
         {
-            return isActiveAndEnabled && interactor is IModuleEntity && _extensibleItem.ItemState == ItemState.Show;
+            return isActiveAndEnabled && interactor is IModuleEntity && _haveOwner.Owner == null;
         }
 
         public void OnInteract(IEntity interactor)

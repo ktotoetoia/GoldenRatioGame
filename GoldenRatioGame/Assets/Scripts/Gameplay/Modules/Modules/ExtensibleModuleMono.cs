@@ -11,8 +11,8 @@ namespace IM.Modules
         [SerializeField] private PortFactoryBase portFactory;
         private ITypeRegistry<IExtension> _extensions;
         private IIconDrawer _iconDrawer;
-        private ItemState _state;
-        
+        private object _owner;
+
         [field: SerializeField] public string Name { get; private set; }
         [field: SerializeField] public string Description { get; private set; }
         public event Action<IEntity> Destroyed;
@@ -22,16 +22,11 @@ namespace IM.Modules
         public ITypeRegistry<IExtension> Extensions => _extensions ??= new TypeRegistry<IExtension>(gameObject.GetComponents<IExtension>());
         public IPortFactory PortFactory => portFactory;
 
-        public ItemState ItemState
-        {
-            get => _state;
-            set => _iconDrawer.IsDrawing = (_state = value) == ItemState.Show;
-        }
+        public object Owner => _owner;
 
         private void Awake()
         {
             _iconDrawer = GetComponent<IIconDrawer>();
-            ItemState = ItemState.Show;
         }
         
         public void Destroy()
@@ -43,6 +38,11 @@ namespace IM.Modules
         {
             Destroyed?.Invoke(this);
             Destroyed = null;
+        }
+        
+        public bool SetOwner(object owner)
+        {
+            return !(_iconDrawer.IsDrawing = (_owner = owner) == null);
         }
     }
 }

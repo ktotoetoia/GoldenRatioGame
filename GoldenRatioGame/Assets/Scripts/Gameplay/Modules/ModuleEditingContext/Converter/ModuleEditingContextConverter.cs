@@ -53,10 +53,10 @@ namespace IM.Modules
             var conditions = new CompositeDataModuleGraphConditions<IExtensibleItem>(
                 _conditionsFactory.Create(innerGraph, mutableStorage));
             var conditionalGraph = new ConditionalCommandDataModuleGraph<IExtensibleItem>(innerGraph, conditions);
-
-            var graphEditing = new GraphEditingService(conditionalGraph, mutableStorage);
-            var unsafeGraphEditing = new UnsafeGraphEditingService<IExtensibleItem>(graphEditing, conditions);
+            
             var storageEditing = new StorageEditingService(mutableStorage);
+            var graphEditing = new GraphEditingService(conditionalGraph, storageEditing);
+            var unsafeGraphEditing = new UnsafeGraphEditingService<IExtensibleItem>(graphEditing, conditions);
 
             var context = new ModuleEditingContext(conditionalGraph, mutableStorage, graphEditing, unsafeGraphEditing, storageEditing);
 

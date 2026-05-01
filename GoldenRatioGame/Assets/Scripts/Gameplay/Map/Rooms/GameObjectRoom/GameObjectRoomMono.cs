@@ -51,8 +51,10 @@ namespace IM.Map
             if (!toAdd || _gameObjects.Contains(toAdd)) return false;
 
             _gameObjects.Add(toAdd);
-            if (toAdd.TryGetComponent(out IRoomVisitor visitor))
-                visitor.CurrentRoom = this;
+            foreach (IRoomVisitor roomVisitor in toAdd.GetComponentsInChildren<IRoomVisitor>())
+            {
+                roomVisitor.CurrentRoom = this;
+            }
 
             if (toAdd.transform.parent != transform)
                 toAdd.transform.SetParent(transform);
@@ -66,9 +68,11 @@ namespace IM.Map
         public bool Remove(GameObject toRemove)
         {
             if (!_gameObjects.Remove(toRemove)) return false;
-
-            if (toRemove.TryGetComponent(out IRoomVisitor visitor) && visitor.CurrentRoom.Equals(this))
-                visitor.CurrentRoom = null;
+            
+            foreach (IRoomVisitor roomVisitor in toRemove.GetComponentsInChildren<IRoomVisitor>())
+            {
+                roomVisitor.CurrentRoom = null;
+            }
 
             GameObjectRemoved?.Invoke(toRemove);
             UpdateRoomActivation();

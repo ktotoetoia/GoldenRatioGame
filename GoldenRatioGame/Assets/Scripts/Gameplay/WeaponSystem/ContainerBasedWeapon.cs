@@ -12,7 +12,6 @@ namespace IM.WeaponSystem
     {
         private IAbilityContainer _abilityContainer;
         private IIcon _icon;
-        private ItemState _itemState;
         private IIconDrawer _iconDrawer;
         private UseContext _context;
 
@@ -25,12 +24,13 @@ namespace IM.WeaponSystem
         public string Name => CastAbility.Name;
         public string Description => CastAbility.Description;
         public IIcon Icon => _icon ??= new Icon(GetComponent<SpriteRenderer>().sprite);
-        public ItemState ItemState
-        {
-            get => _itemState;
-            set => _iconDrawer.IsDrawing = (_itemState = value) == ItemState.Show;
-        }
 
+        public object Owner { get; private set; }
+
+        public bool SetOwner(object owner)
+        {
+            return !(_iconDrawer.IsDrawing = (Owner = owner) == null);
+        }
         public IWeaponVisualsProvider WeaponVisualsProvider { get; private set; }
         
         public event Action<UseContext> AbilityStarted;
@@ -41,7 +41,6 @@ namespace IM.WeaponSystem
             WeaponVisualsProvider = GetComponent<IWeaponVisualsProvider>();
             _iconDrawer = GetComponent<IIconDrawer>();
             _abilityContainer = GetComponent<IAbilityContainer>();
-            ItemState = ItemState.Show;
         }
 
         public bool TryCast(out ICastInfo info)

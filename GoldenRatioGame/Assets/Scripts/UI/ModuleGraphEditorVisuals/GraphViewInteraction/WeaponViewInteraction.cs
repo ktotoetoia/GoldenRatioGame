@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using IM.Modules;
 using IM.WeaponSystem;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace IM.UI
         [SerializeField] private StorageView _weaponStorage;
         [SerializeField] private WeaponVisualView _weaponView;
         [SerializeField] private WeaponPreviewPlacer _weaponPreviewPlacer;
-        private WeaponEditingService _weaponEditingService;
+        private IWeaponEditingService _weaponEditingService;
         
         public Func<Vector3> GetPointerPosition { get; set; } = ()  => Vector3.zero;
         
@@ -23,7 +24,16 @@ namespace IM.UI
 
             _weaponPreviewPlacer.HoverPositionSource = x => GetPointerPosition();
         }
-        
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                _weaponEditingService.ClearWeapon(_weaponEditingService.ContainerAbilityPoolReadOnly.AbilityContainers
+                    .OfType<IWeaponContainerReadOnly>()
+                    .FirstOrDefault());
+            }
+        }
         
         private void OnSelected(object obj)
         {
@@ -42,26 +52,29 @@ namespace IM.UI
 
         private void OnRelease(object obj)
         {
-            if (_weaponPreviewPlacer.IsPreviewing)
-            {
-                IWeapon weapon = _weaponPreviewPlacer.FinalizePreview();
+            if (!_weaponPreviewPlacer.IsPreviewing) return;
+            
+            IWeapon weapon = _weaponPreviewPlacer.FinalizePreview();
                 
-                if (_weaponView.GetWeaponContainerAtPosition(GetPointerPosition()) is { } weaponContainer && weapon != null)
-                {
-                    _weaponEditingService.SetWeapon(weaponContainer,weapon);
-                }
+            if (_weaponView.GetWeaponContainerAtPosition(GetPointerPosition()) is { } weaponContainer && weapon != null)
+            {
+                _weaponEditingService.SetWeapon(weaponContainer,weapon);
             }
         }
         
         private void ObjectInteracted(object obj)
         {
-            if(obj is IWeapon weapon);
+            if (obj is not IWeapon weapon) return;
+            
+            if (_weaponEditingService.ContainerAbilityPoolReadOnly.AbilityContainers.FirstOrDefault(x => x is IWeaponContainer { Weapon: null }) is IWeaponContainer weaponContainer)
+            {
+                _weaponEditingService.SetWeapon(weaponContainer,weapon);
+            }
         }
 
         public override void SetContext(IModuleEditingContext moduleEditingContext)
         {
-            _weaponEditingService = moduleEditingContext.Services.Get<WeaponEditingService>();
-            
+            _weaponEditingService = moduleEditingContext.Services.Get<IWeaponEditingService>();
         }
         
         public override void ClearContext()

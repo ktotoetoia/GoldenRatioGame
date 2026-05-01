@@ -13,6 +13,7 @@ namespace IM.Modules
         private IWeapon _defaultWeapon;
         private IWeapon _equippedWeapon;
         private IEntity _entity;
+        
         public event Action<IWeapon> PreferredWeaponChanged;
 
         public IAbilityReadOnly Ability => PreferredWeapon;
@@ -36,7 +37,26 @@ namespace IM.Modules
             {
                 if (_equippedWeapon == value) return;
 
+                if (_equippedWeapon is IHaveOwner haveOwner && haveOwner.Owner.Equals(this))
+                {
+                    haveOwner.SetOwner(null);
+                }
+                if (_equippedWeapon is MonoBehaviour mb && mb.transform.parent == transform)
+                {
+                    mb.transform.SetParent(null);
+                }
+                
                 _equippedWeapon = value;
+                
+                if (_equippedWeapon is IHaveOwner newHaveOwner)
+                {
+                    newHaveOwner.SetOwner(this);
+                }
+                if (_equippedWeapon is MonoBehaviour newMb)
+                {
+                    newMb.transform.SetParent(transform);
+                }
+                
                 SyncWeaponEntity();
                 PreferredWeaponChanged?.Invoke(Weapon);
             }
@@ -56,7 +76,7 @@ namespace IM.Modules
             GameObject defaultWeapon = Instantiate(_defaultWeaponPrefab, transform);
             
             if(!defaultWeapon.TryGetComponent(out _defaultWeapon)) return;
-            if (defaultWeapon.TryGetComponent(out IHaveItemState itemState)) itemState.ItemState = ItemState.Hide;
+            if(defaultWeapon.TryGetComponent(out IHaveOwner owner)) owner.SetOwner(this);
             
             SyncWeaponEntity();
             PreferredWeaponChanged?.Invoke(PreferredWeapon);

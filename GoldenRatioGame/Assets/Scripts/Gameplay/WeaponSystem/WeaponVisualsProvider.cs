@@ -8,7 +8,8 @@ namespace IM.WeaponSystem
     {
         [SerializeField] private VisualObjectPreset _weaponVisualPresetOnRelease;
         [SerializeField] private GameObject _weaponVisualPrefab;
-        
+
+        [SerializeField] private bool _test;
         public IObjectPool<IWeaponVisual> WeaponVisualsPool { get; private set; }
 
         private void Awake()
@@ -31,7 +32,6 @@ namespace IM.WeaponSystem
         private void OnRelease(IWeaponVisual weaponVisual)
         {
             _weaponVisualPresetOnRelease.ApplyTo(weaponVisual);
-            weaponVisual.Visible = false;
             weaponVisual.Transform.Transform.SetParent(transform);
         }
     }

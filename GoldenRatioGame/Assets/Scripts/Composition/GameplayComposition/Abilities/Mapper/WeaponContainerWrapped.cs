@@ -1,5 +1,6 @@
 ﻿using System;
 using IM.Abilities;
+using IM.Items;
 using IM.WeaponSystem;
 
 namespace IM.Modules
@@ -18,7 +19,6 @@ namespace IM.Modules
             {
                 if(_weapon == value) return;
                 _weapon = value;
-
                 PreferredWeaponChanged?.Invoke(PreferredWeapon);
             }
         }

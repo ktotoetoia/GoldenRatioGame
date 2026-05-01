@@ -22,12 +22,11 @@ namespace IM.Modules
         public override object CaptureState(ModuleEditingContextEditorMono component)
         {
             var snapshot = component.Snapshot;
-
             var state = new ModuleContextData
             {
                 GraphData = _graphSerializer.Serialize(snapshot.Graph)
             };
-
+            
             state.StorageModuleIds.AddRange(
                 snapshot.Storage
                     .Select(cell => (cell.Item as IEntity).GetModuleId())
@@ -44,10 +43,8 @@ namespace IM.Modules
             
             try
             {
-                var graphIds = savedState.GraphData.ModuleInfos
-                    .Select(m => m.ItemId)
-                    .Where(id => !string.IsNullOrEmpty(id))
-                    .ToHashSet();
+                HashSet<string> graphIds = savedState.GraphData.ModuleInfos
+                    .Select(m => m.ItemId).Where(id => !string.IsNullOrEmpty(id)).ToHashSet();
 
                 foreach (GameObject prefab in savedState.StorageModuleIds.Where(id => !string.IsNullOrEmpty(id) && !graphIds.Contains(id)).Select(resolveDependency))
                 {

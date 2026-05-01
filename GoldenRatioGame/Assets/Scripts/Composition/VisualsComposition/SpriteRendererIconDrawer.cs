@@ -45,7 +45,10 @@ namespace IM.Items
         public bool IsDrawing
         {
             get => Renderer.enabled;
-            set => Renderer.enabled = value;
+            set
+            {
+                Renderer.enabled = value;
+            }
         }
     }
 }

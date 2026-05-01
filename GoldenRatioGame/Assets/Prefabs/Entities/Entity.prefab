@@ -67,7 +67,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3866329637884553479}
   m_Layer: 0
-  m_Name: Modules
+  m_Name: Items
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -583,7 +583,6 @@ GameObject:
   - component: {fileID: 4737303748126444302}
   - component: {fileID: 6135420331760039005}
   - component: {fileID: 1996564249185061140}
-  - component: {fileID: 6022803922472626113}
   m_Layer: 0
   m_Name: ModuleObservers
   m_TagString: Untagged
@@ -697,17 +696,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d426e4e28d4c4ab04c65943494224f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleComposition::IM.Modules.ParentSetter
-  _parentTransform: {fileID: 3866329637884553479}
---- !u!114 &6022803922472626113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8508053980751109502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90f605104118471090a78f9cdbbeeb98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: GameplayComposition::IM.Modules.WeaponParentSetterObserver
-  _parentTransform: {fileID: 3866329637884553479}
+  _onAddedTransformIn: {fileID: 3866329637884553479}
+  _onRemovedTransformOut: {fileID: 2365714068825351273}
+  _entitySource: {fileID: 4342869459289063407}

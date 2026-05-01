@@ -5,6 +5,8 @@
             <ui:Button text="Start New" name="CreateNewButton" style="flex-shrink: 1;"/>
             <ui:Button text="Load Last Save" name="LoadLastButton" style="flex-shrink: 1;"/>
         </ui:VisualElement>
-        <ui:VisualElement style="flex-grow: 1; flex-basis: 50%; align-self: center;"/>
+        <ui:VisualElement style="flex-grow: 1; flex-basis: 50%; align-self: center;">
+            <ui:Label text="Input:&#10;Mouse 1 -&gt; ability 1&#10;Mouse 2 -&gt; ability 2&#10;WASD -&gt; movement&#10;F -&gt; pick up an item&#10;I -&gt; open editor&#10;O -&gt; save and close editor&#10;In Editor:&#10;left click module on graph to &#10;remove it&#10;drag module to its appropriate &#10;port to add it&#10;drag weapon to the weapon containers&#10;at the bottom to add them&#10;N -&gt; remove the weapon from the &#10;first container"/>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

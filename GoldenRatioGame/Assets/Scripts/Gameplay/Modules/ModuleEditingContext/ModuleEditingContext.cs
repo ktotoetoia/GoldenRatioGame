@@ -24,9 +24,9 @@ namespace IM.Modules
         {
             Storage = storage;
             Graph = graph;
-            GraphEditing = new GraphEditingService(graph,storage);
-            UnsafeGraphEditing = new UnsafeGraphEditingService<IExtensibleItem>(GraphEditing,conditions);
             StorageEditing = new StorageEditingService(storage);
+            GraphEditing = new GraphEditingService(graph,StorageEditing);
+            UnsafeGraphEditing = new UnsafeGraphEditingService<IExtensibleItem>(GraphEditing,conditions);
         }
         
         public ModuleEditingContext(IConditionalCommandDataModuleGraph<IExtensibleItem> graph,

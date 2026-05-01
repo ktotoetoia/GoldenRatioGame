@@ -48,7 +48,10 @@ namespace IM.UI
         {
             foreach (var (weaponContainer, visualElement) in _container.WeaponContainers)
             {
-                if (visualElement?.panel != null) return weaponContainer;
+                var bounds = visualElement.worldBound;
+                bounds.position += (Vector2)_document.transform.position;
+                
+                if (bounds.Contains(worldPosition)) return weaponContainer;
             }
             
             return null;
