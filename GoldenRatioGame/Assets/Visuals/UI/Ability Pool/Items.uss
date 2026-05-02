@@ -1,0 +1,70 @@
+:root {
+    --item-padding: 6px;
+    --item-gap: 6px;
+    --item-bg: rgb(30, 30, 30);
+    --item-border: rgb(58, 58, 58);
+    --item-radius: 6px;
+    --item-name-color: rgb(255, 255, 255);
+    --item-description-color: rgb(192, 192, 192);
+    --item-width: 49%;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    padding: var(--ability-padding);
+    background-color: var(--ability-bg);
+    border-radius: var(--ability-radius);
+    transition: background-color 0.12s ease;
+    width: var(--ability-width);
+    margin-bottom: 3px;
+    margin-top: 3px;
+    align-self: stretch;
+    aspect-ratio: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.item:hover {
+    background-color: rgb(42, 42, 42);
+}
+
+.itemName {
+    font-size: 14px;
+    color: var(--ability-name-color);
+    margin-bottom: 2px;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+}
+
+.itemIcon {
+    background-position: center;
+    border-radius: 4px;
+    flex-shrink: 1;
+    -unity-background-scale-mode: scale-to-fit;
+    align-self: center;
+    aspect-ratio: 1;
+    flex-grow: 1;
+    margin: 10%;
+}
+
+.itemDescription {
+    font-size: 12px;
+    color: var(--ability-description-color);
+}
+
+.itemButton {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background-image: url("project://database/Assets/Visuals/Sprites/red-cross-png-red-cross-png-file-2000.png?fileID=2800000&guid=adc9c1db76b5ef24699f3d9301d6a57c&type=3#red-cross-png-red-cross-png-file-2000");
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}

@@ -10,10 +10,19 @@ namespace IM.UI
     {
         private readonly MarqueeContainerBase _nameLabel;
         private readonly Image _iconElement;
+        private readonly Button _actionButton;
+        private System.Action _currentAction;
         
+        [UxmlAttribute]
+        public bool ShowButton
+        {
+            get => _actionButton.style.display == DisplayStyle.Flex;
+            set => _actionButton.style.display = value ? DisplayStyle.Flex : DisplayStyle.None;
+        }
+
         public ItemVisualElement()
         {
-            AddToClassList(AbilityClassLists.Ability);
+            AddToClassList(ItemClassLists.Item);
 
             _iconElement = new Image
             {
@@ -25,21 +34,50 @@ namespace IM.UI
                 DurationSec = 2f,
                 FadeDurationSec = 0.5f,
             };
-            _nameLabel.AddToClassList(AbilityClassLists.AbilityName);
 
+            _actionButton = new Button();
+
+            _nameLabel.AddToClassList(ItemClassLists.ItemName);
+            _iconElement.AddToClassList(ItemClassLists.ItemIcon);
+            _actionButton.AddToClassList(ItemClassLists.ItemButton);
+
+            ShowButton = false;
+
+            Add(_actionButton);
             Add(_nameLabel);
+        }
+        
+        public void RegisterAction(string label, System.Action callback)
+        {
+            if (_currentAction != null) _actionButton.clicked -= _currentAction;
+
+            _currentAction = callback;
+
+            _actionButton.text = label;
+            _actionButton.clicked += _currentAction;
+            ShowButton = true;
+        }
+        
+        public void UnregisterActions()
+        {
+            if (_currentAction != null)
+            {
+                _actionButton.clicked -= _currentAction;
+                _currentAction = null;
+            }
+
+            ShowButton = false;
         }
 
         public void SetItem(object item)
         {
-            if(item is IHaveName named) _nameLabel.Text = named.Name;
+            if (item is IHaveName named) _nameLabel.Text = named.Name;
 
             if (item is IHaveIcon { Icon: not null } icon)
             {
                 _nameLabel.RemoveFromHierarchy();
-                
-                if (_iconElement.parent == null)
-                    Add(_iconElement);
+
+                if (_iconElement.parent == null) Add(_iconElement);
 
                 _iconElement.sprite = icon.Icon.Sprite;
             }

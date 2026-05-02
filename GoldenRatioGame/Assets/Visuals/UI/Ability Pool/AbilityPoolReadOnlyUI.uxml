@@ -1,4 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Visuals/UI/Ability%20Pool/Abilities.uss?fileID=7433441132597879392&amp;guid=c1c9e31424850be48ba252ffb41adb09&amp;type=3#Abilities"/>
+    <Style src="project://database/Assets/Visuals/UI/Ability%20Pool/Items.uss?fileID=7433441132597879392&amp;guid=19b25b6549667f74795057157b672e9d&amp;type=3#Items"/>
     <IM.UI.AbilityPoolReadonlyContainer/>
 </ui:UXML>

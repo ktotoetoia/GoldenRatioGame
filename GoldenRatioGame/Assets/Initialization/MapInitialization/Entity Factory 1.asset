@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bee2ea197d7460a980efbc0d626a4c4, type: 3}
-  m_Name: MapInitializer
-  m_EditorClassIdentifier: InfrastructureComposition::IM.MapInitializer
-  _moduleEntityEntries:
-  - <Bounds>k__BackingField:
+  m_Script: {fileID: 11500000, guid: a058e1c388dd4fcf86005567312acf2f, type: 3}
+  m_Name: Entity Factory 1
+  m_EditorClassIdentifier: InfrastructureComposition::IM.ModuleEntityFactory2
+  _entry:
+    <Bounds>k__BackingField:
       m_Center: {x: 0, y: 0, z: 0}
       m_Extent: {x: 0, y: 0, z: 0}
     <EntityGameObject>k__BackingField: {fileID: 3797983940954428562, guid: 5eecb838571f31948a81b32f27795908, type: 3}
@@ -21,12 +21,7 @@ MonoBehaviour:
     - {fileID: 1831086527369138414, guid: f518952fb52b4af42b95ad416b950be5, type: 3}
     - {fileID: 8119833187759213420, guid: 201b37bc89a9a3641b2466ee9ad534a0, type: 3}
     - {fileID: 991209621830917388, guid: 9dd7b1f69d38b81489b903d2f7b7266e, type: 3}
-    - {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
+    - {fileID: 9154606070248935614, guid: acb799a4d4e278d4eb6f46a855de523b, type: 3}
     - {fileID: 2047626318192908934, guid: 120cd70ac3f52c045b9c42cc3fa06d5d, type: 3}
-    - {fileID: 7210977406679086040, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+    - {fileID: 2802572859520272913, guid: ece0237ec3ed11f47af8bff30089ae37, type: 3}
     <Faction>k__BackingField: {fileID: 11400000, guid: 6f84adb9e464b3a45a892ce320bf0a2d, type: 2}
-  _gameObjects:
-  - {fileID: 2969610865149193484, guid: 72b35961a9a5cd342ba0ed456ba27ac6, type: 3}
-  _roomPrefab: {fileID: 4054245826693385729, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
-  _floorPrefab: {fileID: 3678140963209637273, guid: 419cc5101d20e2147aa465fdc58e2963, type: 3}
-  _roomPortPrefab: {fileID: 3031017149369251266, guid: 502dd60d80db5504f994382f78ec18c4, type: 3}

@@ -3,77 +3,68 @@ using System.Linq;
 using IM.Graphs;
 using IM.LifeCycle;
 using IM.Map;
-using IM.Modules;
 using IM.SaveSystem;
 using UnityEngine;
 
 namespace IM
 {
-    [CreateAssetMenu(fileName = "MapInitializer", menuName = "MapInitializer")]
+   [CreateAssetMenu(fileName = "MapInitializer", menuName = "Initialization/Map Initializer")]
     public class MapInitializer : SceneInitializer
     {
-        [SerializeField] private List<ModuleEntityEntry> _moduleEntityEntries;
-        [SerializeField] private List<GameObject> _gameObjects;
-        [SerializeField] private GameObject _roomPrefab;
+        [SerializeField] private List<RoomFactory> _roomFactories;
         [SerializeField] private GameObject _floorPrefab;
         [SerializeField] private GameObject _roomPortPrefab;
-        private IRoomFactory _roomFactory;
-        
+        [SerializeField] private float _portOffset = 4f;
+
         public override void OnSceneLoaded(GameObject initializerGO, IGameObjectFactory factory)
         {
-            Floor floor = factory.Create(_floorPrefab,false).GetComponent<Floor>();
-            _roomFactory = new GameObjectRoomMonoFactory(factory, _roomPrefab);
-            IDataGraph<IGameObjectRoom> floorGraph = new BiDirectionalDataGraph<IGameObjectRoom>();
+            var floor = factory.Create(_floorPrefab, false).GetComponent<Floor>();
+            var graph = new BiDirectionalDataGraph<IGameObjectRoom>();
+            IDataNode<IGameObjectRoom> previousNode = null;
 
-            C(floorGraph,factory);
-            C(floorGraph,factory);
-            C(floorGraph,factory);
-            C(floorGraph,factory);
-            C(floorGraph,factory);
-            C(floorGraph,factory);
-            
-            floor.SetFloorGraph(floorGraph);
-
-            foreach (RoomWalkerMono roomWalker in FindObjectsByType<RoomWalkerMono>(FindObjectsSortMode.None))
+            foreach (var roomFactory in _roomFactories)
             {
-                roomWalker.GoTo(floorGraph.DataNodes.FirstOrDefault().Value);
+                var room = roomFactory.Create(factory);
+                var currentNode = graph.Create(room);
+
+                if (previousNode != null)
+                {
+                    ConnectRooms(factory, graph, previousNode, currentNode);
+                }
+                previousNode = currentNode;
             }
+
+            floor.SetFloorGraph(graph);
+            UpdateWalkers(graph.DataNodes.FirstOrDefault()?.Value);
         }
 
-        private void C(IDataGraph<IGameObjectRoom> graph, IGameObjectFactory factory)
+        private void ConnectRooms(IGameObjectFactory factory, IDataGraph<IGameObjectRoom> graph, 
+            IDataNode<IGameObjectRoom> from, IDataNode<IGameObjectRoom> to)
         {
-            IDataNode<IGameObjectRoom> node = graph.Create(_roomFactory.Create());
-            
-            foreach (IModuleEntity entity in _moduleEntityEntries.Select(x => new ModuleEntityFactory().Create(x,factory)))
-            {
-                node.Value.Add(entity.GameObject);
-            }
+            graph.Connect(from, to);
 
-            foreach (GameObject gameObject in _gameObjects)
-            {
-                node.Value.Add(factory.Create(gameObject, false));
-            }
+            var portAGO = factory.Create(_roomPortPrefab, false);
+            var portBGO = factory.Create(_roomPortPrefab, false);
 
-            if (graph.DataNodes.Count() > 1)
-            {
-                IDataNode<IGameObjectRoom> previous = graph.DataNodes.ElementAt(graph.DataNodes.Count()-2);
-                
-                graph.Connect(previous,node);
-                
-                GameObject from = factory.Create(_roomPortPrefab, false);
-                GameObject to = factory.Create(_roomPortPrefab, false);
-                
-                RoomPort fromPort = from.GetComponent<RoomPort>();
-                RoomPort toPort = to.GetComponent<RoomPort>();
-                
-                from.transform.localPosition = new Vector3(4,0,0);
-                to.transform.localPosition = new Vector3(-4,0,0);
-                
-                fromPort.Initialize(previous.Value,toPort);
-                toPort.Initialize(node.Value,fromPort);
+            portAGO.transform.localPosition = new Vector3(_portOffset, 0, 0);
+            portBGO.transform.localPosition = new Vector3(-_portOffset, 0, 0);
 
-                previous.Value.Add(fromPort);
-                node.Value.Add(toPort);
+            var portA = portAGO.GetComponent<RoomPort>();
+            var portB = portBGO.GetComponent<RoomPort>();
+
+            portA.Initialize(from.Value, portB);
+            portB.Initialize(to.Value, portA);
+
+            from.Value.Add(portA);
+            to.Value.Add(portB);
+        }
+
+        private void UpdateWalkers(IGameObjectRoom startRoom)
+        {
+            if (startRoom == null) return;
+            foreach (var walker in FindObjectsByType<RoomWalkerMono>(FindObjectsSortMode.None))
+            {
+                walker.GoTo(startRoom);
             }
         }
     }

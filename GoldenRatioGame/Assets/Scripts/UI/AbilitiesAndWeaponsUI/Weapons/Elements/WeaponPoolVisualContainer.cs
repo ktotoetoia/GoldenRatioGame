@@ -8,12 +8,13 @@ using UnityEngine.UIElements;
 namespace IM.UI
 {
     [UxmlElement]
-    public partial class WeaponVisualContainer : VisualElement
+    public partial class WeaponPoolVisualContainer : VisualElement
     {
         private IContainerAbilityPoolReadOnly _containerAbilityPool;
         
         public Dictionary<IWeaponContainerReadOnly, ItemVisualElement> WeaponContainers { get; } = new();
-
+        public event Action<IWeaponContainerReadOnly> OnContainerInteracted;
+        
         public void SetContainerAbilityPool(IContainerAbilityPoolReadOnly containerAbilityPool)
         {
             ClearContainerAbilityPool();
@@ -48,6 +49,7 @@ namespace IM.UI
         {
             ItemVisualElement itemVisualElement = new ItemVisualElement();
             weaponContainer.PreferredWeaponChanged += x => itemVisualElement.SetItem(x);
+            itemVisualElement.RegisterAction("",() => OnContainerInteracted?.Invoke(weaponContainer));
             itemVisualElement.SetItem(weaponContainer.PreferredWeapon);
             WeaponContainers[weaponContainer] = itemVisualElement;
             Add(itemVisualElement);
@@ -58,6 +60,7 @@ namespace IM.UI
             if (!WeaponContainers.TryGetValue(weaponContainer, out ItemVisualElement visual)) return;
 
             Remove(visual);
+            visual.UnregisterActions();
             WeaponContainers.Remove(weaponContainer);
         }
     }

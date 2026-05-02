@@ -13,15 +13,18 @@ namespace IM
         public IModuleEntity Create(ModuleEntityEntry entry, IGameObjectFactory factory)
         {
             GameObject created = factory.Create(entry.EntityGameObject, false);
+            
             created.transform.position = new Vector3(Random.Range(entry.Bounds.min.x, entry.Bounds.max.x),
                 Random.Range(entry.Bounds.min.y, entry.Bounds.max.y));
+            
             IModuleEntity entity = created.GetComponent<IModuleEntity>();
             
             if (entry.Faction&& created.TryGetComponent(out IFactionMember factionMember)) factionMember.Faction = entry.Faction;
+            
             IEnumerable<IExtensibleItem> modules = entry.ModulesGameObjects.Select(x => factory.Create(x, false).GetComponent<IExtensibleItem>()).ToList();
             
             AddModulesToEntity(entity, modules);
-
+            
             return entity;
         }
         
@@ -35,13 +38,12 @@ namespace IM
                 {
                     entity.AddToContext(toAdd);
                 }
-                
                 IModuleEditingContext moduleEditingContext = entity.ModuleEditingContextEditor.BeginEdit();
-
+                
                 foreach (IExtensibleItem toAdd in itemsList)
                 {
-                    moduleEditingContext.GraphEditing.TryQuickAddModule(
-                        moduleEditingContext.GraphEditing.CreateModule(toAdd));
+                    moduleEditingContext.GraphEditing.TryQuickAddModule(moduleEditingContext.GraphEditing.CreateModule(toAdd));
+
                 }
             }
             finally
@@ -49,5 +51,6 @@ namespace IM
                 if(!entity.ModuleEditingContextEditor.TryApplyChanges()) entity.ModuleEditingContextEditor.DiscardChanges();
             }
         }
+
     }
 }

@@ -13,7 +13,10 @@ namespace IM.UI
         private IAbilityPoolReadOnly _abilityPool;
         private bool _viewWeaponsAsAbilities;
 
-        public AbilityPoolReadonlyContainer() => AddToClassList(AbilityClassLists.AbilityContainer);
+        public AbilityPoolReadonlyContainer()
+        {
+            AddToClassList(AbilityClassLists.AbilityContainer);
+        }
 
         public bool ViewWeaponsAsAbilities
         {

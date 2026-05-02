@@ -10,14 +10,17 @@ namespace IM.UI
     {
         [SerializeField] private Camera _uiCamera;
         private UIDocument _document;
-        private WeaponVisualContainer _container;
+        private WeaponPoolVisualContainer _container;
         private IAbilityPoolReadOnly _abilityPool;
+
+        public event Action<IWeaponContainerReadOnly> OnContainerInteracted;
 
         private void Awake()
         {
             _document = GetComponent<UIDocument>();
-            _container = _document.rootVisualElement.Q<WeaponVisualContainer>();
+            _container = _document.rootVisualElement.Q<WeaponPoolVisualContainer>();
             _document.rootVisualElement.visible = false;
+            _container.OnContainerInteracted +=x => OnContainerInteracted?.Invoke(x);
         }
 
         private void Update()

@@ -23,16 +23,7 @@ namespace IM.UI
             _weaponStorage.StorageElement.ObjectReleased += OnRelease;
 
             _weaponPreviewPlacer.HoverPositionSource = x => GetPointerPosition();
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                _weaponEditingService.ClearWeapon(_weaponEditingService.ContainerAbilityPoolReadOnly.AbilityContainers
-                    .OfType<IWeaponContainerReadOnly>()
-                    .FirstOrDefault());
-            }
+            _weaponView.OnContainerInteracted += ClearContainer;
         }
         
         private void OnSelected(object obj)
@@ -70,6 +61,11 @@ namespace IM.UI
             {
                 _weaponEditingService.SetWeapon(weaponContainer,weapon);
             }
+        }
+
+        private void ClearContainer(IWeaponContainerReadOnly weaponContainer)
+        {
+            _weaponEditingService?.ClearWeapon(weaponContainer);
         }
 
         public override void SetContext(IModuleEditingContext moduleEditingContext)

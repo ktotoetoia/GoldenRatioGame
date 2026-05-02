@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bee2ea197d7460a980efbc0d626a4c4, type: 3}
+  m_Name: MapInitializer
+  m_EditorClassIdentifier: InfrastructureComposition::IM.MapInitializer
+  _roomFactories:
+  - {fileID: 11400000, guid: 8e7cd557aa73c684a96e7cef6e9cd593, type: 2}
+  - {fileID: 11400000, guid: 8e7cd557aa73c684a96e7cef6e9cd593, type: 2}
+  - {fileID: 11400000, guid: 8e7cd557aa73c684a96e7cef6e9cd593, type: 2}
+  _floorPrefab: {fileID: 3678140963209637273, guid: 419cc5101d20e2147aa465fdc58e2963, type: 3}
+  _roomPortPrefab: {fileID: 3031017149369251266, guid: 502dd60d80db5504f994382f78ec18c4, type: 3}
+  _portOffset: 4

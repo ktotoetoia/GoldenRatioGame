@@ -23,7 +23,7 @@ PrefabInstance:
     - target: {fileID: -3593514902449251487, guid: 59ca93a25dd437541aa2d703651541bd, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 7091213522169619590, guid: b28f93700d64ad048abe12dfa01f5637, type: 3}
+      objectReference: {fileID: 1519367277, guid: b28f93700d64ad048abe12dfa01f5637, type: 3}
     - target: {fileID: -3593514902449251487, guid: 59ca93a25dd437541aa2d703651541bd, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -107,7 +107,7 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 6940537037438603345, guid: 9da5f54910a377c40879b25afaa0dc06, type: 3}
   _cooldown: 0.2
   _projectileSpeed: 20
-  _iconSprite: {fileID: 7091213522169619590, guid: b28f93700d64ad048abe12dfa01f5637, type: 3}
+  _iconSprite: {fileID: 1519367277, guid: b28f93700d64ad048abe12dfa01f5637, type: 3}
 --- !u!114 &-1757960654996738958
 MonoBehaviour:
   m_ObjectHideFlags: 0
