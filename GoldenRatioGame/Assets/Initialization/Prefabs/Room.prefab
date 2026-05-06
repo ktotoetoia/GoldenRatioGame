@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 999588743564167469}
   - component: {fileID: -4642281475574424799}
   - component: {fileID: 6124583892585538369}
-  - component: {fileID: 1289599897053231877}
+  - component: {fileID: 8831215809966109471}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -133,8 +133,8 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1911146241
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 348a295bd64341d391d9bddb0cdcf6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Map::IM.Map.GameObjectRoomMono
---- !u!114 &1289599897053231877
+--- !u!114 &8831215809966109471
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -195,10 +195,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4054245826693385729}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adc852e6d6ca4f02aae631d21554cc9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ed7bf48a94741d4bcba6475a4637421, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::IM.Visuals.RoomGenerator
-  tilemap: {fileID: 2447027755732917793}
-  floorTile: {fileID: 11400000, guid: 67bc9e66cc42dc840835c2ebe3f69bf4, type: 2}
-  minBounds: {x: 7, y: 5}
-  maxBounds: {x: 9, y: 7}
+  m_EditorClassIdentifier: Map::IM.Map.RectangleRoomForm
+  _tilemap: {fileID: 2447027755732917793}
+  _floorTile: {fileID: 11400000, guid: 67bc9e66cc42dc840835c2ebe3f69bf4, type: 2}

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bee2ea197d7460a980efbc0d626a4c4, type: 3}
   m_Name: MapInitializer
   m_EditorClassIdentifier: InfrastructureComposition::IM.MapInitializer
+  _mapGenerator: {fileID: 11400000, guid: cb5b3bc88af0b4c42814d69804b11f0d, type: 2}
   _roomFactories:
   - {fileID: 11400000, guid: 8e7cd557aa73c684a96e7cef6e9cd593, type: 2}
   - {fileID: 11400000, guid: 8e7cd557aa73c684a96e7cef6e9cd593, type: 2}

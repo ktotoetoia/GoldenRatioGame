@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Default Rectangle Room
   m_EditorClassIdentifier: Map::IM.Map.RectangleRoomFactory
   _roomPrefab: {fileID: 4054245826693385729, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
+  _roomPortPrefab: {fileID: 3031017149369251266, guid: 502dd60d80db5504f994382f78ec18c4, type: 3}
   _entityFactories:
   - {fileID: 11400000, guid: 094e158964a9d3743a5cce8f7f91b72b, type: 2}
   - {fileID: 11400000, guid: 094e158964a9d3743a5cce8f7f91b72b, type: 2}
@@ -20,3 +21,4 @@ MonoBehaviour:
   - {fileID: 2969610865149193484, guid: 72b35961a9a5cd342ba0ed456ba27ac6, type: 3}
   _minSize: {x: 8, y: 8}
   _maxSize: {x: 16, y: 16}
+  _step: {x: 0, y: 0}

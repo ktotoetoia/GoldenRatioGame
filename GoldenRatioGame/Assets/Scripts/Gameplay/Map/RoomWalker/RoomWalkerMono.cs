@@ -15,10 +15,9 @@ namespace IM.Map
         {
             get
             {
-                if (Current == null || !CooldownFinished()) 
-                    return Enumerable.Empty<IRoomPort>();
-
-                return Current.RoomPorts.Where(port => port.IsOpen);
+                if (Current == null || !CooldownFinished()) return Enumerable.Empty<IRoomPort>();
+                
+                return Current.RoomPorts.Where(port => port.IsOpen && port.IsConnected);
             }
         }
 

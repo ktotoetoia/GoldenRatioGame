@@ -1,6 +1,5 @@
 ﻿using System;
 using IM.Abilities;
-using IM.Items;
 using IM.WeaponSystem;
 
 namespace IM.Modules

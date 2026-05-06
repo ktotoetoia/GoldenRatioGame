@@ -3,7 +3,7 @@ using UnityEngine.Tilemaps;
 
 namespace IM.Map
 {
-    public class RectangleRoomAspect : MonoBehaviour
+    public class RectangleRoomForm : MonoBehaviour
     {
         [SerializeField] private Tilemap _tilemap;
         [SerializeField] private TileBase _floorTile;

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using IM.Visuals;
 using UnityEngine;
 
@@ -8,20 +8,34 @@ namespace IM
     public class VisualObjectOrderer : MonoBehaviour
     {
         private IReadOnlyCollection<GameObject> _gameObjectCollection;
+        private readonly List<IDepthOrderable> _depthOrderable = new();
+
+        private static readonly Comparison<IDepthOrderable> DepthComparison =
+            (a, b) => a.ReferencePoint.y.CompareTo(b.ReferencePoint.y);
 
         private void Awake()
         {
             _gameObjectCollection = GetComponent<IReadOnlyCollection<GameObject>>();
         }
-        
+
         private void Update()
         {
-            List<IDepthOrderable> d = _gameObjectCollection.Where(x => x.TryGetComponent(out IDepthOrderable depthOrderable)).Select(x => x.GetComponent<IDepthOrderable>()).ToList();
-            d.Sort((a, b) => a.ReferencePoint.y.CompareTo(b.ReferencePoint.y));
-            
-            for (int i = 0; i < d.Count; i++)
+            _depthOrderable.Clear();
+
+            foreach (GameObject go in _gameObjectCollection)
             {
-                d[i].Order = d.Count - i;
+                if (go.TryGetComponent(out IDepthOrderable depthOrderable))
+                {
+                    _depthOrderable.Add(depthOrderable);
+                }
+            }
+
+            _depthOrderable.Sort(DepthComparison);
+
+            int count = _depthOrderable.Count;
+            for (int i = 0; i < count; i++)
+            {
+                _depthOrderable[i].Order = count - i;
             }
         }
     }

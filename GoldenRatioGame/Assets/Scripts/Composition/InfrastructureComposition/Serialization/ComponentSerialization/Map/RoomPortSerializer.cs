@@ -36,7 +36,8 @@ namespace IM
             IGameObjectRoom origin = resolveDependency(s[0]).GetComponent<IGameObjectRoom>();
             IRoomPort destination = resolveDependency(s[1]).GetComponent<IRoomPort>();
             
-            component.Initialize(origin,destination);
+            component.Initialize(origin);
+            component.SetDestination(destination);
         }
     }
 }

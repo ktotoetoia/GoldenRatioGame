@@ -1421,6 +1421,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1886279917}
   - component: {fileID: 1886279918}
+  - component: {fileID: 1886279919}
   m_Layer: 0
   m_Name: Input
   m_TagString: Untagged
@@ -1461,6 +1462,21 @@ MonoBehaviour:
   _gameCamera: {fileID: 519420034}
   _uiCamera: {fileID: 1204849133}
   _abilityKeys: 43010000440100003100000032000000330000007100000065000000
+--- !u!114 &1886279919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886279916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 035c7b840b8447f785eda5897fe2bfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameplayComposition::IM.Modules.CameraPlayerFollow
+  _camera: {fileID: 519420034}
+  _smoothTime: 0.2
+  _offset: {x: 0, y: 0, z: -10}
 --- !u!1 &2049271415
 GameObject:
   m_ObjectHideFlags: 0

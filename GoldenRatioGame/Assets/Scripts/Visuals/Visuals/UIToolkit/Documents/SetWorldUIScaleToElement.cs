@@ -42,7 +42,7 @@ namespace IM.Visuals
                 pixelWidth * unitsPerPixel,
                 pixelHeight * unitsPerPixel
             );
-
+            
             _worldDoc.worldSpaceSize = worldSize * _scaleMultiplier;
         }
     }

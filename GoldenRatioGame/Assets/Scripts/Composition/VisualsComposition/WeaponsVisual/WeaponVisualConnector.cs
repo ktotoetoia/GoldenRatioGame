@@ -1,5 +1,4 @@
-﻿using System;
-using IM.LifeCycle;
+﻿using IM.LifeCycle;
 using IM.Modules;
 using IM.Visuals;
 using IM.WeaponSystem;
@@ -7,7 +6,7 @@ using UnityEngine;
 
 namespace IM
 {
-    public class WeaponOnModule : MonoBehaviour, IRequireModuleVisualObjectInitialization, IPoolObject
+    public class WeaponVisualConnector : MonoBehaviour, IRequireModuleVisualObjectInitialization, IPoolObject
     {
         [SerializeField] private Transform _anchor;
         private IWeaponExtension _weaponExtension;

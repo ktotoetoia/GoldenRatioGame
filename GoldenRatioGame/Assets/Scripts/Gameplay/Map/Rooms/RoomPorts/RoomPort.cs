@@ -12,7 +12,8 @@ namespace IM.Map
             
         public IGameObjectRoom Origin { get; private set; }
         public IRoomPort Connection { get; private set; }
-    
+        public PortSide PortSide { get; set; }
+
         public Vector3 EnterPosition => transform.position;
         public Vector3 DeploymentPosition => transform.position + Offset;
         [field: SerializeField] public Vector3 Offset { get; set; }
@@ -34,7 +35,7 @@ namespace IM.Map
             } 
         }
 
-        public void Initialize(IGameObjectRoom origin, IRoomPort destination)
+        public void Initialize(IGameObjectRoom origin)
         {
             if (_isInitialized) 
             {
@@ -43,8 +44,12 @@ namespace IM.Map
             }
 
             Origin = origin;
-            Connection = destination;
             _isInitialized = true;
+        }
+
+        public void SetDestination(IRoomPort destination)
+        {
+            Connection = destination;
         }
     }
 }
