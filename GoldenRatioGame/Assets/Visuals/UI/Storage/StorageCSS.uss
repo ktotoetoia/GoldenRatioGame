@@ -12,7 +12,7 @@
     --cell-border-width: 6px;
     --cell-padding: 6px;
     --item-text-color: white;
-    --item-font-size: 150%;
+    --item-font-size: 25px;
     --item-font: url("project://database/Assets/Visuals/Fonts/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf?fileID=12800000&guid=585188cdc4600544eb408bee749e4b3a&type=3#ThaleahFat_TTF");
     --slider-dragger-width: 50%;
     --slider-dragger-radius: 10px;
@@ -41,7 +41,6 @@
 }
 
 .itemLabel {
-    font-size: var(--item-font-size);
     color: var(--item-text-color);
     -unity-font-definition: var(--item-font);
     -unity-font-style: bold;
@@ -57,6 +56,7 @@
     flex-shrink: 1;
     margin-right: var(--listItems-padding);
     margin-left: var(--listItems-padding);
+    font-size: var(--item-font-size);
 }
 
 .cell {

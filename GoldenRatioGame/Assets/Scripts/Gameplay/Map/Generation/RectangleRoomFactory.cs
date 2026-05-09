@@ -30,7 +30,7 @@ namespace IM.Map
         public override IRoom Create(ISelectedRoomPattern roomPattern, IGameObjectFactory gameObjectFactory)
         {            
             GameObject roomGO = gameObjectFactory.Create(_roomPrefab, false);
-
+            
             if (roomGO.TryGetComponent(out RectangleRoomForm form))
             {
                 form.SetSize(new Vector2Int((int)roomPattern.RoomRect.size.x, (int)roomPattern.RoomRect.size.y)); 

@@ -1,6 +1,7 @@
 ﻿using IM.LifeCycle;
 using IM.Map.Grid;
 using IM.SaveSystem;
+using IM.Values;
 using UnityEngine;
 
 namespace IM
@@ -9,10 +10,11 @@ namespace IM
     public class MapInitializer : SceneInitializer
     {
         [SerializeField] private MapGenerator _mapGenerator;
+        [SerializeField] private CappedValue<int> _cappedValue = new (3,8);
 
         public override void OnSceneLoaded(GameObject initializerGo, IGameObjectFactory factory)
         {
-            _mapGenerator.Create(factory,Random.Range(3,8),Random.Range(-1000000,1000000));
+            _mapGenerator.Create(factory,Random.Range(_cappedValue.MinValue,_cappedValue.MaxValue),Random.Range(-1000000,1000000));
         }
     }
 }

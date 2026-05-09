@@ -15,11 +15,11 @@ namespace IM
 
         public override object CaptureState(Floor component)
         {
-            FloorInfo info = new FloorInfo();
+            FloorInfo floorInfo = new FloorInfo();
 
             foreach (IGameObjectRoom node in component.FloorGraph.DataNodes.Select(x => x.Value))
             {
-                info.RoomInfos.Add(new RoomInfo
+                floorInfo.RoomInfos.Add(new RoomInfo
                 {
                     RoomId = GetId(node),
                     GameObjects = node.GameObjects.Select(x => x.GetComponent<IIdentifiable>().Id).Where(id => id != null).ToList(),
@@ -29,10 +29,10 @@ namespace IM
 
             foreach (IDataEdge<IGameObjectRoom> edge in component.FloorGraph.DataEdges)
             {
-                info.Connections.Add(new Connection { From = GetId(edge.DataNode1.Value), To = GetId(edge.DataNode2.Value) });
+                floorInfo.Connections.Add(new Connection { From = GetId(edge.DataNode1.Value), To = GetId(edge.DataNode2.Value) });
             }
 
-            return info;
+            return floorInfo;
         }
 
         public override void RestoreState(Floor component, object state, Func<string, GameObject> resolveDependency)

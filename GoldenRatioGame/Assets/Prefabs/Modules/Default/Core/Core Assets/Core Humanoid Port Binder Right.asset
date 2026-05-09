@@ -25,6 +25,6 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 0.1, y: -0.28, z: 0}
     <EulerZRotation>k__BackingField: -90
     <OutputOrderAdjustment>k__BackingField: -2
-  - <Position>k__BackingField: {x: -0.06, y: -0.28, z: 0}
+  - <Position>k__BackingField: {x: -0.08, y: -0.28, z: 0}
     <EulerZRotation>k__BackingField: -90
     <OutputOrderAdjustment>k__BackingField: 2
