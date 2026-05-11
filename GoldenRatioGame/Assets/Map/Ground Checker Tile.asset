@@ -33,6 +33,6 @@ MonoBehaviour:
     e33: 1
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
-  m_ColliderType: 1
+  m_ColliderType: 0
   <LightSprite>k__BackingField: {fileID: 5319393947525291609, guid: b95bcede31c60ab4b981f570afd3ca20, type: 3}
   <DarkSprite>k__BackingField: {fileID: 7281307270145356588, guid: b95bcede31c60ab4b981f570afd3ca20, type: 3}

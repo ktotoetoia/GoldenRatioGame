@@ -11,7 +11,7 @@ namespace IM.Map
         [SerializeField] private GameObject _roomPortPrefab;
         [SerializeField] private List<EntityFactory> _entityFactories;
         [SerializeField] private List<GameObject> _gameObjects;
-        [SerializeField] private Vector2Int _size = new(16, 16);
+        [SerializeField] private Vector2Int _size = new(17, 9);
 
         public override IEnumerable<IRoomPattern> GetRoomPatterns()
         {
@@ -30,44 +30,25 @@ namespace IM.Map
         public override IRoom Create(ISelectedRoomPattern roomPattern, IGameObjectFactory gameObjectFactory)
         {            
             GameObject roomGO = gameObjectFactory.Create(_roomPrefab, false);
-            
-            if (roomGO.TryGetComponent(out RectangleRoomForm form))
-            {
-                form.SetSize(new Vector2Int((int)roomPattern.RoomRect.size.x, (int)roomPattern.RoomRect.size.y)); 
-            }
     
             IGameObjectRoom room = roomGO.GetComponent<IGameObjectRoom>();
-
+            
+            room.SetRect(roomPattern.RoomRect);
+            
             foreach (IPortDefinition portDefinition in roomPattern.PortDefinitions)
             {
                 GameObject portGameObject = gameObjectFactory.Create(_roomPortPrefab, false);
                 RoomPort port = portGameObject.GetComponent<RoomPort>();
                 port.PortSide = portDefinition.Side;
+                port.NormalizedPosition = portDefinition.NormalizedPosition;
                 port.Initialize(room);
                 room.Add(port);
-                
-                portGameObject.transform.localPosition = ResolvePortLocalPosition(roomPattern.CellRect.size, portDefinition);
             }
     
             foreach (var prefab in _gameObjects) room.Add(gameObjectFactory.Create(prefab, false));
             foreach (var entityFactory in _entityFactories) room.Add(entityFactory.Create(gameObjectFactory).GameObject);
 
             return room;
-        }
-
-        private Vector2 ResolvePortLocalPosition(Vector2 size, IPortDefinition port)
-        {
-            float halfW = size.x / 2f;
-            float halfH = size.y / 2f;
-
-            return port.Side switch
-            {
-                PortSide.North => new Vector2(Mathf.Lerp(-halfW, halfW, port.NormalizedPosition),  halfH),
-                PortSide.South => new Vector2(Mathf.Lerp(-halfW, halfW, port.NormalizedPosition), -halfH),
-                PortSide.East  => new Vector2( halfW, Mathf.Lerp(-halfH, halfH, port.NormalizedPosition)),
-                PortSide.West  => new Vector2(-halfW, Mathf.Lerp(-halfH, halfH, port.NormalizedPosition)),
-                _ => Vector2.zero
-            };
         }
     }
 }

@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5110460682599161}
   - component: {fileID: 8185116252885737288}
+  - component: {fileID: 7405270498000282969}
   - component: {fileID: 1393543158944610205}
   - component: {fileID: 1962369493419541764}
   m_Layer: 0
-  m_Name: RoomPort
+  m_Name: Default Room Port
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7040801201457967705, guid: 89289baf08e8cc548a9d93b41864fd3e, type: 3}
+  m_Sprite: {fileID: 743972795, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -93,6 +94,52 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!61 &7405270498000282969
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3031017149369251266}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!114 &1393543158944610205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +158,7 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
+  _blackList: []
 --- !u!114 &1962369493419541764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,6 +172,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Map::IM.Map.RoomPort
   _spriteRenderer: {fileID: 8185116252885737288}
-  _closedSprite: {fileID: 7040801201457967705, guid: 89289baf08e8cc548a9d93b41864fd3e, type: 3}
-  _openSprite: {fileID: 21300000, guid: c57efa21a665cde4eb9b09328d35c035, type: 3}
-  <Offset>k__BackingField: {x: 0, y: 0, z: 0}
+  _noneClosedSprite: {fileID: 743972795, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  _noneOpenSprite: {fileID: 959578683, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  _specialClosedSprite: {fileID: -1711033733, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  _specialOpenSprite: {fileID: 2037060004, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  _finalClosedSprite: {fileID: 1473416987, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  _finalOpenSprite: {fileID: 1246645552, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}

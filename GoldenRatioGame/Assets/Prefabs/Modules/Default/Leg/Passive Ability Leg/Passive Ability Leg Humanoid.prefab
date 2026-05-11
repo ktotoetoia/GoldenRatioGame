@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -122121014652897532, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
       propertyPath: _speedModifier.<Add>k__BackingField
-      value: 1.3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2621271969024498473, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
       propertyPath: m_Size.x

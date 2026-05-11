@@ -18,4 +18,4 @@ MonoBehaviour:
   _gameObjects:
   - {fileID: 2969610865149193484, guid: 72b35961a9a5cd342ba0ed456ba27ac6, type: 3}
   - {fileID: 2969610865149193484, guid: 72b35961a9a5cd342ba0ed456ba27ac6, type: 3}
-  _size: {x: 16, y: 16}
+  _size: {x: 17, y: 9}

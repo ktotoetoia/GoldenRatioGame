@@ -25,6 +25,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2afb1764ab356c14299bf1ba7bb4f123
+    m_Address: Assets/Initialization/Prefabs/Starting Room.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4174b200c638a2d459cb9784d4349438
     m_Address: Assets/Modules/Default/Leg/Default Leg/Leg Humanoid.prefab
     m_ReadOnly: 0
@@ -45,11 +50,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 67bc9e66cc42dc840835c2ebe3f69bf4
-    m_Address: Test Auto Tile
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7245ca3eed7971c49b9c2c812086eabb
     m_Address: Assets/Modules/Default/Arm/Default Arm/Arm Humanoid.prefab
     m_ReadOnly: 0
@@ -60,8 +60,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 74933a45a736e4a418402d63f55c647a
+    m_Address: Wall Tiles
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 74e8aa92c41572a4a9fc5cfe27d8b8d8
     m_Address: Assets/Modules/Default/Core/Default Core/Core Humanoid.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9101dd2d91b800940b729fd9ee7e6d7f
+    m_Address: Assets/Initialization/Prefabs/Final Room.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -77,6 +87,16 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c3488cf6c9d57b64eaa61001eec4d08d
     m_Address: Assets/Prefabs/Rooms/Room.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c6374e5f05db2784f9800c8f472511b6
+    m_Address: Ground Checker Tile
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de0a404a22731cd4db04744937be34c1
+    m_Address: Assets/Initialization/Prefabs/Special Room.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

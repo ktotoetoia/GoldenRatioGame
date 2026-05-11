@@ -12,10 +12,13 @@ namespace IM.Map
         private readonly SmartCollection<IRoomPort> _roomPorts = new();
         private readonly SmartCollection<GameObject> _gameObjects = new();
         
+        public Rect Rect { get; private set; }
         public IEnumerable<GameObject> GameObjects => _gameObjects;
         public IEnumerable<IRoomPort> RoomPorts => _roomPorts;
         public bool IsActive { get; private set; }
-
+        
+        public event Action<Rect> RectChanged;
+        
         public event Action<GameObject> GameObjectAdded;
         public event Action<GameObject> GameObjectRemoved;
         public event Action<IRoomPort> RoomPortAdded;
@@ -27,7 +30,7 @@ namespace IM.Map
             UpdateRoomActivation();
         }
         
-        public bool Add(IRoomPort roomPort)
+        public virtual bool Add(IRoomPort roomPort)
         {
             if (_roomPorts.Contains(roomPort)) return false;
 
@@ -37,7 +40,7 @@ namespace IM.Map
             return true;
         }
 
-        public bool Remove(IRoomPort roomPort)
+        public virtual bool Remove(IRoomPort roomPort)
         {
             if (!_roomPorts.Remove(roomPort)) return false;
 
@@ -46,7 +49,13 @@ namespace IM.Map
             return true;
         }
 
-        public bool Add(GameObject toAdd)
+        public virtual void SetRect(Rect rect)
+        {
+            Rect = rect;
+            RectChanged?.Invoke(rect);
+        }
+
+        public virtual bool Add(GameObject toAdd)
         {
             if (!toAdd || _gameObjects.Contains(toAdd)) return false;
 
@@ -65,7 +74,7 @@ namespace IM.Map
             return true;
         }
 
-        public bool Remove(GameObject toRemove)
+        public virtual bool Remove(GameObject toRemove)
         {
             if (!_gameObjects.Remove(toRemove)) return false;
             

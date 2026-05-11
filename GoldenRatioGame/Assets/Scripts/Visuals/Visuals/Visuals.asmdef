@@ -1,7 +1,10 @@
 {
     "name": "Visuals",
     "rootNamespace": "",
-    "references": ["GUID:acd84d4bbc3005442b548f446825555c"],
+    "references": [
+        "GUID:acd84d4bbc3005442b548f446825555c",
+        "GUID:613783dc1674e844b87788ea74ede0f6"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

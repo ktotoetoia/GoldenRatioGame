@@ -22,11 +22,15 @@ namespace IM.Map
             _roomEvents.GameObjectRemoved += OnVisitorRemoved;
             _roomEvents.RoomPortAdded += x => RefreshPortsState();
             _roomEvents.RoomPortRemoved += x => RefreshPortsState();
-            
             _entities.EntityAdded += OnEntityChanged;
             _entities.EntityRemoved += OnEntityChanged;
             _entities.EntityDestroyed += OnEntityDestroyed;
-
+            
+            foreach (var roomGameObject in _room.GameObjects)
+            {
+                OnVisitorAdded(roomGameObject);
+            }
+            
             RefreshPortsState();
         }
 
@@ -40,7 +44,7 @@ namespace IM.Map
             if (!go.TryGetComponent(out IModuleEntity entity)) return;
             
             if (!entity.GameObject.TryGetComponent(out IFactionMember factionMember)) return;
-
+            
             if (!_factionMembers.TryAdd(entity, factionMember)) return;
 
             _entities.Add(entity);

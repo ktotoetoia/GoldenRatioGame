@@ -8,9 +8,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5310502140078858885, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
+      propertyPath: <RoomType>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 999588743564167469, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
+      propertyPath: _assetReference.m_AssetGUID
+      value: de0a404a22731cd4db04744937be34c1
+      objectReference: {fileID: 0}
     - target: {fileID: 4054245826693385729, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
       propertyPath: m_Name
-      value: Filled Room
+      value: Special Room
       objectReference: {fileID: 0}
     - target: {fileID: 6054549284471274203, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
       propertyPath: m_LocalPosition.x

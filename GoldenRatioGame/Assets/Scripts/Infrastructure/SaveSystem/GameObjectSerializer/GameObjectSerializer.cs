@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using IM.LifeCycle;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -10,6 +11,7 @@ namespace IM.SaveSystem
     public class GameObjectSerializer : MonoBehaviour, IIdentifiable, IStateSerializable, IRequireComponentSerializerContainer
     {
         [SerializeField] protected AssetReferenceGameObject _assetReference;
+        [SerializeField] protected List<Component> _blackList;
         private IComponentSerializerContainer _container;
         
         public string Id { get; private set; }
@@ -52,7 +54,7 @@ namespace IM.SaveSystem
 
         protected virtual IList<Component> GetComponentsToSerialize()
         {
-            return GetComponents<Component>();
+            return GetComponents<Component>().Except(_blackList).ToList();
         }
 
         protected virtual void TryCaptureComponent(Component comp, int index, GameObjectData data)

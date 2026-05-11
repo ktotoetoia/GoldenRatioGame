@@ -27,7 +27,7 @@ namespace IM.Map.Grid
 
             var floor = factory.Create(_floorPrefab, false).GetComponent<Floor>();
             floor.SetFloorGraph(graph);
-            UpdateWalkers(graph.DataNodes.FirstOrDefault(x => x.Value is IStartingRoom)?.Value ?? graph.DataNodes.FirstOrDefault()?.Value);
+            UpdateWalkers(graph.DataNodes.FirstOrDefault(x => x.Value is IHaveRoomType roomType && roomType.RoomType == RoomType.Start)?.Value ?? graph.DataNodes.FirstOrDefault()?.Value);
         }
 
         private IGrid<CellInfo> BuildGrid(int roomCount, Random random)

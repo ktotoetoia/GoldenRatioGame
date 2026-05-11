@@ -17,4 +17,4 @@ MonoBehaviour:
   _entityFactories:
   - {fileID: 11400000, guid: 094e158964a9d3743a5cce8f7f91b72b, type: 2}
   _gameObjects: []
-  _size: {x: 16, y: 16}
+  _size: {x: 17, y: 9}

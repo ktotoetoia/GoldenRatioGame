@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5310502140078858885, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
+      propertyPath: <RoomType>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 999588743564167469, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
+      propertyPath: _assetReference.m_AssetGUID
+      value: 2afb1764ab356c14299bf1ba7bb4f123
+      objectReference: {fileID: 0}
     - target: {fileID: 4054245826693385729, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
       propertyPath: m_Name
       value: Starting Room
@@ -56,25 +64,5 @@ PrefabInstance:
     - {fileID: 6124583892585538369, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4054245826693385729, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4042020791616572711}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
---- !u!1 &4304164797015440776 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4054245826693385729, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
-  m_PrefabInstance: {fileID: 286229322047681417}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4042020791616572711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4304164797015440776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd2de079ceaa469d9248602c8ef9d7d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Map::IM.Map.StartingGameObjectRoom

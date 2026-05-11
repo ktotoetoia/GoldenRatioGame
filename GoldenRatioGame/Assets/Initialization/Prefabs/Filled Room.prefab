@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6054549284471274203}
-  - component: {fileID: 10051488610975741}
-  - component: {fileID: 2447027755732917793}
-  - component: {fileID: 6432282395797782341}
+  - component: {fileID: 6707499678717313083}
+  - component: {fileID: 2694484214590912548}
+  - component: {fileID: 4150068054766213592}
+  - component: {fileID: 2092311543170675996}
   - component: {fileID: 999588743564167469}
   - component: {fileID: -4642281475574424799}
-  - component: {fileID: 6124583892585538369}
+  - component: {fileID: -5310502140078858885}
   - component: {fileID: 8831215809966109471}
   m_Layer: 0
   m_Name: Filled Room
@@ -38,7 +39,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!156049354 &10051488610975741
+--- !u!156049354 &6707499678717313083
 Grid:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,7 +51,7 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!1839735485 &2447027755732917793
+--- !u!1839735485 &2694484214590912548
 Tilemap:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,7 +89,7 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!483693784 &6432282395797782341
+--- !u!483693784 &4150068054766213592
 TilemapRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -133,8 +134,8 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1911146241
-  m_SortingLayer: -1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
@@ -144,6 +145,44 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
+--- !u!19719996 &2092311543170675996
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4054245826693385729}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0
+  m_UseDelaunayMesh: 0
 --- !u!114 &999588743564167469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +201,8 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
+  _blackList:
+  - {fileID: 2694484214590912548}
 --- !u!114 &-4642281475574424799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8932909e9f224745b08a89ffd453ad06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleComposition::IM.Map.RoomPortsController
---- !u!114 &6124583892585538369
+--- !u!114 &-5310502140078858885
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,9 +224,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4054245826693385729}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 348a295bd64341d391d9bddb0cdcf6c6, type: 3}
+  m_Script: {fileID: 11500000, guid: bd2de079ceaa469d9248602c8ef9d7d9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Map::IM.Map.GameObjectRoomMono
+  m_EditorClassIdentifier: Map::IM.Map.TypedGameObjectRoom
+  <RoomType>k__BackingField: 0
 --- !u!114 &8831215809966109471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,5 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed7bf48a94741d4bcba6475a4637421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Map::IM.Map.RectangleRoomForm
-  _tilemap: {fileID: 2447027755732917793}
+  _tilemap: {fileID: 2694484214590912548}
   _floorTile: {fileID: 11400000, guid: c6374e5f05db2784f9800c8f472511b6, type: 2}
+  _wallTile: {fileID: 11400000, guid: 74933a45a736e4a418402d63f55c647a, type: 2}
