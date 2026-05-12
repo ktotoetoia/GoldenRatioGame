@@ -2,6 +2,6 @@
 {
     public interface IHaveRoomType
     {
-        RoomType RoomType { get; set; }
+        RoomType RoomType { get; }
     }
 }

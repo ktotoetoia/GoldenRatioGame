@@ -3,7 +3,5 @@
     public interface IHaveOwner
     {
         object Owner { get; }
-        
-        bool SetOwner(object owner);
     }
 }

@@ -1,0 +1,30 @@
+:root {
+}
+
+.mainContainer {
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.leftPanel {
+    flex-grow: 1;
+}
+
+.rightPanel {
+    flex-grow: 1;
+}
+
+.middlePanel {
+    flex-grow: 1;
+    align-self: center;
+}
+
+.middlePanelButton {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+    -unity-font-definition: url("project://database/Assets/Visuals/Fonts/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf?fileID=12800000&guid=585188cdc4600544eb408bee749e4b3a&type=3#ThaleahFat_TTF");
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+}

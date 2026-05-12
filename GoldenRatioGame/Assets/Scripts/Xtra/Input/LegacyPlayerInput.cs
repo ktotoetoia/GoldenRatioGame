@@ -16,6 +16,7 @@ namespace IM.Inputs
         [SerializeField] private WeaponViewInteraction _weaponViewInteraction;
         [SerializeField] private Camera _gameCamera;
         [SerializeField] private Camera _uiCamera;
+        [SerializeField] private PauseManager _pauseManager;
         [SerializeField] private List<KeyCode> _abilityKeys =  new ()
         {
             KeyCode.Alpha1,
@@ -29,6 +30,10 @@ namespace IM.Inputs
         private IAbilityAnchorPositionProvider _abilityAnchorPositionProvider;
         private void Update()
         {
+            if(Input.GetKeyDown(KeyCode.Escape)) _pauseManager.SetPaused(!_pauseManager.Paused);
+            
+            if(_pauseManager.Paused) return;
+            
             EditorInput();
         }
         

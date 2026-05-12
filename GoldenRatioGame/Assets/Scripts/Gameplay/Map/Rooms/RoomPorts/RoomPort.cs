@@ -6,15 +6,12 @@ namespace IM.Map
     public class RoomPort : MonoBehaviour, IRoomPort
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
-        
         [Header("Sprites: None")]
         [SerializeField] private Sprite _noneClosedSprite;
         [SerializeField] private Sprite _noneOpenSprite;
-        
         [Header("Sprites: Special")]
         [SerializeField] private Sprite _specialClosedSprite;
         [SerializeField] private Sprite _specialOpenSprite;
-        
         [Header("Sprites: Final")]
         [SerializeField] private Sprite _finalClosedSprite;
         [SerializeField] private Sprite _finalOpenSprite;
@@ -33,7 +30,6 @@ namespace IM.Map
                                                          PortSideUtility.ToDirection(PortSideUtility.Opposite(PortSide)).y);
 
         public bool IsConnected => Connection != null;
-
         public RoomType Mode => DetermineMode();
 
         public bool IsOpen
@@ -53,12 +49,8 @@ namespace IM.Map
             if (Connection == null) return originType;
 
             RoomType destinationType = (Connection.Origin as IHaveRoomType)?.RoomType ?? RoomType.None;
-
-            if (originType == RoomType.Final || destinationType == RoomType.Final)
-                return RoomType.Final;
-            
-            if (originType == RoomType.Special || destinationType == RoomType.Special)
-                return RoomType.Special;
+            if (originType == RoomType.Final || destinationType == RoomType.Final) return RoomType.Final;
+            if (originType == RoomType.Special || destinationType == RoomType.Special) return RoomType.Special;
 
             return RoomType.None;
         }
@@ -79,7 +71,7 @@ namespace IM.Map
         {
             if (_isInitialized) 
             {
-                Debug.LogWarning($"Port on {gameObject.name} is already initialized!");
+                Debug.LogWarning($"Port on {gameObject.name} is already initialized");
                 return;
             }
 

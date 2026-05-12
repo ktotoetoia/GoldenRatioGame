@@ -8,7 +8,6 @@ namespace IM.Interactions
 {
     public class RangeBasedModuleEntityInteractor : MonoBehaviour, IInteractor, IRequireInteractionProvider
     {
-        [Header("Settings")]
         [SerializeField] private GameObject _subInteractorSource;
         [SerializeField] private float _maxInteractionRange = 0.5f; 
         [SerializeField] private float _interactionTime = 0.3f;

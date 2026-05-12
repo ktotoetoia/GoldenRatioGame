@@ -9,9 +9,10 @@ namespace IM.SaveSystem
     public class SceneLoadContext : ScriptableObject
     {
         [SerializeField] private string _relativePath;
-        [field: SerializeField] public SceneLoadType SceneLoadType { get; set; }
-        
         [SerializeField] private List<SceneInitializer> _initializers;
+        
+        [field: SerializeField] public SceneLoadType SceneLoadType { get; set; }
+        [field:SerializeField] public int SceneIndex { get; set; }
         
         public string FullSceneLoadPath => Path.Combine(Application.persistentDataPath, _relativePath);
 

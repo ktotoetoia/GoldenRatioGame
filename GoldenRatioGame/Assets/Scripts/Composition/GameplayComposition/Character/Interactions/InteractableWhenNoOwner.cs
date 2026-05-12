@@ -7,17 +7,17 @@ namespace IM.Modules
 {
     public class InteractableWhenNoOwner : MonoBehaviour, IInteractable
     {
-        private IHaveOwner _haveOwner;
+        private IMutableOwner _mutableOwner;
         public GameObject GameObject => gameObject;
         
         private void Awake()
         {
-            _haveOwner = GetComponent<IHaveOwner>();
+            _mutableOwner = GetComponent<IMutableOwner>();
         }
         
         public bool CanInteract(IEntity interactor)
         {
-            return isActiveAndEnabled && interactor is IModuleEntity && _haveOwner.Owner == null;
+            return isActiveAndEnabled && interactor is IModuleEntity && _mutableOwner.Owner == null;
         }
 
         public void OnInteract(IEntity interactor)

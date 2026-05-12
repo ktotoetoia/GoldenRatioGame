@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d33f229877e84a0aabbf6b270ac324ee, type: 3}
   m_Name: Wall Tiles
   m_EditorClassIdentifier: Visuals::IM.Visuals.CustomRuleTile
-  m_DefaultSprite: {fileID: 2837516061785436495, guid: 25c9d22faca5ecf43b22d44e64cf369f, type: 3}
+  m_DefaultSprite: {fileID: 0}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules:

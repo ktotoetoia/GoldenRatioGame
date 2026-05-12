@@ -29,7 +29,7 @@ namespace IM.Modules
                 mb.transform.position = Vector3.zero;
             }
 
-            (obj as IHaveOwner)?.SetOwner(_entity);
+            (obj as IMutableOwner)?.SetOwner(_entity);
         }
 
         private void OnRemoved(object obj)
@@ -37,7 +37,7 @@ namespace IM.Modules
             if (obj is MonoBehaviour mb && mb.transform.parent == _onAddedTransformIn)
                 mb.transform.SetParent(_onRemovedTransformOut.parent);
 
-            if (obj is IHaveOwner haveOwner && haveOwner.Owner == _entity)
+            if (obj is IMutableOwner haveOwner && haveOwner.Owner == _entity)
                 haveOwner.SetOwner(null);
         }
 

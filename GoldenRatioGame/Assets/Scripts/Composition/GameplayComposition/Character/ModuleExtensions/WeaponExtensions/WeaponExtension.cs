@@ -37,7 +37,7 @@ namespace IM.Modules
             {
                 if (_equippedWeapon == value) return;
 
-                if (_equippedWeapon is IHaveOwner haveOwner && haveOwner.Owner.Equals(this))
+                if (_equippedWeapon is IMutableOwner haveOwner && haveOwner.Owner.Equals(this))
                 {
                     haveOwner.SetOwner(null);
                 }
@@ -48,7 +48,7 @@ namespace IM.Modules
                 
                 _equippedWeapon = value;
                 
-                if (_equippedWeapon is IHaveOwner newHaveOwner)
+                if (_equippedWeapon is IMutableOwner newHaveOwner)
                 {
                     newHaveOwner.SetOwner(this);
                 }
@@ -76,7 +76,7 @@ namespace IM.Modules
             GameObject defaultWeapon = Instantiate(_defaultWeaponPrefab, transform);
             
             if(!defaultWeapon.TryGetComponent(out _defaultWeapon)) return;
-            if(defaultWeapon.TryGetComponent(out IHaveOwner owner)) owner.SetOwner(this);
+            if(defaultWeapon.TryGetComponent(out IMutableOwner owner)) owner.SetOwner(this);
             
             SyncWeaponEntity();
             PreferredWeaponChanged?.Invoke(PreferredWeapon);

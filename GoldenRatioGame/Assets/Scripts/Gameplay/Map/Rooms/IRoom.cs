@@ -11,7 +11,7 @@ namespace IM.Map
         bool IsActive { get; }
         bool Add(IRoomPort roomPort);
         bool Remove(IRoomPort roomPort);
-
+        
         void SetRect(Rect rect);
     }
 }

@@ -1,0 +1,14 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Pause%20Menu/Pause%20Menu.uss?fileID=7433441132597879392&amp;guid=e3ec7f889c0bb39478d6629923cbc68e&amp;type=3#Pause Menu"/>
+    <ui:VisualElement name="MainContainer" class="mainContainer">
+        <ui:VisualElement name="LeftPanel" class="leftPanel"/>
+        <ui:VisualElement name="MiddlePanel" class="middlePanel">
+            <ui:Button text="Continue" name="ContinueButton" class="middlePanelButton"/>
+            <ui:Button text="Save" name="SaveButton" class="middlePanelButton"/>
+            <ui:Button text="Exit" name="ExitButton" class="middlePanelButton"/>
+            <ui:Button text="Save And Quit" name="SaveAndQuitButton" class="middlePanelButton"/>
+            <ui:Button text="Quit" name="QuitButton" class="middlePanelButton"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="RightPanel" class="rightPanel"/>
+    </ui:VisualElement>
+</ui:UXML>

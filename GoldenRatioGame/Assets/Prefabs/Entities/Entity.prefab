@@ -305,6 +305,7 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
+  _blackList: []
 --- !u!114 &6073370559917885498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,6 +534,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8839589395240690778}
   - component: {fileID: 4338404269155062247}
+  - component: {fileID: 4700447553636314572}
   m_Layer: 0
   m_Name: SubInteractors
   m_TagString: Untagged
@@ -568,6 +570,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameplayComposition::IM.Entities.TestInteractor
   _moduleEditingContextSource: {fileID: 4342869459289063407}
+--- !u!114 &4700447553636314572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5255341128824037194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94138af774bd4db3964a15f26ee075dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Interactions::IM.Interactions.DefaultInteractor
 --- !u!1 &8508053980751109502
 GameObject:
   m_ObjectHideFlags: 0
