@@ -8,13 +8,13 @@ namespace IM.SaveSystem
     [CreateAssetMenu(menuName = "Scene/Scene Load Context")]
     public class SceneLoadContext : ScriptableObject
     {
-        [SerializeField] private string _relativePath;
         [SerializeField] private List<SceneInitializer> _initializers;
         
+        [field: SerializeField] private string RelativePath { get; set; }
         [field: SerializeField] public SceneLoadType SceneLoadType { get; set; }
         [field:SerializeField] public int SceneIndex { get; set; }
         
-        public string FullSceneLoadPath => Path.Combine(Application.persistentDataPath, _relativePath);
+        public string FullSceneLoadPath => Path.Combine(Application.persistentDataPath, RelativePath);
 
         public void OnSceneLoaded(GameObject initializerGO)
         {

@@ -63,6 +63,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4342869459289063407, guid: fe00d3ca423cbb04092c1edd892db3a4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 464469686258394105}
+    - targetCorrespondingSourceObject: {fileID: 4342869459289063407, guid: fe00d3ca423cbb04092c1edd892db3a4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9157399860618238097}
   m_SourcePrefab: {fileID: 100100000, guid: fe00d3ca423cbb04092c1edd892db3a4, type: 3}
 --- !u!1 &3797983940954428562 stripped
 GameObject:
@@ -82,3 +85,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IM.Inputs.EnemyAITest2
   _closeDistance: 3
+  _timeBetweenAttacks:
+    _minValue: 1
+    _maxValue: 4
+    _value: 1
+--- !u!114 &9157399860618238097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3797983940954428562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e58f6ab36f4e0aa3b98391ef4c0cd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IM.Inputs.EnemyAITest
+  _time:
+    _minValue: 0.5
+    _maxValue: 2
+    _value: 0.5
+  _timeBetweenMoving: 2

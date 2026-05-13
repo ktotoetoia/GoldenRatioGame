@@ -28,19 +28,10 @@ namespace IM.Inputs
         
         private IModuleEntity _moduleEntity;
         private IAbilityAnchorPositionProvider _abilityAnchorPositionProvider;
+        
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.Escape)) _pauseManager.SetPaused(!_pauseManager.Paused);
-            
-            if(_pauseManager.Paused) return;
-            
-            EditorInput();
-        }
-        
-        private void EditorInput()
-        {
-            if (Input.GetKeyDown(KeyCode.I)) _entityModuleAbilityContextEditingViewer.SetEntity(_moduleEntity);
-            if (Input.GetKeyDown(KeyCode.O)) _entityModuleAbilityContextEditingViewer.ForceClearEntity();
         }
 
         public void SetPlayerEntity(IEntity playerEntity)
@@ -55,7 +46,11 @@ namespace IM.Inputs
             _graphViewInteraction.ShouldTryQuickRemove = () =>Input.GetKeyDown(KeyCode.P);
             _graphViewInteraction.GetPointerPosition = () =>(Vector2)_uiCamera.ScreenToWorldPoint(Input.mousePosition);
             _weaponViewInteraction.GetPointerPosition = () => (Vector2)_uiCamera.ScreenToWorldPoint(Input.mousePosition);
-            
+
+            playerStateMachine.ShouldTryStartEditing = () => Input.GetKeyDown(KeyCode.I);
+            playerStateMachine.ShouldTryStopEditing = () => Input.GetKeyDown(KeyCode.I);
+            playerStateMachine.EditStarted += x =>_entityModuleAbilityContextEditingViewer.SetModuleEditingContext(x);
+            playerStateMachine.EditEnded += () =>_entityModuleAbilityContextEditingViewer.ClearModuleEditingContext();
             playerStateMachine.ProvideMovementDirection = GetMovementDirection;
             playerStateMachine.ShouldTryInteract = ShouldTryInteract;
             playerStateMachine.ResolveRequestedAbilities = ProvideKeyForAbility;

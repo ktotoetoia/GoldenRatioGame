@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace IM.UI
 {
-    public class GraphViewInteraction : ContextViewer, IGraphViewInteraction
+    public class GraphViewInteraction : ContextViewer, IGraphViewInteraction,IPausable
     {
         [SerializeField] private ModuleGraphView _moduleGraphView;
         [SerializeField] private StorageView _moduleStorageView;
@@ -21,6 +21,7 @@ namespace IM.UI
         public Func<bool> ShouldTryQuickRemove { get; set; } = () => false;
         public Func<bool> ShouldUndo { get; set; } = () => false;
         public Func<bool> ShouldRedo { get; set; } = () => false;
+        public bool Paused { get; set; }
         
         private void Awake()
         {
@@ -34,7 +35,7 @@ namespace IM.UI
 
         private void Update()
         {
-            if(_context != null) GraphInput();
+            if(_context != null && !Paused) GraphInput();
         }
 
         private void GraphInput()

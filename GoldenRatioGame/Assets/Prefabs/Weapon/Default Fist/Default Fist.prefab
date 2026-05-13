@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Abilities::IM.Abilities.ProjectileAbilityContainer
   _projectilePrefab: {fileID: 6940537037438603345, guid: 9da5f54910a377c40879b25afaa0dc06, type: 3}
-  _cooldown: 0.2
+  _cooldown: 0.5
   _projectileSpeed: 20
   _iconSprite: {fileID: 1519367277, guid: b28f93700d64ad048abe12dfa01f5637, type: 3}
 --- !u!114 &-1757960654996738958

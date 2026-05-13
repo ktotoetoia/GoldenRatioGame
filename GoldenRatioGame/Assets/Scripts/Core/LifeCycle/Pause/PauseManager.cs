@@ -5,9 +5,15 @@ namespace IM
 {
     public class PauseManager : MonoBehaviour, IPauseManager, IGameObjectFactoryObserver
     {
+        [SerializeField] private bool _startPaused;
         private readonly SmartCollection<IPausable> _toPause = new();
         
         public bool Paused { get; private set; }
+
+        private void Awake()
+        {
+            SetPausedInternal(_startPaused);
+        }
         
         public void OnCreate(GameObject instance, bool deserialized)
         {
@@ -21,6 +27,11 @@ namespace IM
         {
             if(Paused == paused) return;
             
+            SetPausedInternal(paused);
+        }
+
+        private void SetPausedInternal(bool paused)
+        {
             Paused = paused;
             
             Time.timeScale = Paused ? 0 : 1;

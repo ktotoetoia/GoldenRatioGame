@@ -305,8 +305,106 @@ Transform:
   - {fileID: 9219254159993980427}
   - {fileID: 4737540472776741049}
   - {fileID: 616146370134468544}
+  - {fileID: 6167266606752900783}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1990189556604430851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6167266606752900783}
+  - component: {fileID: 3216066249656814090}
+  - component: {fileID: 6708261351000366686}
+  - component: {fileID: 6828149406923758460}
+  - component: {fileID: 3762882923286693361}
+  m_Layer: 0
+  m_Name: DeathScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6167266606752900783
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990189556604430851}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3092186167856238398}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3216066249656814090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990189556604430851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 26296ce5bac6104418fb111e33e3de6c, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: b498d591d1de50d409d823b0fdcfc967, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &6708261351000366686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990189556604430851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9bbeabc5712420b99ce6b4277a44f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VisualsComposition::IM.ShowDocumentOnPlayerEntityDestroyed
+--- !u!114 &6828149406923758460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990189556604430851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c15cb79ec8945beae1dd3fd4e33ea01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SaveSystem::IM.SaveSystem.SceneLoadContextUser
+  _sceneLoadContext: {fileID: 11400000, guid: b458c89e0b4ee0d49b73d43f0b0ff518, type: 2}
+--- !u!114 &3762882923286693361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990189556604430851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ad315125a1a68498d78a96c04093fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InfrastructureComposition::Tests.InitializeSceneOnButtonPressed
+  _initializeButton: ExitButton
+  _load: 1
 --- !u!1 &2359483497348274012
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,7 +1081,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5569698635677577918}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c299518f9b604c0c8ac0067ac302bf84, type: 3}
+  m_Script: {fileID: 11500000, guid: c31f25fef99d1974cba0e67c3d5c6312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: InfrastructureComposition::Tests.SaveOnButtonPressed
   _sceneBootstrapper: {fileID: 0}
@@ -997,7 +1095,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5569698635677577918}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c299518f9b604c0c8ac0067ac302bf84, type: 3}
+  m_Script: {fileID: 11500000, guid: c31f25fef99d1974cba0e67c3d5c6312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: InfrastructureComposition::Tests.SaveOnButtonPressed
   _sceneBootstrapper: {fileID: 0}
@@ -1011,10 +1109,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5569698635677577918}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 562bfcb5c36e44aba29482b8e4a04ed6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3077da634ae33334bafdc7ea4a19f304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: InfrastructureComposition::Tests.LoadSceneOnButtonPressed
-  _buttonName: QuitButton
+  _buttonName: SaveAndQuitButton
   _sceneIndex: 0
 --- !u!114 &738648665789247999
 MonoBehaviour:
@@ -1025,10 +1123,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5569698635677577918}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 562bfcb5c36e44aba29482b8e4a04ed6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3077da634ae33334bafdc7ea4a19f304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: InfrastructureComposition::Tests.LoadSceneOnButtonPressed
-  _buttonName: SaveAndQuitButton
+  _buttonName: QuitButton
   _sceneIndex: 0
 --- !u!1 &5599034239580722423
 GameObject:

@@ -160,6 +160,7 @@ MonoBehaviour:
   _defaultTransform: {fileID: 2057245054}
   _notifyAboutExisting:
   - {fileID: 765832289}
+  - {fileID: 766150787}
   - {fileID: 2823462368217778132}
 --- !u!4 &197609166
 Transform:
@@ -191,6 +192,7 @@ MonoBehaviour:
   _startingPosition: {x: 0, y: 0, z: 0}
   _requirePlayer:
   - {fileID: 1886279916}
+  - {fileID: 1804827492}
   _tag: Player
 --- !u!114 &197609168
 MonoBehaviour:
@@ -291,6 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15d3b406e39741c397f1810d855d51ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: LifeCycle::IM.PauseManager
+  _startPaused: 0
 --- !u!1 &454075929
 GameObject:
   m_ObjectHideFlags: 0
@@ -2871,9 +2874,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 765832290}
-  - component: {fileID: 765832292}
-  - component: {fileID: 765832291}
   - component: {fileID: 765832293}
+  - component: {fileID: 765832291}
+  - component: {fileID: 765832292}
   m_Layer: 0
   m_Name: Game Initializer
   m_TagString: Untagged
@@ -2905,7 +2908,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 765832289}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 350a5fd9659743e49bd8ebd4cd912667, type: 3}
+  m_Script: {fileID: 11500000, guid: 85cf9cdb09956b04b957f6b5912f7adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: InfrastructureComposition::Tests.InitializeOnInteracted
 --- !u!114 &765832292
@@ -2980,6 +2983,16 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &766150787 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4912742962568737914, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
+  m_PrefabInstance: {fileID: 2823462368217778131}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1804827492 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1990189556604430851, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
+  m_PrefabInstance: {fileID: 2823462368217778131}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1886279916 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2359483497348274012, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}

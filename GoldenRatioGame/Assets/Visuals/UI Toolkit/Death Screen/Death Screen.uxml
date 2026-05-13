@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Pause%20Menu/Pause%20Menu.uss?fileID=7433441132597879392&amp;guid=e3ec7f889c0bb39478d6629923cbc68e&amp;type=3#Pause Menu"/>
+    <ui:VisualElement class="mainContainer" style="flex-grow: 1;">
+        <ui:VisualElement class="leftPanel" style="flex-grow: 1;"/>
+        <ui:VisualElement class="middlePanel" style="flex-grow: 1;">
+            <ui:Button text="Exit" name="ExitButton" class="middlePanelButton"/>
+        </ui:VisualElement>
+        <ui:VisualElement class="rightPanel" style="flex-grow: 1;"/>
+    </ui:VisualElement>
+</ui:UXML>

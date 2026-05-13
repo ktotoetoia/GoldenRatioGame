@@ -130,7 +130,9 @@ GameObject:
   - component: {fileID: 901341764}
   - component: {fileID: 901341763}
   - component: {fileID: 901341765}
+  - component: {fileID: 901341767}
   - component: {fileID: 901341766}
+  - component: {fileID: 901341768}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -185,7 +187,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 901341762}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f10979ed5ea748df9da6b5ad5f09b468, type: 3}
+  m_Script: {fileID: 11500000, guid: 52ad315125a1a68498d78a96c04093fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tests.SDS
   _initializeButton: CreateNewButton
@@ -203,6 +205,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SaveSystem::IM.SaveSystem.SceneLoadContextUser
   _sceneLoadContext: {fileID: 11400000, guid: b458c89e0b4ee0d49b73d43f0b0ff518, type: 2}
+--- !u!114 &901341767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901341762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ad315125a1a68498d78a96c04093fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InfrastructureComposition::Tests.InitializeSceneOnButtonPressed
+  _initializeButton: LoadLastButton
+  _load: 1
+--- !u!114 &901341768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901341762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca068567ed66ee41b1b656402fa4ed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InfrastructureComposition::Tests.QuitApplicationOnButtonPressed
+  _quitButton: QuitApplicationButton
 --- !u!1 &1225544322
 GameObject:
   m_ObjectHideFlags: 0

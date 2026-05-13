@@ -9,13 +9,20 @@ namespace IM.Modules
         [SerializeField] private Camera _camera;
         [SerializeField] private float _smoothTime = 0.2f;
         [SerializeField] private Vector3 _offset = new(0f, 0f, -10f);
-
         private Transform _target;
         private Vector3 _velocity;
 
         public void SetPlayerEntity(IEntity playerEntity)
         {
             _target = playerEntity.GameObject.transform;
+            _camera.transform.position = _target.position + _offset;
+        }
+
+        private void Awake()
+        {
+            if(!_target) return;
+            
+            _camera.transform.position = _target.position + _offset;
         }
 
         private void LateUpdate()

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1722c399639c4bec907656d41777b5d0, type: 3}
   m_Name: Hub Load Context
   m_EditorClassIdentifier: SaveSystem::IM.SaveSystem.SceneLoadContext
-  _relativePath: Hub.json
   _initializers:
   - {fileID: 11400000, guid: 7bea5e7a2d8a43c41a2243ba1130b1b0, type: 2}
+  <RelativePath>k__BackingField: Hub.json
   <SceneLoadType>k__BackingField: 1
   <SceneIndex>k__BackingField: 1
