@@ -1,4 +1,4 @@
-﻿namespace IM
+﻿namespace IM.LifeCycle
 {
     public interface IPausable
     {

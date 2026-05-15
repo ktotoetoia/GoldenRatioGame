@@ -1,0 +1,65 @@
+:root {
+    --slot-padding-y: 16px;
+    --slot-padding-x: 20px;
+    --slot-margin-y: 6px;
+    --slot-margin-x: 12px;
+    --slot-radius: 6px;
+    --slot-bg: rgba(255, 255, 255, 0.05);
+    --slot-bg-hover: rgba(255, 255, 255, 0.29);
+    --slot-border: rgba(255, 255, 255, 0.08);
+    --text-primary: rgba(255, 255, 255, 0.9);
+    --text-secondary: rgba(255, 255, 255, 0.4);
+    --button-bg: rgba(255, 255, 255, 0.1);
+    --button-bg-hover: rgba(255, 255, 255, 0.18);
+    --button-bg-active: rgba(255, 255, 255, 0.08);
+    --button-border: rgba(255, 255, 255, 0.2);
+}
+
+.save-slot {
+    flex-direction: row;
+    align-items: center;
+    margin: var(--slot-margin-y) var(--slot-margin-x);
+    padding: var(--slot-padding-y) var(--slot-padding-x);
+    border-radius: var(--slot-radius);
+    border-width: 1px;
+    border-color: var(--slot-border);
+    background-color: var(--slot-bg);
+    transition-property: background-color;
+    transition-duration: 0.15s;
+}
+
+.save-slot:hover {
+    background-color: var(--slot-bg-hover);
+}
+
+.save-slot:active {
+    background-color: var(--button-bg-active);
+}
+
+.save-slot--empty {
+    opacity: 0.55;
+}
+
+.save-slot__index {
+    width: 60px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    -unity-font-style: bold;
+}
+
+.save-slot__info {
+    flex-grow: 1;
+    flex-direction: column;
+    margin-left: 12px;
+}
+
+.save-slot__name {
+    margin-bottom: 2px;
+    color: var(--text-primary);
+    font-size: 15px;
+}
+
+.save-slot__meta {
+    color: var(--text-secondary);
+    font-size: 12px;
+}

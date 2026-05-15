@@ -1,0 +1,4 @@
+﻿{
+  "name": "GameCreationUI",
+  "references":[ "GUID:38be81a59a4146ab9a6165a5c84daa2c", "GUID:a8c9e6e47bc86bb4aa567cf5d0cb48ff", "GUID:c1b2e590394d1824a9ad41ff19523f50" ]
+}

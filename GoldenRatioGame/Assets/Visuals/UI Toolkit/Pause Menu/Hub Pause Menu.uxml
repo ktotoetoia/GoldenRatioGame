@@ -4,9 +4,6 @@
         <ui:VisualElement name="LeftPanel" class="leftPanel"/>
         <ui:VisualElement name="MiddlePanel" class="middlePanel">
             <ui:Button text="Continue" name="ContinueButton" class="middlePanelButton"/>
-            <ui:Button text="Save" name="SaveButton" class="middlePanelButton"/>
-            <ui:Button text="Exit" name="ExitButton" class="middlePanelButton"/>
-            <ui:Button text="Save And Quit" name="SaveAndQuitButton" class="middlePanelButton"/>
             <ui:Button text="Quit" name="QuitButton" class="middlePanelButton"/>
         </ui:VisualElement>
         <ui:VisualElement name="RightPanel" class="rightPanel"/>

@@ -994,12 +994,12 @@ GameObject:
   m_Component:
   - component: {fileID: 616146370134468544}
   - component: {fileID: 6918463807878628177}
-  - component: {fileID: 4989434029606721016}
   - component: {fileID: 1473694117680039768}
-  - component: {fileID: 4779268029290551508}
+  - component: {fileID: 4989434029606721016}
   - component: {fileID: 8944842489613758977}
-  - component: {fileID: 7296912849328868311}
   - component: {fileID: 738648665789247999}
+  - component: {fileID: 7296912849328868311}
+  - component: {fileID: 4779268029290551508}
   m_Layer: 0
   m_Name: PauseDocument
   m_TagString: Untagged
@@ -1045,6 +1045,19 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &1473694117680039768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5569698635677577918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b17baf3771914bef99629394f8b29a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InfrastructureComposition::Tests.ShowDocumentOnPaused
+  _showOnPause: 1
 --- !u!114 &4989434029606721016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1059,33 +1072,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: InfrastructureComposition::Tests.ChangePauseOnButtonPressed
   _pauseChangeButton: ContinueButton
   _pauseManager: {fileID: 0}
---- !u!114 &1473694117680039768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5569698635677577918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b17baf3771914bef99629394f8b29a94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: InfrastructureComposition::Tests.ShowDocumentOnPaused
-  _showOnPause: 1
---- !u!114 &4779268029290551508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5569698635677577918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c31f25fef99d1974cba0e67c3d5c6312, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: InfrastructureComposition::Tests.SaveOnButtonPressed
-  _sceneBootstrapper: {fileID: 0}
-  _buttonName: SaveButton
 --- !u!114 &8944842489613758977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1099,21 +1085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: InfrastructureComposition::Tests.SaveOnButtonPressed
   _sceneBootstrapper: {fileID: 0}
-  _buttonName: SaveAndQuitButton
---- !u!114 &7296912849328868311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5569698635677577918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3077da634ae33334bafdc7ea4a19f304, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: InfrastructureComposition::Tests.LoadSceneOnButtonPressed
-  _buttonName: SaveAndQuitButton
-  _sceneIndex: 0
+  _buttonName: QuitButton
 --- !u!114 &738648665789247999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1128,6 +1100,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: InfrastructureComposition::Tests.LoadSceneOnButtonPressed
   _buttonName: QuitButton
   _sceneIndex: 0
+--- !u!114 &7296912849328868311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5569698635677577918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3077da634ae33334bafdc7ea4a19f304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InfrastructureComposition::Tests.LoadSceneOnButtonPressed
+  _buttonName: DebugQuitButton
+  _sceneIndex: 0
+--- !u!114 &4779268029290551508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5569698635677577918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c31f25fef99d1974cba0e67c3d5c6312, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InfrastructureComposition::Tests.SaveOnButtonPressed
+  _sceneBootstrapper: {fileID: 0}
+  _buttonName: DebugSaveButton
 --- !u!1 &5599034239580722423
 GameObject:
   m_ObjectHideFlags: 0

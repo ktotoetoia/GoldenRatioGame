@@ -1,0 +1,28 @@
+:root {
+    --horizontal-slot-width: 25%;
+    --horizontal-slot-height: 100%;
+}
+
+.save-slot {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: var(--horizontal-slot-width);
+    margin: 12px 6px;
+    padding: 20px 16px;
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
+.save-slot__index {
+    width: auto;
+    align-self: flex-start;
+    margin-bottom: 8px;
+}
+
+.save-slot__info {
+    flex-grow: 1;
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: 0;
+}

@@ -1,7 +1,6 @@
-﻿using IM.LifeCycle;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace IM
+namespace IM.LifeCycle
 {
     public class PauseManager : MonoBehaviour, IPauseManager, IGameObjectFactoryObserver
     {

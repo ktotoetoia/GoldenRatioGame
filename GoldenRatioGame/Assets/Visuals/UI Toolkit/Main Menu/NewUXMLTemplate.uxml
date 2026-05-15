@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Main%20Menu/VerticalSaveSlots.uss?fileID=7433441132597879392&amp;guid=ca1cd6cfb88f8b749a21d6b66c0a10e2&amp;type=3#VerticalSaveSlots"/>
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Main%20Menu/HorizontalSaveSlots.uss?fileID=7433441132597879392&amp;guid=aa8faae20ee331b4cb09d6da5b620638&amp;type=3#HorizontalSaveSlots"/>
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+        <IM.SaveSystem.SaveSlotElement/>
+        <IM.SaveSystem.SaveSlotElement/>
+        <IM.SaveSystem.SaveSlotElement/>
+        <IM.SaveSystem.SaveSlotElement/>
+    </ui:VisualElement>
+</ui:UXML>

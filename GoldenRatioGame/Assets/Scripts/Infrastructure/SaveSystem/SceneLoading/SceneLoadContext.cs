@@ -24,5 +24,12 @@ namespace IM.SaveSystem
             
             _initializers.ForEach( i => i.OnSceneLoaded(initializerGO, factory));   
         }
+
+        public void ResetContext()
+        {
+            RelativePath =  string.Empty;
+            SceneLoadType = SceneLoadType.None;
+            SceneIndex = 0;
+        }
     }
 }

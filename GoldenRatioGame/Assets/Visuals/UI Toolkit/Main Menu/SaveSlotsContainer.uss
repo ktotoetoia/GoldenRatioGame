@@ -1,0 +1,4 @@
+.save-slots-container {
+    flex-direction: row;
+    flex-grow: 1;
+}

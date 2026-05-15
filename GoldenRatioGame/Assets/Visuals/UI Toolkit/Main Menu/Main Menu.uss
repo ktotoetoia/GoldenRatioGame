@@ -1,0 +1,23 @@
+:root {
+    --left-container-width: 40%;
+    --right-container-width: 60%;
+}
+
+.mainContainer {
+    flex-direction: row;
+}
+
+.leftContainer {
+    align-self: stretch;
+    width: var(--left-container-width);
+    justify-content: center;
+}
+
+.rightContainer {
+    width: var(--right-container-width);
+}
+
+.styledButton {
+}
+
+

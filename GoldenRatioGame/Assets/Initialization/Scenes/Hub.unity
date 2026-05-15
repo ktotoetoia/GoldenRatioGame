@@ -3140,11 +3140,17 @@ PrefabInstance:
       propertyPath: _pauseManager
       value: 
       objectReference: {fileID: 197609177}
+    - target: {fileID: 6918463807878628177, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
+      propertyPath: sourceAsset
+      value: 
+      objectReference: {fileID: 9197481963319205126, guid: de19b5c278bb27b458208cbc6a7bd77f, type: 3}
     - target: {fileID: 8944842489613758977, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
       propertyPath: _sceneBootstrapper
       value: 
       objectReference: {fileID: 197609171}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7296912849328868311, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
+    - {fileID: 4779268029290551508, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
