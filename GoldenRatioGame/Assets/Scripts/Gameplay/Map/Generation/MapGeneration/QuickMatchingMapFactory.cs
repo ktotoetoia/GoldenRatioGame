@@ -7,27 +7,24 @@ using Random = System.Random;
 namespace IM.Map.Grid
 {
     [CreateAssetMenu(menuName = "Initialization/Quick Matching Map Generator")]
-    public class QuickMatchingMapGenerator : MapGenerator
+    public class QuickMatchingMapFactory : MapFactory
     {
         [SerializeField] private RoomFactory _startingRoomFactory;
         [SerializeField] private RoomFactory _filledRoomFactory;
         [SerializeField] private RoomFactory _specialRoomFactory;
         [SerializeField] private RoomFactory _finalRoomFactory;
-        [SerializeField] private GameObject _floorPrefab;
 
         [field: SerializeField] public float FilledRoomToSpecialRoomRatio { get; set; } = 4;
         
-        public override void Create(IGameObjectFactory factory, int roomCount, int seed)
+        public override IMapInfo Create(IGameObjectFactory factory, int roomCount, int seed)
         {
             Random random = new Random(seed);
 
             IGrid<CellInfo> grid = BuildGrid(roomCount, random);
             new RoomGridSelector().SelectAll(grid);
             IDataGraph<IGameObjectRoom> graph = new RoomGraphFactory(factory).Create(grid);
-
-            var floor = factory.Create(_floorPrefab, false).GetComponent<Floor>();
-            floor.SetFloorGraph(graph);
-            UpdateWalkers(graph.DataNodes.FirstOrDefault(x => x.Value is IHaveRoomType roomType && roomType.RoomType == RoomType.Start)?.Value ?? graph.DataNodes.FirstOrDefault()?.Value);
+            
+            return new MapInfo(graph);
         }
 
         private IGrid<CellInfo> BuildGrid(int roomCount, Random random)
@@ -47,13 +44,6 @@ namespace IM.Map.Grid
             placer.PlaceClose(grid, _finalRoomFactory);
 
             return grid;
-        }
-
-        private void UpdateWalkers(IGameObjectRoom startRoom)
-        {
-            if (startRoom == null) return;
-            foreach (var walker in FindObjectsByType<RoomWalkerMono>())
-                walker.GoTo(startRoom);
         }
     }
 }

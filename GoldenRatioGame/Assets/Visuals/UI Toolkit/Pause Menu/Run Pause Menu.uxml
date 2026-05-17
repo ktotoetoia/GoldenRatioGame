@@ -1,14 +1,17 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Visuals/UI%20Toolkit/Pause%20Menu/Pause%20Menu.uss?fileID=7433441132597879392&amp;guid=e3ec7f889c0bb39478d6629923cbc68e&amp;type=3#Pause Menu"/>
-    <ui:VisualElement name="MainContainer" class="mainContainer">
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Main%20Menu/Containers.uss?fileID=7433441132597879392&amp;guid=1c56ddce45644a54e80f6cdaf1cee08b&amp;type=3#Containers"/>
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Main%20Menu/Font.uss?fileID=7433441132597879392&amp;guid=1a14260a6760efa4ebd95862e69bc46a&amp;type=3#Font"/>
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Main%20Menu/Main%20Menu.uss?fileID=7433441132597879392&amp;guid=85db1f57adb3c2f4991452a00618f84b&amp;type=3#Main Menu"/>
+    <ui:VisualElement name="MainContainer" class="mainContainer" style="background-color: rgba(0, 0, 0, 0.35);">
         <ui:VisualElement name="LeftPanel" class="leftPanel"/>
-        <ui:VisualElement name="MiddlePanel" class="middlePanel">
-            <ui:Button text="Continue" name="ContinueButton" class="middlePanelButton"/>
-            <ui:Button text="Give Up" name="GiveUpButton" class="middlePanelButton"/>
-            <ui:Button text="Quit" name="QuitButton" class="middlePanelButton"/>
+        <ui:VisualElement name="MiddlePanel" class="middlePanel styledContainer">
+            <ui:Button text="Continue" name="ContinueButton" class="middlePanelButton styledButton"/>
+            <ui:Button text="Give Up" name="GiveUpButton" class="middlePanelButton styledButton"/>
+            <ui:Button text="Quit" name="QuitButton" class="middlePanelButton styledButton"/>
             <ui:VisualElement style="flex-grow: 0; padding-top: 31px; padding-right: 31px; padding-bottom: 31px; padding-left: 31px;">
-                <ui:Button text="Debug: Save" name="DebugSaveButton" class="middlePanelButton"/>
-                <ui:Button text="Debug: Quit" name="DebugQuitButton" class="middlePanelButton"/>
+                <ui:Button text="Debug: Save" name="DebugSaveButton" class="middlePanelButton styledButton"/>
+                <ui:Button text="Debug: Quit" name="DebugQuitButton" class="middlePanelButton styledButton"/>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="RightPanel" class="rightPanel"/>

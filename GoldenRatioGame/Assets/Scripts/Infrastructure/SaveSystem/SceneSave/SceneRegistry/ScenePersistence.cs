@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using IM.OdinSerializer;
 using UnityEngine;
@@ -9,7 +10,8 @@ namespace IM.SaveSystem
     internal class ScenePersistence
     {
         private readonly RegistryStore _store;
-
+        private const bool FormatAsReadable = true;
+        
         public ScenePersistence(RegistryStore store)
         {
             _store = store ?? throw new ArgumentNullException(nameof(store));
@@ -18,9 +20,16 @@ namespace IM.SaveSystem
         public string Serialize()
         {
             SceneSaveFile saveFile = CreateSaveFileFromRegistry();
-            byte[] bytes = SerializationUtility.SerializeValue(saveFile, DataFormat.JSON);
-            
-            return Encoding.UTF8.GetString(bytes);
+    
+            using (MemoryStream stream = new MemoryStream())
+            {
+                using (JsonDataWriter writer = new JsonDataWriter(stream, null, formatAsReadable: FormatAsReadable))
+                {
+                    SerializationUtility.SerializeValue(saveFile, writer);
+                }
+        
+                return Encoding.UTF8.GetString(stream.ToArray());
+            }
         }
 
         private SceneSaveFile CreateSaveFileFromRegistry()

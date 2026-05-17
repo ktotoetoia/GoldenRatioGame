@@ -4,8 +4,8 @@
     --slot-margin-y: 6px;
     --slot-margin-x: 12px;
     --slot-radius: 6px;
-    --slot-bg: rgba(255, 255, 255, 0.05);
-    --slot-bg-hover: rgba(255, 255, 255, 0.29);
+    --slot-bg: rgba(217, 204, 193, 0.11);
+    --slot-bg-hover: rgba(248, 248, 248, 0.34);
     --slot-border: rgba(255, 255, 255, 0.08);
     --text-primary: rgba(255, 255, 255, 0.9);
     --text-secondary: rgba(255, 255, 255, 0.4);
@@ -43,7 +43,7 @@
 .save-slot__index {
     width: 60px;
     color: var(--text-secondary);
-    font-size: 13px;
+    font-size: 18px;
     -unity-font-style: bold;
 }
 
@@ -51,15 +51,16 @@
     flex-grow: 1;
     flex-direction: column;
     margin-left: 12px;
+    font-size: 20px;
 }
 
 .save-slot__name {
     margin-bottom: 2px;
     color: var(--text-primary);
-    font-size: 15px;
+    font-size: 20px;
 }
 
 .save-slot__meta {
     color: var(--text-secondary);
-    font-size: 12px;
+    font-size: 16px;
 }

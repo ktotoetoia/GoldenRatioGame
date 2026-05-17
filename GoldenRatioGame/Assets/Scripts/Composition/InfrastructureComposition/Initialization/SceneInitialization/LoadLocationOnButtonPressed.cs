@@ -1,13 +1,15 @@
-﻿using IM.SaveSystem;
+﻿using IM.LifeCycle;
+using IM.SaveSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Tests
 {
-    public class SaveOnButtonPressed : MonoBehaviour
+    public class LoadLocationOnButtonPressed : MonoBehaviour
     {
         [SerializeField] private GameInfoController _gameInfoController;
-        [SerializeField] private string _buttonName = "SaveButton";
+        [SerializeField] private string _buttonName = "GiveUpButton";
+        [SerializeField] private Location _location;
         private UIDocument _document;
 
         private void Awake()
@@ -18,7 +20,7 @@ namespace Tests
 
         private void Clicked()
         {
-            _gameInfoController.Save();
+            _gameInfoController.ProgressTo(_location);
         }
     }
 }

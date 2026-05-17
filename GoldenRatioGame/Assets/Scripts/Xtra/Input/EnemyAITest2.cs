@@ -67,7 +67,7 @@ namespace IM.Inputs
         {
             foreach (IEntity entity in _awareOf)
             {
-                if (entity.GameObject.TryGetComponent(out IFactionMemberReadOnly factionMemberReadOnly) && _factionMember.Faction.GetRelationWith(factionMemberReadOnly.Faction) == FactionRelation.Enemy)
+                if (gameObject.TryGetComponent(out IFactionMemberReadOnly factionMemberReadOnly) && _factionMember.Faction.GetRelationWith(factionMemberReadOnly.Faction) == FactionRelation.Enemy)
                 {
                     _currentTarget =  entity;
                 }

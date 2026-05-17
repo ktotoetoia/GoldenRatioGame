@@ -9,11 +9,11 @@ namespace IM
     public class WeaponVisualConnector : MonoBehaviour, IRequireModuleVisualObjectInitialization, IPoolObject
     {
         [SerializeField] private Transform _anchor;
+        [SerializeField] private bool _showWeapon;
         private IWeaponExtension _weaponExtension;
         private IWeapon _currentWeapon;
         private IWeaponVisual _weaponVisual;
         private IModuleVisualObject _moduleVisualObject;
-
         private bool _visible = true;
 
         public void OnModuleVisualObjectInitialized(IModuleVisualObject moduleVisualObject)
@@ -40,6 +40,7 @@ namespace IM
             _weaponVisual.Transform.Position = _anchor.position;
             _weaponVisual.Transform.Rotation = _anchor.rotation;
             _weaponVisual.Transform.LocalScale = _anchor.lossyScale;
+            _weaponVisual.Visible = _showWeapon;
 
             _weaponVisual.Order = _moduleVisualObject.Order;
         }

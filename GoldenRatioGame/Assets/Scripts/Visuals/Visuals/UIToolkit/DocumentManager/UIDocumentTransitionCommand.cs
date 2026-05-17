@@ -1,4 +1,5 @@
 ﻿using IM.Commands;
+using UnityEngine.UIElements;
 
 namespace IM.UI
 {
@@ -16,19 +17,24 @@ namespace IM.UI
             if (_info.IsOverlay) 
                 _info.ToDocument.sortingOrder = _info.FromDocument.sortingOrder + 1;
             else
-                _info.FromDocument.rootVisualElement.visible = false;
+                SetVisible(_info.FromDocument, false);
 
-            _info.ToDocument.rootVisualElement.visible = true;
+            SetVisible(_info.ToDocument, true);
         }
 
         protected override void InternalUndo()
         {
-            _info.ToDocument.rootVisualElement.visible = false;
+            SetVisible(_info.ToDocument, false);
             
             if (_info.IsOverlay) 
                 _info.ToDocument.sortingOrder = _info.DefaultSortingOrder;
             else
-                _info.FromDocument.rootVisualElement.visible = true;
+                SetVisible(_info.FromDocument, true);
+        }
+
+        private void SetVisible(UIDocument uIDocument, bool isVisible)
+        {
+            uIDocument.rootVisualElement.visible = isVisible;
         }
     }
 }

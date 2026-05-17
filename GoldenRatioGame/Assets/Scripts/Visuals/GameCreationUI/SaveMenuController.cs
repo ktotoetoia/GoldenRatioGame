@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.Collections.Generic;
 using IM.LifeCycle;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -49,13 +46,11 @@ namespace IM.SaveSystem
         {;
             _container.RefreshSlot(slotIndex, 
                 _gameInfoController.CreateAtIndex(slotIndex));
-            
-            Debug.Log($"Creating new game in slot {slotIndex}");
         }
  
         private void OnLoadRequested(int slotIndex)
         {
-            Debug.Log($"Loading slot {slotIndex}");
+            _gameInfoController.StartSession(_gameInfoController.GetByIndex(slotIndex));
         }
     }
 }

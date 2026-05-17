@@ -48,7 +48,7 @@ namespace IM.Abilities
             Vector3 dir = _context.GetDirection().normalized;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             
-            projectile.GetComponent<ITemporary>().Initialize(()=> _projectileFactory.Release(projectile.gameObject));
+            projectile.GetComponent<ITemporary>().Initialize(()=> _projectileFactory.Release(projectile));
             
             projectile.transform.position = _context.AnchorPosition + dir * SpawnProjectileOffsetMagnitude;
             projectile.transform.rotation = Quaternion.Euler(0, 0, angle);

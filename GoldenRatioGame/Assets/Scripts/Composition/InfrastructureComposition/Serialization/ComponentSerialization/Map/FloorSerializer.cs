@@ -5,6 +5,7 @@ using UnityEngine;
 using IM.Graphs;
 using IM.LifeCycle;
 using IM.Map;
+using IM.Map.Grid;
 using IM.SaveSystem;
 
 namespace IM
@@ -15,7 +16,13 @@ namespace IM
 
         public override object CaptureState(Floor component)
         {
-            FloorInfo floorInfo = new FloorInfo();
+            FloorInfo floorInfo = new FloorInfo
+            {
+                MinRooms = component.MinRooms,
+                MaxRooms = component.MaxRooms,
+                Seed = component.Seed,
+                Depth = component.Depth
+            };
 
             foreach (IGameObjectRoom room in component.FloorGraph.DataNodes.Select(x => x.Value))
             {
@@ -73,6 +80,11 @@ namespace IM
         public override void RestoreState(Floor component, object state, Func<string, GameObject> resolveDependency)
         {
             if (state is not FloorInfo info) return;
+            
+            component.MinRooms = info.MinRooms;
+            component.MaxRooms = info.MaxRooms;
+            component.Seed = info.Seed;
+            component.Depth = info.Depth;
 
             BiDirectionalDataGraph<IGameObjectRoom> graph = new();
             Dictionary<string, IDataNode<IGameObjectRoom>> nodeLookup = new();
@@ -92,7 +104,8 @@ namespace IM
                 graph.Connect(GetOrCreateNode(conn.From), GetOrCreateNode(conn.To));
             }
 
-            component.SetFloorGraph(graph);
+            component.SetMapFactory(UnityEngine.Object.FindAnyObjectByType<MapFactory>());
+            component.Next(new MapInfo(graph));
 
             foreach (RoomInfo roomInfo in info.RoomInfos)
             {
@@ -101,7 +114,6 @@ namespace IM
 
                 room.SetRect(roomInfo.Rect);
 
-                // Restore ports BEFORE adding them to room
                 foreach (RoomPortInfo portInfo in roomInfo.RoomPorts)
                 {
                     RoomPort port = resolveDependency(portInfo.PortId)
@@ -147,6 +159,10 @@ namespace IM
         [Serializable]
         private class FloorInfo
         {
+            public int Seed;
+            public int Depth;
+            public int MinRooms;
+            public int MaxRooms;
             public List<RoomInfo> RoomInfos = new();
             public List<Connection> Connections = new();
         }

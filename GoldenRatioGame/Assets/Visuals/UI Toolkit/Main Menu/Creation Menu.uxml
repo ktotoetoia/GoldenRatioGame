@@ -5,11 +5,12 @@
     <Style src="project://database/Assets/Visuals/UI%20Toolkit/Main%20Menu/HorizontalSaveSlots.uss?fileID=7433441132597879392&amp;guid=aa8faae20ee331b4cb09d6da5b620638&amp;type=3#HorizontalSaveSlots"/>
     <Style src="project://database/Assets/Visuals/UI%20Toolkit/Main%20Menu/Font.uss?fileID=7433441132597879392&amp;guid=1a14260a6760efa4ebd95862e69bc46a&amp;type=3#Font"/>
     <Style src="project://database/Assets/Visuals/UI%20Toolkit/Main%20Menu/SaveSlotsContainer.uss?fileID=7433441132597879392&amp;guid=2d4684c7e23e10f4892da1c4c78e356c&amp;type=3#SaveSlotsContainer"/>
-    <ui:VisualElement name="MainContainer" class="mainContainer" style="flex-grow: 1; justify-content: center;">
-        <ui:VisualElement name="ContainersContainer" class="containersContainer">
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Main%20Menu/Containers.uss?fileID=7433441132597879392&amp;guid=1c56ddce45644a54e80f6cdaf1cee08b&amp;type=3#Containers"/>
+    <ui:VisualElement name="MainContainer" class="mainContainer creationMenuMainContainer" style="background-color: rgba(0, 0, 0, 0.35);">
+        <ui:VisualElement name="ContainersContainer" class="containersContainer styledContainer">
             <ui:VisualElement name="TopContainer" class="topContainer"/>
             <ui:VisualElement name="MiddleContainer" class="middleContainer">
-                <ui:VisualElement name="SlotMainContainer" class="slotMainContainer" style="flex-grow: 1;"/>
+                <ui:VisualElement name="SlotMainContainer" class="slotMainContainer" style="flex-grow: 1; flex-direction: row;"/>
             </ui:VisualElement>
             <ui:VisualElement name="BottomContainer" class="bottomContainer">
                 <ui:Button text="Back" name="BackButton" class="styledButton"/>

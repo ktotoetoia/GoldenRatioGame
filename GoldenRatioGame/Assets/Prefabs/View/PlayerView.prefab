@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 3216066249656814090}
   - component: {fileID: 6708261351000366686}
   - component: {fileID: 6828149406923758460}
-  - component: {fileID: 3762882923286693361}
+  - component: {fileID: 7800376711330239065}
   m_Layer: 0
   m_Name: DeathScreen
   m_TagString: Untagged
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SaveSystem::IM.SaveSystem.SceneLoadContextUser
   _sceneLoadContext: {fileID: 11400000, guid: b458c89e0b4ee0d49b73d43f0b0ff518, type: 2}
---- !u!114 &3762882923286693361
+--- !u!114 &7800376711330239065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -400,11 +400,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1990189556604430851}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52ad315125a1a68498d78a96c04093fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a9734afbc0e4e41a108cf7a9db603ca, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: InfrastructureComposition::Tests.InitializeSceneOnButtonPressed
-  _initializeButton: ExitButton
-  _load: 1
+  m_EditorClassIdentifier: InfrastructureComposition::Tests.LoadLocationOnButtonPressed
+  _gameInfoController: {fileID: 11400000, guid: 34b0ef218bac218418db16995d97908a, type: 2}
+  _buttonName: ExitButton
+  _location: 1
 --- !u!1 &2359483497348274012
 GameObject:
   m_ObjectHideFlags: 0
@@ -1084,7 +1085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c31f25fef99d1974cba0e67c3d5c6312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: InfrastructureComposition::Tests.SaveOnButtonPressed
-  _sceneBootstrapper: {fileID: 0}
+  _gameInfoController: {fileID: 11400000, guid: 34b0ef218bac218418db16995d97908a, type: 2}
   _buttonName: QuitButton
 --- !u!114 &738648665789247999
 MonoBehaviour:
@@ -1126,7 +1127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c31f25fef99d1974cba0e67c3d5c6312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: InfrastructureComposition::Tests.SaveOnButtonPressed
-  _sceneBootstrapper: {fileID: 0}
+  _gameInfoController: {fileID: 11400000, guid: 34b0ef218bac218418db16995d97908a, type: 2}
   _buttonName: DebugSaveButton
 --- !u!1 &5599034239580722423
 GameObject:

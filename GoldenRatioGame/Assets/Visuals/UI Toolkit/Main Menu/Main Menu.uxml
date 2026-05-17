@@ -1,6 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Visuals/UI%20Toolkit/Main%20Menu/Main%20Menu.uss?fileID=7433441132597879392&amp;guid=85db1f57adb3c2f4991452a00618f84b&amp;type=3#Main Menu"/>
-    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Main%20Menu/SaveSlots.uss?fileID=7433441132597879392&amp;guid=ca1cd6cfb88f8b749a21d6b66c0a10e2&amp;type=3#SaveSlots"/>
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Main%20Menu/VerticalSaveSlots.uss?fileID=7433441132597879392&amp;guid=ca1cd6cfb88f8b749a21d6b66c0a10e2&amp;type=3#VerticalSaveSlots"/>
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Main%20Menu/Font.uss?fileID=7433441132597879392&amp;guid=1a14260a6760efa4ebd95862e69bc46a&amp;type=3#Font"/>
     <ui:VisualElement name="MainContainer" class="mainContainer" style="flex-grow: 1;">
         <ui:VisualElement name="LeftContainer" class="leftContainer">
             <ui:Button text="Play" name="PlayButton" class="styledButton"/>

@@ -8,15 +8,11 @@ namespace Tests
     [RequireComponent(typeof(ISceneLoadContextUser))]
     public class InitializeOnInteracted : MonoBehaviour, IInteractable
     {
-        private ISceneLoadContextUser _sceneLoadContextUser;
+        [SerializeField] private GameInfoController _gameInfoController;
+        [SerializeField] private Location _location;
         
         public GameObject GameObject => gameObject;
 
-        private void Awake()
-        {
-            _sceneLoadContextUser = GetComponent<ISceneLoadContextUser>();
-        }
-        
         public bool CanInteract(IEntity interactor)
         {
             return true;
@@ -24,7 +20,7 @@ namespace Tests
 
         public void OnInteract(IEntity interactor)
         {
-            _sceneLoadContextUser.LoadNew();
+            _gameInfoController.ProgressTo(_location);
         }
     }
 }

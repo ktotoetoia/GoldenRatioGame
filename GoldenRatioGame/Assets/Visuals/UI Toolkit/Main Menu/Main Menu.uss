@@ -18,6 +18,27 @@
 }
 
 .styledButton {
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    transition-duration: 0.05s;
+    transition-property: color;
+    background-color: rgba(0, 0, 0, 0.16);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    margin-top: 4px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    margin-left: 4px;
 }
 
+.styledButton:hover {
+    color: rgb(191, 223, 255);
+    background-color: rgba(0, 0, 0, 0.26);
+}
 
+.styledButton:active {
+    color: rgb(255, 135, 134);
+    background-color: rgba(178, 178, 178, 0.25);
+}

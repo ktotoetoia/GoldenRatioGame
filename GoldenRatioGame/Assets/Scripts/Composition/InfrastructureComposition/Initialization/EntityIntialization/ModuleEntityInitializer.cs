@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using IM.LifeCycle;
+using IM.Map;
 using IM.SaveSystem;
 using UnityEngine;
 
@@ -13,7 +14,16 @@ namespace IM
         
         public override void OnSceneLoaded(GameObject initializerGO, IGameObjectFactory factory)
         {
-            foreach (ModuleEntityEntry entry in _toInitialize) _factory.Create(entry,factory);
+            Floor floor = FindAnyObjectByType<Floor>();
+            
+            foreach (ModuleEntityEntry entry in _toInitialize)
+            {
+                var entity = _factory.Create(entry,factory);
+                if (floor && entity.GameObject.TryGetComponent(out IRoomWalker roomWalker))
+                {
+                    floor.AddRoomWalker(roomWalker);
+                }
+            }
         }
     }
 }

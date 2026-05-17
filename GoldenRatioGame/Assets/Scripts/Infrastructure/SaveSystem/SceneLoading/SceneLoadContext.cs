@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using IM.LifeCycle;
 using UnityEngine;
 
@@ -10,24 +9,26 @@ namespace IM.SaveSystem
     {
         [SerializeField] private List<SceneInitializer> _initializers;
         
-        [field: SerializeField] private string RelativePath { get; set; }
         [field: SerializeField] public SceneLoadType SceneLoadType { get; set; }
-        [field:SerializeField] public int SceneIndex { get; set; }
-        
-        public string FullSceneLoadPath => Path.Combine(Application.persistentDataPath, RelativePath);
+        [field: SerializeField] public int SceneIndex { get; set; }
+        [field: SerializeField] public string FullSceneLoadPath { get; set; } 
 
         public void OnSceneLoaded(GameObject initializerGO)
         {
-            if(SceneLoadType == SceneLoadType.LoadExisting) return;
+            if (SceneLoadType == SceneLoadType.LoadExisting) return;
             
-            IGameObjectFactory factory = initializerGO.GetComponent<IGameObjectFactory>();
+            var factory = initializerGO.GetComponent<IGameObjectFactory>();
+            if (factory == null) return;
             
-            _initializers.ForEach( i => i.OnSceneLoaded(initializerGO, factory));   
+            foreach (var initializer in _initializers)
+            {
+                initializer.OnSceneLoaded(initializerGO, factory);
+            }
         }
 
         public void ResetContext()
         {
-            RelativePath =  string.Empty;
+            FullSceneLoadPath = string.Empty;
             SceneLoadType = SceneLoadType.None;
             SceneIndex = 0;
         }

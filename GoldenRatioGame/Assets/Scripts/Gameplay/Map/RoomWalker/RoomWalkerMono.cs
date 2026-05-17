@@ -31,7 +31,7 @@ namespace IM.Map
             
             Current?.Remove(gameObject);
             Current = room;
-            Current.Add(gameObject);
+            Current?.Add(gameObject);
         }
 
         private bool CanMoveTo(IGameObjectRoom room)
