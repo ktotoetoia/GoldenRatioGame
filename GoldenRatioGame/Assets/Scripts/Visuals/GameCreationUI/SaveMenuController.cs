@@ -28,27 +28,26 @@ namespace IM.SaveSystem
             
             _container = new SaveSlotsContainer<GameInfo>(_totalSlots, existingSaves, new GameInfoFactory());
  
-            _container.OnCreateRequested += OnCreateRequested;
-            _container.OnLoadRequested += OnLoadRequested;
+            _container.CreateRequested += CreateRequested;
+            _container.LoadRequested += LoadRequested;
+            _container.DeleteRequested += DeleteRequested;
             
             _document.rootVisualElement.Q<VisualElement>(_containerName).Add(_container);
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                _gameInfoController.SaveAll();
-            }
-        }
-
-        private void OnCreateRequested(int slotIndex)
+        private void CreateRequested(int slotIndex)
         {;
             _container.RefreshSlot(slotIndex, 
                 _gameInfoController.CreateAtIndex(slotIndex));
         }
+
+        private void DeleteRequested(int slotIndex)
+        {
+            _container.RefreshSlot(slotIndex,null);
+            _gameInfoController.DeleteAtIndex(slotIndex);
+        }
  
-        private void OnLoadRequested(int slotIndex)
+        private void LoadRequested(int slotIndex)
         {
             _gameInfoController.StartSession(_gameInfoController.GetByIndex(slotIndex));
         }

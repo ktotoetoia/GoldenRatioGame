@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d33f229877e84a0aabbf6b270ac324ee, type: 3}
-  m_Name: Wall Tiles
+  m_Name: New Custom Rule Tile
   m_EditorClassIdentifier: Visuals::IM.Visuals.CustomRuleTile
   m_DefaultSprite: {fileID: -90759681, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
   m_DefaultGameObject: {fileID: 0}

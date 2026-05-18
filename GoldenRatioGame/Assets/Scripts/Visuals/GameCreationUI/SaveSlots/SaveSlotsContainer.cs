@@ -7,13 +7,13 @@ namespace IM.SaveSystem
     public class SaveSlotsContainer<T> : VisualElement
     {
         public const string UssRoot = "save-slots-container";
-
-        public event Action<int> OnCreateRequested;
-        public event Action<int> OnLoadRequested;
- 
         private readonly ISaveSlotFactory<T> _factory;
         private readonly List<SaveSlotElement>  _slotElements = new();
         private readonly VisualElement _container;
+
+        public event Action<int> CreateRequested;
+        public event Action<int> LoadRequested;
+        public event Action<int> DeleteRequested;
 
         public SaveSlotsContainer(int totalSlots, IReadOnlyList<T> existingSaves, ISaveSlotFactory<T> factory)
         {
@@ -45,8 +45,9 @@ namespace IM.SaveSystem
             {
                 var slot = new SaveSlotElement();
  
-                slot.OnCreateRequested += index => OnCreateRequested?.Invoke(index);
-                slot.OnLoadRequested   += index => OnLoadRequested?.Invoke(index);
+                slot.CreateRequested += index => CreateRequested?.Invoke(index);
+                slot.LoadRequested   += index => LoadRequested?.Invoke(index);
+                slot.DeleteRequested   += index => DeleteRequested?.Invoke(index);
  
                 bool hasSave = i < existingSaves.Count && existingSaves[i] != null;
  

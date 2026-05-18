@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace IM.Map
@@ -97,14 +98,13 @@ namespace IM.Map
             mb.transform.localPosition = new Vector3(tilePos.x + 0.5f, tilePos.y + 0.5f, 0f);
             
             _tilemap.SetColor(tilePos, Color.clear);
-            
-            mb.transform.localRotation = side switch
+            mb.transform.localScale = side switch
             {
-                PortSide.North => Quaternion.Euler(0f, 0f, 0),
-                PortSide.South => Quaternion.Euler(0f, 0f, 180f),
-                PortSide.East  => Quaternion.Euler(0f, 0f, 270f),
-                PortSide.West  => Quaternion.Euler(0f, 0f, 90f),
-                _ => Quaternion.identity
+                PortSide.North => new Vector3(1, 1, 1),
+                PortSide.South => new Vector3(1, 1, -1),
+                PortSide.East => new Vector3(-1, 1, 1),
+                PortSide.West => new Vector3(1, 1, 1),
+                _ => throw new ArgumentOutOfRangeException(nameof(side), side, null)
             };
         }
     }

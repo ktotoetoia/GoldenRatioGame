@@ -36,7 +36,7 @@ namespace IM.Map
 
         private bool CanMoveTo(IGameObjectRoom room)
         {
-            return Available.Any(r => r == room);
+            return room == null || Available.Any(r => r == room);
         }
 
         private bool CooldownFinished()

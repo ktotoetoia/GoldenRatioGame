@@ -18,8 +18,6 @@ namespace IM
         {
             FloorInfo floorInfo = new FloorInfo
             {
-                MinRooms = component.MinRooms,
-                MaxRooms = component.MaxRooms,
                 Seed = component.Seed,
                 Depth = component.Depth
             };
@@ -81,8 +79,6 @@ namespace IM
         {
             if (state is not FloorInfo info) return;
             
-            component.MinRooms = info.MinRooms;
-            component.MaxRooms = info.MaxRooms;
             component.Seed = info.Seed;
             component.Depth = info.Depth;
 
@@ -161,8 +157,6 @@ namespace IM
         {
             public int Seed;
             public int Depth;
-            public int MinRooms;
-            public int MaxRooms;
             public List<RoomInfo> RoomInfos = new();
             public List<Connection> Connections = new();
         }

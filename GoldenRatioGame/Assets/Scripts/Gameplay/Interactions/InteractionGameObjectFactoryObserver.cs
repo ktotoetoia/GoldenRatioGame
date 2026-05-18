@@ -10,8 +10,11 @@ namespace IM.Interactions
         
         public void OnCreate(GameObject instance, bool deserialized)
         {
-            if (instance.TryGetComponent(out IRequireInteractionProvider interactor)) interactor.InteractionProvider = InteractionManager;
-            if (instance.TryGetComponent(out IInteractable interactable)) InteractionManager.Add(interactable);
+            IRequireInteractionProvider[] interactors = instance.GetComponentsInChildren<IRequireInteractionProvider>();
+            IInteractable[] interactables =  instance.GetComponentsInChildren<IInteractable>(); ;
+
+            foreach (IRequireInteractionProvider interactor in interactors) interactor.InteractionProvider = InteractionManager;
+            foreach (IInteractable interactable in interactables) InteractionManager.Add(interactable);
         }
     }
 }

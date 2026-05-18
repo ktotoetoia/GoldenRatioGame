@@ -9,10 +9,12 @@ namespace IM.Map
 {
     public sealed class RoomPortsController : MonoBehaviour
     {
+        [SerializeField] private List<GameObject> _transitionPointsSources ;
         private readonly IEntityCollection _entities = new EntityCollection();
         private readonly Dictionary<IEntity, IFactionMember> _factionMembers = new();
         private IGameObjectRoom _room;
         private IGameObjectRoomEvents _roomEvents;
+        private List<ITransitionPoint> _transitionPoints = new ();
 
         private void Awake()
         {
@@ -25,6 +27,14 @@ namespace IM.Map
             _entities.EntityAdded += OnEntityChanged;
             _entities.EntityRemoved += OnEntityChanged;
             _entities.EntityDestroyed += OnEntityDestroyed;
+
+            foreach (GameObject transitionPointsSource in _transitionPointsSources)
+            {
+                if (transitionPointsSource.TryGetComponent(out ITransitionPoint transitionPoint))
+                {
+                    _transitionPoints.Add(transitionPoint);
+                }
+            }
             
             foreach (var roomGameObject in _room.GameObjects)
             {
@@ -86,6 +96,8 @@ namespace IM.Map
 
             foreach (IRoomPort roomPort in _room.RoomPorts)
                 roomPort.IsOpen = shouldOpen;
+            foreach (ITransitionPoint transitionPoint in _transitionPoints) 
+                transitionPoint.IsOpen = shouldOpen;
         }
 
         private void OnDestroy()

@@ -997,6 +997,7 @@ GameObject:
   - component: {fileID: 6918463807878628177}
   - component: {fileID: 1473694117680039768}
   - component: {fileID: 4989434029606721016}
+  - component: {fileID: 2405083175012168364}
   - component: {fileID: 8944842489613758977}
   - component: {fileID: 738648665789247999}
   - component: {fileID: 7296912849328868311}
@@ -1073,6 +1074,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: InfrastructureComposition::Tests.ChangePauseOnButtonPressed
   _pauseChangeButton: ContinueButton
   _pauseManager: {fileID: 0}
+--- !u!114 &2405083175012168364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5569698635677577918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59017445b31b43098ccef5f142d68a00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InfrastructureComposition::Tests.FinishSessionOnButtonPressed
+  _gameInfoController: {fileID: 11400000, guid: 34b0ef218bac218418db16995d97908a, type: 2}
+  _buttonName: QuitButton
 --- !u!114 &8944842489613758977
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using IM.Graphs;
+﻿using IM.Graphs;
 using IM.LifeCycle;
 using UnityEngine;
 using Random = System.Random;
@@ -13,14 +12,15 @@ namespace IM.Map.Grid
         [SerializeField] private RoomFactory _filledRoomFactory;
         [SerializeField] private RoomFactory _specialRoomFactory;
         [SerializeField] private RoomFactory _finalRoomFactory;
-
+        [SerializeField] private int _baseRoomCount = 4;
+        [SerializeField] private int _roomCountPerDepth = 2;
         [field: SerializeField] public float FilledRoomToSpecialRoomRatio { get; set; } = 4;
         
-        public override IMapInfo Create(IGameObjectFactory factory, int roomCount, int seed)
+        public override IMapInfo Create(IGameObjectFactory factory, int seed, int depth)
         {
-            Random random = new Random(seed);
+            Random random = new Random(seed + depth);
 
-            IGrid<CellInfo> grid = BuildGrid(roomCount, random);
+            IGrid<CellInfo> grid = BuildGrid(_baseRoomCount + depth * _roomCountPerDepth, random);
             new RoomGridSelector().SelectAll(grid);
             IDataGraph<IGameObjectRoom> graph = new RoomGraphFactory(factory).Create(grid);
             

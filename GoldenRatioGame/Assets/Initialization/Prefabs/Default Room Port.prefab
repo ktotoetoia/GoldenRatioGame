@@ -89,7 +89,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -131,9 +131,9 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    pivot: {x: 0, y: 0.5}
+    oldSize: {x: 0.5, y: 1}
+    newSize: {x: 0.5, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -172,9 +172,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Map::IM.Map.RoomPort
   _spriteRenderer: {fileID: 8185116252885737288}
-  _noneClosedSprite: {fileID: 743972795, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
-  _noneOpenSprite: {fileID: 959578683, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
-  _specialClosedSprite: {fileID: -1711033733, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
-  _specialOpenSprite: {fileID: 2037060004, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
-  _finalClosedSprite: {fileID: 1473416987, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
-  _finalOpenSprite: {fileID: 1246645552, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  _noneClosedSpriteRegular: {fileID: -1803287543, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  _noneOpenSpriteRegular: {fileID: -769791598, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  _noneClosedSpriteSideways: {fileID: 743972795, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  _noneOpenSpriteSideways: {fileID: 228245510, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  _specialClosedSpriteRegular: {fileID: 1246645552, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  _specialOpenSpriteRegular: {fileID: -209297725, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  _specialClosedSpriteSideways: {fileID: -63004970, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  _specialOpenSpriteSideways: {fileID: -799101760, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  _finalClosedSpriteRegular: {fileID: 959578683, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  _finalOpenSpriteRegular: {fileID: -1719631257, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  _finalClosedSpriteSideways: {fileID: -1711033733, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  _finalOpenSpriteSideways: {fileID: 983188340, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using IM.Graphs;
 using IM.LifeCycle;
 using IM.Map.Grid;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace IM.Map
 {
@@ -13,13 +11,12 @@ namespace IM.Map
     {
         private readonly SmartCollection<IRoomWalker> _roomWalkers = new();
         private IMapFactory _mapFactory;
-        
-        public IDataGraph<IGameObjectRoom> FloorGraph { get; private set; }
+        private IMapInfo _mapInfo;
+
+        public IDataGraph<IGameObjectRoom> FloorGraph => _mapInfo?.Graph;
         public IEnumerable<IRoomWalker> RoomWalkers => _roomWalkers;
         public int Seed { get; set; }
         public int Depth { get;  set; }
-        public int MinRooms { get; set; }
-        public int MaxRooms { get;  set; }
         public IGameObjectFactory Factory { get; set; }
 
         public void SetMapFactory(IMapFactory factory)
@@ -31,7 +28,11 @@ namespace IM.Map
         {
             Clear();
             
-            FloorGraph = mapInfo.Graph;
+            _mapInfo = mapInfo;
+            if (_mapInfo.FinalRoom is IHaveTransitionPoint transitionPoint)
+            {
+                transitionPoint.TransitionPoint.Interacted += Next;
+            }
             
             UpdateRoomWalkers();
         }
@@ -40,7 +41,13 @@ namespace IM.Map
         {
             Clear();
             
-            FloorGraph = _mapFactory.Create(Factory,Random.Range(MinRooms, MaxRooms), Seed).Graph;
+            Depth++;
+            _mapInfo = _mapFactory.Create(Factory,Seed,Depth); 
+            
+            if (_mapInfo.FinalRoom is IHaveTransitionPoint transitionPoint)
+            {
+                transitionPoint.TransitionPoint.Interacted += Next;
+            }
 
             UpdateRoomWalkers();
         }
@@ -49,9 +56,9 @@ namespace IM.Map
         { 
             _roomWalkers.Add(walker);
 
-            if (FloorGraph != null)
+            if (_mapInfo != null)
             {
-                walker.GoTo(FloorGraph.DataNodes.FirstOrDefault(x => x.Value is IHaveRoomType { RoomType: RoomType.Start })?.Value ?? FloorGraph.DataNodes.FirstOrDefault()?.Value);
+                walker.GoTo(_mapInfo.StartRoom);
             }
         }
 
@@ -71,7 +78,7 @@ namespace IM.Map
                 }
             }
             
-            if(FloorGraph == null) return;
+            if(_mapInfo == null) return;
             
             foreach (MonoBehaviour room in FloorGraph.DataNodes.Select(x => x.Value).OfType<MonoBehaviour>())
             {
@@ -81,13 +88,9 @@ namespace IM.Map
 
         private void UpdateRoomWalkers()
         {
-            var startingRoom =
-                FloorGraph.DataNodes.FirstOrDefault(x => x.Value is IHaveRoomType { RoomType: RoomType.Start })
-                    ?.Value ?? FloorGraph.DataNodes.FirstOrDefault()?.Value;
-            
             foreach (var roomWalker in _roomWalkers)
             {
-                roomWalker.GoTo(startingRoom);
+                roomWalker.GoTo(_mapInfo.StartRoom);
             }
         }
     }
