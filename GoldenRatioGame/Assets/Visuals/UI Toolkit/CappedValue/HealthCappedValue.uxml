@@ -1,0 +1,4 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/CappedValue/CappedValueHealthDisplay.uss?fileID=7433441132597879392&amp;guid=a54a42696720a5b4db4e4ae5daafecb3&amp;type=3#CappedValueHealthDisplay"/>
+    <IM.UI.CappedValueElement/>
+</ui:UXML>

@@ -192,6 +192,7 @@ MonoBehaviour:
   _requirePlayer:
   - {fileID: 1886279916}
   - {fileID: 2823462368217778133}
+  - {fileID: 2823462368217778134}
   _tag: Player
 --- !u!114 &197609168
 MonoBehaviour:
@@ -465,6 +466,11 @@ GameObject:
 --- !u!1 &2823462368217778133 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1990189556604430851, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
+  m_PrefabInstance: {fileID: 2823462368217778131}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2823462368217778134 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8177441428246310698, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
   m_PrefabInstance: {fileID: 2823462368217778131}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807

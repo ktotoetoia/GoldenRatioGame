@@ -1,0 +1,18 @@
+:root {
+}
+
+.cappedValueProgressBar {
+    background-color: rgb(215, 176, 176);
+}
+
+.cappedValueProgressBar .unity-progress-bar__progress {
+    background-color: rgb(226, 60, 52);
+}
+
+
+
+
+
+.cappedValueProgressBar .unity-progress-bar__background {
+    background-color: rgb(32, 28, 28);
+}

@@ -4,15 +4,15 @@ using UnityEngine;
 namespace IM.Values
 {
     [Serializable]
-    public class CappedValue<T> : ICappedValue<T> where T : struct, IComparable<T>
+    public class CappedValue<T> : ICappedValue<T>,ICappedValueReadOnlyEvents<T> where T : struct, IComparable<T>
     {
-        [SerializeField]private T _minValue;
-        [SerializeField]private T _maxValue;
-        [SerializeField]private T _value;
+        [SerializeField] private T _minValue;
+        [SerializeField] private T _maxValue;
+        [SerializeField] private T _value;
         
-        public event Action<T> OnMinValueChanged;
-        public event Action<T> OnMaxValueChanged;
-        public event Action<T> OnValueChanged;
+        public event Action<T> MinValueChanged;
+        public event Action<T> MaxValueChanged;
+        public event Action<T> ValueChanged;
 
         public T MinValue
         {
@@ -25,7 +25,7 @@ namespace IM.Values
                 if (_value.CompareTo(_minValue) < 0)
                     _value = _minValue;
                 
-                OnMinValueChanged?.Invoke(_minValue);
+                MinValueChanged?.Invoke(_minValue);
             }
         }
 
@@ -40,7 +40,7 @@ namespace IM.Values
                 if (_value.CompareTo(_maxValue) > 0)
                     _value = _maxValue;
                 
-                OnMaxValueChanged?.Invoke(_maxValue);
+                MaxValueChanged?.Invoke(_maxValue);
             }
         }
 
@@ -51,7 +51,7 @@ namespace IM.Values
             {
                 _value = Clamp(value);
                 
-                OnValueChanged?.Invoke(_value);
+                ValueChanged?.Invoke(_value);
             }
         }
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace IM.Modules
+namespace IM.LifeCycle
 {
     public class CollectionDiffer<T>
     {
