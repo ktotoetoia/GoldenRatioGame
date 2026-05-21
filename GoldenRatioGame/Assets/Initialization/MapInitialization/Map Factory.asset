@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7bce7bf16254135a177078010f17339, type: 3}
-  m_Name: Map Generator
+  m_Name: Map Factory
   m_EditorClassIdentifier: InfrastructureComposition::IM.MapGenerator
   _startingRoomFactory: {fileID: 11400000, guid: 4cf4ca52b5f347b4084303840fd94d8d, type: 2}
   _filledRoomFactory: {fileID: 11400000, guid: 8e7cd557aa73c684a96e7cef6e9cd593, type: 2}

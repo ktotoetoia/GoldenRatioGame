@@ -12,6 +12,7 @@ namespace IM.Map
         PortSide PortSide { get; }
         bool IsConnected { get; }
         bool IsOpen { get; set; }
+        Vector2Int CellOffset { get; }
         void SetDestination(IRoomPort destination);
         void Initialize(IGameObjectRoom origin);
     }

@@ -13,7 +13,7 @@ namespace IM.Map
         
         public bool CanInteract(IEntity interactor)
         {
-            return true;
+            return isActiveAndEnabled && IsOpen;
         }
 
         public void OnInteract(IEntity interactor)

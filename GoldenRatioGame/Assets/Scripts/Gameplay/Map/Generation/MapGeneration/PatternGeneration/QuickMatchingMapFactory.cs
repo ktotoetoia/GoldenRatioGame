@@ -1,9 +1,10 @@
-﻿using IM.Graphs;
+﻿using System.Collections.Generic;
+using IM.Graphs;
 using IM.LifeCycle;
+using IM.Map.Grid;
 using UnityEngine;
-using Random = System.Random;
 
-namespace IM.Map.Grid
+namespace IM.Map
 {
     [CreateAssetMenu(menuName = "Initialization/Quick Matching Map Generator")]
     public class QuickMatchingMapFactory : MapFactory
@@ -18,30 +19,30 @@ namespace IM.Map.Grid
         
         public override IMapInfo Create(IGameObjectFactory factory, int seed, int depth)
         {
-            Random random = new Random(seed + depth);
-
-            IGrid<CellInfo> grid = BuildGrid(_baseRoomCount + depth * _roomCountPerDepth, random);
-            new RoomGridSelector().SelectAll(grid);
-            IDataGraph<IGameObjectRoom> graph = new RoomGraphFactory(factory).Create(grid);
+            int floorSeed = seed + depth;
             
+            IGrid<ICellInfo> grid = BuildGrid(_baseRoomCount + depth * _roomCountPerDepth, floorSeed);
+            
+            IDataGraph<IGameObjectRoom> graph = new RoomGraphFactory(factory).Create(grid);
             return new MapInfo(graph);
         }
 
-        private IGrid<CellInfo> BuildGrid(int roomCount, Random random)
+        private IGrid<ICellInfo> BuildGrid(int roomCount, int seed)
         {
-            IGrid<CellInfo> grid = new Grid<CellInfo>(roomCount, roomCount);
-            RoomGridPlacer placer = new RoomGridPlacer(random);
-
-            Vector2Int center = new Vector2Int(roomCount / 2, roomCount / 2);
-            placer.Place(grid, _startingRoomFactory, center);
-            
             int specialRoomCount = (int)(roomCount / FilledRoomToSpecialRoomRatio);
             int filledRoomCount = roomCount - specialRoomCount;
             
-            for (int i = 0; i < filledRoomCount; i++) placer.PlaceClose(grid, _filledRoomFactory);
-            for (int i = 0; i < specialRoomCount; i++) placer.PlaceClose(grid, _specialRoomFactory);
-
-            placer.PlaceClose(grid, _finalRoomFactory);
+            List<(IRoomFactory, int)> s = new()
+            {
+                (_startingRoomFactory, 1),
+                (_filledRoomFactory, filledRoomCount),
+                (_specialRoomFactory,specialRoomCount),
+                (_finalRoomFactory,1)
+            };
+            
+            IGrid<ICellInfo> grid = new PriorityBasedRandomGridFactory(s,seed).CreateGrid(roomCount,roomCount);
+            new MultiCellPatternSelector().SelectMatchingRoomPatterns(grid,seed);
+            GridDebugPrinter.PrintGrid(grid);
 
             return grid;
         }

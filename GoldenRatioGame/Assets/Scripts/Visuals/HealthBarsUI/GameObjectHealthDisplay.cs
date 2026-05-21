@@ -25,7 +25,6 @@ namespace IM.UI
                 if(health == null) return;
                 
                 _element.GetCappedValue = () => health.Health;
-                Update();
             }
         }
 

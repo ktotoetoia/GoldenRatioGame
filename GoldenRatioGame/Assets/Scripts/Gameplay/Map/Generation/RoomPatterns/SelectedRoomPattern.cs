@@ -5,14 +5,12 @@ namespace IM.Map
 {
     public class SelectedRoomPattern : ISelectedRoomPattern
     {
-        public Rect CellRect { get; }
-        public Rect RoomRect { get; }
-        public IEnumerable<IPortDefinition> PortDefinitions { get; }
+        public IRoomShape Shape { get; }
+        public IReadOnlyDictionary<Vector2Int, IEnumerable<IPortDefinition>> PortDefinitions { get; }
         
-        public SelectedRoomPattern(Rect cellRect, Rect roomRect, IEnumerable<IPortDefinition> portDefinitions)
+        public SelectedRoomPattern(IRoomShape shape, IReadOnlyDictionary<Vector2Int, IEnumerable<IPortDefinition>> portDefinitions)
         {
-            CellRect = cellRect;
-            RoomRect = roomRect;
+            Shape = shape;
             PortDefinitions = portDefinitions;
         }
     }

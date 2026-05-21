@@ -5,8 +5,7 @@ namespace IM.Map
 {
     public interface ISelectedRoomPattern
     {
-        Rect CellRect { get; }
-        Rect RoomRect { get; }
-        IEnumerable<IPortDefinition> PortDefinitions { get; }
+        IRoomShape Shape { get; }
+        IReadOnlyDictionary<Vector2Int, IEnumerable<IPortDefinition>> PortDefinitions { get; }
     }
 }

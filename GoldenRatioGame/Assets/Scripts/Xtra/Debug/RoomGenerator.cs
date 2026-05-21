@@ -5,11 +5,8 @@ namespace IM.Visuals
 {
     public class RoomGenerator : MonoBehaviour
     {
-        [Header("References")]
         [SerializeField] private Tilemap tilemap;
         [SerializeField] private TileBase floorTile;
-
-        [Header("Settings")]
         [SerializeField] private Vector2Int minBounds;
         [SerializeField] private Vector2Int maxBounds;
 

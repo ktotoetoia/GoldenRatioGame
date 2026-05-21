@@ -35,6 +35,7 @@ namespace IM.Map
         public IGameObjectRoom Origin { get; private set; }
         public IRoomPort Connection { get; private set; }
         public float NormalizedPosition { get; set; }
+        public Vector2Int CellOffset { get; set; }
         
         public PortSide PortSide 
         { 
@@ -112,7 +113,7 @@ namespace IM.Map
             _isInitialized = true;
             UpdateVisuals();
         }
-
+        
         public void SetDestination(IRoomPort destination)
         {
             Connection = destination;

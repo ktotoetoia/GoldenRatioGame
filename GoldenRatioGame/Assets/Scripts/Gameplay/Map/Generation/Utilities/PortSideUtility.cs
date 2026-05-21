@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace IM.Map.Grid
+namespace IM.Map
 {
     public static class PortSideUtility
     {
