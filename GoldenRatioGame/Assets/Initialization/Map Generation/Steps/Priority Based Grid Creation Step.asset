@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7bce7bf16254135a177078010f17339, type: 3}
-  m_Name: Map Factory
-  m_EditorClassIdentifier: InfrastructureComposition::IM.MapGenerator
+  m_Script: {fileID: 11500000, guid: 811a974768b64a840af0352c4c7869f5, type: 3}
+  m_Name: Priority Based Grid Creation Step
+  m_EditorClassIdentifier: Map::IM.Map.PriorityBasedGridCreationStep
   _startingRoomFactory: {fileID: 11400000, guid: 4cf4ca52b5f347b4084303840fd94d8d, type: 2}
   _filledRoomFactory: {fileID: 11400000, guid: 8e7cd557aa73c684a96e7cef6e9cd593, type: 2}
   _specialRoomFactory: {fileID: 11400000, guid: 95fffce89b0d7914f992db9aef8aa87e, type: 2}
   _finalRoomFactory: {fileID: 11400000, guid: b947e77518bdf3f49be3fb4cf04dabf4, type: 2}
-  _floorPrefab: {fileID: 3678140963209637273, guid: 419cc5101d20e2147aa465fdc58e2963, type: 3}
-  <FilledRoomToSpecialRoomRatio>k__BackingField: 4
+  _baseRoomCount: 4
+  _roomCountPerDepth: 2
+  _filledRoomToSpecialRoomRatio: 4

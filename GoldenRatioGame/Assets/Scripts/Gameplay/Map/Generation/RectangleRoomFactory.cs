@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using IM.LifeCycle;
 using UnityEngine;
 
 namespace IM.Map
 {
-    [CreateAssetMenu(menuName = "Map/Rectangle Room Factory")]
+    [CreateAssetMenu(menuName = "Map/Room Factories/Rectangle Room Factory")]
     public class RectangleRoomFactory : RoomFactory
     {
         [SerializeField] private GameObject _roomPrefab;
@@ -37,8 +38,23 @@ namespace IM.Map
         {            
             GameObject roomGO = gameObjectFactory.Create(_roomPrefab, false);
             IGameObjectRoom room = roomGO.GetComponent<IGameObjectRoom>();
+
+            int minX = roomPattern.Shape.Offsets.Min(o => o.x);
+            int maxX = roomPattern.Shape.Offsets.Max(o => o.x);
+            int minY = roomPattern.Shape.Offsets.Min(o => o.y);
+            int maxY = roomPattern.Shape.Offsets.Max(o => o.y);
+
+            int gridWidth = maxX - minX + 1;
+            int gridHeight = maxY - minY + 1;
+            Vector2 gridScale = new Vector2(gridWidth, gridHeight);
+
+            Vector2 physicalSize = Vector2.Scale(gridScale, roomPattern.Shape.CellRect.size);
+
+            Rect roomRect = new Rect(Vector2.zero, physicalSize);
             
-            room.SetRect(roomPattern.Shape.CellRect);
+            if (!roomGO.TryGetComponent(out RectangleRoomForm roomForm)) 
+                Debug.LogWarning("RectangleRoomForm was not found in the prefab:" + _roomPrefab);
+            else roomForm.SetRect(roomRect);
 
             foreach (var kvp in roomPattern.PortDefinitions)
             {
@@ -55,13 +71,14 @@ namespace IM.Map
                     if (portDefinition.Side is PortSide.North or PortSide.South)
                     {
                         float localX = (cellOffset.x * _size.x) + (defaultNorm * _size.x);
-                        port.NormalizedPosition = localX / roomPattern.Shape.CellRect.width;
+                        port.NormalizedPosition = localX / roomRect.width;
                     }
                     else
                     {
                         float localY = (cellOffset.y * _size.y) + (defaultNorm * _size.y);
-                        port.NormalizedPosition = localY / roomPattern.Shape.CellRect.height;
+                        port.NormalizedPosition = localY / roomRect.height;
                     }
+                    
 
                     port.Initialize(room);
                     room.Add(port);

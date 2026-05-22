@@ -2,8 +2,9 @@
 
 namespace IM.Map.Grid
 {
-    public interface IMapFactory
+    public interface IMapInfoFactory
     {
+        string AddresableAddress {get;}
         IMapInfo Create(IGameObjectFactory factory, int seed, int depth);
     }
 }

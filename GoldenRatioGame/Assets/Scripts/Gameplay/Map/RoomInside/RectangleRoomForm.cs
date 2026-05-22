@@ -4,6 +4,7 @@ using UnityEngine.Tilemaps;
 
 namespace IM.Map
 {
+    [DefaultExecutionOrder(-100)]
     [RequireComponent(typeof(GameObjectRoomMono))]
     public class RectangleRoomForm : MonoBehaviour
     {
@@ -13,26 +14,27 @@ namespace IM.Map
         private GameObjectRoomMono _gameObjectRoomMono;
         private const int WallBorder = 1;
         
+        public Rect Rect{ get; private set; }
+        
         private void Awake()
         {
             _gameObjectRoomMono = GetComponent<GameObjectRoomMono>();
-            _gameObjectRoomMono.RectChanged += SetSize;
             _gameObjectRoomMono.RoomPortAdded += SetUpRoomPort;
-            if(_gameObjectRoomMono.Rect != default) SetSize(_gameObjectRoomMono.Rect);
         }
         
-        private void SetSize(Rect rect)
+        public void SetRect(Rect rect)
         {
+            Rect = rect;
             GenerateRoom((int)rect.size.x, (int)rect.size.y);
+            
+            if(!_gameObjectRoomMono) return;
 
-            foreach (IRoomPort port in _gameObjectRoomMono.RoomPorts)
-                SetUpRoomPort(port);
+            foreach (IRoomPort port in _gameObjectRoomMono.RoomPorts) SetUpRoomPort(port);
         }
 
         private void GenerateRoom(int xM, int yM)
         {
-            if (!_tilemap || !_floorTile  || !_wallTile)
-                return;
+            if (!_tilemap || !_floorTile  || !_wallTile) return;
 
             _tilemap.ClearAllTiles();
 
@@ -62,8 +64,7 @@ namespace IM.Map
         {
             if (roomPort is not MonoBehaviour mb) return;
 
-            Rect rect = _gameObjectRoomMono.Rect;
-            ResolvePortPosition(mb, rect, roomPort.PortSide, roomPort.NormalizedPosition);
+            ResolvePortPosition(mb,Rect, roomPort.PortSide, roomPort.NormalizedPosition);
         }
 
         private void ResolvePortPosition(MonoBehaviour mb, Rect rect, PortSide side, float normalizedPosition)

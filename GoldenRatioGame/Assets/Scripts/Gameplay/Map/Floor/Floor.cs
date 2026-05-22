@@ -10,7 +10,6 @@ namespace IM.Map
     public class Floor : MonoBehaviour, IFloor,IRequireGameObjectFactory
     {
         private readonly SmartCollection<IRoomWalker> _roomWalkers = new();
-        private IMapFactory _mapFactory;
         private IMapInfo _mapInfo;
 
         public IDataGraph<IGameObjectRoom> FloorGraph => _mapInfo?.Graph;
@@ -18,10 +17,11 @@ namespace IM.Map
         public int Seed { get; set; }
         public int Depth { get;  set; }
         public IGameObjectFactory Factory { get; set; }
+        public IMapInfoFactory MapInfoFactory {get; private set; }
 
-        public void SetMapFactory(IMapFactory factory)
+        public void SetMapFactory(IMapInfoFactory infoFactory)
         {
-            _mapFactory = factory;
+            MapInfoFactory = infoFactory;
         }
 
         public void Next(IMapInfo mapInfo)
@@ -42,7 +42,7 @@ namespace IM.Map
             Clear();
             
             Depth++;
-            _mapInfo = _mapFactory.Create(Factory,Seed,Depth); 
+            _mapInfo = MapInfoFactory.Create(Factory,Seed,Depth); 
             
             if (_mapInfo.FinalRoom is IHaveTransitionPoint transitionPoint)
             {

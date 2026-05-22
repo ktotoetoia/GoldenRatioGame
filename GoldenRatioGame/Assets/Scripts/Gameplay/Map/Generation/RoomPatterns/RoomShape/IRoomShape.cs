@@ -6,7 +6,6 @@ namespace IM.Map
     public interface IRoomShape
     {
         Rect CellRect { get; }
-        Rect RoomRect { get; }
         HashSet<Vector2Int> Offsets { get; }
     }
 }

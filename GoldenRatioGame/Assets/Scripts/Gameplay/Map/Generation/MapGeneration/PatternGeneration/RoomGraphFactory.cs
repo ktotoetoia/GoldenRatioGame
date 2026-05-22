@@ -6,14 +6,15 @@ using UnityEngine;
 
 namespace IM.Map.Grid
 {
-  public class RoomGraphFactory
+    public class RoomGraphFactory
     {
         private readonly IGameObjectFactory _goFactory;
 
         public RoomGraphFactory(IGameObjectFactory goFactory) => _goFactory = goFactory;
 
-        public IDataGraph<IGameObjectRoom> Create(IGrid<ICellInfo> grid)
+        public IDataGraph<IGameObjectRoom> Create(MapGenerationContext context)
         {
+            var grid = context.Grid;
             var graph = new BiDirectionalDataGraph<IGameObjectRoom>();
             var roomToNode = new Dictionary<int, IDataNode<IGameObjectRoom>>();
             var nodes = new IDataNode<IGameObjectRoom>[grid.Width, grid.Height];
@@ -40,7 +41,7 @@ namespace IM.Map.Grid
         }
 
         private void ConnectNeighbors(
-            BiDirectionalDataGraph<IGameObjectRoom> graph,
+            IDataGraph<IGameObjectRoom> graph,
             IDataNode<IGameObjectRoom>[,] nodes,
             IGrid<ICellInfo> grid)
         {
@@ -76,7 +77,7 @@ namespace IM.Map.Grid
         }
 
         private void TryConnect(
-            BiDirectionalDataGraph<IGameObjectRoom> graph,
+            IDataGraph<IGameObjectRoom> graph,
             IDataNode<IGameObjectRoom> nodeA,
             IDataNode<IGameObjectRoom> nodeB,
             Vector2Int offsetA,

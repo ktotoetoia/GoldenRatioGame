@@ -7,6 +7,7 @@ using IM.LifeCycle;
 using IM.Map;
 using IM.Map.Grid;
 using IM.SaveSystem;
+using UnityEngine.AddressableAssets;
 
 namespace IM
 {
@@ -18,15 +19,34 @@ namespace IM
         {
             FloorInfo floorInfo = new FloorInfo
             {
+                MapInfoAddress = component.MapInfoFactory.AddresableAddress,
                 Seed = component.Seed,
                 Depth = component.Depth
             };
 
+            foreach(IRoomWalker roomWalker in component.RoomWalkers)
+            {
+                if (roomWalker is not MonoBehaviour mb)
+                {
+                    Debug.LogWarning("Floor has a room walker that is not MonoBehaviour, cannot serialize");
+
+                    continue;
+                }
+
+                if (!mb.TryGetComponent(out IIdentifiable identifiable))
+                {
+                    Debug.LogWarning("Room Walker object does not contain component IIdentifiable");
+
+                    continue;
+                }
+                
+                floorInfo.RoomWalkers.Add(identifiable.Id);
+            }
+            
             foreach (IGameObjectRoom room in component.FloorGraph.DataNodes.Select(x => x.Value))
             {
                 RoomInfo roomInfo = new RoomInfo
                 {
-                    Rect = room.Rect,
                     RoomId = GetId(room),
                     GameObjects = room.GameObjects
                         .Select(x => x.GetComponent<IIdentifiable>()?.Id)
@@ -79,11 +99,22 @@ namespace IM
         {
             if (state is not FloorInfo info) return;
             
+            var operation = Addressables.LoadAssetAsync<IMapInfoFactory>(info.MapInfoAddress);
+            var mapInfoFactory = operation.WaitForCompletion();
+            
+            
+            component.SetMapFactory(mapInfoFactory);
             component.Seed = info.Seed;
             component.Depth = info.Depth;
 
             BiDirectionalDataGraph<IGameObjectRoom> graph = new();
             Dictionary<string, IDataNode<IGameObjectRoom>> nodeLookup = new();
+
+            foreach (string a in info.RoomWalkers)
+            {
+                GameObject go = resolveDependency(a);
+                if(go && go.TryGetComponent(out IRoomWalker roomWalker)) component.AddRoomWalker(roomWalker);
+            }
 
             foreach (Connection conn in info.Connections)
             {
@@ -100,15 +131,12 @@ namespace IM
                 graph.Connect(GetOrCreateNode(conn.From), GetOrCreateNode(conn.To));
             }
 
-            component.SetMapFactory(UnityEngine.Object.FindAnyObjectByType<MapFactory>());
             component.Next(new MapInfo(graph));
 
             foreach (RoomInfo roomInfo in info.RoomInfos)
             {
                 IGameObjectRoom room = resolveDependency(roomInfo.RoomId)
                     .GetComponent<IGameObjectRoom>();
-
-                room.SetRect(roomInfo.Rect);
 
                 foreach (RoomPortInfo portInfo in roomInfo.RoomPorts)
                 {
@@ -157,6 +185,8 @@ namespace IM
         {
             public int Seed;
             public int Depth;
+            public string MapInfoAddress;
+            public List<string> RoomWalkers = new();
             public List<RoomInfo> RoomInfos = new();
             public List<Connection> Connections = new();
         }
@@ -171,7 +201,6 @@ namespace IM
         private class RoomInfo
         {
             public string RoomId;
-            public Rect Rect;
             public List<string> GameObjects = new();
             public List<RoomPortInfo> RoomPorts = new();
         }

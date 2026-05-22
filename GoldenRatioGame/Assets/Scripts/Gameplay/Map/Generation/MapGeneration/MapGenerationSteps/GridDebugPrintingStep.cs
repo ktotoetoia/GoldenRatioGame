@@ -6,10 +6,15 @@ using UnityEngine;
 
 namespace IM.Map
 {
-    public class GridDebugPrinter
+    [CreateAssetMenu(menuName = "Map/Generation Steps/Grid Debug Printing Step")]
+    public class GridDebugPrintingStep : MapGenerationStep
     {
-        public static void PrintGrid(IGrid<ICellInfo> grid)
+        public override void Execute(MapGenerationContext context)
         {
+            var grid = context.Grid;
+            
+            if (grid == null) Debug.LogWarning("grid is null");
+            
             var occupied = grid.OccupiedPositions().ToList();
             if (occupied.Count == 0)
             {

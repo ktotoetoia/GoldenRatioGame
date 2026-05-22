@@ -12,9 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bee2ea197d7460a980efbc0d626a4c4, type: 3}
   m_Name: Map Initializer
   m_EditorClassIdentifier: InfrastructureComposition::IM.MapInitializer
-  _mapFactory: {fileID: 11400000, guid: cb5b3bc88af0b4c42814d69804b11f0d, type: 2}
+  mapInfoFactory: {fileID: 11400000, guid: cb5b3bc88af0b4c42814d69804b11f0d, type: 2}
   _floorPrefab: {fileID: 3678140963209637273, guid: 419cc5101d20e2147aa465fdc58e2963, type: 3}
-  _cappedValue:
-    _minValue: 3
-    _maxValue: 8
-    _value: 3

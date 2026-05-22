@@ -9,7 +9,7 @@ namespace IM.Map
         IDataGraph<IGameObjectRoom> FloorGraph { get; }
         IEnumerable<IRoomWalker> RoomWalkers { get; }
         
-        void SetMapFactory(IMapFactory factory);
+        void SetMapFactory(IMapInfoFactory infoFactory);
         void AddRoomWalker(IRoomWalker walker);
         void RemoveRoomWalker(IRoomWalker walker);
     }

@@ -25,17 +25,14 @@ namespace IM.Map.Grid
             set => _cells[pos.x, pos.y] = value;
         }
 
-        public bool InBounds(Vector2Int pos) =>
-            pos is { x: >= 0, y: >= 0 } && pos.x < Width && pos.y < Height;
-
+        public bool InBounds(Vector2Int pos) => pos is { x: >= 0, y: >= 0 } && pos.x < Width && pos.y < Height;
         public bool IsOccupied(Vector2Int pos) => InBounds(pos) && _cells[pos.x, pos.y] != null;
 
         public IEnumerable<Vector2Int> OccupiedPositions()
         {
             for (int x = 0; x < Width; x++)
             for (int y = 0; y < Height; y++)
-                if (_cells[x, y] != null) 
-                    yield return new Vector2Int(x, y);
+                if (_cells[x, y] != null) yield return new Vector2Int(x, y);
         }
 
         public IEnumerator<T> GetEnumerator() => _cells.Cast<T>().GetEnumerator();

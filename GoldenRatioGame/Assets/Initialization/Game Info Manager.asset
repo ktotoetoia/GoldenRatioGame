@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e289ee2689148e99de89ebb84773b07, type: 3}
-  m_Name: GameInfoManager
+  m_Name: Game Info Manager
   m_EditorClassIdentifier: GameCreationUI::IM.SaveSystem.GameInfoControllerImplementation
   _gameLoadContext: {fileID: 11400000, guid: e14624f0e951a054dbd79e170576b8ef, type: 2}
   _hubLoadContext: {fileID: 11400000, guid: b458c89e0b4ee0d49b73d43f0b0ff518, type: 2}

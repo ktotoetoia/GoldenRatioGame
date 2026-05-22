@@ -4,7 +4,7 @@ using Random = System.Random;
 
 namespace IM.Map.Grid
 {
-    public class PriorityBasedRandomGridFactory : ICellGridFactory
+    public class PriorityBasedRandomGridFactory
     {
         private readonly IEnumerable<(IRoomFactory, int)> _factories;
         private readonly Random _random;
@@ -15,9 +15,9 @@ namespace IM.Map.Grid
             _factories = factories;
         }
 
-        public IGrid<ICellInfo> CreateGrid(int height, int width)
+        public IGrid<ICellInfo> CreateGrid(Vector2Int gridSize,Vector2Int startingPosition)
         {
-            Grid<ICellInfo> grid = new (height,width);
+            Grid<ICellInfo> grid = new (gridSize.x, gridSize.y);
             bool firstCell = true;
             
             foreach ((IRoomFactory factory, int maxCount) in _factories)
@@ -26,7 +26,7 @@ namespace IM.Map.Grid
                 
                 if (firstCell)
                 {
-                    grid[height / 2, width / 2] = new CellInfo(factory);
+                    grid[startingPosition.x,startingPosition.y] = new CellInfo(factory);
 
                     count--;
                     firstCell = false;

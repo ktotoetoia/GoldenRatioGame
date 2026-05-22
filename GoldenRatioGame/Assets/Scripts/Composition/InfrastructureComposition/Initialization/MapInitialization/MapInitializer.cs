@@ -9,7 +9,7 @@ namespace IM
    [CreateAssetMenu(fileName = "MapInitializer", menuName = "Initialization/Map Initializer")]
     public class MapInitializer : SceneInitializer
     {
-        [SerializeField] private MapFactory _mapFactory;
+        [SerializeField] private MapInfoFactory mapInfoFactory;
         [SerializeField] private GameObject _floorPrefab;
 
         public override void OnSceneLoaded(GameObject initializerGo, IGameObjectFactory factory)
@@ -17,7 +17,7 @@ namespace IM
             Floor floor = factory.Create(_floorPrefab, false).GetComponent<Floor>();
             floor.Seed = Random.Range(-1000000, 1000000);
             
-            floor.SetMapFactory(_mapFactory);
+            floor.SetMapFactory(mapInfoFactory);
             floor.Next();
         }
     }

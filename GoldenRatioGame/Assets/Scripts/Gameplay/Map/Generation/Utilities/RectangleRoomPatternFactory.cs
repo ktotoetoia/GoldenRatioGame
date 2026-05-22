@@ -5,13 +5,11 @@ namespace IM.Map
 {
     public class RectangleRoomPatternFactory
     {
-        public IRoomPattern Create(Vector2Int roomSize, Vector2Int cells)
+        public IRoomPattern Create(Vector2Int cellSize, Vector2Int cells)
         {
             if (cells.x <= 0 || cells.y <= 0)
                 throw new System.ArgumentOutOfRangeException(nameof(cells), "Cells must be positive.");
-
-            Vector2Int totalSize = Vector2Int.Scale(roomSize, cells);
-
+            
             HashSet<Vector2Int> offsets = new();
             Dictionary<Vector2Int, IEnumerable<IPortDefinition>> optionalPorts = new();
 
@@ -24,28 +22,16 @@ namespace IM.Map
 
                     List<IPortDefinition> ports = new();
 
-                    if (x == 0)
-                        ports.Add(new PortDefinition(PortSide.West));
+                    if (x == 0) ports.Add(new PortDefinition(PortSide.West));
+                    if (x == cells.x - 1) ports.Add(new PortDefinition(PortSide.East));
+                    if (y == 0) ports.Add(new PortDefinition(PortSide.South));
+                    if (y == cells.y - 1) ports.Add(new PortDefinition(PortSide.North));
 
-                    if (x == cells.x - 1)
-                        ports.Add(new PortDefinition(PortSide.East));
-
-                    if (y == 0)
-                        ports.Add(new PortDefinition(PortSide.South));
-
-                    if (y == cells.y - 1)
-                        ports.Add(new PortDefinition(PortSide.North));
-
-                    if (ports.Count > 0)
-                        optionalPorts[offset] = ports;
+                    if (ports.Count > 0) optionalPorts[offset] = ports;
                 }
             }
 
-            return new RoomPattern(
-                new RoomShape(
-                    new Rect(Vector2.zero, totalSize),
-                    new Rect(Vector2.zero, totalSize),
-                    offsets),
+            return new RoomPattern(new RoomShape(new Rect(Vector2.zero, cellSize), offsets),
                 new Dictionary<Vector2Int, IEnumerable<IPortDefinition>>(),
                 optionalPorts);
         }

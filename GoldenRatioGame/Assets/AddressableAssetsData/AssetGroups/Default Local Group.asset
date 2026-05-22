@@ -95,6 +95,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb5b3bc88af0b4c42814d69804b11f0d
+    m_Address: Assets/Initialization/Map Generation/Map Factory.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: de0a404a22731cd4db04744937be34c1
     m_Address: Assets/Initialization/Prefabs/Special Room.prefab
     m_ReadOnly: 0
