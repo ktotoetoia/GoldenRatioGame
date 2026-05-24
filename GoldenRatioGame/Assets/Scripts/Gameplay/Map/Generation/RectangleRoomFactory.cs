@@ -55,7 +55,7 @@ namespace IM.Map
             if (!roomGO.TryGetComponent(out RectangleRoomForm roomForm)) 
                 Debug.LogWarning("RectangleRoomForm was not found in the prefab:" + _roomPrefab);
             else roomForm.SetRect(roomRect);
-
+            
             foreach (var kvp in roomPattern.PortDefinitions)
             {
                 Vector2Int cellOffset = kvp.Key;
@@ -63,24 +63,24 @@ namespace IM.Map
                 {
                     GameObject portGameObject = gameObjectFactory.Create(_roomPortPrefab, false);
                     RoomPort port = portGameObject.GetComponent<RoomPort>();
-                    port.PortSide = portDefinition.Side;
-                    port.CellOffset = cellOffset;
-
+                    
+                    float normalizedPosition = 0f;
+                    
                     float defaultNorm = portDefinition.NormalizedPosition == 0 ? 0.5f : portDefinition.NormalizedPosition;
         
                     if (portDefinition.Side is PortSide.North or PortSide.South)
                     {
                         float localX = (cellOffset.x * _size.x) + (defaultNorm * _size.x);
-                        port.NormalizedPosition = localX / roomRect.width;
+                        normalizedPosition = localX / roomRect.width;
                     }
                     else
                     {
                         float localY = (cellOffset.y * _size.y) + (defaultNorm * _size.y);
-                        port.NormalizedPosition = localY / roomRect.height;
+                        normalizedPosition = localY / roomRect.height;
                     }
-                    
+                    PortIdentity portIdentity = new PortIdentity(portDefinition.Index,normalizedPosition,cellOffset,portDefinition.Side);
 
-                    port.Initialize(room);
+                    port.Initialize(room,portIdentity);
                     room.Add(port);
                 }
             }

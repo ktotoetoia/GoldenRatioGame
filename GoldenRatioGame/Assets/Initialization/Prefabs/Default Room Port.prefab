@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 743972795, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  m_Sprite: {fileID: -5118154, guid: a4eca59e67fdad147a14d8a5fae0ea2d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_Size: {x: 0.5, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!61 &7405270498000282969
 BoxCollider2D:
@@ -131,8 +131,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0.5}
-    oldSize: {x: 0.5, y: 1}
+    pivot: {x: 0.5, y: 0.25}
+    oldSize: {x: 3, y: 2}
     newSize: {x: 0.5, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -172,15 +172,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Map::IM.Map.RoomPort
   _spriteRenderer: {fileID: 8185116252885737288}
-  _noneClosedSpriteRegular: {fileID: -1803287543, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
-  _noneOpenSpriteRegular: {fileID: -769791598, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
-  _noneClosedSpriteSideways: {fileID: 743972795, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
-  _noneOpenSpriteSideways: {fileID: 228245510, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
-  _specialClosedSpriteRegular: {fileID: 1246645552, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
-  _specialOpenSpriteRegular: {fileID: -209297725, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
-  _specialClosedSpriteSideways: {fileID: -63004970, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
-  _specialOpenSpriteSideways: {fileID: -799101760, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
-  _finalClosedSpriteRegular: {fileID: 959578683, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
-  _finalOpenSpriteRegular: {fileID: -1719631257, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
-  _finalClosedSpriteSideways: {fileID: -1711033733, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
-  _finalOpenSpriteSideways: {fileID: 983188340, guid: 14f2006417764d441ad68d1765dd2e8a, type: 3}
+  _noneTypeSprites:
+    North:
+      OpenSprite: {fileID: -2334673924373271848, guid: 1c602cb627e7ccf4289097c45fb6ce65, type: 3}
+      ClosedSprite: {fileID: 6949355504954148238, guid: 1c602cb627e7ccf4289097c45fb6ce65, type: 3}
+    South:
+      OpenSprite: {fileID: 6589445465660714253, guid: 1c602cb627e7ccf4289097c45fb6ce65, type: 3}
+      ClosedSprite: {fileID: 9074839600955735120, guid: 1c602cb627e7ccf4289097c45fb6ce65, type: 3}
+    East:
+      OpenSprite: {fileID: -832560776752527008, guid: 1c602cb627e7ccf4289097c45fb6ce65, type: 3}
+      ClosedSprite: {fileID: 7029821845978955238, guid: 1c602cb627e7ccf4289097c45fb6ce65, type: 3}
+    West:
+      OpenSprite: {fileID: 1744916000023151564, guid: 1c602cb627e7ccf4289097c45fb6ce65, type: 3}
+      ClosedSprite: {fileID: 8831533032912794675, guid: 1c602cb627e7ccf4289097c45fb6ce65, type: 3}
+  _specialTypeSprites:
+    North:
+      OpenSprite: {fileID: -2334673924373271848, guid: 50fadbb1793697d44b8d32760ecd2e5e, type: 3}
+      ClosedSprite: {fileID: 6949355504954148238, guid: 50fadbb1793697d44b8d32760ecd2e5e, type: 3}
+    South:
+      OpenSprite: {fileID: 6589445465660714253, guid: 50fadbb1793697d44b8d32760ecd2e5e, type: 3}
+      ClosedSprite: {fileID: 9074839600955735120, guid: 50fadbb1793697d44b8d32760ecd2e5e, type: 3}
+    East:
+      OpenSprite: {fileID: -832560776752527008, guid: 50fadbb1793697d44b8d32760ecd2e5e, type: 3}
+      ClosedSprite: {fileID: 7029821845978955238, guid: 50fadbb1793697d44b8d32760ecd2e5e, type: 3}
+    West:
+      OpenSprite: {fileID: 1744916000023151564, guid: 50fadbb1793697d44b8d32760ecd2e5e, type: 3}
+      ClosedSprite: {fileID: 8831533032912794675, guid: 50fadbb1793697d44b8d32760ecd2e5e, type: 3}
+  _finalTypeSprites:
+    North:
+      OpenSprite: {fileID: -2334673924373271848, guid: b9bcb3edae706f74dbd9a4896a44bbbf, type: 3}
+      ClosedSprite: {fileID: 6949355504954148238, guid: b9bcb3edae706f74dbd9a4896a44bbbf, type: 3}
+    South:
+      OpenSprite: {fileID: 6589445465660714253, guid: b9bcb3edae706f74dbd9a4896a44bbbf, type: 3}
+      ClosedSprite: {fileID: 9074839600955735120, guid: b9bcb3edae706f74dbd9a4896a44bbbf, type: 3}
+    East:
+      OpenSprite: {fileID: -832560776752527008, guid: b9bcb3edae706f74dbd9a4896a44bbbf, type: 3}
+      ClosedSprite: {fileID: 7029821845978955238, guid: b9bcb3edae706f74dbd9a4896a44bbbf, type: 3}
+    West:
+      OpenSprite: {fileID: 1744916000023151564, guid: b9bcb3edae706f74dbd9a4896a44bbbf, type: 3}
+      ClosedSprite: {fileID: 8831533032912794675, guid: b9bcb3edae706f74dbd9a4896a44bbbf, type: 3}

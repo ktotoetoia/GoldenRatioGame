@@ -11,6 +11,7 @@ namespace IM.Map
         [SerializeField] private Tilemap _tilemap;
         [SerializeField] private TileBase _floorTile;
         [SerializeField] private TileBase _wallTile;
+        [SerializeField] private int _portTileRadius = 1;
         private GameObjectRoomMono _gameObjectRoomMono;
         private const int WallBorder = 1;
         
@@ -64,7 +65,7 @@ namespace IM.Map
         {
             if (roomPort is not MonoBehaviour mb) return;
 
-            ResolvePortPosition(mb,Rect, roomPort.PortSide, roomPort.NormalizedPosition);
+            ResolvePortPosition(mb, Rect, roomPort.PortIdentity.PortSide, roomPort.PortIdentity.NormalizedPosition);
         }
 
         private void ResolvePortPosition(MonoBehaviour mb, Rect rect, PortSide side, float normalizedPosition)
@@ -98,15 +99,21 @@ namespace IM.Map
 
             mb.transform.localPosition = new Vector3(tilePos.x + 0.5f, tilePos.y + 0.5f, 0f);
             
-            _tilemap.SetColor(tilePos, Color.clear);
-            mb.transform.localScale = side switch
+            bool isHorizontal = side is PortSide.North or PortSide.South;
+
+            for (int offset = -_portTileRadius; offset <= _portTileRadius; offset++)
             {
-                PortSide.North => new Vector3(1, 1, 1),
-                PortSide.South => new Vector3(1, 1, -1),
-                PortSide.East => new Vector3(-1, 1, 1),
-                PortSide.West => new Vector3(1, 1, 1),
-                _ => throw new ArgumentOutOfRangeException(nameof(side), side, null)
-            };
+                int xOffset = isHorizontal ? offset : 0;
+                int yOffset = isHorizontal ? 0 : offset;
+
+                Vector3Int targetTilePos = new Vector3Int(tilePos.x + xOffset, tilePos.y + yOffset, 0);
+
+                if (_tilemap.HasTile(targetTilePos))
+                {
+                    _tilemap.SetTileFlags(targetTilePos, TileFlags.None);
+                    _tilemap.SetColor(targetTilePos, Color.clear);
+                }
+            }
         }
     }
 }

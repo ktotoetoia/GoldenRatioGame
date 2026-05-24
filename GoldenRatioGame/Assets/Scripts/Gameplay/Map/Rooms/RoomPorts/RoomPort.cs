@@ -1,4 +1,4 @@
-﻿using IM.Map.Grid;
+﻿using System;
 using UnityEngine;
 
 namespace IM.Map
@@ -6,52 +6,19 @@ namespace IM.Map
     public class RoomPort : MonoBehaviour, IRoomPort
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
-        
-        [Header("Sprites: None (Regular N/S)")]
-        [SerializeField] private Sprite _noneClosedSpriteRegular;
-        [SerializeField] private Sprite _noneOpenSpriteRegular;
-        [Header("Sprites: None (Sideways E/W)")]
-        [SerializeField] private Sprite _noneClosedSpriteSideways;
-        [SerializeField] private Sprite _noneOpenSpriteSideways;
-
-        [Header("Sprites: Special (Regular N/S)")]
-        [SerializeField] private Sprite _specialClosedSpriteRegular;
-        [SerializeField] private Sprite _specialOpenSpriteRegular;
-        [Header("Sprites: Special (Sideways E/W)")]
-        [SerializeField] private Sprite _specialClosedSpriteSideways;
-        [SerializeField] private Sprite _specialOpenSpriteSideways;
-
-        [Header("Sprites: Final (Regular N/S)")]
-        [SerializeField] private Sprite _finalClosedSpriteRegular;
-        [SerializeField] private Sprite _finalOpenSpriteRegular;
-        [Header("Sprites: Final (Sideways E/W)")]
-        [SerializeField] private Sprite _finalClosedSpriteSideways;
-        [SerializeField] private Sprite _finalOpenSpriteSideways;
-
+        [SerializeField] private RoomTypePortSprites _noneTypeSprites;
+        [SerializeField] private RoomTypePortSprites _specialTypeSprites;
+        [SerializeField] private RoomTypePortSprites _finalTypeSprites;
         private bool _isInitialized;
         private bool _isOpen;
-        private PortSide _portSide;
 
         public IGameObjectRoom Origin { get; private set; }
         public IRoomPort Connection { get; private set; }
-        public float NormalizedPosition { get; set; }
-        public Vector2Int CellOffset { get; set; }
-        
-        public PortSide PortSide 
-        { 
-            get => _portSide; 
-            set 
-            {
-                _portSide = value;
-                UpdateVisuals();
-            }
-        }
-
+        public IPortIdentity PortIdentity { get; private set; }
         public Vector3 EnterPosition => transform.position;
         public Vector3 DeploymentPosition => transform.position + 
-                                             new Vector3(PortSideUtility.ToDirection(PortSideUtility.Opposite(PortSide)).x, 
-                                                         PortSideUtility.ToDirection(PortSideUtility.Opposite(PortSide)).y);
-
+                                             new Vector3(PortSideUtility.ToDirection(PortSideUtility.Opposite(PortIdentity.PortSide)).x, 
+                                                         PortSideUtility.ToDirection(PortSideUtility.Opposite(PortIdentity.PortSide)).y)*1.5f;
         public bool IsConnected => Connection != null;
         public RoomType Mode => DetermineMode();
 
@@ -70,38 +37,36 @@ namespace IM.Map
             RoomType originType = (Origin as IHaveRoomType)?.RoomType ?? RoomType.None;
 
             if (Connection == null) return originType;
-            
 
             RoomType destinationType = (Connection.Origin as IHaveRoomType)?.RoomType ?? RoomType.None;
             if (originType == RoomType.Final || destinationType == RoomType.Final) return RoomType.Final;
             if (originType == RoomType.Special || destinationType == RoomType.Special) return RoomType.Special;
-
+            
             return RoomType.None;
         }
 
         private void UpdateVisuals()
         {
-            if (!_spriteRenderer) return;
+            if (!_spriteRenderer || PortIdentity == null) return;
 
-            bool isSideways = PortSide is PortSide.East or PortSide.West;
-            
-            _spriteRenderer.sprite = Mode switch
+            RoomTypePortSprites activeTypeConfig = Mode switch
             {
-                RoomType.Special => isSideways 
-                    ? (_isOpen ? _specialOpenSpriteSideways : _specialClosedSpriteSideways) 
-                    : (_isOpen ? _specialOpenSpriteRegular : _specialClosedSpriteRegular),
-                    
-                RoomType.Final   => isSideways 
-                    ? (_isOpen ? _finalOpenSpriteSideways : _finalClosedSpriteSideways) 
-                    : (_isOpen ? _finalOpenSpriteRegular : _finalClosedSpriteRegular),
-                    
-                _                => isSideways 
-                    ? (_isOpen ? _noneOpenSpriteSideways : _noneClosedSpriteSideways) 
-                    : (_isOpen ? _noneOpenSpriteRegular : _noneClosedSpriteRegular)
+                RoomType.Special => _specialTypeSprites,
+                RoomType.Final   => _finalTypeSprites,
+                _                => _noneTypeSprites
             };
+
+            PortSpriteSet activeSpriteSet = activeTypeConfig.GetSetByDirection(PortIdentity.PortSide);
+            _spriteRenderer.sprite = activeSpriteSet.GetSprite(_isOpen);
         }
 
-        public void Initialize(IGameObjectRoom origin)
+        public void SetDestination(IRoomPort destination)
+        {
+            Connection = destination;
+            UpdateVisuals();
+        }
+
+        public void Initialize(IGameObjectRoom origin, IPortIdentity pi)
         {
             if (_isInitialized) 
             {
@@ -110,14 +75,39 @@ namespace IM.Map
             }
 
             Origin = origin;
+            PortIdentity = new PortIdentity(pi.Index, pi.NormalizedPosition, pi.CellOffset, pi.PortSide);
             _isInitialized = true;
             UpdateVisuals();
         }
         
-        public void SetDestination(IRoomPort destination)
+        [Serializable]
+        public struct PortSpriteSet
         {
-            Connection = destination;
-            UpdateVisuals();
+            public Sprite OpenSprite;
+            public Sprite ClosedSprite;
+
+            public Sprite GetSprite(bool isOpen) => isOpen ? OpenSprite : ClosedSprite;
+        }
+
+        [Serializable]
+        public class RoomTypePortSprites
+        {
+            public PortSpriteSet North;
+            public PortSpriteSet South;
+            public PortSpriteSet East;
+            public PortSpriteSet West;
+
+            public PortSpriteSet GetSetByDirection(PortSide side)
+            {
+                return side switch
+                {
+                    PortSide.North => North,
+                    PortSide.South => South,
+                    PortSide.East  => East,
+                    PortSide.West  => West,
+                    _ => throw new ArgumentOutOfRangeException(nameof(side), side, null)
+                };
+            }
         }
     }
 }

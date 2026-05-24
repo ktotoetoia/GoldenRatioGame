@@ -11,6 +11,7 @@ namespace IM.Map
         
         void SetMapFactory(IMapInfoFactory infoFactory);
         void AddRoomWalker(IRoomWalker walker);
+        void AddRoomWalker(IRoomWalker walker, IGameObjectRoom room);
         void RemoveRoomWalker(IRoomWalker walker);
     }
 }

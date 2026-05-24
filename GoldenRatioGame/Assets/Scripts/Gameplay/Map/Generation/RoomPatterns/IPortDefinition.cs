@@ -4,5 +4,6 @@
     {
         PortSide Side { get; }
         float NormalizedPosition { get; }
+        int Index { get; }
     }
 }

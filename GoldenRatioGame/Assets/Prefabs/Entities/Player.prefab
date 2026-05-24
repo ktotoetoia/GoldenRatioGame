@@ -68,9 +68,13 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5563122138591822399, guid: fe00d3ca423cbb04092c1edd892db3a4, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.55
+      objectReference: {fileID: 0}
     - target: {fileID: 7544895549371979933, guid: fe00d3ca423cbb04092c1edd892db3a4, type: 3}
       propertyPath: _rawSpeed
-      value: 20
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7604007037720004241, guid: fe00d3ca423cbb04092c1edd892db3a4, type: 3}
       propertyPath: <ShouldActivate>k__BackingField
@@ -126,7 +130,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -136,7 +140,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.4, y: 1.1}
+  m_Size: {x: 0.4, y: 1.3}
   m_EdgeRadius: 0
 --- !u!114 &1600337499563388486
 MonoBehaviour:

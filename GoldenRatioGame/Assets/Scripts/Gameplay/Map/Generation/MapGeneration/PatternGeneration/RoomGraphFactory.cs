@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace IM.Map.Grid
 {
-    public class RoomGraphFactory
+   public class RoomGraphFactory
     {
         private readonly IGameObjectFactory _goFactory;
 
@@ -36,14 +36,52 @@ namespace IM.Map.Grid
                 nodes[pos.x, pos.y] = node;
             }
 
-            ConnectNeighbors(graph, nodes, grid);
+            var portLookup = BuildPortLookup(grid, roomToNode);
+
+            ConnectNeighbors(graph, nodes, grid, portLookup);
             return graph;
+        }
+
+        private Dictionary<(int RoomId, Vector2Int Offset, PortSide Side), IRoomPort> BuildPortLookup(
+            IGrid<ICellInfo> grid, 
+            Dictionary<int, IDataNode<IGameObjectRoom>> roomToNode)
+        {
+            var portLookup = new Dictionary<(int, Vector2Int, PortSide), IRoomPort>();
+
+            var roomGroups = grid.OccupiedPositions()
+                .Select(pos => (pos, cell: grid[pos]))
+                .GroupBy(x => x.cell.RoomInstanceId);
+
+            foreach (var group in roomGroups)
+            {
+                int roomId = group.Key;
+                var room = roomToNode[roomId].Value;
+
+                var portsByIndex = room.RoomPorts.ToDictionary(p => p.PortIdentity.Index);
+
+                foreach (var item in group)
+                {
+                    Vector2Int cellOffset = item.cell.Offset;
+                    if (!item.cell.SelectedPattern.PortDefinitions.TryGetValue(cellOffset, out var portDefs)) continue;
+
+                    foreach (IPortDefinition portDef in portDefs)
+                    {
+                        if (portsByIndex.TryGetValue(portDef.Index, out var runtimePort))
+                        {
+                            portLookup[(roomId, cellOffset, portDef.Side)] = runtimePort;
+                        }
+                    }
+                }
+            }
+
+            return portLookup;
         }
 
         private void ConnectNeighbors(
             IDataGraph<IGameObjectRoom> graph,
             IDataNode<IGameObjectRoom>[,] nodes,
-            IGrid<ICellInfo> grid)
+            IGrid<ICellInfo> grid,
+            Dictionary<(int RoomId, Vector2Int Offset, PortSide Side), IRoomPort> portLookup)
         {
             Vector2Int[] directions = { Vector2Int.right, Vector2Int.up };
 
@@ -70,7 +108,7 @@ namespace IM.Map.Grid
                         PortSide sideA = PortSideUtility.FromDirection(dir);
                         PortSide sideB = PortSideUtility.Opposite(sideA);
 
-                        TryConnect(graph, nodeA, nodeB, cellA.Offset, cellB.Offset, sideA, sideB);
+                        TryConnect(graph, nodeA, nodeB, cellA, cellB, sideA, sideB, portLookup);
                     }
                 }
             }
@@ -80,13 +118,14 @@ namespace IM.Map.Grid
             IDataGraph<IGameObjectRoom> graph,
             IDataNode<IGameObjectRoom> nodeA,
             IDataNode<IGameObjectRoom> nodeB,
-            Vector2Int offsetA,
-            Vector2Int offsetB,
+            ICellInfo cellA,
+            ICellInfo cellB,
             PortSide sideA,
-            PortSide sideB)
+            PortSide sideB,
+            Dictionary<(int RoomId, Vector2Int Offset, PortSide Side), IRoomPort> portLookup)
         {
-            IRoomPort portA = nodeA.Value.RoomPorts.FirstOrDefault(p => p.PortSide == sideA && p.CellOffset == offsetA);
-            IRoomPort portB = nodeB.Value.RoomPorts.FirstOrDefault(p => p.PortSide == sideB && p.CellOffset == offsetB);
+            portLookup.TryGetValue((cellA.RoomInstanceId, cellA.Offset, sideA), out var portA);
+            portLookup.TryGetValue((cellB.RoomInstanceId, cellB.Offset, sideB), out var portB);
 
             if (portA == null || portB == null) return;
 

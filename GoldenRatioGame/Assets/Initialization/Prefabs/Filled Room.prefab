@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 2694484214590912548}
   - component: {fileID: 4150068054766213592}
   - component: {fileID: 2092311543170675996}
+  - component: {fileID: 1776523202783286439}
+  - component: {fileID: 7439877678105840365}
   - component: {fileID: 999588743564167469}
   - component: {fileID: -4642281475574424799}
   - component: {fileID: -5310502140078858885}
@@ -142,7 +144,7 @@ TilemapRenderer:
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
-  m_SortOrder: 0
+  m_SortOrder: 2
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
 --- !u!19719996 &2092311543170675996
@@ -177,12 +179,84 @@ TilemapCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
+  m_CompositeOperation: 1
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!50 &1776523202783286439
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4054245826693385729}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!66 &7439877678105840365
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4054245826693385729}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths: []
+  m_CompositePaths:
+    m_Paths: []
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.00005
+  m_UseDelaunayMesh: 0
+  m_CompositeGameObject: {fileID: 4054245826693385729}
 --- !u!114 &999588743564167469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,5 +316,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Map::IM.Map.RectangleRoomForm
   _tilemap: {fileID: 2694484214590912548}
-  _floorTile: {fileID: 11400000, guid: c6374e5f05db2784f9800c8f472511b6, type: 2}
-  _wallTile: {fileID: 11400000, guid: 74933a45a736e4a418402d63f55c647a, type: 2}
+  _floorTile: {fileID: 11400000, guid: b0cd4ef9c04b44b42aea20b255c4acec, type: 2}
+  _wallTile: {fileID: 11400000, guid: 993f67262a138794bbd3a06b9c00f24c, type: 2}
+  _portTileRadius: 1

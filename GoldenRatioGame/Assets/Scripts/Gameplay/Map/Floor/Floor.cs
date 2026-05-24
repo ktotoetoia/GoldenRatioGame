@@ -54,11 +54,16 @@ namespace IM.Map
 
         public void AddRoomWalker(IRoomWalker walker)
         { 
+            AddRoomWalker(walker,_mapInfo?.StartRoom);
+        }
+
+        public void AddRoomWalker(IRoomWalker walker, IGameObjectRoom room)
+        {
             _roomWalkers.Add(walker);
 
-            if (_mapInfo != null)
+            if (room != null)
             {
-                walker.GoTo(_mapInfo.StartRoom);
+                walker.GoTo(room);
             }
         }
 

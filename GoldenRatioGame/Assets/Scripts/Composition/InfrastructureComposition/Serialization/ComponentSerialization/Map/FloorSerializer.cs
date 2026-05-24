@@ -15,43 +15,47 @@ namespace IM
     {
         private static string GetId(object obj) => (obj as MonoBehaviour)?.GetComponent<IIdentifiable>()?.Id;
 
+        private static string GetRoomId(IRoomWalker walker) => GetId(walker.Current);
+
         public override object CaptureState(Floor component)
         {
-            FloorInfo floorInfo = new FloorInfo
+            FloorInfo floorInfo = new()
             {
                 MapInfoAddress = component.MapInfoFactory.AddresableAddress,
                 Seed = component.Seed,
                 Depth = component.Depth
             };
 
-            foreach(IRoomWalker roomWalker in component.RoomWalkers)
+            foreach (IRoomWalker roomWalker in component.RoomWalkers)
             {
                 if (roomWalker is not MonoBehaviour mb)
                 {
                     Debug.LogWarning("Floor has a room walker that is not MonoBehaviour, cannot serialize");
-
                     continue;
                 }
 
                 if (!mb.TryGetComponent(out IIdentifiable identifiable))
                 {
                     Debug.LogWarning("Room Walker object does not contain component IIdentifiable");
-
                     continue;
                 }
-                
-                floorInfo.RoomWalkers.Add(identifiable.Id);
+
+                floorInfo.RoomWalkers.Add(new RoomWalkerInfo
+                {
+                    WalkerId = identifiable.Id,
+                    RoomId = GetRoomId(roomWalker)
+                });
             }
-            
+
             foreach (IGameObjectRoom room in component.FloorGraph.DataNodes.Select(x => x.Value))
             {
-                RoomInfo roomInfo = new RoomInfo
+                RoomInfo roomInfo = new()
                 {
                     RoomId = GetId(room),
                     GameObjects = room.GameObjects
                         .Select(x => x.GetComponent<IIdentifiable>()?.Id)
                         .Where(id => id != null)
-                        .ToList(),
+                        .ToList()
                 };
 
                 foreach (IRoomPort port in room.RoomPorts)
@@ -60,10 +64,7 @@ namespace IM
                         !portBehaviour.TryGetComponent(out IIdentifiable portId))
                         continue;
 
-                    RoomPortInfo portInfo = new()
-                    {
-                        PortId = portId.Id
-                    };
+                    RoomPortInfo portInfo = new() { PortId = portId.Id };
 
                     if (port.IsConnected &&
                         port.Origin is MonoBehaviour origin &&
@@ -73,8 +74,13 @@ namespace IM
                     {
                         portInfo.Origin = originId.Id;
                         portInfo.Destination = connectionId.Id;
-                        portInfo.PortSide = (int)port.PortSide;
-                        portInfo.NormalizedPosition = port.NormalizedPosition;
+                        portInfo.PortIdentity = new PortIdentityInfo
+                        {
+                            NormalizedPosition = port.PortIdentity.NormalizedPosition,
+                            PortSide = (int)port.PortIdentity.PortSide,
+                            Index = port.PortIdentity.Index,
+                            CellOffset = port.PortIdentity.CellOffset
+                        };
                     }
 
                     roomInfo.RoomPorts.Add(portInfo);
@@ -98,67 +104,50 @@ namespace IM
         public override void RestoreState(Floor component, object state, Func<string, GameObject> resolveDependency)
         {
             if (state is not FloorInfo info) return;
-            
+
             var operation = Addressables.LoadAssetAsync<IMapInfoFactory>(info.MapInfoAddress);
-            var mapInfoFactory = operation.WaitForCompletion();
-            
-            
-            component.SetMapFactory(mapInfoFactory);
+            component.SetMapFactory(operation.WaitForCompletion());
             component.Seed = info.Seed;
             component.Depth = info.Depth;
 
             BiDirectionalDataGraph<IGameObjectRoom> graph = new();
             Dictionary<string, IDataNode<IGameObjectRoom>> nodeLookup = new();
 
-            foreach (string a in info.RoomWalkers)
+            IDataNode<IGameObjectRoom> GetOrCreateNode(string id)
             {
-                GameObject go = resolveDependency(a);
-                if(go && go.TryGetComponent(out IRoomWalker roomWalker)) component.AddRoomWalker(roomWalker);
+                if (nodeLookup.TryGetValue(id, out var node)) return node;
+                IGameObjectRoom room = resolveDependency(id).GetComponent<IGameObjectRoom>();
+                return nodeLookup[id] = graph.Create(room);
             }
 
             foreach (Connection conn in info.Connections)
-            {
-                IDataNode<IGameObjectRoom> GetOrCreateNode(string id)
-                {
-                    if (nodeLookup.TryGetValue(id, out IDataNode<IGameObjectRoom> node))
-                        return node;
-
-                    IGameObjectRoom room = resolveDependency(id).GetComponent<IGameObjectRoom>();
-
-                    return nodeLookup[id] = graph.Create(room);
-                }
-
                 graph.Connect(GetOrCreateNode(conn.From), GetOrCreateNode(conn.To));
-            }
 
             component.Next(new MapInfo(graph));
 
             foreach (RoomInfo roomInfo in info.RoomInfos)
             {
-                IGameObjectRoom room = resolveDependency(roomInfo.RoomId)
-                    .GetComponent<IGameObjectRoom>();
+                IGameObjectRoom room = resolveDependency(roomInfo.RoomId).GetComponent<IGameObjectRoom>();
 
                 foreach (RoomPortInfo portInfo in roomInfo.RoomPorts)
                 {
-                    RoomPort port = resolveDependency(portInfo.PortId)
-                        .GetComponent<RoomPort>();
+                    RoomPort port = resolveDependency(portInfo.PortId).GetComponent<RoomPort>();
 
-                    port.PortSide = (PortSide)portInfo.PortSide;
-                    port.NormalizedPosition = portInfo.NormalizedPosition;
+                    PortIdentity portIdentity = new(
+                        portInfo.PortIdentity.Index,
+                        portInfo.PortIdentity.NormalizedPosition,
+                        portInfo.PortIdentity.CellOffset,
+                        (PortSide)portInfo.PortIdentity.PortSide);
 
-                    if (!string.IsNullOrEmpty(portInfo.Origin))
-                    {
-                        IGameObjectRoom origin = resolveDependency(portInfo.Origin)
-                            .GetComponent<IGameObjectRoom>();
+                    IGameObjectRoom origin = string.IsNullOrEmpty(portInfo.Origin)
+                        ? null
+                        : resolveDependency(portInfo.Origin).GetComponent<IGameObjectRoom>();
 
-                        port.Initialize(origin);
-                    }
+                    port.Initialize(origin, portIdentity);
 
                     if (!string.IsNullOrEmpty(portInfo.Destination))
                     {
-                        IRoomPort destination = resolveDependency(portInfo.Destination)
-                            .GetComponent<IRoomPort>();
-
+                        IRoomPort destination = resolveDependency(portInfo.Destination).GetComponent<IRoomPort>();
                         port.SetDestination(destination);
                     }
 
@@ -178,6 +167,18 @@ namespace IM
                     room.Add(go);
                 }
             }
+
+            foreach (RoomWalkerInfo walkerInfo in info.RoomWalkers)
+            {
+                GameObject go = resolveDependency(walkerInfo.WalkerId);
+                if (!go || !go.TryGetComponent(out IRoomWalker roomWalker)) continue;
+
+                IGameObjectRoom room = string.IsNullOrEmpty(walkerInfo.RoomId)
+                    ? null
+                    : resolveDependency(walkerInfo.RoomId).GetComponent<IGameObjectRoom>();
+
+                component.AddRoomWalker(roomWalker, room);
+            }
         }
 
         [Serializable]
@@ -186,9 +187,16 @@ namespace IM
             public int Seed;
             public int Depth;
             public string MapInfoAddress;
-            public List<string> RoomWalkers = new();
+            public List<RoomWalkerInfo> RoomWalkers = new();
             public List<RoomInfo> RoomInfos = new();
             public List<Connection> Connections = new();
+        }
+
+        [Serializable]
+        private class RoomWalkerInfo
+        {
+            public string WalkerId;
+            public string RoomId;
         }
 
         [Serializable]
@@ -211,8 +219,16 @@ namespace IM
             public string PortId;
             public string Origin;
             public string Destination;
-            public int PortSide;
+            public PortIdentityInfo PortIdentity;
+        }
+
+        [Serializable]
+        private struct PortIdentityInfo
+        {
+            public Vector2Int CellOffset;
             public float NormalizedPosition;
+            public int Index;
+            public int PortSide;
         }
     }
 }

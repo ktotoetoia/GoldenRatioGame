@@ -4,10 +4,12 @@
     {
         public PortSide Side { get; }
         public float NormalizedPosition { get; }
-        
-        public PortDefinition(PortSide side, float normalizedPosition = 0.5f)
+        public int Index { get; }
+
+        public PortDefinition(PortSide side, int index, float normalizedPosition = 0.5f)
         {
             Side = side;
+            Index = index;
             NormalizedPosition = normalizedPosition;
         }
     }

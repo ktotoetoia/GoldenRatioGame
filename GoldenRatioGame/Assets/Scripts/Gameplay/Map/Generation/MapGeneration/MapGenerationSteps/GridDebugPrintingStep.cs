@@ -12,8 +12,12 @@ namespace IM.Map
         public override void Execute(MapGenerationContext context)
         {
             var grid = context.Grid;
-            
-            if (grid == null) Debug.LogWarning("grid is null");
+
+            if (grid == null)
+            {
+                Debug.LogWarning("grid is null");
+                return;
+            }
             
             var occupied = grid.OccupiedPositions().ToList();
             if (occupied.Count == 0)
