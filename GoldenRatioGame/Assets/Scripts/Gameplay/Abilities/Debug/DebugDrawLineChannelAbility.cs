@@ -70,7 +70,7 @@ namespace IM.Abilities
 
         public IEffectGroup GetEffectGroup()
         {
-            return new EffectGroup(new List<IEffectModifier> { new BlockUserMovementEffect() });
+            return new EffectGroup(new List<IEffectModifier> { new BlockUserMovementEffectModifier() });
         }
     }
 }

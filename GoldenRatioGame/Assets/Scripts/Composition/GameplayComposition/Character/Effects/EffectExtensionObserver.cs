@@ -1,8 +1,8 @@
-﻿using IM.Effects;
-using IM.Graphs;
+﻿using IM.Graphs;
+using IM.Modules;
 using UnityEngine;
 
-namespace IM.Modules
+namespace IM.Effects
 {
     public class EffectExtensionObserver : MonoBehaviour, IEditorObserver<IModuleEditingContextReadOnly>
     {

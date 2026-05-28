@@ -13,7 +13,7 @@ namespace Tests
         private void Awake()
         {
             _document = GetComponent<UIDocument>();
-            _document.rootVisualElement.Q<Button>().clicked += () => _pauseManager.SetPaused(!_pauseManager.Paused)  ;
+            _document.rootVisualElement.Q<Button>(_pauseChangeButton).clicked += () => _pauseManager.SetPaused(!_pauseManager.Paused)  ;
         }
     }
 }

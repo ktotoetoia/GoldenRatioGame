@@ -1,7 +1,6 @@
-﻿using IM.Effects;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace IM.Modules
+namespace IM.Effects
 {
     [DisallowMultipleComponent]
     public class EffectGroupExtension : MonoBehaviour, IEffectGroupExtension

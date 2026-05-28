@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9074599395007698247, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      propertyPath: _triggerOnEnemy
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -1629860833933646921, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
       propertyPath: _damage
       value: 100
@@ -100,17 +104,20 @@ PrefabInstance:
       insertIndex: 2
       addedObject: {fileID: 4592403998778939578}
     - targetCorrespondingSourceObject: {fileID: 4697464553835882009, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      insertIndex: 7
+      addedObject: {fileID: 3841369802328172939}
+    - targetCorrespondingSourceObject: {fileID: 4697464553835882009, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
       insertIndex: -1
       addedObject: {fileID: -3725040602327127315}
+    - targetCorrespondingSourceObject: {fileID: 4697464553835882009, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7062899430328535792}
     - targetCorrespondingSourceObject: {fileID: 4697464553835882009, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5139610318222720983}
     - targetCorrespondingSourceObject: {fileID: 4697464553835882009, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3414789881150628624}
-    - targetCorrespondingSourceObject: {fileID: 4697464553835882009, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -7062899430328535792}
   m_SourcePrefab: {fileID: 100100000, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
 --- !u!1 &6940537037438603345 stripped
 GameObject:
@@ -139,6 +146,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3841369802328172939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6940537037438603345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992ea49dbaeb4d18a1b5debd120e8531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameplayComposition::IM.ApplyEffectHitContract
+  _triggerOnAlly: 0
+  _triggerOnEnemy: 1
+  _triggerOnNone: 0
+  _effectFactory: {fileID: 11400000, guid: c041d9dd99bc1c843b189f887f231981, type: 2}
 --- !u!114 &-3725040602327127315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +176,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Visuals::IM.Visuals.TriggerParameterOnEnable
   _animator: {fileID: 4592403998778939578}
   _parameterName: Punch
+--- !u!114 &-7062899430328535792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6940537037438603345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ae7318fc8935740991e7ec4d84074d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Movement::IM.Movement.VelocityModifier
 --- !u!114 &5139610318222720983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,15 +248,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Movement::IM.Movement.DashMovementChecker
   _movementThreshold: 0.1
---- !u!114 &-7062899430328535792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6940537037438603345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94ae7318fc8935740991e7ec4d84074d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Movement::IM.Movement.VelocityModifier

@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 
 namespace Tests
 {
+    [DefaultExecutionOrder(-100)]
     public class SaveOnButtonPressed : MonoBehaviour
     {
         [SerializeField] private GameInfoController _gameInfoController;

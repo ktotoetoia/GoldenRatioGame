@@ -7,7 +7,7 @@ namespace IM.Map
     public class MapGenerator : ScriptableObject
     {
         [SerializeField] private List<MapGenerationStep> _steps;
-
+        
         public MapGenerationContext Generate(int seed, int depth)
         {
             MapGenerationContext context = new MapGenerationContext(seed, depth);

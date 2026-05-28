@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using IM.Effects;
+using IM.Movement;
 using UnityEngine;
 
-namespace IM.Movement
+namespace IM.Effects
 {
-    public class BlockMovementOnEffectUsed : MonoBehaviour, IEffectObserver
+    public class BlockMovementEffectObserver : MonoBehaviour, IEffectObserver
     {
         [SerializeField] private GameObject _movementSource;
         private IControllableMovement _movement;
-        private readonly List<IBlockUserMovementEffect> _movementBlockingEffects = new();
+        private readonly List<IBlockUserMovementEffectModifier> _movementBlockingEffects = new();
         
         private void Awake()
         {
@@ -18,7 +18,7 @@ namespace IM.Movement
         
         public void OnEffectGroupAdded(IEffectGroup group)
         {
-            if (group.Modifiers.TryGetAll(out IEnumerable<IBlockUserMovementEffect> modifiers))
+            if (group.Modifiers.TryGetAll(out IEnumerable<IBlockUserMovementEffectModifier> modifiers))
             {
                 _movementBlockingEffects.AddRange(modifiers);
             }
@@ -28,7 +28,7 @@ namespace IM.Movement
 
         public void OnEffectGroupRemoved(IEffectGroup group)
         {
-            if (group.Modifiers.TryGetAll(out IEnumerable<IBlockUserMovementEffect> modifiers))
+            if (group.Modifiers.TryGetAll(out IEnumerable<IBlockUserMovementEffectModifier> modifiers))
             {
                 foreach(var modifier in modifiers) _movementBlockingEffects.Remove(modifier);
             }

@@ -1,6 +1,6 @@
 ﻿namespace IM.Effects
 {
-    public interface IBlockUserMovementEffect : IEffectModifier
+    public interface IBlockUserMovementEffectModifier : IEffectModifier
     {
         bool BlockUserMovement { get; }
     }

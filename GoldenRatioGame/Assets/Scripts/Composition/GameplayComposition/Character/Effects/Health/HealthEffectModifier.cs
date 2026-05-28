@@ -1,12 +1,14 @@
 ﻿using IM.Values;
-using UnityEngine;
 
-namespace IM.Modules
+namespace IM.Effects
 {
-    public class HealthEffectModifier : MonoBehaviour, IHealthEffectModifier
+    public class HealthEffectModifier :  IHealthEffectModifier
     {
-        [SerializeField] private CappedValue<float> _health;
+        public ICappedValue<float> Health { get; }
         
-        public ICappedValue<float> Health => _health;
+        public HealthEffectModifier(ICappedValue<float> health)
+        {
+            Health = health;
+        }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace IM.Values
+﻿namespace IM.Values
 {
     public readonly struct CappedValueReadOnly<T> : ICappedValueReadOnly<T>
     {

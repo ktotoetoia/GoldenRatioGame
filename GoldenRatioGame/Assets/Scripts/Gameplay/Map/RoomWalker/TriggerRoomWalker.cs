@@ -11,8 +11,8 @@ namespace IM.Map
 
             if (!AvailablePorts.Contains(roomPort)) return;
             
-            GoTo(roomPort.Connection.Origin);
-            transform.position = roomPort.Connection.DeploymentPosition;
+            GoTo(roomPort.Destination.Origin);
+            transform.position = roomPort.Destination.DeploymentPosition;
         }
     }
 }

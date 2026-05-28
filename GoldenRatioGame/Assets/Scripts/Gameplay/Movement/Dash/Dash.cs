@@ -48,6 +48,7 @@ namespace IM.Movement
             _dashDirection = direction.normalized;
             _dashTimer = 0f;
             _processDash = true;
+            FixedUpdate();
         }
 
         public void ForceStop()

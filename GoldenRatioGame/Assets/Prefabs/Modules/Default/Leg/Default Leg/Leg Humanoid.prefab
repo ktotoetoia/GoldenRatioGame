@@ -18,8 +18,8 @@ GameObject:
   - component: {fileID: 3950009248158461450}
   - component: {fileID: 6869556739838863163}
   - component: {fileID: 3134715345525867726}
-  - component: {fileID: 7118497114025836106}
-  - component: {fileID: -122121014652897532}
+  - component: {fileID: 2359802959697064637}
+  - component: {fileID: 8211583758243136227}
   m_Layer: 0
   m_Name: Leg Humanoid
   m_TagString: Untagged
@@ -181,6 +181,7 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
+  _blackList: []
 --- !u!114 &6869556739838863163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,7 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.ModuleLayout
   _inGamePrefab: {fileID: 2156244532669732079, guid: 418e4bf92402f7047a4c2dc3bcfa1083, type: 3}
   _editorPrefab: {fileID: 2156244532669732079, guid: bfdc73e9d0b5a3d4b9ca081fff0b4756, type: 3}
---- !u!114 &7118497114025836106
+--- !u!114 &2359802959697064637
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,14 +220,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7210977406679086040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9394598438a54e758dd5508185ff1cd9, type: 3}
+  m_Script: {fileID: 11500000, guid: d494dcb089724243ae0fd729a5842997, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: GameplayComposition::IM.Modules.HealthEffectModifierMono
   _health:
     _minValue: 0
-    _maxValue: 100
-    _value: 100
---- !u!114 &-122121014652897532
+    _maxValue: 0
+    _value: 0
+--- !u!114 &8211583758243136227
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,9 +236,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7210977406679086040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1c83efa1f8e4b719c312b9c8ff8e31f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9741ecc49b4d4ad5972de3d6bf93fcac, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Modules::IM.Modules.SpeedExtensionComponent
+  m_EditorClassIdentifier: GameplayComposition::IM.Modules.SpeedEffectModifierMono
   _speedModifier:
     <Add>k__BackingField: 1
-    <Multiplication>k__BackingField: 1
+    <Multiplication>k__BackingField: 1.2

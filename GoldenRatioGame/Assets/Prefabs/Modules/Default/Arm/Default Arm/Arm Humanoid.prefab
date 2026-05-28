@@ -18,9 +18,9 @@ GameObject:
   - component: {fileID: -3808709638150430868}
   - component: {fileID: 6869556739838863163}
   - component: {fileID: 3134715345525867726}
-  - component: {fileID: 7118497114025836106}
   - component: {fileID: 7934457957892961360}
   - component: {fileID: -1796868246183028789}
+  - component: {fileID: 4558522474173079595}
   m_Layer: 0
   m_Name: Arm Humanoid
   m_TagString: Untagged
@@ -182,6 +182,7 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
+  _blackList: []
 --- !u!114 &6869556739838863163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,22 +212,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.ModuleLayout
   _inGamePrefab: {fileID: 2156244532669732079, guid: 3740b105624c7f4459e38d8eae631f76, type: 3}
   _editorPrefab: {fileID: 2156244532669732079, guid: 840872b778351f04b8c956f046141407, type: 3}
---- !u!114 &7118497114025836106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7210977406679086040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9394598438a54e758dd5508185ff1cd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health:
-    _minValue: 0
-    _maxValue: 100
-    _value: 100
 --- !u!114 &7934457957892961360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,3 +238,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: VisualsComposition::IM.Visuals.SetBoolOnAbilityUsed
   _boolName: WeaponUsed
+--- !u!114 &4558522474173079595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210977406679086040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d494dcb089724243ae0fd729a5842997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameplayComposition::IM.Modules.HealthEffectModifierMono
+  _health:
+    _minValue: 0
+    _maxValue: 100
+    _value: 100

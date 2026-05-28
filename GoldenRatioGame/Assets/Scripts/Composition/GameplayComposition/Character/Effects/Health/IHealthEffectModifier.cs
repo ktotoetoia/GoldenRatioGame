@@ -1,7 +1,6 @@
-﻿using IM.Effects;
-using IM.Values;
+﻿using IM.Values;
 
-namespace IM.Modules
+namespace IM.Effects
 {
     public interface IHealthEffectModifier : IEffectModifier
     {

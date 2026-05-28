@@ -1,8 +1,7 @@
-﻿using IM.Effects;
-using IM.Health;
+﻿using IM.Health;
 using UnityEngine;
 
-namespace IM.Modules
+namespace IM.Effects
 {
     public class HealthEffectObserver : MonoBehaviour, IEffectObserver
     {

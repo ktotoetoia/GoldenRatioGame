@@ -14,8 +14,8 @@ namespace IM.Map
             {
                 if (!(Vector3.Distance(port.EnterPosition, transform.position) < _proximityDistance)) continue;
                 
-                GoTo(port.Connection.Origin);
-                transform.position = port.Connection.DeploymentPosition;
+                GoTo(port.Destination.Origin);
+                transform.position = port.Destination.DeploymentPosition;
 
                 return;
             }

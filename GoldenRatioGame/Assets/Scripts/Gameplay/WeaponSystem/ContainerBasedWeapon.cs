@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace IM.WeaponSystem
 {
-    public class ContainerBasedWeapon : DefaultEntity, IWeapon, ICastAbility,IRequireAbilityUseContext, IFocusPointProvider, IAbilityEvents, IStorable, IItem
+    public class ContainerBasedCastWeapon : DefaultEntity, IWeapon, ICastAbility,IRequireAbilityUseContext, IFocusPointProvider, IAbilityEvents, IStorable, IItem
     {
         private IAbilityContainer _abilityContainer;
         private IIcon _icon;

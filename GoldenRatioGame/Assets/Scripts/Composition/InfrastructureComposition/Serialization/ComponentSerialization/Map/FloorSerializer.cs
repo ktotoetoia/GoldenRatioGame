@@ -69,7 +69,7 @@ namespace IM
                     if (port.IsConnected &&
                         port.Origin is MonoBehaviour origin &&
                         origin.TryGetComponent(out IIdentifiable originId) &&
-                        port.Connection is MonoBehaviour connection &&
+                        port.Destination is MonoBehaviour connection &&
                         connection.TryGetComponent(out IIdentifiable connectionId))
                     {
                         portInfo.Origin = originId.Id;

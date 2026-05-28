@@ -21,12 +21,11 @@ namespace IM.Movement
 
             Vector3 currentVelocity = _rigidbody.linearVelocity;
 
-            if (currentVelocity.sqrMagnitude > _movementThreshold * _movementThreshold)
-            {
-                Vector3 moveDirection = currentVelocity.normalized;
+            if (!(currentVelocity.sqrMagnitude > _movementThreshold * _movementThreshold)) return;
+            
+            Vector3 moveDirection = currentVelocity.normalized;
 
-                _dash.Trigger(moveDirection);
-            }
+            _dash.Trigger(moveDirection);
         }
     }
 }

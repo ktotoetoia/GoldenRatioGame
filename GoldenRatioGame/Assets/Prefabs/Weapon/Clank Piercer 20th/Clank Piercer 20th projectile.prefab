@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9074599395007698247, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      propertyPath: _triggerOnEnemy
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -1629860833933646921, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
       propertyPath: _damage
       value: 150

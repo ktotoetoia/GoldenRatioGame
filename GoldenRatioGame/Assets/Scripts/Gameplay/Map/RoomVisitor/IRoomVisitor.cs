@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace IM.Map
+﻿namespace IM.Map
 {
     public interface IRoomVisitor
     {

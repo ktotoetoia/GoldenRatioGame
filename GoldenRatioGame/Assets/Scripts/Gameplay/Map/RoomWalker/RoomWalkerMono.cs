@@ -21,7 +21,7 @@ namespace IM.Map
             }
         }
 
-        public IEnumerable<IGameObjectRoom> Available => AvailablePorts.Select(p => p.Connection.Origin);
+        public IEnumerable<IGameObjectRoom> Available => AvailablePorts.Select(p => p.Destination.Origin);
 
         public void GoTo(IGameObjectRoom room)
         {

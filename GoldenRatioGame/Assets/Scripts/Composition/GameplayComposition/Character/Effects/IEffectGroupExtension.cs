@@ -1,6 +1,6 @@
-﻿using IM.Effects;
+﻿using IM.Modules;
 
-namespace IM.Modules
+namespace IM.Effects
 {
     public interface IEffectGroupExtension : IExtension
     {

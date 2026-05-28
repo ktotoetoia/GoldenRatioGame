@@ -13,13 +13,13 @@ namespace IM.Map
         private bool _isOpen;
 
         public IGameObjectRoom Origin { get; private set; }
-        public IRoomPort Connection { get; private set; }
+        public IRoomPort Destination { get; private set; }
         public IPortIdentity PortIdentity { get; private set; }
         public Vector3 EnterPosition => transform.position;
         public Vector3 DeploymentPosition => transform.position + 
                                              new Vector3(PortSideUtility.ToDirection(PortSideUtility.Opposite(PortIdentity.PortSide)).x, 
                                                          PortSideUtility.ToDirection(PortSideUtility.Opposite(PortIdentity.PortSide)).y)*1.5f;
-        public bool IsConnected => Connection != null;
+        public bool IsConnected => Destination != null;
         public RoomType Mode => DetermineMode();
 
         public bool IsOpen
@@ -36,9 +36,9 @@ namespace IM.Map
         {
             RoomType originType = (Origin as IHaveRoomType)?.RoomType ?? RoomType.None;
 
-            if (Connection == null) return originType;
+            if (Destination == null) return originType;
 
-            RoomType destinationType = (Connection.Origin as IHaveRoomType)?.RoomType ?? RoomType.None;
+            RoomType destinationType = (Destination.Origin as IHaveRoomType)?.RoomType ?? RoomType.None;
             if (originType == RoomType.Final || destinationType == RoomType.Final) return RoomType.Final;
             if (originType == RoomType.Special || destinationType == RoomType.Special) return RoomType.Special;
             
@@ -62,7 +62,7 @@ namespace IM.Map
 
         public void SetDestination(IRoomPort destination)
         {
-            Connection = destination;
+            Destination = destination;
             UpdateVisuals();
         }
 

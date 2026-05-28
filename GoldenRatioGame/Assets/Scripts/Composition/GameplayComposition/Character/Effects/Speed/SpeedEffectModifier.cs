@@ -1,12 +1,14 @@
 ﻿using IM.Values;
-using UnityEngine;
 
 namespace IM.Modules
 {
-    public class SpeedEffectModifier : MonoBehaviour, ISpeedEffectModifier
+    public class SpeedEffectModifier : ISpeedEffectModifier
     {
-        [SerializeField] private SpeedModifier _speedModifier;
+        public ISpeedModifier SpeedModifier { get; }
         
-        public ISpeedModifier SpeedModifier => _speedModifier;
+        public SpeedEffectModifier(ISpeedModifier speedModifier)
+        {
+            SpeedModifier = speedModifier;
+        }
     }
 }
