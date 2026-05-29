@@ -17,6 +17,7 @@ namespace IM.Modules
         [field: SerializeField] public string Description { get; private set; }
         public event Action<IEntity> Destroyed;
         public GameObject GameObject => gameObject;
+        public bool IsDestroyed => !gameObject;
         public IIcon Icon => _iconDrawer.Icon;
         public IStorageCell Cell { get; set; }
         public ITypeRegistry<IExtension> Extensions => _extensions ??= new TypeRegistry<IExtension>(gameObject.GetComponents<IExtension>());

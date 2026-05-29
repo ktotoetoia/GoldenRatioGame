@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -5575505721796090178}
   - component: {fileID: -9074599395007698247}
   - component: {fileID: 1569317106877436456}
-  - component: {fileID: -1629860833933646921}
+  - component: {fileID: 6671762380988703259}
   m_Layer: 0
   m_Name: Default Projectile
   m_TagString: Untagged
@@ -137,7 +137,7 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -184,9 +184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e95261307443f2aec850deb5748ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleComposition::IM.DealDamageOnTriggerEnter
-  _finishOnTriggerEnterAlly: 0
-  _finishOnTriggerEnterEnemy: 1
-  _finishOnTriggerEnterNone: 0
+  _triggerOnAlly: 0
+  _triggerOnEnemy: 0
+  _triggerOnNone: 0
 --- !u!114 &1569317106877436456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,12 +199,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f6a3dbd8eb45849ecdb1f41816800b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleComposition::IM.FactionEnterTemporary
+  _triggerOnAlly: 0
+  _triggerOnEnemy: 0
+  _triggerOnNone: 0
   _toFinishTime: 2
-  _finishOnTriggerEnterAlly: 0
-  _finishOnTriggerEnterEnemy: 1
-  _finishOnTriggerEnterNone: 1
   _finishOnDisable: 1
---- !u!114 &-1629860833933646921
+--- !u!114 &6671762380988703259
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,7 +213,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4697464553835882009}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53bee81a7e3f4badbad03c7f1c76398a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3780db91de9043efbc2279cfa807afda, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Health::IM.Health.RawFloatDamageDealerMono
-  _damage: 50
+  m_EditorClassIdentifier: Health::IM.Health.AdaptiveFloatDamageDealerMono
+  _damage:
+    _minValue: 20
+    _maxValue: 50
+    _value: 35

@@ -14,7 +14,7 @@ namespace IM.Health
             add => _floatHealthValueGroup.OnHealthChanged += value;
             remove => _floatHealthValueGroup.OnHealthChanged -= value;
         }
-
+        
         public ICappedValueReadOnly<float> Health => _floatHealthValueGroup.Health;
         public IReadOnlyList<ICappedValueReadOnly<float>> Values => _floatHealthValueGroup.Values;
         

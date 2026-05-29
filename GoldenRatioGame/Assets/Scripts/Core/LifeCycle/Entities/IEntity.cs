@@ -6,6 +6,7 @@ namespace IM.LifeCycle
     public interface IEntity
     {
         GameObject GameObject { get; }
+        bool IsDestroyed { get; }
         void Destroy();
         event Action<IEntity> Destroyed;
     }

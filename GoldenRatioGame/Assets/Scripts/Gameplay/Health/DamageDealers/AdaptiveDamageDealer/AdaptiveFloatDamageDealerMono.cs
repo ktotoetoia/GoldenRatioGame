@@ -1,15 +1,17 @@
-﻿using UnityEngine;
+﻿using IM.Values;
+using UnityEngine;
 
 namespace IM.Health
 {
-    public class RawFloatDamageDealerMono : MonoBehaviour, IFloatDamageDealer
+    public class AdaptiveFloatDamageDealerMono : MonoBehaviour, IFloatDamageDealer
     {
-        [SerializeField] private float _damage;
+        [SerializeField] private CappedValue<float> _damage;
+        
         private IFloatDamageDealer _floatDamageDealer;
 
         private void Awake()
         {
-            _floatDamageDealer = new RawFloatDamageDealer(_damage);
+            _floatDamageDealer = new AdaptiveFloatDamageDealer(_damage.MinValue,_damage.MaxValue, _damage.Value);
         }
 
         public HealthChangeResult PreviewDamage(IDamageable target) => _floatDamageDealer.PreviewDamage(target);

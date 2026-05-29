@@ -1,0 +1,25 @@
+{
+    "name": "EntityIntelligence",
+    "rootNamespace": "",
+    "references": [
+        "GUID:c6e432bc1fc910f4c9efc7b9b4f32719",
+        "GUID:d03f5bb646b40e143b060a5efbf9687b",
+        "GUID:25caa44c6a1a3a74fab3dfeffd416e41",
+        "GUID:6fd30b70dd5c3a14499868594d8e8626",
+        "GUID:9bf81f7bcd64f4f45818fc5a123cb397",
+        "GUID:bff61e4977a14e65b7c6aff666825c5a",
+        "GUID:38be81a59a4146ab9a6165a5c84daa2c",
+        "GUID:aba9c18d9242409da62396f279d1e63b",
+        "GUID:12e636b2d606b57469a269b7267181d9",
+        "GUID:47909fb9677d4ae5acd4f8123c31950f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

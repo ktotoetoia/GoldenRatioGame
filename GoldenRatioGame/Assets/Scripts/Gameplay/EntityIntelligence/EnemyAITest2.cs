@@ -7,7 +7,7 @@ using IM.Modules;
 using IM.Values;
 using UnityEngine;
 
-namespace IM.Inputs
+namespace IM.EntityIntelligence
 {
     public class EnemyAITest2 : MonoBehaviour
     {
@@ -28,7 +28,10 @@ namespace IM.Inputs
             _playerStateMachine = GetComponent<PlayerStateMachine>();
             _playerStateMachine.ProvideMovementDirection = ProvideMovementDirection;
             _playerStateMachine.ResolveRequestedAbilities = ResolveRequestedAbilities;
-            
+        }
+
+        private void OnEnable()
+        {
             foreach (ModuleEntity entity in FindObjectsByType<ModuleEntity>())
             {
                 if (entity.TryGetComponent(out IFactionMemberReadOnly factionMember))
@@ -58,16 +61,13 @@ namespace IM.Inputs
             return result;
         }
 
-        private Vector2 ProvideMovementDirection()
-        {
-            return Vector2.zero;
-        }
+        private Vector2 ProvideMovementDirection() => Vector2.zero;
 
         private void Update()
         {
             foreach (IEntity entity in _awareOf)
             {
-                if (gameObject.TryGetComponent(out IFactionMemberReadOnly factionMemberReadOnly) && _factionMember.Faction.GetRelationWith(factionMemberReadOnly.Faction) == FactionRelation.Enemy)
+                if (!entity.IsDestroyed && entity.GameObject.TryGetComponent(out IFactionMemberReadOnly factionMemberReadOnly) && _factionMember.Faction.GetRelationWith(factionMemberReadOnly.Faction) == FactionRelation.Enemy)
                 {
                     _currentTarget =  entity;
                 }

@@ -12,6 +12,7 @@ namespace IM.LifeCycle
         public event Action<IEntity> Destroyed;
 
         public GameObject GameObject => gameObject;
+        public bool IsDestroyed => !gameObject;
 
         public bool Paused
         {

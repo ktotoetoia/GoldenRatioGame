@@ -3,7 +3,7 @@ using UnityEngine.Tilemaps;
 
 namespace IM.Visuals
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "2D/Tiles/Custom Rule Tile")]
     public class CustomRuleTile : RuleTile
     {
         public override bool RuleMatch(int neighbor, TileBase other) {

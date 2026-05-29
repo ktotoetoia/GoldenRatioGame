@@ -1,7 +1,7 @@
 ﻿using IM.Values;
 using UnityEngine;
 
-namespace IM.Inputs
+namespace IM.EntityIntelligence
 {
     public class EnemyAITest : MonoBehaviour
     {
