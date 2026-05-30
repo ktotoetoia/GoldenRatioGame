@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using UnityEngine;
 
 namespace IM.StateMachines
 {
@@ -23,8 +24,9 @@ namespace IM.StateMachines
         public StateMachine(IState startState)
         {
             _currentState = startState;
+            startState.OnEnter();
         }
-
+        
         public void Update()
         {
             if (CurrentState is IUpdate update) update.Update();
@@ -46,7 +48,7 @@ namespace IM.StateMachines
 
             if (transition == null) return false;
             
-            transition.BeforeTransition();
+            transition.OnBeforeUsedForTransition();
             CurrentState = transition.To;
             
             return true;

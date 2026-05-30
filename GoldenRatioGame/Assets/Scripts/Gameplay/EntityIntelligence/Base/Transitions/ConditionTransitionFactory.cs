@@ -8,7 +8,7 @@ namespace IM.EntityIntelligence
     [CreateAssetMenu(menuName = "Entity Intelligence/Condition Transition Factory")]
     public class ConditionTransitionFactory : TransitionFactory
     {
-        [SerializeField] private List<ConditionFactory> _conditionFactories;
+        [SerializeReferenceDropdown] [SerializeReference] private List<IConditionFactory> _conditionFactories;
         
         public override ITransition Create(GameObject param1, IState from, IState to)
         {

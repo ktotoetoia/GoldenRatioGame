@@ -16,4 +16,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a4fe4796b497f0140802477f477f010d, type: 2}
   - {fileID: 11400000, guid: 7898fdec31373ca4fada77c3628826a9, type: 2}
   _isTemporary: 1
-  _temporaryTime: 0.5
+  _temporaryTime: 0.2

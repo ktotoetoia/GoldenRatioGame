@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: -4496632896880603262}
   - component: {fileID: 7544895549371979933}
   - component: {fileID: 7112604761653458629}
+  - component: {fileID: 184003361008919845}
   m_Layer: 0
   m_Name: Entity
   m_TagString: Untagged
@@ -451,6 +452,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: VisualsComposition::IM.ViewAnchorPositionProvider
   _moduleVisualMapSource: {fileID: 8508053980751109502}
+--- !u!114 &184003361008919845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b11068fa5bd746b6a188794314ad1f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameplayComposition::IM.Visuals.MovementDirectionAndAbilityUseStorageValueSetter
+  _valueStorageFocusTag: Focus
+  _valueStorageMovementTag: Movement
 --- !u!1 &4348573349406529255
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,10 +622,10 @@ GameObject:
   - component: {fileID: 2804227671461150752}
   - component: {fileID: 5323937255072575917}
   - component: {fileID: 2676012618694106098}
-  - component: {fileID: 8543606873535386348}
   - component: {fileID: 4737303748126444302}
   - component: {fileID: 6135420331760039005}
   - component: {fileID: 1996564249185061140}
+  - component: {fileID: 5577398275096282220}
   m_Layer: 0
   m_Name: ModuleObservers
   m_TagString: Untagged
@@ -659,21 +674,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModulesExt::IM.Modules.EntityInjector
   _entitySource: {fileID: 4342869459289063407}
---- !u!114 &8543606873535386348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8508053980751109502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 200ccaa2e8864a62b567aa27ac885c0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleExtensionsVisual::IM.Visuals.MovementDirectionAndAbilityUseStorageValueSetter
-  _movementAndAbilityEventsSource: {fileID: 4342869459289063407}
-  _valueStorageFocusTag: Focus
-  _valueStorageMovementTag: Movement
 --- !u!114 &4737303748126444302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -727,3 +727,17 @@ MonoBehaviour:
   _onAddedTransformIn: {fileID: 3866329637884553479}
   _onRemovedTransformOut: {fileID: 2365714068825351273}
   _entitySource: {fileID: 4342869459289063407}
+--- !u!114 &5577398275096282220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508053980751109502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb792cebf7e747c58d980eccd1d688d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameplayComposition::IM.Visuals.MovementAndAbilityDirectionSource
+  _movementAndAbilityEventsSource: {fileID: 4342869459289063407}
+  _target: {fileID: 184003361008919845}

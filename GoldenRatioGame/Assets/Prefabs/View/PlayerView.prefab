@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 7855973631049726609}
   - component: {fileID: 8010555784201700074}
   - component: {fileID: 2279685595303131631}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: StorageView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -710,7 +710,7 @@ GameObject:
   - component: {fileID: 5194895593025462755}
   - component: {fileID: 8994293731177551714}
   - component: {fileID: 6011283196228248768}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: AbilityView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -777,7 +777,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6481902687008437372}
   - component: {fileID: 6127912797885748155}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: GraphView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -836,7 +836,7 @@ GameObject:
   - component: {fileID: 5311519207825421755}
   - component: {fileID: 5205874692204699432}
   - component: {fileID: 2681753581974637916}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: ModuleEditor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -928,7 +928,7 @@ GameObject:
   - component: {fileID: 5601723938966562652}
   - component: {fileID: 3233457283572514421}
   - component: {fileID: 2897680561899830979}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: WeaponView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1158,7 +1158,7 @@ GameObject:
   - component: {fileID: 5852375601272947256}
   - component: {fileID: 9152431972408840370}
   - component: {fileID: 5550659480954709177}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: WeaponStorageView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1324,7 +1324,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 32
+    m_Bits: 96
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

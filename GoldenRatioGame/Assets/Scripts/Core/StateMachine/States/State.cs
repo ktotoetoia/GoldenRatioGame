@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace IM.StateMachines
 {
     public class State : IState, IUpdatable
     {
-        private readonly List<ITransition> _transitions = new();
+        protected readonly List<ITransition> _transitions = new();
 
         public virtual void FixedUpdate()
         {

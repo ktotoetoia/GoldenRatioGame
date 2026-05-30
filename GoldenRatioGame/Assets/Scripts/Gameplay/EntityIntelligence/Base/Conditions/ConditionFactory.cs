@@ -1,9 +1,8 @@
-﻿using IM.LifeCycle;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace IM.EntityIntelligence
 {
-    public abstract class ConditionFactory : ScriptableObject, IFactory<ICondition, GameObject>
+    public abstract class ConditionFactory : ScriptableObject, IConditionFactory
     {
         public abstract ICondition Create(GameObject param1);
     }

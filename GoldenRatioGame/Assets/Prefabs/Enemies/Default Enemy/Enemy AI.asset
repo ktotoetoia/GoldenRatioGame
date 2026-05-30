@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00892fab858b4211bc5497e07bd298cc, type: 3}
+  m_Name: Enemy AI
+  m_EditorClassIdentifier: EntityIntelligence::IM.EntityIntelligence.DefaultStateMachineFactory
+  _stateFactories:
+  - {fileID: 11400000, guid: 44d6320c4c632a449b1d2074915fa560, type: 2}
+  - {fileID: 11400000, guid: ece75b4ba63e73d49a7b16a3a41d9506, type: 2}
+  - {fileID: 11400000, guid: 3988c34327ec02f459929888310a7bca, type: 2}
+  - {fileID: 11400000, guid: e3b0230139175f5489aee562eaf87349, type: 2}
+  - {fileID: 11400000, guid: 3d58d0c6805fe93489b96f9528e08275, type: 2}
+  _transitionInfos:
+  - <Factory>k__BackingField: {fileID: 11400000, guid: edef814204b459640b78949e42911b56, type: 2}
+    <FromIndex>k__BackingField: 0
+    <ToIndex>k__BackingField: 1
+  - <Factory>k__BackingField: {fileID: 11400000, guid: da627166cb8be3947ac753f1547d78fb, type: 2}
+    <FromIndex>k__BackingField: 1
+    <ToIndex>k__BackingField: 2
+  - <Factory>k__BackingField: {fileID: 11400000, guid: 547cd7f75277339448256a6da6f93b0d, type: 2}
+    <FromIndex>k__BackingField: 2
+    <ToIndex>k__BackingField: 0
+  - <Factory>k__BackingField: {fileID: 11400000, guid: 547cd7f75277339448256a6da6f93b0d, type: 2}
+    <FromIndex>k__BackingField: 1
+    <ToIndex>k__BackingField: 0
+  - <Factory>k__BackingField: {fileID: 11400000, guid: a725d90ee9bacc14dbd7efe6f0bd9e3b, type: 2}
+    <FromIndex>k__BackingField: 2
+    <ToIndex>k__BackingField: 3
+  - <Factory>k__BackingField: {fileID: 11400000, guid: 0d3a7b78e94f65642a848300e74ca521, type: 2}
+    <FromIndex>k__BackingField: 3
+    <ToIndex>k__BackingField: 4
+  - <Factory>k__BackingField: {fileID: 11400000, guid: 0d3a7b78e94f65642a848300e74ca521, type: 2}
+    <FromIndex>k__BackingField: 4
+    <ToIndex>k__BackingField: 3
+  - <Factory>k__BackingField: {fileID: 11400000, guid: 547cd7f75277339448256a6da6f93b0d, type: 2}
+    <FromIndex>k__BackingField: 3
+    <ToIndex>k__BackingField: 2
+  - <Factory>k__BackingField: {fileID: 11400000, guid: 547cd7f75277339448256a6da6f93b0d, type: 2}
+    <FromIndex>k__BackingField: 4
+    <ToIndex>k__BackingField: 2

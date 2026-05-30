@@ -2,6 +2,8 @@
 {
     public interface IStateMachine : IUpdatable
     {
+        IState CurrentState { get; }
+        
         void UpdateTransition();
     }
 }

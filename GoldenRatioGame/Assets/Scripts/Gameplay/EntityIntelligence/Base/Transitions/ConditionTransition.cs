@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using IM.StateMachines;
+using UnityEngine;
 
 namespace IM.EntityIntelligence
 {
-    public class ConditionTransition : ITransition
+    public class ConditionTransition : ITransition, ITransitionEvents
     {
         private readonly List<ICondition> _conditions;
 
@@ -18,7 +19,21 @@ namespace IM.EntityIntelligence
             _conditions = conditions.ToList();
         }
 
-        public bool CanTransition() => _conditions.All(x => x.Check());
-        public void BeforeTransition() { }
+        public bool CanTransition()
+        {
+            return _conditions.All(x => x.Check());
+        }
+
+        public void OnBeforeUsedForTransition() { }
+        
+        public void OnFromStateStarted()
+        {
+            foreach(var condition in _conditions) condition.Start();
+        }
+
+        public void OnFromStateExited()
+        {
+            foreach(var condition in _conditions) condition.Finish();
+        }
     }
 }

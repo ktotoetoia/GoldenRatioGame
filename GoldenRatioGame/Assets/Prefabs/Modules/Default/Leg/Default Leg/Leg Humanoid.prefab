@@ -225,8 +225,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameplayComposition::IM.Modules.HealthEffectModifierMono
   _health:
     _minValue: 0
-    _maxValue: 0
-    _value: 0
+    _maxValue: 100
+    _value: 100
 --- !u!114 &8211583758243136227
 MonoBehaviour:
   m_ObjectHideFlags: 0

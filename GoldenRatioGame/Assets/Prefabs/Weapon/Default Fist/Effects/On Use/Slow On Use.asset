@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Slow On Use
   m_EditorClassIdentifier: GameplayComposition::IM.Modules.SpeedEffectModifierFactory
   <Add>k__BackingField: 0
-  <Multiplication>k__BackingField: 0.8
+  <Multiplication>k__BackingField: 0.5

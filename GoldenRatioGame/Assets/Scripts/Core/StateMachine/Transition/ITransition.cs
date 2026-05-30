@@ -4,8 +4,8 @@
     {
         IState From { get; }
         IState To { get; }
-
+            
         bool CanTransition();
-        void BeforeTransition();
+        void OnBeforeUsedForTransition();
     }
 }

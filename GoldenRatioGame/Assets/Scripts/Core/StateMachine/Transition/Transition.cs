@@ -7,6 +7,7 @@ namespace IM.StateMachines
         private readonly Func<bool> _condition;
         public IState From { get; }
         public IState To { get; }
+        
         public Action BeforeTransitionAction { get; } = () => { };
         public Transition(IState from, IState to, Func<bool> condition)
         {
@@ -21,7 +22,7 @@ namespace IM.StateMachines
             return _condition();
         }
 
-        public void BeforeTransition()
+        public void OnBeforeUsedForTransition()
         {
             BeforeTransitionAction();
         }

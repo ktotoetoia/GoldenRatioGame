@@ -8,8 +8,14 @@ namespace IM.EntityIntelligence
     [CreateAssetMenu(menuName = "Entity Intelligence/Action State Factory")]
     public class ActionStateFactory  : StateFactory
     {
-        [SerializeField] private List<EntityActionFactory> _actionFactories;
+        [SerializeReferenceDropdown] [SerializeReference] private List<IEntityActionFactory> _actionFactories;
         
-        public override IState Create(GameObject owner) => new ActionState(_actionFactories.Select(x => x.Create(owner)));
+        public override IState Create(GameObject owner)
+        {
+            return new ActionState(_actionFactories.Select(x => x?.Create(owner)))
+            {
+                StateName = name
+            };
+        }
     }
 }

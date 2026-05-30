@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b023a5e65e4991ba1a5dde6695cd7a, type: 3}
+  m_Name: Follow Target State
+  m_EditorClassIdentifier: EntityIntelligence::IM.EntityIntelligence.ActionStateFactory
+  _actionFactories:
+  - rid: 3755091287461069028
+  - rid: 3755091287461069029
+  - rid: 3755091287461069071
+  references:
+    version: 2
+    RefIds:
+    - rid: 3755091287461069028
+      type: {class: MoveTowardsTargetFactory, ns: IM.EntityIntelligence, asm: EntityIntelligence}
+      data:
+        _range: 3
+        _resumeRange: 4
+    - rid: 3755091287461069029
+      type: {class: SeekTargetInRoomEntityActionFactory, ns: IM.EntityIntelligence, asm: EntityIntelligence}
+      data:
+        _range: 13
+    - rid: 3755091287461069071
+      type: {class: SetFocusOnTargetEntityActionFactory, ns: IM.EntityIntelligence, asm: EntityIntelligence}
+      data:
+        _duration: 0.5

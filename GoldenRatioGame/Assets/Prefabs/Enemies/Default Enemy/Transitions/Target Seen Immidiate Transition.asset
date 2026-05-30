@@ -10,6 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38d2cdc387584adfb5caa07e023b3db0, type: 3}
-  m_Name: Default Enemy Transition
+  m_Name: Target Seen Immidiate Transition
   m_EditorClassIdentifier: EntityIntelligence::IM.EntityIntelligence.ConditionTransitionFactory
-  _conditionFactories: []
+  _conditionFactories:
+  - rid: 3755091287461069016
+  references:
+    version: 2
+    RefIds:
+    - rid: 3755091287461069016
+      type: {class: TargetSeenForTimeConditionFactory, ns: IM.EntityIntelligence, asm: EntityIntelligence}
+      data:
+        _requiredTime: 0
+        _triggerWhenNotSeen: 0

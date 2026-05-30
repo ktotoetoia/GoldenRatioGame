@@ -2,6 +2,8 @@
 {
     public interface ICondition
     {
+        void Start();
+        void Finish();
         bool Check();
     }
 }

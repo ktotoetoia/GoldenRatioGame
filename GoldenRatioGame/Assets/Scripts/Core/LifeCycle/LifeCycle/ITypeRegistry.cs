@@ -14,9 +14,4 @@ namespace IM.LifeCycle
         bool HasOfType<T>();
         int GetCount<T>();
     }
-
-    public interface ITaggedTypeRegistry<out TType>
-    {
-        
-    }
 }
