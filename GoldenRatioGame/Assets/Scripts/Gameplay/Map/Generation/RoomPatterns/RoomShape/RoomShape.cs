@@ -7,6 +7,7 @@ namespace IM.Map
     {
         public Rect CellRect { get; }
         public HashSet<Vector2Int> Offsets { get; }
+        public ShapeMetrics Metrics { get; }
 
         public RoomShape(Rect cellRect) : this(cellRect, new HashSet<Vector2Int>() {Vector2Int.zero})
         {
@@ -17,6 +18,7 @@ namespace IM.Map
         {
             CellRect = cellRect;
             Offsets = offsets;
+            Metrics = ShapeMetrics.From(this);
         }
     }
 }

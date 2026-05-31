@@ -26,13 +26,13 @@ MonoBehaviour:
     <FromIndex>k__BackingField: 1
     <ToIndex>k__BackingField: 2
   - <Factory>k__BackingField: {fileID: 11400000, guid: 547cd7f75277339448256a6da6f93b0d, type: 2}
-    <FromIndex>k__BackingField: 2
+    <FromIndex>k__BackingField: 3
     <ToIndex>k__BackingField: 0
   - <Factory>k__BackingField: {fileID: 11400000, guid: 547cd7f75277339448256a6da6f93b0d, type: 2}
     <FromIndex>k__BackingField: 1
     <ToIndex>k__BackingField: 0
   - <Factory>k__BackingField: {fileID: 11400000, guid: a725d90ee9bacc14dbd7efe6f0bd9e3b, type: 2}
-    <FromIndex>k__BackingField: 2
+    <FromIndex>k__BackingField: 1
     <ToIndex>k__BackingField: 3
   - <Factory>k__BackingField: {fileID: 11400000, guid: 0d3a7b78e94f65642a848300e74ca521, type: 2}
     <FromIndex>k__BackingField: 3

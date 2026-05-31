@@ -2,7 +2,7 @@
 
 namespace IM.Values
 {
-    public interface IFocusDirectionSetter
+    public interface IFocusDirectionOverrider
     {
         void OverrideFocusDirection(Vector2 direction, float duration);
     }

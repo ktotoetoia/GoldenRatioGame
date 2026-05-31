@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace IM.WeaponSystem
 {
-    public class ContainerBasedCastWeapon : DefaultEntity, IWeapon, ICastAbility,IRequireAbilityUseContext, IFocusPointProvider, IAbilityEvents, IStorable, IItem
+    public class ContainerBasedCastWeapon : DefaultEntity, IWeapon, ICastAbility,IRequireAbilityUseContext, IFocusProvider, IAbilityEvents, IStorable, IItem
     {
         private IAbilityContainer _abilityContainer;
         private IIcon _icon;
@@ -58,8 +58,8 @@ namespace IM.WeaponSystem
             (CastAbility as IRequireAbilityUseContext)?.UpdateAbilityUseContext(context);
         }
 
-        public float FocusTime => (CastAbility as IFocusPointProvider)?.FocusTime ?? 0;
-        public Vector3 GetFocusPoint() => (CastAbility as IFocusPointProvider)?.GetFocusPoint() ?? default;
-        public Vector3 GetFocusDirection() => (CastAbility as IFocusPointProvider)?.GetFocusDirection() ?? default;
+        public float FocusTime => (CastAbility as IFocusProvider)?.FocusTime ?? 0;
+        public Vector3 GetFocusPoint() => (CastAbility as IFocusProvider)?.GetFocusPoint() ?? default;
+        public Vector3 GetFocusDirection() => (CastAbility as IFocusProvider)?.GetFocusDirection() ?? default;
     }
 }

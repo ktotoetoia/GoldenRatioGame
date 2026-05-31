@@ -13,17 +13,12 @@ MonoBehaviour:
   m_Name: Follow Target State
   m_EditorClassIdentifier: EntityIntelligence::IM.EntityIntelligence.ActionStateFactory
   _actionFactories:
-  - rid: 3755091287461069028
+  - rid: 3755091315988103274
   - rid: 3755091287461069029
   - rid: 3755091287461069071
   references:
     version: 2
     RefIds:
-    - rid: 3755091287461069028
-      type: {class: MoveTowardsTargetFactory, ns: IM.EntityIntelligence, asm: EntityIntelligence}
-      data:
-        _range: 3
-        _resumeRange: 4
     - rid: 3755091287461069029
       type: {class: SeekTargetInRoomEntityActionFactory, ns: IM.EntityIntelligence, asm: EntityIntelligence}
       data:
@@ -32,3 +27,8 @@ MonoBehaviour:
       type: {class: SetFocusOnTargetEntityActionFactory, ns: IM.EntityIntelligence, asm: EntityIntelligence}
       data:
         _duration: 0.5
+    - rid: 3755091315988103274
+      type: {class: NavMeshMoveTowardsTargetFactory, ns: IM.EntityIntelligence, asm: EntityIntelligence}
+      data:
+        _range: 1
+        _resumeRange: 2

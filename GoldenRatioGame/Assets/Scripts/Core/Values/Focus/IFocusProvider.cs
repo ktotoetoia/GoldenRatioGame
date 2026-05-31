@@ -2,7 +2,7 @@
 
 namespace IM.Abilities
 {
-    public interface IFocusPointProvider
+    public interface IFocusProvider
     {
         float FocusTime { get; }
         Vector3 GetFocusPoint();

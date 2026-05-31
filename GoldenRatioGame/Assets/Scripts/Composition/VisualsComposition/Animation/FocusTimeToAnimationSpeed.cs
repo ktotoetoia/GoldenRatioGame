@@ -19,7 +19,7 @@ namespace IM
 
         private void Update()
         {
-            if (_abilityExtension?.Ability is not IFocusPointProvider focusPointProvider) return;
+            if (_abilityExtension?.Ability is not IFocusProvider focusPointProvider) return;
             
             _animator.SetFloat(_floatName, 1f / Mathf.Max(focusPointProvider.FocusTime, 0.0001f));
         }

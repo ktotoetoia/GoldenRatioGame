@@ -8,11 +8,11 @@ using UnityEngine;
 
 namespace IM.Visuals
 {
-    public class MovementAndFocusDirectionStorageValueSetter : MonoBehaviour, IFocusDirectionSetter
+    public class MovementAndFocusDirectionStorageValueOverrider : MonoBehaviour, IFocusDirectionOverrider
     {
         [SerializeField] private string _valueStorageFocusTag = DirectionConstants.Focus;
         [SerializeField] private string _valueStorageMovementTag = DirectionConstants.Movement;
-        private IFocusPointProvider _abilityFocusPointProvider;
+        private IFocusProvider _abilityFocusProvider;
         private IModuleEditingContextEditor _editor;
         private float _abilityStartTime = float.MinValue;
         private float _abilityEndTime = float.MinValue;
@@ -36,13 +36,13 @@ namespace IM.Visuals
             SetFocusDirection(ResolveFocusDirection(direction));
         }
 
-        public void SetAbilityFocusPoint(IFocusPointProvider focusPointProvider)
+        public void SetAbilityFocusPoint(IFocusProvider focusProvider)
         {
-            if (focusPointProvider == null) return;
+            if (focusProvider == null) return;
 
-            _abilityFocusPointProvider = focusPointProvider;
+            _abilityFocusProvider = focusProvider;
             _abilityStartTime = Time.time;
-            _abilityEndTime = Time.time + focusPointProvider.FocusTime;
+            _abilityEndTime = Time.time + focusProvider.FocusTime;
         }
 
         public void OverrideFocusDirection(Vector2 direction, float duration)
@@ -53,19 +53,19 @@ namespace IM.Visuals
         }
         private Direction ResolveFocusDirection(Direction fallbackDirection)
         {
-            bool abilityActive = Time.time < _abilityEndTime && _abilityFocusPointProvider != null;
+            bool abilityActive = Time.time < _abilityEndTime && _abilityFocusProvider != null;
             bool customActive = Time.time < _customOverrideEndTime;
 
             if (!abilityActive && !customActive) return fallbackDirection;
 
             if (abilityActive && customActive)
             {
-                return _customOverrideStartTime > _abilityStartTime ? _customOverrideDirection : DirectionUtils.GetEnumDirection(_abilityFocusPointProvider.GetFocusDirection());
+                return _customOverrideStartTime > _abilityStartTime ? _customOverrideDirection : DirectionUtils.GetEnumDirection(_abilityFocusProvider.GetFocusDirection());
             }
 
             if (customActive) return _customOverrideDirection;
 
-            return DirectionUtils.GetEnumDirection(_abilityFocusPointProvider.GetFocusDirection());
+            return DirectionUtils.GetEnumDirection(_abilityFocusProvider.GetFocusDirection());
         }
 
         private void SetFocusDirection(Direction direction)

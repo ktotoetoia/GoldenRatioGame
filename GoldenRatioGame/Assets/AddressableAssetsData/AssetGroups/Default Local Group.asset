@@ -20,8 +20,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1b9be4eb25bfc824992c30b560ce6d35
+    m_Address: Assets/Square.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 201b37bc89a9a3641b2466ee9ad534a0
     m_Address: Assets/Modules/Default/Head/Default Head/Head Humanoid.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 232ffa9e5e162934caa8225bdd019da1
+    m_Address: Assets/Prefabs/Map/Props/Prop 4.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -65,6 +75,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f4e80caca9964847902543bf370ffe5
+    m_Address: Assets/Props/Prop 2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9101dd2d91b800940b729fd9ee7e6d7f
     m_Address: Assets/Initialization/Prefabs/Final Room.prefab
     m_ReadOnly: 0
@@ -77,6 +92,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: acb799a4d4e278d4eb6f46a855de523b
     m_Address: Assets/Modules/Bolt Thrower/Arm/Bolt Thrower Arm.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b441d3cdec6a318428d647a2f1684ec2
+    m_Address: Assets/Prefabs/Map/Props/Prop 3.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

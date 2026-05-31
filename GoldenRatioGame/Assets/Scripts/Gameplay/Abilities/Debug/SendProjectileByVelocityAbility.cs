@@ -7,7 +7,7 @@ using UnityEngine.Pool;
 
 namespace IM.Abilities
 {
-    public class SendProjectileByVelocityAbility : ICastAbility, IRequireAbilityUseContext, IFocusPointProvider, IAbilityEvents, IHaveIcon
+    public class SendProjectileByVelocityAbility : ICastAbility, IRequireAbilityUseContext, IFocusProvider, IAbilityEvents, IHaveIcon
     {
         private readonly IObjectPool<GameObject> _projectileFactory;
         private readonly ICooldown _cooldown;

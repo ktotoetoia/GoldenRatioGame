@@ -14,7 +14,7 @@ namespace IM.Effects
         public override IEffectModifier Create(IEffectContext context)
         {
             Vector3 baseDirection =
-                context.Instigator.gameObject.GetComponent<IFocusPointProvider>().GetFocusDirection();
+                context.Instigator.gameObject.GetComponent<IFocusProvider>().GetFocusDirection();
             Quaternion rotation = Quaternion.AngleAxis(_degreesOffset, Vector3.forward);
             Vector3 modifiedDirection = rotation * baseDirection;
 

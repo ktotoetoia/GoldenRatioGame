@@ -16,6 +16,22 @@ PrefabInstance:
       propertyPath: _assetReference.m_AssetGUID
       value: 2afb1764ab356c14299bf1ba7bb4f123
       objectReference: {fileID: 0}
+    - target: {fileID: 1843794523594488604, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
+      propertyPath: _bigProps.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1843794523594488604, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
+      propertyPath: _smallProps.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1843794523594488604, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
+      propertyPath: '_smallProps.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8230001644599058862, guid: 8f4e80caca9964847902543bf370ffe5, type: 3}
+    - target: {fileID: 1843794523594488604, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
+      propertyPath: '_smallProps.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8230001644599058862, guid: b441d3cdec6a318428d647a2f1684ec2, type: 3}
     - target: {fileID: 4054245826693385729, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
       propertyPath: m_Name
       value: Starting Room
@@ -58,6 +74,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6054549284471274203, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831215809966109471, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
+      propertyPath: _bigProps.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831215809966109471, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
+      propertyPath: _smallProps.Array.size
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:

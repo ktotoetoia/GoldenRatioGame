@@ -12,9 +12,9 @@ namespace IM.Map
         [SerializeField] private List<GameObject> _transitionPointsSources ;
         private readonly IEntityCollection _entities = new EntityCollection();
         private readonly Dictionary<IEntity, IFactionMember> _factionMembers = new();
+        private readonly List<ITransitionPoint> _transitionPoints = new ();
         private IGameObjectRoom _room;
         private IGameObjectRoomEvents _roomEvents;
-        private List<ITransitionPoint> _transitionPoints = new ();
 
         private void Awake()
         {

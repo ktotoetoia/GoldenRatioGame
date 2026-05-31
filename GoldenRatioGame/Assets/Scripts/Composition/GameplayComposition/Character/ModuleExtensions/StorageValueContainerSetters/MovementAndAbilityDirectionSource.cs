@@ -11,7 +11,7 @@ namespace IM.Visuals
     public class MovementAndAbilityDirectionSource : MonoBehaviour, IEditorObserver<IModuleEditingContextReadOnly>
     {
         [SerializeField] private GameObject _movementAndAbilityEventsSource;
-        [SerializeField] private MovementAndFocusDirectionStorageValueSetter _target;
+        [SerializeField] private MovementAndFocusDirectionStorageValueOverrider _target;
         private IVectorMovement _movement;
         private IAbilityUserEvents _abilityUserEvents;
 
@@ -31,7 +31,7 @@ namespace IM.Visuals
 
         private void OnAbilityStarted(IAbilityReadOnly ability)
         {
-            if (ability is not IFocusPointProvider focusPointProvider) return;
+            if (ability is not IFocusProvider focusPointProvider) return;
             
             _target.SetAbilityFocusPoint(focusPointProvider);
         }

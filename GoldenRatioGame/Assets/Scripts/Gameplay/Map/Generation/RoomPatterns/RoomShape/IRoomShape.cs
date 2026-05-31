@@ -7,5 +7,6 @@ namespace IM.Map
     {
         Rect CellRect { get; }
         HashSet<Vector2Int> Offsets { get; }
+        ShapeMetrics Metrics { get; }
     }
 }

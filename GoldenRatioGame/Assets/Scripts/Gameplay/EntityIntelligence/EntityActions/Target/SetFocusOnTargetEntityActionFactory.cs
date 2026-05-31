@@ -12,7 +12,7 @@ namespace IM.EntityIntelligence
         public IEntityAction Create(GameObject param1)
         {
             return new SetFocusOnTargetEntityAction(param1.transform, param1.GetComponent<IMemoryContainer>(),
-                param1.GetComponent<IFocusDirectionSetter>());
+                param1.GetComponent<IFocusDirectionOverrider>()){FocusDuration = _duration};
         }
     }
 }

@@ -34,7 +34,7 @@ namespace IM.Visuals
         {
             if (!_target) return;
 
-            bool isContextValid = _animate && _abilityContainer?.Ability is IFocusPointProvider;
+            bool isContextValid = _animate && _abilityContainer?.Ability is IFocusProvider;
             Quaternion goalRotation = CalculateGoalRotation(isContextValid);
             
             
@@ -83,8 +83,8 @@ namespace IM.Visuals
             if (!isContextValid)
                 return Quaternion.identity;
 
-            IFocusPointProvider focusPointProvider = (IFocusPointProvider)_abilityContainer.Ability;
-            Vector3 direction = focusPointProvider.GetFocusDirection().normalized;
+            IFocusProvider focusProvider = (IFocusProvider)_abilityContainer.Ability;
+            Vector3 direction = focusProvider.GetFocusDirection().normalized;
 
             if (direction.sqrMagnitude < 0.0001f)
                 return _internalRotation;
