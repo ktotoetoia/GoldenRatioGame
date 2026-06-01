@@ -1,4 +1,5 @@
-﻿using IM.Interactions;
+﻿using System;
+using IM.Interactions;
 using IM.LifeCycle;
 using IM.SaveSystem;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine;
 namespace Tests
 {
     [RequireComponent(typeof(ISceneLoadContextUser))]
-    public class InitializeOnInteracted : MonoBehaviour, IInteractable
+    public class LoadSceneOnInteracted : MonoBehaviour, IInteractable
     {
         [SerializeField] private GameInfoController _gameInfoController;
         [SerializeField] private Location _location;

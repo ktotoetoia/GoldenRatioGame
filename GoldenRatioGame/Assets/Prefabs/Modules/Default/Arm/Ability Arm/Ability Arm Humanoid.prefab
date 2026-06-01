@@ -112,7 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModulesExtensions::IM.Modules.FireProjectileAbilityExtension
   _projectilePrefab: {fileID: 5650377586138757497, guid: d41488b76feacdf4eafb2d6bcc318acc, type: 3}
   _cooldown: 0.5
-  _projectileSpeed: 5
+  _projectileSpeed: 15
   _iconSprite: {fileID: 2837516061785436495, guid: 25c9d22faca5ecf43b22d44e64cf369f, type: 3}
 --- !u!114 &-907160284628163146
 MonoBehaviour:

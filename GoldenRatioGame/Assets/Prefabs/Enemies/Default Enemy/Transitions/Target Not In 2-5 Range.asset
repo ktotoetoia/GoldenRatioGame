@@ -10,21 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38d2cdc387584adfb5caa07e023b3db0, type: 3}
-  m_Name: Target Seen For 500ms Transition
+  m_Name: Target Not In 2-5 Range
   m_EditorClassIdentifier: EntityIntelligence::IM.EntityIntelligence.ConditionTransitionFactory
   _conditionFactories:
-  - rid: 3755091287461069015
   - rid: 3755091287461069034
   references:
     version: 2
     RefIds:
-    - rid: 3755091287461069015
-      type: {class: TargetSeenForTimeConditionFactory, ns: IM.EntityIntelligence, asm: EntityIntelligence}
-      data:
-        _requiredTime: 0.5
-        _triggerWhenNotSeen: 0
     - rid: 3755091287461069034
       type: {class: TargetDistanceRangeConditionFactory, ns: IM.EntityIntelligence, asm: EntityIntelligence}
       data:
-        _minRange: 3
-        _maxRange: 4
+        _minRange: 2
+        _maxRange: 5
+        _reverse: 1

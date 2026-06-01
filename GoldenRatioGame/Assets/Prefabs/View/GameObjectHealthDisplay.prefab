@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4687124490212595012}
   - component: {fileID: 6202429046380630490}
   - component: {fileID: 6470754489313583626}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GameObjectHealthDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e44bcd6b16426dbef4d25fe5b3008c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: HealthBarsUI::IM.UI.GameObjectHealthDisplay
-  _offset: {x: 0, y: 1, z: 0}
+  _offset: {x: 0, y: 1, z: -8}
 --- !u!114 &6470754489313583626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
   m_PanelSettings: {fileID: 11400000, guid: eda9c9fc481388c47846da0379501e78, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 157b6196722df774aa515a4154e4c965, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: c94fa8d436ced2e478f316592b650b8b, type: 3}
   m_SortingOrder: 0
   m_Position: 0
   m_WorldSpaceSizeMode: 1

@@ -64,8 +64,44 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1719117009991353168, guid: 7113e858f7caa1642b5e302fe3c3c98e, type: 3}
+    - target: {fileID: 6671762380988703259, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      propertyPath: _damage._value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671762380988703259, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      propertyPath: _damage._maxValue
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671762380988703259, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      propertyPath: _damage._minValue
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4697464553835882009, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6295264227794524538}
   m_SourcePrefab: {fileID: 100100000, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+--- !u!1 &5650377586138757497 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4697464553835882009, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+  m_PrefabInstance: {fileID: 1106358724110409568}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-6295264227794524538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5650377586138757497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992ea49dbaeb4d18a1b5debd120e8531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameplayComposition::IM.ApplyEffectHitContract
+  _triggerOnAlly: 0
+  _triggerOnEnemy: 1
+  _triggerOnNone: 0
+  _effectFactory: {fileID: 11400000, guid: c041d9dd99bc1c843b189f887f231981, type: 2}

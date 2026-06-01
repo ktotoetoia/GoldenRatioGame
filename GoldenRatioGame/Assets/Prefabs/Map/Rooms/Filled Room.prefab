@@ -338,22 +338,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c6f3515ab740d091cfc6819fab63ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Map::IM.Map.RectangleRoomDecorator
-  _bigProps:
-  - {fileID: 8230001644599058862, guid: 232ffa9e5e162934caa8225bdd019da1, type: 3}
-  _smallProps:
-  - {fileID: 8230001644599058862, guid: 1b9be4eb25bfc824992c30b560ce6d35, type: 3}
-  - {fileID: 8230001644599058862, guid: 8f4e80caca9964847902543bf370ffe5, type: 3}
-  - {fileID: 8230001644599058862, guid: b441d3cdec6a318428d647a2f1684ec2, type: 3}
-  _bigPropCount: 2
-  _smallPropCount: 4
-  _minPortClearance: 2
-  _minPropSpacing: 1.5
-  _edgeThreshold: 1.5
-  _edgeBias: 10
-  _centerWeight: 0.05
-  _clusterRadius: 3
-  _clusterBias: 8
+  _minPortClearance: 4
   _candidateStep: 1
+  _propGroups:
+  - GroupName: 
+    Prefabs:
+    - {fileID: 8230001644599058862, guid: 1b9be4eb25bfc824992c30b560ce6d35, type: 3}
+    - {fileID: 8230001644599058862, guid: 8f4e80caca9964847902543bf370ffe5, type: 3}
+    - {fileID: 8230001644599058862, guid: b441d3cdec6a318428d647a2f1684ec2, type: 3}
+    MinCount: 3
+    MaxCount: 8
+    Size: {x: 1, y: 1}
+    ClearanceRadius: 1
+    EdgeThreshold: 1.5
+    EdgeBias: 10
+    CenterWeight: 0.774
+    ClusterToPrevious: 0
+    ClusterRadius: 0
+    ClusterBiasMultiplier: 0
+  - GroupName: 
+    Prefabs:
+    - {fileID: 8230001644599058862, guid: 232ffa9e5e162934caa8225bdd019da1, type: 3}
+    MinCount: 0
+    MaxCount: 2
+    Size: {x: 2, y: 2}
+    ClearanceRadius: 2
+    EdgeThreshold: 2
+    EdgeBias: 10
+    CenterWeight: 0.071
+    ClusterToPrevious: 0
+    ClusterRadius: 0
+    ClusterBiasMultiplier: 0
 --- !u!114 &5294109350557828821
 MonoBehaviour:
   m_ObjectHideFlags: 0

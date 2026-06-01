@@ -13,21 +13,21 @@ MonoBehaviour:
   m_Name: Regroup State
   m_EditorClassIdentifier: EntityIntelligence::IM.EntityIntelligence.ActionStateFactory
   _actionFactories:
-  - rid: 3755091287461069038
+  - rid: 2168711956656291948
   - rid: 3755091287461069073
   - rid: 3755091287461069076
   references:
     version: 2
     RefIds:
-    - rid: 3755091287461069038
-      type: {class: WanderEntityActionFactory, ns: IM.EntityIntelligence, asm: EntityIntelligence}
+    - rid: 2168711956656291948
+      type: {class: NavMeshMoveToPositionWithLineOfSightFactory, ns: IM.EntityIntelligence, asm: EntityIntelligence}
       data:
-        _walkTime:
-          _minValue: 0.5
-          _maxValue: 2
-          _value: 0.5
-        _timeBetweenWalking: 0.1
-        _biasDistance: 10
+        _angle: 180
+        _desiredRange: 4
+        _rangeTolerance: 1
+        _stopDistance: 0.5
+        _repickDistance: 1
+        _maxSamples: 200
     - rid: 3755091287461069073
       type: {class: SetFocusOnTargetEntityActionFactory, ns: IM.EntityIntelligence, asm: EntityIntelligence}
       data:

@@ -8,6 +8,8 @@ namespace IM.EntityIntelligence
         private readonly TargetMemory _targetMemory;
         private readonly float _minRange;
         private readonly float _maxRange;
+        
+        public bool Reverse { get; set; }
 
         public TargetDistanceRangeCondition(Transform ownerTransform, TargetMemory targetMemory, float minRange, float maxRange)
         {
@@ -33,6 +35,8 @@ namespace IM.EntityIntelligence
             float sqrMin = _minRange * _minRange;
             float sqrMax = _maxRange * _maxRange;
 
+            if (Reverse) return sqrDistance < sqrMin || sqrDistance > sqrMax;
+            
             return sqrDistance >= sqrMin && sqrDistance <= sqrMax;
         }
     }

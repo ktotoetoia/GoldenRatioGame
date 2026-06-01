@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8185116252885737288}
   - component: {fileID: 7405270498000282969}
   - component: {fileID: 1393543158944610205}
+  - component: {fileID: -3885090052406995651}
   - component: {fileID: 1962369493419541764}
   m_Layer: 0
   m_Name: Default Room Port
@@ -159,6 +160,19 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   _blackList: []
+--- !u!114 &-3885090052406995651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3031017149369251266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 384b9baf02ee45f3a99967a3c2ffa013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Visuals::IM.Visuals.RendererDepthOrderable
+  _offset: {x: 0, y: 0, z: 0}
 --- !u!114 &1962369493419541764
 MonoBehaviour:
   m_ObjectHideFlags: 0

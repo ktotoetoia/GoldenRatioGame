@@ -78,7 +78,7 @@ namespace IM.Map
 
         private void SetUpRoomPort(IRoomPort roomPort)
         {
-            if (roomPort is not MonoBehaviour mb || !RoomShape.Metrics.IsValid) return;
+            if (roomPort is not MonoBehaviour mb || RoomShape == null||!RoomShape.Metrics.IsValid) return;
             ResolvePortPosition(mb, roomPort.PortIdentity);
         }
 

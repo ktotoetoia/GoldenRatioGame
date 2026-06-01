@@ -8,7 +8,7 @@ namespace IM.UI
     {
         [SerializeField] private Vector3 _offset = new (0,1);
         private UIDocument _document;
-        private CappedValueElement  _element;
+        private GhostCappedValueElement  _element;
         private GameObject _displayed;
         
         public GameObject Displayed
@@ -31,7 +31,7 @@ namespace IM.UI
         private void Awake()
         {
             _document = GetComponent<UIDocument>();
-            _element = _document.rootVisualElement.Q<CappedValueElement>();
+            _element = _document.rootVisualElement.Q<GhostCappedValueElement>();
         }
 
         private void Update()
@@ -41,8 +41,9 @@ namespace IM.UI
                 _document.rootVisualElement.visible = false;
                 return;
             }
-
+            
             _element?.Update();
+            _element?.Tick(Time.deltaTime);
             _document.rootVisualElement.visible = true;
             transform.position = _displayed.transform.position + _offset;
         }

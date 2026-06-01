@@ -1,0 +1,31 @@
+.cappedValueElement {
+    width: 100%;
+    height: 16px;
+}
+
+.cappedValueBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(32, 28, 28);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.cappedValueGhost {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: rgb(220, 212, 200);
+}
+
+.cappedValueHp {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: rgb(226, 60, 52);
+}
