@@ -11,7 +11,13 @@ namespace IM.Modules
     {
         private AbilityUser _abilityUser;
         private IModuleEditingContextEditor _moduleEditingContextEditor;
-        
+
+        public bool IsInterrupted
+        {
+            get => _abilityUser.IsInterrupted;
+            set => _abilityUser.IsInterrupted = value;
+        }
+
         public IAbilityPoolReadOnly AbilityPool => _abilityUser.AbilityPool;
 
         public event Action<IAbilityReadOnly> AbilityStarted

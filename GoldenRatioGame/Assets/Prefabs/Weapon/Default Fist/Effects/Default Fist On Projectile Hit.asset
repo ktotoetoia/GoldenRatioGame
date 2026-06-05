@@ -15,11 +15,16 @@ MonoBehaviour:
   _effectModifierFactories:
   - rid: 4006956902272204915
   - rid: 4006956902272204916
+  - rid: 2168712046862139494
   _isTemporary: 1
   _temporaryTime: 0.2
   references:
     version: 2
     RefIds:
+    - rid: 2168712046862139494
+      type: {class: InterruptAbilityEffectModifierFactory, ns: IM.Effects, asm: GameplayComposition}
+      data:
+        _interrupts: 1
     - rid: 4006956902272204915
       type: {class: SpeedEffectModifierFactory, ns: IM.Effects, asm: GameplayComposition}
       data:

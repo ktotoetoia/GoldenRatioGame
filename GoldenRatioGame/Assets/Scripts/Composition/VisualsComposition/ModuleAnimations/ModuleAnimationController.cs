@@ -14,16 +14,25 @@ namespace IM.Visuals
         [SerializeField] private EntityModuleGraphVisualObserver _observer;
         [SerializeField] private ControllableCurveMovement _movement;
         private IAbilityUserEvents _abilityUserEvents;
+        private IAbilityUser<IAbilityPoolReadOnly> _abilityUser;
 
         private void Awake()
         {
             _abilityUserEvents = GetComponent<IAbilityUserEvents>();
             _abilityUserEvents.AbilityStarted += OnAbilityUsed;
+            _abilityUser = GetComponent<IAbilityUser<IAbilityPoolReadOnly>>();
         }
         
         private void Update()
         {
             Move(_movement.Direction);
+            
+            BoolAnimationContext c = new BoolAnimationContext("Stunned",_abilityUser.IsInterrupted);
+
+            foreach (IModuleAnimator moduleAnimator in Animators)
+            {
+                if(moduleAnimator.CanPlay(c)) moduleAnimator.Play(c);
+            }
         }
 
         public IEnumerable<IModuleAnimator> Animators =>

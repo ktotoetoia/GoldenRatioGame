@@ -69,10 +69,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6831950797100586301}
   - component: {fileID: -7644578825757335302}
+  - component: {fileID: 5941718197622197708}
   - component: {fileID: 2695611978847088502}
   - component: {fileID: 483543952204984512}
   - component: {fileID: -2843514780123615667}
   - component: {fileID: 5769214145301837531}
+  - component: {fileID: 6348390269845546458}
   m_Layer: 0
   m_Name: Head Humanoid In Game
   m_TagString: Untagged
@@ -94,6 +96,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3880744510753643536}
+  - {fileID: 8881697386377430586}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &-7644578825757335302
@@ -155,6 +158,28 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!95 &5941718197622197708
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156244532669732079}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b3f0cddd8c6b5434da67910c292ffe19, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2695611978847088502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,6 +195,7 @@ MonoBehaviour:
   _portVisualObjectFactory: {fileID: 11400000, guid: b50a20bb72fb9824e8befd705c4581c2, type: 2}
   _portBinder: {fileID: 11400000, guid: 148a279e8d53d5242a175e873032c286, type: 2}
   _renderer: {fileID: -7644578825757335302}
+  _boundsSource: 1
 --- !u!114 &483543952204984512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,3 +255,79 @@ MonoBehaviour:
   _flipX: 1
   _flipY: 0
   _flipZ: 0
+--- !u!114 &6348390269845546458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156244532669732079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fe9952986b94cd1bf992ac36efae829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ModuleAnimator
+  _subAnimatorsSource: {fileID: 8985831986194437433}
+--- !u!1 &8985831986194437433
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8881697386377430586}
+  - component: {fileID: 2473302113366413086}
+  - component: {fileID: 1484022982719961733}
+  m_Layer: 0
+  m_Name: Sub Animators
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8881697386377430586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8985831986194437433}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6831950797100586301}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2473302113366413086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8985831986194437433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edff1c5ff6c441a993776951bc6e0986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.TriggerSubAnimator
+  _animator: {fileID: 5941718197622197708}
+  _contextName: Anger
+  _parameterName: Anger
+--- !u!114 &1484022982719961733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8985831986194437433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec1f9b1f491544889e8af8b5c9740864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.BoolSubAnimator
+  _animator: {fileID: 5941718197622197708}
+  _contextName: Stunned
+  _parameterName: Stunned

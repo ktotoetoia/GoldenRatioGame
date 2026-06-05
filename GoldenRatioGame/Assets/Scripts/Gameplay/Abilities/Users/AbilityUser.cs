@@ -11,12 +11,23 @@ namespace IM.Abilities
         private IAbilityUseInfo _abilityUseInfo;
         private IAbilityReadOnly _currentAbility;
         private IEffectGroup _appliedEffectGroup;
+        private bool _isInterrupted;
         
         public event Action<IAbilityReadOnly> AbilityStarted;
         public event Action<IAbilityReadOnly> AbilityFinished;
         
         public IAbilityPoolReadOnly AbilityPool { get; }
-        
+        public bool IsInterrupted 
+        { 
+            get => _isInterrupted;
+            set
+            {
+                if (_isInterrupted == value) return;
+                _isInterrupted = value;
+
+                if (_isInterrupted) InterruptCurrentAbility();
+            }
+        }
         private IAbilityReadOnly CurrentAbility
         {
             get => _currentAbility;
@@ -49,6 +60,8 @@ namespace IM.Abilities
         
         public void ResolveRequestedAbilities(IEnumerable<KeyValuePair<IAbilityReadOnly,UseContext>> requestedAbilities)
         {
+            if (IsInterrupted) return;
+            
             Dictionary<IAbilityReadOnly, UseContext> requested = new(requestedAbilities);
             
             if (CurrentAbility != null)
@@ -99,6 +112,23 @@ namespace IM.Abilities
             _abilityUseInfo = channelInfo;
             CurrentAbility = channel;
             return true;
-        }   
+        }
+        private void InterruptCurrentAbility()
+        {
+            if (CurrentAbility == null) return;
+
+            if (_abilityUseInfo is { Completed: true })
+            {
+                CurrentAbility = null;
+                return;
+            }
+
+            if (CurrentAbility is not IInterruptable interruptable) return;
+            
+            if (interruptable.TryInterrupt())
+            {
+                CurrentAbility = null;
+            }
+        }
     }
 }

@@ -9,6 +9,12 @@ namespace IM.Abilities
     public class AbilityUserMono : MonoBehaviour, IAbilityUser<IAbilityPoolReadOnly>, IAbilityUserEvents
     {
         private AbilityUser _abilityUser;
+        public bool IsInterrupted
+        {
+            get => _abilityUser.IsInterrupted;
+            set => _abilityUser.IsInterrupted = value;
+        }
+
         public IAbilityPoolReadOnly AbilityPool => _abilityUser.AbilityPool;
 
         public event Action<IAbilityReadOnly> AbilityStarted
