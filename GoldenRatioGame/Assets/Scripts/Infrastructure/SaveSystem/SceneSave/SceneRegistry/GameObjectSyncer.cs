@@ -48,7 +48,7 @@ namespace IM.SaveSystem
                 ident = serializer;
             }
 
-            ident?.InjectId(data.Id);
+            ident?.Inject(data.Id);
             _store.AddEntry(ident.Id, instance, instance.GetComponent<IStateSerializable>());
         }
 

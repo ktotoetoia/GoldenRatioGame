@@ -17,9 +17,9 @@ namespace IM.Modules
         {
             _target = playerEntity.GameObject.transform;
 
-            foreach (var camera in _cameras)
+            foreach (var cam in _cameras)
             {
-                camera.transform.position = _target.position + _offset;
+                cam.transform.position = _target.position + _offset;
             }
             
         }
@@ -28,9 +28,9 @@ namespace IM.Modules
         {
             if(!_target) return;
             
-            foreach (var camera in _cameras)
+            foreach (var cam in _cameras)
             {
-                camera.transform.position = _target.position + _offset;
+                cam.transform.position = _target.position + _offset;
             }
         }
 
@@ -40,10 +40,10 @@ namespace IM.Modules
 
             Vector3 targetPosition = _target.position + _offset;
 
-            foreach (var camera in _cameras)
+            foreach (var cam in _cameras)
             {
-                camera.transform.position = Vector3.SmoothDamp(
-                    camera.transform.position,
+                cam.transform.position = Vector3.SmoothDamp(
+                    cam.transform.position,
                     targetPosition,
                     ref _velocity,
                     _smoothTime);

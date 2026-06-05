@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using IM.Events;
 using IM.LifeCycle;
 using IM.Modules;
 using IM.Transforms;
@@ -48,6 +49,7 @@ namespace IM.Visuals
 
         private ITransform _transform;
         public ITransform Transform => _transform ??= GetComponent<ITransform>();
+        public IValueStorageContainer ValueStorageContainer { get; } = new ValueStorageContainer();
         public IReadOnlyList<IPortVisualObject> PortsVisualObjects => _portVisualObjects;
         public IPortVisualObjectDirtyTracker DirtyTracker { get; } = new PortVisualObjectDirtyTracker();
         public IExtensibleItem Owner { get; private set; }

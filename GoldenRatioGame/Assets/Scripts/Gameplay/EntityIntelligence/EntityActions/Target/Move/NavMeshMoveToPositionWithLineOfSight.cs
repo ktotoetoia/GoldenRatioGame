@@ -103,8 +103,7 @@ namespace IM.EntityIntelligence
 
             Vector3 navDirection = _agent.desiredVelocity.normalized;
 
-            if (navDirection.sqrMagnitude == 0f)
-                navDirection = (_agent.steeringTarget - _ownerTransform.position).normalized;
+            if (navDirection.sqrMagnitude == 0f) navDirection = (_agent.steeringTarget - _ownerTransform.position).normalized;
 
             _movement.Direction = navDirection;
         }
@@ -126,7 +125,7 @@ namespace IM.EntityIntelligence
             toOwner.z = 0f;
 
             if (toOwner.sqrMagnitude < 0.0001f)
-                toOwner = _ownerTransform.up; // or right, just a stable fallback
+                toOwner = _ownerTransform.up;
 
             toOwner.Normalize();
             float centerAngle = Mathf.Atan2(toOwner.y, toOwner.x);
@@ -142,8 +141,6 @@ namespace IM.EntityIntelligence
                     0f
                 );
 
-                Debug.DrawLine(_ownerTransform.position, candidate, Color.blue, 2);
-
                 if (!NavMesh.SamplePosition(candidate, out NavMeshHit hit, 2f, NavMesh.AllAreas))
                     continue;
 
@@ -157,7 +154,6 @@ namespace IM.EntityIntelligence
                     continue;
 
                 result = navPoint;
-                Debug.DrawLine(_ownerTransform.position, navPoint, Color.red, 2);
                 return true;
             }
 

@@ -15,7 +15,7 @@ namespace IM.SaveSystem
         private IComponentSerializerContainer _container;
         
         public string Id { get; private set; }
-        public void InjectId(string id) => Id = id;
+        public void Inject(string id) => Id = id;
 
         public IComponentSerializerContainer Container
         {

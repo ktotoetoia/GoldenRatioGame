@@ -95,6 +95,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b095526b764b37f458cf6cb34a90abfa
+    m_Address: Assets/Prefabs/Modules/Default/Arm/Default Arm/Augment.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b441d3cdec6a318428d647a2f1684ec2
     m_Address: Assets/Prefabs/Map/Props/Prop 3.prefab
     m_ReadOnly: 0

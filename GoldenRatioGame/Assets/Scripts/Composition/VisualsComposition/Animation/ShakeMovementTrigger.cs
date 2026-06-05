@@ -8,7 +8,7 @@ namespace IM.Visuals
         [SerializeField] private bool _triggerShake;
         [SerializeField] private float _shakeDuration = 0.2f;
         [SerializeField] private float _frequency = 40f;
-        [SerializeField] private Vector2 _magnitude = new Vector2(0.1f, 0.1f);
+        [SerializeField] private Vector2 _magnitude = new (0.1f, 0.1f);
 
         private Vector3 _baseLocalPosition;
         private float _shakeElapsed;

@@ -1,4 +1,17 @@
-﻿{
-  "name": "Effects",
-  "references":[ "GUID:38be81a59a4146ab9a6165a5c84daa2c" ]
+{
+    "name": "Effects",
+    "rootNamespace": "",
+    "references": [
+        "GUID:38be81a59a4146ab9a6165a5c84daa2c",
+        "GUID:0caab94c8c0a20b4e83e8dc1e4b2a416"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

@@ -88,6 +88,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2365714068825351273}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2585128701557611141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 595900513532743104}
+  - component: {fileID: 6903656742653833090}
+  m_Layer: 0
+  m_Name: AugmentObservers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &595900513532743104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2585128701557611141}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2365714068825351273}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6903656742653833090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2585128701557611141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f7ce484cf74f24ad8585abcee55389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleAugments::IM.Augments.EffectAugmentObserver
+  _effectContainerSource: {fileID: 4342869459289063407}
 --- !u!1 &4342869459289063407
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,6 +161,9 @@ GameObject:
   - component: {fileID: 7544895549371979933}
   - component: {fileID: 7112604761653458629}
   - component: {fileID: 184003361008919845}
+  - component: {fileID: 1596780648754652566}
+  - component: {fileID: 8423996812760500792}
+  - component: {fileID: 8367310528631646675}
   m_Layer: 0
   m_Name: Entity
   m_TagString: Untagged
@@ -138,6 +186,7 @@ Transform:
   m_Children:
   - {fileID: 2804227671461150752}
   - {fileID: 6392533986653558255}
+  - {fileID: 595900513532743104}
   - {fileID: 8839589395240690778}
   - {fileID: 2204359964471984114}
   - {fileID: 3866329637884553479}
@@ -466,6 +515,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameplayComposition::IM.Visuals.MovementDirectionAndAbilityUseStorageValueSetter
   _valueStorageFocusTag: Focus
   _valueStorageMovementTag: Movement
+  _moduleVisualMapSource: {fileID: 8508053980751109502}
+--- !u!114 &1596780648754652566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a0e7f043d2e41b792e4df3d94d6c094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleAugments::IM.Augments.AugmentContainer
+  _augmentObserversSource: {fileID: 2585128701557611141}
+--- !u!114 &8423996812760500792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d4bd9d8ce0b453fab6dad1e4b757e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleAugments::IM.Augments.AugmentProgressManager
+  _augmentContainer: {fileID: 1596780648754652566}
+  _owner: {fileID: 4342869459289063407}
+--- !u!114 &8367310528631646675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342869459289063407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d341ba2cab44427bbf42d86022d07b86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.ModuleAnimationController
+  _observer: {fileID: 6135420331760039005}
+  _movement: {fileID: 7544895549371979933}
 --- !u!1 &4348573349406529255
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,7 +716,8 @@ GameObject:
   - component: {fileID: 4737303748126444302}
   - component: {fileID: 6135420331760039005}
   - component: {fileID: 1996564249185061140}
-  - component: {fileID: 5577398275096282220}
+  - component: {fileID: 5759935671208930162}
+  - component: {fileID: 8779911689234185194}
   m_Layer: 0
   m_Name: ModuleObservers
   m_TagString: Untagged
@@ -727,7 +819,20 @@ MonoBehaviour:
   _onAddedTransformIn: {fileID: 3866329637884553479}
   _onRemovedTransformOut: {fileID: 2365714068825351273}
   _entitySource: {fileID: 4342869459289063407}
---- !u!114 &5577398275096282220
+--- !u!114 &5759935671208930162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508053980751109502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7dc93cc78a846d8b367ebd98fe59eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleAugments::IM.Augments.AugmentExtensionObserver
+  _progressManager: {fileID: 8423996812760500792}
+--- !u!114 &8779911689234185194
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

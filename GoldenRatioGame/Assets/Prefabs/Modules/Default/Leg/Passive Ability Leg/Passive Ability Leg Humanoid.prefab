@@ -89,7 +89,7 @@ PrefabInstance:
       value: Passive Ability Leg Humanoid
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: -8069501828437842105, guid: 4174b200c638a2d459cb9784d4349438, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

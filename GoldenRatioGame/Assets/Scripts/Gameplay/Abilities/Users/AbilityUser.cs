@@ -12,8 +12,8 @@ namespace IM.Abilities
         private IAbilityReadOnly _currentAbility;
         private IEffectGroup _appliedEffectGroup;
         
-        public event Action<IAbilityReadOnly> OnAbilityStarted;
-        public event Action<IAbilityReadOnly> OnAbilityFinished;
+        public event Action<IAbilityReadOnly> AbilityStarted;
+        public event Action<IAbilityReadOnly> AbilityFinished;
         
         public IAbilityPoolReadOnly AbilityPool { get; }
         
@@ -29,14 +29,14 @@ namespace IM.Abilities
                 {
                     if(previous is IApplyEffectGroupOnUse) _effectContainer.RemoveGroup(_appliedEffectGroup);
                     
-                    OnAbilityFinished?.Invoke(previous);
+                    AbilityFinished?.Invoke(previous);
                 }
                 if (_currentAbility != null)
                 {
                     if(_currentAbility is IApplyEffectGroupOnUse effectGroupOnUse) 
                         _effectContainer.AddGroup(_appliedEffectGroup = effectGroupOnUse.GetEffectGroup());
                     
-                    OnAbilityStarted?.Invoke(_currentAbility);
+                    AbilityStarted?.Invoke(_currentAbility);
                 }
             }
         }

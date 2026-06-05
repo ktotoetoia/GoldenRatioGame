@@ -22,7 +22,7 @@ namespace IM.SaveSystem
                 }
 
                 if (_ids.Add(identifiable.Id)) return;
-                
+
                 Debug.LogWarning($"Duplicate ID: {identifiable.Id}, new id will be injected");
                 Inject(identifiable);
             }
@@ -32,7 +32,7 @@ namespace IM.SaveSystem
         {
             string newId = GenerateUnusedID();
                     
-            identifiable.InjectId(newId);
+            identifiable.Inject(newId);
                     
             _ids.Add(newId);
         }

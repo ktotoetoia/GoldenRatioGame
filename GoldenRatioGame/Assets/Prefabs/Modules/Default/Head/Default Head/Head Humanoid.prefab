@@ -12,13 +12,11 @@ GameObject:
   - component: {fileID: 3521067284498834333}
   - component: {fileID: -7691997585247637884}
   - component: {fileID: -5268866995824273465}
-  - component: {fileID: -594624590486653856}
-  - component: {fileID: -2697889935885480222}
   - component: {fileID: 3187650734492596957}
   - component: {fileID: 5650288060688483888}
   - component: {fileID: 5469737783865499535}
   - component: {fileID: 4556875372869762170}
-  - component: {fileID: 4119260673797207693}
+  - component: {fileID: -594624590486653856}
   m_Layer: 0
   m_Name: Head Humanoid
   m_TagString: Untagged
@@ -125,30 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a87d78ef3b464425bf11f6b7639b7265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Modules::IM.Modules.InteractableModule
---- !u!114 &-594624590486653856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8119833187759213420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9dd9b36686f4bfa8f63a95993a9e1c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleComponents::IM.Modules.EffectGroupExtension
---- !u!114 &-2697889935885480222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8119833187759213420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4701e6af742e47a8b36f25f229d05c20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Modules::TDS.Events.ValueStorageContainerMono
 --- !u!114 &3187650734492596957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,7 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.ModuleLayout
   _inGamePrefab: {fileID: 2156244532669732079, guid: e31406646bfbbfb4d96f36dea99f9cbf, type: 3}
   _editorPrefab: {fileID: 2156244532669732079, guid: 7104e5c87a0e65345a6a9321c64669d3, type: 3}
---- !u!114 &4119260673797207693
+--- !u!114 &-594624590486653856
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,10 +193,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8119833187759213420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d494dcb089724243ae0fd729a5842997, type: 3}
+  m_Script: {fileID: 11500000, guid: a9dd9b36686f4bfa8f63a95993a9e1c4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GameplayComposition::IM.Modules.HealthEffectModifierMono
-  _health:
-    _minValue: 0
-    _maxValue: 100
-    _value: 100
+  m_EditorClassIdentifier: ModuleComponents::IM.Modules.EffectGroupExtension
+  _restorableEffectGroupFactory: {fileID: 11400000, guid: 7bedf75b297133440b294a6c7e6ff879, type: 2}

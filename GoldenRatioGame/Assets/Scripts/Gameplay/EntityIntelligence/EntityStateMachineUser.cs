@@ -1,5 +1,4 @@
-﻿using System;
-using IM.StateMachines;
+﻿using IM.StateMachines;
 using UnityEngine;
 
 namespace IM.EntityIntelligence
@@ -30,7 +29,6 @@ namespace IM.EntityIntelligence
         private void OnDrawGizmos()
         {
             if (_stateMachine?.CurrentState is not ActionState state) return;
-           // if (Camera.current != Camera.main) return;
             
             UnityEditor.Handles.Label(
                 transform.position + Vector3.up * 2f,

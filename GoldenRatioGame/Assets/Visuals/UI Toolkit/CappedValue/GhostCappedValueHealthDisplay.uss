@@ -1,6 +1,6 @@
 .cappedValueElement {
     width: 100%;
-    height: 16px;
+    height: 28px;
 }
 
 .cappedValueBackground {

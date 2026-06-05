@@ -16,7 +16,7 @@ namespace IM.Movement
             get => _movement.Direction;
             set
             {
-                if(Active) _movement.Direction = value;
+                if (Active) _movement.Direction = value;
             }
         }
 

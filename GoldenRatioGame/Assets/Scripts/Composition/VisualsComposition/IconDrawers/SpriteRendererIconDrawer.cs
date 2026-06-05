@@ -32,23 +32,12 @@ namespace IM.Items
             set => _renderer.sortingOrder = value;
         }
         
-        public IIcon Icon
-        {
-            get
-            {
-                _icon ??= new Icon(Renderer.sprite);
-                
-                return _icon;
-            }
-        }
+        public IIcon Icon => _icon??= new Icon(Renderer.sprite);
 
         public bool IsDrawing
         {
             get => Renderer.enabled;
-            set
-            {
-                Renderer.enabled = value;
-            }
+            set => Renderer.enabled = value;
         }
     }
 }

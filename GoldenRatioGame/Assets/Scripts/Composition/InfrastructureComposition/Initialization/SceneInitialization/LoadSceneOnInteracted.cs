@@ -1,5 +1,4 @@
-﻿using System;
-using IM.Interactions;
+﻿using IM.Interactions;
 using IM.LifeCycle;
 using IM.SaveSystem;
 using UnityEngine;

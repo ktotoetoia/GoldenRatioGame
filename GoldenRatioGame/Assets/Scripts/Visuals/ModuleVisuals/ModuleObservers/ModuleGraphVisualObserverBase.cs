@@ -56,6 +56,7 @@ namespace IM.Visuals
             if (snapshot == null) throw new ArgumentNullException(nameof(snapshot));
 
             _snapshotDiffer.OnSnapshotChanged(snapshot.Graph);
+            AlignAll();
         }
 
         private void HandleModuleAdded(IModule module)
@@ -126,10 +127,13 @@ namespace IM.Visuals
                 if (otherPort?.Module is not IDataModule<IExtensibleItem> otherModule) continue;
                 if (!ModuleVisualObjects.TryGetValue(module, out IModuleVisualObject fromModuleVisual)) continue;
                 if (!ModuleVisualObjects.TryGetValue(otherModule, out IModuleVisualObject toModuleVisual)) continue;
-
                 IPortVisualObject fromVisual = fromModuleVisual.PortsVisualObjects[module.Ports.ToList().IndexOf(ownerPort)];
                 IPortVisualObject toVisual = toModuleVisual.PortsVisualObjects[otherModule.Ports.ToList().IndexOf(otherPort)];
                 PortAligner.AlignPorts(fromVisual, toVisual);
+                if (ownerPort.Connection.GetOtherPort(ownerPort) is IValueDataPort<PortDirection, IExtensibleItem> d)
+                {
+                    fromVisual.OwnerVisualObject.ValueStorageContainer.GetOrCreate<PortDirection>().Value = d.Value;
+                }
             }
         }
 

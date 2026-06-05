@@ -1,18 +1,29 @@
-﻿using IM.Modules;
+﻿using System;
+using IM.Modules;
 using IM.Values;
 using UnityEngine;
 
 namespace IM.Effects
 {
-    [CreateAssetMenu(menuName = "Effects/Modifiers/Speed Effect Modifier")]
-    public class SpeedEffectModifierFactory : EffectModifierFactory
+    [Serializable]
+    public class SpeedEffectModifierFactory : IRestorableEffectModifierFactory
     {
         [field:SerializeField] public float Add { get; set; }
         [field: SerializeField] public float Multiplication { get; set; }
         
-        public override IEffectModifier Create(IEffectContext context)
+        public IEffectModifier Create(IEffectContext context)
         {
             return new SpeedEffectModifier(new SpeedModifier(Add,Multiplication));
+        }
+
+        public object Save(IEffectModifier modifier)
+        {
+            return ((SpeedEffectModifier)modifier).SpeedModifier;
+        }
+
+        public IEffectModifier Restore(object modifier, IEffectContext context)
+        {
+            return new SpeedEffectModifier((SpeedModifier)modifier);
         }
     }
 }

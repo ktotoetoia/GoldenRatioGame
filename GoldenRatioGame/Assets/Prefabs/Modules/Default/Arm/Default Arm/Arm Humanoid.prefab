@@ -11,16 +11,14 @@ GameObject:
   - component: {fileID: 3625994651722585011}
   - component: {fileID: 2621271969024498473}
   - component: {fileID: -4724124268522441623}
-  - component: {fileID: 5634798734519334486}
-  - component: {fileID: -7743140741346210048}
   - component: {fileID: -4928454679861181320}
   - component: {fileID: 4071596603139949161}
   - component: {fileID: -3808709638150430868}
   - component: {fileID: 6869556739838863163}
   - component: {fileID: 3134715345525867726}
+  - component: {fileID: -7743140741346210048}
   - component: {fileID: 7934457957892961360}
-  - component: {fileID: -1796868246183028789}
-  - component: {fileID: 4558522474173079595}
+  - component: {fileID: 3411226933833750973}
   m_Layer: 0
   m_Name: Arm Humanoid
   m_TagString: Untagged
@@ -114,30 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a87d78ef3b464425bf11f6b7639b7265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Modules::IM.Modules.InteractableModule
---- !u!114 &5634798734519334486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7210977406679086040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4701e6af742e47a8b36f25f229d05c20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Modules::TDS.Events.ValueStorageContainerMono
---- !u!114 &-7743140741346210048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7210977406679086040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9dd9b36686f4bfa8f63a95993a9e1c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleComponents::IM.Modules.EffectGroupExtension
 --- !u!114 &-4928454679861181320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +186,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.ModuleLayout
   _inGamePrefab: {fileID: 2156244532669732079, guid: 3740b105624c7f4459e38d8eae631f76, type: 3}
   _editorPrefab: {fileID: 2156244532669732079, guid: 840872b778351f04b8c956f046141407, type: 3}
+--- !u!114 &-7743140741346210048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210977406679086040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9dd9b36686f4bfa8f63a95993a9e1c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleComponents::IM.Modules.EffectGroupExtension
+  _restorableEffectGroupFactory: {fileID: 11400000, guid: 7bedf75b297133440b294a6c7e6ff879, type: 2}
 --- !u!114 &7934457957892961360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleComposition::IM.Modules.WeaponExtension
   _defaultWeaponPrefab: {fileID: 5090932878195986776, guid: f3462c44849415747862387dbb549387, type: 3}
---- !u!114 &-1796868246183028789
+--- !u!114 &3411226933833750973
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -234,23 +221,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7210977406679086040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc8df6c0598c45f5b676458f07541cdb, type: 3}
+  m_Script: {fileID: 11500000, guid: f3f06cf14b2a4f48a99d706f409753b5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: VisualsComposition::IM.Visuals.SetBoolOnAbilityUsed
-  _boolName: WeaponUsed
---- !u!114 &4558522474173079595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7210977406679086040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d494dcb089724243ae0fd729a5842997, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: GameplayComposition::IM.Modules.HealthEffectModifierMono
-  _health:
-    _minValue: 0
-    _maxValue: 100
-    _value: 100
+  m_EditorClassIdentifier: ModuleAugments::IM.ModuleAugments.AugmentExtension
+  _augments:
+  - _factory: {fileID: 11400000, guid: b095526b764b37f458cf6cb34a90abfa, type: 2}
+    <RequiredProgress>k__BackingField: 4

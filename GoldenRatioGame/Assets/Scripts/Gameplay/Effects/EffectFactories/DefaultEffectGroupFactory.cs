@@ -7,7 +7,7 @@ namespace IM.Effects
     [CreateAssetMenu(menuName = "Effects/Default Effect Group Factory")]
     public class DefaultEffectGroupFactory : EffectGroupFactory
     {
-        [SerializeField] private List<EffectModifierFactory> _effectModifierFactories;
+        [SerializeReference] [SerializeReferenceDropdown] private List<IEffectModifierFactory> _effectModifierFactories;
         [SerializeField] private bool _isTemporary = true;
         [SerializeField] private float _temporaryTime = 0.5f;
         

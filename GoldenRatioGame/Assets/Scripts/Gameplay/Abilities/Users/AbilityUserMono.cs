@@ -11,16 +11,16 @@ namespace IM.Abilities
         private AbilityUser _abilityUser;
         public IAbilityPoolReadOnly AbilityPool => _abilityUser.AbilityPool;
 
-        public event Action<IAbilityReadOnly> OnAbilityStarted
+        public event Action<IAbilityReadOnly> AbilityStarted
         {
-            add => _abilityUser.OnAbilityStarted += value;
-            remove => _abilityUser.OnAbilityStarted -= value;
+            add => _abilityUser.AbilityStarted += value;
+            remove => _abilityUser.AbilityStarted -= value;
         }
 
-        public event Action<IAbilityReadOnly> OnAbilityFinished
+        public event Action<IAbilityReadOnly> AbilityFinished
         {
-            add => _abilityUser.OnAbilityFinished += value;
-            remove => _abilityUser.OnAbilityFinished -= value;
+            add => _abilityUser.AbilityFinished += value;
+            remove => _abilityUser.AbilityFinished -= value;
         }
 
         private void Awake()

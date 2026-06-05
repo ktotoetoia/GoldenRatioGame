@@ -11,15 +11,12 @@ GameObject:
   - component: {fileID: 3625994651722585011}
   - component: {fileID: 2621271969024498473}
   - component: {fileID: -8940931065562307537}
-  - component: {fileID: -8354513230407654295}
   - component: {fileID: -4267919387342837719}
-  - component: {fileID: 5634798734519334486}
   - component: {fileID: 4071596603139949161}
   - component: {fileID: 3950009248158461450}
   - component: {fileID: 6869556739838863163}
   - component: {fileID: 3134715345525867726}
-  - component: {fileID: 2359802959697064637}
-  - component: {fileID: 8211583758243136227}
+  - component: {fileID: -8354513230407654295}
   m_Layer: 0
   m_Name: Leg Humanoid
   m_TagString: Untagged
@@ -114,18 +111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Map::IM.Map.RoomVisitor
   <ShouldActivate>k__BackingField: 0
---- !u!114 &-8354513230407654295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7210977406679086040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9dd9b36686f4bfa8f63a95993a9e1c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModuleComponents::IM.Modules.EffectGroupExtension
 --- !u!114 &-4267919387342837719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,18 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a87d78ef3b464425bf11f6b7639b7265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Modules::IM.Modules.InteractableModule
---- !u!114 &5634798734519334486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7210977406679086040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4701e6af742e47a8b36f25f229d05c20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Modules::TDS.Events.ValueStorageContainerMono
 --- !u!114 &4071596603139949161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModuleVisuals::IM.Modules.ModuleLayout
   _inGamePrefab: {fileID: 2156244532669732079, guid: 418e4bf92402f7047a4c2dc3bcfa1083, type: 3}
   _editorPrefab: {fileID: 2156244532669732079, guid: bfdc73e9d0b5a3d4b9ca081fff0b4756, type: 3}
---- !u!114 &2359802959697064637
+--- !u!114 &-8354513230407654295
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -220,25 +193,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7210977406679086040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d494dcb089724243ae0fd729a5842997, type: 3}
+  m_Script: {fileID: 11500000, guid: a9dd9b36686f4bfa8f63a95993a9e1c4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GameplayComposition::IM.Modules.HealthEffectModifierMono
-  _health:
-    _minValue: 0
-    _maxValue: 100
-    _value: 100
---- !u!114 &8211583758243136227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7210977406679086040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9741ecc49b4d4ad5972de3d6bf93fcac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: GameplayComposition::IM.Modules.SpeedEffectModifierMono
-  _speedModifier:
-    <Add>k__BackingField: 1
-    <Multiplication>k__BackingField: 1.2
+  m_EditorClassIdentifier: ModuleComponents::IM.Modules.EffectGroupExtension
+  _restorableEffectGroupFactory: {fileID: 11400000, guid: f6d3ed48537e5b84793beb3b210a171e, type: 2}

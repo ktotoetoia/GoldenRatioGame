@@ -1,8 +1,7 @@
 ﻿namespace IM.LifeCycle
 {
-    public interface IIdentifiable
+    public interface IIdentifiable : IHaveID
     {
-        string Id { get; }
-        void InjectId(string id);
+        void Inject(string id);
     }
 }

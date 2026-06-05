@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace IM.Effects
 {
-    [CreateAssetMenu(menuName = "Effects/Modifiers/Block User Movement")]
-    public class BlockUserMovementEffectModifierFactory : EffectModifierFactory
+    [Serializable]
+    public class BlockUserMovementEffectModifierFactory : IEffectModifierFactory
     {
         [SerializeField] private bool _blockUserMovement = true;
         
-        public override IEffectModifier Create(IEffectContext context) => new BlockUserMovementEffectModifier {BlockUserMovement = _blockUserMovement};
+        public IEffectModifier Create(IEffectContext context) => new BlockUserMovementEffectModifier {BlockUserMovement = _blockUserMovement};
     }
 }
