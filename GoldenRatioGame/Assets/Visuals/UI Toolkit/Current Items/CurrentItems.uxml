@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Font.uss?fileID=7433441132597879392&amp;guid=1a14260a6760efa4ebd95862e69bc46a&amp;type=3#Font"/>
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Current%20Items/ItemDisplayContainer.uss?fileID=7433441132597879392&amp;guid=3c6e8703a5cbf364987b38677c00a143&amp;type=3#ItemDisplayContainer"/>
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Current%20Items/ScrollableItemContainer.uss?fileID=7433441132597879392&amp;guid=2de626ac5fa5b1a48895f55a9ecbbd98&amp;type=3#ScrollableItemContainer"/>
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/ItemVisualElement.uss?fileID=7433441132597879392&amp;guid=4a1a33fd037bad5468bf3c56c555eb9d&amp;type=3#ItemVisualElement"/>
+    <IM.Visuals.ScrollableItemContainer name="ItemsContainer"/>
+</ui:UXML>

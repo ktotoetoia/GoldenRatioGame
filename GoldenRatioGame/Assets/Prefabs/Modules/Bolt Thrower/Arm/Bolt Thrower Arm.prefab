@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6869556739838863163, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
       propertyPath: <Name>k__BackingField
-      value: Bolt Thrower Arm
+      value: Bolt Thrower
       objectReference: {fileID: 0}
     - target: {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
       propertyPath: m_Name

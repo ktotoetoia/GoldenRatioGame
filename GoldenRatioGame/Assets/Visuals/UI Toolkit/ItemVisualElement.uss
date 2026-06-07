@@ -1,0 +1,29 @@
+.visualItem {
+    flex-grow: 1;
+    flex-direction: row;
+    overflow: hidden;
+    align-self: center;
+}
+
+.visualItemIcon {
+    align-self: stretch;
+    height: 64px;
+    aspect-ratio: 1;
+}
+
+.visualItemName {
+    flex-grow: 1;
+}
+
+.visualItemIconActive {
+    transition-property: opacity;
+    transition-duration: 100ms;
+}
+
+.visualItemIconActive:hover {
+    opacity: 0.65;
+}
+
+.visualItemIconActive:active {
+    opacity: 0.35;
+}

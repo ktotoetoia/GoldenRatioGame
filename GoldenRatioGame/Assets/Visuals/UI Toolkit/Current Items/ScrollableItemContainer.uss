@@ -1,0 +1,16 @@
+.scrollableItemContainer {
+    flex-grow: 1;
+    background-color: rgb(30, 30, 36);
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: rgb(20, 20, 25);
+    overflow: hidden;
+}
+
+.scrollableItemContainerView {
+    flex-grow: 1;
+}
+
+.scrollableItemContainerView #unity-content-viewport {
+    flex-grow: 1;
+}

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: SaveSystem::IM.SaveSystem.SceneLoadContext
   _initializers:
   - {fileID: 11400000, guid: 7bea5e7a2d8a43c41a2243ba1130b1b0, type: 2}
-  <RelativePath>k__BackingField: Hub.json
   <SceneLoadType>k__BackingField: 1
   <SceneIndex>k__BackingField: 1
+  <FullSceneLoadPath>k__BackingField: 

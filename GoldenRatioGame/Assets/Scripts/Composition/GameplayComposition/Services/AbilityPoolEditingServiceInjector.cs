@@ -26,7 +26,7 @@ namespace IM.Modules
             if(!context.Capabilities.TryGet(out IContainerAbilityPool pool) ||
                context.GraphEditing is not IGraphEditingEvents<IExtensibleItem> events) return;
 
-            context.AddService(new AbilityPoolEditingService(events, pool));
+            context.AddService(new AbilityPoolEditingService(events,context.GraphEditing ,pool));
         }
     }
 }

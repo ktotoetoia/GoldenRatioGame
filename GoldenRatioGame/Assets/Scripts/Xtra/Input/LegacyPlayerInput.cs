@@ -45,7 +45,7 @@ namespace IM.Inputs
             _graphViewInteraction.ShouldTryQuickRemoveAtPointer = () => Input.GetMouseButtonDown(0);
             _graphViewInteraction.ShouldTryQuickRemove = () =>Input.GetKeyDown(KeyCode.P);
             _graphViewInteraction.GetPointerPosition = () =>(Vector2)_uiCamera.ScreenToWorldPoint(Input.mousePosition);
-            _weaponViewInteraction.GetPointerPosition = () => (Vector2)_uiCamera.ScreenToWorldPoint(Input.mousePosition);
+            //_weaponViewInteraction.GetPointerPosition = () => (Vector2)_uiCamera.ScreenToWorldPoint(Input.mousePosition);
 
             playerStateMachine.ShouldTryStartEditing = () => Input.GetKeyDown(KeyCode.I);
             playerStateMachine.ShouldTryStopEditing = () => Input.GetKeyDown(KeyCode.I);

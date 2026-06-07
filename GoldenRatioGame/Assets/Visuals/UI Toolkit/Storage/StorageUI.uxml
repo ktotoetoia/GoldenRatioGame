@@ -1,4 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Visuals/UI/Storage/StorageCSS.uss?fileID=7433441132597879392&amp;guid=7068e01175a38d842a96de40e03466f2&amp;type=3#StorageCSS"/>
-    <IM.UI.TypedStorageElement/>
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Storage/Storage.uss?fileID=7433441132597879392&amp;guid=7068e01175a38d842a96de40e03466f2&amp;type=3#Storage"/>
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Current%20Items/ScrollableItemContainer.uss?fileID=7433441132597879392&amp;guid=2de626ac5fa5b1a48895f55a9ecbbd98&amp;type=3#ScrollableItemContainer"/>
+    <IM.UI.TypedStorageElement class="scrollableItemContainer"/>
 </ui:UXML>

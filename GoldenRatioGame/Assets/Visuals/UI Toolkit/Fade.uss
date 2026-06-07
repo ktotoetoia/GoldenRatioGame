@@ -1,0 +1,10 @@
+.fade-element {
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-out-cubic;
+    opacity: 0;
+}
+
+.fade-element--visible {
+    opacity: 0.62;
+}
