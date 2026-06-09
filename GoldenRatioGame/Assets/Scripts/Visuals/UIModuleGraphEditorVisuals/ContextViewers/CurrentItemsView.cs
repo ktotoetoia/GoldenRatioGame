@@ -13,7 +13,7 @@ namespace IM.Visuals
     {
         [SerializeField] private string _containerName = "ItemsContainer";
         private UIDocument _document;
-        private ScrollableItemContainer _container;
+        private VisualElement _container;
         private IModuleEditingContext _context;
         private AbilityPoolEditingService _abilityPoolEditingService;
         private IWeaponEditingService _weaponEditingService;
@@ -24,7 +24,7 @@ namespace IM.Visuals
         {
             _document = GetComponent<UIDocument>();
             _document.rootVisualElement.visible = false;
-            _container = _document.rootVisualElement.Q<ScrollableItemContainer>(_containerName);
+            _container = _document.rootVisualElement.Q<VisualElement>(_containerName);
         }
 
         private void Update()
@@ -49,12 +49,12 @@ namespace IM.Visuals
                 {
                     var container = CreateItemContainer(module);
                     _itemDisplayContainers[module] = container;
-                    _container.AddItem(container);
+                    _container.Add(container);
                 },
                 module =>
                 {
                     if (_itemDisplayContainers.Remove(module, out var container))
-                        _container.RemoveItem(container);
+                        _container.Remove(container);
                 }
             );
         }
@@ -66,7 +66,7 @@ namespace IM.Visuals
             _weaponEditingService = null;
             _document.rootVisualElement.visible = false;
 
-            _container?.ClearItems();
+            _container?.Clear();
             _itemDisplayContainers.Clear();
         }
 

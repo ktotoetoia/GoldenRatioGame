@@ -1,7 +1,6 @@
 ﻿using IM.Abilities;
 using IM.Items;
 using IM.WeaponSystem;
-using UnityEngine;
 
 namespace IM.Modules
 {

@@ -282,11 +282,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8682116532131102682}
   - component: {fileID: 3523511756636276468}
-  - component: {fileID: 2940245810777732496}
-  - component: {fileID: 2296920569417181304}
-  - component: {fileID: 4097536316920595737}
+  - component: {fileID: 3159109994111952598}
+  - component: {fileID: 1584081455873256841}
   m_Layer: 6
-  m_Name: StatView
+  m_Name: StatsView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -321,7 +320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
   m_PanelSettings: {fileID: 11400000, guid: eda9c9fc481388c47846da0379501e78, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: d87bc0ba5be958c4b8881a645c083306, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: d9914117b9fbdb744b5a32f7d10a11bd, type: 3}
   m_SortingOrder: 0
   m_Position: 0
   m_WorldSpaceSizeMode: 1
@@ -330,7 +329,7 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
---- !u!114 &2940245810777732496
+--- !u!114 &3159109994111952598
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -339,21 +338,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 772882422062157344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 19106, guid: 0000000000000000e000000000000000, type: 0}
+  m_Script: {fileID: 11500000, guid: 9c9af06318c74957ba405ae410417fa7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.PanelInputConfiguration
-  m_Settings:
-    m_ProcessWorldSpaceInput: 1
-    m_InteractionLayers:
-      serializedVersion: 2
-      m_Bits: 99
-    m_MaxInteractionDistance: Infinity
-    m_DefaultEventCameraIsMainCamera: 0
-    m_EventCameras:
-    - {fileID: 1668021793393009949}
-    m_PanelInputRedirection: 0
-    m_AutoCreatePanelComponents: 1
---- !u!114 &2296920569417181304
+  m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.Visuals.StatPreviewContainer
+  _containerName: StatsContainer
+--- !u!114 &1584081455873256841
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -362,22 +351,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 772882422062157344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed6b3205fc78b1342b0bfd15cdc856c8, type: 3}
+  m_Script: {fileID: 11500000, guid: b7502e6b90894843bcdb6c28b94a7ac6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.Visuals.Graph.StorageViewT
---- !u!114 &4097536316920595737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 772882422062157344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 768a7c50da7c473494976af57f1a34a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: StorageUI::IM.UI.TypedStorageElementTypeSetter
-  _typeName: object
+  m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.Visuals.HealthStatPreviewer
+  _requiredStyles: {fileID: 7433441132597879392, guid: 1ee0d512184497c4bb709bcd9d389fd6, type: 3}
 --- !u!1 &1057642660832433101
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,7 +539,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entityModuleAbilityContextEditingViewer: {fileID: 5311519207825421755}
   _graphViewInteraction: {fileID: 5205874692204699432}
-  _weaponViewInteraction: {fileID: 0}
+  _contextViewer: {fileID: 7882148317166366122}
   _gameCamera: {fileID: 4738437957437066650}
   _uiCamera: {fileID: 1668021793393009949}
   _pauseManager: {fileID: 0}
@@ -602,6 +579,8 @@ GameObject:
   - component: {fileID: 4177232278388293757}
   - component: {fileID: 1200866497789498356}
   - component: {fileID: 7131853788293396913}
+  - component: {fileID: 1029005752128145792}
+  - component: {fileID: 478602597680095208}
   m_Layer: 6
   m_Name: Aligner
   m_TagString: Untagged
@@ -772,6 +751,39 @@ MonoBehaviour:
   _screenDoc: {fileID: 8902478754827637143}
   _worldDoc: {fileID: 6400010115505146701}
   _elementName: CurrentItemsContainer
+  _uiCamera: {fileID: 1668021793393009949}
+  _scaleMultiplier: 100
+--- !u!114 &1029005752128145792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2585163883886769232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb20a2578aba4d5eae26b61327103251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Visuals::IM.Visuals.SetPositionToElement
+  _transformToSet: {fileID: 7202876354600031028}
+  _elementSource: {fileID: 8902478754827637143}
+  _elementName: EditorButtonsContainer
+  _uiCamera: {fileID: 1668021793393009949}
+--- !u!114 &478602597680095208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2585163883886769232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdb78eb2db8496588c12def4af63c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Visuals::IM.Visuals.SetWorldUIScaleToElement
+  _screenDoc: {fileID: 8902478754827637143}
+  _worldDoc: {fileID: 1813446415326900376}
+  _elementName: EditorButtonsContainer
   _uiCamera: {fileID: 1668021793393009949}
   _scaleMultiplier: 100
 --- !u!1 &3036138362997564482
@@ -1079,6 +1091,7 @@ Transform:
   - {fileID: 9014239833158190669}
   - {fileID: 8682116532131102682}
   - {fileID: 5013568616935365970}
+  - {fileID: 7202876354600031028}
   m_Father: {fileID: 3092186167856238398}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5311519207825421755
@@ -1098,9 +1111,11 @@ MonoBehaviour:
   - {fileID: 6127912797885748155}
   - {fileID: 5040019416419378188}
   - {fileID: 3009515933189473279}
+  - {fileID: 7882148317166366122}
   _storageViews:
   - {fileID: 7855973631049726609}
-  - {fileID: 2296920569417181304}
+  _statPreviewContainers:
+  - {fileID: 3159109994111952598}
 --- !u!114 &5205874692204699432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1525,7 +1540,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5013568616935365970}
   - component: {fileID: 6400010115505146701}
-  - component: {fileID: 5688042900101687395}
   - component: {fileID: 5040019416419378188}
   m_Layer: 6
   m_Name: CurrentItemsView
@@ -1572,29 +1586,6 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
---- !u!114 &5688042900101687395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8347375906417423393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19106, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.PanelInputConfiguration
-  m_Settings:
-    m_ProcessWorldSpaceInput: 1
-    m_InteractionLayers:
-      serializedVersion: 2
-      m_Bits: 99
-    m_MaxInteractionDistance: Infinity
-    m_DefaultEventCameraIsMainCamera: 0
-    m_EventCameras:
-    - {fileID: 1668021793393009949}
-    m_PanelInputRedirection: 0
-    m_AutoCreatePanelComponents: 1
 --- !u!114 &5040019416419378188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1608,3 +1599,73 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.UI.CurrentItemsView
   _containerName: ItemsContainer
+--- !u!1 &9104703983774945774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7202876354600031028}
+  - component: {fileID: 1813446415326900376}
+  - component: {fileID: 7882148317166366122}
+  m_Layer: 6
+  m_Name: EditButtonsView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7202876354600031028
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9104703983774945774}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2586033227554550551}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1813446415326900376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9104703983774945774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: eda9c9fc481388c47846da0379501e78, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 03fd6604f36acf5408ab54791fa970d6, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 100
+  m_WorldSpaceHeight: 100
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &7882148317166366122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9104703983774945774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d6d24c302c49a59313bd4da088957d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.Visuals.CContextViewer
+  _saveAndExitButtonName: SaveButton
+  _exitButtonName: DiscardButton

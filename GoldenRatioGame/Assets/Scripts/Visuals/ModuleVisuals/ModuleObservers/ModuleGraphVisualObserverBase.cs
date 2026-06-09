@@ -129,11 +129,13 @@ namespace IM.Visuals
                 if (!ModuleVisualObjects.TryGetValue(otherModule, out IModuleVisualObject toModuleVisual)) continue;
                 IPortVisualObject fromVisual = fromModuleVisual.PortsVisualObjects[module.Ports.ToList().IndexOf(ownerPort)];
                 IPortVisualObject toVisual = toModuleVisual.PortsVisualObjects[otherModule.Ports.ToList().IndexOf(otherPort)];
-                PortAligner.AlignPorts(fromVisual, toVisual);
+                
                 if (ownerPort.Connection.GetOtherPort(ownerPort) is IValueDataPort<PortDirection, IExtensibleItem> d)
                 {
                     fromVisual.OwnerVisualObject.ValueStorageContainer.GetOrCreate<PortDirection>().Value = d.Value;
                 }
+                
+                PortAligner.AlignPorts(fromVisual, toVisual);
             }
         }
 

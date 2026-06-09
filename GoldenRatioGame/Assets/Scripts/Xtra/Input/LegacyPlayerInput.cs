@@ -5,6 +5,7 @@ using IM.LifeCycle;
 using IM.Modules;
 using IM.UI;
 using IM.Values;
+using IM.Visuals;
 using UnityEngine;
 
 namespace IM.Inputs
@@ -13,7 +14,7 @@ namespace IM.Inputs
     {
         [SerializeField] private EntityModuleAbilityContextEditingViewer _entityModuleAbilityContextEditingViewer;
         [SerializeField] private GraphViewInteraction _graphViewInteraction;
-        [SerializeField] private WeaponViewInteraction _weaponViewInteraction;
+        [SerializeField] private EditButtonsContextViewer _contextViewer;
         [SerializeField] private Camera _gameCamera;
         [SerializeField] private Camera _uiCamera;
         [SerializeField] private PauseManager _pauseManager;
@@ -28,9 +29,13 @@ namespace IM.Inputs
         
         private IModuleEntity _moduleEntity;
         private IAbilityAnchorPositionProvider _abilityAnchorPositionProvider;
+        private IModuleEditingContext _trySave;
+        private bool _shouldSave;
+        private bool _shouldExit;
         
         private void Update()
         {
+            _contextViewer.SetSaveAndExitButtonEnabled(_moduleEntity.ModuleEditingContextEditor.CanApplyChanges);
             if(Input.GetKeyDown(KeyCode.Escape)) _pauseManager.SetPaused(!_pauseManager.Paused);
         }
 
@@ -40,20 +45,38 @@ namespace IM.Inputs
             _abilityAnchorPositionProvider = playerEntity.GameObject.GetComponent<IAbilityAnchorPositionProvider>();
             PlayerStateMachine playerStateMachine = playerEntity.GameObject.GetComponent<PlayerStateMachine>();
             
+
+            _contextViewer.SaveAndExitButtonClicked += () =>
+            {
+                _shouldSave = true;
+                _shouldExit = true;
+            };
+
+            _contextViewer.ExitButtonClicked += () =>
+            {
+                _shouldSave = false;
+                _shouldExit = true;
+            };
+            
             _graphViewInteraction.ShouldRedo = () => Input.GetKeyDown(KeyCode.X);
             _graphViewInteraction.ShouldUndo = () => Input.GetKeyDown(KeyCode.Z);
             _graphViewInteraction.ShouldTryQuickRemoveAtPointer = () => Input.GetMouseButtonDown(0);
             _graphViewInteraction.ShouldTryQuickRemove = () =>Input.GetKeyDown(KeyCode.P);
             _graphViewInteraction.GetPointerPosition = () =>(Vector2)_uiCamera.ScreenToWorldPoint(Input.mousePosition);
-            //_weaponViewInteraction.GetPointerPosition = () => (Vector2)_uiCamera.ScreenToWorldPoint(Input.mousePosition);
 
-            playerStateMachine.ShouldTryStartEditing = () => Input.GetKeyDown(KeyCode.I);
-            playerStateMachine.ShouldTryStopEditing = () => Input.GetKeyDown(KeyCode.I);
-            playerStateMachine.EditStarted += x =>_entityModuleAbilityContextEditingViewer.SetModuleEditingContext(x);
-            playerStateMachine.EditEnded += () =>_entityModuleAbilityContextEditingViewer.ClearModuleEditingContext();
+            playerStateMachine.ShouldTryStartEditing = () => Input.GetKeyDown(KeyCode.I) || _shouldExit;
+            playerStateMachine.ShouldTryStopEditing = () => Input.GetKeyDown(KeyCode.I) || _shouldExit;
+            playerStateMachine.EditStarted += x =>_entityModuleAbilityContextEditingViewer.SetModuleEditingContext(_moduleEntity,x);
+            playerStateMachine.EditEnded += () =>
+            {
+                _shouldSave = true;
+                _shouldExit = false;
+                _entityModuleAbilityContextEditingViewer.ClearModuleEditingContext();
+            };
             playerStateMachine.ProvideMovementDirection = GetMovementDirection;
             playerStateMachine.ShouldTryInteract = ShouldTryInteract;
             playerStateMachine.ResolveRequestedAbilities = ProvideKeyForAbility;
+            playerStateMachine.ShouldTrySaveChanges = x => _shouldSave;
         }
 
         private IEnumerable<KeyValuePair<IAbilityReadOnly,UseContext>> ProvideKeyForAbility(IEnumerable<IAbilityReadOnly> arg)

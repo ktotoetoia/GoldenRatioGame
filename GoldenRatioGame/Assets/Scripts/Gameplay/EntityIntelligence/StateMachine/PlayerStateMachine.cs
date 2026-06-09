@@ -39,6 +39,7 @@ namespace IM
         public Func<bool> ShouldTryStopEditing { get; set; } = () => false;
         public Action<IModuleEditingContext> EditStarted { get; set; } = x => { };
         public Action EditEnded { get; set; } = () => { };
+        public Func<IModuleEditingContextReadOnly,bool> ShouldTrySaveChanges { get; set; } = x => true;
         
         public bool Paused { get; set; }
         
@@ -53,7 +54,7 @@ namespace IM
             _abilityUseState = new AbilityUseState(_abilityUser, x => ResolveRequestedAbilities(x));
             _generalState = new CompositeState(new [] {_movementState, _abilityUseState});
             _interactionState = new InteractionState(_interactor, ResolveInteraction);
-            _graphEditingState = new GraphEditingState(_entity,x => EditStarted(x), () => EditEnded());
+            _graphEditingState = new GraphEditingState(_entity,x => EditStarted(x), () => EditEnded(),x => ShouldTrySaveChanges(x));
             
             _generalToGraphEditing = new Transition(_generalState,_graphEditingState,()=> ShouldTryStartEditing());
             _graphEditingToGeneral = new Transition(_graphEditingState,_generalState,() => ShouldTryStopEditing());

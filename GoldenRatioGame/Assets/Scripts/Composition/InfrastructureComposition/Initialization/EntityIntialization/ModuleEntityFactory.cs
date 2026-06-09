@@ -33,12 +33,13 @@ namespace IM
             try
             {
                 List<IExtensibleItem> itemsList = items.ToList();
+                IModuleEditingContext moduleEditingContext = entity.ModuleEditingContextEditor.BeginEdit();
                 
                 foreach (IExtensibleItem toAdd in itemsList)
                 {
+                    moduleEditingContext.StorageEditing.AddToStorage(toAdd);
                     entity.AddToContext(toAdd);
                 }
-                IModuleEditingContext moduleEditingContext = entity.ModuleEditingContextEditor.BeginEdit();
                 
                 foreach (IExtensibleItem toAdd in itemsList)
                 {

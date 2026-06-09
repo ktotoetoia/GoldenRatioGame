@@ -29,7 +29,7 @@ namespace IM.Modules
             _subConvertorsSource.GetComponents(moduleEditingContextConverter.CapabilitySnapshots);
             _subConvertorsSource.GetComponents(moduleEditingContextConverter.CapabilityFactories);
             
-            _moduleEditingContextEditor = new ModuleEditingContextEditor(moduleEditingContextConverter);
+            _moduleEditingContextEditor = new ModuleEditingContextEditor(moduleEditingContextConverter,new RequireNumberOfModulesGraphValidator<IModuleEditingContext>(1));
             
             foreach (var editorObserver in GetComponentsInChildren<IEditorObserver<IModuleEditingContextReadOnly>>())
             {

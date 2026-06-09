@@ -7,10 +7,6 @@
     overflow: hidden;
 }
 
-.scrollableItemContainerView {
-    flex-grow: 1;
-}
-
-.scrollableItemContainerView #unity-content-viewport {
+.scrollableItemContainer #unity-content-viewport {
     flex-grow: 1;
 }

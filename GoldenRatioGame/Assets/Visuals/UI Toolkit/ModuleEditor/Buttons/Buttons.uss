@@ -1,0 +1,44 @@
+.button {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    transition-property: background-color, color;
+    transition-duration: 0.1s, 0.1s;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.saveButton {
+    background-color: rgb(98, 218, 79);
+    color: rgb(255, 255, 255);
+}
+
+
+
+.discardButton {
+    background-color: rgb(255, 99, 71);
+}
+
+.saveButton:hover {
+    background-color: rgb(112, 164, 47);
+    color: rgb(255, 255, 255);
+}
+
+.saveButton:active {
+    background-color: rgb(117, 194, 87);
+    color: rgb(0, 0, 0);
+}
+
+.discardButton:hover {
+    background-color: rgb(185, 76, 57);
+}
+
+.discardButton:active {
+    background-color: rgb(221, 123, 75);
+    color: rgb(0, 0, 0);
+}

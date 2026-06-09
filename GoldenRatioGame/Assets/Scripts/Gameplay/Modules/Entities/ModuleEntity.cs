@@ -57,9 +57,9 @@ namespace IM.Modules
             
             foreach (IStorageCellReadonly storageCellReadonly in moduleEditingContext.Storage)
             {
-                if (storageCellReadonly.Item is IExtensibleItem item && moduleEditingContext.StorageEditing.RemoveFromStorage(item))
+                if (storageCellReadonly.Item is IItem i&& moduleEditingContext.StorageEditing.RemoveFromStorage(i) &&  i is IExtensibleItem extItem)
                 {
-                    finalModules.Add(item);
+                    finalModules.Add(extItem);
                 }
             }
             

@@ -36,7 +36,7 @@ namespace IM.Modules
         {
             if (obj is MonoBehaviour mb && mb.transform.parent == _onAddedTransformIn)
                 mb.transform.SetParent(_onRemovedTransformOut.parent);
-
+            
             if (obj is IMutableOwner haveOwner && haveOwner.Owner == _entity)
                 haveOwner.SetOwner(null);
         }

@@ -1,5 +1,4 @@
 using IM.Items;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace IM.Visuals

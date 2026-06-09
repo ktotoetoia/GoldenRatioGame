@@ -1,0 +1,4 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/ModuleEditor/Current%20Items/ScrollableItemContainer.uss?fileID=7433441132597879392&amp;guid=2de626ac5fa5b1a48895f55a9ecbbd98&amp;type=3#ScrollableItemContainer"/>
+    <ui:ScrollView name="StatsContainer" class="scrollableItemContainer" style="flex-grow: 1; padding-top: 16px; padding-right: 16px; padding-bottom: 16px; padding-left: 16px;"/>
+</ui:UXML>

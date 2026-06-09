@@ -4,7 +4,7 @@ namespace IM.UI
 {
     public interface IEntityEditor
     {
-        void SetModuleEditingContext(IModuleEditingContext moduleEditingContext);
+        void SetModuleEditingContext(IModuleEntity entity, IModuleEditingContext moduleEditingContext);
         void ClearModuleEditingContext();
     }
 }

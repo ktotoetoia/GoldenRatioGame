@@ -71,5 +71,10 @@ namespace IM.Values
             if (value.CompareTo(_maxValue) > 0) return _maxValue;
             return value;
         }
+
+        public override string ToString()
+        {
+            return $"Value: {Value}. Min: {_minValue}. Max: {_maxValue}";
+        }
     }
 }

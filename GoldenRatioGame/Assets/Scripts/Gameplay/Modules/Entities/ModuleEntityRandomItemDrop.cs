@@ -21,8 +21,7 @@ namespace IM.Modules
 
         private void OnDestroy()
         {
-            if (_moduleEntity != null)
-                _moduleEntity.Disassembled -= OnDisassembled;
+            if (_moduleEntity) _moduleEntity.Disassembled -= OnDisassembled;
         }
 
         private void OnDisassembled(IEnumerable<IExtensibleItem> modules)
@@ -30,7 +29,7 @@ namespace IM.Modules
             var moduleList = modules.ToList();
             var remainList = new List<IExtensibleItem>();
             int itemsToKeep = Mathf.Min(_dropCount, moduleList.Count);
-        
+            
             for (int i = 0; i < itemsToKeep; i++)
             {
                 int index = Random.Range(0, moduleList.Count);

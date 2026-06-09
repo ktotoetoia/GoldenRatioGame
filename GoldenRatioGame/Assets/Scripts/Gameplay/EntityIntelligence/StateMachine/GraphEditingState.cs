@@ -9,13 +9,15 @@ namespace IM
 	    private readonly IModuleEntity _entity;
 	    private readonly Action<IModuleEditingContext> _onEditStarted;
 	    private readonly Action _onEditEnded;
+	    private readonly Func<IModuleEditingContextReadOnly, bool> _shouldTrySaveChanges;
 	    private IModuleEditingContext _context;
 	    
-	    public GraphEditingState(IModuleEntity entity, Action<IModuleEditingContext> onEditStarted, Action onEditEnded)
+	    public GraphEditingState(IModuleEntity entity, Action<IModuleEditingContext> onEditStarted, Action onEditEnded, Func<IModuleEditingContextReadOnly,bool> shouldTrySaveChanges)
 	    {
 		    _entity = entity;
 		    _onEditStarted = onEditStarted;
 		    _onEditEnded = onEditEnded;
+		    _shouldTrySaveChanges = shouldTrySaveChanges;
 	    }
 
 	    public override void OnEnter()
@@ -27,9 +29,12 @@ namespace IM
 
 	    public override void OnExit()
 	    {
-		    _context = null;
+		    if (!_shouldTrySaveChanges(_context) || !_entity.ModuleEditingContextEditor.TryApplyChanges() )
+		    {
+			    _entity.ModuleEditingContextEditor.DiscardChanges();
+		    }
 		    
-		    if(!_entity.ModuleEditingContextEditor.TryApplyChanges()) _entity.ModuleEditingContextEditor.DiscardChanges();
+		    _context = null;
 		    
 		    _onEditEnded();
 	    }

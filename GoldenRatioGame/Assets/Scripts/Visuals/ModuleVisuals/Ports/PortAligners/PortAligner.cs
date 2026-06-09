@@ -17,9 +17,7 @@ namespace IM.Visuals
         {
             ITransform owner = portToMove.OwnerVisualObject.Transform;
 
-            Quaternion portLocal =
-                Quaternion.Inverse(owner.Rotation) *
-                portToMove.Transform.Rotation;
+            Quaternion portLocal = Quaternion.Inverse(owner.Rotation) * portToMove.Transform.Rotation;
             Quaternion result = anchorPort.Transform.Rotation * Quaternion.Inverse(portLocal);
             
             if (System.Math.Sign(portToMove.Transform.LossyScale.x) == System.Math.Sign(anchorPort.Transform.LossyScale.x))
