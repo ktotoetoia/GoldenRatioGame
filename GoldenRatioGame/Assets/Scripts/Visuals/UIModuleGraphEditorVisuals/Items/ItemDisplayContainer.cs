@@ -1,15 +1,18 @@
 using IM.Items;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace IM.Visuals
 {
     [UxmlElement]
-    public partial class ItemDisplayContainer : VisualElement
+    public partial class ItemDisplayContainer : VisualElement, ITooltipInfo
     {
         private readonly VisualElement _icon;
         private readonly MarqueeContainerBase _nameMarquee;
         private readonly MarqueeContainerBase _descriptionMarquee;
         private readonly VisualElement _extraSlot;
+
+        public VisualElement ExtraElement { get; private set; }
 
         public ItemDisplayContainer()
         {
@@ -50,13 +53,11 @@ namespace IM.Visuals
             }
 
             _nameMarquee.Text = item is IHaveName named ? named.Name : string.Empty;
-            _descriptionMarquee.Text = item is IHaveDescription described ? described.Description : string.Empty;
-            _icon.style.backgroundImage = item is IHaveIcon { Icon: not null } iconed
-                ? Background.FromSprite(iconed.Icon.Sprite)
+            _descriptionMarquee.Text = item is IHaveDescription described ? described.ShortDescription : string.Empty;
+            _icon.style.backgroundImage = item is IHaveIcon { Icon: not null } haveIcon
+                ? Background.FromSprite(haveIcon.Icon.Sprite)
                 : StyleKeyword.None;
         }
-
-        public VisualElement ExtraElement { get; private set; }
 
         public void SetExtraElement(VisualElement element)
         {
@@ -65,5 +66,10 @@ namespace IM.Visuals
             if (element != null)
                 _extraSlot.Add(element);
         }
+
+        public string Name => _nameMarquee.Text;
+        public string ShortDescription => _descriptionMarquee.Text;
+        public string Description => _descriptionMarquee.Text;
+        public Sprite Icon => _icon.style.backgroundImage.value.sprite;
     }
 }

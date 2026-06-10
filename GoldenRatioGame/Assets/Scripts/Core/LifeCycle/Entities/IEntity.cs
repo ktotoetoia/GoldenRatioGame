@@ -10,4 +10,9 @@ namespace IM.LifeCycle
         void Destroy();
         event Action<IEntity> Destroyed;
     }
+
+    public interface IEntityHitBox
+    {
+        IEntity Owner { get; }
+    }
 }

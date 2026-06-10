@@ -17,6 +17,7 @@ namespace IM.Abilities
         public bool CanInterrupt => true;
 
         public string Name { get; set; } = "Line Drawer";
+        public string ShortDescription { get; set; } = "Debug";
         public string Description { get; set; } = "Draws line from the position of an entity to the pointer position";
 
         public DebugDrawLineChannelAbility(float cooldownTime, float useTime)

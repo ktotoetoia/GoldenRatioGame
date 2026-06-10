@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 namespace IM.Visuals
 {
-    public partial class ItemVisualElement : VisualElement
+    public class ItemVisualElement : VisualElement
     {
         private readonly MarqueeContainerBase _nameLabel;
         private readonly Image _iconElement;
@@ -59,8 +59,7 @@ namespace IM.Visuals
                 return;
             }
 
-            if (item is IHaveName named)
-                _nameLabel.Text = named.Name;
+            if (item is IHaveName named) _nameLabel.Text = named.Name;
 
             if (item is IHaveIcon { Icon: not null } icon)
             {

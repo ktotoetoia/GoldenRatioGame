@@ -6,7 +6,7 @@ using UnityEngine;
 namespace IM.UI
 {
     [DefaultExecutionOrder(EntityContextEditorExecutionOrder)]
-    public class EntityModuleAbilityContextEditingViewer : MonoBehaviour, IEntityEditor
+    public class EntityContextEditingViewer : MonoBehaviour, IEntityEditor
     {
         [SerializeField] private List<ContextViewer> _contextViewers;
         [SerializeField] private List<StorageView> _storageViews;

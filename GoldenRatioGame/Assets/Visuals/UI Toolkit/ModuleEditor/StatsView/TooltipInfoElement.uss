@@ -1,0 +1,89 @@
+/* ═══════════════════════════════════════════════════════════
+   TooltipInfoElement.uss
+   Requires Unity 2022.2+ for background-size / background-repeat
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Root card ───────────────────────────────────────────── */
+.tooltip-info {
+    flex-direction: column;
+    background-color: rgb(13, 11, 20);
+    border-color: rgba(200, 162, 78, 0.55);
+    border-width: 1px;
+    border-radius: 6px;
+    padding: 10px;
+    min-width: 180px;
+    max-width: 300px;
+}
+
+/* ── Top row  [icon | name + short-desc] ─────────────────── */
+.tooltip-info__top-row {
+    flex-direction: row;
+    align-items: stretch;           /* text column fills icon height */
+}
+
+/* ── Icon — fixed square ─────────────────────────────────── */
+.tooltip-info__icon {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.06);
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.12);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/* Empty-slot appearance when Sprite is null */
+.tooltip-info__icon--placeholder {
+    background-color: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* ── Text column (right of icon) ─────────────────────────── */
+.tooltip-info__text-column {
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;        /* vertically centers name+desc in icon height */
+    padding-left: 10px;
+}
+
+/* ── Name — larger, prominent ────────────────────────────── */
+.tooltip-info__name {
+    font-size: 14px;
+    -unity-font-style: bold;
+    color: rgb(240, 232, 208);
+    white-space: normal;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 2px;
+}
+
+/* ── Short description — subdued, italic ─────────────────── */
+.tooltip-info__short-desc {
+    font-size: 11px;
+    -unity-font-style: italic;
+    color: rgba(168, 152, 128, 0.9);
+    white-space: normal;
+    margin: 0;
+    padding: 0;
+}
+
+/* ── Divider — only shown when description is present ───── */
+.tooltip-info__divider {
+    height: 1px;
+    background-color: rgba(200, 162, 78, 0.28);
+    margin-top: 8px;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+}
+
+/* ── Full description — same size as short-desc ─────────── */
+.tooltip-info__description {
+    font-size: 11px;
+    color: rgba(168, 152, 128, 0.9);
+    white-space: normal;
+    margin: 0;
+    padding: 0;
+}

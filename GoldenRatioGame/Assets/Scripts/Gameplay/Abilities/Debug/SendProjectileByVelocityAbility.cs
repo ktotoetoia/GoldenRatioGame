@@ -19,7 +19,8 @@ namespace IM.Abilities
         public float Speed { get; set; } = 5f;
         public float FocusTime { get; set; } = 0.5f;
         public string Name { get; set; } = "Projectile thrower";
-        public string Description { get; set; } = "Throws projectile in the direction of pointer";
+        public string ShortDescription { get; set; } = "Debug"; 
+        public string Description { get; set; }= "Throws projectile in the direction of pointer";
         public IIcon Icon { get; set; }
         public float SpawnProjectileOffsetMagnitude { get; set; } = .5f;
         

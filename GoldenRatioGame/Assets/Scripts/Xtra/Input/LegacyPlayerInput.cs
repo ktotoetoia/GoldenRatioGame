@@ -12,7 +12,7 @@ namespace IM.Inputs
 {
     public class LegacyPlayerInput : MonoBehaviour, IRequirePlayerEntity
     {
-        [SerializeField] private EntityModuleAbilityContextEditingViewer _entityModuleAbilityContextEditingViewer;
+        [SerializeField] private EntityContextEditingViewer entityContextEditingViewer;
         [SerializeField] private GraphViewInteraction _graphViewInteraction;
         [SerializeField] private EditButtonsContextViewer _contextViewer;
         [SerializeField] private Camera _gameCamera;
@@ -66,12 +66,12 @@ namespace IM.Inputs
 
             playerStateMachine.ShouldTryStartEditing = () => Input.GetKeyDown(KeyCode.I) || _shouldExit;
             playerStateMachine.ShouldTryStopEditing = () => Input.GetKeyDown(KeyCode.I) || _shouldExit;
-            playerStateMachine.EditStarted += x =>_entityModuleAbilityContextEditingViewer.SetModuleEditingContext(_moduleEntity,x);
+            playerStateMachine.EditStarted += x =>entityContextEditingViewer.SetModuleEditingContext(_moduleEntity,x);
             playerStateMachine.EditEnded += () =>
             {
                 _shouldSave = true;
                 _shouldExit = false;
-                _entityModuleAbilityContextEditingViewer.ClearModuleEditingContext();
+                entityContextEditingViewer.ClearModuleEditingContext();
             };
             playerStateMachine.ProvideMovementDirection = GetMovementDirection;
             playerStateMachine.ShouldTryInteract = ShouldTryInteract;

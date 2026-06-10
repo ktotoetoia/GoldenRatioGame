@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using IM.Abilities;
 using IM.Graphs;
 using IM.LifeCycle;
@@ -9,7 +10,7 @@ using UnityEngine.UIElements;
 
 namespace IM.Visuals
 {
-    public class CurrentItemsView : ContextViewer
+    public class CurrentItemsViewer : ContextViewer
     {
         [SerializeField] private string _containerName = "ItemsContainer";
         private UIDocument _document;
@@ -72,15 +73,15 @@ namespace IM.Visuals
 
         public IAbilityContainer GetContainerAt(Vector3 position)
         {
-            foreach (var container in _itemDisplayContainers.Values)
+            List<ItemDisplayContainer> elements = WorldDocumentUtility.GetElementsAtPosition<ItemDisplayContainer>(_document,position).ToList();
+            
+            foreach (ItemDisplayContainer element in elements)
             {
-                var bounds = container.worldBound;
-                bounds.position += (Vector2)_document.transform.position;
-
-                if (bounds.Contains(position) && container.ExtraElement is ExtensibleItemExtra { AbilityContainer: not null } extra)
-                    return extra.AbilityContainer;
+                if(element.ExtraElement is ExtensibleItemExtra { AbilityContainer: not null } container)
+                {
+                    return container.AbilityContainer;
+                }
             }
-
             return null;
         }
 

@@ -537,7 +537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11bf42e72995449b9daf53473e1c8162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entityModuleAbilityContextEditingViewer: {fileID: 5311519207825421755}
+  entityContextEditingViewer: {fileID: 5311519207825421755}
   _graphViewInteraction: {fileID: 5205874692204699432}
   _contextViewer: {fileID: 7882148317166366122}
   _gameCamera: {fileID: 4738437957437066650}
@@ -914,6 +914,93 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &3349298921210743276
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2003868462023729582}
+  - component: {fileID: 4127881256088814093}
+  - component: {fileID: 3087950249454672768}
+  - component: {fileID: 6204554411797089081}
+  m_Layer: 0
+  m_Name: TooltipView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2003868462023729582
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3349298921210743276}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2586033227554550551}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4127881256088814093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3349298921210743276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 26296ce5bac6104418fb111e33e3de6c, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 30dae933167611245894bb6f0dfe9ebc, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &3087950249454672768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3349298921210743276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1da1c173fc2748f888530cea19bd58e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.Visuals.TooltipContextViewer
+  _uiCamera: {fileID: 1668021793393009949}
+--- !u!114 &6204554411797089081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3349298921210743276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c8b80cd9b0e4cfc93f4bf04aa35fc9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Visuals::IM.Visuals.PopupElementWorldViewer
+  _worldViewDocuments:
+  - {fileID: 6400010115505146701}
+  - {fileID: 3523511756636276468}
+  - {fileID: 8379213644274031688}
+  _hoverDelay: 0.5
 --- !u!1 &3384889456729800444
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,6 +1179,7 @@ Transform:
   - {fileID: 8682116532131102682}
   - {fileID: 5013568616935365970}
   - {fileID: 7202876354600031028}
+  - {fileID: 2003868462023729582}
   m_Father: {fileID: 3092186167856238398}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5311519207825421755
@@ -1112,6 +1200,7 @@ MonoBehaviour:
   - {fileID: 5040019416419378188}
   - {fileID: 3009515933189473279}
   - {fileID: 7882148317166366122}
+  - {fileID: 3087950249454672768}
   _storageViews:
   - {fileID: 7855973631049726609}
   _statPreviewContainers:
@@ -1128,11 +1217,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca473781ca584c23bbe817c0a4b95262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.Visuals.Graph.ModuleContextInput
-  _moduleGraphView: {fileID: 6127912797885748155}
+  moduleGraphViewer: {fileID: 6127912797885748155}
   _moduleStorageView: {fileID: 7855973631049726609}
   _modulePreviewPlacer: {fileID: 8010555784201700074}
   _weaponPreviewPlacer: {fileID: 3328852227756658463}
-  _currentItemsView: {fileID: 5040019416419378188}
+  currentItemsViewer: {fileID: 5040019416419378188}
   _uiCamera: {fileID: 1668021793393009949}
   _addWorldDistance: 0.6
 --- !u!114 &7401670538527069662

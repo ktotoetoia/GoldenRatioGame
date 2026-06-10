@@ -169,7 +169,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portFactory: {fileID: 11400000, guid: d8a6636f007763f4d9ac5991545131c1, type: 2}
   <Name>k__BackingField: 'Humanoid '
-  <Description>k__BackingField: Leg
+  <ShortDescription>k__BackingField: Leg
+  <Description>k__BackingField: 
 --- !u!114 &3134715345525867726
 MonoBehaviour:
   m_ObjectHideFlags: 0

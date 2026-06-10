@@ -169,7 +169,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Modules::IM.Modules.CoreExtensibleModule
   portFactory: {fileID: 11400000, guid: 26e5bdefabebc534397d29ad97ad96eb, type: 2}
   <Name>k__BackingField: Humanoid
-  <Description>k__BackingField: Core
+  <ShortDescription>k__BackingField: Core
+  <Description>k__BackingField: 
 --- !u!114 &1563791358509127018
 MonoBehaviour:
   m_ObjectHideFlags: 0

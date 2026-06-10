@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace IM.UI
 {
-    public class ModuleGraphView : ContextViewer
+    public class ModuleGraphViewer : ContextViewer
     {
         [SerializeField] private ModuleVisualObjectPreset _preset;
         private IModuleEditingContext _context;

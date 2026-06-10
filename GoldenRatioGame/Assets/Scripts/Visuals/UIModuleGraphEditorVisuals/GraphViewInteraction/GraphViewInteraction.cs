@@ -11,11 +11,11 @@ namespace IM.UI
 {
     public class GraphViewInteraction : ContextViewer, IGraphViewInteraction,IPausable
     {
-        [SerializeField] private ModuleGraphView _moduleGraphView;
+        [SerializeField] private ModuleGraphViewer moduleGraphViewer;
         [SerializeField] private StorageView _moduleStorageView;
         [SerializeField] private ModulePreviewPlacer _modulePreviewPlacer;
         [SerializeField] private WeaponPreviewPlacer _weaponPreviewPlacer;
-        [SerializeField] private CurrentItemsView _currentItemsView;
+        [SerializeField] private CurrentItemsViewer currentItemsViewer;
         [SerializeField] private Camera _uiCamera;
         [SerializeField] private float _addWorldDistance = 0.3f;
         private IModuleEditingContext _context;
@@ -51,7 +51,7 @@ namespace IM.UI
             
             Vector3 mousePosition = GetPointerPosition();
 
-            foreach (var (module, visual) in _moduleGraphView.VisualObserver.ModuleToVisualObjects)
+            foreach (var (module, visual) in moduleGraphViewer.VisualObserver.ModuleToVisualObjects)
             {
                 if (visual.Bounds.Contains(mousePosition) && _context.GraphEditing.TryQuickRemoveModule(module))
                 {
@@ -90,7 +90,7 @@ namespace IM.UI
 
             if (_weaponPreviewPlacer.IsPreviewing && _context != null )
             {
-                if(_context!=null&&_currentItemsView.GetContainerAt(GetPointerPosition()) is IWeaponContainer c ) _weaponEditingService.SetWeapon(c,_weaponPreviewPlacer.PreviewObject);
+                if(_context!=null&&currentItemsViewer.GetContainerAt(GetPointerPosition()) is IWeaponContainer c ) _weaponEditingService.SetWeapon(c,_weaponPreviewPlacer.PreviewObject);
                 _weaponPreviewPlacer.FinalizePreview();
             }
         }
@@ -105,14 +105,14 @@ namespace IM.UI
 
             foreach (IPortVisualObject a in toAdd.PortsVisualObjects)
             {
-                foreach (IPortVisualObject otherPort in _moduleGraphView.VisualObserver.ModuleToVisualObjects.SelectMany(x => x.Value.PortsVisualObjects))
+                foreach (IPortVisualObject otherPort in moduleGraphViewer.VisualObserver.ModuleToVisualObjects.SelectMany(x => x.Value.PortsVisualObjects))
                 {
                     float newDistance = Vector3.Distance(otherPort.Transform.Position, a.Transform.Position);
                     IExtensibleItem item = toAdd.Owner;
                     
                     var module = _context.GraphEditing.CreateModule(item);
                     var modulePort = module.DataPorts.ElementAtOrDefault(toAdd.PortsVisualObjects.ToList().IndexOf(a));
-                    var targetPort = _moduleGraphView.VisualObserver.PortToVisualObjects.FirstOrDefault(x => x.Value == otherPort).Key;
+                    var targetPort = moduleGraphViewer.VisualObserver.PortToVisualObjects.FirstOrDefault(x => x.Value == otherPort).Key;
                     
                     if (newDistance < distance && _context.GraphEditing.CanAddAndConnect(module, modulePort, targetPort))
                     {

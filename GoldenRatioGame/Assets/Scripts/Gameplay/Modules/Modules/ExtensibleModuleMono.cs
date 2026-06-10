@@ -14,6 +14,7 @@ namespace IM.Modules
         private object _owner;
 
         [field: SerializeField] public string Name { get; private set; }
+        [field: SerializeField] public string ShortDescription { get; private set; }
         [field: SerializeField] public string Description { get; private set; }
         public event Action<IEntity> Destroyed;
         public GameObject GameObject => gameObject;

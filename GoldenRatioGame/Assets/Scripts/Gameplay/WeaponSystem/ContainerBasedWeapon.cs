@@ -22,6 +22,7 @@ namespace IM.WeaponSystem
         public IEntity Entity { get; set; }
         public IStorageCell Cell { get; set; }
         public string Name => CastAbility.Name;
+        public string ShortDescription => CastAbility.ShortDescription;
         public string Description => CastAbility.Description;
         public IIcon Icon => _icon ??= new Icon(GetComponent<SpriteRenderer>().sprite);
 

@@ -17,9 +17,11 @@ namespace IM.Visuals
 
         public VisualElement GetPreview(IModuleEntity entity, IModuleEditingContextReadOnly currentContext)
         {
-            var previewElement = new GhostCappedValueElement();
-            previewElement.GhostDelaySeconds = 0.1f;
-            previewElement.GhostSlideDuration = 0.1f;
+            var previewElement = new GhostCappedValueElement
+            {
+                GhostDelaySeconds = 0.1f,
+                GhostSlideDuration = 0.1f
+            };
             previewElement.styleSheets.Add(_requiredStyles);
             previewElement.GetCappedValue = () => CalculateTotalHealth(entity, currentContext);
             UpdatePreview(previewElement, entity, currentContext);
