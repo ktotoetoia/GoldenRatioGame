@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2517f2c5f21473c9c702624433f96c4, type: 3}
-  m_Name: AugmentEffect
+  m_Name: 10 HP Effect
   m_EditorClassIdentifier: Effects::IM.Effects.DefaultRestorableEffectGroupFactory
   _effectModifierFactories:
-  - rid: 4006956902272204946
+  - rid: 2168712204229541966
   references:
     version: 2
     RefIds:
-    - rid: 4006956902272204946
-      type: {class: SpeedEffectModifierFactory, ns: IM.Effects, asm: GameplayComposition}
+    - rid: 2168712204229541966
+      type: {class: HealthEffectModifierFactory, ns: IM.Effects, asm: GameplayComposition}
       data:
-        <Add>k__BackingField: 10
-        <Multiplication>k__BackingField: 1
+        _cappedValue:
+          _minValue: 0
+          _maxValue: 10
+          _value: 10

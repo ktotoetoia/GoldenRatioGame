@@ -60,7 +60,7 @@ namespace IM.Visuals
             {
                 foreach (IEffectAugment effectAugment in augmentContainer.Augments.OfType<IEffectAugment>())
                 {
-                    if (effectAugment.EffectGroup?.Modifiers?.TryGet(out IEnumerable<IHealthEffectModifier> effectModifiers) == true)
+                    if (effectAugment.EffectGroup?.Modifiers?.TryGetAll(out IEnumerable<IHealthEffectModifier> effectModifiers) == true)
                     {
                         Accumulate(effectModifiers, ref totalValue, ref totalMax);
                     }

@@ -27,10 +27,7 @@
     border-right-color: rgba(0, 0, 0, 0);
     border-top-color: rgba(0, 0, 0, 0);
     border-bottom-color: rgba(0, 0, 0, 0);
-    margin-top: 4px;
-    margin-right: 4px;
-    margin-bottom: 4px;
-    margin-left: 4px;
+    margin: 4px;
 }
 
 .styledButton:hover {

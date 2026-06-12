@@ -1,6 +1,8 @@
-﻿namespace IM.Augments
+﻿using IM.Items;
+
+namespace IM.Augments
 {
-    public interface IAugment
+    public interface IAugment : IHaveName, IHaveDescription, IHaveIcon
     {
         
     }

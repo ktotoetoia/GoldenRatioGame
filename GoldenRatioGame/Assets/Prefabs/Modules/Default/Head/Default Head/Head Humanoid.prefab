@@ -155,6 +155,7 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   _blackList: []
+  <Order>k__BackingField: -100
 --- !u!114 &5469737783865499535
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -165,6 +165,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -4642281475574424799, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
+      propertyPath: _augmentProgressValueOnClear
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -4642281475574424799, guid: c3488cf6c9d57b64eaa61001eec4d08d, type: 3}
       propertyPath: _transitionPointsSources.Array.size
       value: 1
       objectReference: {fileID: 0}

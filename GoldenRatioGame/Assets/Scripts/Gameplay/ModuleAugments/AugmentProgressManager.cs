@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace IM.Augments
 {
-    public class AugmentProgressManager : MonoBehaviour
+    public class AugmentProgressManager : MonoBehaviour,IAugmentProgressManager
     {
         [SerializeField] private AugmentContainer _augmentContainer;
         [SerializeField] private GameObject _owner;
@@ -14,14 +14,6 @@ namespace IM.Augments
 
         public IReadOnlyDictionary<IAugmentExtension, AugmentProgressInfo> AugmentProgress => _progress;
         public IEnumerable<IAugmentFactory> AppliedFactories => _appliedFactories;
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                Progress(1);
-            }
-        }
         
         public void SetActiveExtensions(IEnumerable<IAugmentExtension> extensions)
         {

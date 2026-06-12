@@ -1,78 +1,100 @@
 :root {
-    --inv-bg: rgb(26, 26, 26);
-    --inv-border: rgb(180, 180, 180);
-    --inv-padding: 6px;
-    --inv-border-width: 6px;
-    --cell-bg: rgb(40, 40, 40);
-    --cell-border: rgb(220, 220, 220);
-    --cell-hover-bg: rgb(90, 90, 90);
-    --cell-selected-bg: rgb(255, 128, 0);
-    --cell-selected-border: rgb(255, 200, 120);
+    --inv-bg: var(--ui-bg-2);
+    --inv-border: var(--ui-border);
+    --inv-padding: 8px;
+    --inv-border-width: 1px;
+
+    --cell-bg: var(--ui-cell-bg);
+    --cell-border: var(--ui-border-cell);
+    --cell-hover-bg: var(--ui-cell-hover-bg);
+    --cell-selected-bg: var(--ui-cell-selected-bg);
+    --cell-selected-border: var(--ui-cell-selected-border);
+
     --cell-height: 80px;
-    --cell-border-width: 6px;
-    --cell-padding: 6px;
-    --item-text-color: white;
+    --cell-border-width: 1px;
+    --cell-padding: 8px;
+
+    --item-text-color: var(--ui-text);
     --item-font-size: 25px;
     --item-font: url("project://database/Assets/Visuals/Fonts/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf?fileID=12800000&guid=585188cdc4600544eb408bee749e4b3a&type=3#ThaleahFat_TTF");
+
     --slider-dragger-width: 50%;
     --slider-dragger-radius: 10px;
     --icon-dimension: 55px;
-    --listItems-padding: 3px;
+    --listItems-padding: 6px;
 }
 
 .storage {
+    flex-grow: 1;
     padding: var(--inv-padding);
     background-color: var(--inv-bg);
-    border-width: var(--inv-border-width);
-    border-radius: 0;
     border-color: var(--inv-border);
+    border-width: var(--inv-border-width);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.storagePanel {
     flex-grow: 1;
+    padding: 6px;
+    background-color: var(--ui-panel);
+    border-color: var(--ui-border-faint);
+    border-width: 1px;
+    border-radius: 10px;
+}
+
+.containerPanel {
+    padding: 8px;
+    background-color: var(--ui-panel-soft);
+    border-color: var(--ui-border-faint);
+    border-width: 1px;
+    border-radius: 10px;
 }
 
 .icon {
-    background-position: center;
     width: var(--icon-dimension);
     height: var(--icon-dimension);
     min-width: var(--icon-dimension);
     min-height: var(--icon-dimension);
-    -unity-background-scale-mode: scale-to-fit;
     margin-right: var(--listItems-padding);
     margin-left: var(--listItems-padding);
+    background-position: center;
+    -unity-background-scale-mode: scale-to-fit;
 }
 
 .itemLabel {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    margin: 0 var(--listItems-padding) 0 var(--listItems-padding);
+    padding: 0;
+    align-self: center;
     color: var(--item-text-color);
+    font-size: var(--item-font-size);
     -unity-font-definition: var(--item-font);
     -unity-font-style: bold;
-    text-overflow: ellipsis;
-    flex-grow: 1;
-    margin: 0;
-    padding: 0;
     -unity-text-align: middle-left;
-    align-self: center;
+    text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    min-width: 0;
-    flex-shrink: 1;
-    margin-right: var(--listItems-padding);
-    margin-left: var(--listItems-padding);
-    font-size: var(--item-font-size);
 }
 
 .cell {
-    margin: 0;
-    background-color: var(--cell-bg);
-    border-width: var(--cell-border-width);
-    border-color: var(--cell-border);
-    height: var(--cell-height);
-    padding: var(--cell-padding);
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    height: var(--cell-height);
+    margin: 0;
+    padding: var(--cell-padding);
+    background-color: var(--cell-bg);
+    border-color: var(--cell-border);
+    border-width: var(--cell-border-width);
+    border-radius: 10px;
 }
 
 .cell:hover {
     background-color: var(--cell-hover-bg);
+    border-color: var(--ui-accent-border);
 }
 
 .cell.unity-collection-view__item--selected {
@@ -81,17 +103,9 @@
 }
 
 .unity-collection-view__item {
-    padding: 0;
-    margin: 0;
     align-items: center;
-    margin-top: 0;
-    margin-right: 0;
-    margin-bottom: 0;
-    margin-left: 0;
-    padding-top: 0;
-    padding-right: 0;
-    padding-bottom: 0;
-    padding-left: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .unity-repeat-button,
@@ -100,12 +114,12 @@
 }
 
 .unity-base-slider__dragger {
-    width: var(--slider-dragger-width);
-    border-radius: var(--slider-dragger-radius);
-    margin: 0;
     align-self: center;
     justify-content: center;
     align-items: center;
+    width: var(--slider-dragger-width);
+    margin: 0;
+    border-radius: var(--slider-dragger-radius);
     left: 25%;
     right: 25%;
 }

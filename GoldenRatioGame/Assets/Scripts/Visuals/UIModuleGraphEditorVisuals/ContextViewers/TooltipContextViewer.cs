@@ -25,6 +25,11 @@ namespace IM.Visuals
         }
         
         public override void SetContext(IModuleEditingContext context) => _show = true;
-        public override void ClearContext() => _show = false;
+
+        public override void ClearContext()
+        {
+            _show = false;
+            _popupElementPicker.Clear();
+        }
     }
 }

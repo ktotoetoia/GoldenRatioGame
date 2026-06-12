@@ -66,11 +66,17 @@ namespace IM.Visuals
             _hoverTimer = 0f; 
         }
 
-        public VisualElement PickAt(Vector3 position)
+        public void Clear()
+        {
+            _popupElement.Hide();
+        }
+
+        private VisualElement PickAt(Vector3 position)
         {
             foreach (UIDocument document in _worldViewDocuments)
             {
-                if(WorldDocumentUtility.GetElementsAtPosition<ITooltipInfo>(document, position).FirstOrDefault(x => x is VisualElement) is VisualElement picked) 
+                if (WorldDocumentUtility.GetElementsAtPosition<ITooltipInfo>(document, position)
+                        .FirstOrDefault(x => x is VisualElement) is VisualElement picked)
                     return picked;
             }
 

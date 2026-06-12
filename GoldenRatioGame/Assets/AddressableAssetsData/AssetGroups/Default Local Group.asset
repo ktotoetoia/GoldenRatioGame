@@ -125,6 +125,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e52203df1eab46141a2193df58c75441
+    m_Address: Assets/Prefabs/Augments/50 HP.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ea3c7ec7d03dac748969c6353e0a10f4
+    m_Address: Assets/Prefabs/Augments/25 HP.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ece0237ec3ed11f47af8bff30089ae37
     m_Address: Assets/Modules/Default/Leg/Passive Ability Leg/Passive Ability Leg
       Humanoid.prefab

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using IM.Augments;
 using IM.Factions;
 using IM.LifeCycle;
 using IM.Modules;
@@ -9,12 +10,16 @@ namespace IM.Map
 {
     public sealed class RoomPortsController : MonoBehaviour
     {
-        [SerializeField] private List<GameObject> _transitionPointsSources ;
+        [SerializeField] private List<GameObject> _transitionPointsSources;
+        [SerializeField] private int _augmentProgressValueOnClear = 1;
+        [SerializeField] private Faction _faction;
         private readonly IEntityCollection _entities = new EntityCollection();
         private readonly Dictionary<IEntity, IFactionMember> _factionMembers = new();
         private readonly List<ITransitionPoint> _transitionPoints = new ();
         private IGameObjectRoom _room;
         private IGameObjectRoomEvents _roomEvents;
+        
+        public bool Cleared { get; set; }
 
         private void Awake()
         {
@@ -90,10 +95,22 @@ namespace IM.Map
 
             if (_factionMembers.Count > 0)
             {
-                IFaction firstFaction = _factionMembers.Values.First().Faction;
-                shouldOpen = _factionMembers.Values.All(m => m.Faction == firstFaction);
+                shouldOpen = _factionMembers.Values.All(m => ReferenceEquals(m.Faction, _faction));
             }
-
+            
+            if (_factionMembers.Any() && shouldOpen && !Cleared)
+            {
+                Cleared = true;
+                
+                foreach (KeyValuePair<IEntity, IFactionMember> keyValuePair in _factionMembers)
+                {
+                    if (keyValuePair.Key.GameObject.TryGetComponent(out IAugmentProgressManager progressManager))
+                    {
+                        progressManager.Progress(_augmentProgressValueOnClear);
+                    }
+                }
+            }
+            
             foreach (IRoomPort roomPort in _room.RoomPorts)
                 roomPort.IsOpen = shouldOpen;
             foreach (ITransitionPoint transitionPoint in _transitionPoints) 

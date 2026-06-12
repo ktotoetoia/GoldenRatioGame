@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using IM.LifeCycle;
 using UnityEngine;
 
@@ -30,7 +31,7 @@ namespace IM.SaveSystem
         {
             foreach (GameObjectData data in dataList)
             {
-                if (!_store.TryGetLiveGameObject(data.Id, out GameObject existing) && instantiateMissing)
+                if (instantiateMissing && !_store.TryGetLiveGameObject(data.Id, out GameObject existing))
                 {
                     SetupNewObject(data, resolver);
                 }
@@ -40,7 +41,7 @@ namespace IM.SaveSystem
         private void SetupNewObject(GameObjectData data, IPrefabResolver resolver)
         {
             GameObject prefab = !string.IsNullOrEmpty(data.PrefabId) ? resolver?.ResolvePrefab(data.PrefabId) : null;
-            GameObject instance = prefab != null ? _factory.Create(prefab,true) : new GameObject($"placeholder-{data.Id}");
+            GameObject instance = prefab != null ? _factory.Create(prefab, true) : new GameObject($"placeholder-{data.Id}");
 
             if (!instance.TryGetComponent(out IIdentifiable ident))
             {
@@ -48,33 +49,28 @@ namespace IM.SaveSystem
                 ident = serializer;
             }
 
-            ident?.Inject(data.Id);
+            ident.Inject(data.Id);
             _store.AddEntry(ident.Id, instance, instance.GetComponent<IStateSerializable>());
         }
 
         private void RestoreStates(IReadOnlyList<GameObjectData> dataList, Dictionary<string, IStateSerializable> serializers)
         {
-            foreach (GameObjectData data in dataList)
-            {
-                if (serializers.TryGetValue(data.Id, out IStateSerializable s) && s != null)
-                {
-                    try
-                    {
-                        s.Restore(data, x =>
-                        {
-                            if (_store.TryGetLiveGameObject(x, out GameObject go))
-                            {
-                                return go;
-                            }
+            var orderedRestorations = dataList
+                .Where(data => serializers.TryGetValue(data.Id, out IStateSerializable s) && s != null)
+                .Select(data => (Data: data, Serializer: serializers[data.Id]))
+                .OrderBy(pair => pair.Serializer.Order);
 
-                            return null;
-                        });
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.LogError($"Restore failed for {data.Id}");
-                        Debug.LogException(ex);
-                    }
+            foreach (var pair in orderedRestorations)
+            {
+                try
+                {
+                    pair.Serializer.Restore(pair.Data, id => 
+                        _store.TryGetLiveGameObject(id, out GameObject go) ? go : null);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"Restore failed for {pair.Data.Id}");
+                    Debug.LogException(ex);
                 }
             }
         }

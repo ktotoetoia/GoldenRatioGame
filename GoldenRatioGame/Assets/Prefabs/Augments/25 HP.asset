@@ -10,12 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79a95c0ecd454d138d4af968c5b026da, type: 3}
-  m_Name: Augment
+  m_Name: 25 HP
   m_EditorClassIdentifier: ModuleAugments::IM.Augments.EffectApplyingAugmentFactory
   _assetReference:
-    m_AssetGUID: b095526b764b37f458cf6cb34a90abfa
+    m_AssetGUID: ea3c7ec7d03dac748969c6353e0a10f4
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
-  _effectGroupFactory: {fileID: 11400000, guid: 915f8087953808543b7f2691a7680705, type: 2}
+  _effectGroupFactory: {fileID: 11400000, guid: 09556abd9cb024848813ff39a4fcf9e5, type: 2}
+  _name: Health Augment
+  _shortDescription: Health Augment
+  _desription: Augment Description
+  _icon: {fileID: 8821234896216062132, guid: 8d23b125a6d2ad740b2347350ff2be16, type: 3}

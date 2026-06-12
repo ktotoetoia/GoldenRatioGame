@@ -157,6 +157,7 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   _blackList: []
+  <Order>k__BackingField: -100
 --- !u!114 &6869556739838863163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,4 +228,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModuleAugments::IM.ModuleAugments.AugmentExtension
   _augments:
   - _factory: {fileID: 11400000, guid: b095526b764b37f458cf6cb34a90abfa, type: 2}
-    <RequiredProgress>k__BackingField: 4
+    <RequiredProgress>k__BackingField: 2
+  - _factory: {fileID: 11400000, guid: ea3c7ec7d03dac748969c6353e0a10f4, type: 2}
+    <RequiredProgress>k__BackingField: 2
+  - _factory: {fileID: 11400000, guid: e52203df1eab46141a2193df58c75441, type: 2}
+    <RequiredProgress>k__BackingField: 2

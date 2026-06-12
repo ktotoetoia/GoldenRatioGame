@@ -15,13 +15,13 @@ GameObject:
   - component: {fileID: 2092311543170675996}
   - component: {fileID: 1776523202783286439}
   - component: {fileID: 7439877678105840365}
+  - component: {fileID: 5294109350557828821}
+  - component: {fileID: 317213388088474234}
   - component: {fileID: 999588743564167469}
   - component: {fileID: -4642281475574424799}
   - component: {fileID: -5310502140078858885}
   - component: {fileID: 8831215809966109471}
   - component: {fileID: 1843794523594488604}
-  - component: {fileID: 5294109350557828821}
-  - component: {fileID: 317213388088474234}
   m_Layer: 0
   m_Name: Filled Room
   m_TagString: Untagged
@@ -264,6 +264,42 @@ CompositeCollider2D:
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 4054245826693385729}
+--- !u!114 &5294109350557828821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4054245826693385729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 0
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
+--- !u!114 &317213388088474234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4054245826693385729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709c8d6349be44c68dff3d220992400c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifierTilemap
+  m_AffectedAgents: ffffffff
+  m_TileModifiers:
+  - tile: {fileID: 11400000, guid: 993f67262a138794bbd3a06b9c00f24c, type: 2}
+    overrideArea: 1
+    area: 1
+  - tile: {fileID: 11400000, guid: b99b07e60e6784546a3dcc97770405ff, type: 2}
+    overrideArea: 1
+    area: 0
 --- !u!114 &999588743564167469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,6 +333,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleComposition::IM.Map.RoomPortsController
   _transitionPointsSources: []
+  _augmentProgressValueOnClear: 1
+  _faction: {fileID: 11400000, guid: 788bd211483850b42816f83e0cc2d97f, type: 2}
 --- !u!114 &-5310502140078858885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,42 +407,6 @@ MonoBehaviour:
     ClusterToPrevious: 0
     ClusterRadius: 0
     ClusterBiasMultiplier: 0
---- !u!114 &5294109350557828821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4054245826693385729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
-  m_OverrideArea: 0
-  m_Area: 0
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
---- !u!114 &317213388088474234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4054245826693385729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 709c8d6349be44c68dff3d220992400c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifierTilemap
-  m_AffectedAgents: ffffffff
-  m_TileModifiers:
-  - tile: {fileID: 11400000, guid: 993f67262a138794bbd3a06b9c00f24c, type: 2}
-    overrideArea: 1
-    area: 1
-  - tile: {fileID: 11400000, guid: b99b07e60e6784546a3dcc97770405ff, type: 2}
-    overrideArea: 1
-    area: 0
 --- !u!1 &4582951500499564362
 GameObject:
   m_ObjectHideFlags: 0

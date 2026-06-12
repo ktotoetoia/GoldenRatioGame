@@ -1,8 +1,5 @@
 .button {
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;
-    border-bottom-left-radius: 12px;
+    border-radius: 12px;
     color: rgb(255, 255, 255);
     font-size: 30px;
     transition-property: background-color, color;
@@ -17,8 +14,6 @@
     background-color: rgb(98, 218, 79);
     color: rgb(255, 255, 255);
 }
-
-
 
 .discardButton {
     background-color: rgb(255, 99, 71);

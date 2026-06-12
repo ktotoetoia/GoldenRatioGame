@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 3523511756636276468}
   - component: {fileID: 3159109994111952598}
   - component: {fileID: 1584081455873256841}
+  - component: {fileID: 4514006189352694908}
   m_Layer: 6
   m_Name: StatsView
   m_TagString: Untagged
@@ -355,6 +356,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.Visuals.HealthStatPreviewer
   _requiredStyles: {fileID: 7433441132597879392, guid: 1ee0d512184497c4bb709bcd9d389fd6, type: 3}
+--- !u!114 &4514006189352694908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772882422062157344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f04d6c9d07940a48252bc159c98bd78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.Visuals.AugmentPreviewer
 --- !u!1 &1057642660832433101
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,8 +1010,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Visuals::IM.Visuals.PopupElementWorldViewer
   _worldViewDocuments:
-  - {fileID: 6400010115505146701}
   - {fileID: 3523511756636276468}
+  - {fileID: 6400010115505146701}
   - {fileID: 8379213644274031688}
   _hoverDelay: 0.5
 --- !u!1 &3384889456729800444

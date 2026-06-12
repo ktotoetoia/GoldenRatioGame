@@ -1,0 +1,36 @@
+:root {
+    --ui-bg: rgb(13, 11, 20);
+    --ui-bg-2: rgb(18, 18, 22);
+    --ui-panel: rgb(24, 24, 30);
+    --ui-panel-soft: rgba(255, 255, 255, 0.03);
+    --ui-border: rgba(200, 162, 78, 0.55);
+    --ui-border-soft: rgba(200, 162, 78, 0.22);
+    --ui-border-faint: rgba(255, 255, 255, 0.08);
+    --ui-border-cell: rgba(255, 255, 255, 0.1);
+    --ui-text: rgb(245, 245, 245);
+    --ui-text-muted: rgb(210, 210, 210);
+    --ui-text-hover: rgb(255, 245, 225);
+    --ui-text-active: rgb(255, 215, 145);
+    --ui-text-tooltip-title: rgb(240, 232, 208);
+    --ui-text-tooltip-desc: rgba(168, 152, 128, 0.9);
+    --ui-accent: rgb(200, 162, 78);
+    --ui-accent-hover: rgba(200, 162, 78, 0.16);
+    --ui-accent-active: rgba(200, 162, 78, 0.26);
+    --ui-accent-border: rgba(200, 162, 78, 0.45);
+    --ui-accent-border-strong: rgba(255, 205, 120, 0.7);
+    --ui-danger: rgb(255, 135, 134);
+    --ui-danger-bg: rgba(178, 178, 178, 0.25);
+    --ui-button-bg: rgba(255, 255, 255, 0.04);
+    --ui-button-bg-hover: rgba(255, 255, 255, 0.08);
+    --ui-button-border: rgba(200, 162, 78, 0.22);
+    --ui-cell-bg: rgba(255, 255, 255, 0.04);
+    --ui-cell-hover-bg: rgba(200, 162, 78, 0.12);
+    --ui-cell-selected-bg: rgba(255, 128, 0, 0.22);
+    --ui-cell-selected-border: rgb(255, 200, 120);
+    --ui-icon-bg: rgba(255, 255, 255, 0.06);
+    --ui-icon-border: rgba(255, 255, 255, 0.12);
+    --ui-icon-bg-placeholder: rgba(255, 255, 255, 0.03);
+    --ui-icon-border-placeholder: rgba(255, 255, 255, 0.06);
+}
+
+

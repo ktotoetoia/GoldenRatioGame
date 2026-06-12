@@ -13,8 +13,11 @@ namespace IM.Visuals
             {
                 var bounds = element.worldBound;
                 bounds.position += (Vector2)document.transform.position;
-            
-                if (bounds.Contains(position)) yield return element;
+                
+                if (bounds.Contains(position))
+                {
+                    yield return element;
+                }
             }
         }
 

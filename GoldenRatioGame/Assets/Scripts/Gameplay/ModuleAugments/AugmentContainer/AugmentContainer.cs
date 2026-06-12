@@ -27,7 +27,6 @@ namespace IM.Augments
             AugmentObservers.ForEach(x => x.OnRemoved(augment));
                 
             return true;
-
         }
     }
 }

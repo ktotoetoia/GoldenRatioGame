@@ -12,5 +12,10 @@
             MinValue = minValue;
             MaxValue = maxValue;
         }
+
+        public override string ToString()
+        {
+            return $"Value: {Value}. Min: {MinValue}. Max: {MaxValue}";
+        }
     }
 }

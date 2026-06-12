@@ -1,9 +1,33 @@
-
-
 .styledContainer {
-    background-color: rgb(41, 41, 41);
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+    padding: 10px;
+    background-color: var(--ui-bg);
+    border-color: var(--ui-border);
+    border-width: 1px;
+    border-radius: 20px 20px 0 0;
+}
+
+.styledButton {
+    margin: 4px;
+    padding: 8px 14px;
+    font-size: 30px;
+    color: var(--ui-text);
+    background-color: var(--ui-button-bg);
+    border-color: var(--ui-button-border);
+    border-width: 1px;
+    border-radius: 12px;
+    -unity-text-align: middle-center;
+    transition-duration: 0.05s;
+    transition-property: color, background-color, border-color;
+}
+
+.styledButton:hover {
+    color: var(--ui-text-hover);
+    background-color: var(--ui-accent-hover);
+    border-color: var(--ui-accent-border);
+}
+
+.styledButton:active {
+    color: var(--ui-text-active);
+    background-color: var(--ui-accent-active);
+    border-color: var(--ui-accent-border-strong);
 }

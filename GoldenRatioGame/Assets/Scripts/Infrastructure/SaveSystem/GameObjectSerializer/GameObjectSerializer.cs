@@ -22,6 +22,8 @@ namespace IM.SaveSystem
             get => _container ??= new ComponentSerializerContainer();
             set => _container = value;
         }
+        
+        [field:SerializeField] public int Order { get; protected set; }
 
         public virtual GameObjectData Capture()
         {

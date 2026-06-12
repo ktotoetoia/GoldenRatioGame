@@ -52,5 +52,11 @@ namespace IM.Health
         {
             return _floatHealthValueGroup.Contains(healthBar);
         }
+
+        [ContextMenu("Print Health")]
+        public void PrintHealth()
+        {
+            Debug.Log("Health: " + _floatHealthValueGroup.Health);
+        }
     }
 }
