@@ -1,18 +1,33 @@
 :root {
+    --container-height: 50px;
+}
+
+.cappedValueElement {
+    position: relative;
+    width: 100%;
 }
 
 .cappedValueProgressBar {
-    background-color: rgb(215, 176, 176);
+    margin: 0;
+    height: var(--container-height);
+}
+
+.cappedValueProgressBar .unity-progress-bar__container {
+    min-height: 100%;
+    max-height: 100%;
+}
+
+.cappedValueProgressBar .unity-progress-bar__background {
+    background-color: rgb(32, 28, 28);
 }
 
 .cappedValueProgressBar .unity-progress-bar__progress {
     background-color: rgb(226, 60, 52);
 }
 
-
-
-
-
-.cappedValueProgressBar .unity-progress-bar__background {
-    background-color: rgb(32, 28, 28);
+.cappedValueProgressBar .unity-progress-bar__title {
+    margin: 0;
+    align-self: center;
+    font-size: 40px;
+    color: rgb(255, 255, 255);
 }

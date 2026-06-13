@@ -10,17 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2517f2c5f21473c9c702624433f96c4, type: 3}
-  m_Name: Arm Humanoid Hand Effects
+  m_Name: 1 Flat Speed Effect
   m_EditorClassIdentifier: Effects::IM.Effects.DefaultRestorableEffectGroupFactory
   _effectModifierFactories:
-  - rid: 4006956902272204904
+  - rid: 2168712212730609742
   references:
     version: 2
     RefIds:
-    - rid: 4006956902272204904
-      type: {class: HealthEffectModifierFactory, ns: IM.Effects, asm: GameplayComposition}
+    - rid: 2168712212730609742
+      type: {class: SpeedEffectModifierFactory, ns: IM.Effects, asm: GameplayComposition}
       data:
-        _cappedValue:
-          _minValue: 0
-          _maxValue: 100
-          _value: 100
+        <Add>k__BackingField: 1
+        <Multiplication>k__BackingField: 1

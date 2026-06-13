@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6758064773000630412}
   - component: {fileID: 1563791358509127018}
   - component: {fileID: 8812685661605889554}
+  - component: {fileID: 222348843154370429}
   m_Layer: 0
   m_Name: Core Humanoid
   m_TagString: Untagged
@@ -199,3 +200,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleComponents::IM.Modules.EffectGroupExtension
   _restorableEffectGroupFactory: {fileID: 11400000, guid: 7bedf75b297133440b294a6c7e6ff879, type: 2}
+--- !u!114 &222348843154370429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8119833187759213420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f06cf14b2a4f48a99d706f409753b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleAugments::IM.Augments.AugmentExtension
+  _augments:
+  - _factory: {fileID: 11400000, guid: ea3c7ec7d03dac748969c6353e0a10f4, type: 2}
+    <RequiredProgress>k__BackingField: 3
+  - _factory: {fileID: 11400000, guid: 41ce5c8ef8ebdd145892c7654f1c5ca0, type: 2}
+    <RequiredProgress>k__BackingField: 5

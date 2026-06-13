@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79a95c0ecd454d138d4af968c5b026da, type: 3}
-  m_Name: 50 HP
+  m_Name: 1 Flat Speed
   m_EditorClassIdentifier: ModuleAugments::IM.Augments.EffectApplyingAugmentFactory
   _assetReference:
-    m_AssetGUID: e52203df1eab46141a2193df58c75441
+    m_AssetGUID: 41ce5c8ef8ebdd145892c7654f1c5ca0
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
-  _effectGroupFactory: {fileID: 11400000, guid: 77b38eca2df4770488d060cef79b7160, type: 2}
+  _effectGroupFactory: {fileID: 11400000, guid: 2922883d8baa85c4d85f85faf632a5a8, type: 2}
   _name: Health Augment
-  _shortDescription: Health Augment
-  _desription: Augment Description
-  _icon: {fileID: 6819710099589156073, guid: 8d23b125a6d2ad740b2347350ff2be16, type: 3}
+  _shortDescription: 1 M/S
+  _desription: Makes the owner faster by 1 M/S
+  _icon: {fileID: -6888551256523749776, guid: 0ebe755383568af4bbe94a595a37521e, type: 3}

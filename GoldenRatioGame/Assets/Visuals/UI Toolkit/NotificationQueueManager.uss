@@ -1,0 +1,15 @@
+.notificationsContainer {
+    width: 320px;
+    padding: 8px;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    align-self: center;
+}
+
+.notificationWrapper {
+    margin-top: 6px;
+    transition-property: translate;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+    align-self: center;
+}

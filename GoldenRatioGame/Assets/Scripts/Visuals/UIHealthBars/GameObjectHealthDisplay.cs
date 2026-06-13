@@ -45,6 +45,7 @@ namespace IM.UI
             _element?.Update();
             _element?.Tick(Time.deltaTime);
             _document.rootVisualElement.visible = true;
+            
             transform.position = _displayed.transform.position + _offset;
         }
     }

@@ -194,6 +194,7 @@ MonoBehaviour:
   - {fileID: 1886279916}
   - {fileID: 1804827492}
   - {fileID: 2823462368217778133}
+  - {fileID: 1708804393}
   _tag: Player
 --- !u!114 &197609168
 MonoBehaviour:
@@ -2759,6 +2760,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 7.9730597, y: 1.9765196}
   m_EdgeRadius: 0
+--- !u!1 &1708804393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3444491939790510144, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
+  m_PrefabInstance: {fileID: 2823462368217778131}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1708804394 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 470406977501570420, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
+  m_PrefabInstance: {fileID: 2823462368217778131}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1804827492 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1990189556604430851, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
@@ -2864,6 +2875,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ----Player View----
       objectReference: {fileID: 0}
+    - target: {fileID: 3036473229136123768, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
+      propertyPath: '_transforms.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1708804394}
     - target: {fileID: 3092186167856238398, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2939,6 +2954,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 9104703983774945774, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 3444491939790510144, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}

@@ -22,10 +22,17 @@ namespace IM.Visuals
 
         private readonly VisualElement _topRow;
         private readonly VisualElement _icon;
-        private readonly Label         _nameLabel;
-        private readonly Label         _shortDescLabel;
+        private readonly Label _nameLabel;
+        private readonly Label _shortDescLabel;
         private readonly VisualElement _divider;
-        private readonly Label         _descLabel;
+        private readonly Label _descLabel;
+
+        public bool ShowIcon { get; set; } = true;
+        public bool ShowName { get; set; } = true;
+        public bool ShowShortDescription { get; set; } = true;
+        public bool ShowDescription { get; set; } = true;
+        public bool ShowDivider { get; set; } = true;
+        public bool ShowTopRow { get; set; } = true;
 
         public TooltipInfoElement()
         {
@@ -48,8 +55,10 @@ namespace IM.Visuals
 
             textColumn.Add(_nameLabel);
             textColumn.Add(_shortDescLabel);
+
             _topRow.Add(_icon);
             _topRow.Add(textColumn);
+
             Add(_topRow);
 
             _divider = new VisualElement();
@@ -60,43 +69,63 @@ namespace IM.Visuals
             _descLabel.AddToClassList(DescClass);
             Add(_descLabel);
 
-            Show(this, false);
+            SetVisible(this, false);
         }
 
         public void Bind(ITooltipInfo info)
         {
-            if (info == null) { Show(this, false); return; }
+            if (info == null)
+            {
+                SetVisible(this, false);
+                return;
+            }
 
-            Show(this, true);
+            SetVisible(this, true);
 
-            bool hasIcon = info.Icon != null;
+            bool hasIcon = ShowIcon && info.Icon;
+            bool hasName = ShowName && !string.IsNullOrWhiteSpace(info.Name);
+            bool hasShortDesc = ShowShortDescription && !string.IsNullOrWhiteSpace(info.ShortDescription);
+            bool hasDescription = ShowDescription && !string.IsNullOrWhiteSpace(info.Description);
+
             _icon.style.backgroundImage = hasIcon
                 ? new StyleBackground(info.Icon)
                 : StyleKeyword.None;
+
             _icon.EnableInClassList(IconPlaceholderClass, !hasIcon);
+            SetVisible(_icon, ShowIcon);
 
-            SetLabel(_nameLabel,     info.Name);
-            SetLabel(_shortDescLabel, info.ShortDescription);
+            SetLabel(_nameLabel, hasName ? info.Name : null);
+            SetLabel(_shortDescLabel, hasShortDesc ? info.ShortDescription : null);
+            SetLabel(_descLabel, hasDescription ? info.Description : null);
 
-            bool hasDesc = !string.IsNullOrEmpty(info.Description);
-            Show(_divider, hasDesc);
-            SetLabel(_descLabel, info.Description);
+            bool hasTopRowContent = hasIcon || hasName || hasShortDesc;
+            SetVisible(_topRow, ShowTopRow && hasTopRowContent);
 
-            Show(_topRow, hasIcon
-                          || !string.IsNullOrEmpty(info.Name)
-                          || !string.IsNullOrEmpty(info.ShortDescription));
+            SetVisible(_divider,
+                ShowDivider &&
+                hasDescription &&
+                ShowTopRow &&
+                hasTopRowContent);
         }
 
-        public void Unbind() => Show(this, false);
+        public void Unbind()
+        {
+            SetVisible(this, false);
+        }
 
-        private static void Show(VisualElement el, bool visible) =>
-            el.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+        private static void SetVisible(VisualElement element, bool visible)
+        {
+            element.style.display = visible
+                ? DisplayStyle.Flex
+                : DisplayStyle.None;
+        }
 
         private static void SetLabel(Label label, string text)
         {
-            bool hasText = !string.IsNullOrEmpty(text);
+            bool hasText = !string.IsNullOrWhiteSpace(text);
+
             label.text = hasText ? text : string.Empty;
-            Show(label, hasText);
+            SetVisible(label, hasText);
         }
     }
 }

@@ -6,7 +6,7 @@ using IM.Graphs;
 
 namespace IM.Modules
 {
-public class AbilityPoolEditingService : IEditingService, INotifiableEditingService
+    public class AbilityPoolEditingService : IEditingService, INotifiableEditingService
     {
         private readonly AbilityContainerMapper _mapper = new();
         private readonly IGraphEditingService<IExtensibleItem> _graphEditing;
@@ -115,19 +115,14 @@ public class AbilityPoolEditingService : IEditingService, INotifiableEditingServ
             {
                 _containerToItem.Remove(wrappedContainer);
 
-                if (_wrappedToUnwrapped.Remove(wrappedContainer, out var unwrappedContainer))
-                {
-                    _unwrappedToWrapped.Remove(unwrappedContainer);
-                }
-
                 _pool.AbilityContainers.Remove(wrappedContainer);
             }
             else if (module.Value.Extensions.TryGet(out IAbilityContainer abilityContainer))
             {
-                if (!_unwrappedToWrapped.Remove(abilityContainer, out var fallbackTarget)) return;
-                
-                _wrappedToUnwrapped.Remove(fallbackTarget);
-                _pool.AbilityContainers.Remove(fallbackTarget);
+                if (_unwrappedToWrapped.TryGetValue(abilityContainer, out var fallbackTarget))
+                {
+                    _pool.AbilityContainers.Remove(fallbackTarget);
+                }
             }
         }
     }

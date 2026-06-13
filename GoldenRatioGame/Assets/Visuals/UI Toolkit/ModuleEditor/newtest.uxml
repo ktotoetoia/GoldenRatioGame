@@ -1,4 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Visuals/UI%20Toolkit/GamePalette.uss?fileID=7433441132597879392&amp;guid=fba99e506b2200441a9ed74aefc78264&amp;type=3#GamePalette"/>
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Font.uss?fileID=7433441132597879392&amp;guid=1a14260a6760efa4ebd95862e69bc46a&amp;type=3#Font"/>
     <Style src="project://database/Assets/Visuals/UI%20Toolkit/ModuleEditor/StatsView/TooltipInfoElement.uss?fileID=7433441132597879392&amp;guid=69163b59c5111dd4f858eb7c41531da5&amp;type=3#TooltipInfoElement"/>
 </ui:UXML>

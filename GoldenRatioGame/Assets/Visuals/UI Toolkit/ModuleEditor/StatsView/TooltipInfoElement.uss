@@ -1,12 +1,15 @@
 .tooltip-info {
     flex-direction: column;
+
     background-color: var(--ui-bg);
     border-color: var(--ui-border);
-    border-width: 1px;
-    border-radius: 6px;
-    padding: 10px;
-    min-width: 180px;
-    max-width: 300px;
+    border-width: 2px;
+    border-radius: 8px;
+
+    padding: 16px;
+
+    min-width: 280px;
+    max-width: 480px;
 }
 
 .tooltip-info__top-row {
@@ -15,13 +18,15 @@
 }
 
 .tooltip-info__icon {
-    width: 56px;
-    height: 56px;
+    width: 80px;
+    height: 80px;
     flex-shrink: 0;
-    border-radius: 4px;
+
     background-color: var(--ui-icon-bg);
     border-color: var(--ui-icon-border);
-    border-width: 1px;
+    border-width: 2px;
+    border-radius: 4px;
+
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -36,39 +41,53 @@
     flex: 1;
     flex-direction: column;
     justify-content: center;
-    padding-left: 10px;
+
+    padding-left: 16px;
 }
 
 .tooltip-info__name {
-    font-size: 14px;
-    -unity-font-style: bold;
     color: var(--ui-text-tooltip-title);
+
+    font-size: 24px;
+    -unity-font-style: bold;
+
     white-space: normal;
-    margin: 0 0 2px 0;
+
+    margin: 0 0 4px 0;
     padding: 0;
 }
 
 .tooltip-info__short-desc {
-    font-size: 11px;
-    -unity-font-style: italic;
     color: var(--ui-text-tooltip-desc);
+
+    font-size: 20px;
+    -unity-font-style: italic;
+
     white-space: normal;
+
     margin: 0;
     padding: 0;
 }
 
 .tooltip-info__divider {
-    height: 1px;
-    background-color: var(--ui-border-soft);
-    margin-top: 8px;
-    margin-bottom: 8px;
+    height: 2px;
     flex-shrink: 0;
+
+    background-color: var(--ui-border-soft);
+
+    margin-top: 12px;
+    margin-bottom: 12px;
 }
 
 .tooltip-info__description {
-    font-size: 11px;
     color: var(--ui-text-tooltip-desc);
+
+    font-size: 20px;
+
     white-space: normal;
+
     margin: 0;
     padding: 0;
+
+    -unity-font-definition: url("project://database/Assets/Visuals/Fonts/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf?fileID=12800000&guid=585188cdc4600544eb408bee749e4b3a&type=3#ThaleahFat_TTF");
 }

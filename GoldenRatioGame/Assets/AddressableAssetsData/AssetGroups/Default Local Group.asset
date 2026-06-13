@@ -50,6 +50,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 41ce5c8ef8ebdd145892c7654f1c5ca0
+    m_Address: Assets/Prefabs/Augments/Speed/1 Flat Speed.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 502dd60d80db5504f994382f78ec18c4
     m_Address: Assets/Prefabs/Rooms/RoomPort.prefab
     m_ReadOnly: 0

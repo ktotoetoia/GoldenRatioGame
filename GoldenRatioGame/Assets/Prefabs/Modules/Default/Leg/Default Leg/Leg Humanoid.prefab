@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6869556739838863163}
   - component: {fileID: 3134715345525867726}
   - component: {fileID: -8354513230407654295}
+  - component: {fileID: 1001158672755589010}
   m_Layer: 0
   m_Name: Leg Humanoid
   m_TagString: Untagged
@@ -199,3 +200,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ModuleComponents::IM.Modules.EffectGroupExtension
   _restorableEffectGroupFactory: {fileID: 11400000, guid: f6d3ed48537e5b84793beb3b210a171e, type: 2}
+--- !u!114 &1001158672755589010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210977406679086040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f06cf14b2a4f48a99d706f409753b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleAugments::IM.Augments.AugmentExtension
+  _augments:
+  - _factory: {fileID: 11400000, guid: 41ce5c8ef8ebdd145892c7654f1c5ca0, type: 2}
+    <RequiredProgress>k__BackingField: 2
+  - _factory: {fileID: 11400000, guid: ea3c7ec7d03dac748969c6353e0a10f4, type: 2}
+    <RequiredProgress>k__BackingField: 4

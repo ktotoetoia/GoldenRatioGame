@@ -9,7 +9,7 @@ namespace IM.Modules
         {
             if(!context.Capabilities.TryGet(out IContainerAbilityPool containerAbilityPool)) return;
 
-            context.AddService(new WeaponEditingService(containerAbilityPool,context.StorageEditing));
+            context.AddService(new WeaponEditingService(containerAbilityPool,context.StorageEditing,context.GraphEditing as IGraphEditingEvents<IExtensibleItem>,context.Services.Get<AbilityPoolEditingService>()));
         }
     }
 }

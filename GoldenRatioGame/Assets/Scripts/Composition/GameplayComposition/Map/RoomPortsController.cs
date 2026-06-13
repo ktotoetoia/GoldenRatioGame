@@ -95,7 +95,7 @@ namespace IM.Map
 
             if (_factionMembers.Count > 0)
             {
-                shouldOpen = _factionMembers.Values.All(m => ReferenceEquals(m.Faction, _faction));
+                shouldOpen = _factionMembers.Values.All(m => _faction.Equals(m.Faction));
             }
             
             if (_factionMembers.Any() && shouldOpen && !Cleared)

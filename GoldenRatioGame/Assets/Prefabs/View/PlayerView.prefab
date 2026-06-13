@@ -355,7 +355,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7502e6b90894843bcdb6c28b94a7ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.Visuals.HealthStatPreviewer
-  _requiredStyles: {fileID: 7433441132597879392, guid: 1ee0d512184497c4bb709bcd9d389fd6, type: 3}
+  _requiredStyles:
+  - {fileID: 7433441132597879392, guid: 1a14260a6760efa4ebd95862e69bc46a, type: 3}
+  - {fileID: 7433441132597879392, guid: a54a42696720a5b4db4e4ae5daafecb3, type: 3}
 --- !u!114 &4514006189352694908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,6 +407,7 @@ Transform:
   - {fileID: 616146370134468544}
   - {fileID: 6167266606752900783}
   - {fileID: 5537748855519076463}
+  - {fileID: 470406977501570420}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1990189556604430851
@@ -516,6 +519,7 @@ GameObject:
   - component: {fileID: 535395604981051355}
   - component: {fileID: 383983793815532856}
   - component: {fileID: 3036473229136123768}
+  - component: {fileID: 2271791982547832113}
   m_Layer: 0
   m_Name: Input
   m_TagString: Untagged
@@ -569,11 +573,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 035c7b840b8447f785eda5897fe2bfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameplayComposition::IM.Modules.CameraPlayerFollow
-  _cameras:
-  - {fileID: 4738437957437066650}
-  - {fileID: 6099246017999889618}
+  _transforms:
+  - {fileID: 9219254159993980427}
+  - {fileID: 414644755952452078}
   _smoothTime: 0.2
   _offset: {x: 0, y: 0, z: -10}
+--- !u!114 &2271791982547832113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2359483497348274012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 035c7b840b8447f785eda5897fe2bfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameplayComposition::IM.Modules.FollowPlayerSmooth
+  _transforms:
+  - {fileID: 470406977501570420}
+  _smoothTime: 0
+  _offset: {x: 0, y: 3, z: 0}
 --- !u!1 &2585163883886769232
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,6 +1091,97 @@ MonoBehaviour:
         _rotation: {x: 0, y: 0, z: 0, w: 1}
         _scale: {x: 1, y: 1, z: 1}
     <PortsVisible>k__BackingField: 1
+--- !u!1 &3444491939790510144
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 470406977501570420}
+  - component: {fileID: 2056220299111942270}
+  - component: {fileID: 287840363586091847}
+  - component: {fileID: 5370027242927999557}
+  m_Layer: 0
+  m_Name: PlayerNotifications
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &470406977501570420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3444491939790510144}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3092186167856238398}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2056220299111942270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3444491939790510144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: eda9c9fc481388c47846da0379501e78, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 69a17d11f479e0743be32286b6d5ecc6, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 400
+  m_WorldSpaceHeight: 400
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &287840363586091847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3444491939790510144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122d8e2c826d4df46b2ca70550225339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Visuals::IM.Visuals.NotificationQueueManager
+  _document: {fileID: 2056220299111942270}
+  _containerName: NotificationsContainer
+  _fadeInTime: 0.3
+  _timeToLive: 1
+  _fadeOutTime: 0.5
+  _queueTime: 0.5
+--- !u!114 &5370027242927999557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3444491939790510144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0380d97ddae40069c9c3cf58291d09b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.Visuals.NotifyOnAugmentAdded
+  _elementStyleSheets:
+  - {fileID: 7433441132597879392, guid: 1a14260a6760efa4ebd95862e69bc46a, type: 3}
+  - {fileID: 7433441132597879392, guid: fba99e506b2200441a9ed74aefc78264, type: 3}
+  - {fileID: 7433441132597879392, guid: 69163b59c5111dd4f858eb7c41531da5, type: 3}
 --- !u!1 &4477925240205731247
 GameObject:
   m_ObjectHideFlags: 0

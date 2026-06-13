@@ -30,7 +30,11 @@ namespace IM.Visuals
         public void UpdatePosition(Vector3 worldPosition, Vector3 screenPosition)
         {
             VisualElement newPicked = PickAt(worldPosition);
-
+            Vector2 panelPosition = RuntimePanelUtils.ScreenToPanel(
+                _popupDocument.rootVisualElement.panel, 
+                screenPosition
+            );
+            
             if (_currentPicked == newPicked)
             {
                 if (newPicked != null)
@@ -43,14 +47,14 @@ namespace IM.Visuals
                         {
                             var tooltipInfoElement = new TooltipInfoElement();
                             tooltipInfoElement.Bind(newPicked as ITooltipInfo);
-                            _popupElement.Show(screenPosition, tooltipInfoElement);
+                            _popupElement.Show(panelPosition, tooltipInfoElement);
                             
                             _isPopupShowing = true;
                         }
                     }
                     else
                     {
-                        _popupElement.SetAnchor(screenPosition);
+                        _popupElement.SetAnchor(panelPosition);
                     }
                 }
                 return;

@@ -13,16 +13,12 @@ namespace IM.Visuals
 {
     public class HealthStatPreviewer : MonoBehaviour, IStatPreviewer
     {
-        [SerializeField] private StyleSheet _requiredStyles;
+        [SerializeField] private List<StyleSheet> _requiredStyles;
 
         public VisualElement GetPreview(IModuleEntity entity, IModuleEditingContextReadOnly currentContext)
         {
-            var previewElement = new GhostCappedValueElement
-            {
-                GhostDelaySeconds = 0.1f,
-                GhostSlideDuration = 0.1f
-            };
-            previewElement.styleSheets.Add(_requiredStyles);
+            var previewElement = new CappedValueElement();
+            foreach (var styleSheet in _requiredStyles) previewElement.styleSheets.Add(styleSheet);
             previewElement.GetCappedValue = () => CalculateTotalHealth(entity, currentContext);
             UpdatePreview(previewElement, entity, currentContext);
         
@@ -31,11 +27,10 @@ namespace IM.Visuals
 
         public void UpdatePreview(VisualElement previewElement, IModuleEntity entity, IModuleEditingContextReadOnly currentContext)
         {
-            if (previewElement is not GhostCappedValueElement healthDisplay) return;
+            if (previewElement is not CappedValueElement healthDisplay) return;
             
             healthDisplay.GetCappedValue = () => CalculateTotalHealth(entity, currentContext);
             healthDisplay.Update();
-            healthDisplay.Tick(Time.deltaTime);
         }
 
         private CappedValue<float> CalculateTotalHealth(IModuleEntity entity, IModuleEditingContextReadOnly currentContext)
@@ -66,7 +61,6 @@ namespace IM.Visuals
                     }
                 }
             }
-
             return new CappedValue<float>(0,totalMax,totalValue);
         }
 

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2517f2c5f21473c9c702624433f96c4, type: 3}
+  m_Name: Default Stats
+  m_EditorClassIdentifier: Effects::IM.Effects.DefaultRestorableEffectGroupFactory
+  _effectModifierFactories:
+  - rid: 4006956902272204904
+  references:
+    version: 2
+    RefIds:
+    - rid: 4006956902272204904
+      type: {class: HealthEffectModifierFactory, ns: IM.Effects, asm: GameplayComposition}
+      data:
+        _cappedValue:
+          _minValue: 0
+          _maxValue: 100
+          _value: 100

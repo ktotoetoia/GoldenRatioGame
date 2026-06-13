@@ -30,7 +30,7 @@ namespace IM.Inputs
         private IModuleEntity _moduleEntity;
         private IAbilityAnchorPositionProvider _abilityAnchorPositionProvider;
         private IModuleEditingContext _trySave;
-        private bool _shouldSave;
+        private bool _shouldSave = true;
         private bool _shouldExit;
         
         private void Update()

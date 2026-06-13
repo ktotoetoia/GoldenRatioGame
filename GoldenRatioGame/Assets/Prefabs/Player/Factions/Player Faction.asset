@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ccb8ec1ae440dfbf8de01447505499, type: 3}
   m_Name: Player Faction
   m_EditorClassIdentifier: Factions::IM.Factions.Faction
+  _id: Player
   _defaultRelation: 2
   _customRelationships:
   - <TargetFaction>k__BackingField: {fileID: 11400000, guid: 6f84adb9e464b3a45a892ce320bf0a2d, type: 2}
