@@ -13,6 +13,7 @@ namespace IM.Visuals
         private bool _visible;
         
         [field:SerializeField] public int OutputOrderAdjustment { get; set; }
+        [field:SerializeField] public int Rotation { get; set; }
         public bool Visible
         {
             get => gameObject.activeInHierarchy;
@@ -44,7 +45,6 @@ namespace IM.Visuals
         }
         public IModuleVisualObject OwnerVisualObject { get; private set; }
         public ITransform Transform => _transform ??= GetComponent<ITransform>();
-        public bool Highlighted { get; set; }
 
         public LocalTransformPreset LocalTransformPreset
         {
@@ -82,5 +82,5 @@ namespace IM.Visuals
         {
             Destroy(gameObject);
         }
-    } 
+    }
 }

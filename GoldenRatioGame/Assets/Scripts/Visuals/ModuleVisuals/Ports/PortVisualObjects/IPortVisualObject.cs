@@ -3,8 +3,8 @@
     public interface IPortVisualObject : IVisualObject
     {
         IModuleVisualObject OwnerVisualObject { get; }
+        public int Rotation { get; set; }
         int OutputOrderAdjustment { get; }
-        bool Highlighted { get; set; }
         
         void Reset();
     }

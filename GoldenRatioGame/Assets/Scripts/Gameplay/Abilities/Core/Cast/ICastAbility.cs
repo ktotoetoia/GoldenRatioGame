@@ -4,4 +4,9 @@
     {
         bool TryCast(out ICastInfo info);
     }
+
+    public interface ITickable
+    {
+        public void Tick();
+    }
 }

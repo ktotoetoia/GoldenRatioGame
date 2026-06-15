@@ -109,9 +109,8 @@ namespace IM.Inputs
 
         private UseContext GetAbilityUseContext(IAbilityReadOnly ability)
         {
-            Vector3 mousePosition = _gameCamera.ScreenToWorldPoint(Input.mousePosition) * Vector2.one;
-            return new UseContext(mousePosition, _moduleEntity.GameObject.transform.position,
-                _abilityAnchorPositionProvider?.GetAnchorPosition(ability) ?? _moduleEntity.GameObject.transform.position);
+            return new UseContext(() => _gameCamera.ScreenToWorldPoint(Input.mousePosition) * Vector2.one, () => _moduleEntity.GameObject.transform.position,
+                () => _abilityAnchorPositionProvider?.GetAnchorPosition(ability) ?? _moduleEntity.GameObject.transform.position);
         }
     }
 }

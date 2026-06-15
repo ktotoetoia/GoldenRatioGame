@@ -19,7 +19,7 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   _effectGroupFactory: {fileID: 11400000, guid: 2922883d8baa85c4d85f85faf632a5a8, type: 2}
-  _name: Health Augment
+  _name: Speed Augment
   _shortDescription: 1 M/S
   _desription: Makes the owner faster by 1 M/S
   _icon: {fileID: -6888551256523749776, guid: 0ebe755383568af4bbe94a595a37521e, type: 3}

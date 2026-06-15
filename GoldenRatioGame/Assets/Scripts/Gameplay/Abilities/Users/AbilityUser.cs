@@ -75,14 +75,12 @@ namespace IM.Abilities
                     
                     bool stillRequested = requested.TryGetValue(CurrentAbility,out UseContext context);
 
-                    if (!stillRequested && CurrentAbility is IInterruptable interruptable && interruptable.TryInterrupt())
+                    if (!stillRequested && CurrentAbility is IInterruptable interruptable && interruptable.TryInterrupt(InterruptionCause.UserCancelled))
                     {
                         CurrentAbility = null;
                     }
-                    else if (CurrentAbility is IChannelAbility && _abilityUseInfo is IChannelInfo channelInfo)
-                    {
-                        channelInfo.UpdateAbilityUseContext(context);
-                    }
+
+                    if (stillRequested && CurrentAbility is IRequireAbilityUseContext contextual) contextual.UpdateAbilityUseContext(context);
                 }
             }
             
@@ -104,13 +102,8 @@ namespace IM.Abilities
             {
                 _abilityUseInfo = castInfo;
                 CurrentAbility = cast;
-                return true;
             }
-
-            if (ability is not IChannelAbility channel || !channel.TryChannel(out var channelInfo)) return false;
             
-            _abilityUseInfo = channelInfo;
-            CurrentAbility = channel;
             return true;
         }
         private void InterruptCurrentAbility()
@@ -123,9 +116,7 @@ namespace IM.Abilities
                 return;
             }
 
-            if (CurrentAbility is not IInterruptable interruptable) return;
-            
-            if (interruptable.TryInterrupt())
+            if (CurrentAbility is IInterruptable interruptable && interruptable.TryInterrupt(InterruptionCause.Forced))
             {
                 CurrentAbility = null;
             }

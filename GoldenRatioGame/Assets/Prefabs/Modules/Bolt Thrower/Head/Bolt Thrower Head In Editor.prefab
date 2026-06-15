@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bolt Thrower Head In Editor
       objectReference: {fileID: 0}
+    - target: {fileID: 3476819271128857547, guid: 7104e5c87a0e65345a6a9321c64669d3, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 3831854756751311003, guid: 7104e5c87a0e65345a6a9321c64669d3, type: 3}
       propertyPath: m_Size.x
       value: 0.16

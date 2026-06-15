@@ -1,8 +1,9 @@
-﻿namespace IM.Effects
+﻿using IM.LifeCycle;
+
+namespace IM.Effects
 {
-    public interface IRestorableEffectModifierFactory : IEffectModifierFactory
+    public interface IRestorableEffectModifierFactory : IEffectModifierFactory, IRestorableFactory<IEffectModifier,IEffectContext>
     {
-        public object Save(IEffectModifier modifier);
-        public IEffectModifier Restore(object modifier, IEffectContext context);   
+        
     }
 }

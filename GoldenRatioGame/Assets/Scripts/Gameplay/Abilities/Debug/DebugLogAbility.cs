@@ -8,6 +8,7 @@ namespace IM.Abilities
         private readonly string _textToLog;
         private readonly ICooldown _cooldown;
 
+        public float WindUpTime { get; }
         public ICooldownReadOnly Cooldown=> _cooldown;
         public bool CanUse => !Cooldown.IsOnCooldown;
 

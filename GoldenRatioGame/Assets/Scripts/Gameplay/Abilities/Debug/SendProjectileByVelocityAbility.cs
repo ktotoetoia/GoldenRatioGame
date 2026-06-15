@@ -1,69 +1,42 @@
-﻿using System;
-using IM.Items;
-using IM.LifeCycle;
+﻿using IM.LifeCycle;
 using IM.Values;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace IM.Abilities
 {
-    public class SendProjectileByVelocityAbility : ICastAbility, IRequireAbilityUseContext, IFocusProvider, IAbilityEvents, IHaveIcon
+    public class SendProjectileByVelocityAbility : CastAbility, IFocusProvider
     {
         private readonly IObjectPool<GameObject> _projectileFactory;
-        private readonly ICooldown _cooldown;
-        private readonly ICooldown _sCooldown;
-        private UseContext _context;
-        
-        public bool CanUse => !Cooldown.IsOnCooldown;
-        public ICooldownReadOnly Cooldown => _cooldown;
+
         public float Speed { get; set; } = 5f;
-        public float FocusTime { get; set; } = 0.5f;
-        public string Name { get; set; } = "Projectile thrower";
-        public string ShortDescription { get; set; } = "Debug"; 
-        public string Description { get; set; }= "Throws projectile in the direction of pointer";
-        public IIcon Icon { get; set; }
+        public float FocusTime { get; set; } = 1f;
         public float SpawnProjectileOffsetMagnitude { get; set; } = .5f;
+        public bool UseInitial { get; set; } = false;
         
-        public event Action<UseContext> AbilityStarted;
-        public event Action<UseContext> AbilityFinished;
-        
-        public SendProjectileByVelocityAbility(IObjectPool<GameObject> projectileFactory, float cooldown) : this(projectileFactory, new FloatCooldown(cooldown))
-        {
-            
-        }
-        
-        public SendProjectileByVelocityAbility(IObjectPool<GameObject> projectileFactory, ICooldown cooldown)
+        public SendProjectileByVelocityAbility(IObjectPool<GameObject> projectileFactory, float cooldown)
+            : this(projectileFactory, new FloatCooldown(cooldown)) { }
+
+        public SendProjectileByVelocityAbility(IObjectPool<GameObject> projectileFactory, ICooldown cooldown) : base(cooldown)
         {
             _projectileFactory = projectileFactory;
-            _cooldown = cooldown;
-            _sCooldown = new FloatCooldown(0);
-        }
-
-        public bool TryCast(out ICastInfo castInfo)
-        {
-            castInfo = new CastInfo();
-            
-            if (!CanUse || !_cooldown.TryReset()) return false;
-            
-            GameObject projectile = _projectileFactory.Get();
-            Vector3 dir = _context.GetDirection().normalized;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            
-            projectile.GetComponent<ITemporary>().Initialize(()=> _projectileFactory.Release(projectile));
-            
-            projectile.transform.position = _context.AnchorPosition + dir * SpawnProjectileOffsetMagnitude;
-            projectile.transform.rotation = Quaternion.Euler(0, 0, angle);
-            projectile.GetComponent<Rigidbody2D>().linearVelocity = dir * Speed;
-            _sCooldown.ForceReset();
-            
-            AbilityStarted?.Invoke(_context);
-            AbilityFinished?.Invoke(_context);
-            
-            return true;
         }
         
-        public Vector3 GetFocusPoint() => _context.TargetWorldPosition;
-        public Vector3 GetFocusDirection() => (_context.TargetWorldPosition - _context.EntityPosition).normalized;
-        public void UpdateAbilityUseContext(UseContext context) => _context = context;
+        protected override void OnWindUpComplete(UseContext context)
+        {
+            GameObject projectile = _projectileFactory.Get();
+            Vector3 dir = GetDirection().normalized;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+            projectile.GetComponent<ITemporary>().Initialize(() => _projectileFactory.Release(projectile));
+            projectile.transform.position = context.GetAnchorPosition() + dir * SpawnProjectileOffsetMagnitude;
+            projectile.transform.rotation = Quaternion.Euler(0, 0, angle);
+            projectile.GetComponent<Rigidbody2D>().linearVelocity = dir * Speed;
+        }
+
+        public Vector3 GetFocusPoint() => _context.InitialTargetWorldPosition;
+        public Vector3 GetFocusDirection() => GetDirection().normalized;
+        
+        public Vector3 GetDirection() => UseInitial ? _context.GetInitialDirection() : _context.GetDirection();
     }
 }

@@ -5,7 +5,7 @@ namespace IM.Abilities
 {
     public interface IAbilityEvents
     {
-        event Action<UseContext> AbilityStarted;
-        event Action<UseContext> AbilityFinished;
+        event Action<UseContext> AbilityWindUp;
+        event Action<UseContext> AbilityFired;
     }
 }

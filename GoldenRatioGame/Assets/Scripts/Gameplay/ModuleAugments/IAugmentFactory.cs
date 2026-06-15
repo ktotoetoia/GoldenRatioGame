@@ -2,9 +2,7 @@
 
 namespace IM.Augments
 {
-    public interface IAugmentFactory : IFactory<IAugment,IAugmentContext>
+    public interface IAugmentFactory : IRestorableFactory<IAugment,IAugmentContext>
     {
-        object Save(IAugment augment);
-        IAugment Restore(object saved,IAugmentContext context);
     }
 }

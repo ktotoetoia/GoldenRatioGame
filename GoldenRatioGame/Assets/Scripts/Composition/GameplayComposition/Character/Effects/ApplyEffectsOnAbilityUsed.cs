@@ -18,7 +18,7 @@ namespace IM.Effects
         {
             _entitySource = GetComponent<IRequireEntity>();
             _abilityEvents = GetComponent<IAbilityEvents>();
-            _abilityEvents.AbilityStarted += Apply;
+            _abilityEvents.AbilityFired += Apply;
         }
 
         private void Apply(UseContext context)
@@ -42,7 +42,7 @@ namespace IM.Effects
         {
             if(_abilityEvents == null) return;
             
-            _abilityEvents.AbilityStarted -= Apply;
+            _abilityEvents.AbilityFired -= Apply;
         }
     }
 }

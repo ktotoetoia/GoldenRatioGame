@@ -51,7 +51,7 @@ namespace IM.Visuals
         public ITransform Transform => _transform ??= GetComponent<ITransform>();
         public IValueStorageContainer ValueStorageContainer { get; } = new ValueStorageContainer();
         public IReadOnlyList<IPortVisualObject> PortsVisualObjects => _portVisualObjects;
-        public IPortVisualObjectDirtyTracker DirtyTracker { get; } = new PortVisualObjectDirtyTracker();
+        public IDirtyTracker<IPortVisualObject> DirtyTracker { get; } = new DirtyTracker<IPortVisualObject>();
         public IExtensibleItem Owner { get; private set; }
         public Transform DefaultParent { get; set; }
 

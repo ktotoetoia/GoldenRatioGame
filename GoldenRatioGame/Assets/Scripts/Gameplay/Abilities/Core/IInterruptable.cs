@@ -2,8 +2,15 @@
 {
     public interface IInterruptable
     {
-        bool CanInterrupt { get; }
-        bool TryInterrupt();
-        void Interrupt();
+        bool CanInterrupt(InterruptionCause cause);
+        bool TryInterrupt(InterruptionCause cause);
+        void Interrupt(InterruptionCause cause);
+    }
+
+    public enum InterruptionCause
+    {
+        None,
+        UserCancelled,
+        Forced,
     }
 }

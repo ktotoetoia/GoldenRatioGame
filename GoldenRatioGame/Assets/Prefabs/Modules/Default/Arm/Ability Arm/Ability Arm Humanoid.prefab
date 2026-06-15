@@ -88,32 +88,22 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -6274676798850143365}
+      addedObject: {fileID: -907160284628163146}
     - targetCorrespondingSourceObject: {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -907160284628163146}
+      addedObject: {fileID: -5857127631781151516}
+    - targetCorrespondingSourceObject: {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3530682095430028463}
+    - targetCorrespondingSourceObject: {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4350115238139031734}
   m_SourcePrefab: {fileID: 100100000, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
 --- !u!1 &991209621830917388 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7210977406679086040, guid: 7245ca3eed7971c49b9c2c812086eabb, type: 3}
   m_PrefabInstance: {fileID: 7625705057183805140}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-6274676798850143365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 991209621830917388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f25b9d435f2437cb0b043b3591740d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: ModulesExtensions::IM.Modules.FireProjectileAbilityExtension
-  _projectilePrefab: {fileID: 5650377586138757497, guid: d41488b76feacdf4eafb2d6bcc318acc, type: 3}
-  _cooldown: 0.5
-  _projectileSpeed: 15
-  _iconSprite: {fileID: 2837516061785436495, guid: 25c9d22faca5ecf43b22d44e64cf369f, type: 3}
 --- !u!114 &-907160284628163146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,3 +116,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c3c2c2fa77489f980a58f8b1fff33e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Values::IM.Values.TransformPositionProvider
+--- !u!114 &-5857127631781151516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991209621830917388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1923327a2535473d9dd20f5124ca59f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameplayComposition::IM.Modules.ContainerAbilityExtension
+--- !u!114 &-3530682095430028463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991209621830917388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1fb55de320430d9552337381a26716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameplayComposition::IM.Modules.ProjectileFactionSetter
+--- !u!114 &4350115238139031734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991209621830917388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5966f126503b42a6a54c4ad86f594a06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Abilities::IM.Abilities.ProjectileAbilityContainer
+  _projectilePrefab: {fileID: 5650377586138757497, guid: d41488b76feacdf4eafb2d6bcc318acc, type: 3}
+  _cooldown: 0.5
+  _projectileSpeed: 15
+  _iconSprite: {fileID: 2837516061785436495, guid: 25c9d22faca5ecf43b22d44e64cf369f, type: 3}
+  _focusTime: 0.5
+  _windupTime: 0.3
+  _useInitialCastDirection: 1

@@ -14,12 +14,16 @@ PrefabInstance:
       objectReference: {fileID: -3014462811013893343, guid: 541abfd47f040f041984073ca67d7629, type: 3}
     - target: {fileID: 870070485612813489, guid: 840872b778351f04b8c956f046141407, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.02
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2156244532669732079, guid: 840872b778351f04b8c956f046141407, type: 3}
       propertyPath: m_Name
       value: Bolt Thrower Arm In Editor
       objectReference: {fileID: 0}
+    - target: {fileID: 4628299210885844736, guid: 840872b778351f04b8c956f046141407, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4499258235831673395, guid: 541abfd47f040f041984073ca67d7629, type: 3}
     - target: {fileID: 5506874432459062017, guid: 840872b778351f04b8c956f046141407, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.06

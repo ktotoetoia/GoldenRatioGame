@@ -1,28 +1,33 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace IM.Values
 {
     public readonly struct UseContext
     {
-        public readonly Vector3 TargetWorldPosition;
-        public readonly Vector3 AnchorPosition;
-        public readonly Vector3 EntityPosition;
-
-        public UseContext(Vector3 targetWorldPosition, Vector3 entityPosition) : this(targetWorldPosition,entityPosition,entityPosition)
+        private readonly Func<Vector3> _getTargetWorldPosition;
+        private readonly Func<Vector3> _getAnchorPosition;
+        private readonly Func<Vector3> _getEntityPosition;
+        
+        public Vector3 InitialTargetWorldPosition { get; }
+        public Vector3 CurrentTargetWorldPosition => _getTargetWorldPosition?.Invoke() ?? Vector3.zero;
+        
+        public UseContext(Func<Vector3> targetWorldPosition, Func<Vector3> entityPosition) : this(targetWorldPosition,entityPosition,entityPosition)
         {
             
         }
         
-        public UseContext(Vector3 targetWorldPosition, Vector3 entityPosition, Vector3 anchorPosition)
+        public UseContext(Func<Vector3> targetWorldPosition, Func<Vector3> entityPosition, Func<Vector3> anchorPosition)
         {
-            TargetWorldPosition = targetWorldPosition;
-            EntityPosition = entityPosition;
-            AnchorPosition = anchorPosition;
+            _getTargetWorldPosition = targetWorldPosition;
+            _getEntityPosition = entityPosition;
+            _getAnchorPosition = anchorPosition;
+            InitialTargetWorldPosition = _getTargetWorldPosition?.Invoke() ?? Vector3.zero;
         }
-
-        public Vector3 GetDirection()
-        {
-            return TargetWorldPosition - EntityPosition;
-        }
+        
+        public Vector3 GetDirection() => CurrentTargetWorldPosition - GetEntityPosition();
+        public Vector3 GetInitialDirection() => InitialTargetWorldPosition - GetEntityPosition();
+        public Vector3 GetAnchorPosition() => _getAnchorPosition?.Invoke() ?? Vector3.zero;
+        public Vector3 GetEntityPosition() => _getEntityPosition?.Invoke() ?? Vector3.zero;
     }
 }

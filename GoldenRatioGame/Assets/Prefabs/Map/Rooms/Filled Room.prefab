@@ -320,6 +320,7 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   _blackList:
   - {fileID: 2694484214590912548}
+  <Order>k__BackingField: 0
 --- !u!114 &-4642281475574424799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,7 +364,7 @@ MonoBehaviour:
   _tilemap: {fileID: 2694484214590912548}
   _floorTile: {fileID: 11400000, guid: b0cd4ef9c04b44b42aea20b255c4acec, type: 2}
   _wallTile: {fileID: 11400000, guid: 993f67262a138794bbd3a06b9c00f24c, type: 2}
-  _portTileRadius: 1
+  _portTileRadius: 0
 --- !u!114 &1843794523594488604
 MonoBehaviour:
   m_ObjectHideFlags: 0

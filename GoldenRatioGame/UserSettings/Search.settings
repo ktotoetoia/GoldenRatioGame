@@ -67,6 +67,11 @@ providers = {
 		priority = 210
 		defaultAction = null
 	}
+	typeselect = {
+		active = true
+		priority = 100
+		defaultAction = null
+	}
 }
 objectSelectors = {
 }

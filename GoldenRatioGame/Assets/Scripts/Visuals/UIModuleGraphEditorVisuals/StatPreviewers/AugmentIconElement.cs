@@ -22,14 +22,8 @@ namespace IM.Visuals
             style.marginRight = 4;
             style.marginBottom = 4;
 
-            if (augment?.Icon != null)
-            {
-                style.backgroundImage = new StyleBackground(augment.Icon.Sprite);
-            }
-            else
-            {
-                style.backgroundColor = new StyleColor(Color.gray); 
-            }
+            if (augment?.Icon != null) style.backgroundImage = new StyleBackground(augment.Icon.Sprite);
+            else style.backgroundColor = new StyleColor(Color.gray);
         }
     }
 }

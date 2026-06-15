@@ -14,7 +14,7 @@ namespace IM.Visuals
         IExtensibleItem Owner { get; }
         IValueStorageContainer ValueStorageContainer { get; }
         IReadOnlyList<IPortVisualObject> PortsVisualObjects { get; }
-        IPortVisualObjectDirtyTracker DirtyTracker { get; }
+        IDirtyTracker<IPortVisualObject> DirtyTracker { get; }
         void FinishInitialization(IExtensibleItem owner);
     }
 }

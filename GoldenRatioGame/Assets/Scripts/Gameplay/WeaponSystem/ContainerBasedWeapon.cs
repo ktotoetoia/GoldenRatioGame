@@ -16,7 +16,8 @@ namespace IM.WeaponSystem
         private UseContext _context;
 
         private ICastAbility CastAbility => _abilityContainer.Ability as ICastAbility;
-        
+
+        public float WindUpTime => CastAbility?.WindUpTime ?? 0;
         public ICooldownReadOnly Cooldown => CastAbility.Cooldown;
         public bool CanUse => CastAbility.CanUse;
         public IEntity Entity { get; set; }
@@ -34,25 +35,39 @@ namespace IM.WeaponSystem
         }
         public IWeaponVisualsProvider WeaponVisualsProvider { get; private set; }
         
-        public event Action<UseContext> AbilityStarted;
-        public event Action<UseContext> AbilityFinished;
+        public event Action<UseContext> AbilityWindUp;
+        public event Action<UseContext> AbilityFired;
         
         private void Awake()
         {
             WeaponVisualsProvider = GetComponent<IWeaponVisualsProvider>();
             _iconDrawer = GetComponent<IIconDrawer>();
             _abilityContainer = GetComponent<IAbilityContainer>();
+            
+            if (CastAbility is IAbilityEvents events)
+            {
+                events.AbilityWindUp += CallWindUp;
+                events.AbilityFired += CallFired;
+            }
         }
 
         public bool TryCast(out ICastInfo info)
         {
             if (!CastAbility.TryCast(out info)) return false;
             
-            AbilityStarted?.Invoke(_context);
-            AbilityFinished?.Invoke(_context);
-                
             return true;
         }
+
+        private void CallWindUp(UseContext context)
+        {
+            AbilityWindUp?.Invoke(_context);
+        }
+
+        private void CallFired(UseContext context)
+        {
+            AbilityFired?.Invoke(_context);
+        }
+        
         public void UpdateAbilityUseContext(UseContext context)
         {
             _context = context;

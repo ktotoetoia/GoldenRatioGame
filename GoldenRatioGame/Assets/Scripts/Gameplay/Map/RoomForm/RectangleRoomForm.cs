@@ -112,9 +112,9 @@ namespace IM.Map
                     tilePos.y + (isHorizontal ? 0 : i), 0);
 
                 if (!_tilemap.HasTile(target)) continue;
-                
                 _tilemap.SetTileFlags(target, TileFlags.None);
                 _tilemap.SetColor(target, Color.clear);
+                _tilemap.SetTile(target,null);
             }
         }
     }

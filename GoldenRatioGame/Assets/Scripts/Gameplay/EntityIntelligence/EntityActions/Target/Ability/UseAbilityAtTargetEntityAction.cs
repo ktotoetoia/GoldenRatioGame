@@ -47,7 +47,7 @@ namespace IM.EntityIntelligence
 
             _requestedAbilities.Clear();
 
-            UseContext context = new UseContext(_targetMemory.Target.transform.position, _ownerTransform.position);
+            UseContext context = new UseContext(() => _targetMemory.Target.transform.position, ()=> _ownerTransform.position);
 
             foreach (IAbilityReadOnly ability in _abilityUser.AbilityPool)
             {

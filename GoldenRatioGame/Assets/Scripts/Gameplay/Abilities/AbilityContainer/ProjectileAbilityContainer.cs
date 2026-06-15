@@ -5,12 +5,16 @@ using UnityEngine.Pool;
 
 namespace IM.Abilities
 {
+    [DefaultExecutionOrder(-10)]
     public class ProjectileAbilityContainer : MonoBehaviour, IAbilityContainer, IProjectileEvents
     {
         [SerializeField] private GameObject _projectilePrefab;
         [SerializeField] private float _cooldown = 3;
         [SerializeField] private float _projectileSpeed = 20;
         [SerializeField] private Sprite _iconSprite;
+        [SerializeField] private float _focusTime;
+        [SerializeField] private float _windupTime;
+        [SerializeField] private bool _useInitialCastDirection = true;
 
         public IAbilityReadOnly Ability { get; private set; }
         
@@ -23,9 +27,17 @@ namespace IM.Abilities
             
             Ability = new SendProjectileByVelocityAbility(pool, _cooldown)
             {
+                FocusTime = _focusTime,
+                WindUpTime = _windupTime,
                 Speed = _projectileSpeed,
+                UseInitial = _useInitialCastDirection,
                 Icon = new Icon(_iconSprite)
             };
+        }
+
+        private void Update()
+        {
+            (Ability as ITickable)?.Tick();
         }
 
         private GameObject Create() => Instantiate(_projectilePrefab, transform);
