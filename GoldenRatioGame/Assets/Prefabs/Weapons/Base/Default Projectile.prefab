@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -9074599395007698247}
   - component: {fileID: 1569317106877436456}
   - component: {fileID: 6671762380988703259}
+  - component: {fileID: -6395899711494527605}
   m_Layer: 0
   m_Name: Default Projectile
   m_TagString: Untagged
@@ -172,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c64d79cf7ce94b2b951d480dfd95efd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Factions::IM.Factions.FactionCollisionDetector
+  _triggerOnSameTarget: 0
 --- !u!114 &-9074599395007698247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,3 +222,16 @@ MonoBehaviour:
     _minValue: 20
     _maxValue: 50
     _value: 35
+--- !u!114 &-6395899711494527605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697464553835882009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 384b9baf02ee45f3a99967a3c2ffa013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Visuals::IM.Visuals.RendererDepthOrderable
+  _offset: {x: 0, y: 0, z: 0}

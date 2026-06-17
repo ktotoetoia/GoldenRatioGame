@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using IM.Augments;
 using IM.Entities;
 using IM.LifeCycle;
@@ -55,14 +56,8 @@ namespace IM.Visuals
                 ShowDescription = false,
                 ShowDivider = false
             };
-
-            if (_elementStyleSheets != null)
-            {
-                foreach (StyleSheet sheet in _elementStyleSheets)
-                {
-                    if (sheet) tooltipElement.styleSheets.Add(sheet);
-                }
-            }
+            
+            foreach (StyleSheet sheet in _elementStyleSheets.Where(x=>x)) tooltipElement.styleSheets.Add(sheet);
             
             tooltipElement.Bind(new TooltipInfoWrapper(augment.Name,augment.ShortDescription,augment.Description,augment.Icon.Sprite));
             _notificationQueueManager.Preview(tooltipElement);

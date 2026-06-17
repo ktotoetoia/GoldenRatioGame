@@ -1,12 +1,7 @@
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace IM.Visuals
 {
-    /// <summary>
-    /// Displays <see cref="ITooltipInfo"/> data as a compact card.
-    /// All fields are optional — missing ones collapse cleanly out of the layout.
-    /// </summary>
     [UxmlElement]
     public partial class TooltipInfoElement : VisualElement
     {
@@ -87,9 +82,7 @@ namespace IM.Visuals
             bool hasShortDesc = ShowShortDescription && !string.IsNullOrWhiteSpace(info.ShortDescription);
             bool hasDescription = ShowDescription && !string.IsNullOrWhiteSpace(info.Description);
 
-            _icon.style.backgroundImage = hasIcon
-                ? new StyleBackground(info.Icon)
-                : StyleKeyword.None;
+            _icon.style.backgroundImage = hasIcon ? new StyleBackground(info.Icon) : StyleKeyword.None;
 
             _icon.EnableInClassList(IconPlaceholderClass, !hasIcon);
             SetVisible(_icon, ShowIcon);
@@ -115,9 +108,7 @@ namespace IM.Visuals
 
         private static void SetVisible(VisualElement element, bool visible)
         {
-            element.style.display = visible
-                ? DisplayStyle.Flex
-                : DisplayStyle.None;
+            element.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
         }
 
         private static void SetLabel(Label label, string text)

@@ -96,6 +96,14 @@ PrefabInstance:
       propertyPath: <ShouldActivate>k__BackingField
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7845291349587292162, guid: fe00d3ca423cbb04092c1edd892db3a4, type: 3}
+      propertyPath: m_Color.a
+      value: 0.65882355
+      objectReference: {fileID: 0}
+    - target: {fileID: 7845291349587292162, guid: fe00d3ca423cbb04092c1edd892db3a4, type: 3}
+      propertyPath: m_Intensity
+      value: 0.7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

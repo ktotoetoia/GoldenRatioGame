@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: _damage
       value: 150
       objectReference: {fileID: 0}
+    - target: {fileID: 1569317106877436456, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      propertyPath: _triggerOnNone
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4697464553835882009, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
       propertyPath: m_Name
       value: Clank Piercer 20th Projectile
@@ -76,10 +80,29 @@ PrefabInstance:
       propertyPath: _damage._minValue
       value: 100
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9208995422943814170, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      propertyPath: m_Radius
+      value: 0.12698501
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208995422943814170, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.041317612
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208995422943814170, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.071272254
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 9208995422943814170, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4697464553835882009, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 1869005335097394544}
+    - targetCorrespondingSourceObject: {fileID: 4697464553835882009, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 2127554243149831807}
     - targetCorrespondingSourceObject: {fileID: 4697464553835882009, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
       insertIndex: -1
       addedObject: {fileID: -6295264227794524538}
@@ -89,6 +112,104 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4697464553835882009, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
   m_PrefabInstance: {fileID: 1106358724110409568}
   m_PrefabAsset: {fileID: 0}
+--- !u!61 &1869005335097394544
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5650377586138757497}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.2, y: 0.08}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.2, y: 0.08}
+  m_EdgeRadius: 0
+--- !u!114 &2127554243149831807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5650377586138757497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.Light2D
+  m_ComponentVersion: 2
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 1
+  m_Color: {r: 1, g: 0.27908093, b: 0.2028302, a: 0.28235295}
+  m_Intensity: 0.14
+  m_LightVolumeIntensity: 0.21
+  m_LightVolumeEnabled: 0
+  m_ApplyToSortingLayers: 01c7e971000000009f512816
+  m_LightCookieSprite: {fileID: -1719117009991353168, guid: 7113e858f7caa1642b5e302fe3c3c98e, type: 3}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowsEnabled: 1
+  m_ShadowIntensity: 0.75
+  m_ShadowSoftness: 0.3
+  m_ShadowSoftnessFalloffIntensity: 0.5
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 0, y: -0.00000011920929, z: 0}
+    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 2.67
+  m_PointLightOuterRadius: 20
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!114 &-6295264227794524538
 MonoBehaviour:
   m_ObjectHideFlags: 0
