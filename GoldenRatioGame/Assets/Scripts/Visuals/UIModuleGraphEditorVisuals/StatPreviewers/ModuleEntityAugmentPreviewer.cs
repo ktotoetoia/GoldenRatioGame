@@ -1,16 +1,20 @@
-﻿using IM.Augments;
+﻿using System.Collections.Generic;
+using IM.Augments;
 using IM.Modules;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace IM.Visuals
 {
-    public class AugmentPreviewer : MonoBehaviour, IStatPreviewer
+    public class ModuleEntityAugmentPreviewer : MonoBehaviour, IModuleEntityStatPreviewer
     {
+        [SerializeField] private List<StyleSheet> _iconStyleSheets;
+        
         public VisualElement GetPreview(IModuleEntity entity, IModuleEditingContextReadOnly currentContext)
         {
             var container = new AugmentScrollView();
-        
+            
+            container.IconStyleSheets.AddRange(_iconStyleSheets);
             UpdatePreview(container, entity, currentContext);
         
             return container;

@@ -18,7 +18,7 @@ namespace IM.UI
             _collection =  GetComponent<IGameObjectStatusDisplayCollection>();
             _rooms = new CollectionDiffer<GameObject>(x =>
             {
-                if(x.TryGetComponent(out IModuleEntity _)) _collection.Add(x);
+                if(x.TryGetComponent(out IEntity _) && x.TryGetComponent(out IDisplayable displayable)) _collection.Add(x);
             }, x =>
             {
                 _collection.Remove(x);
@@ -28,7 +28,6 @@ namespace IM.UI
         public void SetPlayerEntity(IEntity playerEntity)
         {
             playerEntity?.GameObject?.TryGetComponent(out _roomVisitor);
-            
         }
 
         private void LateUpdate()

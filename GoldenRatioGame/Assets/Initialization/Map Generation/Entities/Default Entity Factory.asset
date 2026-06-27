@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28ad98fa6a7d4567af4ec87ba3486eae, type: 3}
+  m_Name: Default Entity Factory
+  m_EditorClassIdentifier: InfrastructureComposition::IM.DefaultEntityFactory
+  _entry:
+    <Bounds>k__BackingField:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    <EntityGameObject>k__BackingField: {fileID: 4926170573108476304, guid: 23769dd0916e0444080f9f6410c27022, type: 3}
+    <Faction>k__BackingField: {fileID: 11400000, guid: 6f84adb9e464b3a45a892ce320bf0a2d, type: 2}

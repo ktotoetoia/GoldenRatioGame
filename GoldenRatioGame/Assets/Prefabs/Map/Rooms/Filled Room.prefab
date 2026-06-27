@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2935354109772483926}
   - component: {fileID: 6549988978593533540}
   - component: {fileID: 5065523590559501304}
+  - component: {fileID: 6265273622926403117}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -280,6 +281,20 @@ MonoBehaviour:
   - tile: {fileID: 11400000, guid: b99b07e60e6784546a3dcc97770405ff, type: 2}
     overrideArea: 1
     area: 0
+--- !u!114 &6265273622926403117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678349054802048420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf6b85b5ed5c4f63a509583c12e40492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Visuals::IM.Visuals.TilemapSeed
+  _seed: 0
+  _chooseRandom: 1
 --- !u!1 &4054245826693385729
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +310,8 @@ GameObject:
   - component: {fileID: -5310502140078858885}
   - component: {fileID: 8831215809966109471}
   - component: {fileID: 1843794523594488604}
+  - component: {fileID: 5084612938058284241}
+  - component: {fileID: 6810456369038980891}
   m_Layer: 0
   m_Name: Filled Room
   m_TagString: Untagged
@@ -393,14 +410,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed7bf48a94741d4bcba6475a4637421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Map::IM.Map.RectangleRoomForm
-  _backgroundTilemap: {fileID: 2198308766799846348}
-  _floorTile: {fileID: 11400000, guid: b0cd4ef9c04b44b42aea20b255c4acec, type: 2}
-  _bgWallTile: {fileID: 11400000, guid: 3a579f245c10a9248b228fa54c138871, type: 2}
-  _portWallTile: {fileID: 11400000, guid: b1027c6dfaff51b428beebc6a8de0235, type: 2}
-  _cornerWallTile: {fileID: 11400000, guid: 4ed914c90652d6841bf8758030102aad, type: 2}
-  _foregroundTilemap: {fileID: 7586212486348635415}
-  _fgWallTile: {fileID: 11400000, guid: 993f67262a138794bbd3a06b9c00f24c, type: 2}
-  _innerWallTile: {fileID: 0}
   _portTileRadius: 0
 --- !u!114 &1843794523594488604
 MonoBehaviour:
@@ -445,6 +454,53 @@ MonoBehaviour:
     ClusterToPrevious: 0
     ClusterRadius: 0
     ClusterBiasMultiplier: 0
+--- !u!114 &5084612938058284241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4054245826693385729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 970a4b0c799a423fb4c6e9f77bd9cb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Map::IM.Map.BackgroundRoomLayer
+  _tilemap: {fileID: 2198308766799846348}
+  _floorTile:
+    entries:
+    - item: {fileID: 11400000, guid: b99b07e60e6784546a3dcc97770405ff, type: 2}
+      weight: 1
+  _wallTiles:
+    entries:
+    - item: {fileID: 11400000, guid: 3a579f245c10a9248b228fa54c138871, type: 2}
+      weight: 20
+    - item: {fileID: 11400000, guid: 0cda659e489dfca4385cb27d48c1586a, type: 2}
+      weight: 4
+    - item: {fileID: 11400000, guid: 5c0e3b4f0e775214d8ab09b4fb3c85c1, type: 2}
+      weight: 1
+  _portWallTiles:
+    entries:
+    - item: {fileID: 11400000, guid: b1027c6dfaff51b428beebc6a8de0235, type: 2}
+      weight: 1
+  _cornerWallTiles:
+    entries:
+    - item: {fileID: 11400000, guid: 4ed914c90652d6841bf8758030102aad, type: 2}
+      weight: 1
+--- !u!114 &6810456369038980891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4054245826693385729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bd74c36f34f4bd187b3072b66d1a990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Map::IM.Map.ForegroundRoomLayer
+  _tilemap: {fileID: 7586212486348635415}
+  _wallTile: {fileID: 11400000, guid: 993f67262a138794bbd3a06b9c00f24c, type: 2}
 --- !u!1 &4582951500499564362
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,6 +614,7 @@ GameObject:
   - component: {fileID: 4350917849550577506}
   - component: {fileID: 9187015947054963530}
   - component: {fileID: 6237062862436819760}
+  - component: {fileID: 2219558044380410537}
   - component: {fileID: 6725391630964118924}
   m_Layer: 0
   m_Name: Foreground
@@ -823,6 +880,20 @@ MonoBehaviour:
   - tile: {fileID: 11400000, guid: b99b07e60e6784546a3dcc97770405ff, type: 2}
     overrideArea: 1
     area: 0
+--- !u!114 &2219558044380410537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8938692188672955427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf6b85b5ed5c4f63a509583c12e40492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Visuals::IM.Visuals.TilemapSeed
+  _seed: 0
+  _chooseRandom: 1
 --- !u!114 &6725391630964118924
 MonoBehaviour:
   m_ObjectHideFlags: 0

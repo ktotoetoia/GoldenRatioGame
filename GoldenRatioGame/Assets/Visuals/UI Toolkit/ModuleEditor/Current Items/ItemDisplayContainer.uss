@@ -1,58 +1,65 @@
-.itemDisplayContainer {
+.item-info {
     flex-direction: row;
     align-items: stretch;
+
     background-color: rgb(38, 38, 44);
-    border-radius: 5px;
+
     border-width: 1px;
     border-color: rgb(22, 22, 28);
-    padding: 6px;
-    padding-top: 8px;
-    padding-right: 8px;
-    padding-bottom: 8px;
-    padding-left: 8px;
+    border-radius: 5px;
+
+    padding: 8px;
 }
 
-.itemIcon {
+.item-info__icon {
     width: 64px;
     height: 64px;
     flex-shrink: 0;
-    border-radius: 3px;
-    background-color: rgb(26, 26, 32);
-    -unity-background-scale-mode: scale-to-fit;
+
     margin-right: 8px;
+
+    background-color: rgb(26, 26, 32);
+    border-radius: 3px;
+
+    -unity-background-scale-mode: scale-to-fit;
 }
 
-.itemInfoColumn {
+.item-info__text-column {
+    width: 140px;
+    flex-shrink: 0;
+
     flex-direction: column;
     justify-content: center;
     overflow: hidden;
-    width: 140px;
-    flex-shrink: 0;
+
     margin-right: 8px;
 }
 
-.itemName {
+.item-info__name {
     height: 25px;
-}
 
-.itemName .marquee-container-label {
     color: rgb(215, 215, 222);
     font-size: 20px;
+
+    overflow: hidden;
+    white-space: nowrap;
 }
 
-.itemDescription {
+.item-info__short-desc {
     height: 20px;
     margin-top: 3px;
-}
 
-.itemDescription .marquee-container-label {
     color: rgb(148, 148, 162);
     font-size: 17px;
+
+    overflow: hidden;
+    white-space: nowrap;
 }
 
-.itemExtraSlot {
+.item-info__additional-info {
     flex-grow: 1;
+    overflow: hidden;
+
     background-color: rgb(26, 26, 32);
     border-radius: 3px;
-    overflow: hidden;
 }

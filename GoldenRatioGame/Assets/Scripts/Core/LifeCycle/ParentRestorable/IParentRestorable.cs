@@ -7,4 +7,5 @@ namespace IM.LifeCycle
         Transform DefaultParent { get; set; }
         void ResetToDefaultParent();
     }
+    
 }

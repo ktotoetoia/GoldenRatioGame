@@ -19,7 +19,7 @@ namespace IM.Visuals
         private AbilityPoolEditingService _abilityPoolEditingService;
         private IWeaponEditingService _weaponEditingService;
         private CollectionDiffer<IDataModule<IExtensibleItem>> _differ;
-        private readonly Dictionary<IDataModule<IExtensibleItem>, ItemDisplayContainer> _itemDisplayContainers = new();
+        private readonly Dictionary<IDataModule<IExtensibleItem>, ItemInfoElement> _itemDisplayContainers = new();
 
         private void Awake()
         {
@@ -35,7 +35,8 @@ namespace IM.Visuals
             _differ?.Update(_context.GraphEditing.GraphReadOnly.DataModules);
 
             foreach (var container in _itemDisplayContainers.Values)
-                (container.ExtraElement as ExtensibleItemExtra)?.Update();
+                (container.AdditionalInfo as ExtensibleItemExtra)?.Update();
+            
         }
 
         public override void SetContext(IModuleEditingContext context)
@@ -48,7 +49,7 @@ namespace IM.Visuals
             _differ = new CollectionDiffer<IDataModule<IExtensibleItem>>(
                 module =>
                 {
-                    var container = CreateItemContainer(module);
+                    ItemInfoElement container = CreateItemContainer(module);
                     _itemDisplayContainers[module] = container;
                     _container.Add(container);
                 },
@@ -73,11 +74,11 @@ namespace IM.Visuals
 
         public IAbilityContainer GetContainerAt(Vector3 position)
         {
-            List<ItemDisplayContainer> elements = WorldDocumentUtility.GetElementsAtPosition<ItemDisplayContainer>(_document,position).ToList();
+            List<ItemInfoElement> elements = WorldDocumentUtility.GetElementsAtPosition<ItemInfoElement>(_document,position).ToList();
             
-            foreach (ItemDisplayContainer element in elements)
+            foreach (ItemInfoElement element in elements)
             {
-                if(element.ExtraElement is ExtensibleItemExtra { AbilityContainer: not null } container)
+                if(element.AdditionalInfo is ExtensibleItemExtra { AbilityContainer: not null } container)
                 {
                     return container.AbilityContainer;
                 }
@@ -85,11 +86,11 @@ namespace IM.Visuals
             return null;
         }
 
-        private ItemDisplayContainer CreateItemContainer(IDataModule<IExtensibleItem> module)
+        private ItemInfoElement CreateItemContainer(IDataModule<IExtensibleItem> module)
         {
-            var container = new ItemDisplayContainer();
+            var container = new ItemInfoElement();
             container.SetItem(module.Value);
-            container.SetExtraElement(new ExtensibleItemExtra(
+            container.SetAdditionalInfo(new ExtensibleItemExtra(
                 module.Value,
                 weapon => _weaponEditingService.ClearWeapon(weapon),
                 _abilityPoolEditingService

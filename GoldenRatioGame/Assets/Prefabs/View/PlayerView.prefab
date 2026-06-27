@@ -370,6 +370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f04d6c9d07940a48252bc159c98bd78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.Visuals.AugmentPreviewer
+  _iconStyleSheets:
+  - {fileID: 7433441132597879392, guid: 25396fc865ce64444a86f1166b258428, type: 3}
 --- !u!1 &1057642660832433101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,6 +1047,7 @@ GameObject:
   - component: {fileID: 4127881256088814093}
   - component: {fileID: 3087950249454672768}
   - component: {fileID: 6204554411797089081}
+  - component: {fileID: 151054751258415026}
   m_Layer: 0
   m_Name: TooltipView
   m_TagString: Untagged
@@ -1120,6 +1123,20 @@ MonoBehaviour:
   - {fileID: 6400010115505146701}
   - {fileID: 8379213644274031688}
   _hoverDelay: 0.5
+--- !u!114 &151054751258415026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3349298921210743276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53661dcf32c043eba509379088bb9708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.Visuals.HealthPreviewer
+  _styleSheets:
+  - {fileID: 7433441132597879392, guid: a54a42696720a5b4db4e4ae5daafecb3, type: 3}
 --- !u!1 &3384889456729800444
 GameObject:
   m_ObjectHideFlags: 0

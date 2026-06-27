@@ -8,8 +8,8 @@ namespace IM.Visuals
     public class StatPreviewContainer : MonoBehaviour, IStatPreviewContainer
     {
         [SerializeField] private string _containerName = "StatsContainer";
-        private readonly List<IStatPreviewer>  _statPreviewers = new();
-        private readonly Dictionary<IStatPreviewer, VisualElement> _statPreviewerMap = new();
+        private readonly List<IModuleEntityStatPreviewer>  _statPreviewers = new();
+        private readonly Dictionary<IModuleEntityStatPreviewer, VisualElement> _statPreviewerMap = new();
         private UIDocument _document;
         private VisualElement _visualElement;
         private IModuleEntity _entity;
@@ -25,7 +25,7 @@ namespace IM.Visuals
 
         private void Update()
         {
-            foreach ((IStatPreviewer statPreviewer,VisualElement element) in _statPreviewerMap) 
+            foreach ((IModuleEntityStatPreviewer statPreviewer,VisualElement element) in _statPreviewerMap) 
                 statPreviewer.UpdatePreview(element,_entity, _contextReadOnly);
         }
 

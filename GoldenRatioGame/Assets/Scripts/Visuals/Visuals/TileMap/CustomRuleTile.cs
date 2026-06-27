@@ -6,8 +6,6 @@ namespace IM.Visuals
     [CreateAssetMenu(menuName = "2D/Tiles/Custom Rule Tile")]
     public class CustomRuleTile : RuleTile
     {
-        
-        
         public override bool RuleMatch(int neighbor, TileBase other) {
             switch (neighbor) 
             {

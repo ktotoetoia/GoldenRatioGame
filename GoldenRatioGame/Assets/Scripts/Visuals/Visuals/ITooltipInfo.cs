@@ -8,5 +8,6 @@ namespace IM.Visuals
         string ShortDescription { get; }
         string Description { get; }
         Sprite Icon { get; }
+        object Item { get; }
     }
 }

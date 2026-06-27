@@ -27,7 +27,7 @@ namespace IM.EntityIntelligence
         {
             if(!_targetMemory.IsSeen)return;
            
-            _focusDirectionOverrider.OverrideFocusDirection(_targetMemory.Target.transform.position- _ownerTransform.position,FocusDuration);
+            _focusDirectionOverrider?.OverrideFocusDirection(_targetMemory.Target.transform.position- _ownerTransform.position,FocusDuration);
         }
     }
 }

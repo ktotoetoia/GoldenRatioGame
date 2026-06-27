@@ -1,0 +1,29 @@
+.item-info {
+    width: 64px;
+    height: 64px;
+
+    margin-right: 4px;
+    margin-bottom: 4px;
+
+    padding: 0;
+}
+
+.item-info > .item-info__icon {
+    width: 100%;
+    height: 100%;
+
+    flex-grow: 1;
+    flex-shrink: 0;
+
+    background-color: transparent;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.item-info > .item-info__icon--placeholder {
+    background-color: rgb(128, 128, 128);
+}
+
+.item-info > .item-info__text-column,
+.item-info > .item-info__additional-info {
+    display: none;
+}

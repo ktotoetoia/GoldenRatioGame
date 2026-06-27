@@ -13,7 +13,7 @@ namespace IM.Augments
         [SerializeField] private RestorableEffectGroupFactory _effectGroupFactory;
         [SerializeField] private string _name = "Augment";
         [SerializeField] private string _shortDescription= "Augment Description";
-        [SerializeField] private string _desription = "Augment Description";
+        [SerializeField] private string _description = "Augment Description";
         [SerializeField] private Sprite _icon;
         
         public string Id => _assetReference.AssetGUID;
@@ -24,7 +24,7 @@ namespace IM.Augments
             {
                 Name = _name,
                 ShortDescription = _shortDescription,
-                Description = _desription,
+                Description = _description,
                 Icon = new Icon(_icon),
             };
         }
@@ -42,7 +42,7 @@ namespace IM.Augments
             {
                 Name = _name,
                 ShortDescription = _shortDescription,
-                Description = _desription,
+                Description = _description,
                 Icon = new Icon(_icon),
             };;
         }

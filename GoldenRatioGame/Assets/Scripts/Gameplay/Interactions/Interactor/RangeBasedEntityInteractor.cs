@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace IM.Interactions
 {
-    public class RangeBasedModuleEntityInteractor : MonoBehaviour, IInteractor, IRequireInteractionProvider
+    public class RangeBasedEntityInteractor : MonoBehaviour, IInteractor, IRequireInteractionProvider
     {
         [SerializeField] private GameObject _subInteractorSource;
         [SerializeField] private float _maxInteractionRange = 0.5f; 
@@ -22,8 +22,7 @@ namespace IM.Interactions
 
         private void Awake()
         {   
-            if (_subInteractorSource == null) 
-                throw new MissingComponentException($"{nameof(_subInteractorSource)} is required on {gameObject.name}");
+            if (!_subInteractorSource) throw new MissingComponentException($"{nameof(_subInteractorSource)} is required on {gameObject.name}");
 
             _subInteractors = _subInteractorSource.GetComponents<ISubInteractor>().ToList();
             _entity = GetComponent<IEntity>();

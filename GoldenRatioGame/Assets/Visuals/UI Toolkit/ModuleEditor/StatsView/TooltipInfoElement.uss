@@ -12,11 +12,6 @@
     max-width: 480px;
 }
 
-.tooltip-info__top-row {
-    flex-direction: row;
-    align-items: stretch;
-}
-
 .tooltip-info__icon {
     width: 80px;
     height: 80px;
@@ -36,9 +31,19 @@
     background-color: var(--ui-icon-bg-placeholder);
     border-color: var(--ui-icon-border-placeholder);
 }
+.tooltip-info__top-row {
+    flex-direction: row;
+    align-items: stretch;
+    min-width: 0;
+}
 
 .tooltip-info__text-column {
-    flex: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+
+    min-width: 0;
+
     flex-direction: column;
     justify-content: center;
 
@@ -46,24 +51,24 @@
 }
 
 .tooltip-info__name {
-    color: var(--ui-text-tooltip-title);
+    align-self: stretch;
+    flex-grow: 0;
 
+    color: var(--ui-text-tooltip-title);
     font-size: 24px;
     -unity-font-style: bold;
-
-    white-space: normal;
 
     margin: 0 0 4px 0;
     padding: 0;
 }
 
 .tooltip-info__short-desc {
-    color: var(--ui-text-tooltip-desc);
+    align-self: stretch;
+    flex-grow: 0;
 
+    color: var(--ui-text-tooltip-desc);
     font-size: 20px;
     -unity-font-style: italic;
-
-    white-space: normal;
 
     margin: 0;
     padding: 0;
@@ -90,4 +95,29 @@
     padding: 0;
 
     -unity-font-definition: url("project://database/Assets/Visuals/Fonts/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf?fileID=12800000&guid=585188cdc4600544eb408bee749e4b3a&type=3#ThaleahFat_TTF");
+}
+
+.tooltip-info__additional-info {
+    flex-direction: column;
+
+    margin-top: 12px;
+    padding: 0;
+}
+
+.tooltip-stat-previews {
+    flex-direction: column;
+
+    margin: 0;
+    padding: 0;
+}
+
+.tooltip-stat-previews__preview {
+    flex-shrink: 0;
+
+    margin: 0;
+    padding: 0;
+}
+
+.tooltip-stat-previews__preview--spaced {
+    margin-top: 8px;
 }

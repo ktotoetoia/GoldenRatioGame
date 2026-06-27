@@ -31,14 +31,14 @@ namespace IM.UI
 
         public void Add(GameObject go)
         {
-            if(!go.TryGetComponent(out IEntity entity))return;
+            if(!go.TryGetComponent(out IEntity entity)) return;
 
             _displayedEntities.Add(entity);
         }
 
         public void Remove(GameObject go)
         {
-            if(!go ||!go.TryGetComponent(out IEntity entity))return;
+            if(!go ||!go.TryGetComponent(out IEntity entity)) return;
             
             _displayedEntities.Remove(entity);
         }

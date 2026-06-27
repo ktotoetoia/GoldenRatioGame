@@ -59,7 +59,7 @@ namespace IM.Visuals
             
             foreach (StyleSheet sheet in _elementStyleSheets.Where(x=>x)) tooltipElement.styleSheets.Add(sheet);
             
-            tooltipElement.Bind(new TooltipInfoWrapper(augment.Name,augment.ShortDescription,augment.Description,augment.Icon.Sprite));
+            tooltipElement.Bind(new TooltipInfoWrapper(augment, augment.Name,augment.ShortDescription,augment.Description,augment.Icon.Sprite));
             _notificationQueueManager.Preview(tooltipElement);
         }
     }

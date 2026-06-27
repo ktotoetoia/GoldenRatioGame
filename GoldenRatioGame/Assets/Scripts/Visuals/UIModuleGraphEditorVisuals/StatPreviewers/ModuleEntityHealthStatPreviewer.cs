@@ -11,7 +11,7 @@ using UnityEngine.UIElements;
 
 namespace IM.Visuals
 {
-    public class HealthStatPreviewer : MonoBehaviour, IStatPreviewer
+    public class ModuleEntityHealthStatPreviewer : MonoBehaviour, IModuleEntityStatPreviewer
     {
         [SerializeField] private List<StyleSheet> _requiredStyles;
 

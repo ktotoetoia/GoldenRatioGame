@@ -8,9 +8,11 @@ namespace IM.Visuals
         public string ShortDescription { get; }
         public string Description { get; }
         public Sprite Icon { get; }
-        
-        public TooltipInfoWrapper(string name, string shortDescription, string description, Sprite icon)
+        public object Item { get; }
+
+        public TooltipInfoWrapper(object item, string name, string shortDescription, string description, Sprite icon)
         {
+            Item = item;
             Name = name;
             ShortDescription = shortDescription;
             Description = description;

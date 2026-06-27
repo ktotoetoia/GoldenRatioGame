@@ -1,18 +1,24 @@
 ﻿using IM.Items;
 using IM.Storages;
+using IM.Visuals;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace IM.UI
 {
     [UxmlElement]
-    public partial class StorageCellElement : VisualElement
+    public partial class StorageCellElement : VisualElement, ITooltipInfo
     {
         private readonly Label _label;
         private readonly VisualElement _iconDisplay;
         private IStorageCellReadonly _cell;
 
         public string Name { get => _label.text; set => _label.text = value; }
-        
+        public string ShortDescription => (_cell?.Item as IHaveDescription)?.ShortDescription;
+        public string Description => (_cell?.Item as IHaveDescription)?.Description;
+        public Sprite Icon => (_cell?.Item as IHaveIcon)?.Icon?.Sprite;
+        public object Item => _cell?.Item;
+
         public IStorageCellReadonly Cell
         {
             get => _cell;
