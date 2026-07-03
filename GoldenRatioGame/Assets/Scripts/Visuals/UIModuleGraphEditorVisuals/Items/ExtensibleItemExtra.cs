@@ -12,14 +12,18 @@ namespace IM.Visuals
         private readonly AbilityPoolEditingService _abilityPoolEditingService;
         private readonly ItemVisualElement _itemVisualElement;
         private readonly IExtensibleItem _item;
+        private readonly Action _clearAction;
 
         public IAbilityContainer AbilityContainer { get; private set; }
+
+        private object _lastAbility;
 
         public ExtensibleItemExtra(IExtensibleItem item, Action<IWeaponContainer> onClear, AbilityPoolEditingService abilityPoolEditingService)
         {
             _item = item;
             _onClear = onClear;
             _abilityPoolEditingService = abilityPoolEditingService;
+            _clearAction = () => _onClear(AbilityContainer as IWeaponContainer);
 
             _itemVisualElement = new ItemVisualElement();
             Add(_itemVisualElement);
@@ -29,22 +33,31 @@ namespace IM.Visuals
 
         public void Update()
         {
-            _itemVisualElement.SetItem(null);
-            AbilityContainer = null;
+            IAbilityContainer resolvedContainer = null;
+            bool isWeapon = false;
 
             if (_item.Extensions.TryGet(out IWeaponExtension weaponExtension))
             {
-                AbilityContainer = _abilityPoolEditingService.GetWrapped(weaponExtension);
-                _itemVisualElement.SetItem(AbilityContainer.Ability);
-                _itemVisualElement.RegisterAction(() => _onClear(AbilityContainer as IWeaponContainer));
-                return;
+                resolvedContainer = _abilityPoolEditingService.GetWrapped(weaponExtension);
+                isWeapon = true;
+            }
+            else if (_item.Extensions.TryGet(out IAbilityExtension abilityExtension))
+            {
+                resolvedContainer = _abilityPoolEditingService.GetWrapped(abilityExtension);
             }
 
-            if (_item.Extensions.TryGet(out IAbilityExtension abilityExtension))
-            {
-                AbilityContainer = _abilityPoolEditingService.GetWrapped(abilityExtension);
-                _itemVisualElement.SetItem(AbilityContainer.Ability);
-            }
+            object resolvedAbility = resolvedContainer?.Ability;
+
+            if (ReferenceEquals(resolvedContainer, AbilityContainer) && ReferenceEquals(resolvedAbility, _lastAbility))
+                return;
+
+            AbilityContainer = resolvedContainer;
+            _lastAbility = resolvedAbility;
+
+            _itemVisualElement.SetItem(resolvedAbility);
+
+            if (isWeapon)
+                _itemVisualElement.RegisterAction(_clearAction);
         }
     }
 }

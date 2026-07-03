@@ -18,10 +18,10 @@ namespace IM.Visuals
         public VisualElement GetPreview(IModuleEntity entity, IModuleEditingContextReadOnly currentContext)
         {
             var previewElement = new CappedValueElement();
-            foreach (var styleSheet in _requiredStyles) previewElement.styleSheets.Add(styleSheet);
             previewElement.GetCappedValue = () => CalculateTotalHealth(entity, currentContext);
             UpdatePreview(previewElement, entity, currentContext);
-        
+            foreach (var styleSheet in _requiredStyles) previewElement.styleSheets.Add(styleSheet);
+            
             return previewElement;
         }
 

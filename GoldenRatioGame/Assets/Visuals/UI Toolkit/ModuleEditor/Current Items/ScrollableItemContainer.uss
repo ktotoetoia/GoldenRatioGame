@@ -1,12 +1,76 @@
-.scrollableItemContainer {
-    flex-grow: 1;
-    background-color: rgb(30, 30, 36);
-    border-radius: 5px;
-    border-width: 1px;
-    border-color: rgb(20, 20, 25);
-    overflow: hidden;
+:root {
+    --editor-frame-texture: url("project://database/Assets/Visuals/Sprites/UI/Editor%20Slider.png?fileID=1700676726&guid=ae23e08ba2b00cf458bca0ec794a01f3&type=3#Editor Slider_1");
+    --scrollbar-thumb-texture: url("project://database/Assets/Visuals/Sprites/UI/Editor%20Slider.png?fileID=-7254897664836990127&guid=ae23e08ba2b00cf458bca0ec794a01f3&type=3#Editor Slider_0");
+    --scrollbar-thickness: 56px;
+    --slider-thickness: 20px;
 }
 
-.scrollableItemContainer #unity-content-viewport {
+.scrollableItemContainer {
     flex-grow: 1;
+    overflow: hidden;
+    background-image: var(--editor-frame-texture);
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgb(20, 20, 25);
+    border-width: 1px;
+    border-radius: 5px;
+    margin: 0;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    padding: 20px;
+}
+
+.scrollableItemContainer .unity-scroll-view__content-and-vertical-scroll-container {
+    background-image: url("project://database/Assets/Visuals/Sprites/UI/Editor.png?fileID=-200860325&guid=9c061e9bdd467ad46bc49abeadeb0aee&type=3#Editor_4");
+    padding: 12px;
+}
+
+.scrollableItemContainer .unity-scroller {
+    align-items: center;
+    background-image: var(--editor-frame-texture);
+    background-color: rgba(0, 0, 0, 0);
+    padding: 0;
+}
+
+.scrollableItemContainer .unity-scroller--vertical {
+    width: var(--scrollbar-thickness);
+    min-width: var(--scrollbar-thickness);
+}
+
+.scrollableItemContainer .unity-scroller--horizontal {
+    height: var(--scrollbar-thickness);
+    min-height: var(--scrollbar-thickness);
+}
+
+.scrollableItemContainer .unity-base-slider__drag-container {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.scrollableItemContainer .unity-base-slider__tracker {
+    border-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.scrollableItemContainer .unity-base-slider__dragger {
+    background-image: var(--scrollbar-thumb-texture);
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    width: var(--slider-thickness);
+    align-self: center;
+    left: 0;
+    position: relative;
+}
+
+.scrollableItemContainer .unity-repeat-button {
+    display: none;
+}
+
+.scrollableItemContainer .unity-slider {
+    height: auto;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }

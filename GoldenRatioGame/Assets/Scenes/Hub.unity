@@ -5005,6 +5005,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Global Light
       objectReference: {fileID: 0}
+    - target: {fileID: 2065267724718437922, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3036473229136123768, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
       propertyPath: '_transforms.Array.data[2]'
       value: 
@@ -5065,6 +5069,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 7143805859741979392, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8944842489613758977, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
       propertyPath: _sceneBootstrapper
       value: 
@@ -5084,10 +5092,16 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 772882422062157344, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 2157813391325168893, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 8347375906417423393, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 9104703983774945774, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8612684050457457402, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 3444491939790510144, guid: f8d94e2bfda927d44b71f33f64e96537, type: 3}

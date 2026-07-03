@@ -8,32 +8,31 @@
     border-right-width: 0;
     border-bottom-width: 0;
     border-left-width: 0;
+    width: 48%;
 }
 
 .saveButton {
-    background-color: rgb(98, 218, 79);
     color: rgb(255, 255, 255);
+    background-image: url("project://database/Assets/Visuals/Sprites/UI/Editor%20Buttons.png?fileID=-3779293812660613945&guid=4e53c1a50be27c744b5c3a5e6b6f48d6&type=3#Editor Buttons_0");
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .discardButton {
-    background-color: rgb(255, 99, 71);
+    background-image: url("project://database/Assets/Visuals/Sprites/UI/Editor%20Buttons.png?fileID=2046373611301936240&guid=4e53c1a50be27c744b5c3a5e6b6f48d6&type=3#Editor Buttons_1");
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .saveButton:hover {
-    background-color: rgb(112, 164, 47);
     color: rgb(255, 255, 255);
 }
 
 .saveButton:active {
-    background-color: rgb(117, 194, 87);
     color: rgb(0, 0, 0);
 }
 
 .discardButton:hover {
-    background-color: rgb(185, 76, 57);
 }
 
 .discardButton:active {
-    background-color: rgb(221, 123, 75);
     color: rgb(0, 0, 0);
 }

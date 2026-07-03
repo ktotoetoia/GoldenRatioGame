@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Font.uss?fileID=7433441132597879392&amp;guid=1a14260a6760efa4ebd95862e69bc46a&amp;type=3#Font"/>
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/ModuleEditor/Current%20Items/ScrollableItemContainer.uss?fileID=7433441132597879392&amp;guid=2de626ac5fa5b1a48895f55a9ecbbd98&amp;type=3#ScrollableItemContainer"/>
+    <ui:VisualElement class="scrollableItemContainer" style="flex-grow: 1;">
+        <ui:Label text="Editor" style="-unity-text-generator: advanced; -unity-text-auto-size: best-fit 10px 50px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; flex-grow: 1; -unity-text-align: middle-center;"/>
+    </ui:VisualElement>
+</ui:UXML>

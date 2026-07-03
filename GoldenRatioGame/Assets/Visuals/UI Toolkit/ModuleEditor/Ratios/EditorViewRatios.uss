@@ -2,15 +2,20 @@
     --left-panel: 30%;
     --right-panel: 30%;
     --center-panel: 40%;
-    --current-items-container: 60%;
-    --storage-height: 85%;
-    --graph-editor-container-height: 100%;
-    --stats-container-height: 40%;
-    --editor-buttons-container: 15%;
+    --current-items-container: 84%;
+    --storage-height: 84%;
+    --stats-container-height: 16%;
+    --editor-buttons-container: 16%;
+    --title-container-height: 10%;
+    --augment-container-height: 25%;
 }
 
 .container {
     padding: 15px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
 }
 
 .statsContainer {
@@ -31,7 +36,8 @@
 }
 
 .graphEditorContainer {
-    height: var(--graph-editor-container-height);
+    flex-grow: 1;
+    margin-bottom: 100px;
 }
 
 .leftPanel {
@@ -48,4 +54,16 @@
 
 .editorButtonsContainer {
     height: var(--editor-buttons-container);
+}
+
+.titleContainer {
+    height: var(--title-container-height);
+    margin-right: 20%;
+    margin-left: 20%;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.augmentContainer {
+    height: var(--augment-container-height);
 }

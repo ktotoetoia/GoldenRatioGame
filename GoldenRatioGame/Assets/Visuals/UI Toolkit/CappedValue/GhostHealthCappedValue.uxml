@@ -1,4 +1,6 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/Visuals/UI%20Toolkit/CappedValue/GhostCappedValueHealthDisplay.uss?fileID=7433441132597879392&amp;guid=1ee0d512184497c4bb709bcd9d389fd6&amp;type=3#GhostCappedValueHealthDisplay"/>
-    <IM.UI.GhostCappedValueElement/>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/Font.uss?fileID=7433441132597879392&amp;guid=1a14260a6760efa4ebd95862e69bc46a&amp;type=3#Font"/>
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/CappedValue/CappedValueHealthDisplay.uss?fileID=7433441132597879392&amp;guid=1ee0d512184497c4bb709bcd9d389fd6&amp;type=3#CappedValueHealthDisplay"/>
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/CappedValue/SmallerCappedValueHealthDisplay.uss?fileID=7433441132597879392&amp;guid=4f9b201c6d2c402bab56a88f8396a5ff&amp;type=3#SmallerCappedValueHealthDisplay"/>
+    <IM.UI.GhostCappedValueElement show-label="false"/>
 </ui:UXML>

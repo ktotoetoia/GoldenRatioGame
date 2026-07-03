@@ -2,26 +2,32 @@ using UnityEngine.UIElements;
 
 namespace IM.Visuals
 {
-  [UxmlElement]
+    [UxmlElement]
     public partial class TooltipInfoElement : InfoElementBase
     {
-        private const string Root = "tooltip-info";
-        private const string TopRowClassName = "tooltip-info__top-row";
-        private const string IconClassName = "tooltip-info__icon";
+        private const string Root               = "tooltip-info";
+        private const string ContentClassName    = "tooltip-info__content";
+        private const string TopRowClassName     = "tooltip-info__top-row";
+        private const string IconContainerName   = "tooltip-info__icon-container";
+        private const string IconClassName       = "tooltip-info__icon";
         private const string IconPlaceholderName = "tooltip-info__icon--placeholder";
-        private const string TextColClassName = "tooltip-info__text-column";
-        private const string NameClassName = "tooltip-info__name";
-        private const string ShortDescClassName = "tooltip-info__short-desc";
-        private const string DividerClassName = "tooltip-info__divider";
-        private const string DescClassName = "tooltip-info__description";
-        private const string AdditionalInfoName = "tooltip-info__additional-info";
+        private const string TextColClassName    = "tooltip-info__text-column";
+        private const string NameClassName       = "tooltip-info__name";
+        private const string ShortDescClassName  = "tooltip-info__short-desc";
+        private const string DividerClassName    = "tooltip-info__divider";
+        private const string DescClassName       = "tooltip-info__description";
+        private const string ActionClassName     = "tooltip-info__action";
+        private const string AdditionalInfoName  = "tooltip-info__additional-info";
 
         protected override string RootClass => Root;
+        protected override string ContentClass => ContentClassName;
+        protected override string IconContainerClass => IconContainerName;
         protected override string IconClass => IconClassName;
         protected override string IconPlaceholderClass => IconPlaceholderName;
         protected override string NameClass => NameClassName;
         protected override string ShortDescriptionClass => ShortDescClassName;
         protected override string DescriptionClass => DescClassName;
+        protected override string ActionClass => ActionClassName;
         protected override string AdditionalInfoClass => AdditionalInfoName;
 
         private VisualElement _topRow;
@@ -47,17 +53,19 @@ namespace IM.Visuals
             textColumn.Add(NameLabel);
             textColumn.Add(ShortDescriptionLabel);
 
-            _topRow.Add(IconElement);
+            _topRow.Add(IconContainer);
             _topRow.Add(textColumn);
+            _topRow.Add(ActionContainer);
 
-            Add(_topRow);
+            ContentContainer.Add(_topRow);
 
             _divider = new VisualElement();
             _divider.AddToClassList(DividerClassName);
-            Add(_divider);
+            ContentContainer.Add(_divider);
 
-            Add(DescriptionLabel);
-            Add(AdditionalInfoContainer);
+            ContentContainer.Add(DescriptionLabel);
+
+            ContentContainer.Add(AdditionalInfoContainer);
         }
 
         public void Bind(ITooltipInfo info)
@@ -89,7 +97,8 @@ namespace IM.Visuals
         public void Unbind()
         {
             ClearAdditionalInfo();
+            ClearAction();
             SetVisible(this, false);
-        }
+        } 
     }
 }

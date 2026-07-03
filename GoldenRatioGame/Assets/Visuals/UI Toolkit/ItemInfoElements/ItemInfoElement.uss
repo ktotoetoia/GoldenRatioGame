@@ -1,0 +1,102 @@
+.item-info {
+    flex-direction: column;
+    align-items: stretch;
+    flex-shrink: 0;
+    border-width: 1px;
+    border-color: rgb(22, 22, 28);
+    border-radius: 5px;
+    background-image: url("project://database/Assets/Visuals/Sprites/UI/Editor.png?fileID=-8756655857814372213&guid=9c061e9bdd467ad46bc49abeadeb0aee&type=3#Editor_0");
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.item-info__content {
+    flex-direction: column;
+    align-items: stretch;
+    margin: 8px;
+}
+
+.item-info__icon {
+    border-radius: 3px;
+    -unity-background-scale-mode: scale-to-fit;
+    flex-grow: 1;
+}
+
+.item-info__top-row {
+    flex-direction: row;
+    align-items: stretch;
+    margin: 2px;
+}
+
+.item-info__text-column {
+    width: 160px;
+    flex-shrink: 0;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    margin-right: 8px;
+}
+
+.item-info__name {
+    height: 25px;
+    color: rgb(215, 215, 222);
+    font-size: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.item-info__short-desc {
+    height: 20px;
+    margin-top: 3px;
+    color: rgb(148, 148, 162);
+    font-size: 17px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.item-info__action {
+    flex-grow: 1;
+    overflow: hidden;
+    border-radius: 3px;
+    flex-shrink: 0;
+    align-self: stretch;
+    justify-content: center;
+    align-items: center;
+    background-image: url("project://database/Assets/Visuals/Sprites/UI/Editor.png?fileID=-7884024998149454518&guid=9c061e9bdd467ad46bc49abeadeb0aee&type=3#Editor_2");
+    margin: 0;
+}
+
+.item-info__additional-info {
+    flex-grow: 1;
+    overflow: hidden;
+    border-radius: 3px;
+    margin: 8px 8px 4px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.item-info__icon-container {
+    background-image: url("project://database/Assets/Visuals/Sprites/UI/Editor.png?fileID=-7884024998149454518&guid=9c061e9bdd467ad46bc49abeadeb0aee&type=3#Editor_2");
+    aspect-ratio: 1;
+    align-content: center;
+    align-items: stretch;
+    height: 64px;
+    width: 64px;
+    min-width: 64px;
+    min-height: 64px;
+    justify-content: center;
+    margin-right: 8px;
+    padding: 12px;
+}

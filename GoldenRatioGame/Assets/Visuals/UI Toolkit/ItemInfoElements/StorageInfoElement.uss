@@ -1,0 +1,29 @@
+:root {
+    --cell-hover-bg: var(--ui-cell-hover-bg);
+    --cell-selected-bg: var(--ui-cell-selected-bg);
+    --cell-selected-border: var(--ui-cell-selected-border);
+}
+
+.item-info:hover {
+    border-color: var(--ui-accent-border);
+    background-image: url("project://database/Assets/Visuals/Sprites/UI/Editor.png?fileID=-8382579341289407947&guid=9c061e9bdd467ad46bc49abeadeb0aee&type=3#Editor_1");
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.item-info:selected {
+    border-color: var(--ui-accent-border);
+    background-image: url("project://database/Assets/Visuals/Sprites/UI/Editor.png?fileID=-8382579341289407947&guid=9c061e9bdd467ad46bc49abeadeb0aee&type=3#Editor_1");
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.item-info__content {
+    margin: 10px;
+}

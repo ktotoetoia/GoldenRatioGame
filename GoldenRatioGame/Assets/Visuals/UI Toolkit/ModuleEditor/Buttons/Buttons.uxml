@@ -1,8 +1,9 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Visuals/UI%20Toolkit/Font.uss?fileID=7433441132597879392&amp;guid=1a14260a6760efa4ebd95862e69bc46a&amp;type=3#Font"/>
     <Style src="project://database/Assets/Visuals/UI%20Toolkit/ModuleEditor/Buttons/Buttons.uss?fileID=7433441132597879392&amp;guid=b4038c3b916536b41b157224ac5fd3ba&amp;type=3#Buttons"/>
-    <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: row; justify-content: center;">
-        <ui:Button text="Save" name="SaveButton" class="button saveButton" style="aspect-ratio: 1;"/>
-        <ui:Button text="Discard" name="DiscardButton" class="button discardButton" style="aspect-ratio: 1;"/>
+    <Style src="project://database/Assets/Visuals/UI%20Toolkit/ModuleEditor/Current%20Items/ScrollableItemContainer.uss?fileID=7433441132597879392&amp;guid=2de626ac5fa5b1a48895f55a9ecbbd98&amp;type=3#ScrollableItemContainer"/>
+    <ui:VisualElement name="VisualElement" class="scrollableItemContainer" style="flex-grow: 1; flex-direction: row; justify-content: center;">
+        <ui:Button text=" Save" name="SaveButton" icon-image="project://database/Assets/Visuals/Sprites/UI/Editor%20Buttons.png?fileID=-2602928751410431622&amp;guid=4e53c1a50be27c744b5c3a5e6b6f48d6&amp;type=3#Editor Buttons_2" display-tooltip-when-elided="true" class="button saveButton"/>
+        <ui:Button text=" Discard" name="DiscardButton" icon-image="project://database/Assets/Visuals/Sprites/UI/Editor%20Buttons.png?fileID=-2483980128490533286&amp;guid=4e53c1a50be27c744b5c3a5e6b6f48d6&amp;type=3#Editor Buttons_3" class="button discardButton"/>
     </ui:VisualElement>
 </ui:UXML>

@@ -56,7 +56,7 @@ namespace IM.Map
 
         private void OnVisitorAdded(GameObject go)
         {
-            if (!go.TryGetComponent(out IModuleEntity entity)) return;
+            if (!go.TryGetComponent(out IEntity entity)) return;
             
             if (!entity.GameObject.TryGetComponent(out IFactionMember factionMember)) return;
             
@@ -67,7 +67,7 @@ namespace IM.Map
 
         private void OnVisitorRemoved(GameObject go)
         {
-            if (!go.TryGetComponent(out IModuleEntity entity)) return;
+            if (!go.TryGetComponent(out IEntity entity)) return;
             
             _factionMembers.Remove(entity);
             _entities.Remove(entity);
