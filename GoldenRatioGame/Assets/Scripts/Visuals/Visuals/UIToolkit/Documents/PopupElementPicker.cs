@@ -106,14 +106,33 @@ namespace IM.Visuals
 
         private VisualElement PickAt(Vector3 position)
         {
+            VisualElement deepest = null;
+            int deepestDepth = -1;
+
             foreach (UIDocument document in _worldViewDocuments)
             {
-                VisualElement picked = WorldDocumentUtility.GetElementsAtPosition<ITooltipInfo>(document, position).OfType<VisualElement>().FirstOrDefault();
+                foreach (VisualElement candidate in WorldDocumentUtility.GetElementsAtPosition<ITooltipInfo>(document, position).Where(x => x is VisualElement && !x.TooltipDisabled))
+                {
+                    int depth = GetHierarchyDepth(candidate);
 
-                if (picked != null) return picked;
+                    if (depth <= deepestDepth) continue;
+
+                    deepestDepth = depth;
+                    deepest = candidate;
+                }
             }
 
-            return null;
+            return deepest;
+        }
+
+        private static int GetHierarchyDepth(VisualElement element)
+        {
+            int depth = 0;
+
+            for (VisualElement current = element.parent; current != null; current = current.parent)
+                depth++;
+
+            return depth;
         }
     }
 }

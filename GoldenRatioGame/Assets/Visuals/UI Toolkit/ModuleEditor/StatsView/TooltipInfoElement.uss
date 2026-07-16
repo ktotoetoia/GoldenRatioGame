@@ -9,7 +9,6 @@
     padding: 16px;
 
     min-width: 280px;
-    max-width: 480px;
 }
 
 .tooltip-info__icon {

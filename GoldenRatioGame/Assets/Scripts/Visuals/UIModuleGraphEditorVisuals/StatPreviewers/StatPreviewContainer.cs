@@ -49,8 +49,11 @@ namespace IM.Visuals
             _entity = null;
             _contextReadOnly = null;
             _document.rootVisualElement.visible = false;
+            foreach (KeyValuePair<IModuleEntityStatPreviewer, VisualElement> valuePair in _statPreviewerMap)
+            {
+                _visualElement.Remove(valuePair.Value);
+            }
             _statPreviewerMap.Clear();
-            _visualElement.Clear();
         }
     }
 }

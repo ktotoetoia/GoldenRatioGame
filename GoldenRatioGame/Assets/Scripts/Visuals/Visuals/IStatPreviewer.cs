@@ -8,4 +8,5 @@ namespace IM.Visuals
         VisualElement GetPreview(object item);
         void UpdatePreview(VisualElement previewElement, object item);
     }
+    
 }

@@ -9,5 +9,6 @@ namespace IM.Visuals
         string Description { get; }
         Sprite Icon { get; }
         object Item { get; }
+        bool TooltipDisabled { get; }
     }
 }

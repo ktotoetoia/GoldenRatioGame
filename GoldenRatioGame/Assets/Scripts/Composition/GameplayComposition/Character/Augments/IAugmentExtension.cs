@@ -3,8 +3,8 @@ using IM.Modules;
 
 namespace IM.Augments
 {
-    public interface IAugmentExtension : IExtension
+    public interface IAugmentExtension : IExtension,IAugmentSource
     {
-        IEnumerable<AugmentInfo> Augments { get; }
+        
     }
 }

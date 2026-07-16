@@ -10,6 +10,9 @@ namespace IM.Abilities
     public class ProjectileAbilityContainer : MonoBehaviour, IAbilityContainer, IProjectileEvents, IRequireGameObjectFactory
     {
         [SerializeField] private GameObject _projectilePrefab;
+        [SerializeField] private string _name = "Ability";
+        [SerializeField] private string _shortDescription = "Short Description";
+        [SerializeField] private string _description = "Description";
         [SerializeField] private float _cooldown = 3;
         [SerializeField] private float _projectileSpeed = 20;
         [SerializeField] private Sprite _iconSprite;
@@ -32,6 +35,9 @@ namespace IM.Abilities
                 WindUpTime = _windupTime,
                 Speed = _projectileSpeed,
                 UseInitial = _useInitialCastDirection,
+                Name = _name,
+                ShortDescription = _shortDescription,
+                Description = _description,
                 Icon = new Icon(_iconSprite)
             };
         }

@@ -12,20 +12,15 @@ namespace IM.Modules
     {
         public override object CaptureState(AugmentProgressManager component)
         {
-            var state = new AugmentProgressManagerState();
+            Dictionary<string, object> state = new Dictionary<string,object>();
 
-            foreach (KeyValuePair<IAugmentExtension, AugmentProgressInfo> kvp in component.AugmentProgress)
+            foreach (var a  in component.AppliedFactories)
             {
-                if(kvp.Key is not MonoBehaviour mb || !mb || !mb.TryGetComponent(out IHaveID id)) continue;
-                
-                state.Progress[id.Id] = kvp.Value;
-            }
+                if (a.Value is not IHaveID id) continue;
 
-            foreach (IAugmentFactory factory in component.AppliedFactories)
-            {
-                if (factory is not IHaveID id) continue;
+                object saved = a.Value.Save(a.Key);
                 
-                state.AppliedFactoryIds.Add(id.Id); 
+                state[id.Id] = saved; 
             }
 
             return state;
@@ -33,35 +28,22 @@ namespace IM.Modules
 
         public override void RestoreState(AugmentProgressManager component, object state, Func<string, GameObject> resolveDependency)
         {
-            if (state is not AugmentProgressManagerState savedState)
+            if (state is not Dictionary<string, object> savedState)
             {
                 Debug.LogWarning("Failed to restore AugmentProgressManager: state is invalid or null.");
                 return;
             }
 
-            var restoredProgress = new Dictionary<IAugmentExtension, AugmentProgressInfo>();
-            var restoredFactories = new List<IAugmentFactory>();
+            Dictionary<IAugment,IAugmentFactory> restoredFactories = new ();
 
-            foreach (KeyValuePair<string, AugmentProgressInfo> kvp in savedState.Progress)
-            {
-                IAugmentExtension extension = ResolveExtensionById(kvp.Key,resolveDependency);
-
-                if (extension != null)
-                {
-                    restoredProgress[extension] = kvp.Value;
-                }
-                else
-                {
-                    Debug.LogWarning($"Could not find IAugmentExtension with ID: {kvp.Key}");
-                }
-            }
-
-            foreach (string factoryId in savedState.AppliedFactoryIds)
+            foreach (var (factoryId, augmentSave) in savedState)
             {
                 IAugmentFactory factory = ResolveFactoryById(factoryId);
+                
                 if (factory != null)
                 {
-                    restoredFactories.Add(factory);
+                    IAugment restoredAugment = factory.Restore(augmentSave,new AugmentContext(component.gameObject));
+                    restoredFactories[restoredAugment] = factory;
                 }
                 else
                 {
@@ -69,12 +51,10 @@ namespace IM.Modules
                 }
             }
 
-            component.AddToProgress(restoredProgress, restoredFactories);
-        }
-        
-        private IAugmentExtension ResolveExtensionById(string id,Func<string, GameObject> resolveDependency)
-        {;
-            return resolveDependency(id)?.GetComponent<IAugmentExtension>();
+            foreach ((IAugment augment, IAugmentFactory factory) in restoredFactories)
+            {
+                component.AddAppliedFactory(augment,factory);
+            }
         }
 
         private IAugmentFactory ResolveFactoryById(string id)
@@ -82,12 +62,5 @@ namespace IM.Modules
             var handle = Addressables.LoadAssetAsync<IAugmentFactory>(id);
             return handle.WaitForCompletion(); 
          }
-    }
-    
-    [Serializable]
-    public class AugmentProgressManagerState
-    {
-        public Dictionary<string, AugmentProgressInfo> Progress = new();
-        public List<string> AppliedFactoryIds = new();
     }
 }

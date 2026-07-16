@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace IM.Visuals
 {
- [UxmlElement]
+    [UxmlElement]
     public partial class ItemInfoElement : InfoElementBase, ITooltipInfo
     {
         private const string Root                = "item-info";
@@ -18,6 +18,8 @@ namespace IM.Visuals
         private const string ShortDescClassName  = "item-info__short-desc";
         private const string ActionClassName     = "item-info__action";
         private const string AdditionalInfoName  = "item-info__additional-info";
+        private const string AdditionalInfoContentClassName = "item-info__additional-info-content";
+        private const string ActionContentClassName = "item-info__action-content";
 
         protected override string RootClass => Root;
         protected override string ContentClass => ContentClassName;
@@ -28,19 +30,24 @@ namespace IM.Visuals
         protected override string ShortDescriptionClass => ShortDescClassName;
         protected override string ActionClass => ActionClassName;
         protected override string AdditionalInfoClass => AdditionalInfoName;
+        protected override string AdditionalInfoContentClass => AdditionalInfoContentClassName;
+        protected override string ActionContentClass => ActionContentClassName;
+
+        protected VisualElement TopRow { get; private set; }
 
         public string Name { get; private set; }
         public string ShortDescription { get; private set; }
         public string Description { get; private set; }
         public Sprite Icon { get; private set; }
         public object Item { get; private set; }
+        public bool TooltipDisabled { get; set; }
 
         public ItemInfoElement() => BuildLayout();
 
         protected override void BuildLayout()
         {
-            var topRow = new VisualElement();
-            topRow.AddToClassList(TopRowClassName);
+            TopRow = new VisualElement();
+            TopRow.AddToClassList(TopRowClassName);
 
             var textColumn = new VisualElement();
             textColumn.AddToClassList(TextColClassName);
@@ -48,16 +55,16 @@ namespace IM.Visuals
             textColumn.Add(NameLabel);
             textColumn.Add(ShortDescriptionLabel);
 
-            topRow.Add(IconContainer);
-            topRow.Add(textColumn);
-            topRow.Add(ActionContainer);
+            TopRow.Add(IconContainer);
+            TopRow.Add(textColumn);
+            TopRow.Add(ActionContainer);
 
-            ContentContainer.Add(topRow);
+            ContentContainer.Add(TopRow);
 
             ContentContainer.Add(AdditionalInfoContainer);
         }
 
-        public void SetItem(object item)
+        public virtual void SetItem(object item)
         {
             Item = item;
             Name = item is IHaveName named ? named.Name : null;
@@ -80,4 +87,5 @@ namespace IM.Visuals
             schedule.Execute(MarkDirtyRepaint);
         }
     }
+    
 }

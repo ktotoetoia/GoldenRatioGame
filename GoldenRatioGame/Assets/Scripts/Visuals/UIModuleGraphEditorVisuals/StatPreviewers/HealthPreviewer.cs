@@ -48,8 +48,7 @@ namespace IM.Visuals
         {
             if (_cappedValueCache.TryGetValue(previewElement, out List<CappedValueElement> cappedValues))
             {
-                foreach (CappedValueElement cappedValueElement in cappedValues)
-                    cappedValueElement.Update();
+                foreach (CappedValueElement cappedValueElement in cappedValues) cappedValueElement.Update();
             }
         }
     }

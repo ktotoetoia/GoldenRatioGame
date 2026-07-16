@@ -18,6 +18,8 @@ namespace IM.Visuals
         private const string DescClassName       = "tooltip-info__description";
         private const string ActionClassName     = "tooltip-info__action";
         private const string AdditionalInfoName  = "tooltip-info__additional-info";
+        private const string AdditionalInfoContentClassName = "tooltip-info__additional-info-content";
+        private const string ActionContentClassName    = "tooltip-info__action-content";
 
         protected override string RootClass => Root;
         protected override string ContentClass => ContentClassName;
@@ -29,7 +31,9 @@ namespace IM.Visuals
         protected override string DescriptionClass => DescClassName;
         protected override string ActionClass => ActionClassName;
         protected override string AdditionalInfoClass => AdditionalInfoName;
-
+        protected override string AdditionalInfoContentClass => AdditionalInfoContentClassName;
+        protected override string ActionContentClass => ActionContentClassName;
+        
         private VisualElement _topRow;
         private VisualElement _divider;
 
@@ -96,8 +100,8 @@ namespace IM.Visuals
 
         public void Unbind()
         {
-            ClearAdditionalInfo();
-            ClearAction();
+            AdditionalInfoContainer.Clear();
+            ActionContainer.Clear();
             SetVisible(this, false);
         } 
     }

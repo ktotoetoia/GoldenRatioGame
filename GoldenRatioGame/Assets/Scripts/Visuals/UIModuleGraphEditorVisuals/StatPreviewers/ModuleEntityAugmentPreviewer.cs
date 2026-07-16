@@ -27,11 +27,11 @@ namespace IM.Visuals
                 if (entity.GameObject.TryGetComponent(out IAugmentContainer augmentContainer))
                 {
                     augmentScrollView.SetAugments(augmentContainer.Augments);
+
+                    return;
                 }
-                else
-                {
-                    augmentScrollView.SetAugments(null); 
-                }
+
+                augmentScrollView.SetAugments(null);
             }
         }
     }

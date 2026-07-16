@@ -100,3 +100,9 @@
     margin-right: 8px;
     padding: 12px;
 }
+
+.item-stats-info__right-container{
+    flex-grow: 1;
+    flex-direction: row;
+    justify-content: flex-end;
+}

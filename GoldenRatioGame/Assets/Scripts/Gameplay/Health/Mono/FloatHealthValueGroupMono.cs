@@ -7,56 +7,54 @@ namespace IM.Health
 {
     public class FloatHealthValueGroupMono : MonoBehaviour, IFloatHealthValuesGroup, IFloatHealthEvents
     {
-        private readonly FloatHealthValuesGroup _floatHealthValueGroup = new();
+        [SerializeField] private bool _useDivided;
+
+
+        private IFloatHealthValuesGroup _floatHealthValuesGroup;
+        private  IFloatHealthValuesGroup FloatHealthValueGroup => _floatHealthValuesGroup ??= _useDivided ? new DividedFloatHealthValuesGroup(): new FloatHealthValuesGroup();
 
         public event Action<float> OnHealthChanged
         {
-            add => _floatHealthValueGroup.OnHealthChanged += value;
-            remove => _floatHealthValueGroup.OnHealthChanged -= value;
+            add => ((IFloatHealthEvents)FloatHealthValueGroup).OnHealthChanged += value;
+            remove => ((IFloatHealthEvents)FloatHealthValueGroup).OnHealthChanged -= value;
         }
         
-        public ICappedValueReadOnly<float> Health => _floatHealthValueGroup.Health;
-        public IReadOnlyList<ICappedValueReadOnly<float>> Values => _floatHealthValueGroup.Values;
+        public ICappedValueReadOnly<float> Health => FloatHealthValueGroup.Health;
+        public IReadOnlyList<ICappedValueReadOnly<float>> Values => FloatHealthValueGroup.Values;
         
         public HealthChangeResult PreviewDamage(float incomingDamage)
         {
-            return _floatHealthValueGroup.PreviewDamage(incomingDamage);
+            return FloatHealthValueGroup.PreviewDamage(incomingDamage);
         }
 
         public HealthChangeResult TakeDamage(float damage)
         {
-            return _floatHealthValueGroup.TakeDamage(damage);
+            return FloatHealthValueGroup.TakeDamage(damage);
         }
 
         public HealthChangeResult PreviewHealing(float healing)
         {
-            return _floatHealthValueGroup.PreviewHealing(healing);
+            return FloatHealthValueGroup.PreviewHealing(healing);
         }
 
         public HealthChangeResult RestoreHealth(float healing)
         {
-            return _floatHealthValueGroup.RestoreHealth(healing);
+            return FloatHealthValueGroup.RestoreHealth(healing);
         }
 
         public void AddHealth(ICappedValue<float> healthBar)
         {
-            _floatHealthValueGroup.AddHealth(healthBar);
+            FloatHealthValueGroup.AddHealth(healthBar);
         }
 
         public void RemoveHealth(ICappedValue<float> healthBar)
         {
-            _floatHealthValueGroup.RemoveHealth(healthBar);
+            FloatHealthValueGroup.RemoveHealth(healthBar);
         }
 
         public bool Contains(ICappedValueReadOnly<float> healthBar)
         {
-            return _floatHealthValueGroup.Contains(healthBar);
-        }
-
-        [ContextMenu("Print Health")]
-        public void PrintHealth()
-        {
-            Debug.Log("Health: " + _floatHealthValueGroup.Health);
+            return FloatHealthValueGroup.Contains(healthBar);
         }
     }
 }

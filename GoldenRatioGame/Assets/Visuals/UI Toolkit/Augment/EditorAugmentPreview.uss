@@ -1,0 +1,7 @@
+.augment-preview
+{
+    flex-grow: 0;
+    height: 64;
+    width: 64;
+    padding: 6;
+}

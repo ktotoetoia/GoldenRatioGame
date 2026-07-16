@@ -12,7 +12,7 @@ namespace IM.Augments
     
         public void OnSnapshotChanged(IModuleEditingContextReadOnly snapshot)
         {
-            _progressManager.SetActiveExtensions(GetExtensions(snapshot));
+            _progressManager.SetActiveSources(GetExtensions(snapshot));
         }
     
         private static IEnumerable<IAugmentExtension> GetExtensions(IModuleEditingContextReadOnly snapshot)

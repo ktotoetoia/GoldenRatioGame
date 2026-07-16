@@ -74,3 +74,8 @@
     margin-top: 16px;
     margin-bottom: 16px;
 }
+
+.hideViewport > .unity-scroll-view__content-and-vertical-scroll-container {
+    background-image: none;
+    padding: 0;
+}

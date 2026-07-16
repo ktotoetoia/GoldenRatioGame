@@ -9,6 +9,7 @@ namespace IM.Visuals
         public string Description { get; }
         public Sprite Icon { get; }
         public object Item { get; }
+        public bool TooltipDisabled { get; set; }
 
         public TooltipInfoWrapper(object item, string name, string shortDescription, string description, Sprite icon)
         {

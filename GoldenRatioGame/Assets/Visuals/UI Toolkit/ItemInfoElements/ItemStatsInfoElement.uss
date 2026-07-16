@@ -1,0 +1,25 @@
+
+.item-info__action
+{
+    aspect-ratio: 1;
+    flex-grow:0;
+    height: 64px;
+    width: 64px;
+    min-width: 64px;
+    min-height: 64px;
+    max-height: 64px;
+    max-width: 64px;
+    padding: 12px;
+}
+
+.item-stats-info__augment-container
+{
+    flex-grow:0;
+    height: 64px;
+    width: 64px;
+    min-width: 64px;
+    min-height: 64px;
+    max-height: 64px;
+    max-width: 64px;
+    padding: 12px;
+}

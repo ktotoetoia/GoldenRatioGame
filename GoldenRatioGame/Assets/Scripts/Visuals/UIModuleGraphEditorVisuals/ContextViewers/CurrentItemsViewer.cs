@@ -12,23 +12,26 @@ namespace IM.Visuals
 {
     public class CurrentItemsViewer : ContextViewer
     {
+        [SerializeField] private List<StyleSheet> _styleSheets = new ();
         [SerializeField] private string _containerName = "ItemsContainer";
-        [SerializeField] private bool _stop;
         private UIDocument _document;
         private VisualElement _container;
         private IModuleEditingContext _context;
         private AbilityPoolEditingService _abilityPoolEditingService;
         private IWeaponEditingService _weaponEditingService;
         private CollectionDiffer<IDataModule<IExtensibleItem>> _differ;
-        private readonly Dictionary<IDataModule<IExtensibleItem>, ItemDisplay> _itemDisplays = new();
+        private readonly Dictionary<IDataModule<IExtensibleItem>, ItemStatsInfoElement> _itemDisplays = new();
         private readonly List<IStatPreviewer> _statPreviewers = new();
+        private IAugmentPreviewer _augmentPreviewer;
 
         private void Awake()
         {
             _document = GetComponent<UIDocument>();
             _document.rootVisualElement.visible = false;
             _container = _document.rootVisualElement.Q<VisualElement>(_containerName);
+            _augmentPreviewer = GetComponent<IAugmentPreviewer>();
             GetComponents(_statPreviewers);
+            _statPreviewers.Remove(_augmentPreviewer);
         }
 
         private void Update()
@@ -37,14 +40,10 @@ namespace IM.Visuals
 
             _differ?.Update(_context.GraphEditing.GraphReadOnly.DataModules);
 
-            foreach (ItemDisplay display in _itemDisplays.Values)
+            foreach (ItemStatsInfoElement element in _itemDisplays.Values)
             {
-                if(!_stop) (display.Element.Action as ExtensibleItemExtra)?.Update();
-
-                object item = display.Module.Value;
-
-                foreach (var (previewer, element) in display.StatElements)
-                    previewer.UpdatePreview(element, item);
+                (element.Action as ExtensibleItemExtra)?.Update();
+                element.UpdatePreviews();
             }
         }
 
@@ -58,14 +57,14 @@ namespace IM.Visuals
             _differ = new CollectionDiffer<IDataModule<IExtensibleItem>>(
                 module =>
                 {
-                    ItemDisplay display = CreateItemDisplay(module);
-                    _itemDisplays[module] = display;
-                    _container.Add(display.Element);
+                    ItemStatsInfoElement element = CreateItemDisplay(module);
+                    _itemDisplays[module] = element;
+                    _container.Add(element);
                 },
                 module =>
                 {
-                    if (_itemDisplays.Remove(module, out ItemDisplay display))
-                        _container.Remove(display.Element);
+                    if (_itemDisplays.Remove(module, out var element))
+                        _container.Remove(element);
                 }
             );
         }
@@ -94,9 +93,9 @@ namespace IM.Visuals
             return null;
         }
 
-        private ItemDisplay CreateItemDisplay(IDataModule<IExtensibleItem> module)
+        private ItemStatsInfoElement CreateItemDisplay(IDataModule<IExtensibleItem> module)
         {
-            var element = new ItemInfoElement();
+            var element = new ItemStatsInfoElement(_statPreviewers, _augmentPreviewer);
             element.SetItem(module.Value);
             element.SetAction(new ExtensibleItemExtra(
                 module.Value,
@@ -104,34 +103,12 @@ namespace IM.Visuals
                 _abilityPoolEditingService
             ));
 
-            var statContainer = new VisualElement();
-            var statElements = new Dictionary<IStatPreviewer, VisualElement>();
-
-            foreach (IStatPreviewer statPreviewer in _statPreviewers)
+            foreach (StyleSheet styleSheet in _styleSheets)
             {
-                VisualElement statElement = statPreviewer.GetPreview(module.Value);
-
-                if (statElement == null) continue;
-
-                statContainer.Add(statElement);
-                statElements[statPreviewer] = statElement;
+                element.styleSheets.Add(styleSheet);
             }
 
-            element.SetAdditionalInfo(statContainer);
-
-            return new ItemDisplay
-            {
-                Element = element,
-                Module = module,
-                StatElements = statElements
-            };
-        }
-
-        private class ItemDisplay
-        {
-            public ItemInfoElement Element;
-            public IDataModule<IExtensibleItem> Module;
-            public Dictionary<IStatPreviewer, VisualElement> StatElements;
+            return element;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace IM.Visuals
 {
     public class AugmentScrollView : ScrollView
     {
-        private readonly Dictionary<IAugment, ItemInfoElement> _iconElements = new();
+        private readonly Dictionary<IAugment, AugmentPreviewElement> _iconElements = new();
         private readonly CollectionDiffer<IAugment> _differ;
 
         public List<StyleSheet> IconStyleSheets { get; } = new(); 
@@ -21,7 +21,7 @@ namespace IM.Visuals
             contentContainer.style.paddingBottom = 4;
             contentContainer.style.paddingLeft = 4;
             contentContainer.style.paddingRight = 4;
-
+            
             _differ = new CollectionDiffer<IAugment>(OnAugmentAdded, OnAugmentRemoved);
         }
 
@@ -32,26 +32,22 @@ namespace IM.Visuals
 
         private void OnAugmentAdded(IAugment augment)
         {
-            var newIcon =  new ItemInfoElement
-            {
-                ShowName = false,
-                ShowShortDescription = false,
-                ShowDescription = false
-            };
+            var newIcon = new AugmentPreviewElement();
             
-            newIcon.SetItem(augment);
+            newIcon.SetAugment(new AugmentInfo(),augment,0);
 
             foreach (StyleSheet iconStyleSheet in IconStyleSheets)
             {
                 newIcon.styleSheets.Add(iconStyleSheet);
             }
+            
             _iconElements[augment] = newIcon;
             Add(newIcon);
         }
 
         private void OnAugmentRemoved(IAugment augment)
         {
-            if (_iconElements.TryGetValue(augment, out ItemInfoElement iconToRemove))
+            if (_iconElements.TryGetValue(augment, out AugmentPreviewElement iconToRemove))
             {
                 Remove(iconToRemove);
                 _iconElements.Remove(augment);

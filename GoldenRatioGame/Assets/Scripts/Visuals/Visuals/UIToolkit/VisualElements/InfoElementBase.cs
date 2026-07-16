@@ -65,6 +65,8 @@ namespace IM.Visuals
         protected virtual string DescriptionClass => "info-element__description";
         protected virtual string ActionClass => "info-element__action";
         protected virtual string AdditionalInfoClass => "info-element__additional-info";
+        protected virtual string AdditionalInfoContentClass => "info-element__additional-info-content";
+        protected virtual string ActionContentClass => "info-element__action-content";
 
         protected abstract void BuildLayout();
 
@@ -84,8 +86,10 @@ namespace IM.Visuals
 
         public void SetAction(VisualElement action)
         {
+            Action?.RemoveFromClassList(ActionContentClass);
             Action = action;
 
+            Action?.AddToClassList(ActionContentClass);
             ActionContainer.Clear();
 
             if (action != null) ActionContainer.Add(action);
@@ -95,6 +99,7 @@ namespace IM.Visuals
 
         public void ClearAction()
         {
+            Action?.RemoveFromClassList(ActionContentClass);
             Action = null;
 
             ActionContainer.Clear();
@@ -103,7 +108,9 @@ namespace IM.Visuals
 
         public void SetAdditionalInfo(VisualElement content)
         {
+            AdditionalInfo?.RemoveFromClassList(AdditionalInfoContentClass);
             AdditionalInfo = content;
+            AdditionalInfo?.AddToClassList(AdditionalInfoContentClass);
 
             AdditionalInfoContainer.Clear();
 
@@ -114,6 +121,7 @@ namespace IM.Visuals
 
         public void ClearAdditionalInfo()
         {
+            AdditionalInfo?.RemoveFromClassList(AdditionalInfoContentClass);
             AdditionalInfo = null;
 
             AdditionalInfoContainer.Clear();

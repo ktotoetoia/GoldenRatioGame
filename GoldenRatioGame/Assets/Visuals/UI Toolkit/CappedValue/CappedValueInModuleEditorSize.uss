@@ -1,0 +1,7 @@
+:root {
+}
+
+.capped-value {
+    min-width: 130px;
+    max-width: 300px;
+}
