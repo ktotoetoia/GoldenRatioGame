@@ -46,8 +46,8 @@ namespace IM.Map
             foreach (Vector2Int offset in _shape.Offsets)
             {
                 var (startX, startY) = GetCellOrigin(offset);
-                if (pos.x >= startX && pos.x < startX + CellW &&
-                    pos.y >= startY && pos.y < startY + CellH)
+                if (pos.x >= startX && pos.x <= startX + CellW &&
+                    pos.y >= startY && pos.y <= startY + CellH)
                 {
                     return true;
                 }
@@ -65,10 +65,17 @@ namespace IM.Map
                 float endX = startX + CellW;
                 float endY = startY + CellH;
 
-                if (!_shape.Offsets.Contains(new Vector2Int(offset.x - 1, offset.y))) minDist = Mathf.Min(minDist, pos.x - startX);
-                if (!_shape.Offsets.Contains(new Vector2Int(offset.x + 1, offset.y))) minDist = Mathf.Min(minDist, endX - pos.x);
-                if (!_shape.Offsets.Contains(new Vector2Int(offset.x, offset.y - 1))) minDist = Mathf.Min(minDist, pos.y - startY);
-                if (!_shape.Offsets.Contains(new Vector2Int(offset.x, offset.y + 1))) minDist = Mathf.Min(minDist, endY - pos.y);
+                bool withinRowY = pos.y >= startY && pos.y < endY;
+                bool withinColX = pos.x >= startX && pos.x < endX;
+
+                if (withinRowY && !_shape.Offsets.Contains(new Vector2Int(offset.x - 1, offset.y)))
+                    minDist = Mathf.Min(minDist, pos.x - startX);
+                if (withinRowY && !_shape.Offsets.Contains(new Vector2Int(offset.x + 1, offset.y)))
+                    minDist = Mathf.Min(minDist, endX - pos.x);
+                if (withinColX && !_shape.Offsets.Contains(new Vector2Int(offset.x, offset.y - 1)))
+                    minDist = Mathf.Min(minDist, pos.y - startY);
+                if (withinColX && !_shape.Offsets.Contains(new Vector2Int(offset.x, offset.y + 1)))
+                    minDist = Mathf.Min(minDist, endY - pos.y);
             }
 
             return Mathf.Max(0f, minDist);

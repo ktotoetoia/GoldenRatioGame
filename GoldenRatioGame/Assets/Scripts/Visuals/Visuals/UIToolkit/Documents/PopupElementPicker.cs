@@ -111,8 +111,9 @@ namespace IM.Visuals
 
             foreach (UIDocument document in _worldViewDocuments)
             {
-                foreach (VisualElement candidate in WorldDocumentUtility.GetElementsAtPosition<ITooltipInfo>(document, position).Where(x => x is VisualElement && !x.TooltipDisabled))
+                foreach (var tooltipInfo in WorldDocumentUtility.GetElementsAtPosition<ITooltipInfo>(document, position).Where(x => x is VisualElement && !x.TooltipDisabled))
                 {
+                    var candidate = (VisualElement)tooltipInfo;
                     int depth = GetHierarchyDepth(candidate);
 
                     if (depth <= deepestDepth) continue;

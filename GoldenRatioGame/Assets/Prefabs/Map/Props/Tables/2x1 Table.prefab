@@ -13,12 +13,11 @@ GameObject:
   - component: {fileID: -3825554202757746004}
   - component: {fileID: -5896985568854718756}
   - component: {fileID: -3206285625532461972}
-  - component: {fileID: 5114771193892837841}
-  - component: {fileID: 1265334971316383490}
-  - component: {fileID: 5728854354146526594}
-  - component: {fileID: -4769616172992636547}
+  - component: {fileID: 1967851773276458105}
+  - component: {fileID: 6016722558093975344}
+  - component: {fileID: -1711150581838536310}
   m_Layer: 9
-  m_Name: Prop 3
+  m_Name: 2x1 Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,12 +87,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 5729655590360138071, guid: f3c0ed9ac7f09424795d5c52621951f5, type: 3}
+  m_Sprite: {fileID: 3910007393715495831, guid: 00c8621b7316c2a47956a1e866a28c0d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9375, y: 1.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -110,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 384b9baf02ee45f3a99967a3c2ffa013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Visuals::IM.Visuals.RendererDepthOrderable
-  _offset: {x: 0, y: 0.634, z: 0}
+  _offset: {x: 0, y: 0, z: 0}
 --- !u!114 &-5896985568854718756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SaveSystem::IM.SaveSystem.GameObjectSerializer
   _assetReference:
-    m_AssetGUID: b441d3cdec6a318428d647a2f1684ec2
+    m_AssetGUID: 87558f7aeac5f7f4b9e2bffbe8b0a22b
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
@@ -144,10 +143,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Visuals::IM.Visuals.RandomSpriteSelector
   _sprites:
-  - {fileID: 5729655590360138071, guid: f3c0ed9ac7f09424795d5c52621951f5, type: 3}
-  - {fileID: 4133720698210986842, guid: f3c0ed9ac7f09424795d5c52621951f5, type: 3}
---- !u!60 &5114771193892837841
-PolygonCollider2D:
+  - {fileID: 3910007393715495831, guid: 00c8621b7316c2a47956a1e866a28c0d, type: 3}
+  - {fileID: 4609286878515473275, guid: 00c8621b7316c2a47956a1e866a28c0d, type: 3}
+  - {fileID: 3468556939174345179, guid: 00c8621b7316c2a47956a1e866a28c0d, type: 3}
+  - {fileID: -8628415691088989013, guid: 00c8621b7316c2a47956a1e866a28c0d, type: 3}
+  - {fileID: 5505616311575136979, guid: 00c8621b7316c2a47956a1e866a28c0d, type: 3}
+--- !u!61 &1967851773276458105
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -180,25 +182,19 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.03, y: -0.15}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.2857143}
-    oldSize: {x: 1.1875, y: 1.75}
-    newSize: {x: 1, y: 1}
+    pivot: {x: 0.48387095, y: 0.5}
+    oldSize: {x: 1.9375, y: 1}
+    newSize: {x: 0.9375, y: 1.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.6, y: 0.14}
-      - {x: -0.066666, y: 0.4}
-      - {x: -0.6, y: 0.14}
-      - {x: -0.6, y: -0.12}
-      - {x: 0.066666, y: -0.5}
-  m_UseDelaunayMesh: 1
---- !u!114 &1265334971316383490
+  m_Size: {x: 1.94, y: 0.7}
+  m_EdgeRadius: 0
+--- !u!114 &6016722558093975344
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,60 +210,7 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
---- !u!114 &5728854354146526594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8230001644599058862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.ShadowCaster2D
-  m_ShadowGroup: 0
-  m_Priority: 0
-  m_ComponentVersion: 5
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_AlphaCutoff: 0.1
-  m_ApplyToSortingLayers: 01c7e971000000009f512816
-  m_ShapePath:
-  - {x: -0.59375, y: -0.5, z: 0}
-  - {x: -0.59375, y: 1.25, z: 0}
-  - {x: 0.59375, y: 1.25, z: 0}
-  - {x: 0.59375, y: -0.5, z: 0}
-  m_ShapePathHash: 0
-  m_InstanceId: 0
-  m_ShadowShape2DComponent: {fileID: 5114771193892837841}
-  m_ShadowShape2DProvider:
-    rid: 2168712318642552921
-  m_ShadowCastingSource: 2
-  m_ShadowMesh:
-    m_Mesh: {fileID: 0}
-    m_LocalBounds:
-      m_Center: {x: 0, y: 0.375, z: 0}
-      m_Extent: {x: 0.54374695, y: 0.82499695, z: 0}
-    m_EdgeProcessing: 1
-    m_TrimEdge: 0.05
-    m_FlipX: 0
-    m_FlipY: 0
-    m_InitialTrim: 0.05
-  m_CastingOption: 1
-  m_PreviousTrimEdge: 0.05
-  m_PreviousEdgeProcessing: 1
-  m_PreviousShadowCastingSource: 2
-  m_PreviousShadowShape2DSource: {fileID: 6399303019081533142}
-  references:
-    version: 2
-    RefIds:
-    - rid: 2168712318642552921
-      type: {class: ShadowShape2DProvider_Collider2D, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
-      data: 
---- !u!114 &-4769616172992636547
+--- !u!114 &-1711150581838536310
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -279,3 +222,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d71af32f7164ec3ab981494ac6c153c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Factions::IM.Factions.EnvironmentObject
+  <CanCollide>k__BackingField: 0

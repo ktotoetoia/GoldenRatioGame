@@ -17,7 +17,7 @@ namespace IM.Factions
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent(out IEnvironmentObject environmentObject))
+            if (other.TryGetComponent(out IEnvironmentObject environmentObject) && environmentObject.CanCollide)
             {
                 OnTriggerEnterNone?.Invoke(other.gameObject);
                 return;

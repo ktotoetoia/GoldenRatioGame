@@ -49,10 +49,7 @@ namespace IM.Modules
             
             foreach (IItemDropObserver dropObserver in _itemDropObservers)
             {
-                foreach (IExtensibleItem module in remainList)
-                {
-                    dropObserver.OnItemDropped(module);
-                }
+                dropObserver.OnItemsDropped(remainList);
             }
         }
     }

@@ -30,8 +30,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 232ffa9e5e162934caa8225bdd019da1
-    m_Address: Assets/Prefabs/Map/Props/Prop 4.prefab
+  - m_GUID: 23769dd0916e0444080f9f6410c27022
+    m_Address: Assets/Prefabs/Entities/Scavenger/Scavenger.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -47,6 +47,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 419cc5101d20e2147aa465fdc58e2963
     m_Address: Assets/Prefabs/Rooms/Floor.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 41c3c1ac724b15344b7ef322c3d2b666
+    m_Address: Assets/Prefabs/Map/Props/Tables/1.5x2 Table.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -80,6 +85,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 87558f7aeac5f7f4b9e2bffbe8b0a22b
+    m_Address: Assets/Prefabs/Map/Props/Tables/2x1 Table.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8f4e80caca9964847902543bf370ffe5
     m_Address: Assets/Props/Prop 2.prefab
     m_ReadOnly: 0
@@ -92,6 +102,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9dd7b1f69d38b81489b903d2f7b7266e
     m_Address: Assets/Modules/Default/Arm/Ability Arm/Ability Arm Humanoid.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a057bd05935edaf4a866ae711e6c77c7
+    m_Address: Assets/Prefabs/Map/Props/1x1 table.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -117,6 +132,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cb5b3bc88af0b4c42814d69804b11f0d
     m_Address: Assets/Initialization/Map Generation/Map Factory.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce605fa9aeecd064581a0bb52c8531a6
+    m_Address: Assets/Prefabs/Map/Props/Tables/1x2 Table.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -158,6 +178,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f518952fb52b4af42b95ad416b950be5
     m_Address: Assets/Modules/Bolt Thrower/Core/Bolt Thrower Core.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fd631aa922be1fa45bf658012038d732
+    m_Address: Assets/Prefabs/Map/Props/Tables/2x1.5 Table.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

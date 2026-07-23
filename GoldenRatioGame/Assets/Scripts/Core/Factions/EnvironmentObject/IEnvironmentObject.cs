@@ -2,6 +2,6 @@
 {
     public interface IEnvironmentObject
     {
-        
+        bool CanCollide { get; }
     }
 }

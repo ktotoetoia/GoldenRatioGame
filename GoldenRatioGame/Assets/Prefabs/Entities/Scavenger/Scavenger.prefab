@@ -689,6 +689,9 @@ PrefabInstance:
       addedObject: {fileID: -3668683800981911439}
     - targetCorrespondingSourceObject: {fileID: 4912466834130127017, guid: 9f0b97f9a5024eb4cb224904732b14c1, type: 3}
       insertIndex: -1
+      addedObject: {fileID: -3921746689501453964}
+    - targetCorrespondingSourceObject: {fileID: 4912466834130127017, guid: 9f0b97f9a5024eb4cb224904732b14c1, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 2560375368025484774}
     - targetCorrespondingSourceObject: {fileID: 4912466834130127017, guid: 9f0b97f9a5024eb4cb224904732b14c1, type: 3}
       insertIndex: -1
@@ -727,6 +730,26 @@ NavMeshAgent:
   m_BaseOffset: 0.56
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-3921746689501453964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4926170573108476304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61fb8a09bb0248b783469ddc8dbf413b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SaveSystem::IM.SaveSystem.GameObjectSerializer
+  _assetReference:
+    m_AssetGUID: 23769dd0916e0444080f9f6410c27022
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _blackList: []
+  <Order>k__BackingField: 0
 --- !u!114 &2560375368025484774
 MonoBehaviour:
   m_ObjectHideFlags: 0

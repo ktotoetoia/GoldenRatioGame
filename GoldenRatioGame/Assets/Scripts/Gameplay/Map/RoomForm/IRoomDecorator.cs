@@ -1,9 +1,11 @@
-﻿using IM.LifeCycle;
+﻿using System.Collections.Generic;
+using IM.LifeCycle;
+using UnityEngine;
 
 namespace IM.Map
 {
     public interface IRoomDecorator
     {
-        void Decorate(IGameObjectRoom room, IRoomShape shape, IGameObjectFactory factory);
+        IEnumerable<GameObject> Decorate(IGameObjectRoom room, IRoomShape shape, IGameObjectFactory factory);
     }
 }

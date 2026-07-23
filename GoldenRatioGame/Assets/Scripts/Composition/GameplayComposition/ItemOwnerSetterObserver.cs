@@ -35,7 +35,10 @@ namespace IM.Modules
         private void OnRemoved(object obj)
         {
             if (obj is MonoBehaviour mb && mb.transform.parent == _onAddedTransformIn)
+            {
                 mb.transform.SetParent(_onRemovedTransformOut.parent);
+                mb.transform.position = _onRemovedTransformOut.position;
+            }
             
             if (obj is IMutableOwner haveOwner && haveOwner.Owner == _entity)
                 haveOwner.SetOwner(null);

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4421ec7ce77d4820841adf9337dbd0f5, type: 3}
+  m_Name: 1.5x2 Table
+  m_EditorClassIdentifier: RoomInterior::IM.Map.PropInfo
+  <Prefab>k__BackingField: {fileID: 8230001644599058862, guid: 41c3c1ac724b15344b7ef322c3d2b666, type: 3}
+  <CellSize>k__BackingField: {x: 2, y: 2}
+  <ClearanceRadius>k__BackingField: 1

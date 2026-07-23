@@ -14,8 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Map::IM.Map.RectangleRoomFactory
   _roomPrefab: {fileID: 5643771623657572961, guid: de0a404a22731cd4db04744937be34c1, type: 3}
   _roomPortPrefab: {fileID: 3031017149369251266, guid: 502dd60d80db5504f994382f78ec18c4, type: 3}
+  _roomDecorator: {fileID: 11400000, guid: 5f480cd9e516edc47b4325e2e33a8b60, type: 2}
   _entityFactories: []
   _gameObjects:
   - {fileID: 2969610865149193484, guid: 72b35961a9a5cd342ba0ed456ba27ac6, type: 3}
   - {fileID: 2969610865149193484, guid: 72b35961a9a5cd342ba0ed456ba27ac6, type: 3}
   _size: {x: 17, y: 9}
+  _roomSizes:
+  - {x: 1, y: 1}
+  - {x: 1, y: 2}
+  - {x: 2, y: 1}
+  - {x: 2, y: 2}

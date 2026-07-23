@@ -1,0 +1,244 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06b305b5583d4ed197c0e9830bc85f9a, type: 3}
+  m_Name: Default Room Props
+  m_EditorClassIdentifier: RoomInterior::IM.Map.RoomDecorationPropInfo
+  _propSets:
+  - <PropInfo>k__BackingField: {fileID: 11400000, guid: 1652e2eb073665e46b9a9fec98e1c085, type: 2}
+    <MinCount>k__BackingField: 0
+    <MaxCount>k__BackingField: 2
+    <PropPlacementStrategy>k__BackingField:
+      rid: 8394966403758948470
+  - <PropInfo>k__BackingField: {fileID: 11400000, guid: be42eb7c4a9e02a4aa31844d9e615538, type: 2}
+    <MinCount>k__BackingField: 0
+    <MaxCount>k__BackingField: 2
+    <PropPlacementStrategy>k__BackingField:
+      rid: 8394966425802637424
+  - <PropInfo>k__BackingField: {fileID: 11400000, guid: 1b07694eda79bf34ba8132e4d54b75ad, type: 2}
+    <MinCount>k__BackingField: 0
+    <MaxCount>k__BackingField: 2
+    <PropPlacementStrategy>k__BackingField:
+      rid: 8394966425802637423
+  - <PropInfo>k__BackingField: {fileID: 11400000, guid: 2f0cbda33d185084b9a8df5429069e44, type: 2}
+    <MinCount>k__BackingField: 0
+    <MaxCount>k__BackingField: 2
+    <PropPlacementStrategy>k__BackingField:
+      rid: 8394966425802637425
+  - <PropInfo>k__BackingField: {fileID: 11400000, guid: cfa91228fa762f94282e476dcdf77b3b, type: 2}
+    <MinCount>k__BackingField: 0
+    <MaxCount>k__BackingField: 2
+    <PropPlacementStrategy>k__BackingField:
+      rid: 8394966425802637426
+  - <PropInfo>k__BackingField: {fileID: 11400000, guid: 980c2e844c71bfd40b0127a98d2a4926, type: 2}
+    <MinCount>k__BackingField: 0
+    <MaxCount>k__BackingField: 1
+    <PropPlacementStrategy>k__BackingField:
+      rid: 8394966425802637427
+  - <PropInfo>k__BackingField: {fileID: 11400000, guid: 84ed9c2d822d02147bde499edcde5447, type: 2}
+    <MinCount>k__BackingField: 0
+    <MaxCount>k__BackingField: 1
+    <PropPlacementStrategy>k__BackingField:
+      rid: 8394966425802637428
+  - <PropInfo>k__BackingField: {fileID: 11400000, guid: 2b89c39dc74da3946a81a62376db0d1f, type: 2}
+    <MinCount>k__BackingField: 0
+    <MaxCount>k__BackingField: 1
+    <PropPlacementStrategy>k__BackingField:
+      rid: 8394966425802637429
+  - <PropInfo>k__BackingField: {fileID: 11400000, guid: 143025a2ad0c9f3488052d4f95b20cc9, type: 2}
+    <MinCount>k__BackingField: 0
+    <MaxCount>k__BackingField: 1
+    <PropPlacementStrategy>k__BackingField:
+      rid: 8394966425802637430
+  _portClearance: 4
+  references:
+    version: 2
+    RefIds:
+    - rid: 8394966403758948470
+      type: {class: WallBasedPropPlacementStrategy, ns: IM.Map, asm: RoomInterior}
+      data:
+        _inverse: 0
+        _left:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _right:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _top:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _bottom:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+    - rid: 8394966425802637423
+      type: {class: WallBasedPropPlacementStrategy, ns: IM.Map, asm: RoomInterior}
+      data:
+        _inverse: 0
+        _left:
+          Place: 0
+          MinDistance: 1
+          MaxDistance: 3
+        _right:
+          Place: 0
+          MinDistance: 1
+          MaxDistance: 3
+        _top:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 0
+        _bottom:
+          Place: 0
+          MinDistance: 1
+          MaxDistance: 3
+    - rid: 8394966425802637424
+      type: {class: WallBasedPropPlacementStrategy, ns: IM.Map, asm: RoomInterior}
+      data:
+        _inverse: 0
+        _left:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _right:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _top:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _bottom:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+    - rid: 8394966425802637425
+      type: {class: WallBasedPropPlacementStrategy, ns: IM.Map, asm: RoomInterior}
+      data:
+        _inverse: 0
+        _left:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _right:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _top:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _bottom:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+    - rid: 8394966425802637426
+      type: {class: WallBasedPropPlacementStrategy, ns: IM.Map, asm: RoomInterior}
+      data:
+        _inverse: 0
+        _left:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _right:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _top:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _bottom:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+    - rid: 8394966425802637427
+      type: {class: WallBasedPropPlacementStrategy, ns: IM.Map, asm: RoomInterior}
+      data:
+        _inverse: 0
+        _left:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _right:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _top:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _bottom:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+    - rid: 8394966425802637428
+      type: {class: WallBasedPropPlacementStrategy, ns: IM.Map, asm: RoomInterior}
+      data:
+        _inverse: 0
+        _left:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _right:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _top:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _bottom:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+    - rid: 8394966425802637429
+      type: {class: WallBasedPropPlacementStrategy, ns: IM.Map, asm: RoomInterior}
+      data:
+        _inverse: 0
+        _left:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _right:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _top:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _bottom:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+    - rid: 8394966425802637430
+      type: {class: WallBasedPropPlacementStrategy, ns: IM.Map, asm: RoomInterior}
+      data:
+        _inverse: 0
+        _left:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _right:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _top:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3
+        _bottom:
+          Place: 1
+          MinDistance: 0
+          MaxDistance: 3

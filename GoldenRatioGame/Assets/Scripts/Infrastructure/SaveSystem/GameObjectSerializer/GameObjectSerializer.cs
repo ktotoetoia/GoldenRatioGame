@@ -11,7 +11,7 @@ namespace IM.SaveSystem
     public class GameObjectSerializer : MonoBehaviour, IIdentifiable, IStateSerializable, IRequireComponentSerializerContainer
     {
         [SerializeField] protected AssetReferenceGameObject _assetReference;
-        [SerializeField] protected List<Component> _blackList;
+        [SerializeField] protected List<Component> _blackList = new();
         private IComponentSerializerContainer _container;
         
         public string Id { get; private set; }

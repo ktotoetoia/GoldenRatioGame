@@ -9,6 +9,7 @@ namespace IM.Map
     {
         [SerializeField] private GameObject _roomPrefab;
         [SerializeField] private GameObject _roomPortPrefab;
+        [SerializeField] private RoomDecorator _roomDecorator;
         [SerializeField] private List<EntityFactory> _entityFactories;
         [SerializeField] private List<GameObject> _gameObjects;
         [SerializeField] private Vector2Int _size = new(17, 9);
@@ -52,9 +53,8 @@ namespace IM.Map
 
             foreach (var prefab in _gameObjects) room.Add(gameObjectFactory.Create(prefab, false));
             foreach (var factory in _entityFactories) room.Add(factory.Create(gameObjectFactory).GameObject);
-
-            if (roomGO.TryGetComponent(out IRoomDecorator decorator)) decorator.Decorate(room, roomPattern.Shape,gameObjectFactory);
-
+            _roomDecorator?.Decorate(room,roomPattern.Shape,gameObjectFactory);
+            
             return room;
         }
     }
