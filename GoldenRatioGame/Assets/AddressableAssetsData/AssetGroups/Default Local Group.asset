@@ -85,6 +85,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7ba6453c70867794fa15df0ab5ccf665
+    m_Address: Assets/Prefabs/Entities/Lil Scavanger/Modules/Lil Scavanger Body.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 87558f7aeac5f7f4b9e2bffbe8b0a22b
     m_Address: Assets/Prefabs/Map/Props/Tables/2x1 Table.prefab
     m_ReadOnly: 0

@@ -87,5 +87,4 @@ namespace IM.Visuals
             schedule.Execute(MarkDirtyRepaint);
         }
     }
-    
 }

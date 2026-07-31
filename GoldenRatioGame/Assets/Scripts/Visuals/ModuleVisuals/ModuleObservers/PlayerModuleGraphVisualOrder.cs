@@ -7,6 +7,10 @@ namespace IM.Visuals
     {
         [SerializeField] private EntityModuleGraphVisualObserver _moduleGraphVisualObserver;
         private int _order;
+        
+        [field:SerializeField]  public float Elevation { get; private set; }
+        [field:SerializeField]  public float Height { get;  private set;}
+        [field:SerializeField]  public float HalfWidth { get;  private set;}
 
         public Vector3 ReferencePoint
         {

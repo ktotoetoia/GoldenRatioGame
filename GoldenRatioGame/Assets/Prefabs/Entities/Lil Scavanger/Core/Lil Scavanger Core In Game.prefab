@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1733959713801920240}
   - component: {fileID: 998457133526526282}
   m_Layer: 0
-  m_Name: Core Humanoid In Game
+  m_Name: Lil Scavanger Core In Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 755226432850309792, guid: c95e2d4e9bf09f049abca6f9aa1ebbb2, type: 3}
+  m_Sprite: {fileID: -9140366676904456173, guid: 52636170fbb145e41bb25b3b72c18c6f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   - targetComponent: {fileID: 2128649818120202721}
     memberName: PortBinder
     left:
-      objectValue: {fileID: 11400000, guid: 13643a2c93cb000499bf64d91c758fff, type: 2}
+      objectValue: {fileID: 11400000, guid: 2a7483bb02171994787c2ef891362a77, type: 2}
       intValue: 0
       floatValue: 0
       doubleValue: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
       stringValue: 
       enumIndex: 0
     right:
-      objectValue: {fileID: 11400000, guid: fbd3d9a8dcdbae9489b5798b5f2f7882, type: 2}
+      objectValue: {fileID: 11400000, guid: c530bb27f59c1824586be17eb08286ce, type: 2}
       intValue: 0
       floatValue: 0
       doubleValue: 0

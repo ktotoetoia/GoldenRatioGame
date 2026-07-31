@@ -19,7 +19,7 @@ MonoBehaviour:
   _gameObjects:
   - {fileID: 2969610865149193484, guid: 72b35961a9a5cd342ba0ed456ba27ac6, type: 3}
   - {fileID: 2969610865149193484, guid: 72b35961a9a5cd342ba0ed456ba27ac6, type: 3}
-  _size: {x: 17, y: 9}
+  _size: {x: 29, y: 15}
   _roomSizes:
   - {x: 1, y: 1}
   - {x: 1, y: 2}

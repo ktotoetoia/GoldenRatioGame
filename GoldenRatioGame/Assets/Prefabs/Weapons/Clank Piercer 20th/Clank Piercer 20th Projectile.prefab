@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: _triggerOnEnemy
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6395899711494527605, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
+      propertyPath: <Elevation>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -1629860833933646921, guid: 980fd75b97dc6544592a4182a15e4cf4, type: 3}
       propertyPath: _damage
       value: 150

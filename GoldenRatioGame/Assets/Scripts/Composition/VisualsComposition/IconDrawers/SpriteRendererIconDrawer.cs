@@ -25,6 +25,10 @@ namespace IM.Items
                 );
             }
         }
+
+        [field:SerializeField]  public float Elevation { get; private set; }
+        [field:SerializeField]  public float Height { get;  private set;}
+        [field:SerializeField]  public float HalfWidth { get;  private set;}
         
         public int Order
         {

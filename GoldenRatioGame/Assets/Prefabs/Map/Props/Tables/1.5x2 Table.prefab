@@ -109,7 +109,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 384b9baf02ee45f3a99967a3c2ffa013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Visuals::IM.Visuals.RendererDepthOrderable
+  _referencePointSource: 1
+  _heightSource: 0
+  _halfWidthSource: 1
+  _manualReferencePoint: {x: 0, y: 0, z: 0}
+  _manualHeight: 0.5
+  _manualHalfWidth: 0
   _offset: {x: 0, y: 0, z: 0}
+  <Elevation>k__BackingField: 0
 --- !u!114 &-5896985568854718756
 MonoBehaviour:
   m_ObjectHideFlags: 0

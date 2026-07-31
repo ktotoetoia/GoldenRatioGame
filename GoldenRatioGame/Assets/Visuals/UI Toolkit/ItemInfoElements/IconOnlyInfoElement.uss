@@ -1,0 +1,29 @@
+.item-info--icon-only {
+    background-image: none;
+    border-width: 0;
+    padding: 0;
+}
+
+.item-info--icon-only > .item-info__content {
+    margin: 0;
+}
+
+.item-info--icon-only .item-info__text-column,
+.item-info--icon-only .item-info__action,
+.item-info--icon-only .item-info__additional-info,
+.item-info--icon-only .item-stats-info__right-container {
+    display: none;
+}
+
+.item-info--icon-only .item-info__top-row {
+    margin: 0;
+    justify-content: center;
+}
+
+.item-info--icon-only .item-info__icon-container {
+    margin: 0;
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    min-height: 64px;
+}

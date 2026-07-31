@@ -16,8 +16,9 @@ MonoBehaviour:
   _roomPortPrefab: {fileID: 3031017149369251266, guid: 502dd60d80db5504f994382f78ec18c4, type: 3}
   _roomDecorator: {fileID: 11400000, guid: 5f480cd9e516edc47b4325e2e33a8b60, type: 2}
   _entityFactories: []
-  _gameObjects: []
-  _size: {x: 17, y: 9}
+  _gameObjects:
+  - {fileID: 8119833187759213420, guid: 7ba6453c70867794fa15df0ab5ccf665, type: 3}
+  _size: {x: 29, y: 15}
   _roomSizes:
   - {x: 1, y: 1}
   - {x: 1, y: 2}

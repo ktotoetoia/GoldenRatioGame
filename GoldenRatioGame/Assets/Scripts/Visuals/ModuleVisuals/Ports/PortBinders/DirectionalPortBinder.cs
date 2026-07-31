@@ -36,7 +36,7 @@ namespace IM.Visuals
                 Vector3 position = transform.TransformPoint(portInfo.Position);
                 
                 Gizmos.color = Color.blue;
-                Gizmos.DrawSphere(position, sphereSize);
+                //Gizmos.DrawSphere(position, sphereSize);
             }
             
             foreach (PortPositionRotation portInfo in _portPositionRotations)

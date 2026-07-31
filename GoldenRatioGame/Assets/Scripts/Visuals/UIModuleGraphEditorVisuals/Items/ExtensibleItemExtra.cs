@@ -8,11 +8,11 @@ namespace IM.Visuals
 {
     public class ExtensibleItemExtra : VisualElement
     {
-        private readonly Action<IWeaponContainer> _onClear;
         private readonly AbilityPoolEditingService _abilityPoolEditingService;
-        private readonly ItemVisualElement _itemVisualElement;
+        private readonly IconOnlyInfoElement _iconVisualElement;
         private readonly IExtensibleItem _item;
         private readonly Action _clearAction;
+        private Action _currentAction;
 
         public IAbilityContainer AbilityContainer { get; private set; }
 
@@ -21,14 +21,20 @@ namespace IM.Visuals
         public ExtensibleItemExtra(IExtensibleItem item, Action<IWeaponContainer> onClear, AbilityPoolEditingService abilityPoolEditingService)
         {
             _item = item;
-            _onClear = onClear;
             _abilityPoolEditingService = abilityPoolEditingService;
-            _clearAction = () => _onClear(AbilityContainer as IWeaponContainer);
+            _clearAction = () => onClear(AbilityContainer as IWeaponContainer);
+            style.alignSelf = new StyleEnum<Align>(Align.Stretch);
+            style.flexGrow = 1;
 
-            _itemVisualElement = new ItemVisualElement();
-            Add(_itemVisualElement);
+            _iconVisualElement = new IconOnlyInfoElement();
+            Add(_iconVisualElement);
 
+            this.AddManipulator(new Clickable(OnClick));
             Update();
+        }
+        private void OnClick()
+        {
+            _currentAction?.Invoke();
         }
 
         public void Update()
@@ -54,10 +60,9 @@ namespace IM.Visuals
             AbilityContainer = resolvedContainer;
             _lastAbility = resolvedAbility;
 
-            _itemVisualElement.SetItem(resolvedAbility);
+            _iconVisualElement.SetItem(resolvedAbility);
 
-            if (isWeapon)
-                _itemVisualElement.RegisterAction(_clearAction);
+            _currentAction = isWeapon ? _clearAction : null;
         }
     }
 }

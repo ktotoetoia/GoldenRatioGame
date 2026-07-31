@@ -10,6 +10,7 @@ namespace IM.Visuals
         [field: SerializeField] public int Order { get; private set; }
         [field: SerializeField] public int Layer{ get; private set; }
         [field: SerializeField] public bool Visible{ get; private set; }
+        [field: SerializeField] public string RendererSortingLayer { get; private set; } = "Default";
         [field: SerializeField] public LocalTransformPreset DefaultTransform { get; private set; } = LocalTransformPreset.Default;
 
         public VisualObjectPreset()
@@ -36,6 +37,10 @@ namespace IM.Visuals
             visualObject.Visible = Visible;
             visualObject.Order = Order;
             visualObject.Layer = Layer;
+            if (visualObject is MonoBehaviour mb && mb.TryGetComponent(out Renderer renderer))
+            {
+                renderer.sortingLayerName = RendererSortingLayer;
+            }
         }
     }
 }

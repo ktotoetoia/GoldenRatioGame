@@ -77,7 +77,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 9.375
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -251,6 +251,7 @@ MonoBehaviour:
       <Order>k__BackingField: 1000
       <Layer>k__BackingField: 5
       <Visible>k__BackingField: 1
+      <RendererSortingLayer>k__BackingField: 0
       <DefaultTransform>k__BackingField:
         _changePosition: 1
         _changeRotation: 1
@@ -1115,7 +1116,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 9.375
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1344,6 +1345,7 @@ MonoBehaviour:
       <Order>k__BackingField: 0
       <Layer>k__BackingField: 5
       <Visible>k__BackingField: 1
+      <RendererSortingLayer>k__BackingField: 0
       <DefaultTransform>k__BackingField:
         _changePosition: 0
         _changeRotation: 0
@@ -1631,6 +1633,7 @@ MonoBehaviour:
       <Order>k__BackingField: 1000
       <Layer>k__BackingField: 6
       <Visible>k__BackingField: 1
+      <RendererSortingLayer>k__BackingField: Module Editor
       <DefaultTransform>k__BackingField:
         _changePosition: 1
         _changeRotation: 1
@@ -1656,6 +1659,7 @@ MonoBehaviour:
     <Order>k__BackingField: 1000
     <Layer>k__BackingField: 6
     <Visible>k__BackingField: 1
+    <RendererSortingLayer>k__BackingField: Module Editor
     <DefaultTransform>k__BackingField:
       _changePosition: 1
       _changeRotation: 1
@@ -2164,6 +2168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModuleContextEditorVisuals::IM.UI.CurrentItemsView
   _styleSheets:
   - {fileID: 7433441132597879392, guid: 3b48dade4517b5641a994ba7e32802d5, type: 3}
+  - {fileID: 7433441132597879392, guid: a904c3994d38ac945aff5c7207ef0952, type: 3}
   _containerName: ItemsContainer
 --- !u!114 &8687540714366366304
 MonoBehaviour:

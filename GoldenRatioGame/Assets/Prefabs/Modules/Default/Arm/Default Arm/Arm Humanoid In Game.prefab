@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: ModuleVisuals::IM.Visuals.PortVisualObjectMono
   _renderer: {fileID: 0}
   <OutputOrderAdjustment>k__BackingField: 0
+  <Rotation>k__BackingField: 0
 --- !u!114 &1380044109673290030
 MonoBehaviour:
   m_ObjectHideFlags: 0
